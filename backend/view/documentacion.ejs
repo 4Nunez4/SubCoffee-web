@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/style.css">
+    <title>Documentacion de API</title>
+</head>
+<body>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+h1 {
+    color: #333;
+    text-align: center;
+    padding: 20px 0;
+}
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    opacity: 0.2;
+}
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+    </style>
+
+    <h1>API Documentation - Productos  ejemplo </h1>
+    <table>
+        <tr><td>Numero </td><td>1</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
+        <tr><td>URI</td><td>/usuario/listar</td></tr>
+        <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
+        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador</td></tr>
+        <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                "idusuario": 126,
+                "nombres": "Felix ",
+                "direccion": "",
+                "telefono": "",
+                "correo": "",
+                "rol": "administrador",
+                "password": "0000"
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                status:500
+                message:"No se encontraron usuarios registrados"
+            }
+            Error:
+            Status:505
+            body:{
+                "error en el sistema"
+            }
+        </td></tr>
+    </table>
+</body>
+</html>
