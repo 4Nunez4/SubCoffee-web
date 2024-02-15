@@ -9,56 +9,61 @@ export const getNotifications = async (req, res) => {
             res.status(400).json({status:400, message: 'No se encontraron notificaciones' });
         }
     } catch (error) {
-        res.status(500).json({ status:500, message: 'Error al obtener las notificaciones' });
+        res.status(500).json({ status:500, message: 'Error al obtener las notificaciones mod getNotifications', error });
     }
 };
 
 export const getNotification = async (req, res) => {
     try {
-        const { pk_id_not } = req.params; 
-        const [rows] = await pool.query("SELECT * FROM notificaciones WHERE pk_id_not = ?", [pk_id_not]);
-        if (!rows.length) {
-            res.status(404).json({ error: 'Notificación no encontrada' });
+        const [rows] = await pool.query("SELECT * FROM notificaciones WHERE pk_id_not = ?", [req.params.id]);
+        if (rows.length > 0) {
+            res.status(200).json({status:200, data:rows});
         } else {
-            res.status(200).json(rows[0]);
+            res.status(404).json({status:404, message: 'Error ID Notificación no encontrada' });
         }
     } catch (error) {
-        res.status(500).json({ error: 'Error al obtener la notificación' });
+        res.status(500).json({ status:500, message: 'Error al obtener la notificación mod getNotification', error });
     }
 };
 
 export const createNotification = async (req, res) => {
+    const { tipo_not, fecha_not, texto_not, fk_id_subasta, fk_id_usuario } = req.body;
     try {
-        const { tipo_not, fecha_not, texto_not, fk_id_subasta, fk_id_usuario } = req.body;
-        await pool.query("INSERT INTO notificaciones (tipo_not, fecha_not, texto_not, fk_id_subasta, fk_id_usuario) VALUES (?, ?, ?, ?, ?)", [tipo_not, fecha_not, texto_not, fk_id_subasta, fk_id_usuario]);
-        res.status(201).json({ message: 'Notificación creada exitosamente'});
+        const [rows] = await pool.query("INSERT INTO notificaciones (tipo_not, fecha_not, texto_not, fk_id_subasta, fk_id_usuario) VALUES (?, ?, ?, ?, ?)", [tipo_not, fecha_not, texto_not, fk_id_subasta, fk_id_usuario]);
+        if(rows.affectedRows){
+            res.status(201).json({ status: 200, message: 'Notificación creada exitosamente', data:rows});
+        }else {
+            res.status(404).json({status: 404, message: "Error al validar la notificación." });
+        }
     } catch (error) {
-        res.status(500).json({ error: 'Error al crear la notificación' });
+        res.status(500).json({ status: 500, message:'Error al crear la notificación', error });
     }
 };
 
 export const updateNotification = async (req, res) => {
     try {
-        const { pk_id_not } = req.body;
-        const { tipo_not, fecha_not, texto_not, fk_id_subasta, fk_id_usuario } = req.body;
-        const [rows] = await pool.query("UPDATE notificaciones SET tipo_not = ?, fecha_not = ?, texto_not = ?, fk_id_subasta = ?, fk_id_usuario = ? WHERE pk_id_not = ?", [tipo_not, fecha_not, texto_not, fk_id_subasta, fk_id_usuario, pk_id_not]);
-        if(rows.affectedRows === 0) {
-            return res.status(404).json({message: "El ID proporcionado no es incorrecto"})
+        const id = req.params.id;
+        const { tipo_not, fecha_not, texto_not } = req.body;
+        const [result] = await pool.query("UPDATE notificaciones SET tipo_not = ?, fecha_not = ?, texto_not = ? WHERE pk_id_not = ?", [tipo_not, fecha_not, texto_not, id]);
+        if(result.affectedRows > 0) {
+            res.status(200).json({ status: 200, message: 'Notificación actualizada exitosamente' });
+        }else {
+            res.status(404).json({status: 404, message: "El ID proporcionado es incorrecto"})
         }
-        res.status(200).json({ message: 'Notificación actualizada exitosamente' });
     } catch (error) {
-        res.status(500).json({ error: 'Error al actualizar la notificación' });
+        res.status(500).json({ status: 500, message: 'Error al actualizar la notificación', error});
     }
 };
 
 export const deleteNotification = async (req, res) => {
     try {
-        const [rows] = await pool.query("DELETE FROM notificaciones WHERE pk_id_not = ?", [req.body.pk_id_not]);
-        if(rows.affectedRows === 0){
-            return res.status(404).json({ error: 'La notificación con el ID proporcionado no existe' });
+        const [result] = await pool.query("DELETE FROM notificaciones WHERE pk_id_not = ?", [req.params.id]);
+        if(result.affectedRows === 0){
+            res.status(404).json({status: 404, message: 'La notificación con el ID proporcionado no existe'});
+        }else {
+            res.status(200).json({status: 200, message: 'Notificación eliminada exitosamente' });
         }
-        res.status(200).json({ message: 'Notificación eliminada exitosamente' });
     } catch (error) {
-        res.status(500).json({ error: 'Error al eliminar la notificación' });
+        res.status(500).json({status: 500, message: 'Error al eliminar la notificación', error });
     }
 };

@@ -24,53 +24,28 @@
         <td>
           Correcto:
           JSON:{
-            Status:200
-            data:
-            {
-              "pk_id_chat": 4,
-              "mensaje_chat": "Holaaa!",
-              "fecha_chat": null,
-              "fk_id_subasta": 2,
-              "fk_id_usuario": 1084251889
-            },
-            {
-              "pk_id_chat": 5,
-              "mensaje_chat": "Holaaa!",
-              "fecha_chat": null,
-              "fk_id_subasta": 2,
-              "fk_id_usuario": 1084251889
-            },
-            {
-              "pk_id_chat": 6,
-              "mensaje_chat": "Holaaa!",
-              "fecha_chat": "2024-02-15T02:44:59.000Z",
-              "fk_id_subasta": 2,
-              "fk_id_usuario": 1084251889
-            },
-            {
-              "pk_id_chat": 7,
-              "mensaje_chat": "Holaaa!",
-              "fecha_chat": "2024-02-15T02:45:40.000Z",
-              "fk_id_subasta": 2,
-              "fk_id_usuario": 1084251889
-            },
-            {
-              "pk_id_chat": 8,
-              "mensaje_chat": "Holaaa!",
-              "fecha_chat": "2024-02-15T02:46:04.000Z",
-              "fk_id_subasta": 2,
-              "fk_id_usuario": 1084251889
-            }
+            "status": 200,
+            "data": [
+              [
+                {
+                  "pk_id_not": 1,
+                  "tipo_not": "mensaje",
+                  "fecha_not": "2024-02-20T05:00:00.000Z",
+                  "texto_not": "Quiero que me dejen el café",
+                  "fk_id_subasta": 2,
+                  "fk_id_usuario": 1084251889
+                }
+              ]
           }
           Incorrecto:
           JSON:{
             status:404
-            message:"No se encontraron mensajes."
+            message:"Error ID Notificación no encontrada'
           }
           Error:
           JSON:{
             Status:500
-            "Ocurrió un error al buscar los mensajes."
+            "Error al obtener la notificación mod getNotification', error
           }
         </td>
       </tr>
@@ -84,33 +59,33 @@
       <tr><td>URI</td><td>/user/notifications/:id</td></tr>
       <tr><td>DESCRIPCIÓN</td><td>Permite listar una notificación en especifico de la base de datos</td></tr>
       <tr><td>VERBO HTTP</td><td>GET</td></tr>
-      <tr><td>HEADER</td><td>2</td></tr>
+      <tr><td>HEADER</td><td>1</td></tr>
       <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
       <tr><td>PETICIÓN body</td><td>NULL</td></tr>
       <tr><td>RESPUESTA JSON</td>
         <td>
           Correcto
           JSON:{
-            status: 200,
+            "status": 200,
             "data": [
               {
-                "pk_id_chat": 8,
-                "mensaje_chat": "Holaaa!",
-                "fecha_chat": "2024-02-15T02:46:04.000Z",
+                "pk_id_not": 1,
+                "tipo_not": "mensaje",
+                "fecha_not": "2024-02-20T05:00:00.000Z",
+                "texto_not": "Quiero que me dejen el café",
                 "fk_id_subasta": 2,
                 "fk_id_usuario": 1084251889
               }
-            ]
-          }
+            }
           Incorrecto:
           JSON:{
             status:404
-            message:"Error ID al listar el mensaje."
+            message:"Error ID Notificación no encontrada"
           }
           Error:
           JSON:{
             status:500
-            "Ocurrió un error al buscar el mensaje mod getChat."
+            "Error al obtener la notificación mod getNotification', error
           }
         </td>
       </tr>
@@ -129,8 +104,10 @@
       <tr><td>PETICIÓN body</td>
         <td>
           {
-            "mensaje": "Holaaa!",
-            "fk_id_subasta":2, 
+            "tipo_not":"mensaje",
+            "fecha_not":"2024-02-20",
+            "texto_not":"Quiero que me dejen el café",
+            "fk_id_subasta":2,
             "fk_id_usuario":1084251889
           }
         </td>
@@ -140,11 +117,11 @@
           Correcto:
           JSON:{
             "status": 200,
-            "message": "Mensaje enviado con éxito.",
+            "message": "Notificación creada exitosamente",
             "data": {
               "fieldCount": 0,
               "affectedRows": 1,
-              "insertId": 28,
+              "insertId": 1,
               "info": "",
               "serverStatus": 2,
               "warningStatus": 0,
@@ -154,12 +131,12 @@
           Incorrecto:
           JSON:{
               status:404
-              message:"Error al enviar el mensaje."
+              message:"Error al validar la notificación."
           }
           Error:
           JSON:{
             Status:500
-            message:"No se pudo crear el mensaje. mod createChat"
+            message:Error al crear la notificación', error
           }
         </td>
       </tr>
@@ -168,18 +145,19 @@
     </table>
 
     <table>
-      
       <tr><td>NUMERO</td><td>4</td></tr>
       <tr><td>NOMBRE DEL SERVICIO</td><td>actualizar notificación</td></tr>
       <tr><td>URI</td><td>/user/notifications/:id</td></tr>
       <tr><td>DESCRIPCIÓN</td><td>Permite actualizar las notificaciones de la base de datos</td></tr>
       <tr><td>VERBO HTTP</td><td>PUT</td></tr>
-      <tr><td>HEADER</td><td>3</td></tr>
+      <tr><td>HEADER</td><td>1</td></tr>
       <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
       <tr><td>PETICIÓN body</td>
         <td>
           {
-            "mensaje": "Si si si?"
+            "tipo_not":"cierre",
+            "fecha_not":"2024-02-22",
+            "texto_not":"dentro de 30m"
           }
         </td>
       </tr>
@@ -188,17 +166,17 @@
           Correcto:
           JSON:{
             "status": 200,
-            "message": "El mensaje ha sido actualizado con éxito."
+            "message": "Notificación actualizada exitosamente"
           }
           Incorrecto:
           JSON:{
             status:404
-            message:"No se encontró el mensaje con el ID especificado."
+            message:"El ID proporcionado es incorrecto"
           }
           Error:
           JSON:{
             status:500
-            "Ocurrió un error al actualizar el mensaje. Error: " + error
+            'Error al actualizar la notificación', error
           }
         </td>
       </tr>
@@ -221,16 +199,17 @@
           Correcto:
           JSON:{
             "status": 200,
-            "message": "Chat eliminado con éxito."
+            "message": "Notificación eliminada exitosamente"
           }
           Incorrecto:
           JSON:{
             "status": 404,
-            "message": "Chat no encontrado"
+            "message": 'La notificación con el ID proporcionado no existe'
           }
           Error:
           JSON:{
-            "No se pudo eliminar el chat. Error: " + error 
+            "status":500,
+            'Error al eliminar la notificación', error
           }
         </td>
       </tr>
