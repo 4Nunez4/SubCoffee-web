@@ -5,8 +5,12 @@ import rutaOferta from "./src/routes/router.oferta.js";
 import router from "./src/routes/routes.registro.js";
 import routerDocument from "./src/routes/notificaciones.routes.js";
 import routerChat from "./src/routes/chat.routes.js";
-
+import rutasSubastas from "./src/routes/subasta.routes.js";
+import rutasSeguimiento from "./src/routes/seguimiento.routes.js";
 const app = express();
+
+
+
 
 
 app.use(express.json());
@@ -14,6 +18,10 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+
+app.use("/subasta",rutasSubastas);
+app.use("/segimiento",rutasSeguimiento);
 app.use("/subcoffee", rutaOferta);
 app.use("/usuario", router);
 app.use("/user", routerChat);
