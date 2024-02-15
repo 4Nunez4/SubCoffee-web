@@ -1,13 +1,10 @@
 import express from "express";
 import bodyParser from 'body-parser';
-// import rutasSubastas from "./src/routes/subasta.routes.js";
-// import rutasSeguimiento from "./src/routes/seguimiento.routes.js";
+
 import ejs from "ejs"; 
 
 const app = express();
 
-// app.use(rutasSubastas);
-// app.use(rutasSeguimiento);
 
 
 
