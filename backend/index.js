@@ -1,11 +1,15 @@
 import express from "express";
 import bodyParser from 'body-parser';
 import ejs from "ejs"; 
+import rutaOferta from "./src/router/router.oferta.js";
+import router from "./src/routes/routes.registro.js";
 
 const app = express();
 
 
 
+app.use('/subcoffee',rutaOferta);
+app.use("/usuario", router);
 
 
 app.use(express.json());

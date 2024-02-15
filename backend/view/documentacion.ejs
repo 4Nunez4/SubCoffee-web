@@ -35,42 +35,1039 @@ td {
     border: 1px solid #ccc;
 }
     </style>
+    <center><h1>Documentacion de la Api</h1></center>
+    <hr>
+    <center><h2>1. REQ Documentacion del registro de usuario</h2></center>
 
-    <h1>API Documentation - Productos  ejemplo </h1>
+    <h3>Listar usuario</h3>
     <table>
-        <tr><td>Numero </td><td>1</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
-        <tr><td>URI</td><td>/usuario/listar</td></tr>
-        <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
-        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador</td></tr>
-        <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
-        <tr><td>RESPUESTA JSON</td><td>
-            Correcto:
-            Status:200
-            JSON:
-            {
-                "idusuario": 126,
-                "nombres": "Felix ",
-                "direccion": "",
-                "telefono": "",
-                "correo": "",
-                "rol": "administrador",
-                "password": "0000"
-            }
-            Incorrecto:
-            Status:404
-            body:{
-                status:500
-                message:"No se encontraron usuarios registrados"
-            }
-            Error:
-            Status:505
-            body:{
-                "error en el sistema"
-            }
-        </td></tr>
+        <tr>
+            <td>NUMERO</td>
+            <td>1</td>
+        </tr>
+
+        <tr>
+            <td>NOMBRE DEL ENDPOINT</td>
+            <td>LISTAR USUARIOS</td>
+        </tr>
+
+        <tr>
+            <td>URI</td>
+            <td>localhost/usuario/listar</td>
+        </tr>
+
+        <tr>
+            <td>DESCRIPCION</td>
+            <td>Permite listar a los usuarios que se encuentran registrados en la base de datos</td>
+        </tr>
+
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+
+        <tr>
+            <td>USUARIOS</td>
+            <td>ADMINISTRADOR</td>
+        </tr>
+
+        <tr>
+            <td>PETICION BODY</td>
+            <td>NULL</td>
+        </tr>
     </table>
+
+    <hr>
+
+    <h3>Registrar usuario</h3>
+    <table>
+        <tr>
+            <td>NUMERO</td>
+            <td>1</td>
+        </tr>
+
+        <tr>
+            <td>NOMBRE DEL ENDPOINT</td>
+            <td>REGISTRA USUARIOS</td>
+        </tr>
+
+        <tr>
+            <td>URI</td>
+            <td>/usuario/registrar</td>
+        </tr>
+
+        <tr>
+            <td>DESCRIPCION</td>
+            <td>Permite registrar a los usuarios</td>
+        </tr>
+
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>POST</td>
+        </tr>
+
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+
+        <tr>
+            <td>USUARIOS</td>
+            <td>ADMINISTRADOR</td>
+        </tr>
+
+        <tr>
+            <td>PETICION BODY</td>
+            <td>"pk_cedula_user": 378292</td>
+        </tr>
+
+        <tr>
+            <td>RESPUESTA JSON</td>
+            <td>
+                CORRECTO:
+                STATUS:200
+                MESSAGE: "Felicidades, el registro fue un exito"
+                JSON
+                {
+                    "pk_cedula_user": 378292,
+                    "nombre_user":"Jhon Diaz",
+                    "email_user": "jho@gmail.com",
+                    "password_user": "jh@gmail.com",
+                    "rol_user":"comprador",
+                    "descripcion_user": "Timana, cafe pergamino, cafe borbon",
+                    "telefono_user": "8494992",
+                    "fecha_nacimiento_user": "26-12-2000"	
+                }
+                INCORRECTO
+                STATUS: 404
+                BODY :{
+                    STATUS: 404
+                    MESSAGE: "Error, El registro fue denegado"
+                }
+                ERROR:
+                STATUS: 500
+                BODY : JSON{
+                    STATUS:500,
+                    MESSAGE: "ERROR EN EL SERVIDOR"
+                }
+            </td>
+        </tr>
+    </table>
+
+    <hr>
+    <h3>Actualizar usuario</h3>
+    <table>
+        <tr>
+            <td>NUMERO</td>
+            <td>1</td>
+        </tr>
+
+        <tr>
+            <td>NOMBRE DEL ENDPOINT</td>
+            <td>ACTUALIZAR USUARIOS</td>
+        </tr>
+
+        <tr>
+            <td>URI</td>
+            <td>/usuario/actualizar/pk_cedula_user</td>
+        </tr>
+
+        <tr>
+            <td>DESCRIPCION</td>
+            <td>Permite actualizar los datos de los usuarios, 
+                cada usuario podra actualizar datos como son: "nombre", "email", "telefono", "password" </td>
+        </tr>
+
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PUT</td>
+        </tr>
+
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+
+        <tr>
+            <td>USUARIOS</td>
+            <td>ADMINISTRADOR</td>
+        </tr>
+
+        <tr>
+            <td>PETICION BODY</td>
+            <td>NULL</td>
+        </tr>
+
+        <tr>
+            <td>RESPUESTA JSON</td>
+            <td>
+                CORRECTO:
+                STATUS:200
+                MESSAGE: "Felicidades, La actualizacion del usuario fue un exito"
+                JSON
+                {
+                    "nombre_user":"Jhon Diaz",
+                    "email_user": "jho@gmail.com",
+                    "password_user": "jh@gmail.com",
+                    "telefono_user": "8494992",	
+                }
+                INCORRECTO
+                STATUS: 404
+                BODY :{
+                    STATUS: 404
+                    MESSAGE: "Error, La actualizacion fue denegada"
+                }
+                ERROR:
+                STATUS: 500
+                BODY : JSON{
+                    STATUS:500,
+                    MESSAGE: "ERROR EN EL SERVIDOR"
+                }
+            </td>
+        </tr>
+    </table>
+
+    <hr>
+    <h3>Buscar usuario</h3>
+
+    <table>
+        <tr>
+            <td>NUMERO</td>
+            <td>1</td>
+        </tr>
+
+        <tr>
+            <td>NOMBRE DEL ENDPOINT</td>
+            <td>BUSCAR USUARIOS</td>
+        </tr>
+
+        <tr>
+            <td>URI</td>
+            <td>/usuario/buscar/pk_cedula_user</td>
+        </tr>
+
+        <tr>
+            <td>DESCRIPCION</td>
+            <td>Permite buscar a los usuarios</td>
+        </tr>
+
+        <tr>
+            <td>VERBO</td>
+            <td>GET</td>
+        </tr>
+
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+
+        <tr>
+            <td>USUARIOS</td>
+            <td>ADMINISTRADOR</td>
+        </tr>
+
+        <tr>
+            <td>PETICION</td>
+            <td>NULL</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <h3>Eliminar usuario</h3>
+
+    <table>
+        <tr>
+            <td>NUMERO</td>
+            <td>1</td>
+        </tr>
+
+        <tr>
+            <td>NOMBRE DEL ENDPOINT</td>
+            <td>BUSCAR USUARIOS</td>
+        </tr>
+
+        <tr>
+            <td>URI</td>
+            <td>/usuario/eliminar/pk_cedula_user</td>
+        </tr>
+
+        <tr>
+            <td>DESCRIPCION</td>
+            <td>Permite eliminar a usuarios</td>
+        </tr>
+
+        <tr>
+            <td>VERBO</td>
+            <td>DELETE</td>
+        </tr>
+
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+
+        <tr>
+            <td>USUARIOS</td>
+            <td>ADMINISTRADOR</td>
+        </tr>
+
+        <tr>
+            <td>PETICION</td>
+            <td>NULL</td>
+        </tr>
+    </table>
+    <h1>API Documentación - notificaciones</h1>
+    <hr />
+
+    <table>
+      <h2>Documentación del ENDPOINT Notificaciones</h2>
+      <tr><td>NUMERO</td><td>1</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Listar notificaciones</td></tr>
+      <tr><td>URI</td><td>/user/notifications</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite listar todas las notificaciones de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>GET</td></tr>
+      <tr><td>HEADER</td><td>NULL</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td><td>NULL</td></tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            "status": 200,
+            "data": [
+              [
+                {
+                  "pk_id_not": 1,
+                  "tipo_not": "mensaje",
+                  "fecha_not": "2024-02-20T05:00:00.000Z",
+                  "texto_not": "Quiero que me dejen el café",
+                  "fk_id_subasta": 2,
+                  "fk_id_usuario": 1084251889
+                }
+              ]
+          }
+          Incorrecto:
+          JSON:{
+            status:404
+            message:"Error ID Notificación no encontrada'
+          }
+          Error:
+          JSON:{
+            Status:500
+            "Error al obtener la notificación mod getNotification', error
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      <tr><td>NUMERO</td><td>2</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Listar notificaciones</td></tr>
+      <tr><td>URI</td><td>/user/notifications/:id</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite listar una notificación en especifico de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>GET</td></tr>
+      <tr><td>HEADER</td><td>1</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td><td>NULL</td></tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto
+          JSON:{
+            "status": 200,
+            "data": [
+              {
+                "pk_id_not": 1,
+                "tipo_not": "mensaje",
+                "fecha_not": "2024-02-20T05:00:00.000Z",
+                "texto_not": "Quiero que me dejen el café",
+                "fk_id_subasta": 2,
+                "fk_id_usuario": 1084251889
+              }
+            }
+          Incorrecto:
+          JSON:{
+            status:404
+            message:"Error ID Notificación no encontrada"
+          }
+          Error:
+          JSON:{
+            status:500
+            "Error al obtener la notificación mod getNotification', error
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      <tr><td>NUMERO</td><td>3</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Crear notificación</td></tr>
+      <tr><td>URI</td><td>/user/notifications</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite crear una notificacion en la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>POST</td></tr>
+      <tr><td>HEADER</td><td>NULL</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td>
+        <td>
+          {
+            "tipo_not":"mensaje",
+            "fecha_not":"2024-02-20",
+            "texto_not":"Quiero que me dejen el café",
+            "fk_id_subasta":2,
+            "fk_id_usuario":1084251889
+          }
+        </td>
+      </tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            "status": 200,
+            "message": "Notificación creada exitosamente",
+            "data": {
+              "fieldCount": 0,
+              "affectedRows": 1,
+              "insertId": 1,
+              "info": "",
+              "serverStatus": 2,
+              "warningStatus": 0,
+              "changedRows": 0
+            }
+          }
+          Incorrecto:
+          JSON:{
+              status:404
+              message:"Error al validar la notificación."
+          }
+          Error:
+          JSON:{
+            Status:500
+            message:Error al crear la notificación', error
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      <tr><td>NUMERO</td><td>4</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>actualizar notificación</td></tr>
+      <tr><td>URI</td><td>/user/notifications/:id</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite actualizar las notificaciones de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>PUT</td></tr>
+      <tr><td>HEADER</td><td>1</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td>
+        <td>
+          {
+            "tipo_not":"cierre",
+            "fecha_not":"2024-02-22",
+            "texto_not":"dentro de 30m"
+          }
+        </td>
+      </tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            "status": 200,
+            "message": "Notificación actualizada exitosamente"
+          }
+          Incorrecto:
+          JSON:{
+            status:404
+            message:"El ID proporcionado es incorrecto"
+          }
+          Error:
+          JSON:{
+            status:500
+            'Error al actualizar la notificación', error
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      
+      <tr><td>NUMERO</td><td>5</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Eliminar notificaciones</td></tr>
+      <tr><td>URI</td><td>/user/notifications/:id</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite eliminar las notificaciones de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>DELETE</td></tr>
+      <tr><td>HEADER</td><td>3</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td><td>NULL</td></tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            "status": 200,
+            "message": "Notificación eliminada exitosamente"
+          }
+          Incorrecto:
+          JSON:{
+            "status": 404,
+            "message": 'La notificación con el ID proporcionado no existe'
+          }
+          Error:
+          JSON:{
+            "status":500,
+            'Error al eliminar la notificación', error
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+    <h1>Documentación de la API</h1>
+    <hr>
+    <h2>Requerimiento 1. Documentacion de la OFERTA</h2>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Registrar oferta</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/subcoffee/registrarOferta</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite registrar las ofertas en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>POST</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                  "status": 200,
+                  "message": "Se registro con exito la oferta...!!!"
+                }
+                Incorrecto:
+                Status:{
+                  status: 404,
+                  message: "No se registro la oferta...!!!"
+                }
+                Error: 
+                status: 500,
+                body:{
+                  status:500,message:"Error"+e
+                }
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h2>Requerimiento 2. Documentacion de la OFERTA</h2>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Actualizar oferta</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>subcoffee/actualizarOferta/:id</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite actualizar las ofertas registradas en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PUT</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                  "status": 200,
+                  "message": "La postualción (oferta) con ID 6 fue actualizado correctamente."
+                }
+                Incorrecto:
+                Status:{
+                  status: 404,
+                  message: "No se encontro nimgúna postulación (oferta) con ese ID 6"
+                }
+                Error: 
+                status: 500,
+                body:{
+                  status:500,message:"Error del servidor al intentar editar la postulación (oferta)."+e
+                }
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h2>Requerimiento 3. Documentacion de la OFERTA</h2>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Buscar oferta</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/subcoffee/buscarOferta/:id</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite buscar una oferta registrada en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                  "pk_id_pos": 6,
+                  "fecha_pos": null,
+                  "estado_pos": null,
+                  "monto_inicial_pos": 0,
+                  "oferta_pos": 800000,
+                  "fk_id_usuario": null
+                }
+                Incorrecto:
+                Status:{
+                  status: 404,
+                  message: "No se encontro nimguna postulación(Oferta) con el ID 6"
+                }
+                Error: 
+                status: 500,
+                body:{
+                  status:500,message:"Error"+e
+                }
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h2>Requerimiento 4. Documentacion de la OFERTA</h2>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Borrar oferta</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/subcoffee/borrarOferta/:id</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite borrar una oferta registrada en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>DELETE</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                  "status": 200,
+                  "message": "Se elimino la oferta con exito"
+                }
+                Incorrecto:
+                Status:{
+                  status: 404,
+                  message: "no se elimino la oferta"
+                }
+                Error: 
+                status: 500,
+                body:{
+                  status:500,message:"Error"+e
+                }
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h2>Requerimiento 5. Documentacion de la OFERTA</h2>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Listar ofertas</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/subcoffee/listarOferta</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite listar las ofertas registradas en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                [
+                  {
+                    "pk_id_pos": 1,
+                    "fecha_pos": null,
+                    "estado_pos": null,
+                    "monto_inicial_pos": 0,
+                    "oferta_pos": 400000,
+                    "fk_id_usuario": null
+                  },
+                  {
+                    "pk_id_pos": 5,
+                    "fecha_pos": null,
+                    "estado_pos": null,
+                    "monto_inicial_pos": 0,
+                    "oferta_pos": 1000000,
+                    "fk_id_usuario": null
+                  }
+                ]
+              Incorrecto:
+              Status:{
+                status: 404,
+                message: "No se a registrado ninguna oferta en el sistema...!!!"
+              }
+              Error: 
+              status: 500,
+              body:{
+                status:500,message:"Error"+e
+              }
+            </td>
+        </tr>
+    </table>
+    <h1>API Documentación - chat</h1>
+    <hr />
+
+    <table>
+      <h2>Documentación del ENDPOINT Chats</h2>
+      <tr><td>NUMERO</td><td>1</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Listar chats</td></tr>
+      <tr><td>URI</td><td>/user/chats</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite Listar todos los chats de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>GET</td></tr>
+      <tr><td>HEADER</td><td>NULL</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td><td>NULL</td></tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            Status:200
+            data:
+            {
+              "pk_id_chat": 4,
+              "mensaje_chat": "Holaaa!",
+              "fecha_chat": null,
+              "fk_id_subasta": 2,
+              "fk_id_usuario": 1084251889
+            },
+            {
+              "pk_id_chat": 5,
+              "mensaje_chat": "Holaaa!",
+              "fecha_chat": null,
+              "fk_id_subasta": 2,
+              "fk_id_usuario": 1084251889
+            },
+            {
+              "pk_id_chat": 6,
+              "mensaje_chat": "Holaaa!",
+              "fecha_chat": "2024-02-15T02:44:59.000Z",
+              "fk_id_subasta": 2,
+              "fk_id_usuario": 1084251889
+            },
+            {
+              "pk_id_chat": 7,
+              "mensaje_chat": "Holaaa!",
+              "fecha_chat": "2024-02-15T02:45:40.000Z",
+              "fk_id_subasta": 2,
+              "fk_id_usuario": 1084251889
+            },
+            {
+              "pk_id_chat": 8,
+              "mensaje_chat": "Holaaa!",
+              "fecha_chat": "2024-02-15T02:46:04.000Z",
+              "fk_id_subasta": 2,
+              "fk_id_usuario": 1084251889
+            }
+          }
+          Incorrecto:
+          JSON:{
+            status:404
+            message:"No se encontraron mensajes."
+          }
+          Error:
+          JSON:{
+            Status:500
+            "Ocurrió un error al buscar los mensajes."
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      
+      <tr><td>NUMERO</td><td>2</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Listar chat</td></tr>
+      <tr><td>URI</td><td>/user/chats/:id</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite Listar un chats en especifico de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>GET</td></tr>
+      <tr><td>HEADER</td><td>8</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td><td>NULL</td></tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto
+          JSON:{
+            status: 200,
+            "data": [
+              {
+                "pk_id_chat": 8,
+                "mensaje_chat": "Holaaa!",
+                "fecha_chat": "2024-02-15T02:46:04.000Z",
+                "fk_id_subasta": 2,
+                "fk_id_usuario": 1084251889
+              }
+            ]
+          }
+          Incorrecto:
+          JSON:{
+            status:404
+            message:"Error ID al listar el mensaje."
+          }
+          Error:
+          JSON:{
+            status:500
+            "Ocurrió un error al buscar el mensaje mod getChat."
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      
+      <tr><td>NUMERO</td><td>3</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Crear chat</td></tr>
+      <tr><td>URI</td><td>/user/chats</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite crear un chat en la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>POST</td></tr>
+      <tr><td>HEADER</td><td>NULL</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td>
+        <td>
+          {
+            "mensaje": "Holaaa!",
+            "fk_id_subasta":2, 
+            "fk_id_usuario":1084251889
+          }
+        </td>
+      </tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            "status": 200,
+            "message": "Mensaje enviado con éxito.",
+            "data": {
+              "fieldCount": 0,
+              "affectedRows": 1,
+              "insertId": 28,
+              "info": "",
+              "serverStatus": 2,
+              "warningStatus": 0,
+              "changedRows": 0
+            }
+          }
+          Incorrecto:
+          JSON:{
+              status:404
+              message:"Error al enviar el mensaje."
+          }
+          Error:
+          JSON:{
+            Status:500
+            message:"No se pudo crear el mensaje. mod createChat"
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      
+      <tr><td>NUMERO</td><td>4</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>actualizar chat</td></tr>
+      <tr><td>URI</td><td>/user/chats/:id</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite actualizar los chats de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>PUT</td></tr>
+      <tr><td>HEADER</td><td>3</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td>
+        <td>
+          {
+            "mensaje": "Si si si?"
+          }
+        </td>
+      </tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            "status": 200,
+            "message": "El mensaje ha sido actualizado con éxito."
+          }
+          Incorrecto:
+          JSON:{
+            status:404
+            message:"No se encontró el mensaje con el ID especificado."
+          }
+          Error:
+          JSON:{
+            status:500
+            "Ocurrió un error al actualizar el mensaje. Error: " + error
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      
+      <tr><td>NUMERO</td><td>5</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Eliminar chat</td></tr>
+      <tr><td>URI</td><td>/user/chats/:id</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite eliminar los chats de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>DELETE</td></tr>
+      <tr><td>HEADER</td><td>3</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td><td>NULL</td></tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            "status": 200,
+            "message": "Chat eliminado con éxito."
+          }
+          Incorrecto:
+          JSON:{
+            "status": 404,
+            "message": "Chat no encontrado"
+          }
+          Error:
+          JSON:{
+            "No se pudo eliminar el chat. Error: " + error 
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+
 </body>
 </html>
