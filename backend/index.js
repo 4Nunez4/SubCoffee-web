@@ -1,25 +1,27 @@
-import express  from 'express';
-import body_parser from 'body-parser';
-import router from './src/routes/routes.registro.js';
+import express from "express";
+import bodyParser from 'body-parser';
+import ejs from "ejs"; 
+
+const app = express();
 
 
-const app = express()
 
-app.use(body_parser.json())
-app.use(body_parser.urlencoded({extends: false}))
 
-app.set('view engine','ejs')
-app.set('views','./views')
 
-app.use(express.static('./public'))
+app.use(express.json());
+// app.use(bodyParser.urlencoded({extended:false}));Poder trabajar con el formato json
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/document', (req, res)=>{
-    res.render('documentacionValentina.ejs')
-})
+app.set ('view engine','ejs');
+app.set('views','./view');
 
-app.use("/usuario", router)
+
+app.get('/documents', (req,res) =>{
+    res.render('documentacion.ejs');
+});
+
 
 app.listen(4000, () => {
-    console.log("Connected on port: ");
-}) 
-
+    console.log("Servidor se esta ejecutando en el puerto 4000");
+});
