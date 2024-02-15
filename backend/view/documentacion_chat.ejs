@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Documentación - chat</title>
+    <link rel="stylesheet" href="/style_juam.css" />
+  </head>
+  <body>
+    <h1>API Documentación - chat</h1>
+    <hr />
+
+    <table>
+      <h2>Documentación del ENDPOINT Chats</h2>
+      <tr><td>NUMERO</td><td>1</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Listar chats</td></tr>
+      <tr><td>URI</td><td>/user/chats</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite Listar todos los chats de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>GET</td></tr>
+      <tr><td>HEADER</td><td>NULL</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td><td>NULL</td></tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            Status:200
+            data:
+            {
+              "pk_id_chat": 4,
+              "mensaje_chat": "Holaaa!",
+              "fecha_chat": null,
+              "fk_id_subasta": 2,
+              "fk_id_usuario": 1084251889
+            },
+            {
+              "pk_id_chat": 5,
+              "mensaje_chat": "Holaaa!",
+              "fecha_chat": null,
+              "fk_id_subasta": 2,
+              "fk_id_usuario": 1084251889
+            },
+            {
+              "pk_id_chat": 6,
+              "mensaje_chat": "Holaaa!",
+              "fecha_chat": "2024-02-15T02:44:59.000Z",
+              "fk_id_subasta": 2,
+              "fk_id_usuario": 1084251889
+            },
+            {
+              "pk_id_chat": 7,
+              "mensaje_chat": "Holaaa!",
+              "fecha_chat": "2024-02-15T02:45:40.000Z",
+              "fk_id_subasta": 2,
+              "fk_id_usuario": 1084251889
+            },
+            {
+              "pk_id_chat": 8,
+              "mensaje_chat": "Holaaa!",
+              "fecha_chat": "2024-02-15T02:46:04.000Z",
+              "fk_id_subasta": 2,
+              "fk_id_usuario": 1084251889
+            }
+          }
+          Incorrecto:
+          JSON:{
+            status:404
+            message:"No se encontraron mensajes."
+          }
+          Error:
+          JSON:{
+            Status:500
+            "Ocurrió un error al buscar los mensajes."
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      
+      <tr><td>NUMERO</td><td>2</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Listar chat</td></tr>
+      <tr><td>URI</td><td>/user/chats/:id</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite Listar un chats en especifico de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>GET</td></tr>
+      <tr><td>HEADER</td><td>8</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td><td>NULL</td></tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto
+          JSON:{
+            status: 200,
+            "data": [
+              {
+                "pk_id_chat": 8,
+                "mensaje_chat": "Holaaa!",
+                "fecha_chat": "2024-02-15T02:46:04.000Z",
+                "fk_id_subasta": 2,
+                "fk_id_usuario": 1084251889
+              }
+            ]
+          }
+          Incorrecto:
+          JSON:{
+            status:404
+            message:"Error ID al listar el mensaje."
+          }
+          Error:
+          JSON:{
+            status:500
+            "Ocurrió un error al buscar el mensaje mod getChat."
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      
+      <tr><td>NUMERO</td><td>3</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Crear chat</td></tr>
+      <tr><td>URI</td><td>/user/chats</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite crear un chat en la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>POST</td></tr>
+      <tr><td>HEADER</td><td>NULL</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td>
+        <td>
+          {
+            "mensaje": "Holaaa!",
+            "fk_id_subasta":2, 
+            "fk_id_usuario":1084251889
+          }
+        </td>
+      </tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            "status": 200,
+            "message": "Mensaje enviado con éxito.",
+            "data": {
+              "fieldCount": 0,
+              "affectedRows": 1,
+              "insertId": 28,
+              "info": "",
+              "serverStatus": 2,
+              "warningStatus": 0,
+              "changedRows": 0
+            }
+          }
+          Incorrecto:
+          JSON:{
+              status:404
+              message:"Error al enviar el mensaje."
+          }
+          Error:
+          JSON:{
+            Status:500
+            message:"No se pudo crear el mensaje. mod createChat"
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      
+      <tr><td>NUMERO</td><td>4</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>actualizar chats</td></tr>
+      <tr><td>URI</td><td>/user/chats/:id</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite actualizar los chats de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>PUT</td></tr>
+      <tr><td>HEADER</td><td>3</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td>
+        <td>
+          {
+            "mensaje": "Si si si?"
+          }
+        </td>
+      </tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            "status": 200,
+            "message": "El mensaje ha sido actualizado con éxito."
+          }
+          Incorrecto:
+          JSON:{
+            status:404
+            message:"No se encontró el mensaje con el ID especificado."
+          }
+          Error:
+          JSON:{
+            status:500
+            "Ocurrió un error al actualizar el mensaje. Error: " + error
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+
+    <table>
+      
+      <tr><td>NUMERO</td><td>5</td></tr>
+      <tr><td>NOMBRE DEL SERVICIO</td><td>Eliminar chats</td></tr>
+      <tr><td>URI</td><td>/user/chats/:id</td></tr>
+      <tr><td>DESCRIPCIÓN</td><td>Permite eliminar los chats de la base de datos</td></tr>
+      <tr><td>VERBO HTTP</td><td>DELETE</td></tr>
+      <tr><td>HEADER</td><td>3</td></tr>
+      <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
+      <tr><td>PETICIÓN body</td><td>NULL</td></tr>
+      <tr><td>RESPUESTA JSON</td>
+        <td>
+          Correcto:
+          JSON:{
+            "status": 200,
+            "message": "Chat eliminado con éxito."
+          }
+          Incorrecto:
+          JSON:{
+            "status": 404,
+            "message": "Chat no encontrado"
+          }
+          Error:
+          JSON:{
+            "No se pudo eliminar el chat. Error: " + error 
+          }
+        </td>
+      </tr>
+      <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
+      <tr><td>RAMA:</td><td>DEVjcrc</td></tr>
+    </table>
+  </body>
+</html>

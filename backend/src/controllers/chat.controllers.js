@@ -1,75 +1,69 @@
-import {pool} from "../db.js"
+import {pool} from "../databases/conexion.js"
 
 export const getChats = async (req, res) => {
     try {
-        const [rows] = await pool.query("SELECT * FROM chat WHERE fk_id_subasta = ?", [req.body.idSubasta]);
-        
-        let response = {};
-        if (rows.length >  0) {
-            response = { message: "Mensajes recuperados con éxito.", chats: rows };
+        const result = await pool.query("SELECT * FROM chat");
+        if (result.length >  0) {
+            res.status(200).json({status: 200, data:result });
         } else {
-            response = { message: "No se encontraron mensajes con el ID de subasta proporcionado." };
+            res.status(404).json({status: 404, message: "No se encontraron mensajes." });
         }
-        
-        res.status(200).json(response);
     } catch (error) {
-        console.error("Error al obtener los mensajes de la base de datos:", error);
-        return res.status(500).json({ message: "Ocurrió un error al buscar los mensajes. Error: " + error.message });
+        res.status(500).json({status: 500, message: "Ocurrió un error al buscar los mensajes."});
     }
 };
 
 export const getChat = async (req, res) => {
     try {
-        const [rows] = await pool.query("SELECT mensaje_chat FROM chat WHERE mensaje_chat = ?", [req.body.message]);
+        const [rows] = await pool.query("SELECT * FROM chat WHERE pk_id_chat = ?", [req.params.id]);
         if (rows.length >  0) {
-            res.status(200).json({ message: "Mensaje encontrado", chat: rows });
+            res.status(200).json({status:  200, data: rows});
         } else {
-            res.status(404).json({ message: "No se encontró el mensaje: " + req.body.message });
+            res.status(404).json({status:  404, message: "Error ID al listar el mensaje." });
         }
     } catch (error) {
-        console.error("Error al obtener el mensaje de la base de datos:", error);
-        return res.status(500).json({ message: "Ocurrió un error al buscar el mensaje. Error: " + error.message });
+        res.status(500).json({status:  500, message: "Ocurrió un error al buscar el mensaje mod getChat." + error });
     }
 };
 
-export const createChat = (req, res) => {
-    const {message, idSubasta, idUsuario} = req.body
+export const createChat = async (req, res) => {
+    const {mensaje, idSubasta, idUsuario} = req.body;
     try {
-        pool.query("INSERT INTO chat(mensaje_chat, fk_id_subasta, fk_id_usuario) VALUES (?, ?, ?)", [message, idSubasta, idUsuario])
-        res.status(200).json({message:"Registro de mensaje exitoso"})
+        const [rows] = await pool.query("INSERT INTO chat(mensaje_chat, fk_id_subasta, fk_id_usuario) VALUES (?, ?, ?)", [mensaje, idSubasta, idUsuario]);
+        if(rows.affectedRows){
+            res.status(200).json({status:   200, message: "Mensaje enviado con éxito.", data:rows});
+        } else {
+            res.status(404).json({status:   404, message: "Error al enviar el mensaje." });
+        }
     } catch (error) {
-        return res.status(500).json({ message: "No se pudo crear el mensaje " +error })
+        res.status(500).json({status:   500, message: "No se pudo crear el mensaje. mod createChat " + error });
+    }
+};
+
+export const updateChat = async (req, res) => {
+    const id = req.params.id;
+    const {mensaje_chat} = req.body;
+    try {
+        const [result] = await pool.query("UPDATE chat SET mensaje_chat = ? WHERE pk_id_chat = ?", [mensaje_chat, id]);
+        if (result.affectedRows >   0) {
+            res.status(200).json({status: 200, message: "El mensaje ha sido actualizado con éxito." });
+        } else {
+            res.status(404).json({status: 404, message: "No se encontró el mensaje con el ID especificado." });
+        }
+    } catch (error) {
+        res.status(500).json({status: 500, message: "Ocurrió un error al actualizar el mensaje. Error: " + error });
     }
 }
 
-export const updateChat = async (req, res) => {
-    try {
-        const updates = req.body;
-        const id = req.body.id;
-
-        // Assuming updates contains fields like 'mensaje_chat', 'fk_id_subasta', etc.
-        const [result] = await pool.query("UPDATE chat SET mensaje_chat = ? WHERE id_chat = ?", [updates.mensaje_chat, id]);
-
-        if (result.affectedRows >   0) {
-            res.status(200).json({ message: "El mensaje ha sido actualizado con éxito." });
-        } else {
-            res.status(404).json({ message: "No se encontró el mensaje con el ID especificado." });
-        }
-    } catch (error) {
-        console.error("Error al actualizar el mensaje en la base de datos:", error);
-        return res.status(500).json({ message: "Ocurrió un error al actualizar el mensaje. Error: " + error.message });
-    }
-};
-
 export const deleteChat = async (req, res) => {
     try {
-        const [result] = await pool.query("DELETE FROM chat WHERE id_chat = ?", [req.body.id]);
+        const [result] = await pool.query("DELETE FROM chat WHERE pk_id_chat = ?", [req.params.id]);
         if (result.affectedRows ===  0) {
-            return res.status(404).json({ message: "Chat no encontrado" });
+            res.status(404).json({status: 404, message: "Chat no encontrado" });
+        }else {
+            res.status(200).json({status: 200, message: "Chat eliminado con éxito." });
         }
-        res.status(200).json({ message: "Chat eliminado con éxito." });
     } catch (error) {
-        console.error("Error al eliminar el chat: ", error);
-        return res.status(500).json({ message: "No se pudo eliminar el chat. Error: " + error.message });
+        res.status(500).json({status: 500, message: "No se pudo eliminar el chat. Error: " + error });
     }
 };

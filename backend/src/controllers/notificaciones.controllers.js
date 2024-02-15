@@ -1,15 +1,15 @@
-import {pool} from "../db.js"
+import {pool} from "../databases/conexion.js"
 
 export const getNotifications = async (req, res) => {
     try {
-        const [rows] = await pool.query("SELECT * FROM notificaciones WHERE fk_id_usuario = ?", [req.body.fk_id_usuario]);
-        if (rows.length >  0) {
-            res.status(200).json(rows);
+        const result = await pool.query("SELECT * FROM notificaciones");
+        if (result.length >  0) {
+            res.status(200).json({status:200, data:result});
         } else {
-            res.status(200).json({ message: 'Por el momento no existen notificaciones' });
+            res.status(400).json({status:400, message: 'No se encontraron notificaciones' });
         }
     } catch (error) {
-        res.status(500).json({ error: 'Error al obtener las notificaciones' });
+        res.status(500).json({ status:500, message: 'Error al obtener las notificaciones' });
     }
 };
 

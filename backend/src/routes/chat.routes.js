@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { createChat, deleteChat, getChat, getChats, updateChat } from "../controllers/chat.controllers.js";
 
-const router = Router();
+const routerChat = Router();
 
-router.get('/chat', getChats)
-router.get('/chat/:id', getChat)
-router.post('/chat', createChat)
-router.put('/chat/:id', updateChat)
-router.delete('/chat/:id', deleteChat)
+routerChat.get('/chats', getChats)
+routerChat.get('/chats/:id', getChat)
+routerChat.post('/chats', createChat)
+routerChat.put('/chats/:id', updateChat)
+routerChat.delete('/chats/:id', deleteChat)
 
-export default router;
+export default routerChat;

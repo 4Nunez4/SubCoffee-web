@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { createNotification, deleteNotification, getNotification, getNotifications, updateNotification } from "../controllers/notificaciones.controllers.js";
 
-const router = Router()
+const routerDocument = Router()
 
-router.get('/noti', getNotifications)
-router.get('/noti/:id', getNotification)
-router.post('/noti', createNotification)
-router.put('/noti/:id', updateNotification)
-router.delete('/noti/:id', deleteNotification)
+routerDocument.get('/notifications', getNotifications)
+routerDocument.get('/notifications/:id', getNotification)
+routerDocument.post('/notifications', createNotification)
+routerDocument.put('/notifications/:id', updateNotification)
+routerDocument.delete('/notifications/:id', deleteNotification)
 
-export default router
+export default routerDocument;
