@@ -7,10 +7,10 @@ const variedadesRoute= Router();
 
 
 
-variedadesRoute.post('/registrar',guardarPostulacion);
-variedadesRoute.put('/actualizar/:id',editarPostulacion);
-variedadesRoute.get('/listar',eliminarPostulacion);
-variedadesRoute.get('/buscar/:id',getPostulacion);
+variedadesRoute.post('/guardarPostulacion',guardarPostulacion);
+variedadesRoute.put('/editarPostulacion/:id',editarPostulacion);
+variedadesRoute.get('/eliminarPostulacion',eliminarPostulacion);
+variedadesRoute.get('/getPostulacion/:id',getPostulacion);
 
 
 
