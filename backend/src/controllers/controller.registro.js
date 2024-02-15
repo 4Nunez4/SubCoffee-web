@@ -19,16 +19,17 @@ export const listar = async (req, res) =>{
 
    //registrarUsuarios
 
-   export const registrar = async(req, res)=>{
+export const registrar = async(req, res)=>{
     try {
-        const {pk_cedula_user, nombre_user, email_user, telefono_user, fecha_nacimiento_user, password_user, rol_user, descripcion_user} =req.body
-        let sql = `insert into usuarios(pk_cedula_user, nombre_user, email_user, telefono_user, fecha_nacimiento_user, password_user, rol_user, descripcion_user) values (?, ?, ?, ?, ?, ?, ?, ?)`
+        const {pk_cedula_user, nombre_user, email_user, telefono_user, fecha_nacimiento_user, password_user, rol_user, descripcion_user} = req.body
+
+        let sql = `insert into usuarios(pk_cedula_user, nombre_user, email_user, telefono_user, fecha_nacimiento_user, password_user, rol_user, descripcion_user) values (?, ?, ?, ?, ?, ?, ?, ?)` 
 
         const [rows] = await pool.query(sql,[pk_cedula_user, nombre_user, email_user, telefono_user, fecha_nacimiento_user, password_user, rol_user, descripcion_user])
 
         if(rows.affectedRows > 0)
         {res.status(200).json({'status':200, 'mesage': 'Felicidades, el registro fue un exito'})}
-        
+
         else
         {res.status(400).json({'status':400, 'mesage': 'Error, El registro fue denegado'})} 
     } 
@@ -42,7 +43,7 @@ export const listar = async (req, res) =>{
 
 export const actualizar = async (req, res) => {
     try {
-        let pk_cedula_user = req.params.pk_cedula_user
+        let {pk_cedula_user} = req.params
 
         const {nombre_user, email_user, telefono_user, password_user} = req.body
         
