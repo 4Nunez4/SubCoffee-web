@@ -27,25 +27,125 @@ hr {
 }
 table {
     width: 100%;
-    margin: 20px 0;
+    margin: 50px 0;
     border-collapse: collapse;
 }
 td {
     padding: 10px;
+    
     border: 1px solid #ccc;
 }
     </style>
 
-    <h1>API Documentation - Productos  ejemplo </h1>
+    <h1>API Documentation - Postulacion  </h1>
     <table>
         <tr><td>Numero </td><td>1</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
-        <tr><td>URI</td><td>/usuario/listar</td></tr>
-        <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
-        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+        <tr><td>Nombre del Servicio </td><td>editarPostulacion </td></tr>
+        <tr><td>URI</td><td>/postulacion/editarPostulacion</td></tr>
+        <tr><td>Descripcion:</td><td>Permite al usuario editar una postulacion hecha por el</td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Usuario, Administrador</td></tr>
+        <tr><td>PETICION BODY</td><td>{ postulacionId, updatedEstado, updatedMonto, updatedSentimiento, updatedOferta } </td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            "status": 200,
+          "message": "Se actualizó con éxito la postulación"
+            
+            Incorrecto:
+            Status:404
+            body:{
+                "status": 401,
+                "message": "No se pudo actualizar la postulación"
+            }
+            Error:
+            Status:505
+            body:{
+                "status": 505,
+                "message": "Error en el servidor: " + e
+            }
+        </td></tr>
+    </table>
+
+
+
+    <h1>API Documentation - Postulacion  </h1>
+    <table>
+        <tr><td>Numero </td><td>2</td></tr>
+        <tr><td>Nombre del Servicio </td><td>eliminarPostulacion </td></tr>
+        <tr><td>URI</td><td>/postulacion/eliminarPostulacion</td></tr>
+        <tr><td>Descripcion:</td><td>Permite eliminar al usuario una postulacion hecha por el </td></tr>
+        <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
         <tr><td>Usuarios:</td><td>Administrador</td></tr>
         <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                "status": 200,
+                "message": "Se eliminó con éxito la postulación"
+            }
+            Incorrecto:
+            Status:401
+            body:{
+                "status": 401,
+                "message": "No se pudo eliminar la postulación"
+            }
+            Error:
+            Status:505
+            body:{
+                "status": 505,
+                "message": "Error en el servidor: " + e
+            }
+        </td></tr>
+    </table>
+    <h1>API Documentation - Postulacion  </h1>
+    <table>
+        <tr><td>Numero </td><td>3</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Mostrar Postulacion </td></tr>
+        <tr><td>URI</td><td>/postulacion/getPostulaciontd></tr>
+        <tr><td>Descripcion:</td><td>Permite listar listar las postulaciones hechas por un usuario </td></tr>
+        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador</td></tr>
+        <tr><td>PETICION BODY</td><td>   </td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                status(200).json({message:'Postulaciones:' + result})
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                status:505
+                message:"No se encontraron Postulaciones con el id"
+            }
+            Error:
+            Status:505
+            body:{
+                res.status(500).json({ message:'error en listar Postulacion: '+err})
+            }
+        </td></tr>
+    </table>
+
+
+
+    <h1>API Documentation - Postulacion  </h1>
+    <table>
+        <tr><td>Numero </td><td>4</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Guardar Postulacion </td></tr>
+        <tr><td>URI</td><td>/postulacion/guardarPostulacion</td></tr>
+        <tr><td>Descripcion:</td><td>Permite crear postuladciones a los usuarios   </td></tr>
+        <tr><td>Verbo HTTP:</td><td>POST</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td>  (estado_pos, monto_inicial_pos, sentimiento_pos, oferta_pos)</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
@@ -62,7 +162,7 @@ td {
             Incorrecto:
             Status:404
             body:{
-                status:500
+                status:505
                 message:"No se encontraron usuarios registrados"
             }
             Error:
@@ -72,5 +172,52 @@ td {
             }
         </td></tr>
     </table>
+
+    
+
+
+
+
+
+
+
+    <h1>API Documentation - Variedades  </h1>
+    <table>
+        <tr><td>Numero </td><td>1</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Listar Variedad </td></tr>
+        <tr><td>URI</td><td>/postulacion/getPostulaciontd></tr>
+        <tr><td>Descripcion:</td><td>Permite listar listar las postulaciones hechas por un usuario </td></tr>
+        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador</td></tr>
+        <tr><td>PETICION BODY</td><td>   </td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                status(200).json({message:'Postulaciones:' + result})
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                status:505
+                message:"No se encontraron Postulaciones con el id"
+            }
+            Error:
+            Status:505
+            body:{
+                res.status(500).json({ message:'error en listar Postulacion: '+err})
+            }
+        </td></tr>
+    </table>
+
+
+
+
+
+
+
+
 </body>
 </html>

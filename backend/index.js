@@ -1,12 +1,14 @@
 import express from "express";
 import bodyParser from 'body-parser';
+import postulacionesrouter from "./src/routes/postulacion.routes";
+import variedadesRoute from "./src/routes/variedades.routes";
 import ejs from "ejs"; 
 
 const app = express();
 
 
-
-
+app.get('/postulacion', postulacionesrouter);
+app.get('/variedad', variedadesRoute);
 
 
 app.use(express.json());
