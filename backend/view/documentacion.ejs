@@ -35,35 +35,36 @@ td {
     border: 1px solid #ccc;
 }
     </style>
+    Modulo Subastas
 
-    <h1>API Documentation - Productos  ejemplo </h1>
+    <h1>API Documentation - Subastas   </h1>
     <table>
         <tr><td>Numero </td><td>1</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
-        <tr><td>URI</td><td>/usuario/listar</td></tr>
-        <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
+        <tr><td>Nombre del Servicio </td><td>Listar Subastas</td></tr>
+        <tr><td>URI</td><td>/subastas/listar</td></tr>
+        <tr><td>Descripcion:</td><td>Permite listar las subastas registradas en la base de datos    </td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
         <tr><td>Usuarios:</td><td>Administrador</td></tr>
-        <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+        <tr><td>PETICION BODY</td><td>NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
             JSON:
-            {
-                "idusuario": 126,
-                "nombres": "Felix ",
-                "direccion": "",
-                "telefono": "",
-                "correo": "",
-                "rol": "administrador",
-                "password": "0000"
+            {   
+                pk_id_sub: 1,
+                fecha_inicio_sub: '2024-02-02', 
+                fecha_fin_sub: '2024-02-14', 
+                precio_final_sub: 0.00, 
+                estado_sub: 'cerrada', 
+                fk_id_produccion: 1, 
+                fk_id_postulacion: 1 
             }
             Incorrecto:
             Status:404
             body:{
                 status:500
-                message:"No se encontraron usuarios registrados"
+                message:"No se encontraron subastas registradas :c"
             }
             Error:
             Status:505
@@ -72,5 +73,328 @@ td {
             }
         </td></tr>
     </table>
+
+    <h1>API Documentation - Subastas   </h1>
+    <table>
+        <tr><td>Numero </td><td>2</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Agregar Subastas</td></tr>
+        <tr><td>URI</td><td>subastas/agregar</td></tr>
+        <tr><td>Descripcion:</td><td>Permite Agregar subastas, registrarlas en la base de datos    </td></tr>
+        <tr><td>Verbo HTTP:</td><td>POST</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td>
+        {
+            pk_id_sub: 2, 
+            fecha_inicio_sub: '2024-02-10', 
+            fecha_fin_sub: '', 
+            precio_final_sub: 0.00, 
+            estado_sub: 'abierta', 
+            fk_id_produccion: 2, 
+            fk_id_postulacion: 2, 
+        }</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            "mensaje": "Su subasta ha sido exitosa"
+            Incorrecto:
+            status(400)
+            BODY:{
+                "mensaje": "Por favor, proporcione todos los campos necesarios."
+            }
+            Error:
+            Status:505
+            body:{
+                    "mensaje": "Error interno del servidor"
+                }
+        </td></tr>
+    </table>
+
+    <h1>API Documentation - Subastas   </h1>
+    <table>
+        <tr><td>Numero </td><td>3</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Actualizar Subastas</td></tr>
+        <tr><td>URI</td><td>/usuario/listar</td></tr>
+        <tr><td>Descripcion:</td><td>Permite actualizar las subastas registradas en la base de datos    </td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td>
+        {
+            pk_id_sub: 2,
+            fecha_inicio_sub: '2024-02-10', 
+            fecha_fin_sub: '', 
+            precio_final_sub: 2000, 
+            estado_sub: 'abierta', 
+            fk_id_produccion: 2, 
+            fk_id_postulacion: 2,
+        }</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            body{
+                "mensaje": "La subasta ha sido actualizada exitosamente"
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                status:500
+                "mensaje": "No se encontró ninguna subasta con el id proporcionado"
+            }
+            Error:
+            Status:505
+            body:{
+                "Error interno del servidor"
+            }
+        </td></tr>
+    </table>
+
+    <h1>API Documentation - Subastas   </h1>
+    <table>
+        <tr><td>Numero </td><td>4</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Listar Subasta</td></tr>
+        <tr><td>URI</td><td>/subastas/:id</td></tr>
+        <tr><td>Descripcion:</td><td>Permite listar la subasta con id proporcionado registrada en la base de datos    </td></tr>
+        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td>{'pk_id_sub': 2}</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            "mensaje": "Datos de subasta obtenidos correctamente",
+                "data": resultado[0]
+            Incorrecto:
+            Status:404
+            body:{
+                status:500
+                "mensaje": "No se encontró ninguna subasta con el id consultado."
+            }
+            Error:
+            Status:505
+            body:{
+                "Error interno del servidor"
+            }
+        </td></tr>
+    </table>
+
+    <h1>API Documentation - Subastas   </h1>
+    <table>
+        <tr><td>Numero </td><td>5</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Eliminar Subasta</td></tr>
+        <tr><td>URI</td><td>/subastas/:id</td></tr>
+        <tr><td>Descripcion:</td><td>Permite eliminar la subasta con id proporcionado registradas en la base de datos     </td></tr>
+        <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td>{'pk_id_sub': 2}</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:{
+            "mensaje": "Subasta eliminada exitosamente."
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                status:500
+                "mensaje": "No se encontró una subasta con el id proporcionado."
+            }
+            Error:
+            Status:505
+            body:{
+                "Error interno del servidor"
+            }
+        </td></tr>
+    </table>
+
+Modulo Seguimientos
+
+<h1>API Documentation - Seguimientos   </h1>
+<table>
+    <tr><td>Numero </td><td>1</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
+    <tr><td>URI</td><td>/usuario/listar</td></tr>
+    <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
+    <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+    <tr><td>HEADER:</td><td>NULL</td></tr>
+    <tr><td>Usuarios:</td><td>Administrador</td></tr>
+    <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+    <tr><td>RESPUESTA JSON</td><td>
+        Correcto:
+        Status:200
+        JSON:
+        {
+            "idusuario": 126,
+            "nombres": "Felix ",
+            "direccion": "",
+            "telefono": "",
+            "correo": "",
+            "rol": "administrador",
+            "password": "0000"
+        }
+        Incorrecto:
+        Status:404
+        body:{
+            status:500
+            message:"No se encontraron usuarios registrados"
+        }
+        Error:
+        Status:505
+        body:{
+            "error en el sistema"
+        }
+    </td></tr>
+</table>
+
+<h1>API Documentation - Seguimientos   </h1>
+<table>
+    <tr><td>Numero </td><td>1</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
+    <tr><td>URI</td><td>/usuario/listar</td></tr>
+    <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
+    <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+    <tr><td>HEADER:</td><td>NULL</td></tr>
+    <tr><td>Usuarios:</td><td>Administrador</td></tr>
+    <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+    <tr><td>RESPUESTA JSON</td><td>
+        Correcto:
+        Status:200
+        JSON:
+        {
+            "idusuario": 126,
+            "nombres": "Felix ",
+            "direccion": "",
+            "telefono": "",
+            "correo": "",
+            "rol": "administrador",
+            "password": "0000"
+        }
+        Incorrecto:
+        Status:404
+        body:{
+            status:500
+            message:"No se encontraron usuarios registrados"
+        }
+        Error:
+        Status:505
+        body:{
+            "error en el sistema"
+        }
+    </td></tr>
+</table>
+
+<h1>API Documentation - Seguimientos   </h1>
+<table>
+    <tr><td>Numero </td><td>1</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
+    <tr><td>URI</td><td>/usuario/listar</td></tr>
+    <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
+    <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+    <tr><td>HEADER:</td><td>NULL</td></tr>
+    <tr><td>Usuarios:</td><td>Administrador</td></tr>
+    <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+    <tr><td>RESPUESTA JSON</td><td>
+        Correcto:
+        Status:200
+        JSON:
+        {
+            "idusuario": 126,
+            "nombres": "Felix ",
+            "direccion": "",
+            "telefono": "",
+            "correo": "",
+            "rol": "administrador",
+            "password": "0000"
+        }
+        Incorrecto:
+        Status:404
+        body:{
+            status:500
+            message:"No se encontraron usuarios registrados"
+        }
+        Error:
+        Status:505
+        body:{
+            "error en el sistema"
+        }
+    </td></tr>
+</table>
+
+<h1>API Documentation - Seguimientos   </h1>
+<table>
+    <tr><td>Numero </td><td>1</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
+    <tr><td>URI</td><td>/usuario/listar</td></tr>
+    <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
+    <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+    <tr><td>HEADER:</td><td>NULL</td></tr>
+    <tr><td>Usuarios:</td><td>Administrador</td></tr>
+    <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+    <tr><td>RESPUESTA JSON</td><td>
+        Correcto:
+        Status:200
+        JSON:
+        {
+            "idusuario": 126,
+            "nombres": "Felix ",
+            "direccion": "",
+            "telefono": "",
+            "correo": "",
+            "rol": "administrador",
+            "password": "0000"
+        }
+        Incorrecto:
+        Status:404
+        body:{
+            status:500
+            message:"No se encontraron usuarios registrados"
+        }
+        Error:
+        Status:505
+        body:{
+            "error en el sistema"
+        }
+    </td></tr>
+</table>
+
+<h1>API Documentation - Seguimientos   </h1>
+<table>
+    <tr><td>Numero </td><td>1</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
+    <tr><td>URI</td><td>/usuario/listar</td></tr>
+    <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
+    <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+    <tr><td>HEADER:</td><td>NULL</td></tr>
+    <tr><td>Usuarios:</td><td>Administrador</td></tr>
+    <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+    <tr><td>RESPUESTA JSON</td><td>
+        Correcto:
+        Status:200
+        JSON:
+        {
+            "idusuario": 126,
+            "nombres": "Felix ",
+            "direccion": "",
+            "telefono": "",
+            "correo": "",
+            "rol": "administrador",
+            "password": "0000"
+        }
+        Incorrecto:
+        Status:404
+        body:{
+            status:500
+            message:"No se encontraron usuarios registrados"
+        }
+        Error:
+        Status:505
+        body:{
+            "error en el sistema"
+        }
+    </td></tr>
+</table>
+
 </body>
 </html>
