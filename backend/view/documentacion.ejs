@@ -114,8 +114,8 @@ td {
     <table>
         <tr><td>Numero </td><td>3</td></tr>
         <tr><td>Nombre del Servicio </td><td>Actualizar Subastas</td></tr>
-        <tr><td>URI</td><td>/usuario/listar</td></tr>
-        <tr><td>Descripcion:</td><td>Permite actualizar las subastas registradas en la base de datos    </td></tr>
+        <tr><td>URI</td><td>/subastas/:id</td></tr>
+        <tr><td>Descripcion:</td><td>Permite actualizar las subastas con id proporcionado registradas en la base de datos    </td></tr>
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
         <tr><td>Usuarios:</td><td>Usuario</td></tr>
@@ -214,31 +214,31 @@ Modulo Seguimientos
 <h1>API Documentation - Seguimientos   </h1>
 <table>
     <tr><td>Numero </td><td>1</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
-    <tr><td>URI</td><td>/usuario/listar</td></tr>
-    <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
+    <tr><td>Nombre del Servicio </td><td>Listar seguimiento</td></tr>
+    <tr><td>URI</td><td>/seguimiento/listar</td></tr>
+    <tr><td>Descripcion:</td><td>Permite listar los seguimientos registrados en la base de datos    </td></tr>
     <tr><td>Verbo HTTP:</td><td>GET</td></tr>
     <tr><td>HEADER:</td><td>NULL</td></tr>
     <tr><td>Usuarios:</td><td>Administrador</td></tr>
-    <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+    <tr><td>PETICION BODY</td><td>NULL</td></tr>
     <tr><td>RESPUESTA JSON</td><td>
         Correcto:
         Status:200
         JSON:
-        {
-            "idusuario": 126,
-            "nombres": "Felix ",
-            "direccion": "",
-            "telefono": "",
-            "correo": "",
-            "rol": "administrador",
-            "password": "0000"
+        {   
+            pk_id_seg: 1,
+            certificacion_seg: 'certificado', 
+            puntuacion_seg: '',
+            fecha_seg: 2024-02-14, 
+            imagen_seg: '', 
+            fk_id_postulacion: 1, 
+            fk_id_usuario: 1,
         }
         Incorrecto:
         Status:404
         body:{
             status:500
-            message:"No se encontraron usuarios registrados"
+            message:"No se encontraron seguimientos registrados :c"
         }
         Error:
         Status:505
@@ -250,148 +250,136 @@ Modulo Seguimientos
 
 <h1>API Documentation - Seguimientos   </h1>
 <table>
-    <tr><td>Numero </td><td>1</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
-    <tr><td>URI</td><td>/usuario/listar</td></tr>
-    <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
-    <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+    <tr><td>Numero </td><td>2</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Agregar seguimiento</td></tr>
+    <tr><td>URI</td><td>seguimiento/agregar</td></tr>
+    <tr><td>Descripcion:</td><td>Permite Agregar seguimiento, registrarlo en la base de datos    </td></tr>
+    <tr><td>Verbo HTTP:</td><td>POST</td></tr>
     <tr><td>HEADER:</td><td>NULL</td></tr>
     <tr><td>Usuarios:</td><td>Administrador</td></tr>
-    <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+    <tr><td>PETICION BODY</td><td>
+        {   
+            pk_id_seg: 2,
+            certificacion_seg: 'sin certificacion', 
+            puntuacion_seg: '',
+            fecha_seg: 2024-02-14, 
+            imagen_seg: '', 
+            fk_id_postulacion: 2, 
+            fk_id_usuario: 2,
+        }
+    </td></tr>
     <tr><td>RESPUESTA JSON</td><td>
         Correcto:
         Status:200
-        JSON:
-        {
-            "idusuario": 126,
-            "nombres": "Felix ",
-            "direccion": "",
-            "telefono": "",
-            "correo": "",
-            "rol": "administrador",
-            "password": "0000"
-        }
+        "mensaje": "Su segumiento ha sido exitoso"
         Incorrecto:
-        Status:404
-        body:{
-            status:500
-            message:"No se encontraron usuarios registrados"
+        status(400)
+        BODY:{
+            "mensaje": "Por favor, proporcione todos los campos necesarios."
         }
         Error:
         Status:505
         body:{
-            "error en el sistema"
-        }
+                "mensaje": "Error interno del servidor"
+            }
     </td></tr>
 </table>
 
 <h1>API Documentation - Seguimientos   </h1>
 <table>
-    <tr><td>Numero </td><td>1</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
-    <tr><td>URI</td><td>/usuario/listar</td></tr>
-    <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
-    <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+    <tr><td>Numero </td><td>3</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Actualizar seguimiento</td></tr>
+    <tr><td>URI</td><td>/seguimiento/:id</td></tr>
+    <tr><td>Descripcion:</td><td>Permite actualizar los seguimientos con id proporcionado registrados en la base de datos    </td></tr>
+    <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
     <tr><td>HEADER:</td><td>NULL</td></tr>
     <tr><td>Usuarios:</td><td>Administrador</td></tr>
-    <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+    <tr><td>PETICION BODY</td><td>
+    {
+        pk_id_sub: 2,
+        fecha_inicio_sub: '2024-02-10', 
+        fecha_fin_sub: '', 
+        precio_final_sub: 2000, 
+        estado_sub: 'abierta', 
+        fk_id_produccion: 2, 
+        fk_id_postulacion: 2,
+    }</td></tr>
     <tr><td>RESPUESTA JSON</td><td>
         Correcto:
         Status:200
-        JSON:
-        {
-            "idusuario": 126,
-            "nombres": "Felix ",
-            "direccion": "",
-            "telefono": "",
-            "correo": "",
-            "rol": "administrador",
-            "password": "0000"
+        body{
+            "mensaje": "La segumiento ha sido actualizado exitosamente"
         }
         Incorrecto:
         Status:404
         body:{
             status:500
-            message:"No se encontraron usuarios registrados"
+            "mensaje": "No se encontró ninguna segumiento con el id proporcionado"
         }
         Error:
         Status:505
         body:{
-            "error en el sistema"
+            "Error interno del servidor"
         }
     </td></tr>
 </table>
 
-<h1>API Documentation - Seguimientos   </h1>
+<h1>API Documentation - seguimiento   </h1>
 <table>
-    <tr><td>Numero </td><td>1</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
-    <tr><td>URI</td><td>/usuario/listar</td></tr>
-    <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
+    <tr><td>Numero </td><td>4</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Listar segumiento</td></tr>
+    <tr><td>URI</td><td>/seguimiento/:id</td></tr>
+    <tr><td>Descripcion:</td><td>Permite listar el segumiento con id proporcionado registrada en la base de datos    </td></tr>
     <tr><td>Verbo HTTP:</td><td>GET</td></tr>
     <tr><td>HEADER:</td><td>NULL</td></tr>
     <tr><td>Usuarios:</td><td>Administrador</td></tr>
-    <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+    <tr><td>PETICION BODY</td><td>{'pk_id_seg': 2}</td></tr>
     <tr><td>RESPUESTA JSON</td><td>
         Correcto:
         Status:200
         JSON:
-        {
-            "idusuario": 126,
-            "nombres": "Felix ",
-            "direccion": "",
-            "telefono": "",
-            "correo": "",
-            "rol": "administrador",
-            "password": "0000"
-        }
+        "mensaje": "Datos de segumiento obtenidos correctamente",
+            "data": resultado[0]
         Incorrecto:
         Status:404
         body:{
             status:500
-            message:"No se encontraron usuarios registrados"
+            "mensaje": "No se encontró ninguna segumiento con el id consultado."
         }
         Error:
         Status:505
         body:{
-            "error en el sistema"
+            "Error interno del servidor"
         }
     </td></tr>
 </table>
 
-<h1>API Documentation - Seguimientos   </h1>
+<h1>API Documentation - seguimiento   </h1>
 <table>
-    <tr><td>Numero </td><td>1</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Listar Usuarios</td></tr>
-    <tr><td>URI</td><td>/usuario/listar</td></tr>
-    <tr><td>Descripcion:</td><td>Permite listar los usuarios registrados en la base de datos    </td></tr>
-    <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+    <tr><td>Numero </td><td>5</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Eliminar segumiento</td></tr>
+    <tr><td>URI</td><td>/seguimiento/:id</td></tr>
+    <tr><td>Descripcion:</td><td>Permite eliminar la seguimiento con id proporcionado registrados en la base de datos     </td></tr>
+    <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
     <tr><td>HEADER:</td><td>NULL</td></tr>
     <tr><td>Usuarios:</td><td>Administrador</td></tr>
-    <tr><td>PETICION BODY</td><td>{nombre:'juanito'}</td></tr>
+    <tr><td>PETICION BODY</td><td>{'pk_id_seg': 2}</td></tr>
     <tr><td>RESPUESTA JSON</td><td>
         Correcto:
         Status:200
-        JSON:
-        {
-            "idusuario": 126,
-            "nombres": "Felix ",
-            "direccion": "",
-            "telefono": "",
-            "correo": "",
-            "rol": "administrador",
-            "password": "0000"
+        JSON:{
+        "mensaje": "segumiento eliminada exitosamente."
         }
         Incorrecto:
         Status:404
         body:{
             status:500
-            message:"No se encontraron usuarios registrados"
+            "mensaje": "No se encontró una segumiento con el id proporcionado."
         }
         Error:
         Status:505
         body:{
-            "error en el sistema"
+            "Error interno del servidor"
         }
     </td></tr>
 </table>

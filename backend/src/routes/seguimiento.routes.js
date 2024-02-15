@@ -3,8 +3,8 @@ import { listarSeguimientos, postSeguimiento, putSeguimiento, getSeguimientoId, 
 
 const router = Router()
 
-router.get("/seguimientos", listarSeguimientos)
-router.post("/seguimientos", postSeguimiento)
+router.get("/seguimientos/listar", listarSeguimientos)
+router.post("/seguimientos/agregar", postSeguimiento)
 router.put("/seguimientos/:id", putSeguimiento)
 router.get("/seguimientos/:id", getSeguimientoId)
 router.delete("/seguimientos/:id", deleteSeguimiento)
