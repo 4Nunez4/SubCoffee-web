@@ -33,7 +33,6 @@ app.set("views", "./view");
 app.get("/documents", (req, res) => {
   res.render("documentacion.ejs");
 });
-
 app.listen(4000, () => {
   console.log("Servidor se esta ejecutando en el puerto 4000");
 });
