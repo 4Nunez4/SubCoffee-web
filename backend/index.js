@@ -12,7 +12,6 @@ const app = express();
 
 
 
-
 app.use(express.json());
 // app.use(bodyParser.urlencoded({extended:false}));Poder trabajar con el formato json
 app.use(bodyParser.json());

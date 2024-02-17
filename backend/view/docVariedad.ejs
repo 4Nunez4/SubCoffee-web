@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <h1>API Documentation - Variedades  </h1>
+    <table>
+        <tr><td>Numero </td><td>1</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Listar Variedad </td></tr>
+        <tr><td>URI</td><td>/postulacion/getPostulaciontd></tr>
+        <tr><td>Descripcion:</td><td>Permite listar listar las postulaciones hechas por un usuario </td></tr>
+        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador</td></tr>
+        <tr><td>PETICION BODY</td><td>   </td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                status(200).json({message:'Postulaciones:' + result})
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                status:505
+                message:"No se encontraron Postulaciones con el id"
+            }
+            Error:
+            Status:505
+            body:{
+                res.status(500).json({ message:'error en listar Postulacion: '+err})
+            }
+        </td></tr>
+    </table>
+
+</body>
+</html>
