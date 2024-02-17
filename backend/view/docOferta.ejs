@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Requerimiento Oferta</h2>
+    <hr>
+    <h3>Registrar oferta</h3>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Registrar oferta</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/subcoffee/registrarOferta</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite registrar las ofertas en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>POST</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                  "status": 200,
+                  "message": "Se registro con exito la oferta...!!!"
+                }
+                Incorrecto:
+                Status:{
+                  status: 404,
+                  message: "No se registro la oferta...!!!"
+                }
+                Error: 
+                status: 500,
+                body:{
+                  status:500,message:"Error"+e
+                }
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h2>Requerimiento 2. Documentacion de la OFERTA</h2>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Actualizar oferta</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>subcoffee/actualizarOferta/:id</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite actualizar las ofertas registradas en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PUT</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                  "status": 200,
+                  "message": "La postualción (oferta) con ID 6 fue actualizado correctamente."
+                }
+                Incorrecto:
+                Status:{
+                  status: 404,
+                  message: "No se encontro nimgúna postulación (oferta) con ese ID 6"
+                }
+                Error: 
+                status: 500,
+                body:{
+                  status:500,message:"Error del servidor al intentar editar la postulación (oferta)."+e
+                }
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h2>Requerimiento 3. Documentacion de la OFERTA</h2>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Buscar oferta</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/subcoffee/buscarOferta/:id</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite buscar una oferta registrada en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                  "pk_id_pos": 6,
+                  "fecha_pos": null,
+                  "estado_pos": null,
+                  "monto_inicial_pos": 0,
+                  "oferta_pos": 800000,
+                  "fk_id_usuario": null
+                }
+                Incorrecto:
+                Status:{
+                  status: 404,
+                  message: "No se encontro nimguna postulación(Oferta) con el ID 6"
+                }
+                Error: 
+                status: 500,
+                body:{
+                  status:500,message:"Error"+e
+                }
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h2>Requerimiento 4. Documentacion de la OFERTA</h2>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Borrar oferta</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/subcoffee/borrarOferta/:id</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite borrar una oferta registrada en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>DELETE</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                  "status": 200,
+                  "message": "Se elimino la oferta con exito"
+                }
+                Incorrecto:
+                Status:{
+                  status: 404,
+                  message: "no se elimino la oferta"
+                }
+                Error: 
+                status: 500,
+                body:{
+                  status:500,message:"Error"+e
+                }
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h2>Requerimiento 5. Documentacion de la OFERTA</h2>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Listar ofertas</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/subcoffee/listarOferta</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite listar las ofertas registradas en la base de datos</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                [
+                  {
+                    "pk_id_pos": 1,
+                    "fecha_pos": null,
+                    "estado_pos": null,
+                    "monto_inicial_pos": 0,
+                    "oferta_pos": 400000,
+                    "fk_id_usuario": null
+                  },
+                  {
+                    "pk_id_pos": 5,
+                    "fecha_pos": null,
+                    "estado_pos": null,
+                    "monto_inicial_pos": 0,
+                    "oferta_pos": 1000000,
+                    "fk_id_usuario": null
+                  }
+                ]
+              Incorrecto:
+              Status:{
+                status: 404,
+                message: "No se a registrado ninguna oferta en el sistema...!!!"
+              }
+              Error: 
+              status: 500,
+              body:{
+                status:500,message:"Error"+e
+              }
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
