@@ -12,12 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.1",
-=======
-    "dotenv": "^16.4.4",
->>>>>>> db1e87c6a4f80b920dbe4972081a638c4f21d56d
+
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
