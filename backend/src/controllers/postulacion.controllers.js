@@ -24,12 +24,12 @@ export const guardarPostulacion = async (req,res)=> {
   try {
       const [rows] = await pool.query("INSERT INTO postulacion(fecha_pos, estado_pos, monto_inicial_pos, oferta_pos, fk_id_usuario) VALUES (?, ?, ?,?,?)", [fecha_pos, estado_pos, monto_inicial_pos, oferta_pos, idUsuario]);
       if(rows.affectedRows){
-          res.status(200).json({status: 200, message: "Mensaje creado con éxito."});
+          res.status(200).json({status: 200, message: "Se creo con exito la postulacion."});
       } else {
-          res.status(404).json({status: 404, message: "Error al crear el mensaje." });
+          res.status(404).json({status: 404, message: "Error al crear la postulacion." });
       }
   } catch (error) {
-      res.status(500).json({status: 500, message: "No se pudo crear el mensaje." + error});
+      res.status(500).json({status: 500, message: "Error servidor " + error});
   }
 };
 //este sirve
