@@ -11,7 +11,7 @@ export const getPostulaciones = async (req,res) =>{
             return res.status(200).json(result)
         }
         else{
-            return res.status(484).send({'mesage': 'Error no hay postulaciones'})
+            return res.status(404).send({'mesage': 'Error no hay postulaciones'})
         }
     } catch (error) {
         res.status(500).json({'status': 500,'mesage': 'ERROR SERVIDOR' + error})
@@ -47,25 +47,25 @@ export const getPostulacion = async (req,res) =>{
   }
 };
 
-  export const updatePostulacion = async (req,res) =>{
-    try{
-      const id = req.params.id;
-      const {estado_pos	,monto_inicial_pos,oferta_pos} = req.body;
 
-      const [result] = await pool.query("UPDATE postulacion SET estado_pos = ?, monto_inicial_pos = ?, oferta_pos = ? WHERE id = ?", [estado_pos, monto_inicial_pos, oferta_pos, id]);
-      if(result.affectedRows > 0){
-        res.status(200).json({ status: 200, message: 'Postulacion actualizada exitosamente' });
+  export const updatePostulacion = async (req, res) => {
+      try {
+          const id = req.params.id;
+          const {estado_pos	,monto_inicial_pos,oferta_pos}= req.body;
+          const [result] = await pool.query("UPDATE postulacion SET estado_pos = ?, monto_inicial_pos = ?, oferta_pos = ? WHERE pk_id_pos = ?", [estado_pos, monto_inicial_pos, oferta_pos, id]);
+          if(result.affectedRows > 0) {
+              res.status(200).json({ status: 200, message: 'Postulacion actualizada exitosamente' });
+          }else {
+              res.status(404).json({status: 404, message: "El ID de la postulacion es incorrecto"})
+          }
+      } catch (error) {
+          res.status(500).json({ status: 500, message: 'Error en el sistema', error});
       }
-      else {
-        res.status(404).json({status: 404, message: "El ID proporcionado es incorrecto"})
-    }
-    
+  }
 
-  }
-  catch (e) {
-    res.status(500).json({ status: 500, message: 'Error al actualizar la Postulacion' + e});
-  }
-  };
+
+
+
   
 export const deletePostulacion = async (req, res) => {
   try {

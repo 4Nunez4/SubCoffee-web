@@ -12,32 +12,182 @@
     <table>
         <tr><td>Numero </td><td>1</td></tr>
         <tr><td>Nombre del Servicio </td><td>Listar Variedad </td></tr>
-        <tr><td>URI</td><td>/postulacion/getPostulaciontd></tr>
-        <tr><td>Descripcion:</td><td>Permite listar listar las postulaciones hechas por un usuario </td></tr>
+        <tr><td>URI</td><td>/variedad/variedad></tr>
+        <tr><td>Descripcion:</td><td>Permite listar todas las variedades</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador</td></tr>
-        <tr><td>PETICION BODY</td><td>   </td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>PETICION BODY</td><td>  NULL </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
             JSON:
             {
-                status(200).json({message:'Postulaciones:' + result})
+                
+                    "pk_id_vari": 1,
+                    "tipo_vari": "Borbon",
+                    "descripcion_vari": "cafe de la mejor calidad",
+                    "imagen_vari": null,
+                    "puntuacion_vari": 12
+                
             }
             Incorrecto:
             Status:404
             body:{
-                status:505
-                message:"No se encontraron Postulaciones con el id"
+                message:"Error al listar la variedad"
             }
             Error:
-            Status:505
+            Status:500
             body:{
-                res.status(500).json({ message:'error en listar Postulacion: '+err})
+              message:'No se pudo listar la variedad" '+err
+            }
+        </td></tr>
+    </table>
+    <table>
+        <tr><td>Numero </td><td>2</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Guaradar Variedad </td></tr>
+        <tr><td>URI</td><td>/variedad/variedad></tr>
+        <tr><td>Descripcion:</td><td>Permite guardar variedades en la base de datos</td></tr>
+        <tr><td>Verbo HTTP:</td><td>POST</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>PETICION BODY</td><td> {
+
+            "tipo_vari": "Tipica",
+            "descripcion_vari": "cafe de la mejor calidad",
+            "imagen_vari": null,
+            "puntuacion_vari": 17
+        }</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                
+                  message:"Variedad creada con exito"
+                
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message:"Error al crear la variedad"
+            }
+            Error:
+            Status:500
+            body:{
+              message:'No se pudo crear la variedad" '+err
             }
         </td></tr>
     </table>
 
+
+
+    <table>
+        <tr><td>Numero </td><td>3</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Actualizar Variedad </td></tr>
+        <tr><td>URI</td><td>/variedad/variedad></tr>
+        <tr><td>Descripcion:</td><td>Permite actualizar variedades en la base de datos</td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>PETICION BODY</td><td> {
+
+            "tipo_vari": "Tipica",
+            "descripcion_vari": "cafe de la mejor calidaddsd",
+            "imagen_vari": null,
+            "puntuacion_vari": 17
+        }</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                
+                message: 'La variedad ha sido actualizada exitosamente'
+                
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: "El ID de la variedad es incorrecto"
+            }
+            Error:
+            Status:500
+            body:{
+                message:  'Error al actualizar la variedad' + '+err
+            }
+        </td></tr>
+    </table>
+
+
+    <table>
+        <tr><td>Numero </td><td>4</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Buscar Variedad a traves de su id</td></tr>
+        <tr><td>URI</td><td>/variedad/variedad/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite actualizar variedades en la base de datos</td></tr>
+        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                "status": 200,
+                "data": [
+                    {
+                        "pk_id_vari": 2,
+                        "tipo_vari": "Tipica",
+                        "descripcion_vari": "cafe de la mejor calidad",
+                        "imagen_vari": null,
+                        "puntuacion_vari": 17
+                    }
+                ]
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: 'Error ID variedad no encontrada'
+            }
+            Error:
+            Status:500
+            body:{
+                message: 'Error en el sistema' + '+err
+            }
+        </td></tr>
+    </table>
+
+    
+    <table>
+        <tr><td>Numero </td><td>5</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Eliminar Variedad</td></tr>
+        <tr><td>URI</td><td>/variedad/variedad/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite eliminar variedades en la base de datos</td></tr>
+        <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+              
+                    "message": "Variedad eliminada exitosamente"
+                
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: 'La Variedad con el ID proporcionado no existe'
+            }
+            Error:
+            Status:500
+            body:{
+                message: 'Error en el sistema' + '+err
+            }
+        </td></tr>
+    </table>
 </body>
 </html>
