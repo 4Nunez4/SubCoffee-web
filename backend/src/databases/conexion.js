@@ -26,4 +26,4 @@ pool.getConnection().then(connect => {
 })
     .catch(error => {
         console.error("Conexion a base de datos fallida. " + error);
-    }) 
+})  

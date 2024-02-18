@@ -7,9 +7,8 @@ import routerDocument from "./src/routes/notificaciones.routes.js";
 import routerChat from "./src/routes/chat.routes.js";
 import rutasSubastas from "./src/routes/subasta.routes.js";
 import rutasSeguimiento from "./src/routes/seguimiento.routes.js";
+
 const app = express();
-
-
 
 
 app.use(express.json());
