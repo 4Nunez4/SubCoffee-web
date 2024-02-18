@@ -1,18 +1,20 @@
 import express from "express";
-import bodyParser from 'body-parser';
-import postulacionesrouter from "./src/routes/postulacion.routes";
-import variedadesRoute from "./src/routes/variedades.routes";
-import ejs from "ejs"; 
+import bodyParser from "body-parser";
+import postulacionRoutes from "./src/routes/postulacion.routes.js";
+import variedadesRoute from "./src/routes/variedades.routes.js";
+import ejs from 'ejs' 
 
 const app = express();
 
 
-app.get('/postulacion', postulacionesrouter);
-app.get('/variedad', variedadesRoute);
+app.use("/postulacion", postulacionRoutes);
+app.get("/variedad", variedadesRoute);
 
 
+// app.use(express.json());
 app.use(express.json());
 // app.use(bodyParser.urlencoded({extended:false}));Poder trabajar con el formato json
+// app.use(bodyParser.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
