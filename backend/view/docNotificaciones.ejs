@@ -11,8 +11,8 @@
     <table>
         <h2>Documentación del ENDPOINT Notificaciones</h2>
         <tr><td>NUMERO</td><td>1</td></tr>
-        <tr><td>NOMBRE DEL SERVICIO</td><td>Listar notificaciones</td></tr>
-        <tr><td>URI</td><td>/user/notifications</td></tr>
+        <tr><td>NOMBRE DEL SERVICIO</td><td>Listar todas las notificaciones</td></tr>
+        <tr><td>URI</td><td>/user/notificaciones</td></tr>
         <tr><td>DESCRIPCIÓN</td><td>Permite listar todas las notificaciones de la base de datos</td></tr>
         <tr><td>VERBO HTTP</td><td>GET</td></tr>
         <tr><td>HEADER</td><td>NULL</td></tr>
@@ -21,30 +21,11 @@
         <tr><td>RESPUESTA JSON</td>
           <td>
             Correcto:
-            JSON:{
-              "status": 200,
-              "data": [
-                [
-                  {
-                    "pk_id_not": 1,
-                    "tipo_not": "mensaje",
-                    "fecha_not": "2024-02-20T05:00:00.000Z",
-                    "texto_not": "Quiero que me dejen el café",
-                    "fk_id_subasta": 2,
-                    "fk_id_usuario": 1084251889
-                  }
-                ]
-            }
+            JSON:{status: 200, message:"Notificaciones encontrados con exito."}
             Incorrecto:
-            JSON:{
-              status:404
-              message:"Error ID Notificación no encontrada'
-            }
+            JSON:{status: 404, message: 'No se encontraron notificaciones.'}
             Error:
-            JSON:{
-              Status:500
-              "Error al obtener la notificación mod getNotification', error
-            }
+            JSON:{status: 500, message: 'Error al obtener las notificaciones mod getNotifications.'}
           </td>
         </tr>
         <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -52,39 +33,23 @@
       </table>
   
       <table>
+        <h2>Documentación del ENDPOINT Notificaciones</h2>
         <tr><td>NUMERO</td><td>2</td></tr>
         <tr><td>NOMBRE DEL SERVICIO</td><td>Listar notificaciones</td></tr>
-        <tr><td>URI</td><td>/user/notifications/:id</td></tr>
+        <tr><td>URI</td><td>/user/notificaciones/:id</td></tr>
         <tr><td>DESCRIPCIÓN</td><td>Permite listar una notificación en especifico de la base de datos</td></tr>
         <tr><td>VERBO HTTP</td><td>GET</td></tr>
-        <tr><td>HEADER</td><td>1</td></tr>
+        <tr><td>HEADER</td><td>NULL</td></tr>
         <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICIÓN body</td><td>NULL</td></tr>
         <tr><td>RESPUESTA JSON</td>
           <td>
-            Correcto
-            JSON:{
-              "status": 200,
-              "data": [
-                {
-                  "pk_id_not": 1,
-                  "tipo_not": "mensaje",
-                  "fecha_not": "2024-02-20T05:00:00.000Z",
-                  "texto_not": "Quiero que me dejen el café",
-                  "fk_id_subasta": 2,
-                  "fk_id_usuario": 1084251889
-                }
-              }
+            Correcto:
+            JSON:{status: 200, message:"Mensaje encontrado con exito."}
             Incorrecto:
-            JSON:{
-              status:404
-              message:"Error ID Notificación no encontrada"
-            }
+            JSON:{status: 404, message: 'Error con ID de Notificación, no encontrado.'}
             Error:
-            JSON:{
-              status:500
-              "Error al obtener la notificación mod getNotification', error
-            }
+            JSON:{status: 500, message: 'Error al obtener la notificación mod getNotification.'}
           </td>
         </tr>
         <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -92,9 +57,10 @@
       </table>
   
       <table>
+        <h2>Documentación del ENDPOINT Notificaciones</h2>
         <tr><td>NUMERO</td><td>3</td></tr>
         <tr><td>NOMBRE DEL SERVICIO</td><td>Crear notificación</td></tr>
-        <tr><td>URI</td><td>/user/notifications</td></tr>
+        <tr><td>URI</td><td>/user/notificaciones</td></tr>
         <tr><td>DESCRIPCIÓN</td><td>Permite crear una notificacion en la base de datos</td></tr>
         <tr><td>VERBO HTTP</td><td>POST</td></tr>
         <tr><td>HEADER</td><td>NULL</td></tr>
@@ -113,29 +79,11 @@
         <tr><td>RESPUESTA JSON</td>
           <td>
             Correcto:
-            JSON:{
-              "status": 200,
-              "message": "Notificación creada exitosamente",
-              "data": {
-                "fieldCount": 0,
-                "affectedRows": 1,
-                "insertId": 1,
-                "info": "",
-                "serverStatus": 2,
-                "warningStatus": 0,
-                "changedRows": 0
-              }
-            }
+            JSON:{status: 200, message: 'Notificación creada exitosamente.'}
             Incorrecto:
-            JSON:{
-                status:404
-                message:"Error al validar la notificación."
-            }
+            JSON:{status: 404, message: "Error al crear la notificación."}
             Error:
-            JSON:{
-              Status:500
-              message:Error al crear la notificación', error
-            }
+            JSON:{status: 500, message:'Error al crear la notificación. mod createNotificacion.'}
           </td>
         </tr>
         <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -143,9 +91,10 @@
       </table>
   
       <table>
+        <h2>Documentación del ENDPOINT Notificaciones</h2>
         <tr><td>NUMERO</td><td>4</td></tr>
         <tr><td>NOMBRE DEL SERVICIO</td><td>actualizar notificación</td></tr>
-        <tr><td>URI</td><td>/user/notifications/:id</td></tr>
+        <tr><td>URI</td><td>/user/notificaciones/:id</td></tr>
         <tr><td>DESCRIPCIÓN</td><td>Permite actualizar las notificaciones de la base de datos</td></tr>
         <tr><td>VERBO HTTP</td><td>PUT</td></tr>
         <tr><td>HEADER</td><td>1</td></tr>
@@ -162,20 +111,11 @@
         <tr><td>RESPUESTA JSON</td>
           <td>
             Correcto:
-            JSON:{
-              "status": 200,
-              "message": "Notificación actualizada exitosamente"
-            }
+            JSON:{status: 200, message: 'Notificación actualizada exitosamente.'}
             Incorrecto:
-            JSON:{
-              status:404
-              message:"El ID proporcionado es incorrecto"
-            }
+            JSON:{status: 404, message: "El ID proporcionado no existe."}
             Error:
-            JSON:{
-              status:500
-              'Error al actualizar la notificación', error
-            }
+            JSON:{status: 500, message: 'Error al actualizar la notificación. mod updateNotification.'}
           </td>
         </tr>
         <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -183,32 +123,23 @@
       </table>
   
       <table>
-        
+        <h2>Documentación del ENDPOINT Notificaciones</h2>
         <tr><td>NUMERO</td><td>5</td></tr>
         <tr><td>NOMBRE DEL SERVICIO</td><td>Eliminar notificaciones</td></tr>
-        <tr><td>URI</td><td>/user/notifications/:id</td></tr>
+        <tr><td>URI</td><td>/user/notificaciones/:id</td></tr>
         <tr><td>DESCRIPCIÓN</td><td>Permite eliminar las notificaciones de la base de datos</td></tr>
         <tr><td>VERBO HTTP</td><td>DELETE</td></tr>
-        <tr><td>HEADER</td><td>3</td></tr>
+        <tr><td>HEADER</td><td>NULL</td></tr>
         <tr><td>USUARIOS</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICIÓN body</td><td>NULL</td></tr>
         <tr><td>RESPUESTA JSON</td>
           <td>
             Correcto:
-            JSON:{
-              "status": 200,
-              "message": "Notificación eliminada exitosamente"
-            }
+            JSON:{status: 200, message: 'Notificación eliminada exitosamente.'}
             Incorrecto:
-            JSON:{
-              "status": 404,
-              "message": 'La notificación con el ID proporcionado no existe'
-            }
+            JSON:{status: 404, message: 'La notificación con el ID proporcionado no existe.'}
             Error:
-            JSON:{
-              "status":500,
-              'Error al eliminar la notificación', error
-            }
+            JSON:{status: 500, message: 'Error al eliminar la notificación. mod deleteNotification.'}
           </td>
         </tr>
         <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>

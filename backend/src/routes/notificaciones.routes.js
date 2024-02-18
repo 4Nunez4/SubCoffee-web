@@ -3,10 +3,10 @@ import { createNotification, deleteNotification, getNotification, getNotificatio
 
 const routerDocument = Router()
 
-routerDocument.get('/notifications', getNotifications)
-routerDocument.get('/notifications/:id', getNotification)
-routerDocument.post('/notifications', createNotification)
-routerDocument.put('/notifications/:id', updateNotification)
-routerDocument.delete('/notifications/:id', deleteNotification)
+routerDocument.get('/notificaciones', getNotifications)
+routerDocument.get('/notificaciones/:id', getNotification)
+routerDocument.post('/notificaciones', createNotification)
+routerDocument.put('/notificaciones/:id', updateNotification)
+routerDocument.delete('/notificaciones/:id', deleteNotification)
 
 export default routerDocument;
