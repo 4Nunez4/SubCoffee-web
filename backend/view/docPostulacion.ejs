@@ -6,12 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>API Documentation - Postulacion  </h1>
+    
     <table>
+        <tr><h2>Requerimiento 1. Documentacion de Postulaciones</h2></tr>
+        <tr><h3>LISTAR POSTULACIONES</h3></tr>
         <tr><td>Numero </td><td>1</td></tr>
         <tr><td>Nombre del Servicio </td><td>Listar Postulaciones </td></tr>
         <tr><td>URI</td><td>/postulacion/postulacion</td></tr>
-        <tr><td>Descripcion:</td><td>Permite listar todas las postulaaciones creadas</td></tr>
+        <tr><td>Descripcion:</td><td>Permite listar todas las postulaciones creadas</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
         <tr><td>Usuarios:</td><td>Usuario, Administrador</td></tr>
@@ -44,10 +46,18 @@
                 "message": "Error en el servidor: " + e
             }
         </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
     </table>
     
-    <h1>API Documentation - Postulacion  </h1>
+
     <table>
+        <tr><h2>Requerimiento 2. Documentacion de Postulacion</h2></tr>
+        <tr><h3>GUARDAR POSTULACION</h3></tr>
         <tr><td>Numero </td><td>2</td></tr>
         <tr><td>Nombre del Servicio </td><td>guardarPostulacion </td></tr>
         <tr><td>URI</td><td>/postulacion/postulacion</td></tr>
@@ -57,8 +67,6 @@
         <tr><td>Usuarios:</td><td>Administrador</td></tr>
         <tr><td>PETICION BODY</td><td>{
             "fecha_pos": "2024-02-17",
-            "estado_pos": "rechazada",
-            "monto_inicial_pos": 5000,
             "oferta_pos": 6000,
             "fk_id_usuario": 1079534439
           }
@@ -85,11 +93,19 @@
                 "message": "Error en el servidor: " + e
             }
         </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
     </table>
-    <h1>API Documentation - Postulacion  </h1>
+    
     <table>
+        <tr><h2>Requerimiento 3. Documentacion de Postulacion</h2></tr>
+        <tr><h3>MOSTRAR POSTULACION</h3></tr>
         <tr><td>Numero </td><td>3</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Mostrar Postulacion po ID </td></tr>
+        <tr><td>Nombre del Servicio </td><td>Mostrar Postulacion por el ID del usuario</td></tr>
         <tr><td>URI</td><td>/postulacion/postulacion/:id</tr>
         <tr><td>Descripcion:</td><td>Permite listar las postulaciones hechas por un usuario en especifico </td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
@@ -123,6 +139,12 @@
             message:'Error al obtener las postulaciones'
             }
         </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
     </table>
 
 
@@ -130,32 +152,29 @@
 
 
 
-    
-
-    <h1>API Documentation - Postulacion  </h1>
+   
     <table>
+        <tr><h2>Requerimiento 4. Documentacion de Postulacion</h2></tr>
+        <tr><h3>ACTUALIZAR POSTULACION</h3></tr>
         <tr><td>Numero </td><td>4</td></tr>
         <tr><td>Nombre del Servicio </td><td>Actulizar Postulacion </td></tr>
         <tr><td>URI</td><td>/postulacion/postulacion/:id</td></tr>
-        <tr><td>Descripcion:</td><td>Permite actualizar datos de la postulacion </td></tr>
+        <tr><td>Descripcion:</td><td>Permite actualizar datos de la postulacion por el id de la postulacion</td></tr>
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
         <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
-        <tr><td>PETICION BODY</td><td>  (estado_pos, monto_inicial_pos, sentimiento_pos, oferta_pos)</td></tr>
+        <tr><td>PETICION BODY</td><td>    {
+
+            "oferta_pos": 6000
+      
+          
+    }</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
             JSON:
-            
-            {
-
-                    "estado_pos": "rechazada",
-                    "monto_inicial_pos": 122000,
-                    "oferta_pos": 6000
-                
-                  
-                  
-            }
+            message: 'Postulacion actualizada exitosamente'
+         
             Incorrecto:
             Status:404
             body:{
@@ -168,22 +187,28 @@
                 "Error al actualizar la Postulacion"
             }
         </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
     </table>
 
 
 
-    
 
-    <h1>API Documentation - Postulacion  </h1>
     <table>
+        <tr><h2>Requerimiento 5. Documentacion de Postulacion</h2></tr>
+        <tr><h3>ELIMINAR POSTULACION</h3></tr>
         <tr><td>Numero </td><td>5</td></tr>
         <tr><td>Nombre del Servicio </td><td>Eliminar Postulacion </td></tr>
         <tr><td>URI</td><td>/postulacion/postulacion/:id</td></tr>
-        <tr><td>Descripcion:</td><td>Permite eliminar una postulacion </td></tr>
+        <tr><td>Descripcion:</td><td>Permite eliminar una postulacion a traves de su ID </td></tr>
         <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
         <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
-        <tr><td>PETICION BODY</td><td> </td></tr>
+        <tr><td>PETICION BODY</td><td>NULL </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             JSON:
@@ -205,6 +230,12 @@
                 "Error al eliminar la postulacion"
             }
         </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
     </table>
 
 
