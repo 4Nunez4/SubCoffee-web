@@ -2,14 +2,14 @@ import {pool} from "../databases/conexion.js"
 
 export const getNotifications = async (req, res) => {
     try {
-        const result = await pool.query("SELECT * FROM notificaciones");
-        if (result.length >  0) {
-            res.status(200).json({status: 200, message:"Notificaciones encontradas con exito."});
-        } else {
+        const [rows] = await pool.query("SELECT * FROM notificaciones");
+        if (rows.length > 0) {
+            res.status(200).json({status: 200, message: 'Notificaciones encontradas con éxito.', data:rows});
+        }else {
             res.status(404).json({status: 404, message: 'No se encontraron notificaciones.'});
         }
     } catch (error) {
-        res.status(500).json({status: 500, message: 'Error al obtener las notificaciones mod getNotifications.'});
+        res.status(500).json({status: 500, message: 'Error en el sistema.'});
     }
 };
 
@@ -17,12 +17,12 @@ export const getNotification = async (req, res) => {
     try {
         const [rows] = await pool.query("SELECT * FROM notificaciones WHERE pk_id_not = ?", [req.params.id]);
         if (rows.length > 0) {
-            res.status(200).json({status: 200, message:"Mensaje encontrado con exito."});
+            res.status(200).json({status: 200, message:"notificación encontrada exitosamente.", data:rows});
         } else {
             res.status(404).json({status: 404, message: 'Error con ID de Notificación, no encontrado.'});
         }
     } catch (error) {
-        res.status(500).json({status: 500, message: 'Error al obtener la notificación mod getNotification.'});
+        res.status(500).json({status: 500, message: 'Error en el sistema.'});
     }
 };
 
@@ -36,7 +36,7 @@ export const createNotification = async (req, res) => {
             res.status(404).json({status: 404, message: "Error al crear la notificación."});
         }
     } catch (error) {
-        res.status(500).json({status: 500, message:'Error al crear la notificación. mod createNotificacion.'});
+        res.status(500).json({status: 500, message:'Error en el sistema.'});
     }
 };
 
@@ -51,7 +51,7 @@ export const updateNotification = async (req, res) => {
             res.status(404).json({status: 404, message: "El ID proporcionado no existe."})
         }
     } catch (error) {
-        res.status(500).json({status: 500, message: 'Error al actualizar la notificación. mod updateNotification.'});
+        res.status(500).json({status: 500, message: 'Error en el sistema.'});
     }
 };
 
@@ -64,6 +64,6 @@ export const deleteNotification = async (req, res) => {
             res.status(404).json({status: 404, message: 'La notificación con el ID proporcionado no existe.'});
         }
     } catch (error) {
-        res.status(500).json({status: 500, message: 'Error al eliminar la notificación. mod deleteNotification.'});
+        res.status(500).json({status: 500, message: 'Error en el sistema.'});
     }
 };

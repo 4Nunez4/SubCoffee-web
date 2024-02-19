@@ -21,11 +21,11 @@
       <tr><td>RESPUESTA JSON</td>
         <td>
           Correcto:
-          JSON:{status: 200, message: "Mensajes encontrados con exito" }
+          JSON:{status: 200, message: "Mensajes encontrados con exito.", data: rows }
           Incorrecto:
           JSON:{status: 404, message: "No se encontraron mensajes." }
           Error:
-          JSON:{status: 500, message: "Error al buscar los mensajes. mod getChats"}
+          JSON:{status: 500, message: "Error en el sistema."}
         </td>
       </tr>
       <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -45,11 +45,11 @@
       <tr><td>RESPUESTA JSON</td>
         <td>
           Correcto
-          JSON:{status:  200, message:"Mensaje encontrado con exito"}
+          JSON:{status:  200, message:"Mensaje encontrado con exito", data:rows}
           Incorrecto:
-          JSON:{status:  404, message: "Error con ID al listar el mensaje." }
+          JSON:{status:  404, message: "Error con ID al encontrar el mensaje." }
           Error:
-          JSON:{status:  500, message: "Ocurrió un error al buscar el mensaje mod getChat."}
+          JSON:{status:  500, message: "Error en el sistema."}
         </td>
       </tr>
       <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -69,7 +69,6 @@
         <td>
           {
             "mensaje": "Holaaa!",
-            "fk_id_subasta":1, 
             "fk_id_usuario":1084251889
           }
         </td>
@@ -81,7 +80,7 @@
           Incorrecto:
           JSON:{status: 404, message: "Error al crear el mensaje."}
           Error:
-          JSON:{status: 500, message: "No se pudo crear el mensaje. mod createChat."}
+          JSON:{status: 500, message: "Error en el sistema."}
         </td>
       </tr>
       <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -111,7 +110,7 @@
           Incorrecto:
           JSON:{status: 404, message: "No se encontró el mensaje con el ID especificado."}
           Error:
-          JSON:{status: 500, message: "Ocurrió un error al actualizar el mensaje. mod updateChat."}
+          JSON:{status: 500, message: "Error en el sistema."}
         </td>
       </tr>
       <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -133,9 +132,9 @@
           Correcto:
           JSON:{status: 200, message: "Chat eliminado con éxito."}
           Incorrecto:
-          JSON:{status: 404, message: "ID de Chat no encontrado."}
+          JSON:{status: 404, message: "No se encontró el mensaje con el ID especificado."}
           Error:
-          JSON:{status: 500, message: "No se pudo eliminar el chat. mod deleteChat."}
+          JSON:{status: 500, message: "Error en el sistema."}
         </td>
       </tr>
       <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>

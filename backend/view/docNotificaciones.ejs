@@ -21,11 +21,11 @@
         <tr><td>RESPUESTA JSON</td>
           <td>
             Correcto:
-            JSON:{status: 200, message:"Notificaciones encontrados con exito."}
+            JSON:{status: 200, message:"Notificaciones encontradas con éxito', data:rows}
             Incorrecto:
             JSON:{status: 404, message: 'No se encontraron notificaciones.'}
             Error:
-            JSON:{status: 500, message: 'Error al obtener las notificaciones mod getNotifications.'}
+            JSON:{status: 500, message: 'Error en el sistema.'}
           </td>
         </tr>
         <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -45,11 +45,11 @@
         <tr><td>RESPUESTA JSON</td>
           <td>
             Correcto:
-            JSON:{status: 200, message:"Mensaje encontrado con exito."}
+            JSON:{status: 200, message:"notificación encontrada exitosamente.", data:rows}
             Incorrecto:
             JSON:{status: 404, message: 'Error con ID de Notificación, no encontrado.'}
             Error:
-            JSON:{status: 500, message: 'Error al obtener la notificación mod getNotification.'}
+            JSON:{status: 500, message: 'Error en el sistema.'}
           </td>
         </tr>
         <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -70,8 +70,8 @@
             {
               "tipo_not":"mensaje",
               "fecha_not":"2024-02-20",
-              "texto_not":"Quiero que me dejen el café",
-              "fk_id_subasta":2,
+              "texto_not":"Hola, buenos dias",
+              "fk_id_subasta":1,
               "fk_id_usuario":1084251889
             }
           </td>
@@ -83,7 +83,7 @@
             Incorrecto:
             JSON:{status: 404, message: "Error al crear la notificación."}
             Error:
-            JSON:{status: 500, message:'Error al crear la notificación. mod createNotificacion.'}
+            JSON:{status: 500, message:'Error en el sistema.'}
           </td>
         </tr>
         <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -102,9 +102,7 @@
         <tr><td>PETICIÓN body</td>
           <td>
             {
-              "tipo_not":"cierre",
-              "fecha_not":"2024-02-22",
-              "texto_not":"dentro de 30m"
+              "tipo_not":"cierre"
             }
           </td>
         </tr>
@@ -115,7 +113,7 @@
             Incorrecto:
             JSON:{status: 404, message: "El ID proporcionado no existe."}
             Error:
-            JSON:{status: 500, message: 'Error al actualizar la notificación. mod updateNotification.'}
+            JSON:{status: 500, message: 'Error en el sistema.'}
           </td>
         </tr>
         <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
@@ -139,7 +137,7 @@
             Incorrecto:
             JSON:{status: 404, message: 'La notificación con el ID proporcionado no existe.'}
             Error:
-            JSON:{status: 500, message: 'Error al eliminar la notificación. mod deleteNotification.'}
+            JSON:{status: 500, message: 'Error en el sistema.'}
           </td>
         </tr>
         <tr><td>DESARROLLADOR</td><td>JUAN CAMILO REALPE CERON</td></tr>
