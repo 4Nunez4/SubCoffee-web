@@ -1,100 +1,81 @@
-import { pool } from '../database/conexion';
-import { validationResult } from "express-validator";
+import { pool } from '../databases/conexion.js';
 
-export const guardarPostulacion = async (req, res) => {
-  const { estado_pos, monto_inicial_pos, sentimiento_pos, oferta_pos } = req.body;
-  try {
-    const [rows] = await pool.query("INSERT INTO postulacion (estado_pos, monto_inicial_pos, sentimiento_pos, oferta_pos) VALUES (?, ?, ?, ?)", [estado_pos, monto_inicial_pos, sentimiento_pos, oferta_pos]);
-    if (rows.affectedRows > 0) {
-      return res.status(200).json({
-        "status": 200,
-        "message": "Se registró con éxito la postulación"
-      });
-    } else {
-      return res.status(401).json({
-        "status": 401,
-        "message": "No se registró con éxito la postulación"
-      });
+
+
+export const getPostulaciones = async (req,res) =>{
+    try {
+        let sql = 'select * from postulacion'
+        const [result] = await pool.query(sql)
+        
+        if(result.length > 0){
+            return res.status(200).json(result)
+        }
+        else{
+            return res.status(404).send({'mesage': 'Error no hay postulaciones'})
+        }
+    } catch (error) {
+        res.status(500).json({'status': 500,'mesage': 'ERROR SERVIDOR' + error})
     }
-  } catch (e) {
-    return res.status(500).json({
-      "status": 500,
-      "message": "Error en el servidor: " + e
-    });
-  }
-}
-export const editarPostulacion = async (req, res) => {
-  try {
-    
-    let { postulacionId, updatedEstado, updatedMonto, updatedSentimiento, updatedOferta } = req.body;
+};
 
-   
-    let sql = `UPDATE variedades SET estado_pos = '${updatedEstado}', monto_inicial_pos = ${updatedMonto}, sentimiento_pos = '${updatedSentimiento}', oferta_pos = '${updatedOferta}' WHERE id = ${postulacionId}`;
+
+export const guardarPostulacion = async (req,res)=> {
+  const {fecha_pos, estado_pos, monto_inicial_pos,oferta_pos,idUsuario } = req.body;
+  try {
+      const [rows] = await pool.query("INSERT INTO postulacion(fecha_pos, estado_pos, monto_inicial_pos, oferta_pos, fk_id_usuario) VALUES (?, ?, ?,?,?)", [fecha_pos, estado_pos, monto_inicial_pos, oferta_pos, idUsuario]);
+      if(rows.affectedRows){
+          res.status(200).json({status: 200, message: "Se creo con exito la postulacion."});
+      } else {
+          res.status(404).json({status: 404, message: "Error al crear la postulacion." });
+      }
+  } catch (error) {
+      res.status(500).json({status: 500, message: "Error servidor " + error});
+  }
+};
+//este sirve
+export const getPostulacion = async (req,res) =>{
+  try{
+    const [rows] = await pool.query("SELECT * FROM postulacion WHERE fk_id_usuario = ?", [req.params.id]);
+    if(rows.length >0){
+      res.status(200).json({status:200, data:rows});
+    }else{
+      res.status(404).json({status:404, message: 'Error ID postulacion no encontrada' });
+    }
+
+  }catch(e){
+    res.status(500).json({ status:500, message: 'Error al obtener las postulaciones', e });
+  }
+};
+
+
+  export const updatePostulacion = async (req, res) => {
+      try {
+          const id = req.params.id;
+          const {estado_pos	,monto_inicial_pos,oferta_pos}= req.body;
+          const [result] = await pool.query("UPDATE postulacion SET estado_pos = ?, monto_inicial_pos = ?, oferta_pos = ? WHERE pk_id_pos = ?", [estado_pos, monto_inicial_pos, oferta_pos, id]);
+          if(result.affectedRows > 0) {
+              res.status(200).json({ status: 200, message: 'Postulacion actualizada exitosamente' });
+          }else {
+              res.status(404).json({status: 404, message: "El ID de la postulacion es incorrecto"})
+          }
+      } catch (error) {
+          res.status(500).json({ status: 500, message: 'Error en el sistema', error});
+      }
+  }
+
+
+
 
   
-    const [rows] = await pool.query(sql);
-
-    if (rows.affectedRows > 0) {
-      return res.status(200).json({
-        "status": 200,
-        "message": "Se actualizó con éxito la postulación"
-      });
-    } else {
-      return res.status(401).json({
-        "status": 401,
-        "message": "No se pudo actualizar la postulación"
-      });
-    }
-  } catch (e) {
-    return res.status(500).json({
-      "status": 500,
-      "message": "Error en el servidor: " + e
-    });
-  }
-}
-
-export const eliminarPostulacion = async (req, res) => {
+export const deletePostulacion = async (req, res) => {
   try {
-
-      let postulacionId = req.body.postulacionId || req.params.postulacionId;
-
-
-    let sql = `DELETE FROM variedades WHERE id = ${postulacionId}`;
-
-
-    const [rows] = await pool.query(sql);
-
-   
-    if (rows.affectedRows > 0) {
-      return res.status(200).json({
-        "status": 200,
-        "message": "Se eliminó con éxito la postulación"
-      });
-    } else {
-      return res.status(401).json({
-        "status": 401,
-        "message": "No se pudo eliminar la postulación"
-      });
-    }
-  } catch (e) {
-    return res.status(500).json({
-      "status": 500,
-      "message": "Error en el servidor: " + e
-    });
+      const [result] = await pool.query("DELETE FROM postulacion WHERE pk_id_pos = ?", [req.params.id]);
+      if(result.affectedRows === 0){
+          res.status(404).json({status: 404, message: 'La Postulacion con el ID proporcionado no existe'});
+      }else {
+          res.status(200).json({status: 200, message: 'Postulacion eliminada exitosamente' });
+      }
+  } catch (error) {
+      res.status(500).json({status: 500, message: 'Error al eliminar la postulacion', error });
   }
-}
-
-export const getPostulacion = async (req, res) => {
-   try{
-
-      const[result]= await pool.query("select * from postulacion");
-      res.status(200).json({message:'Postulaciones:' + result});
-
-
-  }
-
-  catch(err){
-      res.status(500).json({ message:'error en listar Postulacion: '+err});
-  }
-}
-
+};

@@ -7,9 +7,10 @@ import routerDocument from "./src/routes/notificaciones.routes.js";
 import routerChat from "./src/routes/chat.routes.js";
 import rutasSubastas from "./src/routes/subasta.routes.js";
 import rutasSeguimiento from "./src/routes/seguimiento.routes.js";
+import postulacionRoutes from "./src/routes/postulacion.routes.js";
+import variedadesRoute from "./src/routes/variedades.routes.js";
+
 const app = express();
-
-
 
 
 app.use(express.json());
@@ -25,6 +26,8 @@ app.use("/subcoffee", rutaOferta);
 app.use("/usuario", router);
 app.use("/user", routerChat);
 app.use("/user", routerDocument);
+app.use("/postulacion", postulacionRoutes);
+app.use("/variedad", variedadesRoute);
 
 app.set("view engine", "ejs");
 app.set("views", "./view");

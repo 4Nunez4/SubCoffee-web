@@ -1,17 +1,18 @@
-import{Router} from 'express';
-        
+ import{Router} from 'express';
+      
 
-import{guardarVariedad,actualizarVariedad,listarVariedad,buscarvariedad} from '../controllers/variedad.controllers.js';
+ import{guardarVariedad,actualizarVariedad,listarVariedad,buscarvariedad, deleteVariedad} from '../controllers/variedad.controllers.js';
 
-const variedadesRoute= Router();
-
-
-
-variedadesRoute.post('/registrar',guardarVariedad);
-variedadesRoute.put('/actualizar/:id',actualizarVariedad);
-variedadesRoute.get('/listar',listarVariedad);
-variedadesRoute.get('/buscar/:id',buscarvariedad);
+ const variedadesRoute= Router();
 
 
 
-export default variedadesRoute;
+ variedadesRoute.post('/variedad',guardarVariedad);
+ variedadesRoute.put('/variedad/:id',actualizarVariedad);
+ variedadesRoute.get('/variedad',listarVariedad);
+ variedadesRoute.get('/variedad/:id',buscarvariedad);
+ variedadesRoute.delete('/variedad/:id',deleteVariedad)
+
+
+
+ export default variedadesRoute;

@@ -1,17 +1,20 @@
 import{Router} from 'express';
         
 
-import{guardarPostulacion,editarPostulacion,eliminarPostulacion,getPostulacion} from '../controllers/postulacion.controllers.js';
+ import{getPostulaciones,guardarPostulacion, getPostulacion,updatePostulacion, deletePostulacion} from '../controllers/postulacion.controllers.js';
 
-const variedadesRoute= Router();
-
-
-
-variedadesRoute.post('/guardarPostulacion',guardarPostulacion);
-variedadesRoute.put('/editarPostulacion/:id',editarPostulacion);
-variedadesRoute.get('/eliminarPostulacion',eliminarPostulacion);
-variedadesRoute.get('/getPostulacion/:id',getPostulacion);
+    const postulacionRoutes= Router();
 
 
 
-export default variedadesRoute;
+    // postulacionRoutes.post('/postulacion',guardarPostulacion);
+    // postulacionRoutes.put('/postulacion/:id',editarPostulacion);
+    // postulacionRoutes.delete('/postulacion',eliminarPostulacion);
+    postulacionRoutes.get('/postulacion', getPostulaciones);
+    postulacionRoutes.post('/postulacion', guardarPostulacion);
+    postulacionRoutes.get('/postulacion/:id', getPostulacion);
+    postulacionRoutes.put('/postulacion/:id', updatePostulacion);
+    postulacionRoutes.delete('/postulacion/:id', deletePostulacion)
+
+
+    export default postulacionRoutes;
