@@ -59,7 +59,7 @@ export const getPostulacion = async (req,res) =>{
               res.status(404).json({status: 404, message: "El ID de la postulacion es incorrecto"})
           }
       } catch (error) {
-          res.status(500).json({ status: 500, message: 'Error e n el sistema', error});
+          res.status(500).json({ status: 500, message: 'Error en el sistema', error});
       }
   }
 
