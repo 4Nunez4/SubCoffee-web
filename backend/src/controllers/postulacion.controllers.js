@@ -20,9 +20,9 @@ export const getPostulaciones = async (req,res) =>{
 
 
 export const guardarPostulacion = async (req,res)=> {
-  const {fecha_pos, estado_pos, monto_inicial_pos,oferta_pos,idUsuario } = req.body;
+  const {fecha_pos, oferta_pos,fk_id_usuario } = req.body;
   try {
-      const [rows] = await pool.query("INSERT INTO postulacion(fecha_pos, estado_pos, monto_inicial_pos, oferta_pos, fk_id_usuario) VALUES (?, ?, ?,?,?)", [fecha_pos, estado_pos, monto_inicial_pos, oferta_pos, idUsuario]);
+      const [rows] = await pool.query("INSERT INTO postulacion(fecha_pos, oferta_pos, fk_id_usuario) VALUES (?, ?, ?)", [fecha_pos, oferta_pos, fk_id_usuario]);
       if(rows.affectedRows){
           res.status(200).json({status: 200, message: "Se creo con exito la postulacion."});
       } else {
@@ -51,15 +51,15 @@ export const getPostulacion = async (req,res) =>{
   export const updatePostulacion = async (req, res) => {
       try {
           const id = req.params.id;
-          const {estado_pos	,monto_inicial_pos,oferta_pos}= req.body;
-          const [result] = await pool.query("UPDATE postulacion SET estado_pos = ?, monto_inicial_pos = ?, oferta_pos = ? WHERE pk_id_pos = ?", [estado_pos, monto_inicial_pos, oferta_pos, id]);
+          const {oferta_pos}= req.body;
+          const [result] = await pool.query("UPDATE postulacion SET oferta_pos = ? WHERE pk_id_pos = ?", [ oferta_pos, id]);
           if(result.affectedRows > 0) {
               res.status(200).json({ status: 200, message: 'Postulacion actualizada exitosamente' });
           }else {
               res.status(404).json({status: 404, message: "El ID de la postulacion es incorrecto"})
           }
       } catch (error) {
-          res.status(500).json({ status: 500, message: 'Error en el sistema', error});
+          res.status(500).json({ status: 500, message: 'Error e n el sistema', error});
       }
   }
 

@@ -34,7 +34,7 @@
             Incorrecto:
             Status:404
             body:{
-                message:"Error al listar la variedad"
+                message:" 'Error no hay variedades"
             }
             Error:
             Status:500
@@ -102,7 +102,7 @@
         <tr><h3>ACTUALIZAR VARIEDADES</h3></tr>
         <tr><td>Numero </td><td>3</td></tr>
         <tr><td>Nombre del Servicio </td><td>Actualizar Variedad </td></tr>
-        <tr><td>URI</td><td>/variedad/variedad></tr>
+        <tr><td>URI</td><td>/variedad/variedad/:id</tr>
         <tr><td>Descripcion:</td><td>Permite actualizar variedades en la base de datos</td></tr>
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
@@ -111,7 +111,6 @@
 
             "tipo_vari": "Tipica",
             "descripcion_vari": "cafe de la mejor calidaddsd",
-            "imagen_vari": null,
             "puntuacion_vari": 17
         }</td></tr>
         <tr><td>RESPUESTA JSON</td><td>

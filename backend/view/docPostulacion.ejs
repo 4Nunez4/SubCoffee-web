@@ -165,21 +165,18 @@
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
         <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
-        <tr><td>PETICION BODY</td><td>  (estado_pos, monto_inicial_pos, sentimiento_pos, oferta_pos)</td></tr>
+        <tr><td>PETICION BODY</td><td>    {
+
+            "oferta_pos": 6000
+      
+          
+    }</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
             JSON:
-            
-            {
-
-                    "estado_pos": "rechazada",
-                    "monto_inicial_pos": 122000,
-                    "oferta_pos": 6000
-                
-                  
-                  
-            }
+            message: 'Postulacion actualizada exitosamente'
+         
             Incorrecto:
             Status:404
             body:{

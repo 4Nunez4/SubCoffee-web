@@ -2,16 +2,20 @@ import {pool} from '../databases/conexion.js';
 
 
 
-export const listarVariedad= async (req,res)=>{
-  try{
-
-      const[result]= await pool.query("select * from variedad");
-      res.status(200).json(result);
-
-
-  }catch(err){
-      res.status(500).json({ message:'error en listar Variedad: '+err});
-  }
+export const listarVariedad = async (req,res) =>{
+    try {
+        let sql = 'select * from variedad'
+        const [result] = await pool.query(sql)
+        
+        if(result.length > 0){
+            return res.status(200).json(result)
+        }
+        else{
+            return res.status(404).send({'mesage': 'Error no hay variedades'})
+        }
+    } catch (error) {
+        res.status(500).json({'status': 500,'mesage': 'ERROR SERVIDOR' + error})
+    }
 };
 
 export const guardarVariedad= async (req, res) => {
