@@ -9,111 +9,6 @@
     <hr>
     <h2>Requerimiento. Documentación de chat</h2>
     <hr>
-    <h3>Listar chats</h3>
-    <table>
-      <tr>
-        <td>NUMERO</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>Listar todos los chats</td>
-      </tr>
-      <tr>
-        <td>URI</td>
-        <td>/user/chats</td>
-      </tr>
-      <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>Permite Listar todos los chats de la base de datos</td>
-      </tr>
-      <tr>
-        <td>VERBO HTTP</td>
-        <td>GET</td>
-      </tr>
-      <tr>
-        <td>HEADER</td>
-        <td>NULL</td>
-      </tr>
-      <tr>
-        <td>USUARIOS</td>
-        <td>ADMINISTRADOR Y USUARIO</td>
-      </tr>
-      <tr>
-        <td>PETICIÓN body</td>
-        <td>NULL</td>
-      </tr>
-      <tr>
-        <td>RESPUESTA JSON</td>
-        <td>
-          Correcto: JSON:{status: 200, message: "Mensajes encontrados con
-          exito.", data: rows } Incorrecto: JSON:{status: 404, message: "No se
-          encontraron mensajes." } Error: JSON:{status: 500, message: "Error en
-          el sistema."}
-        </td>
-      </tr>
-      <tr>
-        <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
-      </tr>
-      <tr>
-        <td>RAMA:</td>
-        <td>DEVjcrc</td>
-      </tr>
-    </table>
-
-    <h3>Listar chat</h3>
-    <table>
-      <tr>
-        <td>NUMERO</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>Listar un chat</td>
-      </tr>
-      <tr>
-        <td>URI</td>
-        <td>/user/chats/:id</td>
-      </tr>
-      <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>Permite Listar un chats en especifico de la base de datos</td>
-      </tr>
-      <tr>
-        <td>VERBO HTTP</td>
-        <td>GET</td>
-      </tr>
-      <tr>
-        <td>HEADER</td>
-        <td>NULL</td>
-      </tr>
-      <tr>
-        <td>USUARIOS</td>
-        <td>ADMINISTRADOR Y USUARIO</td>
-      </tr>
-      <tr>
-        <td>PETICIÓN body</td>
-        <td>NULL</td>
-      </tr>
-      <tr>
-        <td>RESPUESTA JSON</td>
-        <td>
-          Correcto JSON:{status: 200, message:"Mensaje encontrado con exito",
-          data:rows} Incorrecto: JSON:{status: 404, message: "Error con ID al
-          encontrar el mensaje." } Error: JSON:{status: 500, message: "Error en
-          el sistema."}
-        </td>
-      </tr>
-      <tr>
-        <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
-      </tr>
-      <tr>
-        <td>RAMA:</td>
-        <td>DEVjcrc</td>
-      </tr>
-    </table>
 
     <h3>Crear chat</h3>
     <table>
@@ -168,6 +63,59 @@
       </tr>
     </table>
 
+    <h3>Listar chats</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>NOMBRE DEL SERVICIO</td>
+        <td>Listar todos los chats</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/user/chats</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCIÓN</td>
+        <td>Permite Listar todos los chats de la base de datos</td>
+      </tr>
+      <tr>
+        <td>VERBO HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR Y USUARIO</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN body</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: JSON:{status: 200, message: "Mensajes encontrados con
+          exito.", data: rows } Incorrecto: JSON:{status: 404, message: "No se
+          encontraron mensajes." } Error: JSON:{status: 500, message: "Error en
+          el sistema."}
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>JUAN CAMILO REALPE CERON</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
     <h3>actualizar chat</h3>
     <table>
       <h2>Documentación del ENDPOINT Chats</h2>
@@ -181,7 +129,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/chats/:id</td>
+        <td>/user/chats/1</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
@@ -222,6 +170,59 @@
       </tr>
     </table>
 
+    <h3>Listar chat</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>NOMBRE DEL SERVICIO</td>
+        <td>Listar un chat</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/user/chats/1</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCIÓN</td>
+        <td>Permite Listar un chats en especifico de la base de datos</td>
+      </tr>
+      <tr>
+        <td>VERBO HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR Y USUARIO</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN body</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto JSON:{status: 200, message:"Mensaje encontrado con exito",
+          data:rows} Incorrecto: JSON:{status: 404, message: "Error con ID al
+          encontrar el mensaje." } Error: JSON:{status: 500, message: "Error en
+          el sistema."}
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>JUAN CAMILO REALPE CERON</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
     <h3>Eliminar chat</h3>
     <table>
       <h2>Documentación del ENDPOINT Chats</h2>
@@ -235,7 +236,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/chats/:id</td>
+        <td>/user/chats/1</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>

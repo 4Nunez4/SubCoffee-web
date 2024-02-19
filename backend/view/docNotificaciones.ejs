@@ -9,114 +9,6 @@
     <hr>
     <h2>Requerimiento. Documentación de notificaciones</h2>
     <hr />
-    <h3>Listar notificaciones</h3>
-    <table>
-      <tr>
-        <td>NUMERO</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>Listar todas las notificaciones</td>
-      </tr>
-      <tr>
-        <td>URI</td>
-        <td>/user/notificaciones</td>
-      </tr>
-      <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>Permite listar todas las notificaciones de la base de datos</td>
-      </tr>
-      <tr>
-        <td>VERBO HTTP</td>
-        <td>GET</td>
-      </tr>
-      <tr>
-        <td>HEADER</td>
-        <td>NULL</td>
-      </tr>
-      <tr>
-        <td>USUARIOS</td>
-        <td>ADMINISTRADOR, USUARIO</td>
-      </tr>
-      <tr>
-        <td>PETICIÓN body</td>
-        <td>NULL</td>
-      </tr>
-      <tr>
-        <td>RESPUESTA JSON</td>
-        <td>
-          Correcto: JSON:{status: 200, message:"Notificaciones encontradas con
-          éxito', data:rows} Incorrecto: JSON:{status: 404, message: 'No se
-          encontraron notificaciones.'} Error: JSON:{status: 500, message:
-          'Error en el sistema.'}
-        </td>
-      </tr>
-      <tr>
-        <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
-      </tr>
-      <tr>
-        <td>RAMA:</td>
-        <td>DEVjcrc</td>
-      </tr>
-    </table>
-
-    <h3>Listar notificación</h3>
-    <table>
-      <h2>Documentación del ENDPOINT Notificaciones</h2>
-      <tr>
-        <td>NUMERO</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>Listar notificación</td>
-      </tr>
-      <tr>
-        <td>URI</td>
-        <td>/user/notificaciones/:id</td>
-      </tr>
-      <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>
-          Permite listar una notificación en especifico de la base de datos
-        </td>
-      </tr>
-      <tr>
-        <td>VERBO HTTP</td>
-        <td>GET</td>
-      </tr>
-      <tr>
-        <td>HEADER</td>
-        <td>NULL</td>
-      </tr>
-      <tr>
-        <td>USUARIOS</td>
-        <td>ADMINISTRADOR, USUARIO</td>
-      </tr>
-      <tr>
-        <td>PETICIÓN body</td>
-        <td>NULL</td>
-      </tr>
-      <tr>
-        <td>RESPUESTA JSON</td>
-        <td>
-          Correcto: JSON:{status: 200, message:"notificación encontrada
-          exitosamente.", data:rows} Incorrecto: JSON:{status: 404, message:
-          'Error con ID de Notificación, no encontrado.'} Error: JSON:{status:
-          500, message: 'Error en el sistema.'}
-        </td>
-      </tr>
-      <tr>
-        <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
-      </tr>
-      <tr>
-        <td>RAMA:</td>
-        <td>DEVjcrc</td>
-      </tr>
-    </table>
 
     <h3>Crear notificación</h3>
     <table>
@@ -175,7 +67,60 @@
       </tr>
     </table>
 
-    <h3>actualizar notificación</h3>
+    <h3>Listar notificaciones</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>NOMBRE DEL SERVICIO</td>
+        <td>Listar todas las notificaciones</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/user/notificaciones</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCIÓN</td>
+        <td>Permite listar todas las notificaciones de la base de datos</td>
+      </tr>
+      <tr>
+        <td>VERBO HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR, USUARIO</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN body</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: JSON:{status: 200, message:"Notificaciones encontradas con
+          éxito', data:rows} Incorrecto: JSON:{status: 404, message: 'No se
+          encontraron notificaciones.'} Error: JSON:{status: 500, message:
+          'Error en el sistema.'}
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>JUAN CAMILO REALPE CERON</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <h3>Actualizar notificación</h3>
     <table>
       <h2>Documentación del ENDPOINT Notificaciones</h2>
       <tr>
@@ -188,7 +133,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/notificaciones/:id</td>
+        <td>/user/notificaciones/1</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
@@ -229,6 +174,62 @@
       </tr>
     </table>
 
+    <h3>Listar notificación</h3>
+    <table>
+      <h2>Documentación del ENDPOINT Notificaciones</h2>
+      <tr>
+        <td>NUMERO</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>NOMBRE DEL SERVICIO</td>
+        <td>Listar notificación</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/user/notificaciones/1</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCIÓN</td>
+        <td>
+          Permite listar una notificación en especifico de la base de datos
+        </td>
+      </tr>
+      <tr>
+        <td>VERBO HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR, USUARIO</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN body</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: JSON:{status: 200, message:"notificación encontrada
+          exitosamente.", data:rows} Incorrecto: JSON:{status: 404, message:
+          'Error con ID de Notificación, no encontrado.'} Error: JSON:{status:
+          500, message: 'Error en el sistema.'}
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>JUAN CAMILO REALPE CERON</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
     <h3>Eliminar notificación</h3>
     <table>
       <h2>Documentación del ENDPOINT Notificaciones</h2>
@@ -242,7 +243,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/notificaciones/:id</td>
+        <td>/user/notificaciones/1</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
