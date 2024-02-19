@@ -6,12 +6,58 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <hr>
+    <h2>Requerimiento 5. Documentacion de Postulacion</h2>
+    <hr>
+    <h3>Crear Postulacion</h3>
     <table>
-        <tr><h2>Requerimiento 1. Documentacion de Postulaciones</h2></tr>
-        <tr><h3>LISTAR POSTULACIONES</h3></tr>
+        <tr><td>Numero </td><td>2</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Crear Postulacion </td></tr>
+        <tr><td>URI</td><td>/postulacion/postulacion</td></tr>
+        <tr><td>Descripcion:</td><td>Permite guardar una nueva postulacion en la base de datos</td></tr>
+        <tr><td>Verbo HTTP:</td><td>POST</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador</td></tr>
+        <tr><td>PETICION BODY</td><td>{
+            "fecha_pos": "2024-02-17",
+            "oferta_pos": 6000,
+            "fk_id_usuario": 1079534439
+          }
+          
+          </td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                "status": 200,
+                "message": "Se creo con exito la postulacion."
+            }
+            Incorrecto:
+            Status:401
+            body:{
+                "status": 401,
+                "message": "Error al crear la postulacion."
+            }
+            Error:
+            Status:505
+            body:{
+                "status": 505,
+                "message": "Error en el servidor: " + e
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
+    </table>
+    <hr>
+    <h3>Listar Postulaciones</h3>
+    <table>
         <tr><td>Numero </td><td>1</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Listar Postulaciones </td></tr>
+        <tr><td>Nombre del Servicio </td><td>Listar Postulaciones</td></tr>
         <tr><td>URI</td><td>/postulacion/postulacion</td></tr>
         <tr><td>Descripcion:</td><td>Permite listar todas las postulaciones creadas</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
@@ -54,43 +100,39 @@
        </tr>
     </table>
     
-
+    <hr>
+    <h3>Actulizar Postulacion</h3>
     <table>
-        <tr><h2>Requerimiento 2. Documentacion de Postulacion</h2></tr>
-        <tr><h3>GUARDAR POSTULACION</h3></tr>
-        <tr><td>Numero </td><td>2</td></tr>
-        <tr><td>Nombre del Servicio </td><td>guardarPostulacion </td></tr>
-        <tr><td>URI</td><td>/postulacion/postulacion</td></tr>
-        <tr><td>Descripcion:</td><td>Permite guardar una nueva postulacion en la base de datos</td></tr>
-        <tr><td>Verbo HTTP:</td><td>POST</td></tr>
+
+        <tr><td>Numero </td><td>4</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Actulizar Postulacion </td></tr>
+        <tr><td>URI</td><td>/postulacion/postulacion/:id</td></tr>
+        <tr><td>Descripcion:</td><td>Permite actualizar datos de la postulacion por el id de la postulacion</td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador</td></tr>
-        <tr><td>PETICION BODY</td><td>{
-            "fecha_pos": "2024-02-17",
-            "oferta_pos": 6000,
-            "fk_id_usuario": 1079534439
-          }
+        <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td>    {
+
+            "oferta_pos": 6000
+      
           
-          </td></tr>
+    }</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
             JSON:
-            {
-                "status": 200,
-                "message": "Se creo con exito la postulacion."
-            }
+            message: 'Postulacion actualizada exitosamente'
+         
             Incorrecto:
-            Status:401
+            Status:404
             body:{
-                "status": 401,
-                "message": "Error al crear la postulacion."
+                status:505
+                message:" "El ID proporcionado es incorrecto"
             }
             Error:
             Status:505
             body:{
-                "status": 505,
-                "message": "Error en el servidor: " + e
+                "Error al actualizar la Postulacion"
             }
         </td></tr>
         <tr>
@@ -100,12 +142,12 @@
            <td>Rama:</td><td>DEVlkvm</td>
        </tr>
     </table>
-    
+ 
+    <hr>
+    <h3>Buscar Postulacion</h3>
     <table>
-        <tr><h2>Requerimiento 3. Documentacion de Postulacion</h2></tr>
-        <tr><h3>MOSTRAR POSTULACION</h3></tr>
         <tr><td>Numero </td><td>3</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Mostrar Postulacion por el ID del usuario</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Buscar Postulacion por el ID del usuario</td></tr>
         <tr><td>URI</td><td>/postulacion/postulacion/:id</tr>
         <tr><td>Descripcion:</td><td>Permite listar las postulaciones hechas por un usuario en especifico </td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
@@ -147,60 +189,9 @@
        </tr>
     </table>
 
-
-
-
-
-
-   
+    <hr>
+    <h3>Eliminar Postulacion</h3>
     <table>
-        <tr><h2>Requerimiento 4. Documentacion de Postulacion</h2></tr>
-        <tr><h3>ACTUALIZAR POSTULACION</h3></tr>
-        <tr><td>Numero </td><td>4</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Actulizar Postulacion </td></tr>
-        <tr><td>URI</td><td>/postulacion/postulacion/:id</td></tr>
-        <tr><td>Descripcion:</td><td>Permite actualizar datos de la postulacion por el id de la postulacion</td></tr>
-        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
-        <tr><td>PETICION BODY</td><td>    {
-
-            "oferta_pos": 6000
-      
-          
-    }</td></tr>
-        <tr><td>RESPUESTA JSON</td><td>
-            Correcto:
-            Status:200
-            JSON:
-            message: 'Postulacion actualizada exitosamente'
-         
-            Incorrecto:
-            Status:404
-            body:{
-                status:505
-                message:" "El ID proporcionado es incorrecto"
-            }
-            Error:
-            Status:505
-            body:{
-                "Error al actualizar la Postulacion"
-            }
-        </td></tr>
-        <tr>
-            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
-       </tr>
-       <tr>
-           <td>Rama:</td><td>DEVlkvm</td>
-       </tr>
-    </table>
-
-
-
-
-    <table>
-        <tr><h2>Requerimiento 5. Documentacion de Postulacion</h2></tr>
-        <tr><h3>ELIMINAR POSTULACION</h3></tr>
         <tr><td>Numero </td><td>5</td></tr>
         <tr><td>Nombre del Servicio </td><td>Eliminar Postulacion </td></tr>
         <tr><td>URI</td><td>/postulacion/postulacion/:id</td></tr>

@@ -7,7 +7,49 @@
 </head>
 <body>
     
-<h1>API Documentation - Seguimientos   </h1>
+    <hr>
+    <h2>Requerimiento 4. Documentacion de Seguimiento</h2>
+
+    <hr>
+    <h3>Agregar seguimiento</h3>
+    <table>
+    <tr><td>Numero </td><td>2</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Agregar seguimiento</td></tr>
+    <tr><td>URI</td><td>seguimiento/agregar</td></tr>
+    <tr><td>Descripcion:</td><td>Permite Agregar seguimiento, registrarlo en la base de datos    </td></tr>
+    <tr><td>Verbo HTTP:</td><td>POST</td></tr>
+    <tr><td>HEADER:</td><td>NULL</td></tr>
+    <tr><td>Usuarios:</td><td>Administrador</td></tr>
+    <tr><td>PETICION BODY</td><td>
+        {   
+            pk_id_seg: 2,
+            certificacion_seg: 'sin certificacion', 
+            puntuacion_seg: '',
+            fecha_seg: 2024-02-14, 
+            imagen_seg: '', 
+            fk_id_postulacion: 2, 
+            fk_id_usuario: 2,
+        }
+    </td></tr>
+    <tr><td>RESPUESTA JSON</td><td>
+        Correcto:
+        Status:200
+        "mensaje": "Su segumiento ha sido exitoso"
+        Incorrecto:
+        status(400)
+        BODY:{
+            "mensaje": "Por favor, proporcione todos los campos necesarios."
+        }
+        Error:
+        Status:505
+        body:{
+                "mensaje": "Error interno del servidor"
+            }
+    </td></tr>
+    </table>
+    
+    <hr>
+    <h3>Listar seguimiento</h3>
 <table>
 <tr><td>Numero </td><td>1</td></tr>
 <tr><td>Nombre del Servicio </td><td>Listar seguimiento</td></tr>
@@ -44,44 +86,8 @@
 </td></tr>
 </table>
 
-<h1>API Documentation - Seguimientos   </h1>
-<table>
-<tr><td>Numero </td><td>2</td></tr>
-<tr><td>Nombre del Servicio </td><td>Agregar seguimiento</td></tr>
-<tr><td>URI</td><td>seguimiento/agregar</td></tr>
-<tr><td>Descripcion:</td><td>Permite Agregar seguimiento, registrarlo en la base de datos    </td></tr>
-<tr><td>Verbo HTTP:</td><td>POST</td></tr>
-<tr><td>HEADER:</td><td>NULL</td></tr>
-<tr><td>Usuarios:</td><td>Administrador</td></tr>
-<tr><td>PETICION BODY</td><td>
-    {   
-        pk_id_seg: 2,
-        certificacion_seg: 'sin certificacion', 
-        puntuacion_seg: '',
-        fecha_seg: 2024-02-14, 
-        imagen_seg: '', 
-        fk_id_postulacion: 2, 
-        fk_id_usuario: 2,
-    }
-</td></tr>
-<tr><td>RESPUESTA JSON</td><td>
-    Correcto:
-    Status:200
-    "mensaje": "Su segumiento ha sido exitoso"
-    Incorrecto:
-    status(400)
-    BODY:{
-        "mensaje": "Por favor, proporcione todos los campos necesarios."
-    }
-    Error:
-    Status:505
-    body:{
-            "mensaje": "Error interno del servidor"
-        }
-</td></tr>
-</table>
-
-<h1>API Documentation - Seguimientos   </h1>
+<hr>
+<h3>Actualizar seguimiento</h3>
 <table>
 <tr><td>Numero </td><td>3</td></tr>
 <tr><td>Nombre del Servicio </td><td>Actualizar seguimiento</td></tr>
@@ -120,7 +126,8 @@
 </td></tr>
 </table>
 
-<h1>API Documentation - seguimiento   </h1>
+<hr>
+<h3>Busca segumiento</h3>
 <table>
 <tr><td>Numero </td><td>4</td></tr>
 <tr><td>Nombre del Servicio </td><td>Listar segumiento</td></tr>
@@ -150,7 +157,8 @@
 </td></tr>
 </table>
 
-<h1>API Documentation - seguimiento   </h1>
+<hr>
+<h3>Eliminar segumiento</h3>
 <table>
 <tr><td>Numero </td><td>5</td></tr>
 <tr><td>Nombre del Servicio </td><td>Eliminar segumiento</td></tr>

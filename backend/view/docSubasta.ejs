@@ -7,7 +7,47 @@
 </head>
 <body>
     
-<h1>API Documentation - Subastas   </h1>
+    <hr>
+    <h2>Requerimiento 3. Documentacion del Subasta</h2>
+    <hr>
+    <h3>Crear Subasta</h3>
+    <table>
+        <tr><td>Numero </td><td>2</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Crear Subasta</td></tr>
+        <tr><td>URI</td><td>subastas/agregar</td></tr>
+        <tr><td>Descripcion:</td><td>Permite Agregar subastas, registrarlas en la base de datos    </td></tr>
+        <tr><td>Verbo HTTP:</td><td>POST</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td>
+        {
+            pk_id_sub: 2, 
+            fecha_inicio_sub: '2024-02-10', 
+            fecha_fin_sub: '', 
+            precio_final_sub: 0.00, 
+            estado_sub: 'abierta', 
+            fk_id_produccion: 2, 
+            fk_id_postulacion: 2, 
+        }</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            "mensaje": "Su subasta ha sido exitosa"
+            Incorrecto:
+            status(400)
+            BODY:{
+                "mensaje": "Por favor, proporcione todos los campos necesarios."
+            }
+            Error:
+            Status:505
+            body:{
+                    "mensaje": "Error interno del servidor"
+                }
+        </td></tr>
+    </table>
+    
+    <hr>
+    <h3>listar subasta</h3>
 <table>
     <tr><td>Numero </td><td>1</td></tr>
     <tr><td>Nombre del Servicio </td><td>Listar Subastas</td></tr>
@@ -44,46 +84,12 @@
     </td></tr>
 </table>
 
-<h1>API Documentation - Subastas   </h1>
-<table>
-    <tr><td>Numero </td><td>2</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Agregar Subastas</td></tr>
-    <tr><td>URI</td><td>subastas/agregar</td></tr>
-    <tr><td>Descripcion:</td><td>Permite Agregar subastas, registrarlas en la base de datos    </td></tr>
-    <tr><td>Verbo HTTP:</td><td>POST</td></tr>
-    <tr><td>HEADER:</td><td>NULL</td></tr>
-    <tr><td>Usuarios:</td><td>Usuario</td></tr>
-    <tr><td>PETICION BODY</td><td>
-    {
-        pk_id_sub: 2, 
-        fecha_inicio_sub: '2024-02-10', 
-        fecha_fin_sub: '', 
-        precio_final_sub: 0.00, 
-        estado_sub: 'abierta', 
-        fk_id_produccion: 2, 
-        fk_id_postulacion: 2, 
-    }</td></tr>
-    <tr><td>RESPUESTA JSON</td><td>
-        Correcto:
-        Status:200
-        "mensaje": "Su subasta ha sido exitosa"
-        Incorrecto:
-        status(400)
-        BODY:{
-            "mensaje": "Por favor, proporcione todos los campos necesarios."
-        }
-        Error:
-        Status:505
-        body:{
-                "mensaje": "Error interno del servidor"
-            }
-    </td></tr>
-</table>
 
-<h1>API Documentation - Subastas   </h1>
+<hr>
+<h3>Actualizar Subasta</h3>
 <table>
     <tr><td>Numero </td><td>3</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Actualizar Subastas</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Actualizar Subasta</td></tr>
     <tr><td>URI</td><td>/subastas/:id</td></tr>
     <tr><td>Descripcion:</td><td>Permite actualizar las subastas con id proporcionado registradas en la base de datos    </td></tr>
     <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
@@ -119,7 +125,8 @@
     </td></tr>
 </table>
 
-<h1>API Documentation - Subastas   </h1>
+<hr>
+<h3>Buscar Subasta</h3>
 <table>
     <tr><td>Numero </td><td>4</td></tr>
     <tr><td>Nombre del Servicio </td><td>Listar Subasta</td></tr>
@@ -149,7 +156,8 @@
     </td></tr>
 </table>
 
-<h1>API Documentation - Subastas   </h1>
+<hr>
+<h3>Eliminar Subasta</h3>
 <table>
     <tr><td>Numero </td><td>5</td></tr>
     <tr><td>Nombre del Servicio </td><td>Eliminar Subasta</td></tr>

@@ -10,6 +10,95 @@
     <hr>
     <h2>Requerimiento 1. Documentacion del Registro de usuario</h2>
     <hr>
+    <h3>REGISTRAR USUARIOS</h3>
+    <table>
+        <tr>
+            <td>NUMERO</td>
+            <td>2</td>
+        </tr>
+
+        <tr>
+            <td>NOMBRE DEL ENDPOINT</td>
+            <td>REGISTRAR USUARIOS</td>
+        </tr>
+
+        <tr>
+            <td>URI</td>
+            <td>/usuario/registrar</td>
+        </tr>
+
+        <tr>
+            <td>DESCRIPCION</td>
+            <td>Permite registrar a los usuarios</td>
+        </tr>
+
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>POST</td>
+        </tr>
+
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+
+        <tr>
+            <td>USUARIOS</td>
+            <td>ADMINISTRADOR</td>
+        </tr>
+
+        <tr>
+            <td>PETICION BODY</td>
+            <td>"pk_cedula_user": 378292, "nombre_user":"Jhon Diaz", "email_user": "jho@gmail.com", "password_user": "79nh02", "rol_user":"comprador", "descripcion_user": "Timana, cafe pergamino, cafe borbon",   "telefono_user": "8494992", "fecha_nacimiento_user": "26-12-2000"</td>
+        </tr>
+
+        <tr>
+            <td>RESPUESTA JSON</td>
+            <td>
+                
+                CORRECTO: 
+                STATUS:200 
+                MESSAGE: "Felicidades, el registro fue un exito"
+                JSON 
+                { 
+                    "pk_cedula_user": 378292, 
+                    "nombre_user":"Jhon Diaz", 
+                    "email_user": "jho@gmail.com", 
+                    "password_user": "79nh02", 
+                    "rol_user":"comprador", 
+                    "descripcion_user": "Timana, cafe pergamino, cafe borbon", 
+                    "telefono_user": "8494992", 
+                    "fecha_nacimiento_user": "26-12-2000" 	
+                } 
+
+                INCORRECTO 
+                STATUS: 404 
+                BODY :{
+                    STATUS: 404
+                    MESSAGE: "Error, El registro fue denegado"
+                } 
+
+                ERROR: 
+                STATUS: 500 
+                BODY : JSON{
+                    STATUS:500,
+                    MESSAGE: "ERROR EN EL SERVIDOR"
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>DESARROLADOR</td>
+            <td>VALENTINA DIAZ LERMA</td>
+        </tr>
+
+        <tr>
+            <td>RAMA</td>
+            <td>DEVvdl</td>
+        </tr>
+    </table>
+
+    <hr>
     <h3>LISTAR USUARIOS</h3>
         <table>
             <tr>
@@ -102,94 +191,7 @@
         </table>
 
 
-        <h3>REGISTRAR USUARIOS</h3>
-        <table>
-            <tr>
-                <td>NUMERO</td>
-                <td>2</td>
-            </tr>
-
-            <tr>
-                <td>NOMBRE DEL ENDPOINT</td>
-                <td>REGISTRAR USUARIOS</td>
-            </tr>
-
-            <tr>
-                <td>URI</td>
-                <td>/usuario/registrar</td>
-            </tr>
-
-            <tr>
-                <td>DESCRIPCION</td>
-                <td>Permite registrar a los usuarios</td>
-            </tr>
-
-            <tr>
-                <td>VERBO HTTP</td>
-                <td>POST</td>
-            </tr>
-
-            <tr>
-                <td>HEADER</td>
-                <td>NULL</td>
-            </tr>
-
-            <tr>
-                <td>USUARIOS</td>
-                <td>ADMINISTRADOR</td>
-            </tr>
-
-            <tr>
-                <td>PETICION BODY</td>
-                <td>"pk_cedula_user": 378292, "nombre_user":"Jhon Diaz", "email_user": "jho@gmail.com", "password_user": "79nh02", "rol_user":"comprador", "descripcion_user": "Timana, cafe pergamino, cafe borbon",   "telefono_user": "8494992", "fecha_nacimiento_user": "26-12-2000"</td>
-            </tr>
-
-            <tr>
-                <td>RESPUESTA JSON</td>
-                <td>
-                    
-                    CORRECTO: 
-                    STATUS:200 
-                    MESSAGE: "Felicidades, el registro fue un exito"
-                    JSON 
-                    { 
-                        "pk_cedula_user": 378292, 
-                        "nombre_user":"Jhon Diaz", 
-                        "email_user": "jho@gmail.com", 
-                        "password_user": "79nh02", 
-                        "rol_user":"comprador", 
-                        "descripcion_user": "Timana, cafe pergamino, cafe borbon", 
-                        "telefono_user": "8494992", 
-                        "fecha_nacimiento_user": "26-12-2000" 	
-                    } 
-
-                    INCORRECTO 
-                    STATUS: 404 
-                    BODY :{
-                        STATUS: 404
-                        MESSAGE: "Error, El registro fue denegado"
-                    } 
-
-                    ERROR: 
-                    STATUS: 500 
-                    BODY : JSON{
-                        STATUS:500,
-                        MESSAGE: "ERROR EN EL SERVIDOR"
-                    }
-                </td>
-            </tr>
-
-            <tr>
-                <td>DESARROLADOR</td>
-                <td>VALENTINA DIAZ LERMA</td>
-            </tr>
-
-            <tr>
-                <td>RAMA</td>
-                <td>DEVvdl</td>
-            </tr>
-        </table>
-
+ 
 
 
         <h3>ACTUALIZAR USUARIOS</h3>

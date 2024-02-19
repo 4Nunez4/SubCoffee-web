@@ -6,10 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-
-    <h1>Documentación de la API</h1>
     <hr>
-    <h2>Requerimiento Oferta</h2>
+    <h2>Requerimiento 2. Documentacion de Oferta</h2>
     <hr>
     <h3>Registrar Oferta.</h3>
     <table>
@@ -64,6 +62,77 @@
                 body:{
                   status:500,message:"Error"+e
                 }
+            </td>
+        </tr>
+    </table>
+    <hr>
+    <h3>Listar Oferta.</h3>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Listar ofertas.</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/subcoffee/listarOferta</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite listar las ofertas registradas en la base de datos.</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                [
+                  {
+                    "pk_id_pos": 1,
+                    "fecha_pos": null,
+                    "estado_pos": null,
+                    "monto_inicial_pos": 0,
+                    "oferta_pos": 400000,
+                    "fk_id_usuario": null
+                  },
+                  {
+                    "pk_id_pos": 5,
+                    "fecha_pos": null,
+                    "estado_pos": null,
+                    "monto_inicial_pos": 0,
+                    "oferta_pos": 1000000,
+                    "fk_id_usuario": null
+                  }
+                ]
+              Incorrecto:
+              Status:{
+                status: 404,
+                message: "No se a registrado ninguna oferta en el sistema...!!!"
+              }
+              Error: 
+              status: 500,
+              body:{
+                status:500,message:"Error"+e
+              }
             </td>
         </tr>
     </table>
@@ -242,76 +311,6 @@
             </td>
         </tr>
     </table>
-    <hr>
-    <h3>Listar Oferta.</h3>
-    <table>
-        <tr>
-            <td>NÚMERO</td>
-            <td>5</td>
-        </tr>
-        <tr>
-            <td>NOMBRE DE SERVICIO</td>
-            <td>Listar ofertas.</td>
-        </tr>
-        <tr>
-            <td>URL</td>
-            <td>/subcoffee/listarOferta</td>
-        </tr>
-        <tr>
-            <td>DESCRIPCIÓN</td>
-            <td>Permite listar las ofertas registradas en la base de datos.</td>
-        </tr>
-        <tr>
-            <td>VERBO HTTP</td>
-            <td>GET</td>
-        </tr>
-        <tr>
-            <td>HEADER</td>
-            <td>NULL</td>
-        </tr>
-        <tr>
-            <td>USUARIOS</td>
-            <td>Administrador</td>
-        </tr>
-        <tr>
-            <td>PETICIÓN json</td>
-            <td>NULL</td>
-        </tr>
-        <tr>
-            <td>REPUESTA JSON</td>
-            <td>
-                Correcto:
-                Status: 200
-                [
-                  {
-                    "pk_id_pos": 1,
-                    "fecha_pos": null,
-                    "estado_pos": null,
-                    "monto_inicial_pos": 0,
-                    "oferta_pos": 400000,
-                    "fk_id_usuario": null
-                  },
-                  {
-                    "pk_id_pos": 5,
-                    "fecha_pos": null,
-                    "estado_pos": null,
-                    "monto_inicial_pos": 0,
-                    "oferta_pos": 1000000,
-                    "fk_id_usuario": null
-                  }
-                ]
-              Incorrecto:
-              Status:{
-                status: 404,
-                message: "No se a registrado ninguna oferta en el sistema...!!!"
-              }
-              Error: 
-              status: 500,
-              body:{
-                status:500,message:"Error"+e
-              }
-            </td>
-        </tr>
-    </table>
+
 </body>
 </html>
