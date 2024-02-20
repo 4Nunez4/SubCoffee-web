@@ -19,25 +19,22 @@ export const listar = async (req, res) =>{
 
    //registrarUsuarios
 
-export const registrar = async(req, res)=>{
+   export const registrar = async (req, res) =>{
     try {
-        const {pk_cedula_user, nombre_user, email_user, telefono_user, fecha_nacimiento_user, password_user, rol_user, descripcion_user} = req.body
+        const {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user}=req.body
+        let sql = `insert into usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user) values (?,?,?,?,?,?,?)`
 
-        let sql = `insert into usuarios(pk_cedula_user, nombre_user, email_user, telefono_user, fecha_nacimiento_user, password_user, rol_user, descripcion_user) values (?, ?, ?, ?, ?, ?, ?, ?)` 
-
-        const [rows] = await pool.query(sql,[pk_cedula_user, nombre_user, email_user, telefono_user, fecha_nacimiento_user, password_user, rol_user, descripcion_user])
+        const [rows] = await pool.query(sql,[pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user])
 
         if(rows.affectedRows > 0)
-        {res.status(200).json({'status':200, 'mesage': 'Felicidades, el registro fue un exito'})}
-
+        {res.status(200).json({'status':400, 'mesage':'Felicidades, el registro fue un exito'})}
         else
-        {res.status(400).json({'status':400, 'mesage': 'Error, El registro fue denegado'})} 
-    } 
-
-    catch (error) {
-        res.status(500).json({'status':500, 'mesage':'ERROR SERVIDOR' + error})
+        {res.status(200).json({'status':200, 'mesage': 'Error, el registro fue denegado'})}
+    } catch (error) {
+        res.status(500).json({'status':500, 'mesage':'ERROR SERVIDOR'})
     }
 }
+
 
 //actualizar o editar usuario
 

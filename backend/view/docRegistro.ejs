@@ -10,95 +10,6 @@
     <hr>
     <h2>Requerimiento 1. Documentacion del Registro de usuario</h2>
     <hr>
-    <h3>REGISTRAR USUARIOS</h3>
-    <table>
-        <tr>
-            <td>NUMERO</td>
-            <td>2</td>
-        </tr>
-
-        <tr>
-            <td>NOMBRE DEL ENDPOINT</td>
-            <td>REGISTRAR USUARIOS</td>
-        </tr>
-
-        <tr>
-            <td>URI</td>
-            <td>/usuario/registrar</td>
-        </tr>
-
-        <tr>
-            <td>DESCRIPCION</td>
-            <td>Permite registrar a los usuarios</td>
-        </tr>
-
-        <tr>
-            <td>VERBO HTTP</td>
-            <td>POST</td>
-        </tr>
-
-        <tr>
-            <td>HEADER</td>
-            <td>NULL</td>
-        </tr>
-
-        <tr>
-            <td>USUARIOS</td>
-            <td>ADMINISTRADOR</td>
-        </tr>
-
-        <tr>
-            <td>PETICION BODY</td>
-            <td>"pk_cedula_user": 378292, "nombre_user":"Jhon Diaz", "email_user": "jho@gmail.com", "password_user": "79nh02", "rol_user":"comprador", "descripcion_user": "Timana, cafe pergamino, cafe borbon",   "telefono_user": "8494992", "fecha_nacimiento_user": "26-12-2000"</td>
-        </tr>
-
-        <tr>
-            <td>RESPUESTA JSON</td>
-            <td>
-                
-                CORRECTO: 
-                STATUS:200 
-                MESSAGE: "Felicidades, el registro fue un exito"
-                JSON 
-                { 
-                    "pk_cedula_user": 378292, 
-                    "nombre_user":"Jhon Diaz", 
-                    "email_user": "jho@gmail.com", 
-                    "password_user": "79nh02", 
-                    "rol_user":"comprador", 
-                    "descripcion_user": "Timana, cafe pergamino, cafe borbon", 
-                    "telefono_user": "8494992", 
-                    "fecha_nacimiento_user": "26-12-2000" 	
-                } 
-
-                INCORRECTO 
-                STATUS: 404 
-                BODY :{
-                    STATUS: 404
-                    MESSAGE: "Error, El registro fue denegado"
-                } 
-
-                ERROR: 
-                STATUS: 500 
-                BODY : JSON{
-                    STATUS:500,
-                    MESSAGE: "ERROR EN EL SERVIDOR"
-                }
-            </td>
-        </tr>
-
-        <tr>
-            <td>DESARROLADOR</td>
-            <td>VALENTINA DIAZ LERMA</td>
-        </tr>
-
-        <tr>
-            <td>RAMA</td>
-            <td>DEVvdl</td>
-        </tr>
-    </table>
-
-    <hr>
     <h3>LISTAR USUARIOS</h3>
         <table>
             <tr>
@@ -149,17 +60,13 @@
                     STATUS:200 
                     JSON
                     {
-                        "pk_cedula_user": 1,
-                        "nombre_user": "Jhon Diaz",
-                        "email_user": "jho@gmail.com",
-                        "password_user": "jh@gmail.com",
-                        "rol_user": "comprador",
-                        "descripcion_user": "Timana, cafe pergamino, cafe borbon",
-                        "imagen_user": {
-                            "type": "Buffer",
-                            "data": []
-                        },
-                        "telefono_user": "8494992",
+                        "pk_cedula_user": 10,
+                        "nombre_user": "Valentina",
+                        "email_user": "value@gmail.com",
+                        "password_user": "mikysus",
+                        "descripcion_user": "Hola soy vendedor",
+                        "imagen_user": null,
+                        "telefono_user": "33903033",
                         "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z"
                     }
 
@@ -191,6 +98,100 @@
         </table>
 
 
+        <h3>REGISTRAR USUARIOS</h3>
+        <table>
+            <tr>
+                <td>NUMERO</td>
+                <td>2</td>
+            </tr>
+
+            <tr>
+                <td>NOMBRE DEL ENDPOINT</td>
+                <td>REGISTRAR USUARIOS</td>
+            </tr>
+
+            <tr>
+                <td>URI</td>
+                <td>/usuario/registrar</td>
+            </tr>
+
+            <tr>
+                <td>DESCRIPCION</td>
+                <td>Permite registrar a los usuarios</td>
+            </tr>
+
+            <tr>
+                <td>VERBO HTTP</td>
+                <td>POST</td>
+            </tr>
+
+            <tr>
+                <td>HEADER</td>
+                <td>NULL</td>
+            </tr>
+
+            <tr>
+                <td>USUARIOS</td>
+                <td>ADMINISTRADOR</td>
+            </tr>
+
+            <tr>
+                <td>PETICION BODY</td>
+                <td>"pk_cedula_user": 10,
+                    "nombre_user": "Valentina",
+                    "email_user": "value@gmail.com",
+                    "password_user": "mikysus",
+                    "descripcion_user": "Hola soy vendedor",
+                    "imagen_user": null,
+                    "telefono_user": "33903033",
+                    "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z"</td>
+            </tr>
+
+            <tr>
+                <td>RESPUESTA JSON</td>
+                <td>
+                    
+                    CORRECTO: 
+                    STATUS:200 
+                    MESSAGE: "Felicidades, el registro fue un exito"
+                    JSON 
+                    {
+                        "pk_cedula_user": 10,
+                        "nombre_user": "Valentina",
+                        "email_user": "value@gmail.com",
+                        "password_user": "mikysus",
+                        "descripcion_user": "Hola soy vendedor",
+                        "imagen_user": null,
+                        "telefono_user": "33903033",
+                        "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z"
+                    },
+
+                    INCORRECTO 
+                    STATUS: 404 
+                    BODY :{
+                        STATUS: 404
+                        MESSAGE: "Error, El registro fue denegado"
+                    } 
+
+                    ERROR: 
+                    STATUS: 500 
+                    BODY : JSON{
+                        STATUS:500,
+                        MESSAGE: "ERROR EN EL SERVIDOR"
+                    }
+                </td>
+            </tr>
+
+            <tr>
+                <td>DESARROLADOR</td>
+                <td>VALENTINA DIAZ LERMA</td>
+            </tr>
+
+            <tr>
+                <td>RAMA</td>
+                <td>DEVvdl</td>
+            </tr>
+        </table>
  
 
 
@@ -208,7 +209,7 @@
 
             <tr>
                 <td>URI</td>
-                <td>/usuario/actualizar/pk_cedula_user</td>
+                <td>/usuario/actualizar/1079534436</td>
             </tr>
 
             <tr>
@@ -233,7 +234,13 @@
 
             <tr>
                 <td>PETICION BODY</td>
-                <td>"nombre_user":"Jhon Diaz", "email_user": "jho@gmail.com", "password_user": "8392UHG", "telefono_user": "8494992",</td>
+                <td>{
+                    "nombre_user": "valentina l",
+                    "telefono_user":"3207383",
+                    "email_user": "valus@hotmail.com",
+                    "password_user": "7382b"
+                    }
+                </td>
             </tr>
 
             <tr>
@@ -244,11 +251,11 @@
                     STATUS:200 
                     MESSAGE: "Felicidades, La actualizacion del usuario fue un exito"
                     JSON 
-                    { 
-                        "nombre_user":"Jhon", 
-                        "email_user": "jho347@gmail.com", 
-                        "password_user": "8392UHG", 
-                        "telefono_user": "32092", 
+                    {
+                        "nombre_user": "valentina l",
+                        "telefono_user":"3207383",
+                        "email_user": "valus@hotmail.com",
+                        "password_user": "7382b"
                     }
 
                     INCORRECTO 
@@ -295,7 +302,7 @@
 
             <tr>
                 <td>URI</td>
-                <td>/usuario/buscar/pk_cedula_user</td>
+                <td>/usuario/buscar/1079534436</td>
             </tr>
 
             <tr>
@@ -330,16 +337,16 @@
                     CORRECTO: 
                     STATUS:200
                     JSON 
-                    { 
-                        "pk_cedula_user": 378292, 
-                        "nombre_user":"Jhon Diaz", 
-                        "email_user": "jho@gmail.com", 
-                        "password_user": "79nh02", 
-                        "rol_user":"comprador", 
-                        "descripcion_user": "Timana, cafe pergamino, cafe borbon", 
-                        "telefono_user": "8494992", 
-                        "fecha_nacimiento_user": "26-12-2000" 	
-                    } 
+                    {
+                        "pk_cedula_user": 10,
+                        "nombre_user": "valentina l",
+                        "email_user": "valus@hotmail.com",
+                        "password_user": "7382b",
+                        "descripcion_user": "Hola soy vendedor",
+                        "imagen_user": null,
+                        "telefono_user": "3207383",
+                        "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z"
+                    }
 
 
                     INCORRECTO 
@@ -370,6 +377,7 @@
         </table>
 
 
+
         <h3>ELIMINAR USUARIOS</h3>
 
         <table>
@@ -380,12 +388,12 @@
 
             <tr>
                 <td>NOMBRE DEL ENDPOINT</td>
-                <td>ELIMINAT USUARIOS</td>
+                <td>ELIMINAR USUARIOS</td>
             </tr>
 
             <tr>
                 <td>URI</td>
-                <td>/usuario/eliminar/pk_cedula_user</td>
+                <td>/usuario/eliminar/1079534436</td>
             </tr>
 
             <tr>
