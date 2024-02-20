@@ -10,7 +10,7 @@ export const listar = async (req, res) =>{
             return res.status(200).json(result)
         }
         else{
-            return res.status(484).send({'mesage': 'Error, No hay registros de usuario'})
+            return res.status(404).send({'mesage': 'Error, No hay registros de usuario'})
         }
     } catch (error) {
         res.status(500).json({'status': 500,'mesage': 'ERROR SERVIDOR' + error})
@@ -27,9 +27,9 @@ export const listar = async (req, res) =>{
         const [rows] = await pool.query(sql,[pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user])
 
         if(rows.affectedRows > 0)
-        {res.status(200).json({'status':400, 'mesage':'Felicidades, el registro fue un exito'})}
+        {res.status(200).json({'status':200, 'mesage':'Felicidades, el registro fue un exito'})}
         else
-        {res.status(200).json({'status':200, 'mesage': 'Error, el registro fue denegado'})}
+        {res.status(404).json({'status':404, 'mesage': 'Error, el registro fue denegado'})}
     } catch (error) {
         res.status(500).json({'status':500, 'mesage':'ERROR SERVIDOR'})
     }
@@ -51,7 +51,7 @@ export const actualizar = async (req, res) => {
             res.status(200).json({'status': 200, 'message': 'Felicidades, La actualizacion del usuario fue un exito'})
 
         else
-        res.status(400).json({'status': 400, 'message': 'Error, La actualizacion fue denegada'})
+        res.status(404).json({'status': 404, 'message': 'Error, La actualizacion fue denegada'})
     } 
     catch (error) 
     {
@@ -73,7 +73,7 @@ export const buscar = async (req, res) =>{
         }
         else
         {
-            return res.status(484).send({'mesage': 'Error, No se encuentra ningun registro de usuario'})
+            return res.status(404).send({'mesage': 'Error, No se encuentra ningun registro de usuario'})
         }
     } catch (error) {
         res.status(500).json({'status': 500,'mesage': 'ERROR SERVIDOR' + error})
@@ -92,7 +92,7 @@ export const eliminar = async (req,res)=>{
         res.status(200).json({'status': 200, 'message': 'Se elimino el usuario exitasamente'})
 
         else
-        res.status(400).json({'status': 400, 'message': 'Error, El usuario no fue eliminado'})
+        res.status(404).json({'status': 404, 'message': 'Error, El usuario no fue eliminado'})
 
     } catch (error) {
         res.status(500).json({'status': 500, 'message': 'ERROR SERVIDOR' + error})

@@ -9,100 +9,12 @@
     <h1>Documentacion de la Api</h1>
     <hr>
     <h2>Requerimiento 1. Documentacion del Registro de usuario</h2>
-    <hr>
-    <h3>LISTAR USUARIOS</h3>
-        <table>
-            <tr>
-                <td>NUMERO</td>
-                <td>1</td>
-            </tr>
-
-            <tr>
-                <td>NOMBRE DEL ENDPOINT</td>
-                <td>LISTAR USUARIOS</td>
-            </tr>
-
-            <tr>
-                <td>URI</td>
-                <td>localhost/usuario/listar</td>
-            </tr>
-
-            <tr>
-                <td>DESCRIPCION</td>
-                <td>Permite listar a los usuarios que se encuentran registrados en la base de datos</td>
-            </tr>
-
-            <tr>
-                <td>VERBO HTTP</td>
-                <td>GET</td>
-            </tr>
-
-            <tr>
-                <td>HEADER</td>
-                <td>NULL</td>
-            </tr>
-
-            <tr>
-                <td>USUARIOS</td>
-                <td>ADMINISTRADOR</td>
-            </tr>
-
-            <tr>
-                <td>PETICION BODY</td>
-                <td>NULL</td>
-            </tr>
-
-            <tr>
-                <td>RESPUESTA JSON</td>
-                <td>
-                    
-                    CORRECTA:
-                    STATUS:200 
-                    JSON
-                    {
-                        "pk_cedula_user": 10,
-                        "nombre_user": "Valentina",
-                        "email_user": "value@gmail.com",
-                        "password_user": "mikysus",
-                        "descripcion_user": "Hola soy vendedor",
-                        "imagen_user": null,
-                        "telefono_user": "33903033",
-                        "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z"
-                    }
-
-                    INCORRECTO: 
-                    STATUS: 404 
-                    BODY :{
-                        STATUS: 404
-                        MESSAGE: "Error, No hay registros de usuario"
-                    } 
-
-                    ERROR: 
-                    STATUS: 500 
-                    BODY : JSON{
-                        STATUS:500,
-                        MESSAGE: "ERROR EN EL SERVIDOR"
-                    } 
-                </td>
-            </tr>
-            
-            <tr>
-                <td>DESARROLADOR</td>
-                <td>VALENTINA DIAZ LERMA</td>
-            </tr>
-
-            <tr>
-                <td>RAMA</td>
-                <td>DEVvdl</td>
-            </tr>
-        </table>
-
-
+   
         <h3>REGISTRAR USUARIOS</h3>
         <table>
             <tr>
                 <td>NUMERO</td>
-                <td>2</td>
+                <td>1</td>
             </tr>
 
             <tr>
@@ -137,14 +49,14 @@
 
             <tr>
                 <td>PETICION BODY</td>
-                <td>"pk_cedula_user": 10,
+                <td>{"pk_cedula_user": 10,
                     "nombre_user": "Valentina",
                     "email_user": "value@gmail.com",
                     "password_user": "mikysus",
                     "descripcion_user": "Hola soy vendedor",
                     "imagen_user": null,
                     "telefono_user": "33903033",
-                    "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z"</td>
+                    "fecha_nacimiento_user": "1899-11-03"}</td>
             </tr>
 
             <tr>
@@ -163,7 +75,7 @@
                         "descripcion_user": "Hola soy vendedor",
                         "imagen_user": null,
                         "telefono_user": "33903033",
-                        "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z"
+                        "fecha_nacimiento_user": "1899-11-03"
                     },
 
                     INCORRECTO 
@@ -192,6 +104,95 @@
                 <td>DEVvdl</td>
             </tr>
         </table>
+        <hr>
+        <h3>LISTAR USUARIOS</h3>
+            <table>
+                <tr>
+                    <td>NUMERO</td>
+                    <td>2</td>
+                </tr>
+    
+                <tr>
+                    <td>NOMBRE DEL ENDPOINT</td>
+                    <td>LISTAR USUARIOS</td>
+                </tr>
+    
+                <tr>
+                    <td>URI</td>
+                    <td>/usuario/listar</td>
+                </tr>
+    
+                <tr>
+                    <td>DESCRIPCION</td>
+                    <td>Permite listar a los usuarios que se encuentran registrados en la base de datos</td>
+                </tr>
+    
+                <tr>
+                    <td>VERBO HTTP</td>
+                    <td>GET</td>
+                </tr>
+    
+                <tr>
+                    <td>HEADER</td>
+                    <td>NULL</td>
+                </tr>
+    
+                <tr>
+                    <td>USUARIOS</td>
+                    <td>ADMINISTRADOR</td>
+                </tr>
+    
+                <tr>
+                    <td>PETICION BODY</td>
+                    <td>NULL</td>
+                </tr>
+    
+                <tr>
+                    <td>RESPUESTA JSON</td>
+                    <td>
+                        
+                        CORRECTA:
+                        STATUS:200 
+                        JSON
+                        {
+                            "pk_cedula_user": 10,
+                            "nombre_user": "Valentina",
+                            "email_user": "value@gmail.com",
+                            "password_user": "mikysus",
+                            "descripcion_user": "Hola soy vendedor",
+                            "imagen_user": null,
+                            "telefono_user": "33903033",
+                            "fecha_nacimiento_user": "1899-11-03"
+                        }
+    
+                        INCORRECTO: 
+                        STATUS: 404 
+                        BODY :{
+                            STATUS: 404
+                            MESSAGE: "Error, No hay registros de usuario"
+                        } 
+    
+                        ERROR: 
+                        STATUS: 500 
+                        BODY : JSON{
+                            STATUS:500,
+                            MESSAGE: "ERROR EN EL SERVIDOR"
+                        } 
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>DESARROLADOR</td>
+                    <td>VALENTINA DIAZ LERMA</td>
+                </tr>
+    
+                <tr>
+                    <td>RAMA</td>
+                    <td>DEVvdl</td>
+                </tr>
+            </table>
+    
+    
  
 
 
@@ -209,7 +210,7 @@
 
             <tr>
                 <td>URI</td>
-                <td>/usuario/actualizar/1079534436</td>
+                <td>/usuario/actualizar/10</td>
             </tr>
 
             <tr>
@@ -302,7 +303,7 @@
 
             <tr>
                 <td>URI</td>
-                <td>/usuario/buscar/1079534436</td>
+                <td>/usuario/buscar/10</td>
             </tr>
 
             <tr>
@@ -393,7 +394,7 @@
 
             <tr>
                 <td>URI</td>
-                <td>/usuario/eliminar/1079534436</td>
+                <td>/usuario/eliminar/10</td>
             </tr>
 
             <tr>
