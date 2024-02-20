@@ -27,9 +27,9 @@ export const getChat = async (req, res) => {
 };
 
 export const createChat = async (req, res) => {
-    const {mensaje, idUsuario} = req.body;
+    const {mensaje_chat, fk_id_usuario} = req.body;
     try {
-        const [rows] = await pool.query("INSERT INTO chat(mensaje_chat, fk_id_usuario) VALUES (?, ?)", [mensaje, idUsuario]);
+        const [rows] = await pool.query("INSERT INTO chat(mensaje_chat, fk_id_usuario) VALUES (?, ?)", [mensaje_chat, fk_id_usuario]);
         if(rows.affectedRows){
             res.status(200).json({status: 200, message: "Mensaje creado con éxito."});
         } else {
