@@ -60,14 +60,15 @@
                     STATUS:200 
                     JSON
                     {
-                        "pk_cedula_user": 10,
-                        "nombre_user": "Valentina",
-                        "email_user": "value@gmail.com",
-                        "password_user": "mikysus",
-                        "descripcion_user": "Hola soy vendedor",
+                        "pk_cedula_user": 108000700,
+                        "nombre_user": "Pepito Perez",
+                        "email_user": "pepito123@gmail.com",
+                        "password_user": "123456789",
+                        "descripcion_user": "Soy amable y amigable ",
                         "imagen_user": null,
-                        "telefono_user": "33903033",
-                        "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z"
+                        "telefono_user": "3101010101",
+                        "fecha_nacimiento_user": "2005-12-12",
+                        "rol_user": "admin"
                     }
 
                     INCORRECTO: 
@@ -96,6 +97,7 @@
                 <td>DEVvdl</td>
             </tr>
         </table>
+
 
 
         <h3>REGISTRAR USUARIOS</h3>
@@ -137,14 +139,19 @@
 
             <tr>
                 <td>PETICION BODY</td>
-                <td>"pk_cedula_user": 10,
-                    "nombre_user": "Valentina",
-                    "email_user": "value@gmail.com",
-                    "password_user": "mikysus",
-                    "descripcion_user": "Hola soy vendedor",
-                    "imagen_user": null,
-                    "telefono_user": "33903033",
-                    "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z"</td>
+                <td>
+                    {
+                        "pk_cedula_user": 108000701,
+                        "nombre_user": "Pepito Perez",
+                        "email_user": "pepito123@gmail.com",
+                        "password_user": "123456789",
+                        "descripcion_user": "Soy amable y amigable ",
+                        "imagen_user": null,
+                        "telefono_user": "3101010101",
+                        "fecha_nacimiento_user": "2005-12-12",
+                        "rol_user": "admin"
+                    }
+                </td>
             </tr>
 
             <tr>
@@ -156,15 +163,16 @@
                     MESSAGE: "Felicidades, el registro fue un exito"
                     JSON 
                     {
-                        "pk_cedula_user": 10,
-                        "nombre_user": "Valentina",
-                        "email_user": "value@gmail.com",
-                        "password_user": "mikysus",
-                        "descripcion_user": "Hola soy vendedor",
+                        "pk_cedula_user": 108000701,
+                        "nombre_user": "Pepito Perez",
+                        "email_user": "pepito123@gmail.com",
+                        "password_user": "123456789",
+                        "descripcion_user": "Soy amable y amigable ",
                         "imagen_user": null,
-                        "telefono_user": "33903033",
-                        "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z"
-                    },
+                        "telefono_user": "3101010101",
+                        "fecha_nacimiento_user": "2005-12-12",
+                        "rol_user": "admin"
+                    }
 
                     INCORRECTO 
                     STATUS: 404 
@@ -209,7 +217,7 @@
 
             <tr>
                 <td>URI</td>
-                <td>/usuario/actualizar/1079534436</td>
+                <td>/usuario/actualizar/108000700</td>
             </tr>
 
             <tr>
@@ -234,10 +242,11 @@
 
             <tr>
                 <td>PETICION BODY</td>
-                <td>{
-                    "nombre_user": "valentina l",
+                <td>
+                    {
+                    "nombre_user": "Pepito",
                     "telefono_user":"3207383",
-                    "email_user": "valus@hotmail.com",
+                    "email_user": "pepito@hotmail.com",
                     "password_user": "7382b"
                     }
                 </td>
@@ -252,9 +261,9 @@
                     MESSAGE: "Felicidades, La actualizacion del usuario fue un exito"
                     JSON 
                     {
-                        "nombre_user": "valentina l",
+                        "nombre_user": "Pepito",
                         "telefono_user":"3207383",
-                        "email_user": "valus@hotmail.com",
+                        "email_user": "pepito@hotmail.com",
                         "password_user": "7382b"
                     }
 
@@ -288,7 +297,6 @@
 
 
         <h3>BUSCAR USUARIOS</h3>
-
         <table>
             <tr>
                 <td>NUMERO</td>
@@ -302,7 +310,7 @@
 
             <tr>
                 <td>URI</td>
-                <td>/usuario/buscar/1079534436</td>
+                <td>/usuario/buscar/108000700</td>
             </tr>
 
             <tr>
@@ -338,14 +346,15 @@
                     STATUS:200
                     JSON 
                     {
-                        "pk_cedula_user": 10,
-                        "nombre_user": "valentina l",
-                        "email_user": "valus@hotmail.com",
-                        "password_user": "7382b",
-                        "descripcion_user": "Hola soy vendedor",
+                        "pk_cedula_user": 108000701,
+                        "nombre_user": "Pepito Perez",
+                        "email_user": "pepito123@gmail.com",
+                        "password_user": "123456789",
+                        "descripcion_user": "Soy amable y amigable ",
                         "imagen_user": null,
-                        "telefono_user": "3207383",
-                        "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z"
+                        "telefono_user": "3101010101",
+                        "fecha_nacimiento_user": "2005-12-12",
+                        "rol_user": "admin"
                     }
 
 
@@ -379,7 +388,6 @@
 
 
         <h3>ELIMINAR USUARIOS</h3>
-
         <table>
             <tr>
                 <td>NUMERO</td>
