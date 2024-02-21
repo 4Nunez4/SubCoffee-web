@@ -1,45 +1,60 @@
 import { query } from "express";
 import { pool } from "../databases/conexion.js";
 
-export const registrarOferta = async(req,res) => {
+export const registrarProduccion = async(req,res) => {
     try {
-        const {oferta} = req.body;
-        let sql = `insert into postulacion(oferta_pos) values (?)`;
-        const [rows] = await pool.query(sql,[oferta]);
+        const {cantidad,variedad,finca} = req.body;
+        let sql = `insert into produccion(cantidad_pro,fk_id_variedad,fk_id_finca) values (?,?,?)`;
+        const [rows] = await pool.query(sql,[cantidad,variedad,finca]);
         if (rows.affectedRows>0) {
-            res.status(200).json({'status':200,'message':'Se registro con exito la oferta...!!!'});
+            res.status(200).json({'status':200,'message':'Se registro con exito la producción.'});
         }else{
-            res.status(403).json({'status':403,'message':'No se registro la oferta...!!!'});
+            res.status(403).json({'status':403,'message':'No se registro la producción.'});
         }
     } catch (e) {
         res.status(500).json({'status':500,'message':'Error: '+e});
     }
 }
 
-export const actualizarOferta = async (req,res) => {
+export const listarProduccion = async(req,res) => {
     try {
-        const { id } = req.params;
-        const {oferta} = req.body;
-        const [result] = await pool.query('update postulacion set oferta_pos = ? where pk_id_pos = ?',[oferta, id]);
-        if(result.affectedRows > 0) {
-            res.status(200).json({'status': 200, 'message': `La postualción (oferta) con ID ${id} fue actualizado correctamente.`});
-        }else{
-            res.status(404).json({'status': 404, message:`'No se encontro nimgúna postulación (oferta) con ese ID ${id}`});
+        let sql ='select * from produccion';
+        const [result] = await pool.query(sql);
+        if(result.length > 0) {
+            res.status(200).json(result);
         }
-    } catch (e) {
-        console.log('Error del sistema'+e);
-        res.status(500).json({'status': 500, message: 'Error del servidor al intentar editar la postulación (oferta).'+e});
+        else{
+            res.status(404).json({'status': 404,'message': 'No se a registrado ninguna producción en el sistema.'});
+        }
+    } catch (error) {
+        res.status(500).json({'status':500,'message':'Error: '+error});
     }
 }
 
-export const buscarOferta = async (req,res) => {
+export const actualizarProduccion = async (req,res) => {
     try {
         const { id } = req.params;
-        const [result] = await pool.query('select * from postulacion where pk_id_pos = ?',[id]);
+        const {cantidad} = req.body;
+        const [result] = await pool.query('update produccion set cantidad_pro = ? where pk_id_pro = ?',[cantidad, id]);
+        if(result.affectedRows > 0) {
+            res.status(200).json({'status': 200, 'message': `La producción con ID ${id} fue actualizado correctamente.`});
+        }else{
+            res.status(404).json({'status': 404, message:`No se encontro nimgúna producción con ese ID ${id}.`});
+        }
+    } catch (e) {
+        console.log('Error del sistema'+e);
+        res.status(500).json({'status': 500, message: 'Error: '+e});
+    }
+}
+
+export const buscarProduccion = async (req,res) => {
+    try {
+        const { id } = req.params;
+        const [result] = await pool.query('select * from producción where pk_id_pro = ?',[id]);
         if(result.length > 0) {
             res.status(200).json(result[0]);
         }else{
-            res.status(404).json({'status': 404, message:`No se encontro nimguna postulación(Oferta) con el ID ${id}`});
+            res.status(404).json({'status': 404, message:`No se encontro nimguna producción con el ID ${id}`});
         }
     } catch (e) {
         console.log('Error del sistema'+e);
@@ -47,32 +62,17 @@ export const buscarOferta = async (req,res) => {
     }
 }
 
-export const borrarOferta = async(req,res) => {
+export const borrarProduccion = async(req,res) => {
     try {
-        const idPos = req.params.id;
-        const [result] = await pool.query('delete from postulacion where pk_id_pos = ?',[idPos]);
+        const idPro = req.params.id;
+        const [result] = await pool.query('delete from produccion where pk_id_pro = ?',[idPro]);
 
         if(result.affectedRows>0) {
-            res.status(200).json({'status':200, 'message':'Se elimino la oferta con exito'});
+            res.status(200).json({'status':200, 'message':`Se elimino la producción del ID ${idPro}`});
         } else {
-            res.status(404).json({'status':404, 'message':'no se elimino la oferta'});
+            res.status(404).json({'status':404, 'message':`no se elimino la producción del ID ${idPro}`});
         }
     } catch (e) {
-        res.status(500).json({'status':500, 'message':'Error'+e});
-    }
-}
-
-export const listarOferta = async(req,res) => {
-    try {
-        let sql ='select * from postulacion';
-        const [result] = await pool.query(sql);
-        if(result.length > 0) {
-            res.status(200).json(result);
-        }
-        else{
-            res.status(404).json({'status': 404,'message': 'No se a registrado ninguna oferta en el sistema...!!!'});
-        }
-    } catch (error) {
-        res.status(500).json({'status':500,'message':'Error: '+error});
+        res.status(500).json({'status':500, 'message':'Error: '+e});
     }
 }
