@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registrarProduccion, actualizarProduccion, buscarProduccion, borrarProduccion, listarProduccion } from "../controllers/controller.oferta.js";
+import { registrarProduccion, actualizarProduccion, buscarProduccion, borrarProduccion, listarProduccion } from "../controllers/controller.produccion.js";
 const rutaProduccion = Router();
 
 rutaProduccion.post('/registrar',registrarProduccion);
