@@ -21,10 +21,10 @@ export const listar = async (req, res) =>{
 
    export const registrar = async (req, res) =>{
     try {
-        const {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user}=req.body
-        let sql = `insert into usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user) values (?,?,?,?,?,?,?)`
+        const {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user}=req.body
+        let sql = `insert into usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user) values (?,?,?,?,?,?,?,?)`
 
-        const [rows] = await pool.query(sql,[pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user])
+        const [rows] = await pool.query(sql,[pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user])
 
         if(rows.affectedRows > 0)
         {res.status(200).json({'status':200, 'mesage':'Felicidades, el registro fue un exito'})}
