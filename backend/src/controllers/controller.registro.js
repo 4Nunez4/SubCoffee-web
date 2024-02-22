@@ -40,11 +40,11 @@ export const listar = async (req, res) =>{
 
 export const actualizar = async (req, res) => {
     try {
-        const {id} = req.params
+        let {id} = req.params
 
         const {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user} = req.body
         
-        let sql=`UPDATE usuarios SET pk_cedula_user=IFNULL(?,pk_cedula_user), nombre_user=IFNULL(?,nombre_user),  email_user=IFNULL(?, email_user), password_user=IFNULL(?, password_user), descripcion_user=IFNULL(?,descripcion_user), telefono_user=IFNULL(?,telefono_user),  fecha_nacimiento_user=IFNULL(?, fecha_nacimiento_user), rol_user=IFNULL(?,rol_user) `
+        let sql=`UPDATE usuarios SET pk_cedula_user=IFNULL(?,pk_cedula_user), nombre_user=IFNULL(?,nombre_user),  email_user=IFNULL(?, email_user), password_user=IFNULL(?, password_user), descripcion_user=IFNULL(?,descripcion_user), telefono_user=IFNULL(?,telefono_user),  fecha_nacimiento_user=IFNULL(?, fecha_nacimiento_user), rol_user=IFNULL(?,rol_user)  WHERE pk_cedula_user =?`
 
         const [rows] = await pool.query(sql, [pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user, id])
 
