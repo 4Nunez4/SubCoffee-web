@@ -51,16 +51,16 @@ export const registrar = async (req, res) => {
 export const actualizar = async (req, res) => {
     try {
         const { id } = req.params;
-        const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion } = req.body;
+        const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub } = req.body;
 
-        if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !fk_id_postulacion) {
-            return res.status(400).json({
-                "mensaje": "Por favor, proporcione todos los campos necesarios."
-            });
-        }
+//        if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !fk_id_postulacion) {
+//           return res.status(400).json({
+//               "mensaje": "Por favor, proporcione todos los campos necesarios."
+//           });
+//       }
 
-        const [resultado] = await pool.query("update subasta set fecha_inicio_sub=?, fecha_fin_sub=?, precio_inicial_sub=?, precio_final_sub=?, estado_sub=?, fk_id_produccion=?, fk_id_postulacion=? where pk_id_sub=?",
-            [fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion, id]);
+        const [resultado] = await pool.query("update subasta set fecha_inicio_sub=COALESCE(?, fecha_inicio_sub), fecha_fin_sub=COALESCE(?, fecha_fin_sub), precio_inicial_sub=COALESCE(?, precio_inicial_sub), precio_final_sub=COALESCE(?, precio_final_sub), estado_sub=COALESCE(?, estado_sub) where pk_id_sub=?",
+            [fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, id]);
 
         if (resultado.affectedRows > 0) {
             res.status(200).json({
@@ -113,8 +113,7 @@ export const buscar = async (req, res) => {
 
 export const eliminar = async (req, res) => {
     try {
-        const { id } = req.params;
-
+        const id = req.params.id;
 
         const [resultado] = await pool.query("delete from subasta where pk_id_sub = ?", [id]);
 

@@ -5,8 +5,8 @@ const router = Router()
 
 router.get("/listar", listar)
 router.post("/registrar", registrar)
-router.put("/actualizar:id", actualizar)
-router.get("/buscar:id", buscar)
-router.delete("/eliminar:id", eliminar)
+router.put("/actualizar/:id", actualizar)
+router.get("/buscar/:id", buscar)
+router.delete("/eliminar/:id", eliminar)
 
 export default router

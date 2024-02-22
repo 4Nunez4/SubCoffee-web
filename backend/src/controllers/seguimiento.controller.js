@@ -24,11 +24,11 @@ export const registrar = async (req, res) => {
     try {
         const  { nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario } = req.body;
 
-        if (!nombre_seg.trim() || !fecha_seg.trim() || !fk_id_produccion || !fk_id_usuario) {
-            return res.status(400).json({
-                "mensaje": "Por favor, proporcione todos los campos necesarios."
-            });
-        }
+//        if (!nombre_seg.trim() || !fecha_seg.trim() || !fk_id_produccion || !fk_id_usuario) {
+//            return res.status(400).json({
+//                "mensaje": "Por favor, proporcione todos los campos necesarios."
+//            });
+//        }
 
         const [resultado] = await pool.query("insert into seguimiento (nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario) values (?, ?, ?, ?, ?)",
             [nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario]);
@@ -50,17 +50,17 @@ export const registrar = async (req, res) => {
 
 export const actualizar = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario } = req.body;
+        const id = req.params.id;
+        const { nombre_seg, fecha_seg, imagen_seg} = req.body;
 
-        if (!nombre_seg.trim() || !fecha_seg.trim() || !fk_id_produccion || !fk_id_usuario) {
-            return res.status(400).json({
-                "mensaje": "Por favor, proporcione todos los campos necesarios."
-            });
-        }
+//        if (!nombre_seg.trim() || !fecha_seg.trim() || !fk_id_produccion || !fk_id_usuario) {
+//            return res.status(400).json({
+//                "mensaje": "Por favor, proporcione todos los campos necesarios."
+//            });
+//        }
 
-        const [resultado] = await pool.query("update seguimiento set nombre_seg=?, fecha_seg=?, imagen_seg=?, fk_id_produccion=?, fk_id_usuario=? where pk_id_seg=?",
-            [nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario, id]);
+        const [resultado] = await pool.query("update seguimiento set nombre_seg=COALESCE(?, nombre_seg), fecha_seg=COALESCE(?, fecha_seg), imagen_seg=COALESCE(?, imagen_seg) where pk_id_seg=?",
+            [nombre_seg, fecha_seg, imagen_seg, id]);
 
         if (resultado.affectedRows > 0) {
             res.status(200).json({

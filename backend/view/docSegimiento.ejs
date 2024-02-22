@@ -15,18 +15,18 @@
     <table>
     <tr><td>Numero </td><td>1</td></tr>
     <tr><td>Nombre del Servicio </td><td>Registar seguimiento</td></tr>
-    <tr><td>URI</td><td>seguimiento/registar</td></tr>
+    <tr><td>URI</td><td>segimiento/registrar</td></tr>
     <tr><td>Descripcion:</td><td>Permite Agregar seguimiento, registrarlo en la base de datos    </td></tr>
     <tr><td>Verbo HTTP:</td><td>POST</td></tr>
     <tr><td>HEADER:</td><td>NULL</td></tr>
-    <tr><td>Usuarios:</td><td>Administrador</td></tr>
+    <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
     <tr><td>PETICION BODY</td><td>
-        {   
-            nombre_seg: 'Tercer Seguimiento',
-            fecha_seg: 2024-02-14, 
-            imagen_seg: '', 
-            fk_id_produccion: 1, 
-            fk_id_usuario: 1,
+        {
+            "nombre_seg": "Un seguimiento",
+            "fecha_seg": "2024-02-14",
+            "imagen_seg": "NULL",
+            "fk_id_produccion": 2,
+            "fk_id_usuario": 1084251889
         }
     </td></tr>
     <tr><td>RESPUESTA JSON</td><td>
@@ -58,11 +58,11 @@
 <table>
 <tr><td>Numero </td><td>2</td></tr>
 <tr><td>Nombre del Servicio </td><td>Listar seguimiento</td></tr>
-<tr><td>URI</td><td>/seguimiento/listar</td></tr>
+<tr><td>URI</td><td>/segimiento/listar</td></tr>
 <tr><td>Descripcion:</td><td>Permite listar los seguimientos registrados en la base de datos    </td></tr>
 <tr><td>Verbo HTTP:</td><td>GET</td></tr>
 <tr><td>HEADER:</td><td>NULL</td></tr>
-<tr><td>Usuarios:</td><td>Administrador</td></tr>
+<tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
 <tr><td>PETICION BODY</td><td>NULL</td></tr>
 <tr><td>RESPUESTA JSON</td><td>
     Correcto:
@@ -102,18 +102,16 @@
 <table>
 <tr><td>Numero </td><td>3</td></tr>
 <tr><td>Nombre del Servicio </td><td>Actualizar seguimiento</td></tr>
-<tr><td>URI</td><td>/seguimiento/actualizar:id</td></tr>
+<tr><td>URI</td><td>/segimiento/actualizar/:id</td></tr>
 <tr><td>Descripcion:</td><td>Permite actualizar los seguimientos con id proporcionado registrados en la base de datos    </td></tr>
 <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
 <tr><td>HEADER:</td><td>NULL</td></tr>
-<tr><td>Usuarios:</td><td>Administrador</td></tr>
+<tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
 <tr><td>PETICION BODY</td><td>
     {
-        nombre_seg: 'Tercer Seguimiento',
-        fecha_seg: 2024-02-20, 
-        imagen_seg: '', 
-        fk_id_produccion: 2, 
-        fk_id_usuario: 2,
+        "nombre_seg": "Tercer Seguimiento",
+        "fecha_seg": "2024-02-20", 
+        "imagen_seg": "NULL"
     }
 </td></tr>
 <tr><td>RESPUESTA JSON</td><td>
@@ -148,12 +146,12 @@
 <table>
 <tr><td>Numero </td><td>4</td></tr>
 <tr><td>Nombre del Servicio </td><td>Buscar segumiento</td></tr>
-<tr><td>URI</td><td>/seguimiento/buscar:id</td></tr>
+<tr><td>URI</td><td>/segimiento/buscar/:id</td></tr>
 <tr><td>Descripcion:</td><td>Permite buscar el segumiento con id proporcionado registrada en la base de datos    </td></tr>
 <tr><td>Verbo HTTP:</td><td>GET</td></tr>
 <tr><td>HEADER:</td><td>NULL</td></tr>
 <tr><td>Usuarios:</td><td>Administrador</td></tr>
-<tr><td>PETICION BODY</td><td>{'pk_id_seg': 3}</td></tr>
+<tr><td>PETICION BODY</td><td>NULL</td></tr>
 <tr><td>RESPUESTA JSON</td><td>
     Correcto:
     Status:200
@@ -186,12 +184,12 @@
 <table>
 <tr><td>Numero </td><td>5</td></tr>
 <tr><td>Nombre del Servicio </td><td>Eliminar seguimiento</td></tr>
-<tr><td>URI</td><td>/seguimiento/eliminar:id</td></tr>
+<tr><td>URI</td><td>/segimiento/eliminar/:id</td></tr>
 <tr><td>Descripcion:</td><td>Permite eliminar el seguimiento con id proporcionado registrados en la base de datos     </td></tr>
 <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
 <tr><td>HEADER:</td><td>NULL</td></tr>
 <tr><td>Usuarios:</td><td>Administrador</td></tr>
-<tr><td>PETICION BODY</td><td>{'pk_id_seg': 3}</td></tr>
+<tr><td>PETICION BODY</td><td>NULL</td></tr>
 <tr><td>RESPUESTA JSON</td><td>
     Correcto:
     Status:200
