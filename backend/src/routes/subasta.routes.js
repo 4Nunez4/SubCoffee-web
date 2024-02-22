@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { getSubastaId, listarSubastas, postSubasta, putSubasta, deleteSubasta } from "../controllers/subasta.controllers.js";
+import { listar, registrar, actualizar, buscar, eliminar } from "../controllers/subasta.controllers.js";
 
 const router = Router()
 
-router.get("/subastas/listar", listarSubastas)
-router.post("/subastas/agregar", postSubasta)
-router.put("/subastas/:id", putSubasta)
-router.get("/subastas/:id", getSubastaId)
-router.delete("/subastas/:id", deleteSubasta)
+router.get("/listar", listar)
+router.post("/registrar", registrar)
+router.put("/actualizar:id", actualizar)
+router.get("/buscar:id", buscar)
+router.delete("/eliminar:id", eliminar)
 
 export default router

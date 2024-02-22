@@ -11,30 +11,28 @@
     <h2>Requerimiento 4. Documentacion de Seguimiento</h2>
 
     <hr>
-    <h3>Agregar seguimiento</h3>
+    <h3>Registar seguimiento</h3>
     <table>
-    <tr><td>Numero </td><td>2</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Agregar seguimiento</td></tr>
-    <tr><td>URI</td><td>seguimiento/agregar</td></tr>
+    <tr><td>Numero </td><td>1</td></tr>
+    <tr><td>Nombre del Servicio </td><td>Registar seguimiento</td></tr>
+    <tr><td>URI</td><td>seguimiento/registar</td></tr>
     <tr><td>Descripcion:</td><td>Permite Agregar seguimiento, registrarlo en la base de datos    </td></tr>
     <tr><td>Verbo HTTP:</td><td>POST</td></tr>
     <tr><td>HEADER:</td><td>NULL</td></tr>
     <tr><td>Usuarios:</td><td>Administrador</td></tr>
     <tr><td>PETICION BODY</td><td>
         {   
-            pk_id_seg: 2,
-            certificacion_seg: 'sin certificacion', 
-            puntuacion_seg: '',
+            nombre_seg: 'Tercer Seguimiento',
             fecha_seg: 2024-02-14, 
             imagen_seg: '', 
-            fk_id_postulacion: 2, 
-            fk_id_usuario: 2,
+            fk_id_produccion: 1, 
+            fk_id_usuario: 1,
         }
     </td></tr>
     <tr><td>RESPUESTA JSON</td><td>
         Correcto:
         Status:200
-        "mensaje": "Su segumiento ha sido exitoso"
+        "mensaje": "Su seguimiento ha sido exitoso"
         Incorrecto:
         status(400)
         BODY:{
@@ -45,13 +43,20 @@
         body:{
                 "mensaje": "Error interno del servidor"
             }
-    </td></tr>
+    </td></tr><tr>
+        <td>DESARROLLADOR</td>
+        <td>James Alfaro Muñoz Bolaños</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjamb</td>
+      </tr>
     </table>
     
     <hr>
     <h3>Listar seguimiento</h3>
 <table>
-<tr><td>Numero </td><td>1</td></tr>
+<tr><td>Numero </td><td>2</td></tr>
 <tr><td>Nombre del Servicio </td><td>Listar seguimiento</td></tr>
 <tr><td>URI</td><td>/seguimiento/listar</td></tr>
 <tr><td>Descripcion:</td><td>Permite listar los seguimientos registrados en la base de datos    </td></tr>
@@ -64,12 +69,11 @@
     Status:200
     JSON:
     {   
-        pk_id_seg: 1,
-        certificacion_seg: 'certificado', 
-        puntuacion_seg: '',
+        pk_id_seg: 3,
+        nombre_seg: 'Tercer Seguimiento',
         fecha_seg: 2024-02-14, 
         imagen_seg: '', 
-        fk_id_postulacion: 1, 
+        fk_id_produccion: 1, 
         fk_id_usuario: 1,
     }
     Incorrecto:
@@ -83,7 +87,14 @@
     body:{
         "error en el sistema"
     }
-</td></tr>
+</td></tr><tr>
+    <td>DESARROLLADOR</td>
+    <td>James Alfaro Muñoz Bolaños</td>
+  </tr>
+  <tr>
+    <td>RAMA:</td>
+    <td>DEVjamb</td>
+  </tr>
 </table>
 
 <hr>
@@ -91,101 +102,121 @@
 <table>
 <tr><td>Numero </td><td>3</td></tr>
 <tr><td>Nombre del Servicio </td><td>Actualizar seguimiento</td></tr>
-<tr><td>URI</td><td>/seguimiento/:id</td></tr>
+<tr><td>URI</td><td>/seguimiento/actualizar:id</td></tr>
 <tr><td>Descripcion:</td><td>Permite actualizar los seguimientos con id proporcionado registrados en la base de datos    </td></tr>
 <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
 <tr><td>HEADER:</td><td>NULL</td></tr>
 <tr><td>Usuarios:</td><td>Administrador</td></tr>
 <tr><td>PETICION BODY</td><td>
-{
-    pk_id_sub: 2,
-    fecha_inicio_sub: '2024-02-10', 
-    fecha_fin_sub: '', 
-    precio_final_sub: 2000, 
-    estado_sub: 'abierta', 
-    fk_id_produccion: 2, 
-    fk_id_postulacion: 2,
-}</td></tr>
+    {
+        nombre_seg: 'Tercer Seguimiento',
+        fecha_seg: 2024-02-20, 
+        imagen_seg: '', 
+        fk_id_produccion: 2, 
+        fk_id_usuario: 2,
+    }
+</td></tr>
 <tr><td>RESPUESTA JSON</td><td>
     Correcto:
     Status:200
     body{
-        "mensaje": "La segumiento ha sido actualizado exitosamente"
+        "mensaje": "El seguimiento ha sido actualizado exitosamente"
     }
     Incorrecto:
     Status:404
     body:{
         status:500
-        "mensaje": "No se encontró ninguna segumiento con el id proporcionado"
+        "mensaje": "No se encontró ningun seguimiento con el id proporcionado"
     }
     Error:
     Status:505
     body:{
         "Error interno del servidor"
     }
-</td></tr>
+</td></tr><tr>
+    <td>DESARROLLADOR</td>
+    <td>James Alfaro Muñoz Bolaños</td>
+  </tr>
+  <tr>
+    <td>RAMA:</td>
+    <td>DEVjamb</td>
+  </tr>
 </table>
 
 <hr>
-<h3>Busca segumiento</h3>
+<h3>Buscar seguimiento</h3>
 <table>
 <tr><td>Numero </td><td>4</td></tr>
-<tr><td>Nombre del Servicio </td><td>Listar segumiento</td></tr>
-<tr><td>URI</td><td>/seguimiento/:id</td></tr>
-<tr><td>Descripcion:</td><td>Permite listar el segumiento con id proporcionado registrada en la base de datos    </td></tr>
+<tr><td>Nombre del Servicio </td><td>Buscar segumiento</td></tr>
+<tr><td>URI</td><td>/seguimiento/buscar:id</td></tr>
+<tr><td>Descripcion:</td><td>Permite buscar el segumiento con id proporcionado registrada en la base de datos    </td></tr>
 <tr><td>Verbo HTTP:</td><td>GET</td></tr>
 <tr><td>HEADER:</td><td>NULL</td></tr>
 <tr><td>Usuarios:</td><td>Administrador</td></tr>
-<tr><td>PETICION BODY</td><td>{'pk_id_seg': 2}</td></tr>
+<tr><td>PETICION BODY</td><td>{'pk_id_seg': 3}</td></tr>
 <tr><td>RESPUESTA JSON</td><td>
     Correcto:
     Status:200
     JSON:
-    "mensaje": "Datos de segumiento obtenidos correctamente",
+    "mensaje": "Datos de seguimiento obtenidos correctamente",
         "data": resultado[0]
     Incorrecto:
     Status:404
     body:{
         status:500
-        "mensaje": "No se encontró ninguna segumiento con el id consultado."
+        "mensaje": "No se encontró ningun seguimiento con el id consultado."
     }
     Error:
     Status:505
     body:{
         "Error interno del servidor"
     }
-</td></tr>
+</td></tr><tr>
+    <td>DESARROLLADOR</td>
+    <td>James Alfaro Muñoz Bolaños</td>
+  </tr>
+  <tr>
+    <td>RAMA:</td>
+    <td>DEVjamb</td>
+  </tr>
 </table>
 
 <hr>
-<h3>Eliminar segumiento</h3>
+<h3>Eliminar seguimiento</h3>
 <table>
 <tr><td>Numero </td><td>5</td></tr>
-<tr><td>Nombre del Servicio </td><td>Eliminar segumiento</td></tr>
-<tr><td>URI</td><td>/seguimiento/:id</td></tr>
-<tr><td>Descripcion:</td><td>Permite eliminar la seguimiento con id proporcionado registrados en la base de datos     </td></tr>
+<tr><td>Nombre del Servicio </td><td>Eliminar seguimiento</td></tr>
+<tr><td>URI</td><td>/seguimiento/eliminar:id</td></tr>
+<tr><td>Descripcion:</td><td>Permite eliminar el seguimiento con id proporcionado registrados en la base de datos     </td></tr>
 <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
 <tr><td>HEADER:</td><td>NULL</td></tr>
 <tr><td>Usuarios:</td><td>Administrador</td></tr>
-<tr><td>PETICION BODY</td><td>{'pk_id_seg': 2}</td></tr>
+<tr><td>PETICION BODY</td><td>{'pk_id_seg': 3}</td></tr>
 <tr><td>RESPUESTA JSON</td><td>
     Correcto:
     Status:200
     JSON:{
-    "mensaje": "segumiento eliminada exitosamente."
+    "mensaje": "segumiento eliminado exitosamente."
     }
     Incorrecto:
     Status:404
     body:{
         status:500
-        "mensaje": "No se encontró una segumiento con el id proporcionado."
+        "mensaje": "No se encontró un seguimiento con el id proporcionado."
     }
     Error:
     Status:505
     body:{
         "Error interno del servidor"
     }
-</td></tr>
+</td></tr><tr>
+    <td>DESARROLLADOR</td>
+    <td>James Alfaro Muñoz Bolaños</td>
+  </tr>
+  <tr>
+    <td>RAMA:</td>
+    <td>DEVjamb</td>
+  </tr>
 </table>
   
 </body>
