@@ -24,7 +24,7 @@
 
             <tr>
                 <td>URI</td>
-                <td>localhost/usuario/listar</td>
+                <td>/usuario/listar</td>
             </tr>
 
             <tr>
@@ -100,11 +100,12 @@
 
 
 
+
         <h3>REGISTRAR USUARIOS</h3>
         <table>
             <tr>
                 <td>NUMERO</td>
-                <td>1</td>
+                <td>2</td>
             </tr>
 
             <tr>
@@ -161,18 +162,7 @@
                     CORRECTO: 
                     STATUS:200 
                     MESSAGE: "Felicidades, el registro fue un exito"
-                    JSON 
-                    {
-                        "pk_cedula_user": 108000701,
-                        "nombre_user": "Pepito Perez",
-                        "email_user": "pepito123@gmail.com",
-                        "password_user": "123456789",
-                        "descripcion_user": "Soy amable y amigable ",
-                        "imagen_user": null,
-                        "telefono_user": "3101010101",
-                        "fecha_nacimiento_user": "2005-12-12",
-                        "rol_user": "admin"
-                    }
+    
 
                     INCORRECTO 
                     STATUS: 404 
@@ -200,95 +190,6 @@
                 <td>DEVvdl</td>
             </tr>
         </table>
-        <hr>
-        <h3>LISTAR USUARIOS</h3>
-            <table>
-                <tr>
-                    <td>NUMERO</td>
-                    <td>2</td>
-                </tr>
-    
-                <tr>
-                    <td>NOMBRE DEL ENDPOINT</td>
-                    <td>LISTAR USUARIOS</td>
-                </tr>
-    
-                <tr>
-                    <td>URI</td>
-                    <td>/usuario/listar</td>
-                </tr>
-    
-                <tr>
-                    <td>DESCRIPCION</td>
-                    <td>Permite listar a los usuarios que se encuentran registrados en la base de datos</td>
-                </tr>
-    
-                <tr>
-                    <td>VERBO HTTP</td>
-                    <td>GET</td>
-                </tr>
-    
-                <tr>
-                    <td>HEADER</td>
-                    <td>NULL</td>
-                </tr>
-    
-                <tr>
-                    <td>USUARIOS</td>
-                    <td>ADMINISTRADOR</td>
-                </tr>
-    
-                <tr>
-                    <td>PETICION BODY</td>
-                    <td>NULL</td>
-                </tr>
-    
-                <tr>
-                    <td>RESPUESTA JSON</td>
-                    <td>
-                        
-                        CORRECTA:
-                        STATUS:200 
-                        JSON
-                        {
-                            "pk_cedula_user": 10,
-                            "nombre_user": "Valentina",
-                            "email_user": "value@gmail.com",
-                            "password_user": "mikysus",
-                            "descripcion_user": "Hola soy vendedor",
-                            "imagen_user": null,
-                            "telefono_user": "33903033",
-                            "fecha_nacimiento_user": "1899-11-03"
-                        }
-    
-                        INCORRECTO: 
-                        STATUS: 404 
-                        BODY :{
-                            STATUS: 404
-                            MESSAGE: "Error, No hay registros de usuario"
-                        } 
-    
-                        ERROR: 
-                        STATUS: 500 
-                        BODY : JSON{
-                            STATUS:500,
-                            MESSAGE: "ERROR EN EL SERVIDOR"
-                        } 
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>DESARROLADOR</td>
-                    <td>VALENTINA DIAZ LERMA</td>
-                </tr>
-    
-                <tr>
-                    <td>RAMA</td>
-                    <td>DEVvdl</td>
-                </tr>
-            </table>
-    
-    
  
 
 
@@ -348,13 +249,6 @@
                     CORRECTO: 
                     STATUS:200 
                     MESSAGE: "Felicidades, La actualizacion del usuario fue un exito"
-                    JSON 
-                    {
-                        "nombre_user": "Pepito",
-                        "telefono_user":"3207383",
-                        "email_user": "pepito@hotmail.com",
-                        "password_user": "7382b"
-                    }
 
                     INCORRECTO 
                     STATUS: 404 
