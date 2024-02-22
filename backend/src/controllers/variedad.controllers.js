@@ -29,7 +29,7 @@ export const guardarVariedad= async (req, res) => {
                 res.status(404).json({status:404, message: "Error al crear la variedad"});
             }
         }catch(e){
-                res.status(500).json({status:500, message:"Error Sistema: No se pudo crear la variedad" + e})
+                res.status(500).json({status:500, message:"Error Sistema: No se pudo crear la variedad" + e});
         }
 }
 

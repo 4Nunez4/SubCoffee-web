@@ -53,10 +53,10 @@
            <td>Rama:</td><td>DEVlkvm</td>
        </tr>
     </table>
-    <hr>
+    
     <h3>Listar Postulaciones</h3>
     <table>
-        <tr><td>Numero </td><td>2</td></tr>
+        <tr><td>Numero </td><td>3</td></tr>
         <tr><td>Nombre del Servicio </td><td>Listar Postulaciones</td></tr>
         <tr><td>URI</td><td>/postulacion/postulacion</td></tr>
         <tr><td>Descripcion:</td><td>Permite listar todas las postulaciones creadas</td></tr>
@@ -71,9 +71,7 @@
             {
                 
                    "pk_id_pos": 2,
-                    "fecha_pos": "2024-02-07T05:00:00.000Z",
-                    "estado_pos": "rechazada",
-                    "monto_inicial_pos": 43543534,
+                    "fecha_pos": "2024-02-07T05:00:00.000Z", 
                     "oferta_pos": 3243,
                     "fk_id_usuario": 1079534437
                 
@@ -126,13 +124,13 @@
             Incorrecto:
             Status:404
             body:{
-                status:505
+                status:404
                 message:" "El ID proporcionado es incorrecto"
             }
             Error:
             Status:505
             body:{
-                "Error al actualizar la Postulacion"
+                "Error al actualizar la Postulacion" + Error
             }
         </td></tr>
         <tr>
