@@ -40,23 +40,16 @@ export const listar = async (req, res) =>{
 
 export const actualizar = async (req, res) => {
     try {
-        let {id} = req.params
-
-        const {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user} = req.body
-        
-        let sql=`UPDATE usuarios SET pk_cedula_user=IFNULL(?,pk_cedula_user), nombre_user=IFNULL(?,nombre_user),  email_user=IFNULL(?, email_user), password_user=IFNULL(?, password_user), descripcion_user=IFNULL(?,descripcion_user), telefono_user=IFNULL(?,telefono_user),  fecha_nacimiento_user=IFNULL(?, fecha_nacimiento_user), rol_user=IFNULL(?,rol_user)  WHERE pk_cedula_user =?`
-
-        const [rows] = await pool.query(sql, [pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user, id])
-
-        if(rows.affectedRows > 0)
-            res.status(200).json({'status': 200, 'message': 'Felicidades, La actualizacion del usuario fue un exito'})
-
-        else
-        res.status(404).json({'status': 404, 'message': 'Error, La actualizacion fue denegada'})
-    } 
-    catch (error) 
-    {
-        res.status(500).json({'status': 500, 'message': 'ERROR SERVIDOR' + error})
+        const id = req.params.id;
+        const {nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user} = req.body;
+        const [result] = await pool.query( 'update usuarios set nombre_user = COALESCE(?,nombre_user), email_user = COALESCE(?, email_user), password_user = COALESCE(?, password_user), descripcion_user = COALESCE(?,descripcion_user), telefono_user = COALESCE(?, telefono_user), fecha_nacimiento_user = COALESCE(?, fecha_nacimiento_user), rol_user = COALESCE(?, rol_user) where pk_cedula_user = ?', [nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user,id]);
+        if(result.affectedRows>0){
+           res.status(200).json({status: 200, message: 'Felicidades, La actualizacion del usuario fue un exito'}) 
+        }else{
+           res.status(404).json({status: 404, message: 'Error, La actualizacion fue denegada'}) 
+        }
+    } catch (error){
+        res.status(500).json({status: 500, message: 'ERROR SERVIDOR' + error})
     }
 }
 
@@ -64,16 +57,11 @@ export const actualizar = async (req, res) => {
 
 export const buscar = async (req, res) =>{
     try {
-        let pk_cedula_user = req.params.pk_cedula_user
-        let sql = `select * from usuarios where pk_cedula_user = ${pk_cedula_user}`
-        const [result] = await pool.query(sql)
-        
-        if(result.length > 0)
-        {
+        const [result] = await pool.query(`select * from usuarios where pk_cedula_user = ?`,[req.params.id])
+        if(result.length>0){
             return res.status(200).json(result)
         }
-        else
-        {
+        else{
             return res.status(404).send({'mesage': 'Error, No se encuentra ningun registro de usuario'})
         }
     } catch (error) {
@@ -85,10 +73,8 @@ export const buscar = async (req, res) =>{
 
 export const eliminar = async (req,res)=>{
     try {
-        let pk_cedula_user = req.params.pk_cedula_user
-        let sql= `delete from usuarios where pk_cedula_user = ${pk_cedula_user}`
-        const [rows] = await pool.query(sql)
-        
+   
+        const [rows] = await pool.query(`delete from usuarios where pk_cedula_user = ?`,[req.params.id])
         if(rows.affectedRows > 0)
         res.status(200).json({'status': 200, 'message': 'Se elimino el usuario exitasamente'})
 
