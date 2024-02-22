@@ -1,4 +1,3 @@
-import { query } from "express";
 import { pool } from "../databases/conexion.js";
 
 export const registrarProduccion = async(req,res) => {
@@ -35,7 +34,7 @@ export const actualizarProduccion = async (req,res) => {
     try {
         const { id } = req.params;
         const {cantidad} = req.body;
-        const [result] = await pool.query('update produccion set cantidad_pro = ? where pk_id_pro = ?',[cantidad, id]);
+        const [result] = await pool.query('update produccion set cantidad_pro = COALESCE(?, cantidad_pro) where pk_id_pro = ?',[cantidad, id]);
         if(result.affectedRows > 0) {
             res.status(200).json({'status': 200, 'message': `La producción con ID ${id} fue actualizado correctamente.`});
         }else{
@@ -50,7 +49,7 @@ export const actualizarProduccion = async (req,res) => {
 export const buscarProduccion = async (req,res) => {
     try {
         const { id } = req.params;
-        const [result] = await pool.query('select * from producción where pk_id_pro = ?',[id]);
+        const [result] = await pool.query('select * from produccion where pk_id_pro = ?',[id]);
         if(result.length > 0) {
             res.status(200).json(result[0]);
         }else{
