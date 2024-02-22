@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import ejs from "ejs";
-import rutaOferta from "./src/routes/router.oferta.js";
+import rutaProduccion from "./src/routes/router.produccion.js";
 import router from "./src/routes/routes.registro.js";
 import routerDocument from "./src/routes/notificaciones.routes.js";
 import routerChat from "./src/routes/chat.routes.js";
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/finca",FincaRouter);
 app.use("/subasta",rutasSubastas);
 app.use("/segimiento",rutasSeguimiento);
-app.use("/subcoffee", rutaOferta);
+app.use("/produccion", rutaProduccion);
 app.use("/usuario", router);
 app.use("/user", routerChat);
 app.use("/user", routerDocument);
