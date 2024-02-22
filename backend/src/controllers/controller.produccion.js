@@ -50,11 +50,11 @@ export const actualizarProduccion = async (req,res) => {
 export const buscarProduccion = async (req,res) => {
     try {
         const { id } = req.params;
-        const [result] = await pool.query('select * from producción where pk_id_pro = ?',[id]);
+        const [result] = await pool.query('select * from produccion where pk_id_pro = ?',[id]);
         if(result.length > 0) {
             res.status(200).json(result[0]);
         }else{
-            res.status(404).json({'status': 404, message:`No se encontro nimguna producción con el ID ${id}`});
+            res.status(404).json({'status': 404, message:`No se encontró ninguna producción con el ID ${id}`});
         }
     } catch (e) {
         console.log('Error del sistema'+e);
