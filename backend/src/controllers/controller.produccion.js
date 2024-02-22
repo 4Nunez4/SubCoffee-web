@@ -1,4 +1,3 @@
-import { query } from "express";
 import { pool } from "../databases/conexion.js";
 
 export const registrarProduccion = async(req,res) => {
@@ -50,7 +49,7 @@ export const actualizarProduccion = async (req,res) => {
 export const buscarProduccion = async (req,res) => {
     try {
         const { id } = req.params;
-        const [result] = await pool.query('select * from producción where pk_id_pro = ?',[id]);
+        const [result] = await pool.query('select * from produccion where pk_id_pro = ?',[id]);
         if(result.length > 0) {
             res.status(200).json(result[0]);
         }else{

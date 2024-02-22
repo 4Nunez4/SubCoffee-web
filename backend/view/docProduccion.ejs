@@ -41,7 +41,9 @@
         </tr>
         <tr>
             <td>PETICIÓN BODY</td>
-            <td>{"cantidad_pro": 10, "fk_id_variedad": 1, "fk_id_finca": 2}</td>
+            <td>
+                {"cantidad_pro": 10, "fk_id_variedad": 1, "fk_id_finca": 2}
+            </td>
         </tr>
         <tr>
             <td>REPUESTA JSON</td>
@@ -64,9 +66,18 @@
                 }
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+          </tr>
+          <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+          </tr>
     </table>
     <hr>
-    <h3>Listar Oferta.</h3>
+
+    <h3>Listar Ofertas.</h3>
     <table>
         <tr>
             <td>NÚMERO</td>
@@ -94,11 +105,11 @@
         </tr>
         <tr>
             <td>USUARIOS</td>
-            <td>Administrador</td>
+            <td>ADMINISTRADOR, USUARIO</td>
         </tr>
         <tr>
             <td>PETICIÓN Body</td>
-            <td>{"pk_id_pro": 4, "cantidad_pro": 10, "fk_id_variedad": 1, "fk_id_finca": 2}</td>
+            <td>NULL</td>
         </tr>
         <tr>
             <td>REPUESTA JSON</td>
@@ -125,8 +136,17 @@
               }
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+          </tr>
+          <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+          </tr>
     </table>
     <hr>
+
     <h3>Actualizar Producción.</h3>
     <table>
         <tr>
@@ -159,7 +179,11 @@
         </tr>
         <tr>
             <td>PETICIÓN json</td>
-            <td>{"pk_id_pro": 4, "cantidad_pro": 12, "fk_id_variedad": 1, "fk_id_finca": 2}</td>
+            <td>
+                {
+                    "cantidad": 100000
+                }
+            </td>
         </tr>
         <tr>
             <td>REPUESTA JSON</td>
@@ -182,8 +206,17 @@
                 }
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+          </tr>
+          <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+          </tr>
     </table>
     <hr>
+
     <h3>Buscar Producción.</h3>
     <table>
         <tr>
@@ -216,7 +249,7 @@
         </tr>
         <tr>
             <td>PETICIÓN json</td>
-            <td>{"pk_id_pro": 4, "cantidad_pro": 12, fk_id_variedad": 1, "fk_id_finca": 2}</td>
+            <td>NULL</td>
         </tr>
         <tr>
             <td>REPUESTA JSON</td>
@@ -241,8 +274,17 @@
                 }
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+          </tr>
+          <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+          </tr>
     </table>
     <hr>
+
     <h3>Borrar Producción.</h3>
     <table>
         <tr>
@@ -284,7 +326,7 @@
                 Status: 200
                 {
                   "status": 200,
-                  "message": "Se elimino la producción del ID 4"
+                  "message": "Se elimino la producción del ID 2"
                 }
                 Incorrecto:
                 Status:{
@@ -298,7 +340,14 @@
                 }
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+          </tr>
+          <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+          </tr>
     </table>
-
 </body>
 </html>
