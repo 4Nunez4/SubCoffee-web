@@ -7,8 +7,9 @@
 </head>
 <body>
     <hr>
-    <h2>Requerimiento 5. Documentacion de Postulacion</h2>
+    <h2>Requerimiento. Documentacion de Postulacion</h2>
     <hr>
+
     <h3>Crear Postulacion</h3>
     <table>
         <tr><td>Numero </td><td>1</td></tr>
@@ -17,13 +18,12 @@
         <tr><td>Descripcion:</td><td>Permite guardar una nueva postulacion en la base de datos</td></tr>
         <tr><td>Verbo HTTP:</td><td>POST</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador</td></tr>
-        <tr><td>PETICION BODY</td><td>{
-            "fecha_pos": "2024-02-17",
-            "oferta_pos": 6000,
-            "fk_id_usuario": 1079534439
-          }
-          
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td>
+            {
+                "oferta_pos": 6000,
+                "fk_id_usuario": 1084251889
+            }
           </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
@@ -56,27 +56,24 @@
     
     <h3>Listar Postulaciones</h3>
     <table>
-        <tr><td>Numero </td><td>3</td></tr>
+        <tr><td>Numero </td><td>2</td></tr>
         <tr><td>Nombre del Servicio </td><td>Listar Postulaciones</td></tr>
         <tr><td>URI</td><td>/postulacion/postulacion</td></tr>
         <tr><td>Descripcion:</td><td>Permite listar todas las postulaciones creadas</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Usuario, Administrador</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td>NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
             JSON:
             {
-                
-                   "pk_id_pos": 2,
-                    "fecha_pos": "2024-02-07T05:00:00.000Z", 
-                    "oferta_pos": 3243,
-                    "fk_id_usuario": 1079534437
-                
+                "pk_id_pos": 3,
+                "fecha_pos": "2024-02-22T03:42:11.000Z",
+                "oferta_pos": 6000,
+                "fk_id_usuario": 1084251889
             }
-            
             Incorrecto:
             Status:404
             body:{
@@ -99,22 +96,20 @@
     </table>
     
     <hr>
-    <h3>Actulizar Postulacion</h3>
+    <h3>Actualizar Postulacion</h3>
     <table>
-
         <tr><td>Numero </td><td>3</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Actulizar Postulacion </td></tr>
+        <tr><td>Nombre del Servicio </td><td>Actualizar Postulacion </td></tr>
         <tr><td>URI</td><td>/postulacion/postulacion/:id</td></tr>
         <tr><td>Descripcion:</td><td>Permite actualizar datos de la postulacion por el id de la postulacion</td></tr>
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
-        <tr><td>PETICION BODY</td><td>    {
-
-            "oferta_pos": 6000
-      
-          
-    }</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td>    
+        {
+            "oferta_pos":100000
+        }
+        </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
@@ -150,23 +145,21 @@
         <tr><td>Descripcion:</td><td>Permite listar las postulaciones hechas por un usuario en especifico </td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
-        <tr><td>PETICION BODY</td><td>  NULL </td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td>NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
             JSON:
             {
                 status(200)
-                body{	
-                    "pk_id_pos": 2,
-                    "fecha_pos": "2024-02-07T05:00:00.000Z",
-                    "estado_pos": "rechazada",
-                    "monto_inicial_pos": 43543534,
-                    "oferta_pos": 3243,
-                    "fk_id_usuario": 1079534437
-                }}
-            
+                body{
+                    "pk_id_pos": 3,
+                    "fecha_pos": "2024-02-22T03:42:11.000Z",
+                    "oferta_pos": 100000,
+                    "fk_id_usuario": 1084251889
+                }
+            }
             Incorrecto:
             Status:404
             body:{
@@ -186,8 +179,8 @@
            <td>Rama:</td><td>DEVlkvm</td>
        </tr>
     </table>
-
     <hr>
+    
     <h3>Eliminar Postulacion</h3>
     <table>
         <tr><td>Numero </td><td>5</td></tr>
@@ -196,16 +189,14 @@
         <tr><td>Descripcion:</td><td>Permite eliminar una postulacion a traves de su ID </td></tr>
         <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td>NULL </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             JSON:
             {
              Status:200
-             message: 'Postulacion eliminada exitosamente'   
-                  
-                  
+             message: 'Postulacion eliminada exitosamente'  
             }
             Incorrecto:
             Status:404
@@ -226,7 +217,5 @@
            <td>Rama:</td><td>DEVlkvm</td>
        </tr>
     </table>
-
-
 </body>
 </html>
