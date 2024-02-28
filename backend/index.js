@@ -9,6 +9,7 @@ import rutasSubastas from "./src/routes/subasta.routes.js";
 import rutasSeguimiento from "./src/routes/seguimiento.routes.js";
 import postulacionRoutes from "./src/routes/postulacion.routes.js";
 import variedadesRoute from "./src/routes/variedades.routes.js";
+import FincaRouter from "./src/routes/finca.routes.js";
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-
+app.use("/finca",FincaRouter);
 app.use("/subasta",rutasSubastas);
 app.use("/segimiento",rutasSeguimiento);
 app.use("/produccion", rutaProduccion);

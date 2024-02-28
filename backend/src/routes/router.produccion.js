@@ -1,11 +1,12 @@
 import { Router } from "express";
-import { registrarProduccion, actualizarProduccion, buscarProduccion, borrarProduccion, listarProduccion } from "../controllers/controller.produccion.js";
+import { registrarProduccion, listarProduccion, actualizarProduccion, buscarProduccion, desactivarProduccion } from "../controllers/controller.produccion.js";
+import { valiActualizacionProduccion, valiRegistroProduccion } from "../validations/validation.produccion.js";
 const rutaProduccion = Router();
 
-rutaProduccion.post('/registrar',registrarProduccion);
+rutaProduccion.post('/registrar',valiRegistroProduccion,registrarProduccion);
 rutaProduccion.get('/listar',listarProduccion);
-rutaProduccion.put('/actualizar/:id',actualizarProduccion);
+rutaProduccion.put('/actualizar/:id',valiActualizacionProduccion,actualizarProduccion);
 rutaProduccion.get('/buscar/:id',buscarProduccion);
-rutaProduccion.delete('/borrar/:id',borrarProduccion);
+rutaProduccion.put('/desactivar/:id',desactivarProduccion);
 
 export default rutaProduccion;

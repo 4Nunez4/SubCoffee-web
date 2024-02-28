@@ -7,32 +7,30 @@
 </head>
 <body>
     <hr>
-    <h2>Requerimiento 6. Documentacion de Variedades</h2>
+    <h2>Requerimiento. Documentacion de Variedades</h2>
     <hr>
-    <h3>Guardar Variedad </h3>
+    <h3>Crear Variedad</h3>
     <table>
-
-        <tr><td>Numero </td><td>2</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Guardar Variedad </td></tr>
-        <tr><td>URI</td><td>/variedad/variedad></tr>
-        <tr><td>Descripcion:</td><td>Permite guardar variedades en la base de datos</td></tr>
+        <tr><td>Numero </td><td>1</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Crear Variedad </td></tr>
+        <tr><td>URI</td><td>/variedad/variedad</tr>
+        <tr><td>Descripcion:</td><td>Permite crear variedades en la base de datos</td></tr>
         <tr><td>Verbo HTTP:</td><td>POST</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
-        <tr><td>PETICION BODY</td><td> {
-
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td> 
+        {
             "tipo_vari": "Tipica",
-            "descripcion_vari": "cafe de la mejor calidad",
-            "puntuacion_vari": 17
-        }</td></tr>
+            "descripcion_vari": "cafe de la mejor calidad del Huila",
+            "puntuacion_vari": 90
+        }
+    </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
             JSON:
             {
-                
-                  message:"Variedad creada con exito"
-                
+              message:"Variedad creada con exito"
             }
             Incorrecto:
             Status:404
@@ -56,26 +54,24 @@
     <hr>
     <h3>Listar Variedades</h3>
     <table>
-        <tr><td>Numero </td><td>1</td></tr>
+        <tr><td>Numero </td><td>2</td></tr>
         <tr><td>Nombre del Servicio </td><td>Listar Variedad </td></tr>
-        <tr><td>URI</td><td>/variedad/variedad></tr>
+        <tr><td>URI</td><td>/variedad/variedad</tr>
         <tr><td>Descripcion:</td><td>Permite listar todas las variedades</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
         <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
-        <tr><td>PETICION BODY</td><td>  NULL </td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
             JSON:
             {
-                
-                    "pk_id_vari": 1,
-                    "tipo_vari": "Borbon",
-                    "descripcion_vari": "cafe de la mejor calidad",
-                    "imagen_vari": null,
-                    "puntuacion_vari": 12
-                
+                "pk_id_vari": 1,
+                "tipo_vari": "Tipica",
+                "descripcion_vari": "Este tipo de café tiene un sabor más amargo y un aroma picante",
+                "imagen_vari": null,
+                "puntuacion_vari": 9
             }
             Incorrecto:
             Status:404
@@ -96,25 +92,23 @@
        </tr>
     </table>
    
-
-   
     <hr>
     <h3>Actualizar Variedad</h3>
     <table>
-
         <tr><td>Numero </td><td>3</td></tr>
         <tr><td>Nombre del Servicio </td><td>Actualizar Variedad </td></tr>
         <tr><td>URI</td><td>/variedad/variedad/:id</tr>
         <tr><td>Descripcion:</td><td>Permite actualizar variedades en la base de datos por medio de su id       </td></tr>
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
-        <tr><td>PETICION BODY</td><td> {
-
-            "tipo_vari": "Tipica",
-            "descripcion_vari": "cafe de la mejor calidaddsd",
-            "puntuacion_vari": 17
-        }</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td> 
+            {
+                "tipo_vari": "Borbon",
+                "descripcion_vari": "cafe de la mejor calidad",
+                "puntuacion_vari": 92
+            }
+    </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
@@ -146,14 +140,13 @@
     <hr>
     <h3>Buscar Variedad</h3>
     <table>
-
         <tr><td>Numero </td><td>4</td></tr>
         <tr><td>Nombre del Servicio </td><td>Buscar Variedad a traves de su id</td></tr>
         <tr><td>URI</td><td>/variedad/variedad/:id</tr>
         <tr><td>Descripcion:</td><td>Permite buscar variedades en la base de datos por medio de su ID</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td> NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
@@ -164,10 +157,10 @@
                 "data": [
                     {
                         "pk_id_vari": 2,
-                        "tipo_vari": "Tipica",
+                        "tipo_vari": "Borbon",
                         "descripcion_vari": "cafe de la mejor calidad",
                         "imagen_vari": null,
-                        "puntuacion_vari": 17
+                        "puntuacion_vari": 92
                     }
                 ]
             }
@@ -193,23 +186,20 @@
     <hr>
     <h3>Eliminar Variedad</h3>
     <table>
-
         <tr><td>Numero </td><td>5</td></tr>
         <tr><td>Nombre del Servicio </td><td>Eliminar Variedad</td></tr>
         <tr><td>URI</td><td>/variedad/variedad/:id</tr>
         <tr><td>Descripcion:</td><td>Permite eliminar variedades en la base de datos por medio de su id</td></tr>
         <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td> NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
             JSON:
             {
-              
-                    "message": "Variedad eliminada exitosamente"
-                
+                "message": "Variedad eliminada exitosamente"    
             }
             Incorrecto:
             Status:404

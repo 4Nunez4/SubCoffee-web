@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Requerimiento de la API</title>
 </head>
 <body>
     <hr>
     <h2>Requerimiento 2. Documentacion de Producción</h2>
     <hr>
-    <h3>Registrar Producción.</h3>
+    <h3>Registrar Producción.</h3> 
     <table>
         <tr>
             <td>NÚMERO</td>
@@ -17,15 +17,15 @@
         </tr>
         <tr>
             <td>NOMBRE DE SERVICIO</td>
-            <td>Registrar produción.</td>
+            <td>Registrar producción.</td>
         </tr>
         <tr>
             <td>URL</td>
             <td>/produccion/registrar</td>
         </tr>
-        <tr>
+        <tr> 
             <td>DESCRIPCIÓN</td>
-            <td>Permite registrar las ofertas en la base de datos.</td>
+            <td>Permite registrar las Producción en la base de datos.</td>
         </tr>
         <tr>
             <td>VERBO HTTP</td>
@@ -41,7 +41,9 @@
         </tr>
         <tr>
             <td>PETICIÓN BODY</td>
-            <td>{"cantidad_pro": 10, "fk_id_variedad": 1, "fk_id_finca": 2}</td>
+            <td>
+                {"cantidad_pro": 10, "fk_id_variedad": 1, "fk_id_finca": 2, "estado_pro": "activo"}
+            </td>
         </tr>
         <tr>
             <td>REPUESTA JSON</td>
@@ -62,10 +64,33 @@
                 body:{
                   status:500,message:"Error: "+e
                 }
+                Error de validación:
+                status: 400,
+                "errors": [
+                  {
+                    "type": "field",
+                    "value": "",
+                    "msg": "estado invalido",
+                    "path": "estado_pro",
+                    "location": "body"
+                  }
+                ]
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+          </tr>
+          <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+          </tr>
     </table>
     <hr>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ec9275297a8dfabbf2a1479d215ac914ec2f529b
     <h3>Listar Producción.</h3>
     <table>
         <tr>
@@ -82,7 +107,7 @@
         </tr>
         <tr>
             <td>DESCRIPCIÓN</td>
-            <td>Permite listar las ofertas registradas en la base de datos.</td>
+            <td>Permite listar las Producciones registradas en la base de datos.</td>
         </tr>
         <tr>
             <td>VERBO HTTP</td>
@@ -94,11 +119,11 @@
         </tr>
         <tr>
             <td>USUARIOS</td>
-            <td>Administrador</td>
+            <td>ADMINISTRADOR, USUARIO</td>
         </tr>
         <tr>
             <td>PETICIÓN Body</td>
-            <td>{"pk_id_pro": 4, "cantidad_pro": 10, "fk_id_variedad": 1, "fk_id_finca": 2}</td>
+            <td>NULL</td>
         </tr>
         <tr>
             <td>REPUESTA JSON</td>
@@ -106,11 +131,12 @@
                 Correcto:
                 Status: 200
                 [
-                  {
-                    "pk_id_pro": 4,
-                    "cantidad_pro": 10,
+                {
+                    "pk_id_pro": 5,
+                    "cantidad_pro": 300000,
                     "fk_id_variedad": 1,
-                    "fk_id_finca": 2
+                    "fk_id_finca": 2,
+                    "estado_pro": "activo"
                   }
                 ]
               Incorrecto:
@@ -125,8 +151,17 @@
               }
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+          </tr>
+          <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+          </tr>
     </table>
     <hr>
+
     <h3>Actualizar Producción.</h3>
     <table>
         <tr>
@@ -139,11 +174,11 @@
         </tr>
         <tr>
             <td>URL</td>
-            <td>produccion/actualizar/4</td>
+            <td>produccion/actualizar/5</td>
         </tr>
         <tr>
             <td>DESCRIPCIÓN</td>
-            <td>Permite actualizar las ofertas registradas en la base de datos.</td>
+            <td>Permite actualizar las Producciones registradas en la base de datos.</td>
         </tr>
         <tr>
             <td>VERBO HTTP</td>
@@ -159,7 +194,11 @@
         </tr>
         <tr>
             <td>PETICIÓN json</td>
-            <td>{"pk_id_pro": 4, "cantidad_pro": 12, "fk_id_variedad": 1, "fk_id_finca": 2}</td>
+            <td>
+                {
+                    "cantidad": 100000
+                }
+            </td>
         </tr>
         <tr>
             <td>REPUESTA JSON</td>
@@ -168,22 +207,42 @@
                 Status: 200
                 {
                   "status": 200,
-                  "message": "La producción con ID 4 fue actualizado correctamente."
+                  "message": "La producción con ID 5 fue actualizado correctamente."
                 }
                 Incorrecto:
                 Status:{
                   status: 404,
-                  message: "No se encontro nimgúna producción con ese ID 4."
+                  message: "No se encontro nimgúna producción con ese ID 5."
                 }
                 Error: 
                 status: 500,
                 body:{
                   status:500,message:"Error: "+e
                 }
+                Error de validación:
+                status: 400,
+                "errors": [
+                  {
+                    "type": "field",
+                    "value": "",
+                    "msg": "Ingrese la cantidad de la produccion.",
+                    "path": "cantidad_pro",
+                    "location": "body"
+                  }
+                ]
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+          </tr>
+          <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+          </tr>
     </table>
     <hr>
+
     <h3>Buscar Producción.</h3>
     <table>
         <tr>
@@ -196,11 +255,11 @@
         </tr>
         <tr>
             <td>URL</td>
-            <td>/produccion/buscar/4</td>
+            <td>/produccion/buscar/5</td>
         </tr>
         <tr>
             <td>DESCRIPCIÓN</td>
-            <td>Permite buscar una oferta registrada en la base de datos.</td>
+            <td>Permite buscar una Producción registrada en la base de datos.</td>
         </tr>
         <tr>
             <td>VERBO HTTP</td>
@@ -216,7 +275,7 @@
         </tr>
         <tr>
             <td>PETICIÓN json</td>
-            <td>{"pk_id_pro": 4, "cantidad_pro": 12, fk_id_variedad": 1, "fk_id_finca": 2}</td>
+            <td>NULL</td>
         </tr>
         <tr>
             <td>REPUESTA JSON</td>
@@ -224,10 +283,11 @@
                 Correcto:
                 Status: 200
                 {
-                  "pk_id_pro": 4,
-                  "cantidad_pro": 12,
+                  "pk_id_pro": 5,
+                  "cantidad_pro": 600000,
                   "fk_id_variedad": 1,
-                  "fk_id_finca": 2
+                  "fk_id_finca": 2,
+                  "estado_pro": "activo"
                 }
                 Incorrecto:
                 Status:{
@@ -241,9 +301,18 @@
                 }
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+          </tr>
+          <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+          </tr>
     </table>
     <hr>
-    <h3>Borrar Producción.</h3>
+
+    <h3>Desactivar Producción.</h3>
     <table>
         <tr>
             <td>NÚMERO</td>
@@ -251,19 +320,19 @@
         </tr>
         <tr>
             <td>NOMBRE DE SERVICIO</td>
-            <td>Borrar producción.</td>
+            <td>Desactivar producción.</td>
         </tr>
         <tr>
             <td>URL</td>
-            <td>/produccion/borrar/4</td>
+            <td>/produccion/borrar/5</td>
         </tr>
         <tr>
             <td>DESCRIPCIÓN</td>
-            <td>Permite borrar una oferta registrada en la base de datos.</td>
+            <td>Permite desactivar una Producción registrada en la base de datos.</td>
         </tr>
         <tr>
             <td>VERBO HTTP</td>
-            <td>DELETE</td>
+            <td>PUT</td>
         </tr>
         <tr>
             <td>HEADER</td>
@@ -284,12 +353,12 @@
                 Status: 200
                 {
                   "status": 200,
-                  "message": "Se elimino la producción del ID 4"
+                  "message": "Se elimino la producción del ID 5"
                 }
                 Incorrecto:
                 Status:{
                   status: 404,
-                  message: "no se elimino la producción del ID 4"
+                  message: "no se elimino la producción del ID 5"
                 }
                 Error: 
                 status: 500,
@@ -298,7 +367,14 @@
                 }
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+          </tr>
+          <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+          </tr>
     </table>
-
 </body>
 </html>

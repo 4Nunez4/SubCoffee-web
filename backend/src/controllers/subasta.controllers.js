@@ -1,6 +1,6 @@
 import { pool } from "../databases/conexion.js";
 
-export const listarSubastas = async(req, res) => {
+export const listar = async(req, res) => {
     try {
         const [ resultado ] = await pool.query("select * from subasta")
 
@@ -13,55 +13,54 @@ export const listarSubastas = async(req, res) => {
         }
 
     } catch (error) {
+        console.error("Error en el bloque try:", error);
         res.status(500).json({
-            "mensaje": ("error en el sistema")
-        })
+            "mensaje": "Error interno del servidor"
+        });
     }
 }
 
-export const postSubasta = async (req, res) => {
+export const registrar = async (req, res) => {
     try {
-        const  { fecha_inicio_sub, fecha_fin_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion } = req.body;
+        const  { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion } = req.body;        ;
 
-        if (!fecha_inicio_sub || !fecha_fin_sub || !precio_final_sub || !estado_sub || !fk_id_produccion || !fk_id_postulacion) {
+        if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !fk_id_postulacion) {
             return res.status(400).json({
                 "mensaje": "Por favor, proporcione todos los campos necesarios."
             });
         }
+        
 
-        const [resultado] = await pool.query("insert into subasta (fecha_inicio_sub, fecha_fin_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion) values (?, ?, ?, ?, ?, ?)",
-            [fecha_inicio_sub, fecha_fin_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion]);
+        const [resultado] = await pool.query("insert into subasta (fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion) values (?, ?, ?, ?, ?, ?, ?)",
+            [fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion]);
 
         if (resultado.affectedRows > 0) {
             res.status(200).json({
                 "mensaje": "Su subasta ha sido exitosa"
             });
-        } else {
-            res.status(404).json({
-                "mensaje": "No se encontraron subastas :c"
-            });
-        }
+        } 
 
     } catch (error) {
+        console.error("Error en el bloque try:", error);
         res.status(500).json({
             "mensaje": "Error interno del servidor"
-        })
+        });
     }
 }
 
-export const putSubasta = async (req, res) => {
+export const actualizar = async (req, res) => {
     try {
         const { id } = req.params;
-        const { fecha_inicio_sub, fecha_fin_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion } = req.body;
+        const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub } = req.body;
 
-        if (!fecha_inicio_sub || !fecha_fin_sub || !precio_final_sub || !estado_sub || !fk_id_produccion || !fk_id_postulacion) {
-            return res.status(400).json({
-                "mensaje": "Por favor, proporcione todos los campos necesarios."
-            });
-        }
+//        if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !fk_id_postulacion) {
+//           return res.status(400).json({
+//               "mensaje": "Por favor, proporcione todos los campos necesarios."
+//           });
+//       }
 
-        const [resultado] = await pool.query("update subasta set fecha_inicio_sub=?, fecha_fin_sub=?, precio_final_sub=?, estado_sub=?, fk_id_produccion=?, fk_id_postulacion=? where id=?",
-            [fecha_inicio_sub, fecha_fin_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion, id]);
+        const [resultado] = await pool.query("update subasta set fecha_inicio_sub=COALESCE(?, fecha_inicio_sub), fecha_fin_sub=COALESCE(?, fecha_fin_sub), precio_inicial_sub=COALESCE(?, precio_inicial_sub), precio_final_sub=COALESCE(?, precio_final_sub), estado_sub=COALESCE(?, estado_sub) where pk_id_sub=?",
+            [fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, id]);
 
         if (resultado.affectedRows > 0) {
             res.status(200).json({
@@ -74,13 +73,14 @@ export const putSubasta = async (req, res) => {
         }
 
     } catch (error) {
+        console.error("Error en el bloque try:", error);
         res.status(500).json({
             "mensaje": "Error interno del servidor"
         });
     }
 }
 
-export const getSubastaId = async (req, res) => {
+export const buscar = async (req, res) => {
     try {
         const subastaId = req.params.id;
 
@@ -104,21 +104,16 @@ export const getSubastaId = async (req, res) => {
         }
 
     } catch (error) {
+        console.error("Error en el bloque try:", error);
         res.status(500).json({
-            "mensaje": error.message || "Error interno del servidor"
+            "mensaje": "Error interno del servidor"
         });
     }
 }
 
-export const deleteSubasta = async (req, res) => {
+export const eliminar = async (req, res) => {
     try {
-        const { id } = req.params;
-
-        if (!id) {
-            return res.status(400).json({
-                "mensaje": "Por favor, proporcione un id válido."
-            });
-        }
+        const id = req.params.id;
 
         const [resultado] = await pool.query("delete from subasta where pk_id_sub = ?", [id]);
 
@@ -133,8 +128,9 @@ export const deleteSubasta = async (req, res) => {
         }
 
     } catch (error) {
+        console.error("Error en el bloque try:", error);
         res.status(500).json({
-            "mensaje": error.message || "Error interno del servidor"
+            "mensaje": "Error interno del servidor"
         });
     }
 };
