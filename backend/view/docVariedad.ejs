@@ -12,7 +12,7 @@
     <h3>Guardar Variedad </h3>
     <table>
 
-        <tr><td>Numero </td><td>2</td></tr>
+        <tr><td>Numero </td><td>1</td></tr>
         <tr><td>Nombre del Servicio </td><td>Guardar Variedad </td></tr>
         <tr><td>URI</td><td>/variedad/variedad></tr>
         <tr><td>Descripcion:</td><td>Permite guardar variedades en la base de datos</td></tr>
@@ -23,7 +23,8 @@
 
             "tipo_vari": "Tipica",
             "descripcion_vari": "cafe de la mejor calidad",
-            "puntuacion_vari": 17
+            "puntuacion_vari": 17,
+            "estado_vari": "activo"
         }</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
@@ -56,7 +57,7 @@
     <hr>
     <h3>Listar Variedades</h3>
     <table>
-        <tr><td>Numero </td><td>1</td></tr>
+        <tr><td>Numero </td><td>2</td></tr>
         <tr><td>Nombre del Servicio </td><td>Listar Variedad </td></tr>
         <tr><td>URI</td><td>/variedad/variedad></tr>
         <tr><td>Descripcion:</td><td>Permite listar todas las variedades</td></tr>
@@ -74,7 +75,8 @@
                     "tipo_vari": "Borbon",
                     "descripcion_vari": "cafe de la mejor calidad",
                     "imagen_vari": null,
-                    "puntuacion_vari": 12
+                    "puntuacion_vari": 12,
+                    "estado_vari": "activo"
                 
             }
             Incorrecto:
@@ -113,7 +115,8 @@
 
             "tipo_vari": "Tipica",
             "descripcion_vari": "cafe de la mejor calidaddsd",
-            "puntuacion_vari": 17
+            "puntuacion_vari": 17,
+            "estado_vari":"activo"
         }</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
@@ -167,7 +170,8 @@
                         "tipo_vari": "Tipica",
                         "descripcion_vari": "cafe de la mejor calidad",
                         "imagen_vari": null,
-                        "puntuacion_vari": 17
+                        "puntuacion_vari": 17,
+                        "estado_vari":"activo"
                     }
                 ]
             }
@@ -220,6 +224,51 @@
             Status:500
             body:{
                 message: 'Error en el sistema' + '+err
+            }
+           <tr>
+                 <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+            </tr>
+            <tr>
+                <td>Rama:</td><td>DEVlkvm</td>
+            </tr>
+            
+        </td></tr>
+    </table>
+
+
+
+
+    
+    <hr>
+    <h3>Desactivar Variedad</h3>
+    <table>
+
+        <tr><td>Numero </td><td>6</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Desactivar Variedad</td></tr>
+        <tr><td>URI</td><td>/variedad/desactivar/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite desactivar variedades en la base de datos por medio de su id</td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+              
+                    "message": "La variedad fue desactivada exitosamente"
+                
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: 'El id de la variedad es incorrecto' 
+            }
+            Error:
+            Status:500
+            body:{
+                message: 'Error al desactivar la variedad'
             }
            <tr>
                  <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>

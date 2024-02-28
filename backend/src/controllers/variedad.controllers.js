@@ -98,7 +98,7 @@ export const buscarvariedad = async (req,res) =>{
         const { estado_vari } = req.body;
         const [variedaExiste] = await pool.query("UPDATE variedad SET estado_vari = ? WHERE pk_id_vari = ?", [estado_vari, id]);
         if(variedaExiste.length === 0) {
-            res.status(404).json({ status: 404, message: 'La variedad no fue desactivada exitosamente' });
+            res.status(404).json({ status: 404, message: 'El id de la variedad es incorrecto'});
         }else {
            const [result] = await pool.query("UPDATE variedad SET estado_vari = ? WHERE pk_id_vari = ?", ['inactivo', id]);
            if(result.affectedRows >0)
