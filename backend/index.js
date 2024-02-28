@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/finca",FincaRouter);
 app.use("/subasta",rutasSubastas);
-app.use("/segimiento",rutasSeguimiento);
+app.use("/seguimiento",rutasSeguimiento);
 app.use("/produccion", rutaProduccion);
 app.use("/usuario", router);
 app.use("/user", routerChat);

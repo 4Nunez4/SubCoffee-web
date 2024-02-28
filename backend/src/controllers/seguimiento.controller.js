@@ -1,4 +1,5 @@
 import { pool } from "../databases/conexion.js";
+import { validationResult } from "express-validator";
 
 export const listar = async(req, res) => {
     try {
@@ -22,7 +23,12 @@ export const listar = async(req, res) => {
 
 export const registrar = async (req, res) => {
     try {
-        const  { nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario } = req.body;
+        const errors = validationResult(req);
+       
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        const  { nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario, estado_seg } = req.body;
 
 //        if (!nombre_seg.trim() || !fecha_seg.trim() || !fk_id_produccion || !fk_id_usuario) {
 //            return res.status(400).json({
@@ -30,8 +36,8 @@ export const registrar = async (req, res) => {
 //            });
 //        }
 
-        const [resultado] = await pool.query("insert into seguimiento (nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario) values (?, ?, ?, ?, ?)",
-            [nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario]);
+    const [resultado] = await pool.query("insert into seguimiento (nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario, estado_seg) values (?, ?, ?, ?, ?, ?)",
+            [nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario, estado_seg]);
 
         if (resultado.affectedRows > 0) {
             res.status(200).json({
@@ -50,8 +56,13 @@ export const registrar = async (req, res) => {
 
 export const actualizar = async (req, res) => {
     try {
+        const errors = validationResult(req);
+       
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         const id = req.params.id;
-        const { nombre_seg, fecha_seg, imagen_seg} = req.body;
+        const { nombre_seg, fecha_seg, imagen_seg, estado_seg} = req.body;
 
 //        if (!nombre_seg.trim() || !fecha_seg.trim() || !fk_id_produccion || !fk_id_usuario) {
 //            return res.status(400).json({
@@ -59,8 +70,8 @@ export const actualizar = async (req, res) => {
 //            });
 //        }
 
-        const [resultado] = await pool.query("update seguimiento set nombre_seg=COALESCE(?, nombre_seg), fecha_seg=COALESCE(?, fecha_seg), imagen_seg=COALESCE(?, imagen_seg) where pk_id_seg=?",
-            [nombre_seg, fecha_seg, imagen_seg, id]);
+        const [resultado] = await pool.query("update seguimiento set nombre_seg=COALESCE(?, nombre_seg), fecha_seg=COALESCE(?, fecha_seg), imagen_seg=COALESCE(?, imagen_seg), estado_seg=COALESCE(?, estado_seg) where pk_id_seg=?",
+            [nombre_seg, fecha_seg, imagen_seg, estado_seg, id]);
 
         if (resultado.affectedRows > 0) {
             res.status(200).json({
