@@ -1,9 +1,15 @@
+import { validationResult } from "express-validator";
 import { pool } from "../databases/conexion.js";
 
 export const registrarProduccion = async(req,res) => {
-    const {cantidad_pro,fk_id_variedad,fk_id_finca} = req.body;
     try {
-        const [rows]=await pool.query(`insert into produccion(cantidad_pro,fk_id_variedad,fk_id_finca) values (?,?,?)`, [cantidad_pro,fk_id_variedad,fk_id_finca]);
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            return res.status(400).json(errors);
+        }
+
+        const {cantidad_pro,fk_id_variedad,fk_id_finca,estado_pro} = req.body;
+        const [rows]=await pool.query(`insert into produccion(cantidad_pro,fk_id_variedad,fk_id_finca,estado_pro) values (?,?,?,?)`, [cantidad_pro,fk_id_variedad,fk_id_finca,estado_pro]);
         if (rows.affectedRows) {
             res.status(200).json({'status':200,'message':'Se registro con exito la producción.'});
         }else{
@@ -31,6 +37,11 @@ export const listarProduccion = async(req,res) => {
 
 export const actualizarProduccion = async (req,res) => {
     try {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            return res.status(400).json(errors);
+        }
+        
         const { id } = req.params;
         const {cantidad} = req.body;
         const [result] = await pool.query('update produccion set cantidad_pro = COALESCE(?, cantidad_pro) where pk_id_pro = ?',[cantidad, id]);
@@ -52,7 +63,7 @@ export const buscarProduccion = async (req,res) => {
         if(result.length > 0) {
             res.status(200).json(result[0]);
         }else{
-            res.status(404).json({'status': 404, message:`No se encontro nimguna producción con el ID ${id}`});
+            res.status(404).json({'status': 404, message:`No se encontró ninguna producción con el ID ${id}`});
         }
     } catch (e) {
         console.log('Error del sistema'+e);
@@ -60,15 +71,20 @@ export const buscarProduccion = async (req,res) => {
     }
 }
 
-export const borrarProduccion = async(req,res) => {
+export const desactivarProduccion = async(req,res) => {
     try {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            return res.status(400).json(errors);
+        }
+        
         const idPro = req.params.id;
-        const [result] = await pool.query('delete from produccion where pk_id_pro = ?',[idPro]);
+        const [result] = await pool.query('update produccion set estado_pro = 2 where pk_id_pro = ?',[idPro]);
 
         if(result.affectedRows>0) {
-            res.status(200).json({'status':200, 'message':`Se elimino la producción del ID ${idPro}`});
+            res.status(200).json({'status':200, 'message':`Se desactivo la producción del ID ${idPro}`});
         } else {
-            res.status(404).json({'status':404, 'message':`no se elimino la producción del ID ${idPro}`});
+            res.status(404).json({'status':404, 'message':`no se encontro la producción del ID ${idPro}`});
         }
     } catch (e) {
         res.status(500).json({'status':500, 'message':'Error: '+e});
