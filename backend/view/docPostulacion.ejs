@@ -18,12 +18,14 @@
         <tr><td>Descripcion:</td><td>Permite guardar una nueva postulacion en la base de datos</td></tr>
         <tr><td>Verbo HTTP:</td><td>POST</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
-        <tr><td>PETICION BODY</td><td>
-            {
-                "oferta_pos": 6000,
-                "fk_id_usuario": 1084251889
-            }
+        <tr><td>Usuarios:</td><td>Administrador</td></tr>
+        <tr><td>PETICION BODY</td><td>{
+            "fecha_pos": "2024-02-17",
+            "oferta_pos": 6000,
+            "fk_id_usuario": 1079534439,
+            "estado_pos":"activo"
+          }
+          
           </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
@@ -69,10 +71,13 @@
             Status:200
             JSON:
             {
-                "pk_id_pos": 3,
-                "fecha_pos": "2024-02-22T03:42:11.000Z",
-                "oferta_pos": 6000,
-                "fk_id_usuario": 1084251889
+                
+                   "pk_id_pos": 2,
+                    "fecha_pos": "2024-02-07T05:00:00.000Z", 
+                    "oferta_pos": 3243,
+                    "fk_id_usuario": 1079534437,
+                    "estado_pos": "activo"
+                
             }
             Incorrecto:
             Status:404
@@ -104,12 +109,14 @@
         <tr><td>Descripcion:</td><td>Permite actualizar datos de la postulacion por el id de la postulacion</td></tr>
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
         <tr><td>HEADER:</td><td>NULL</td></tr>
-        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
-        <tr><td>PETICION BODY</td><td>    
-        {
-            "oferta_pos":100000
-        }
-        </td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td>    {
+
+            "oferta_pos": 6000,
+            "estado_pos": "activo"
+      
+          
+    }</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
@@ -153,13 +160,16 @@
             JSON:
             {
                 status(200)
-                body{
-                    "pk_id_pos": 3,
-                    "fecha_pos": "2024-02-22T03:42:11.000Z",
-                    "oferta_pos": 100000,
-                    "fk_id_usuario": 1084251889
-                }
-            }
+                body{	
+                    "pk_id_pos": 2,
+                    "fecha_pos": "2024-02-07T05:00:00.000Z",
+                    "estado_pos": "rechazada",
+                    "monto_inicial_pos": 43543534,
+                    "oferta_pos": 3243,
+                    "fk_id_usuario": 1079534437,
+                    "estado_pos": "activo"
+                }}
+            
             Incorrecto:
             Status:404
             body:{
@@ -217,5 +227,48 @@
            <td>Rama:</td><td>DEVlkvm</td>
        </tr>
     </table>
+
+
+    <hr>
+    <h3>Desactivar Postulacion</h3>
+    <table>
+        <tr><td>Numero </td><td>6</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Desactivar Postulacion </td></tr>
+        <tr><td>URI</td><td>/postulacion/desactivar/:id</td></tr>
+        <tr><td>Descripcion:</td><td>Permite desactivar una postulacion a traves de su ID </td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
+        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td>NULL </td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            JSON:
+            {
+             Status:200
+             message: 'Postulacion desactivada exitosamente'   
+                  
+                  
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                status:404
+                message: 'El id de la postulacion es incorrecto'
+            }
+            Error:
+            Status:505
+            body:{
+                'Error en el sistema'
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
+    </table>
+
+
 </body>
 </html>

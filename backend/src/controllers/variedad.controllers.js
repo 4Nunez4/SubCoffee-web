@@ -1,4 +1,6 @@
 import {pool} from '../databases/conexion.js';
+import { validationResult } from 'express-validator';
+
 
 export const listarVariedad = async (req,res) =>{
     try {
@@ -17,9 +19,14 @@ export const listarVariedad = async (req,res) =>{
 };
 
 export const guardarVariedad= async (req, res) => {
-        const {tipo_vari, descripcion_vari, puntuacion_vari} = req.body;
         try{
-            const [rows] = await pool.query("INSERT INTO variedad(tipo_vari, descripcion_vari, puntuacion_vari) VALUES (?,?,?)", [tipo_vari, descripcion_vari, puntuacion_vari  ]);
+            const error = validationResult(req);
+            if(!error.isEmpty()){
+                return res.status(400).json(error)
+            }
+    
+            const {tipo_vari, descripcion_vari, puntuacion_vari, estado_vari} = req.body;
+            const [rows] = await pool.query("INSERT INTO variedad(tipo_vari, descripcion_vari, puntuacion_vari,estado_vari) VALUES (?,?,?,?)", [tipo_vari, descripcion_vari, puntuacion_vari ,estado_vari ]);
             if(rows.affectedRows){
                 res.status(200).json({status:500, message:"Variedad creada con exito"});
             }else{
@@ -32,9 +39,13 @@ export const guardarVariedad= async (req, res) => {
 
 export const actualizarVariedad = async (req, res) => {
     try {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json(errors)
+        }
         const id = req.params.id;
-        const { tipo_vari, descripcion_vari, puntuacion_vari } = req.body;
-        const [result] = await pool.query("UPDATE variedad SET tipo_vari = COALESCE(?, tipo_vari), descripcion_vari = COALESCE(?, descripcion_vari), puntuacion_vari = ? WHERE pk_id_vari = ?", [tipo_vari, descripcion_vari, puntuacion_vari, id]);
+        const { tipo_vari, descripcion_vari, puntuacion_vari, estado_vari } = req.body;
+        const [result] = await pool.query("UPDATE variedad SET tipo_vari = ?, descripcion_vari = ?, puntuacion_vari = ?, estado_vari = ? WHERE pk_id_vari - ?", [tipo_vari, descripcion_vari, puntuacion_vari,estado_vari, id]);
         if(result.affectedRows > 0) {
             res.status(200).json({ status: 200, message: 'La variedad ha sido actualizada exitosamente' });
         }else {
@@ -71,3 +82,24 @@ export const buscarvariedad = async (req,res) =>{
         res.status(500).json({status: 500, message: 'Error en el Sistema', error });
     }
   };
+
+  export const desactivarVariedad = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json(errors)
+        }
+        const id = req.params.id;
+        const { estado_vari } = req.body;
+        const [variedaExiste] = await pool.query("UPDATE variedad SET estado_vari = ? WHERE pk_id_vari = ?", [estado_vari, id]);
+        if(variedaExiste.length === 0) {
+            res.status(404).json({ status: 404, message: 'El id de la variedad es incorrecto'});
+        }else {
+           const [result] = await pool.query("UPDATE variedad SET estado_vari = ? WHERE pk_id_vari = ?", ['inactivo', id]);
+           if(result.affectedRows >0)
+           res.status(200).json({status: 200, message: "La variedad fue desactivada exitosamente"})
+        }
+    } catch (error) {
+        res.status(500).json({ status: 500, message: 'Error al desactivar la variedad', error});
+    }
+}
