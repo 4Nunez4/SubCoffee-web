@@ -1,11 +1,10 @@
 import { pool } from "../databases/conexion.js";
 
 export const registrarProduccion = async(req,res) => {
+    const {cantidad_pro,fk_id_variedad,fk_id_finca} = req.body;
     try {
-        const {cantidad,variedad,finca} = req.body;
-        let sql = `insert into produccion(cantidad_pro,fk_id_variedad,fk_id_finca) values (?,?,?)`;
-        const [rows] = await pool.query(sql,[cantidad,variedad,finca]);
-        if (rows.affectedRows>0) {
+        const [rows]=await pool.query(`insert into produccion(cantidad_pro,fk_id_variedad,fk_id_finca) values (?,?,?)`, [cantidad_pro,fk_id_variedad,fk_id_finca]);
+        if (rows.affectedRows) {
             res.status(200).json({'status':200,'message':'Se registro con exito la producción.'});
         }else{
             res.status(403).json({'status':403,'message':'No se registro la producción.'});
