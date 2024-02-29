@@ -1,4 +1,5 @@
 import { pool } from "../databases/conexion.js"
+import { validationResult } from "express-validator"
 
 //listarUsuariosTodos
 export const listar = async (req, res) =>{
@@ -22,6 +23,12 @@ export const listar = async (req, res) =>{
 
    export const registrar = async (req, res) =>{
     try {
+    
+        const errors = validationResult(req)
+        if(!errors.isEmpty()){
+            return res.status(400).json(errors)
+        }
+
         const {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user}=req.body
 
         let sql = `insert into usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user) values (?,?,?,?,?,?,?,?)`
@@ -44,6 +51,12 @@ export const listar = async (req, res) =>{
 
 export const actualizar = async (req, res) => {
     try {
+ 
+        const errors = validationResult(req)
+        if(!errors.isEmpty()){
+            return res.status(400).json(errors)
+        }
+
         const id = req.params.id;
 
         const {nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user} = req.body;
@@ -96,4 +109,22 @@ export const eliminar = async (req,res)=>{
         res.status(500).json({'status': 500, 'message': 'ERROR SERVIDOR' + error})
     }
 
+}
+
+//desactivar
+export const desactivar = async (req, res)=>{
+    try {
+    
+        const {id} = req.params
+    
+        const [rows] = await pool.query('UPDATE usuarios SET estado_user=2 WHERE pk_cedula_user = ?',[id])
+    
+        if(rows.affectedRows > 0)
+        res.status(200).json({'status':200, 'message':'Se desativo el usuario exitosamente'})
+    
+        else
+        res.status(404).json({'status':404, 'message':'Error, no se pudo desactivar el usuario'})
+    } catch (error) {
+        res.status(500).json({'status':500, 'message':'ERROR SERVIDOR', error})
+    }
 }

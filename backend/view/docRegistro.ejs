@@ -446,6 +446,82 @@
         </table>
 
 
+        <h3>DESACTIVAR USUARIOS</h3>
+        <table>
+            <tr>
+                <td>NUMERO</td>
+                <td>6</td>
+            </tr>
+
+            <tr>
+                <td>NOMBRE DEL ENDPOINT</td>
+                <td>DESACTIVAR USUARIOS</td>
+            </tr>
+
+            <tr>
+                <td>URI</td>
+                <td>/usuario/desactivar/108000700</td>
+            </tr>
+
+            <tr>
+                <td>DESCRIPCION</td>
+                <td>Permite desactivar usuarios</td>
+            </tr>
+
+            <tr>
+                <td>VERBO</td>
+                <td>PUT</td>
+            </tr>
+
+            <tr>
+                <td>HEADER</td>
+                <td>NULL</td>
+            </tr>
+
+            <tr>
+                <td>USUARIOS</td>
+                <td>ADMINISTRADOR</td>
+            </tr>
+
+            <tr>
+                <td>PETICION</td>
+                <td>NULL</td>
+            </tr>
+
+            <tr>
+                <td>RESPUESTA JSON</td>
+                <td>
+                    
+                    CORRECTO: 
+                    STATUS:200 
+                    MESSAGE: 'Se desactivo el usuario exitasamente' 
+
+                    INCORRECTO 
+                    STATUS: 404 
+                    BODY :{
+                        STATUS: 404
+                        MESSAGE: 'Error, no se desactivo usuario'
+                    }
+
+                    ERROR: 
+                    STATUS: 500 
+                    BODY : JSON{
+                        STATUS:500,
+                        MESSAGE: "ERROR EN EL SERVIDOR"
+                    }
+                </td>
+            </tr>
+
+            <tr>
+                <td>DESARROLADOR</td>
+                <td>VALENTINA DIAZ LERMA</td>
+            </tr>
+
+            <tr>
+                <td>RAMA</td>
+                <td>DEVvdl</td>
+            </tr>
+        </table>
 
 </body>
 </html>
