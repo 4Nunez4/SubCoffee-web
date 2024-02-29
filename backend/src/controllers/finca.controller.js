@@ -1,8 +1,13 @@
 import { pool } from "../databases/conexion.js";
+import { validationResult } from "express-validator";
 
 export const registrar = async (req,res)=>{
-    const {nombre_fin,ubicacion_fin,imagen_fin,descripcion_fin,municipio_fin,departamento_fin,fk_id_usuario}=req.body;
-    try{
+    try {
+        let errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json(errors);
+        }
+        const {nombre_fin,ubicacion_fin,imagen_fin,descripcion_fin,municipio_fin,departamento_fin,fk_id_usuario}=req.body;
         const [rows]=await pool.query(`INSERT INTO finca(nombre_fin, ubicacion_fin, imagen_fin, descripcion_fin, municipio_fin,departamento_fin, fk_id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)`, [nombre_fin,ubicacion_fin,imagen_fin,descripcion_fin,municipio_fin,departamento_fin,fk_id_usuario]);
         if(rows.affectedRows){
             res.status(200).json({status:500, message:"Finca registrada con exito"});
@@ -30,7 +35,11 @@ export const listar = async(req,res)=>{
 }
 //actualizar un registro de la tabla finca por su id 
 export const actualizar =async(req,res) =>{
-    try{
+    try {
+        let errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json(errors);
+        }
         const id = req.params.id;
         const {nombre_fin,ubicacion_fin,imagen_fin,descripcion_fin,municipio_fin,departamento_fin} = req.body;
         const [result]  = await pool.query('update finca set nombre_fin = COALESCE(?,nombre_fin), ubicacion_fin = COALESCE(?,ubicacion_fin), imagen_fin = COALESCE(?,imagen_fin), descripcion_fin = COALESCE(?,descripcion_fin), municipio_fin = COALESCE(?,municipio_fin),departamento_fin = COALESCE(?,departamento_fin) where pk_id_fin = ?',[nombre_fin,ubicacion_fin,imagen_fin,descripcion_fin,municipio_fin,departamento_fin,id]);
