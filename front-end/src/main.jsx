@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import SubCoffee from './SubCoffee'
+import SubCoffee from './pages/SubCoffee'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
