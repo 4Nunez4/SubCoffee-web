@@ -1,6 +1,6 @@
 function Dashboard() {
     return ( 
-        <h2>Hello word</h2>
+         <h2>Hello word</h2>
      );
 }
 
