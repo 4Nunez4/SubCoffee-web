@@ -2,9 +2,10 @@ import { Router } from "express";
 import { actualizar, buscar, desactivar, eliminar, listar, registrar } from "../controllers/controller.registro.js";
 import { validarUsuarioActualizacion, validarUsuarioRegister } from "../validations/registro.validacion.js";
 
+import { validartoken } from "../controllers/autenticacionController.js";
 const router = Router()
 
-router.get("/listar", listar)
+router.get("/listar",validartoken, listar)
 router.post("/registrar", validarUsuarioRegister, registrar)
 router.put("/actualizar/:id", validarUsuarioActualizacion, actualizar)
 router.get("/buscar/:id", buscar)

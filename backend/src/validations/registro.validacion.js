@@ -15,7 +15,7 @@ export const validarUsuarioRegister= [
 
     check('fecha_nacimiento_user', 'Formato de fecha incorrecta').exists().isISO8601(),
 
-    check('rol_user', 'El rol del usuario es obligatorio, ingrese los roles que son permitidos (vendedor, comprador, admin)').isEmpty().custom((value)=>
+    check('rol_user', 'El rol del usuario es obligatorio, ingrese los roles que son permitidos (vendedor, comprador, admin)').not().isEmpty().custom((value)=>
     {
         const rol = ['vendedor','comprador','admin']
         if(!rol.includes(value)){
