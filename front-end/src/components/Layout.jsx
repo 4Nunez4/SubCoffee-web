@@ -6,7 +6,7 @@ function Layout({ children }) {
   const [isAuthenticated] = useState(true);
   return (
     <>
-      {isAuthenticated ? (
+      an{isAuthenticated ? (
         <div className="flex flex-auto h-auto">
           <Sidebar />
           <div className="grow">
