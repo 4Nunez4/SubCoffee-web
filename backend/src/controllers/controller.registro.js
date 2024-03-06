@@ -128,3 +128,20 @@ export const desactivar = async (req, res)=>{
         res.status(500).json({'status':500, 'message':'ERROR SERVIDOR', error})
     }
 }
+
+//Activar
+export const activar = async (req, res)=>{
+    try {
+        const {id} = req.params
+    
+        const [rows] = await pool.query('UPDATE usuarios SET estado_user=1 WHERE pk_cedula_user = ?',[id])
+    
+        if(rows.affectedRows > 0)
+        res.status(200).json({'status':200, 'message':'Se activo el usuario exitosamente'})
+    
+        else
+        res.status(404).json({'status':404, 'message':'Error, no se pudo activar el usuario'})
+    } catch (error) {
+        res.status(500).json({'status':500, 'message':'ERROR SERVIDOR', error})
+    }
+}

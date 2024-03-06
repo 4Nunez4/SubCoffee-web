@@ -13,16 +13,8 @@ export const validarUsuarioRegister= [
 
     check('telefono_user','total de caracteres maximo 12').isLength({max:12}),
 
-    check('fecha_nacimiento_user', 'Formato de fecha incorrecta').exists().isISO8601(),
+    check('rol_user','El rol del usuario es obligatorio, ingrese los roles que son permitidos (vendedor,comprador,admin)').not().isEmpty()
 
-    check('rol_user', 'El rol del usuario es obligatorio, ingrese los roles que son permitidos (vendedor, comprador, admin)').not().isEmpty().custom((value)=>
-    {
-        const rol = ['vendedor','comprador','admin']
-        if(!rol.includes(value)){
-            throw new Error("Error, ingrese los roles permitidos")
-        }   
-        return true
-    })
 ]
 
 export const validarUsuarioActualizacion=[
@@ -36,12 +28,6 @@ export const validarUsuarioActualizacion=[
 
     check('telefono_user','total de caracteres maximo 12').isLength({max:12}),
 
-    check('fecha_nacimiento_user', 'Formato de fecha incorrecta').exists().isISO8601(),
-
-    check('rol_user', 'El rol del usuario es obligatorio, ingrese los roles que son permitidos (vendedor, comprador, admin)').isEmpty().custom((value)=>{
-        const rol = ['vendedor','comprador','admin']
-        if(!rol.includes(value)){
-            throw new Error("Error, ingrese los roles permitidos")
-        }   return true
-    }),
+    check('rol_user','El rol del usuario es obligatorio, ingrese los roles que son permitidos(vendedor,comprador,admin)').not().isEmpty()
 ]
+
