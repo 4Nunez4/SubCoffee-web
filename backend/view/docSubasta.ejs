@@ -17,7 +17,7 @@
         <tr><td>URI</td><td>subasta/registrar</td></tr>
         <tr><td>Descripcion:</td><td>Permite Agregar subastas, registrarlas en la base de datos    </td></tr>
         <tr><td>Verbo HTTP:</td><td>POST</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>Autorización Token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td>
             {
@@ -62,7 +62,7 @@
     <tr><td>URI</td><td>/subasta/listar</td></tr>
     <tr><td>Descripcion:</td><td>Permite listar las subastas registradas en la base de datos    </td></tr>
     <tr><td>Verbo HTTP:</td><td>GET</td></tr>
-    <tr><td>HEADER:</td><td>NULL</td></tr>
+    <tr><td>HEADER:</td><td>Autorización Token</td></tr>
     <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
     <tr><td>PETICION BODY</td><td>NULL</td></tr>
     <tr><td>RESPUESTA JSON</td><td>
@@ -109,7 +109,7 @@
     <tr><td>URI</td><td>/subasta/actualizar/:id</td></tr>
     <tr><td>Descripcion:</td><td>Permite actualizar las subastas con id proporcionado registradas en la base de datos    </td></tr>
     <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
-    <tr><td>HEADER:</td><td>NULL</td></tr>
+    <tr><td>HEADER:</td><td>Autorización Token</td></tr>
     <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
     <tr><td>PETICION BODY</td><td>
         {
@@ -151,7 +151,7 @@
     <tr><td>URI</td><td>/subasta/buscar/:id</td></tr>
     <tr><td>Descripcion:</td><td>Permite listar la subasta con id proporcionado registrada en la base de datos    </td></tr>
     <tr><td>Verbo HTTP:</td><td>GET</td></tr>
-    <tr><td>HEADER:</td><td>NULL</td></tr>
+    <tr><td>HEADER:</td><td>Autorización Token</td></tr>
     <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
     <tr><td>PETICION BODY</td><td>NULL</td></tr>
     <tr><td>RESPUESTA JSON</td><td>
@@ -189,7 +189,7 @@
     <tr><td>URI</td><td>/subasta/eliminar/:id</td></tr>
     <tr><td>Descripcion:</td><td>Permite eliminar la subasta con id proporcionado registradas en la base de datos     </td></tr>
     <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
-    <tr><td>HEADER:</td><td>NULL</td></tr>
+    <tr><td>HEADER:</td><td>Autorización Token</td></tr>
     <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
     <tr><td>PETICION BODY</td><td>NULL</td></tr>
     <tr><td>RESPUESTA JSON</td><td>
