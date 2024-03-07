@@ -101,3 +101,22 @@ export const desactivarPostulacion = async (req, res) => {
         res.status(500).json({ status: 500, message: 'Error en el sistema'+ error});
     }
 };
+
+export const activarPostulacion = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const {estado_pos}= req.body;
+        const [postulacionExiste] = await pool.query("UPDATE postulacion SET estado_pos = COALESCE(?, estado_pos) WHERE pk_id_pos = ?", [estado_pos, id]);
+        if(postulacionExiste.length === 0) {
+            res.status(404).json({ status: 404, message: 'El id de la postulacion es incorrecto' });
+        }else {
+            const [result] = await pool.query("UPDATE postulacion SET estado_pos = ? WHERE pk_id_pos = ?", ["activo", id]);
+            if(result.affectedRows >0){
+                 res.status(200).json({ status: 200, message: 'Postulacion activada exitosamente' });
+            }
+           
+        }
+    } catch (error) {
+        res.status(500).json({ status: 500, message: 'Error en el sistema'+ error});
+    }
+};

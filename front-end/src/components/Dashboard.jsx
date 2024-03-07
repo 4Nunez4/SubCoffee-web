@@ -4,11 +4,14 @@ import logo from '../assets/cafe-pergamino.dashboard.jpg';
 
 function Dashboard() {
   return (
-    <div className='p-10'>
-       <div className="mb-20 bg-white rounded-xl mt-5 border-2 border-blue-500 p-10 text-center mx-auto w-100 h-screen/2">
-       <img className="w-full h-auto rounded-lg" src={logo} />
-        </div>
-          </div>
+    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="bg-white rounded-xl mx-auto w-11/12 md:w-3/4 lg:w-4/5 xl:w-11/12 2xl:w-5/6 h-5/6 ">
+      <img className="w-full h-full object-cover rounded-3xl" src={logo} alt="logo" />
+    </div>
+  </div>
+  
+
+
   );
 }
 

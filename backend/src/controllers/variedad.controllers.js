@@ -103,3 +103,25 @@ export const buscarvariedad = async (req,res) =>{
         res.status(500).json({ status: 500, message: 'Error al desactivar la variedad', error});
     }
 }
+
+
+export const activarVariedad = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json(errors)
+        }
+        const id = req.params.id;
+        const { estado_vari } = req.body;
+        const [variedaExiste] = await pool.query("UPDATE variedad SET estado_vari = ? WHERE pk_id_vari = ?", [estado_vari, id]);
+        if(variedaExiste.length === 0) {
+            res.status(404).json({ status: 404, message: 'El id de la variedad es incorrecto'});
+        }else {
+           const [result] = await pool.query("UPDATE variedad SET estado_vari = ? WHERE pk_id_vari = ?", ['activo', id]);
+           if(result.affectedRows >0)
+           res.status(200).json({status: 200, message: "La variedad fue activada exitosamente"})
+        }
+    } catch (error) {
+        res.status(500).json({ status: 500, message: 'Error al desactivar la variedad', error});
+    }
+}

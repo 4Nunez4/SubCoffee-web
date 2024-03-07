@@ -1,6 +1,6 @@
 import{Router} from 'express';
 import { check } from 'express-validator';
- import{getPostulaciones,guardarPostulacion, getPostulacion,updatePostulacion, deletePostulacion, desactivarPostulacion} from '../controllers/postulacion.controllers.js';
+ import{getPostulaciones,guardarPostulacion, getPostulacion,updatePostulacion, deletePostulacion, desactivarPostulacion, activarPostulacion} from '../controllers/postulacion.controllers.js';
  import { validarguardarPostulacion,validarActualizacionPos } from '../validations/postulacion.validation.js';
  import { validartoken } from '../controllers/autenticacionController.js';
 
@@ -15,8 +15,10 @@ import { check } from 'express-validator';
     postulacionRoutes.post('/postulacion',validartoken,validarguardarPostulacion, guardarPostulacion);
     postulacionRoutes.get('/postulacion/:id',validartoken, getPostulacion);
     postulacionRoutes.put('/postulacion/:id',validartoken,validarActualizacionPos, updatePostulacion);
-    postulacionRoutes.delete('/postulacion/:id',validartoken, deletePostulacion),
+    postulacionRoutes.delete('/postulacion/:id',validartoken, deletePostulacion);
     postulacionRoutes.put('/desactivar/:id',validartoken, desactivarPostulacion)
+    postulacionRoutes.put('/activar/:id',validartoken,activarPostulacion)
+
 
 
     export default postulacionRoutes;
