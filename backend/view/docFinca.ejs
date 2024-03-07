@@ -16,7 +16,7 @@
         <tr><td>URI</td><td>/finca/registrar</tr>
         <tr><td>Descripcion:</td><td>Permite registrar fincas en la base de datos</td></tr>
         <tr><td>Verbo HTTP:</td><td>POST</td></tr>
-        <tr><td>HEADER:</td><td>Autorizacion token</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td> 
             {
@@ -63,7 +63,7 @@
         <tr><td>URI</td><td>/finca/listar</tr>
         <tr><td>Descripcion:</td><td>Permite listar todas las fincas registradas</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
-        <tr><td>HEADER:</td><td>Autorizacion token</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
         <tr><td>PETICION BODY</td><td> NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -125,7 +125,7 @@
         <tr><td>URI</td><td>/finca/actualizar/:id</tr>
         <tr><td>Descripcion:</td><td>Permite actualizar fincas en la base de datos por medio de su id       </td></tr>
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
-        <tr><td>HEADER:</td><td>Autorizacion token</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td> 
             {
@@ -168,7 +168,7 @@
         <tr><td>URI</td><td>/finca/buscar/:id</tr>
         <tr><td>Descripcion:</td><td>Permite buscar fincas en la base de datos por medio de su ID</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
-        <tr><td>HEADER:</td><td>Autorizacion token</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td> NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -221,7 +221,7 @@
         <tr><td>URI</td><td>/finca/eliminar/:id</tr>
         <tr><td>Descripcion:</td><td>Permite eliminar finca en la base de datos por medio de su id</td></tr>
         <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
-        <tr><td>HEADER:</td><td>Autorizacion token</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td> NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -280,7 +280,7 @@
 
         <tr>
             <td>HEADER</td>
-            <td>Autorizacion token</td>
+            <td>token: token</td>
         </tr>
 
         <tr>
@@ -358,7 +358,7 @@
 
         <tr>
             <td>HEADER</td>
-            <td>Autorizacion token</td>
+            <td>token: token</td>
         </tr>
 
         <tr>
