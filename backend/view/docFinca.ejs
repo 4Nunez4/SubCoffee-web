@@ -16,7 +16,7 @@
         <tr><td>URI</td><td>/finca/registrar</tr>
         <tr><td>Descripcion:</td><td>Permite registrar fincas en la base de datos</td></tr>
         <tr><td>Verbo HTTP:</td><td>POST</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>Autorizacion token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td> 
             {
@@ -63,7 +63,7 @@
         <tr><td>URI</td><td>/finca/listar</tr>
         <tr><td>Descripcion:</td><td>Permite listar todas las fincas registradas</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>Autorizacion token</td></tr>
         <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
         <tr><td>PETICION BODY</td><td> NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -125,7 +125,7 @@
         <tr><td>URI</td><td>/finca/actualizar/:id</tr>
         <tr><td>Descripcion:</td><td>Permite actualizar fincas en la base de datos por medio de su id       </td></tr>
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>Autorizacion token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td> 
             {
@@ -168,7 +168,7 @@
         <tr><td>URI</td><td>/finca/buscar/:id</tr>
         <tr><td>Descripcion:</td><td>Permite buscar fincas en la base de datos por medio de su ID</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>Autorizacion token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td> NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -221,7 +221,7 @@
         <tr><td>URI</td><td>/finca/eliminar/:id</tr>
         <tr><td>Descripcion:</td><td>Permite eliminar finca en la base de datos por medio de su id</td></tr>
         <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>Autorizacion token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td> NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -250,5 +250,161 @@
             
         </td></tr>
     </table>
+    
+    <h3>DESACTIVAR finca</h3>
+    <table>
+        <tr>
+            <td>NUMERO</td>
+            <td>6</td>
+        </tr>
+
+        <tr>
+            <td>NOMBRE DEL ENDPOINT</td>
+            <td>DESACTIVAR finca</td>
+        </tr>
+
+        <tr>
+            <td>URI</td>
+            <td>/finca/desactivar/id</td>
+        </tr>
+
+        <tr>
+            <td>DESCRIPCION</td>
+            <td>Permite desactivar finca</td>
+        </tr>
+
+        <tr>
+            <td>VERBO</td>
+            <td>PUT</td>
+        </tr>
+
+        <tr>
+            <td>HEADER</td>
+            <td>Autorizacion token</td>
+        </tr>
+
+        <tr>
+            <td>USUARIOS</td>
+            <td>ADMINISTRADOR</td>
+        </tr>
+
+        <tr>
+            <td>PETICION</td>
+            <td>NULL</td>
+        </tr>
+
+        <tr>
+            <td>RESPUESTA JSON</td>
+            <td>
+                
+                CORRECTO: 
+                STATUS:200 
+                MESSAGE: 'Se desativo la finca exitosamente' 
+
+                INCORRECTO 
+                STATUS: 404 
+                BODY :{
+                    STATUS: 404
+                    MESSAGE: 'Error, no se pudo desactivar la finca'
+                }
+
+                ERROR: 
+                STATUS: 500 
+                BODY : JSON{
+                    STATUS:500,
+                    MESSAGE: "ERROR EN EL SERVIDOR"
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>DESARROLADOR</td>
+            <td>Jorge Enrique Nuñez Molina</td>
+        </tr>
+
+        <tr>
+            <td>RAMA</td>
+            <td>DEVjenm</td>
+        </tr>
+    </table>
+
+
+    <h3>ACTIVAR finca</h3>
+    <table>
+        <tr>
+            <td>NUMERO</td>
+            <td>7</td>
+        </tr>
+
+        <tr>
+            <td>NOMBRE DEL ENDPOINT</td>
+            <td>ACTIVAR finca</td>
+        </tr>
+
+        <tr>
+            <td>URI</td>
+            <td>/finca/activar/id</td>
+        </tr>
+
+        <tr>
+            <td>DESCRIPCION</td>
+            <td>Permite activar finca</td>
+        </tr>
+
+        <tr>
+            <td>VERBO</td>
+            <td>PUT</td>
+        </tr>
+
+        <tr>
+            <td>HEADER</td>
+            <td>Autorizacion token</td>
+        </tr>
+
+        <tr>
+            <td>USUARIOS</td>
+            <td>ADMINISTRADOR</td>
+        </tr>
+
+        <tr>
+            <td>PETICION</td>
+            <td>NULL</td>
+        </tr>
+
+        <tr>
+            <td>RESPUESTA JSON</td>
+            <td>
+                
+                CORRECTO: 
+                STATUS:200 
+                MESSAGE: 'Se activo la finca de manera exitosa' 
+
+                INCORRECTO 
+                STATUS: 404 
+                BODY :{
+                    STATUS: 404
+                    MESSAGE: 'Error, no se pudo activar la finca'
+                }
+
+                ERROR: 
+                STATUS: 500 
+                BODY : JSON{
+                    STATUS:500,
+                    MESSAGE: "ERROR EN EL SERVIDOR"
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>DESARROLADOR</td>
+            <td>Jorge Enrique Nuñez Molina</td>
+        </tr>
+
+        <tr>
+            <td>RAMA</td>
+            <td>DEVjenm</td>
+        </tr>
+    </table>
+
 </body>
 </html>
