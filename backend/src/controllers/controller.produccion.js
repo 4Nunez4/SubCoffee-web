@@ -28,7 +28,7 @@ export const listarProduccion = async(req,res) => {
             res.status(200).json(result);
         }
         else{
-            res.status(404).json({'status': 404,'message': 'No se a registrado ninguna producción en el sistema.'});
+            res.status(404).json({'status': 404,'message': 'No se ha registrado ninguna producción en el sistema.'});
         }
     } catch (error) {
         res.status(500).json({'status':500,'message':'Error: '+error});
@@ -73,37 +73,28 @@ export const buscarProduccion = async (req,res) => {
 
 export const desactivarProduccion = async(req,res) => {
     try {
-        const errors = validationResult(req);
-        if(!errors.isEmpty()) {
-            return res.status(400).json(errors);
-        }
-        
         const idPro = req.params.id;
         const [result] = await pool.query('update produccion set estado_pro = 2 where pk_id_pro = ?',[idPro]);
 
         if(result.affectedRows>0) {
             res.status(200).json({'status':200, 'message':`Se desactivo la producción del ID ${idPro}`});
         } else {
-            res.status(404).json({'status':404, 'message':`no se encontro la producción del ID ${idPro}`});
+            res.status(404).json({'status':404, 'message':`no se encontró la producción del ID ${idPro}`});
         }
     } catch (e) {
         res.status(500).json({'status':500, 'message':'Error: '+e});
     }
 }
+
 export const activarProduccion = async(req,res) => {
     try {
-        const errors = validationResult(req);
-        if(!errors.isEmpty()) {
-            return res.status(400).json(errors);
-        }
-        
         const idPro = req.params.id;
         const [result] = await pool.query('update produccion set estado_pro = 1 where pk_id_pro = ?',[idPro]);
 
         if(result.affectedRows>0) {
             res.status(200).json({'status':200, 'message':`Se activo la producción del ID ${idPro}`});
         } else {
-            res.status(404).json({'status':404, 'message':`no se encontro la producción del ID ${idPro}`});
+            res.status(404).json({'status':404, 'message':`no se encontró la producción del ID ${idPro}`});
         }
     } catch (e) {
         res.status(500).json({'status':500, 'message':'Error: '+e});

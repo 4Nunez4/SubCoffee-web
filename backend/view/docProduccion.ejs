@@ -25,7 +25,7 @@
         </tr>
         <tr> 
             <td>DESCRIPCIÓN</td>
-            <td>Permite registrar las Producción en la base de datos.</td>
+            <td>Permite registrar la Producción en la base de datos.</td>
         </tr>
         <tr>
             <td>VERBO HTTP</td>
@@ -75,6 +75,14 @@
                 ]
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+        <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+        </tr>
     </table>
     <hr>
     <h3>Listar Producción.</h3>
@@ -93,7 +101,7 @@
         </tr>
         <tr>
             <td>DESCRIPCIÓN</td>
-            <td>Permite listar las ofertas registradas en la base de datos.</td>
+            <td>Permite listar las Producciones registradas en la base de datos.</td>
         </tr>
         <tr>
             <td>VERBO HTTP</td>
@@ -128,7 +136,7 @@
               Incorrecto:
               Status:{
                 status: 404,
-                message: "No se a registrado ninguna producción en el sistema."
+                message: "No se ha registrado ninguna producción en el sistema."
               }
               Error: 
               status: 500,
@@ -137,9 +145,16 @@
               }
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+        <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+        </tr>
     </table>
     <hr>
-
     <h3>Actualizar Producción.</h3>
     <table>
         <tr>
@@ -181,12 +196,12 @@
                 Status: 200
                 {
                   "status": 200,
-                  "message": "La producción con ID 4 fue actualizado correctamente."
+                  "message": "La producción con ID 5 fue actualizado correctamente."
                 }
                 Incorrecto:
                 Status:{
                   status: 404,
-                  message: "No se encontro nimgúna producción con ese ID 4."
+                  message: "No se encontro nimgúna producción con ese ID 5."
                 }
                 Error: 
                 status: 500,
@@ -206,9 +221,16 @@
                 ]
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+        <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+        </tr>
     </table>
     <hr>
-
     <h3>Buscar Producción.</h3>
     <table>
         <tr>
@@ -225,7 +247,7 @@
         </tr>
         <tr>
             <td>DESCRIPCIÓN</td>
-            <td>Permite buscar una oferta registrada en la base de datos.</td>
+            <td>Permite buscar una producción registrada en la base de datos.</td>
         </tr>
         <tr>
             <td>VERBO HTTP</td>
@@ -258,7 +280,7 @@
                 Incorrecto:
                 Status:{
                   status: 404,
-                  message: "No se encontró ninguna producción con el ID 4"
+                  message: "No se encontró ninguna producción con el ID 5"
                 }
                 Error: 
                 status: 500,
@@ -267,9 +289,17 @@
                 }
             </td>
         </tr>
+        <tr>
+            <td>DESARROLLADOR</td>
+            <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
+        </tr>
+        <tr>
+            <td>RAMA:</td>
+            <td>DEVjavm</td>
+        </tr>
     </table>
     <hr>
-    <h3>Borrar Producción.</h3>
+    <h3>Desactivar Producción.</h3>
     <table>
         <tr>
             <td>NÚMERO</td>
@@ -281,11 +311,11 @@
         </tr>
         <tr>
             <td>URL</td>
-            <td>/produccion/borrar/4</td>
+            <td>/produccion/desactivar/5</td>
         </tr>
         <tr>
             <td>DESCRIPCIÓN</td>
-            <td>Permite borrar una oferta registrada en la base de datos.</td>
+            <td>Permite desactivar una producción registrada en la base de datos.</td>
         </tr>
         <tr>
             <td>VERBO HTTP</td>
@@ -310,12 +340,12 @@
                 Status: 200
                 {
                   "status": 200,
-                  "message": "Se elimino la producción del ID 4"
+                  "message": "Se desactivo la producción del ID 5"
                 }
                 Incorrecto:
                 Status:{
                   status: 404,
-                  message: "no se elimino la producción del ID 5"
+                  message: "no se encontró la producción del ID 5"
                 }
                 Error: 
                 status: 500,
@@ -332,14 +362,71 @@
             <td>RAMA:</td>
             <td>DEVjavm</td>
           </tr>
+    </table>
+    <hr>
+    <h3>Activar Producción.</h3>
+    <table>
+        <tr>
+            <td>NÚMERO</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>NOMBRE DE SERVICIO</td>
+            <td>Activar producción.</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/produccion/activar/5</td>
+        </tr>
+        <tr>
+            <td>DESCRIPCIÓN</td>
+            <td>Permite activar una producción registrada en la base de datos.</td>
+        </tr>
+        <tr>
+            <td>VERBO HTTP</td>
+            <td>PUT</td>
+        </tr>
+        <tr>
+            <td>HEADER</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>USUARIOS</td>
+            <td>Administrador</td>
+        </tr>
+        <tr>
+            <td>PETICIÓN json</td>
+            <td>NULL</td>
+        </tr>
+        <tr>
+            <td>REPUESTA JSON</td>
+            <td>
+                Correcto:
+                Status: 200
+                {
+                  "status": 200,
+                  "message": "Se activo la producción del ID 5"
+                }
+                Incorrecto:
+                Status:{
+                  status: 404,
+                  message: "no se encontró la producción del ID 5"
+                }
+                Error: 
+                status: 500,
+                body:{
+                  status:500,message:"Error: "+e
+                }
+            </td>
+        </tr>
         <tr>
             <td>DESARROLLADOR</td>
             <td>JOSE ALEJANDRO VELEZ MUÑOZ</td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
             <td>RAMA:</td>
             <td>DEVjavm</td>
-          </tr>
+        </tr>
     </table>
 
 </body>
