@@ -13,7 +13,7 @@ export const validarUsuarioRegister= [
 
     check('telefono_user','total de caracteres maximo 12').isLength({max:12}),
 
-    check('rol_user','El rol del usuario es obligatorio, ingrese los roles que son permitidos (vendedor,comprador,admin)').not().isEmpty()
+    check('rol_user','El rol del usuario es obligatorio, ingrese los roles que son permitidos (vendedor,comprador,admin)').exists().isIn(['vendedor','comprador','admin'])
 
 ]
 
@@ -28,6 +28,6 @@ export const validarUsuarioActualizacion=[
 
     check('telefono_user','total de caracteres maximo 12').isLength({max:12}),
 
-    check('rol_user','El rol del usuario es obligatorio, ingrese los roles que son permitidos(vendedor,comprador,admin)').not().isEmpty()
+    check('rol_user','El rol del usuario es obligatorio, ingrese los roles que son permitidos (vendedor,comprador,admin)').exists().isIn(['vendedor','comprador','admin'])
 ]
 

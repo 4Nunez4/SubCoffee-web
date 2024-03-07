@@ -1,6 +1,6 @@
 
 import { pool } from "../databases/conexion.js";
-import  Jwt  from "jsonwebtoken";
+import  Jwt from "jsonwebtoken";
 
 export const validarUsuario =async(req, res)=>{
     try{
