@@ -269,5 +269,48 @@
     </table>
 
 
+    
+
+    <hr>
+    <h3>Activar Postulacion</h3>
+    <table>
+        <tr><td>Numero </td><td>7</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Activar Postulacion </td></tr>
+        <tr><td>URI</td><td>/postulacion/activar/:id</td></tr>
+        <tr><td>Descripcion:</td><td>Permite activar una postulacion a traves de su ID </td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
+        <tr><td>HEADER:</td><td>Autorización Token</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td>NULL </td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            JSON:
+            {
+             Status:200
+             message: 'Postulacion activada exitosamente'   
+                  
+                  
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                status:404
+                message: 'El id de la postulacion es incorrecto'
+            }
+            Error:
+            Status:505
+            body:{
+                'Error en el sistema'
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
+    </table>
+
+
 </body>
 </html>
