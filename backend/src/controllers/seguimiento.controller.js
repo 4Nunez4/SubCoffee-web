@@ -28,7 +28,7 @@ export const registrar = async (req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const  { nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario, estado_seg } = req.body;
+        const  { nombre_seg, imagen_seg, fk_id_produccion, fk_id_usuario, estado_seg } = req.body;
 
 //        if (!nombre_seg.trim() || !fecha_seg.trim() || !fk_id_produccion || !fk_id_usuario) {
 //            return res.status(400).json({
@@ -36,8 +36,8 @@ export const registrar = async (req, res) => {
 //            });
 //        }
 
-    const [resultado] = await pool.query("insert into seguimiento (nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario, estado_seg) values (?, ?, ?, ?, ?, ?)",
-            [nombre_seg, fecha_seg, imagen_seg, fk_id_produccion, fk_id_usuario, estado_seg]);
+    const [resultado] = await pool.query("insert into seguimiento (nombre_seg, imagen_seg, fk_id_produccion, fk_id_usuario, estado_seg) values (?, ?, ?, ?, ?)",
+            [nombre_seg, imagen_seg, fk_id_produccion, fk_id_usuario, estado_seg]);
 
         if (resultado.affectedRows > 0) {
             res.status(200).json({
@@ -146,3 +146,37 @@ export const eliminar = async (req, res) => {
         });
     }
 };
+
+export const desactivar = async (req, res)=>{
+    try {
+    
+        const {id} = req.params
+    
+        const [rows] = await pool.query('UPDATE seguimiento SET estado_seg=2 WHERE pk_id_seg = ?',[id])
+    
+        if(rows.affectedRows > 0)
+        res.status(200).json({'status':200, 'message':'Se desativo el seguimiento exitosamente'})
+    
+        else
+        res.status(404).json({'status':404, 'message':'Error, no se pudo desactivar el seguimiento'})
+    } catch (error) {
+        res.status(500).json({'status':500, 'message':'ERROR SERVIDOR', error})
+    }
+}
+
+//Activar
+export const activar = async (req, res)=>{
+    try {
+        const {id} = req.params
+    
+        const [rows] = await pool.query('UPDATE seguimiento SET estado_seg=1 WHERE pk_id_seg = ?',[id])
+    
+        if(rows.affectedRows > 0)
+        res.status(200).json({'status':200, 'message':'Se activo el seguimiento de manera exitosa'})
+    
+        else
+        res.status(404).json({'status':404, 'message':'Error, no se pudo activar el seguimiento'})
+    } catch (error) {
+        res.status(500).json({'status':500, 'message':'ERROR SERVIDOR', error})
+    }
+}
