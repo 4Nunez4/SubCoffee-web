@@ -15,11 +15,7 @@ const rutaProduccion = Router();
 
 rutaProduccion.post("/registrar", valiRegistroProduccion, registrarProduccion);
 rutaProduccion.get("/listar", listarProduccion);
-rutaProduccion.put(
-  "/actualizar/:id",
-  valiActualizacionProduccion,
-  actualizarProduccion
-);
+rutaProduccion.put("/actualizar/:id",valiActualizacionProduccion,actualizarProduccion);
 rutaProduccion.get("/buscar/:id", buscarProduccion);
 rutaProduccion.put("/desactivar/:id", desactivarProduccion);
 rutaProduccion.put("/activar/:id", activarProduccion);
