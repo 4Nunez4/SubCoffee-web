@@ -1,6 +1,6 @@
 
 import { pool } from "../databases/conexion.js";
-import  Jwt  from "jsonwebtoken";
+import  Jwt from "jsonwebtoken";
 
 export const validarUsuario =async(req, res)=>{
     try{
@@ -18,6 +18,7 @@ export const validarUsuario =async(req, res)=>{
         return res.status(500).json({"message":"el servidor esta caido intente otra vez"})
     }
 }
+
 export const validartoken=async(req,res,next)=>{
     let token_usuario = req.headers['token'];
     if(!token_usuario){

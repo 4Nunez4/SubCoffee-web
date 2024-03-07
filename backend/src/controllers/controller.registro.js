@@ -3,6 +3,7 @@ import { validationResult } from "express-validator"
 
 //listarUsuariosTodos
 export const listar = async (req, res) =>{
+
     try {
         let sql = 'select * from usuarios'
         const [result] = await pool.query(sql)
@@ -29,11 +30,11 @@ export const listar = async (req, res) =>{
             return res.status(400).json(errors)
         }
 
-        const {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user}=req.body
+        const {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, rol_user}=req.body
 
-        let sql = `insert into usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user) values (?,?,?,?,?,?,?,?)`
+        let sql = `insert into usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user,  rol_user) values (?,?,?,?,?,?,?)`
 
-        const [rows] = await pool.query(sql,[pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user])
+        const [rows] = await pool.query(sql,[pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user,  rol_user])
 
         if(rows.affectedRows > 0)
         {
@@ -59,9 +60,9 @@ export const actualizar = async (req, res) => {
 
         const id = req.params.id;
 
-        const {nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user} = req.body;
+        const {nombre_user, email_user, password_user, descripcion_user, telefono_user, rol_user} = req.body;
 
-        const [result] = await pool.query( 'update usuarios set nombre_user = COALESCE(?,nombre_user), email_user = COALESCE(?, email_user), password_user = COALESCE(?, password_user), descripcion_user = COALESCE(?,descripcion_user), telefono_user = COALESCE(?, telefono_user), fecha_nacimiento_user = COALESCE(?, fecha_nacimiento_user), rol_user = COALESCE(?, rol_user) where pk_cedula_user = ?', [nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user,id]);
+        const [result] = await pool.query( 'update usuarios set nombre_user = COALESCE(?,nombre_user), email_user = COALESCE(?, email_user), password_user = COALESCE(?, password_user), descripcion_user = COALESCE(?,descripcion_user), telefono_user = COALESCE(?, telefono_user), rol_user = COALESCE(?, rol_user) where pk_cedula_user = ?', [nombre_user, email_user, password_user, descripcion_user, telefono_user, rol_user, id]);
 
         if(result.affectedRows>0)
         {
@@ -124,6 +125,23 @@ export const desactivar = async (req, res)=>{
     
         else
         res.status(404).json({'status':404, 'message':'Error, no se pudo desactivar el usuario'})
+    } catch (error) {
+        res.status(500).json({'status':500, 'message':'ERROR SERVIDOR', error})
+    }
+}
+
+//Activar
+export const activar = async (req, res)=>{
+    try {
+        const {id} = req.params
+    
+        const [rows] = await pool.query('UPDATE usuarios SET estado_user=1 WHERE pk_cedula_user = ?',[id])
+    
+        if(rows.affectedRows > 0)
+        res.status(200).json({'status':200, 'message':'Se activo el usuario exitosamente'})
+    
+        else
+        res.status(404).json({'status':404, 'message':'Error, no se pudo activar el usuario'})
     } catch (error) {
         res.status(500).json({'status':500, 'message':'ERROR SERVIDOR', error})
     }
