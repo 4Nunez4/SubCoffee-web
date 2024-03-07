@@ -24,9 +24,9 @@ export const guardarPostulacion = async (req,res)=> {
     if(!errors.isEmpty()){
         return res.status(400).json(errors);
     }
-  const {oferta_pos,fk_id_usuario, estado_pos } = req.body;
+  const {oferta_pos,fk_id_usuario,	fk_id_subasta , estado_pos } = req.body;
 
-      const [rows] = await pool.query("INSERT INTO postulacion(oferta_pos, fk_id_usuario, estado_pos) VALUES (?,?,?)", [oferta_pos, fk_id_usuario, estado_pos]);
+      const [rows] = await pool.query("INSERT INTO postulacion(oferta_pos, fk_id_usuario,	fk_id_subasta , estado_pos) VALUES (?,?,?,?)", [oferta_pos, fk_id_usuario,	fk_id_subasta , estado_pos]);
       if(rows.affectedRows){
           res.status(200).json({status: 200, message: "Se creo con exito la postulacion."});
       } else {
