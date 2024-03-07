@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiMessageSquare } from "react-icons/fi";
+import { FiBarChart } from "react-icons/fi";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -10,6 +11,7 @@ const Sidebar = () => {
   const Menus = [
     { title: "user", link: "/dashboard", icon: AiOutlineUser },
     { title: "messages", link: "/subcoffee", icon: FiMessageSquare },
+    { title: "chat", link: "/chat", icon: FiBarChart },
   ];
 
   return (
