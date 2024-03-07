@@ -1,5 +1,4 @@
 // src/Dashboard.jsx
-import React from 'react';
 import logo from '../assets/cafe-pergamino.dashboard.jpg';
 
 function Dashboard() {

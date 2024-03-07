@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard";
 import SubCoffee from "./pages/SubCoffee";
 import NotFound from "./pages/NotFound";
 import { TerminosyCondiciones } from "./components/TerminosCondiciones";
+import { Login } from "./components/Login";
 
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/subcoffee" element={<SubCoffee />} />
+          <Route path="/login" element={<Login/>}/>
+          <Route path="*" element={<NotFound />} />
           <Route path="/terminosycondiciomes" element={<TerminosyCondiciones/>} />
          
         </Routes>
