@@ -3,5 +3,5 @@ function Dashboard() {
          <h2>Hello word</h2>
      );
 }
-
+    
 export default Dashboard;
