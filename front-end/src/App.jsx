@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import Subasta from "./pages/Subasta.jsx";
 import Chat from "./pages/Chat";
 import { TerminosyCondiciones } from "./components/TerminosCondiciones";
+import { Login } from "./components/Login";
 
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/subasta" element={<Subasta />} />
+          <Route path="/login" element={<Login/>}/>
+          <Route path="*" element={<NotFound />} />
           <Route path="/terminosycondiciomes" element={<TerminosyCondiciones/>} />
          
         </Routes>
