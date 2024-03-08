@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiMessageSquare } from "react-icons/fi";
 import { FiBarChart } from "react-icons/fi";
+import { IoNotificationsOutline } from "react-icons/io5";
+import { RiAuctionLine } from "react-icons/ri";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -12,6 +14,8 @@ const Sidebar = () => {
     { title: "user", link: "/dashboard", icon: AiOutlineUser },
     { title: "messages", link: "/subcoffee", icon: FiMessageSquare },
     { title: "chat", link: "/chat", icon: FiBarChart },
+    { title: "Notificaciones", link: "/Notificaciones", icon: IoNotificationsOutline },
+    { title: "Subasta", link: "/Subasta", icon: RiAuctionLine },
   ];
 
   return (

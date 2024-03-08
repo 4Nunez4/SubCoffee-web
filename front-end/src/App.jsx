@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import Subasta from "./pages/Subasta.jsx";
 import Chat from "./pages/Chat";
 import { TerminosyCondiciones } from "./components/TerminosCondiciones";
+import Notificaciones from "./pages/Notificaciones.jsx";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/subasta" element={<Subasta />} />
           <Route path="/terminosycondiciomes" element={<TerminosyCondiciones/>} />
+          <Route path="/Notificaciones" element={<Notificaciones />} />
          
         </Routes>
       </Layout>

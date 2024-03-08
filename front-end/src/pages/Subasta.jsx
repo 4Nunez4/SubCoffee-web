@@ -1,4 +1,5 @@
-import SubastaInfoUser from "../components/Subastainf";
+import SubastaInfoUser from "../components/InfoSubasta";
+
 function Subasta() {
     return ( 
         <>
@@ -8,9 +9,8 @@ function Subasta() {
         <h1 className="text-2xl font-semibold mb-4">Subasta abierta</h1>
         <div className="flex-auto h-screen">
           <SubastaInfoUser />
-         
+          
         </div>
-
        
         <div class="bg-white rounded-lg shadow p-4 mb-6">
             <p class="font-semibold">Ofertas realizadas:</p>
