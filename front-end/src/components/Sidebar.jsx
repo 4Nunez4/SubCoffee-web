@@ -10,7 +10,9 @@ const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
+
   const Menus = [
+
     { title: "user", link: "/dashboard", icon: AiOutlineUser },
     { title: "messages", link: "/subcoffee", icon: FiMessageSquare },
     { title: "chat", link: "/chat", icon: FiBarChart },
