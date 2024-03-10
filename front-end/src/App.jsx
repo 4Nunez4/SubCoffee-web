@@ -7,6 +7,7 @@ import Subasta from "./pages/Subasta.jsx";
 import Chat from "./pages/Chat";
 import { TerminosyCondiciones } from "./components/TerminosCondiciones";
 import Notificaciones from "./pages/Notificaciones.jsx";
+import RegistrarFinca from "./pages/RegistrarFinca.jsx";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/subasta" element={<Subasta />} />
           <Route path="/terminosycondiciomes" element={<TerminosyCondiciones/>} />
           <Route path="/Notificaciones" element={<Notificaciones />} />
+          <Route path="/Registrar Finca" element={<RegistrarFinca />} />
          
         </Routes>
       </Layout>
