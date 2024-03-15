@@ -24,9 +24,9 @@ export const guardarPostulacion = async (req,res)=> {
     if(!errors.isEmpty()){
         return res.status(400).json(errors);
     }
-  const {oferta_pos,fk_id_usuario, estado_pos } = req.body;
+  const {oferta_pos,fk_id_usuario,	fk_id_subasta , estado_pos } = req.body;
 
-      const [rows] = await pool.query("INSERT INTO postulacion(oferta_pos, fk_id_usuario, estado_pos) VALUES (?,?,?)", [oferta_pos, fk_id_usuario, estado_pos]);
+      const [rows] = await pool.query("INSERT INTO postulacion(oferta_pos, fk_id_usuario,	fk_id_subasta , estado_pos) VALUES (?,?,?,?)", [oferta_pos, fk_id_usuario,	fk_id_subasta , estado_pos]);
       if(rows.affectedRows){
           res.status(200).json({status: 200, message: "Se creo con exito la postulacion."});
       } else {
@@ -94,6 +94,25 @@ export const desactivarPostulacion = async (req, res) => {
             const [result] = await pool.query("UPDATE postulacion SET estado_pos = ? WHERE pk_id_pos = ?", ["inactivo", id]);
             if(result.affectedRows >0){
                  res.status(200).json({ status: 200, message: 'Postulacion desactivada exitosamente' });
+            }
+           
+        }
+    } catch (error) {
+        res.status(500).json({ status: 500, message: 'Error en el sistema'+ error});
+    }
+};
+
+export const activarPostulacion = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const {estado_pos}= req.body;
+        const [postulacionExiste] = await pool.query("UPDATE postulacion SET estado_pos = COALESCE(?, estado_pos) WHERE pk_id_pos = ?", [estado_pos, id]);
+        if(postulacionExiste.length === 0) {
+            res.status(404).json({ status: 404, message: 'El id de la postulacion es incorrecto' });
+        }else {
+            const [result] = await pool.query("UPDATE postulacion SET estado_pos = ? WHERE pk_id_pos = ?", ["activo", id]);
+            if(result.affectedRows >0){
+                 res.status(200).json({ status: 200, message: 'Postulacion activada exitosamente' });
             }
            
         }

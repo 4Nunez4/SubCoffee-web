@@ -28,17 +28,17 @@ export const registrar = async (req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const  { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion } = req.body;        ;
+        const  { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion } = req.body;        ;
 
-        // if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !fk_id_postulacion) {
+        // if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !) {
         //     return res.status(400).json({
         //         "mensaje": "Por favor, proporcione todos los campos necesarios."
         //     });
         // }
         
 
-        const [resultado] = await pool.query("insert into subasta (fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion) values (?, ?, ?, ?, ?, ?, ?)",
-            [fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion, fk_id_postulacion]);
+        const [resultado] = await pool.query("insert into subasta (fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion) values (?, ?, ?, ?, ?, ?)",
+            [fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion]);
 
         if (resultado.affectedRows > 0) {
             res.status(200).json({
@@ -66,7 +66,7 @@ export const actualizar = async (req, res) => {
         const { id } = req.params;
         const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub } = req.body;
 
-//        if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !fk_id_postulacion) {
+//        if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !) {
 //           return res.status(400).json({
 //               "mensaje": "Por favor, proporcione todos los campos necesarios."
 //           });

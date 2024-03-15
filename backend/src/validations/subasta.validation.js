@@ -23,11 +23,6 @@ export const validarRegistrarSubasta=[
     .isEmpty()
     .isInt({ min: 1 })
     .toInt(),
-    check('fk_id_postulacion','Digite un id registrado')
-    .not()
-    .isEmpty()
-    .isInt({ min: 1 })
-    .toInt(),
 ];
 
 export const validarActualizarSubasta=[
@@ -49,11 +44,6 @@ export const validarActualizarSubasta=[
     .exists()
     .isInt(),
     check('fk_id_produccion','Digite un id registrado')
-    .not()
-    .isEmpty()
-    .isInt({ min: 1 })
-    .toInt(),
-    check('fk_id_postulacion','Digite un id registrado')
     .not()
     .isEmpty()
     .isInt({ min: 1 })

@@ -17,15 +17,16 @@
         <tr><td>URI</td><td>/postulacion/postulacion</td></tr>
         <tr><td>Descripcion:</td><td>Permite guardar una nueva postulacion en la base de datos</td></tr>
         <tr><td>Verbo HTTP:</td><td>POST</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>Administrador</td></tr>
-        <tr><td>PETICION BODY</td><td>{
-            "fecha_pos": "2024-02-17",
-            "oferta_pos": 6000,
-            "fk_id_usuario": 1079534439,
-            "estado_pos":"activo"
-          }
-          
+        <tr><td>PETICION BODY</td><td>
+            {
+                "oferta_pos":1565571,
+                "fk_id_usuario": 1084251889,
+                "fk_id_subasta":1, 
+                "estado_pos":"activo"
+     }
+              
           </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
@@ -63,7 +64,7 @@
         <tr><td>URI</td><td>/postulacion/postulacion</td></tr>
         <tr><td>Descripcion:</td><td>Permite listar todas las postulaciones creadas</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td>NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -71,13 +72,12 @@
             Status:200
             JSON:
             {
-                
-                   "pk_id_pos": 2,
-                    "fecha_pos": "2024-02-07T05:00:00.000Z", 
-                    "oferta_pos": 3243,
-                    "fk_id_usuario": 1079534437,
-                    "estado_pos": "activo"
-                
+                "pk_id_pos": 9,
+                "fecha_pos": "2024-03-07T03:34:37.000Z",
+                "oferta_pos": 1565571,
+                "fk_id_usuario": 1084251889,
+                "fk_id_subasta": 1,
+                "estado_pos": "activo"
             }
             Incorrecto:
             Status:404
@@ -108,15 +108,17 @@
         <tr><td>URI</td><td>/postulacion/postulacion/:id</td></tr>
         <tr><td>Descripcion:</td><td>Permite actualizar datos de la postulacion por el id de la postulacion</td></tr>
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
-        <tr><td>PETICION BODY</td><td>    {
+        <tr><td>PETICION BODY</td><td>   
+            {
 
-            "oferta_pos": 6000,
-            "estado_pos": "activo"
-      
-          
-    }</td></tr>
+                "oferta_pos": "12",
+                "estado_pos":"activo"
+        
+              
+        }
+        </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
@@ -151,7 +153,7 @@
         <tr><td>URI</td><td>/postulacion/postulacion/:id</tr>
         <tr><td>Descripcion:</td><td>Permite listar las postulaciones hechas por un usuario en especifico </td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td>NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -159,16 +161,13 @@
             Status:200
             JSON:
             {
-                status(200)
-                body{	
-                    "pk_id_pos": 2,
-                    "fecha_pos": "2024-02-07T05:00:00.000Z",
-                    "estado_pos": "rechazada",
-                    "monto_inicial_pos": 43543534,
-                    "oferta_pos": 3243,
-                    "fk_id_usuario": 1079534437,
-                    "estado_pos": "activo"
-                }}
+                "pk_id_pos": 9,
+                "fecha_pos": "2024-03-07T03:38:37.000Z",
+                "oferta_pos": 12,
+                "fk_id_usuario": 1084251889,
+                "fk_id_subasta": 1,
+                "estado_pos": "activo"
+            }
             
             Incorrecto:
             Status:404
@@ -198,7 +197,7 @@
         <tr><td>URI</td><td>/postulacion/postulacion/:id</td></tr>
         <tr><td>Descripcion:</td><td>Permite eliminar una postulacion a traves de su ID </td></tr>
         <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
         <tr><td>PETICION BODY</td><td>NULL </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -237,7 +236,7 @@
         <tr><td>URI</td><td>/postulacion/desactivar/:id</td></tr>
         <tr><td>Descripcion:</td><td>Permite desactivar una postulacion a traves de su ID </td></tr>
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
-        <tr><td>HEADER:</td><td>NULL</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
         <tr><td>PETICION BODY</td><td>NULL </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -246,6 +245,49 @@
             {
              Status:200
              message: 'Postulacion desactivada exitosamente'   
+                  
+                  
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                status:404
+                message: 'El id de la postulacion es incorrecto'
+            }
+            Error:
+            Status:505
+            body:{
+                'Error en el sistema'
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
+    </table>
+
+
+    
+
+    <hr>
+    <h3>Activar Postulacion</h3>
+    <table>
+        <tr><td>Numero </td><td>7</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Activar Postulacion </td></tr>
+        <tr><td>URI</td><td>/postulacion/activar/:id</td></tr>
+        <tr><td>Descripcion:</td><td>Permite activar una postulacion a traves de su ID </td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td>NULL </td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            JSON:
+            {
+             Status:200
+             message: 'Postulacion activada exitosamente'   
                   
                   
             }
