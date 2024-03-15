@@ -12,7 +12,7 @@ function RegistrarFinca() {
       </div>
       <div className="mb-4 flex items-center">
         <label htmlFor="ubicacion" className="block text-lg mb-2 text-left">
-          Ubicación
+          Ubicacion
         </label>
         <input type="text" required className="p-2 border rounded-md w-full" />
       </div>
