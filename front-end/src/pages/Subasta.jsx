@@ -1,37 +1,81 @@
-import SubastaInfoUser from "../components/InfoSubasta";
+import SubastaInfoUser from "../components/Subastainf";
 
 function Subasta() {
-    return ( 
-        <>
-        <div className="w-full h-full bg-gray-100 grid-cols-2 gap-3">
-        <div className="max-w-3xl mx-auto p-4">
-        
-        <h1 className="text-2xl font-semibold mb-4">Subasta abierta</h1>
-        <div className="flex-auto h-screen">
-          <SubastaInfoUser />
-          
-        </div>
-       
-        <div class="bg-white rounded-lg shadow p-4 mb-6">
-            <p class="font-semibold">Ofertas realizadas:</p>
-            <ul class="list-disc pl-6">
-                <li>Maria: $900.000 (12:50 p.m.)</li>
-                <li>Alexander: $950.000 (12:52 p.m.)</li>
-                <li>Maria: $1.000.000 (12:55 p.m.)</li>
-                <li>Alexander: $1.250.000 (12:50 p.m.)</li>
-                <li>Marcos: $1.350.000</li>
-            </ul>
-        </div>
+  return (
+    <>
+      <div className="text-2xl ">
+        <div className=" grid grid-cols-2">
+          <div
+            className="bg-white  p-4  overflow-hidden hover:overflow-y-auto"
+            style={{ maxHeight: "72vh" }}
+          >
+            <div className="flex items-center gap-x-2">
+              <div>
+                <img
+                  src="./src/assets/profile_user.jfif"
+                  alt=""
+                  className="w-10 h-10 rounded-full"
+                />
+                <p className="text-xs text-center">jorge</p>
+              </div>
+              <div className="">
+                <div className="bg-gray-200 border border-gray-600 p-2 rounded-xl">
+                  $400,000
+                </div>
+                <p className="text-xs">2024-03-08 10:40 a.m.</p>
+              </div>
+            </div>
 
-        
-        <button class="bg-red-500 text-white px-4 py-2 rounded-md mr-2">Cierra subasta</button>
-        <button class="bg-green-500 text-white px-4 py-2 rounded-md">Iniciar conversación</button>
-    </div>
-            
+            <div className="flex items-center gap-x-2">
+              <div>
+                <img
+                  src="./src/assets/profile_user4.jfif"
+                  alt=""
+                  className="w-10 h-10 rounded-full"
+                />
+                <p className="text-xs text-center">Camila</p>
+              </div>
+              <div className="">
+                <div className="bg-gray-200 border border-gray-600 p-2 rounded-xl">
+                  $500,000
+                </div>
+                <p className="text-xs">2024-03-08 10:40 a.m.</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-x-2">
+              <div>
+                <img
+                  src="./src/assets/profile_user.jfif"
+                  alt=""
+                  className="w-10 h-10 rounded-full"
+                />
+                <p className="text-xs text-center">jorge</p>
+              </div>
+              <div className="">
+                <div className="bg-gray-200 border border-gray-600 p-2 rounded-xl">
+                  $600,000
+                </div>
+                <p className="text-xs">2024-03-08 10:40 a.m.</p>
+              </div>
+            </div>
+          </div>
+
+          <SubastaInfoUser />
         </div>
-            
-        </>
-     );
+      </div>
+      <div className="bg-gray-400 flex justify-between items-center text-2xl  rounded-b-xl border ">
+        <div className="justify-center w-2/4 grid grid-cols-2">
+          <button class="bg-green-400 hover:bg-green-700 text-white font-bold  rounded">
+            Cerrar Subasta{" "}
+          </button>
+          <button class=" bg-white hover:bg-amber-600 text-green-400 hover:text-white font-bold py-5 px-5 rounded">
+            Iniciar conversacion{" "}
+          </button>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Subasta;

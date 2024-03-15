@@ -3,7 +3,7 @@ import { IoMdTime } from "react-icons/io";
 
 function SubastaInfoUser() {
   return (
-    <div className="bg-green-500 border border-gray-400 rounded-se-2xl p-4">
+    <div className="bg-green-500 p-4">
       <div className="flex text-white justify-between">
         <div className="">
           <p>Subasta: Don juan</p>
