@@ -58,11 +58,11 @@ function Home(){
         ))}
       </div>
 
-        <h1 className="font-medium">Cafe Robusta Subasta</h1>
-        <div className="max-w-[200px] h-[200px] w-full m-auto py-16 px-4 relative group bg-orange-950  flex-row"></div>
+        <h1 className="font-medium flex-row">Cafe Robusta Subasta</h1>
+        <div className="max-w-[200px] h-[200px] w-full m-auto py-16 px-4 relative group bg-orange-950 "></div>
 
-        <h1 className="font-medium">Cafe Arabico Subastas</h1>
-        <div className="max-w-[200px] h-[200px] w-full m-auto py-16 px-4 relative group bg-orange-950"></div></div>
+        <h1 className="font-medium flex-row">Cafe Arabico Subastas</h1>
+        <div className="max-w-[200px] h-[200px] w-full m-auto py-16 px-4 relative group bg-orange-950 flex-row"></div></div>
 )}
 
 //slidesmini
