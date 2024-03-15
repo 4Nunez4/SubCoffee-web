@@ -8,7 +8,7 @@ import Chat from "./pages/Chat";
 import { TerminosyCondiciones } from "./components/TerminosCondiciones";
 import Notificaciones from "./pages/Notificaciones.jsx";
 import { Login } from "./components/Login";
-import Axios from "./pages/AxiosEjem.jsx";
+import Oferta from "./pages/Oferta.jsx";
 
 
 
@@ -26,7 +26,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/terminosycondiciomes" element={<TerminosyCondiciones/>} />
           <Route path="/Notificaciones" element={<Notificaciones />} />
-          <Route path="/Axios" element={<Axios />} />
+          <Route path="/Oferta" element={<Oferta />} />
         </Routes>
       </Layout>
     </BrowserRouter>
