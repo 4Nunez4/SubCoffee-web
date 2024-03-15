@@ -53,7 +53,7 @@ function Navbar() {
           <nav className="flex justify-between text-black font-roboto-regular bg-[#39A900]">
             <ul className="flex gap-x-5 p-5">
               <li>
-                <Link to={"/"} className="text-white text-xl">
+                <Link to={"/dashboard"} className="text-white text-xl">
                   Subcoffee
                 </Link>
               </li>
@@ -61,7 +61,7 @@ function Navbar() {
             <ul className="flex gap-x-5 p-5">
               <li>
                 <Link
-                  to={"/"}
+                  to={"/login"}
                   className="text-white rounded-lg p-3 hover:bg-green-800 border-white border-2"
                 >
                   Iniciar sesión
