@@ -1,5 +1,5 @@
 import { FaGooglePlay  } from "react-icons/fa6";
-import InfoChat from "../components/InfoChat";
+import InfoChat from "../components/ChatInfo";
 import InfoSubasta from "../components/InfoSubasta";
 import SubastaInfoUser from "../components/Subastainf";
 

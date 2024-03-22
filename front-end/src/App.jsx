@@ -5,6 +5,7 @@ import SubCoffee from "./pages/SubCoffee";
 import NotFound from "./pages/NotFound";
 import Subasta from "./pages/Subasta.jsx";
 import Chat from "./pages/Chat";
+import ChatInfo from "./components/ChatInfo.jsx"
 import { TerminosyCondiciones } from "./components/TerminosCondiciones";
 
 
@@ -14,8 +15,8 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/subcoffee" element={<SubCoffee />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/subcoffee" element={<SubCoffee />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          <Route path="/chat" element={<ChatInfo />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/subasta" element={<Subasta />} />
           <Route path="/terminosycondiciomes" element={<TerminosyCondiciones/>} />
