@@ -10,6 +10,8 @@ import { TerminosyCondiciones } from "./components/TerminosCondiciones";
 import Notificaciones from "./pages/Notificaciones.jsx";
 import { Login } from "./components/Login";
 import Oferta from "./pages/Oferta.jsx";
+import Historial from "./pages/Historial.jsx";
+import RegistrarFinca from "./pages/RegistrarFinca.jsx";
 
 
 
