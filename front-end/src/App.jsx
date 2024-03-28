@@ -21,6 +21,8 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/historial" element={<Historial />} />
+          <Route path="/registrarfinca" element={<RegistrarFinca />} />
           <Route path="/subcoffee" element={<SubCoffee />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
           <Route path="/chat" element={<ChatInfo />} />
           <Route path="*" element={<NotFound />} />
