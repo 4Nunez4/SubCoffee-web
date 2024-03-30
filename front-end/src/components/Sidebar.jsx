@@ -2,14 +2,24 @@ import { Link, useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiMessageSquare } from "react-icons/fi";
+import { FiBarChart } from "react-icons/fi";
+import { IoNotificationsOutline } from "react-icons/io5";
+import { RiAuctionLine } from "react-icons/ri";
+import { HiOutlineHand } from "react-icons/hi";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
+
   const Menus = [
+
     { title: "user", link: "/dashboard", icon: AiOutlineUser },
     { title: "messages", link: "/subcoffee", icon: FiMessageSquare },
+    { title: "chat", link: "/chat", icon: FiBarChart },
+    { title: "Notificaciones", link: "/Notificaciones", icon: IoNotificationsOutline },
+    { title: "Subasta", link: "/Subasta", icon: RiAuctionLine },
+    { title: "Oferta", link: "/Oferta", icon: HiOutlineHand },
   ];
 
   return (

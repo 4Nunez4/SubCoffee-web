@@ -10,7 +10,3 @@ export const valiRegistroProduccion = [
 export const valiActualizacionProduccion = [
     check("cantidad", "Ingrese la cantidad de la produccion.").isInt()
 ]
-
-/* export const valiDesactivacionProduccion = [
-    check("estado", "estado invalido").isIn('activo','inactivo')
-] */

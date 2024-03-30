@@ -52,15 +52,16 @@
                 <td>PETICION BODY</td>
                 <td>
                     {
-                        "pk_cedula_user": 108000701,
-                        "nombre_user": "Pepito Perez",
-                        "email_user": "pepito123@gmail.com",
-                        "password_user": "123456789",
-                        "descripcion_user": "Soy amable y amigable ",
+                        "pk_cedula_user": 108000777,
+                        "nombre_user": "Pepito",
+                        "email_user": "pepito@hotmail.com",
+                        "password_user": "7382b",
+                        "descripcion_user": "hola, esta funcionando ?",
                         "imagen_user": null,
-                        "telefono_user": "3101010101",
-                        "fecha_nacimiento_user": "2005-12-12",
-                        "rol_user": "admin"
+                        "telefono_user": "3207383",
+                        "fecha_nacimiento_user": "2005-02-01T05:00:00.000Z",
+                        "rol_user": "admin",
+                        "estado_user": "inactivo"
                     }
                 </td>
             </tr>
@@ -100,7 +101,7 @@
                 <td>DEVvdl</td>
             </tr>
         </table>
- 
+
         
         <h3>LISTAR USUARIOS</h3>
         <table>
@@ -131,7 +132,7 @@
 
             <tr>
                 <td>HEADER</td>
-                <td>NULL</td>
+                <td>token: token</td>
             </tr>
 
             <tr>
@@ -153,14 +154,15 @@
                     JSON
                     {
                         "pk_cedula_user": 108000700,
-                        "nombre_user": "Pepito Perez",
-                        "email_user": "pepito123@gmail.com",
-                        "password_user": "123456789",
-                        "descripcion_user": "Soy amable y amigable ",
+                        "nombre_user": "Pepito",
+                        "email_user": "pepito@hotmail.com",
+                        "password_user": "7382b",
+                        "descripcion_user": "hola, esta funcionando ?",
                         "imagen_user": null,
-                        "telefono_user": "3101010101",
-                        "fecha_nacimiento_user": "2005-12-12",
-                        "rol_user": "admin"
+                        "telefono_user": "3207383",
+                        "fecha_nacimiento_user": "2005-02-01T05:00:00.000Z",
+                        "rol_user": "admin",
+                        "estado_user": "inactivo"
                     }
 
                     INCORRECTO: 
@@ -220,7 +222,7 @@
 
             <tr>
                 <td>HEADER</td>
-                <td>NULL</td>
+                <td>token: token</td>
             </tr>
 
             <tr>
@@ -232,10 +234,16 @@
                 <td>PETICION BODY</td>
                 <td>
                     {
-                    "nombre_user": "Pepito",
-                    "telefono_user":"3207383",
-                    "email_user": "pepito@hotmail.com",
-                    "password_user": "7382b"
+                        "pk_cedula_user": 108000777,
+                        "nombre_user": "Pepito",
+                        "email_user": "pepito@hotmail.com",
+                        "password_user": "7382b",
+                        "descripcion_user": "hola, esta funcionando ?",
+                        "imagen_user": null,
+                        "telefono_user": "3207383",
+                        "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z",
+                        "rol_user": "admin",
+                        "estado_user": null
                     }
                 </td>
             </tr>
@@ -274,7 +282,6 @@
                 <td>DEVvdl</td>
             </tr>
         </table>
-
 
 
         <h3>BUSCAR USUARIOS</h3>
@@ -327,15 +334,18 @@
                     STATUS:200
                     JSON 
                     {
-                        "pk_cedula_user": 108000701,
-                        "nombre_user": "Pepito Perez",
-                        "email_user": "pepito123@gmail.com",
-                        "password_user": "123456789",
-                        "descripcion_user": "Soy amable y amigable ",
-                        "imagen_user": null,
-                        "telefono_user": "3101010101",
-                        "fecha_nacimiento_user": "2005-12-12",
-                        "rol_user": "admin"
+                        {
+                            "pk_cedula_user": 108000777,
+                            "nombre_user": "Pepito",
+                            "email_user": "pepito@hotmail.com",
+                            "password_user": "7382b",
+                            "descripcion_user": "hola, esta funcionando ?",
+                            "imagen_user": null,
+                            "telefono_user": "3207383",
+                            "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z",
+                            "rol_user": "admin",
+                            "estado_user": null
+                        }
                     }
 
 
@@ -397,7 +407,7 @@
 
             <tr>
                 <td>HEADER</td>
-                <td>NULL</td>
+                <td>token: token</td>
             </tr>
 
             <tr>
@@ -475,7 +485,7 @@
 
             <tr>
                 <td>HEADER</td>
-                <td>NULL</td>
+                <td>token: token</td>
             </tr>
 
             <tr>
@@ -501,6 +511,84 @@
                     BODY :{
                         STATUS: 404
                         MESSAGE: 'Error, no se desactivo usuario'
+                    }
+
+                    ERROR: 
+                    STATUS: 500 
+                    BODY : JSON{
+                        STATUS:500,
+                        MESSAGE: "ERROR EN EL SERVIDOR"
+                    }
+                </td>
+            </tr>
+
+            <tr>
+                <td>DESARROLADOR</td>
+                <td>VALENTINA DIAZ LERMA</td>
+            </tr>
+
+            <tr>
+                <td>RAMA</td>
+                <td>DEVvdl</td>
+            </tr>
+        </table>
+
+
+        <h3>ACTIVAR USUARIOS</h3>
+        <table>
+            <tr>
+                <td>NUMERO</td>
+                <td>7</td>
+            </tr>
+
+            <tr>
+                <td>NOMBRE DEL ENDPOINT</td>
+                <td>ACTIVAR USUARIOS</td>
+            </tr>
+
+            <tr>
+                <td>URI</td>
+                <td>/usuario/activar/108000700</td>
+            </tr>
+
+            <tr>
+                <td>DESCRIPCION</td>
+                <td>Permite activar usuarios</td>
+            </tr>
+
+            <tr>
+                <td>VERBO</td>
+                <td>PUT</td>
+            </tr>
+
+            <tr>
+                <td>HEADER</td>
+                <td>token: token</td>
+            </tr>
+
+            <tr>
+                <td>USUARIOS</td>
+                <td>ADMINISTRADOR</td>
+            </tr>
+
+            <tr>
+                <td>PETICION</td>
+                <td>NULL</td>
+            </tr>
+
+            <tr>
+                <td>RESPUESTA JSON</td>
+                <td>
+                    
+                    CORRECTO: 
+                    STATUS:200 
+                    MESSAGE: 'Se activo el usuario exitasamente' 
+
+                    INCORRECTO 
+                    STATUS: 404 
+                    BODY :{
+                        STATUS: 404
+                        MESSAGE: 'Error, no se activo usuario'
                     }
 
                     ERROR: 

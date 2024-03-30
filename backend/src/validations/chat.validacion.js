@@ -5,20 +5,14 @@ export const validarCreateChat = [
     .not()
     .isEmpty()
     .isLength({ max: 100 }),
-  check(
-    "fk_id_subasta",
-    "El id subasta es obligatorio y debe ser numerico sin signos"
-  )
+  check("fk_id_subasta","El id subasta es obligatorio y debe ser numerico sin signos")
     .not()
     .isEmpty()
     .isInt({ min: 1 })
     .toInt()
     .isNumeric({ no_symbols: true })
     .isLength({ max: 100 }),
-  check(
-    "fk_id_usuario",
-    "El id subasta es obligatorio y debe ser numerico sin signos"
-  )
+  check("fk_id_usuario","El id subasta es obligatorio y debe ser numerico sin signos")
     .not()
     .isEmpty()
     .isInt({ min: 1 })

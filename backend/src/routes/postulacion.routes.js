@@ -1,5 +1,4 @@
 import{Router} from 'express';
-import { check } from 'express-validator';
  import{getPostulaciones,guardarPostulacion, getPostulacion,updatePostulacion, deletePostulacion, desactivarPostulacion, activarPostulacion} from '../controllers/postulacion.controllers.js';
  import { validarguardarPostulacion,validarActualizacionPos } from '../validations/postulacion.validation.js';
  import { validartoken } from '../controllers/autenticacionController.js';
@@ -22,3 +21,4 @@ import { check } from 'express-validator';
 
 
     export default postulacionRoutes;
+   
