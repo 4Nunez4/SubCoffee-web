@@ -43,7 +43,7 @@ export const listar = async (req, res) =>{
         else{res.status(404).json({'status':404, 'mesage': 'Error, el registro fue denegado'})}
 
     } catch (error) {
-        res.status(500).json({'status':500, 'mesage':'ERROR SERVIDOR'})
+        res.status(500).json({'status':500, 'mesage':'ERROR SERVIDOR' + error})
     }
 }
 
