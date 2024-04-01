@@ -9,7 +9,7 @@
 }
 .img-user {
     border-radius: 50%;
-    position: absolute;
-    top: 316px;
+    position: relative;
+    top: -160px;
     left: 44%;
 }

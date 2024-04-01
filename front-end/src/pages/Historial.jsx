@@ -118,7 +118,7 @@ const Historial = (historial) => {
       id: 4,
       imagen: './src/assets/cafe3.jfif',
       nombre_usuario: 'Juanito Perez',
-      producto: 'Borbon',
+      producto: 'Borbon rosado',
       cantidad: '800 kg',
       precio_inicial: 640000,
       precio_final: 1300000,
@@ -131,7 +131,7 @@ const Historial = (historial) => {
     <div className='w-full'>
       <div className='content-img'></div>
       <img src={('./src/assets/profile_user.jfif')} className='img-user' alt='img-user' />
-      <div className='content p-20'>
+      <div className='content pb-20 pl-20 pr-20'>
         <h1 className=' text-3xl mb-8'>Pablo Emilio</h1>
         <p className='text-xl mb-4'>Finca - Pitalito/Huila</p>
         <p className='text-xl mb-2'>Tel: 315784593</p>
@@ -145,7 +145,7 @@ const Historial = (historial) => {
             {HistorialSubCreadas.map((historial) => (
               <div key={historial.id} className='flex flex-row items-center border border-black rounded-lg p-4' onClick={() => openModal(historial)}>
                 <div className='w-30 flex items-center justify-center m-4'>
-                  <img src={historial.imagen} alt="" className='w-full' />
+                  <img src={historial.imagen} alt="" className='w-full rounded-md' />
                 </div>
                 <div className='w-80'>
                   <h1 className='text-xl font-semibold mb-4'>{historial.nombre_subasta}</h1>
@@ -160,7 +160,7 @@ const Historial = (historial) => {
             {HistorialSubGanadas.map((historial) => (
               <div key={historial.id} className='flex flex-row items-center border border-black rounded-lg p-4' onClick={() => openModal(historial)}>
                 <div className='w-30 flex items-center justify-center m-4'>
-                  <img src={historial.imagen} alt="" className='w-full' />
+                  <img src={historial.imagen} alt="" className='w-full rounded-md' />
                 </div>
                 <div className='w-80'>
                   <h1 className='text-xl font-semibold mb-4'>{historial.nombre_subasta}</h1>
@@ -178,13 +178,14 @@ const Historial = (historial) => {
           <div className='bg-white p-8 rounded-lg'>
             <div className="flex flex-row justify-center items-center" >
               <div className='w-30 flex items-center justify-center m-4'>
-                <img src={selectedSubasta.imagen} alt="" className="w-full" />
+                <img src={selectedSubasta.imagen} alt="" className="w-full rounded-md" />
               </div>
               <div className='w-80'>
                 <h2 className="text-3xl font-semibold mb-14">{selectedSubasta.nombre_subasta}</h2>
                 <p className="text-lg mb-2">Usuario: {selectedSubasta.nombre_usuario}</p>
                 <p className="text-lg mb-2">Producto: {selectedSubasta.producto}</p>
                 <p className="text-lg mb-2">Cantidad: {selectedSubasta.cantidad}</p>
+                <p className="text-lg mb-2">Precio Inicial: {selectedSubasta.precio_inicial}</p>
                 {selectedSubasta.precio_final && (
                   <p className="text-lg mb-2">Precio final: {selectedSubasta.precio_final}</p>
                 )}
