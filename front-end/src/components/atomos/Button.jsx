@@ -1,12 +1,12 @@
-import React from "react";
-import { FaGooglePlay } from "react-icons/fa6";
+// Button.jsx
+import React from 'react';
 
-function Button() {
-    return (
-        <button>
-            <FaGooglePlay className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer" />
-        </button>
-    );
-}
+const Button = ({ children, variant = "" }) => {
+  return (
+    <button className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded ${variant === "outline" ? "border border-blue-600" : ""}`}>
+      {children}
+    </button>
+  );
+};
 
 export default Button;
