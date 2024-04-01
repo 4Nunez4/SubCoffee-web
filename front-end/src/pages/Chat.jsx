@@ -1,6 +1,5 @@
 import { FaGooglePlay  } from "react-icons/fa6";
 import InfoChat from "../components/ChatInfo";
-import InfoSubasta from "../components/InfoSubasta";
 import SubastaInfoUser from "../components/Subastainf";
 
 function Chat() {
@@ -8,7 +7,7 @@ function Chat() {
     <div className="p-3">
       <div className="grid grid-cols-2">
         <InfoChat />
-        <SubastaInfoUser />
+        <SubastaInfoUser />c
       </div>
       <div className="bg-gray-200 flex justify-between items-center rounded-b-xl border border-gray-400">
           <div className="m-4 relative w-2/4 mr-16 flex justify-center">
