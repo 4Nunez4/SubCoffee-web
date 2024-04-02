@@ -1,7 +1,7 @@
 const Texto= ({children})=> {
     return ( 
  
-    <p class="text-gray-400">
+    <p class="text-gray-700 text-2xl">
     {children}
     </p>
  

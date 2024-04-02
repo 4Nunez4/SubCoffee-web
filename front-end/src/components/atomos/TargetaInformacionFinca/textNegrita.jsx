@@ -1,6 +1,6 @@
 const TextoNegrita = ({children}) => {
     return ( 
-        <div class="text-lg font-semibold">
+        <div class="text-2xl font-semibold">
            {children}
         </div>
      );

@@ -1,6 +1,6 @@
 const Targeta = ({children})=> {
     return ( 
-        <div class=" w-3/5  h-3/5  bg-gray-800 rounded-xl shadow-md overflow-hidden grid grid-cols-4 gap-4 text-center">
+        <div class=" h-96  bg-gray-300 rounded-xl shadow-md overflow-hidden grid grid-cols-4 gap-4 text-center border-gray-400 border-4">
         {children}
         </div>
      

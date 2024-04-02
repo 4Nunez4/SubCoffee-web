@@ -9,7 +9,7 @@ import { LuBadgeCheck } from "react-icons/lu";
 
 const ButtonGridOrganism = () => {
   return (
-    <div className="grid grid-cols-2 gap-4 p-8 text-white bg-blue-800">
+    <div className="grid grid-cols-2 gap-4 p-8 text-white bg-blue-800 h-full rounded-lg">
       <ButtonWithIconMolecule icon={<IoChatbubbleEllipsesSharp />} text="Chatear" />
       <ButtonWithIconMolecule icon={<FaTrashCan />} text="Eliminar" />
       <ButtonWithIconMolecule icon={<HiUserGroup />} text="Continuar" />

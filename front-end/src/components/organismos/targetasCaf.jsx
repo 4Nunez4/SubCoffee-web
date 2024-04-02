@@ -2,7 +2,7 @@ import TargetaInfoFinca from "../moleculas/TargetaFinca";
 const TargetasCafetero= ({children})=>{
     return ( 
         <div >
-            <TargetaInfoFinca></TargetaInfoFinca>
+            <TargetaInfoFinca/>
             
                         {children}
         </div>

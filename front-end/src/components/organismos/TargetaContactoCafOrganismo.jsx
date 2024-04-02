@@ -5,7 +5,7 @@ import TextAtom from '../atomos/TargetaDueñoSubasta/TextoDueñoSubastaAtomo';
 
 const ContactCardOrganism = () => {
   return (
-    <div className="w-64 h-80 bg-blue-500 rounded-lg shadow-md overflow-hidden place-content-center text-white">
+    <div className="h-full bg-blue-500 rounded-lg shadow-md overflow-hidden place-content-center text-white">
       <div className="p-4  grid grid-rows-3 grid-flow-col gap-3">
         <AvatarWithTextMolecule src="/src/assets/profile_user4.jfif" />
         <TextAtom>Camilo montolla </TextAtom>
