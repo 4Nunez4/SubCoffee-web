@@ -10,7 +10,7 @@ router.get("/listar", validartoken, listar)
 
 router.post("/registrar", cargarImagen, validarUsuarioRegister, registrar)
 
-router.put("/actualizar/:id", validartoken, validarUsuarioActualizar, actualizar)
+router.put("/actualizar/:id", cargarImagen , validartoken, validarUsuarioActualizar, actualizar)
 
 router.get("/buscar/:id", validartoken,buscar)
 

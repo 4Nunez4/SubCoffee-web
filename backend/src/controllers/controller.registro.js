@@ -83,7 +83,9 @@ export const actualizar = async (req, res) => {
 
         const {nombre_user, email_user, password_user, descripcion_user, telefono_user, rol_user} = req.body;
 
-        const [result] = await pool.query( 'update usuarios set nombre_user = COALESCE(?,nombre_user), email_user = COALESCE(?, email_user), password_user = COALESCE(?, password_user), descripcion_user = COALESCE(?,descripcion_user), telefono_user = COALESCE(?, telefono_user), rol_user = COALESCE(?, rol_user) where pk_cedula_user = ?', [nombre_user, email_user, password_user, descripcion_user, telefono_user, rol_user, id]);
+        let imagen_user = req.file.originalname
+
+        const [result] = await pool.query( 'update usuarios set nombre_user = COALESCE(?,nombre_user), email_user = COALESCE(?, email_user), password_user = COALESCE(?, password_user), descripcion_user = COALESCE(?,descripcion_user), imagen_user = COALESCE(?, imagen_user), telefono_user = COALESCE(?, telefono_user), rol_user = COALESCE(?, rol_user) where pk_cedula_user = ?', [nombre_user, email_user, password_user, descripcion_user, imagen_user, telefono_user, rol_user, id]);
 
         if(result.affectedRows>0)
         {
