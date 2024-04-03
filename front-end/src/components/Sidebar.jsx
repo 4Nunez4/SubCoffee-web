@@ -20,6 +20,7 @@ const Sidebar = () => {
     { title: "Notificaciones", link: "/Notificaciones", icon: IoNotificationsOutline },
     { title: "Subasta", link: "/Subasta", icon: RiAuctionLine },
     { title: "Oferta", link: "/Oferta", icon: HiOutlineHand },
+
   ];
 
   return (

@@ -1,7 +1,56 @@
+import multer from "multer"
 import { pool } from "../databases/conexion.js"
 import { validationResult } from "express-validator"
 
-//listarUsuariosTodos
+//ALMACENAR IMAGEN
+
+    const storage = multer.diskStorage(
+        {
+            destination: function(req,img,cb)
+            {
+                cb(null, "public/img")
+            },
+
+            filename: function(req,img,cb)
+            {
+                cb(null,img.originalname)
+            }
+        }
+    )
+
+    const upload = multer({storage:storage})
+    export const cargarImagen = upload.single('img')
+
+   //REGISTRAR-USUARIOS
+   export const registrar = async (req, res) =>{
+    try {
+
+        const errors = validationResult(req)
+        if(!errors.isEmpty()){
+            return res.status(400).json(errors)
+        }
+
+        let {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user, estado_user} = req.body
+
+        let imagen_user = req.file.originalname
+
+        let sql = `INSERT INTO usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, imagen_user, telefono_user, fecha_nacimiento_user, rol_user, estado_user) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+
+        const [rows] = await pool.query(sql,[pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, imagen_user, telefono_user, fecha_nacimiento_user, rol_user, estado_user])
+
+        if(rows.affectedRows > 0)
+        {
+            res.status(200).json({'status':200, 'mesage':'Felicidades, el registro fue un exito'})
+        }
+        else{res.status(404).json({'status':404, 'mesage': 'Error, el registro fue denegado'})}
+
+    } catch (error) {
+        res.status(500).json({'status':500, 'mesage':'ERROR SERVIDOR' + error})
+    }
+}
+
+
+//LISTAR-USUARIOS
 export const listar = async (req, res) =>{
 
     try {
@@ -20,35 +69,7 @@ export const listar = async (req, res) =>{
     }
 }
 
-   //registrarUsuarios
-
-   export const registrar = async (req, res) =>{
-    try {
-    
-        const errors = validationResult(req)
-        if(!errors.isEmpty()){
-            return res.status(400).json(errors)
-        }
-
-        const {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, rol_user}=req.body
-
-        let sql = `insert into usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user,  rol_user) values (?,?,?,?,?,?,?)`
-
-        const [rows] = await pool.query(sql,[pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user,  rol_user])
-
-        if(rows.affectedRows > 0)
-        {
-            res.status(200).json({'status':200, 'mesage':'Felicidades, el registro fue un exito'})
-        }
-
-        else{res.status(404).json({'status':404, 'mesage': 'Error, el registro fue denegado'})}
-
-    } catch (error) {
-        res.status(500).json({'status':500, 'mesage':'ERROR SERVIDOR'})
-    }
-}
-
-//actualizar o editar usuario
+//ACTUALIZAR-USUARIOS
 
 export const actualizar = async (req, res) => {
     try {
@@ -75,7 +96,7 @@ export const actualizar = async (req, res) => {
     }
 }
 
-//buscar usuario
+//BUSCAR-USUARIOS
 
 export const buscar = async (req, res) =>{
     try {
@@ -93,7 +114,7 @@ export const buscar = async (req, res) =>{
     }
 }
 
-//eliminar usuario
+//ELIMINAR-USUARIOS
 
 export const eliminar = async (req,res)=>{
     try {
@@ -112,7 +133,7 @@ export const eliminar = async (req,res)=>{
 
 }
 
-//desactivar
+//DESACTIVAR-USUARIOS
 export const desactivar = async (req, res)=>{
     try {
     
@@ -130,7 +151,7 @@ export const desactivar = async (req, res)=>{
     }
 }
 
-//Activar
+//ACTIVAR-USUARIOS
 export const activar = async (req, res)=>{
     try {
         const {id} = req.params
