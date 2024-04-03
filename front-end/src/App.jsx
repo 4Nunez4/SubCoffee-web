@@ -18,14 +18,14 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/" element={<Dashboard />} />
           <Route path="/subcoffee" element={<SubCoffee />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
           <Route path="/chat" element={<ChatInfo />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/subasta" element={<Subasta />} />
-          <Route path="/login" element={<Login/>}/>
           <Route path="*" element={<NotFound />} />
-          <Route path="/terminosycondiciomes" element={<TerminosyCondiciones/>} />
+          <Route path="/terminosycondiciones" element={<TerminosyCondiciones/>} />
           <Route path="/Notificaciones" element={<Notificaciones />} />
           <Route path="/Oferta" element={<Oferta />} />
         </Routes>
