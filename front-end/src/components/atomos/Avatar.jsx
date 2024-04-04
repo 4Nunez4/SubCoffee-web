@@ -1,12 +1,9 @@
 // Avatar.jsx
 import React from 'react';
 
-const Avatar = ({ children }) => {
-  return (
-    <div className="flex items-center">
-      {children}
-    </div>
-  );
-};
+function Avatar({ src, alt }) {
+  return <img src={src} alt={alt} className="w-20 h-20 rounded-full" />;
+}
 
 export default Avatar;
+
