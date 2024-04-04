@@ -43,7 +43,8 @@ export const guardarVariedad= async (req, res) => {
             }
     
             const {tipo_vari, descripcion_vari, puntuacion_vari, estado_vari} = req.body;
-            const [rows] = await pool.query("INSERT INTO variedad(tipo_vari, descripcion_vari, puntuacion_vari,estado_vari) VALUES (?,?,?,?)", [tipo_vari, descripcion_vari, puntuacion_vari ,estado_vari ]);
+            let imagenVari = req.file.originalname
+            const [rows] = await pool.query("INSERT INTO variedad(tipo_vari, descripcion_vari, imagenVari, puntuacion_vari,estado_vari) VALUES (?,?,?,?,?)", [tipo_vari, descripcion_vari, puntuacion_vari, imagenVari ,estado_vari ]);
             if(rows.affectedRows){
                 res.status(200).json({status:500, message:"Variedad creada con exito"});
             }else{
