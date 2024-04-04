@@ -1,5 +1,5 @@
-  import express from "express";
-  import bodyParser from "body-parser";
+import express from "express";
+import bodyParser from "body-parser";
 import ejs from "ejs";
 import cors from 'cors';
 import rutaProduccion from "./src/routes/router.produccion.js";
@@ -12,11 +12,9 @@ import postulacionRoutes from "./src/routes/postulacion.routes.js";
 import variedadesRoute from "./src/routes/variedades.routes.js";
 import FincaRouter from "./src/routes/finca.routes.js";
 import autenticacionRouter from "./src/routes/autenticacion.routes.js";
-import cors from  'cors';
+
 
 const app = express();
-
-app.use(cors())
 
 app.use(express.json());
 // app.use(bodyParser.urlencoded({extended:false}));Poder trabajar con el formato json

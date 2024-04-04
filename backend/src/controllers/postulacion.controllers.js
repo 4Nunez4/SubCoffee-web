@@ -1,6 +1,6 @@
 import { pool } from '../databases/conexion.js';
 import { validationResult } from 'express-validator';
-import multer from 'multer';
+
 
 export const getPostulaciones = async (req,res) =>{
     try {
@@ -26,6 +26,7 @@ export const guardarPostulacion = async (req,res)=> {
         return res.status(400).json(errors);
     }
   const {oferta_pos,fk_id_usuario,	fk_id_subasta , estado_pos } = req.body;
+
 
       const [rows] = await pool.query("INSERT INTO postulacion(oferta_pos, fk_id_usuario,	fk_id_subasta , estado_pos) VALUES (?,?,?,?)", [oferta_pos, fk_id_usuario,	fk_id_subasta , estado_pos]);
       if(rows.affectedRows){
