@@ -4,22 +4,20 @@ import { validationResult } from "express-validator"
 
 //ALMACENAR IMAGEN
 
-    const storage = multer.diskStorage(
-        {
-            destination: function(req,img,cb)
-            {
-                cb(null, "public/img")
-            },
+const storage = multer.diskStorage(
+    {
+        destination: function(req,img,cb){
+            cb(null, "public/img")
+        },
 
-            filename: function(req,img,cb)
-            {
-                cb(null,img.originalname)
-            }
+        filename: function(req,img,cb){
+            cb(null,img.originalname)
         }
-    )
+    }
+)
+const upload = multer({storage:storage})
+export const cargarImagen= upload.single('img')
 
-    const upload = multer({storage:storage})
-    export const cargarImagen = upload.single('img')
 
    //REGISTRAR-USUARIOS
    export const registrar = async (req, res) =>{
@@ -30,7 +28,7 @@ import { validationResult } from "express-validator"
             return res.status(400).json(errors)
         }
 
-        let {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user, estado_user} = req.body
+        const {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user, estado_user} = req.body
 
         let imagen_user = req.file.originalname
 
@@ -81,11 +79,11 @@ export const actualizar = async (req, res) => {
 
         const id = req.params.id;
 
-        const {nombre_user, email_user, password_user, descripcion_user, telefono_user, rol_user} = req.body;
+        const {nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user} = req.body;
 
         let imagen_user = req.file.originalname
 
-        const [result] = await pool.query( 'update usuarios set nombre_user = COALESCE(?,nombre_user), email_user = COALESCE(?, email_user), password_user = COALESCE(?, password_user), descripcion_user = COALESCE(?,descripcion_user), imagen_user = COALESCE(?, imagen_user), telefono_user = COALESCE(?, telefono_user), rol_user = COALESCE(?, rol_user) where pk_cedula_user = ?', [nombre_user, email_user, password_user, descripcion_user, imagen_user, telefono_user, rol_user, id]);
+        const [result] = await pool.query( 'update usuarios set nombre_user = COALESCE(?,nombre_user), email_user = COALESCE(?, email_user), password_user = COALESCE(?, password_user), descripcion_user = COALESCE(?,descripcion_user), imagen_user = COALESCE(?, imagen_user), telefono_user = COALESCE(?, telefono_user), fecha_nacimiento_user = COALESCE(?, fecha_nacimiento_user), rol_user = COALESCE(?, rol_user) where pk_cedula_user = ?', [nombre_user, email_user, password_user, descripcion_user, imagen_user, telefono_user, fecha_nacimiento_user, rol_user, id]);
 
         if(result.affectedRows>0)
         {
