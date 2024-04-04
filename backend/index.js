@@ -35,14 +35,15 @@ app.use("/variedad", variedadesRoute);
 app.use(autenticacionRouter)
 
 app.set("view engine", "ejs");
+
 app.set("views", "./view");
+
+app.use(express.static('./public'))
 
 app.get("/documents", (req, res) => {
   res.render("documentacion.ejs");
 });
 
-
-
 app.listen(4000, () => {
   console.log("Servidor se esta ejecutando en el puerto 4000");
-});
+}); 

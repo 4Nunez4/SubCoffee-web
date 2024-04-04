@@ -1,6 +1,6 @@
 import React from "react"
 
-export const Login = () => {
+export const Registro = () => {
     return (
         <div className="min-h-screen flex items-center justify-center w-full">
 

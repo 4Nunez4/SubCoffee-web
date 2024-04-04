@@ -19,10 +19,8 @@ function Home(){
 
     ];
 
-
-
-     const [currentIndex,setCurrentIndex] = useState(0);
-  const prevSlide = () => {
+    const [currentIndex,setCurrentIndex] = useState(0);
+    const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length-1 : currentIndex-1;
     setCurrentIndex(newIndex)
@@ -58,14 +56,23 @@ function Home(){
         ))}
       </div>
 
+      <>
         <h1 className="font-medium flex-row">Cafe Robusta Subasta</h1>
-        <div className="max-w-[200px] h-[200px] w-full m-auto py-16 px-4 relative group bg-orange-950 "></div>
+
 
         <h1 className="font-medium flex-row">Cafe Arabico Subastas</h1>
-        <div className="max-w-[200px] h-[200px] w-full m-auto py-16 px-4 relative group bg-orange-950 flex-row"></div></div>
+
+      </>  
+
+          </div>
 )}
 
 //slidesmini
+
+/* className="shadow-sm rounded-md px-3 py-2 border border-black focus:outline-none focus:border-blue-700 mb-2 w-64 cursor-pointer" */
+/*  <div className="flex flex-col w-[30%] h-[30%] mt-96">
+                            <img src={ImagenSuba} />
+                            </div> */
 
 
 export default Home
