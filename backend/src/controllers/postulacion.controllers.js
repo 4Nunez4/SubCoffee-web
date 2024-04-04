@@ -1,5 +1,6 @@
 import { pool } from '../databases/conexion.js';
 import { validationResult } from 'express-validator';
+import multer from 'multer';
 
 export const getPostulaciones = async (req,res) =>{
     try {

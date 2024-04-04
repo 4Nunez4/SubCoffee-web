@@ -45,7 +45,7 @@ export const actualizarVariedad = async (req, res) => {
         }
         const id = req.params.id;
         const { tipo_vari, descripcion_vari, puntuacion_vari, estado_vari } = req.body;
-        const [result] = await pool.query("UPDATE variedad SET tipo_vari = ?, descripcion_vari = ?, puntuacion_vari = ?, estado_vari = ? WHERE pk_id_vari - ?", [tipo_vari, descripcion_vari, puntuacion_vari,estado_vari, id]);
+        const [result] = await pool.query("UPDATE variedad SET tipo_vari = ?, descripcion_vari = ?, puntuacion_vari = ?, estado_vari = ? WHERE pk_id_vari = ?", [tipo_vari, descripcion_vari, puntuacion_vari,estado_vari, id]);
         if(result.affectedRows > 0) {
             res.status(200).json({ status: 200, message: 'La variedad ha sido actualizada exitosamente' });
         }else {

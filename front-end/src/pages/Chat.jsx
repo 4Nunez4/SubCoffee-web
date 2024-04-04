@@ -1,6 +1,10 @@
 import { FaGooglePlay  } from "react-icons/fa6";
 import InfoChat from "../components/ChatInfo";
+<<<<<<< HEAD
 // import InfoSubasta from "../components/InfoSubasta";
+=======
+
+>>>>>>> DEVlkvm
 import SubastaInfoUser from "../components/Subastainf";
 
 function Chat() {
