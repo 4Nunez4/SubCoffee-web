@@ -70,6 +70,9 @@ function Home(){
 //slidesmini
 
 /* className="shadow-sm rounded-md px-3 py-2 border border-black focus:outline-none focus:border-blue-700 mb-2 w-64 cursor-pointer" */
+/*  <div className="flex flex-col w-[30%] h-[30%] mt-96">
+                            <img src={ImagenSuba} />
+                            </div> */
 
 
 export default Home

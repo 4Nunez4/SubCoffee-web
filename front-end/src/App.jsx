@@ -19,8 +19,7 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/subcoffee" element={<SubCoffee />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          <Route path="/dashboard" element={<Dashboard />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
           
           <Route path="*" element={<NotFound />} />
           <Route path="/subasta" element={<Subasta />} />
@@ -31,7 +30,6 @@ function App() {
           <Route path="/Oferta" element={<Oferta />} />
 
           <Route path="/CrearSubasta" element={<CrearSubasta />} />
-          <Route path="/Home" element={<Home />} />
         </Routes>
       </Layout>
     </BrowserRouter>
