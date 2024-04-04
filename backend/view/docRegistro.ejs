@@ -45,7 +45,7 @@
 
             <tr>
                 <td>USUARIOS</td>
-                <td>ADMINISTRADOR</td>
+                <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
             </tr>
 
             <tr>
@@ -57,7 +57,7 @@
                         "email_user": "pepito@hotmail.com",
                         "password_user": "7382b",
                         "descripcion_user": "hola, esta funcionando ?",
-                        "imagen_user": null,
+                        "img": img,
                         "telefono_user": "3207383",
                         "fecha_nacimiento_user": "2005-02-10",
                         "rol_user": "admin",
@@ -72,7 +72,7 @@
                     
                     CORRECTO: 
                     STATUS:200 
-                    MESSAGE: "Felicidades, el registro fue un exito"
+                    MESSAGE: "Felicidades, el registro fue un exito" <br>
     
 
                     INCORRECTO 
@@ -80,9 +80,9 @@
                     BODY :{
                         STATUS: 404
                         MESSAGE: "Error, El registro fue denegado"
-                    } 
+                    } <br>
 
-                    ERROR: 
+                    ERROR-SERVIDOR: 
                     STATUS: 500 
                     BODY : JSON{
                         STATUS:500,
@@ -137,7 +137,7 @@
 
             <tr>
                 <td>USUARIOS</td>
-                <td>ADMINISTRADOR</td>
+                <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
             </tr>
 
             <tr>
@@ -158,21 +158,21 @@
                         "email_user": "pepito@hotmail.com",
                         "password_user": "7382b",
                         "descripcion_user": "hola, esta funcionando ?",
-                        "imagen_user": null,
+                        "img": img,
                         "telefono_user": "3207383",
                         "fecha_nacimiento_user": "2005-02-10",
                         "rol_user": "admin",
                         "estado_user": "activo"
-                    }
+                    } <br>
 
                     INCORRECTO: 
                     STATUS: 404 
                     BODY :{
                         STATUS: 404
                         MESSAGE: "Error, No hay registros de usuario"
-                    } 
+                    } <br>
 
-                    ERROR: 
+                    ERROR-SERVIDOR: 
                     STATUS: 500 
                     BODY : JSON{
                         STATUS:500,
@@ -227,7 +227,7 @@
 
             <tr>
                 <td>USUARIOS</td>
-                <td>ADMINISTRADOR</td>
+                <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
             </tr>
 
             <tr>
@@ -252,14 +252,14 @@
                     
                     CORRECTO: 
                     STATUS:200 
-                    MESSAGE: "Felicidades, La actualizacion del usuario fue un exito"
+                    MESSAGE: "Felicidades, La actualizacion del usuario fue un exito" <br>
 
                     INCORRECTO 
                     STATUS: 404 
                     BODY :{
                         STATUS: 404
                         MESSAGE: "Error, La actualizacion fue denegada"
-                    }
+                    } <br>
 
                     ERROR: 
                     STATUS: 500 
@@ -316,7 +316,7 @@
 
             <tr>
                 <td>USUARIOS</td>
-                <td>ADMINISTRADOR</td>
+                <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
             </tr>
 
             <tr>
@@ -338,13 +338,13 @@
                             "email_user": "pepito@hotmail.com",
                             "password_user": "7382b",
                             "descripcion_user": "hola, esta funcionando ?",
-                            "imagen_user": null,
+                            "imagen_user": img,
                             "telefono_user": "3207383",
                             "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z",
                             "rol_user": "admin",
-                            "estado_user": null
+                            "estado_user": "activo"
                         }
-                    }
+                    } <br>
 
 
                     INCORRECTO 
@@ -352,9 +352,9 @@
                     BODY :{
                         STATUS: 404
                         MESSAGE: 'Error, No se encuentra de usuario'
-                    }
+                    } <br>
 
-                    ERROR: 
+                    ERROR-SERVIDOR: 
                     STATUS: 500 
                     BODY : JSON{
                         STATUS:500,
@@ -410,7 +410,7 @@
 
             <tr>
                 <td>USUARIOS</td>
-                <td>ADMINISTRADOR</td>
+                <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
             </tr>
 
             <tr>
@@ -424,14 +424,14 @@
                     
                     CORRECTO: 
                     STATUS:200 
-                    MESSAGE: 'Se elimino el usuario exitasamente' 
+                    MESSAGE: 'Se elimino el usuario exitasamente' <br> 
 
                     INCORRECTO 
                     STATUS: 404 
                     BODY :{
                         STATUS: 404
                         MESSAGE: 'Error, no se elimino usuario'
-                    }
+                    } <br>
 
                     ERROR: 
                     STATUS: 500 
@@ -488,7 +488,7 @@
 
             <tr>
                 <td>USUARIOS</td>
-                <td>ADMINISTRADOR</td>
+                <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
             </tr>
 
             <tr>
@@ -502,16 +502,16 @@
                     
                     CORRECTO: 
                     STATUS:200 
-                    MESSAGE: 'Se desactivo el usuario exitasamente' 
+                    MESSAGE: 'Se desactivo el usuario exitasamente'  <br>
 
-                    INCORRECTO 
+                    INCORRECTO:
                     STATUS: 404 
                     BODY :{
                         STATUS: 404
                         MESSAGE: 'Error, no se desactivo usuario'
-                    }
+                    } <br>
 
-                    ERROR: 
+                    ERROR-SERVIDOR: 
                     STATUS: 500 
                     BODY : JSON{
                         STATUS:500,
@@ -566,7 +566,7 @@
 
             <tr>
                 <td>USUARIOS</td>
-                <td>ADMINISTRADOR</td>
+                <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
             </tr>
 
             <tr>
@@ -580,21 +580,21 @@
                     
                     CORRECTO: 
                     STATUS:200 
-                    MESSAGE: 'Se activo el usuario exitasamente' 
+                    MESSAGE: 'Se activo el usuario exitasamente' <br>
 
-                    INCORRECTO 
+                    INCORRECTO :
                     STATUS: 404 
                     BODY :{
                         STATUS: 404
                         MESSAGE: 'Error, no se activo usuario'
-                    }
+                    } <br>
 
                     ERROR: 
                     STATUS: 500 
                     BODY : JSON{
                         STATUS:500,
                         MESSAGE: "ERROR EN EL SERVIDOR"
-                    }
+                    } <br>
                 </td>
             </tr>
 
