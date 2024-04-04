@@ -12,7 +12,8 @@ import Oferta from "./pages/Oferta.jsx";
 import Historial from "./pages/Historial.jsx";
 import RegistrarFinca from "./pages/RegistrarFinca.jsx";
 
-
+import CrearSubasta from "./pages/CrearSubasta.jsx"
+import Home from "./pages/Home.jsx"
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
           <Route path="/terminosycondiciones" element={<TerminosyCondiciones/>} />
           <Route path="/Notificaciones" element={<Notificaciones />} />
           <Route path="/Oferta" element={<Oferta />} />
+
+          <Route path="/CrearSubasta" element={<CrearSubasta />} />
         </Routes>
       </Layout>
     </BrowserRouter>

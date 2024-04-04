@@ -17,6 +17,9 @@ const Sidebar = () => {
 
     { title: "user", link: "/dashboard", icon: AiOutlineUser },
     { title: "messages", link: "/subcoffee", icon: FiMessageSquare },
+<<<<<<< HEAD
+    
+=======
     { title: "chat", link: "/chat", icon: FiBarChart },
     { title: "Notificaciones", link: "/Notificaciones", icon: IoNotificationsOutline },
     { title: "Subasta", link: "/Subasta", icon: RiAuctionLine },

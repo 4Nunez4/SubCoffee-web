@@ -1,54 +1,86 @@
+import ImagenSuba from "../assets/ImagenSubasta.png"
+import { FaX } from "react-icons/fa6";
+
 function CrearSubasta(){
+
     return(
+        <div className="flex flex-col">
+        
+            <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
 
-        <div className=" rounded-t-xl bg-white flex flex-col justify-center items-center p-5">
+                <div className=' flex flex-col justify-center bg-slate-50 shadow-md rounded-lg px-8 py-6 border border-gray-700 w-[90%] h-[90%] auto-cols-auto'>
 
-            <form className="flex flex-col justify-center bg-slate-200 w-6/12">
+                            <div className="flex flex-col">
+                            <h1 className="flex flex-col justify-center items-center text-xl font-semibold">Crear Tu Subasta Ya</h1> 
+                            </div>
 
-        <button className="flex flex-col bg-emerald-500 px-2.5 ml-2.5 mt-5 w-48 rounded-full left-80" 
-        type="submit">Volver al inicio</button>
+                            <div className="flex flex-col">
+                            <p className="flex flex-col justify-center items-center text-xl mb-4">¡Subasta Tu pasión y despierta el aroma del éxito!</p> 
+                            </div>
 
-                <label className="border-black inset-y-5 p-5">Tipo de variedad
-                    <input  className="" type="text" values = "variedad" placeholder="Tipo de variedad"/>
-                </label>
+                            <form action="#">
 
-                <label className="border-black inset-y-5 p-5" >Puntuacion/Factor
-                    <input  type="number" values = "factor" placeholder="Puntuacion"/>
-                </label>
+                                <div className="flex flex-col">
+                                <label>
+                                    <input className="shadow-sm rounded-md px-3 py-2 w-4/6 border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="number" values = "variedad" placeholder= "Tipo de variedad" required/>
+                                </label>
+                                </div>   
 
-                <label className="border-black inset-y-5 p-5">Cantidad
-                    <input  type="text" values = "cantidad" placeholder="Cantidad"/>
-                </label>
+                                <div className="flex flex-col">
+                                <label>
+                                    <input className="shadow-sm rounded-md px-3 py-2 w-4/6  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer"type="number" values = "factor" placeholder= "Puntuacion/Factor" required/>
+                                </label> 
+                                </div>
 
-                <label className="border-black inset-y-5 p-5">Nombre del documento
-                    <input type="text" values = "nombreDocumento" placeholder="Nombre del documento"/>
-                </label>
+                                <div className="flex flex-col">
+                                <label>
+                                    <input className="shadow-sm rounded-md px-3 py-2 w-4/6  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="text" values = "cantidad" placeholder="Cantidad de cafe" required/>
+                                </label> 
+                                </div>
 
-                <label className="border-black inset-y-5 p-5">Documento
-                    <input type="text" values = "Documento" placeholder="Documento"/>
-                </label>
+                                <div className="flex flex-col">
+                                <label>
+                                    <input className="shadow-sm rounded-md px-3 py-2 w-4/6  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="number" values = "monto" placeholder="Monto inicial" required/>
+                                </label> 
+                                </div>
 
-                <label className="border-black inset-y-5 p-5">Fecha Fin
-                    <input type="date" values = "FechaFin"/>
-                </label>
+                                <div className="flex flex-col">
+                                <label>
+                                    <input className="shadow-sm rounded-md px-3 py-2 w-4/6  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="date" values="FechaFin" placeholder="Fecha Fin" required/>
+                                </label> 
+                                </div>
+                                
+                                <div className="flex flex-col">
+                                <label>
+                                    <input className="shadow-sm rounded-md px-3 py-2 w-4/6  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="text" values = "NombreCertificado" placeholder="Nombre de certificado" required/>
+                                </label> 
+                                </div>
 
-                <label className="border-black inset-y-5 p-5">Monto Inicial
-                    <input type="number" values = "monto" placeholder="Monto Inicial"/>
-                </label>
+                                <div className="flex flex-col">
+                                <label >
+                                    <input className="shadow-sm rounded-md px-3 py-2 w-4/6  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="text" values = "DocumentoCertificado" placeholder = "Suba el documentó que certifica la calidad de su café"/>
+                                </label>
+                                </div>
 
-                <label className="border-black inset-y-5 p-5">Imagen
-                    <input type="text" values = "imagen"/>
-                </label>
+                                 <div className="flex flex-col">
+                                <label>
+                                    <input className="shadow-sm rounded-md px-3 py-2 w-4/6  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="text" values = "imagen" placeholder="Suba una imagen del café con orientación horizontal"/>
+                                </label>
+                                </div>
 
-                <label className="border-black inset-y-5 p-5">Descripcion
-                    <input type="text" values = "discripcion" placeholder="Descripcion"/>
-                </label>
+                                 <div className="flex flex-col">
+                                <label>
+                                    <input  className="shadow-sm rounded-md px-3 py-2 w-4/6  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer h-2/3 " type="text" values = "discripcion" placeholder="Descripcion de la subasta" required/>
+                                </label>
+                                </div>
 
-                <button className="bg-orange-400 rounded-full left-2.5 right-3 top-0.5 space-x-4 backdrop-contrast-200" type="submit">Cancelar suabasta</button>
-
-                <button className="bg-emerald-500 rounded-full left-2.5 right-3 bottom-px backdrop-contrast-200" type="submit">Crear Subasta</button>
-            </form>
-        </div>
+                                <div className="flex flex-col">
+                                <button  onClick={() => alert("Datos Registrados Con Exito")} className="bg-slate-300 rounded-md focus:outline-none focus:border-amber-700 px-3 py-2 cursor-pointer hover:border-black hover:bg-green-500 w-64 ml-96" type="submit"><p>Crear Subasta</p></button>
+                                </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
     )
 }
 

@@ -12,13 +12,11 @@ import postulacionRoutes from "./src/routes/postulacion.routes.js";
 import variedadesRoute from "./src/routes/variedades.routes.js";
 import FincaRouter from "./src/routes/finca.routes.js";
 import autenticacionRouter from "./src/routes/autenticacion.routes.js";
-import cors from 'cors'
+import cors from  'cors';
 
 const app = express();
 
-app.use(cors());
-app.use(express.json());
-
+app.use(cors())
 
 app.use(express.json());
 // app.use(bodyParser.urlencoded({extended:false}));Poder trabajar con el formato json
@@ -40,11 +38,15 @@ app.use(autenticacionRouter)
 app.use(cors());
 
 app.set("view engine", "ejs");
+
 app.set("views", "./view");
+
+app.use(express.static('./public'))
 
 app.get("/documents", (req, res) => {
   res.render("documentacion.ejs");
 });
+
 app.listen(4000, () => {
   console.log("Servidor se esta ejecutando en el puerto 4000");
-});
+}); 
