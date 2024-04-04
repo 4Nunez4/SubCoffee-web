@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import ejs from "ejs";
+import cors from 'cors';
 import rutaProduccion from "./src/routes/router.produccion.js";
 import router from "./src/routes/routes.registro.js";
 import routerDocument from "./src/routes/notificaciones.routes.js";
@@ -31,6 +32,8 @@ app.use("/user", routerDocument);
 app.use("/postulacion", postulacionRoutes);
 app.use("/variedad", variedadesRoute);
 app.use(autenticacionRouter)
+
+app.use(cors());
 
 app.set("view engine", "ejs");
 app.set("views", "./view");

@@ -6,6 +6,7 @@ import { FiBarChart } from "react-icons/fi";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { RiAuctionLine } from "react-icons/ri";
 import { HiOutlineHand } from "react-icons/hi";
+import { AiOutlineHistory } from "react-icons/ai";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -20,6 +21,8 @@ const Sidebar = () => {
     { title: "Notificaciones", link: "/Notificaciones", icon: IoNotificationsOutline },
     { title: "Subasta", link: "/Subasta", icon: RiAuctionLine },
     { title: "Oferta", link: "/Oferta", icon: HiOutlineHand },
+    { title: "historial", link: "/historial", icon: AiOutlineHistory },
+    { title: "registrarfinca", link: "/registrarfinca", icon: FiBarChart },
   ];
 
   return (
@@ -34,7 +37,7 @@ const Sidebar = () => {
             src="./src/assets/control.png"
             className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
                 border-2 rounded-full  ${!open && "rotate-180"}`}
-            onClick={() => setOpen(!open)}
+            onClick={() => setOpen(!open)} 
           />
           <div className="flex gap-x-4 items-center">
             <img
