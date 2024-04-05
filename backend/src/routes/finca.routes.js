@@ -4,10 +4,10 @@ import { validateActualizarFinca, validateRegistarFinca } from "../validations/f
 import { validartoken } from "../controllers/autenticacionController.js";
 const FincaRouter = Router();
 
-FincaRouter.post("/registrar",validartoken,Imagen,validateRegistarFinca, registrar)
+FincaRouter.post("/registrar",Imagen,validartoken,validateRegistarFinca, registrar)
 FincaRouter.get("/listar",validartoken, listar)
-FincaRouter.put("/actualizar/:id",validartoken,validateActualizarFinca, actualizar)
-FincaRouter.get("/buscar/:id",validartoken,Imagen, buscar)
+FincaRouter.put("/actualizar/:id",Imagen,validartoken,validateActualizarFinca, actualizar)
+FincaRouter.get("/buscar/:id",validartoken, buscar)
 FincaRouter.delete("/eliminar/:id",validartoken, borrar)
 FincaRouter.put("/desactivar/:id",validartoken, desactivar)
 FincaRouter.put("/activar/:id",validartoken, activar)
