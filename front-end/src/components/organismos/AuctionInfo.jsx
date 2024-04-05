@@ -1,5 +1,5 @@
 import React from "react";
-import { PdfIcon } from "../atomos/Textarea";
+import PdfIcon from "../atomos/Textarea";
 import UserInfo from "../moleculas/UserInfo";
 import ImageGallery from "../moleculas/ImageGallery";
 

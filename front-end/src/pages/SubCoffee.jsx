@@ -1,10 +1,24 @@
 // PerfilPage.jsx
-import { Button } from "../components/atomos/Button";
-import { AvatarImage, Avatar } from "../components/atomos/Avatar";
-import { CardTitle, CardHeader, CardContent, CardFooter, Card } from "../components/atomos/Card";
-import { Input } from "../components/atomos/Input";
-import { Textarea } from "../components/atomos/Textarea";
-import { CompassIcon, HomeIcon, SettingsIcon, TextIcon, CogIcon, CircleIcon, LogOutIcon, SearchIcon } from "../components/atomos/Icons";
+import Button from "../components/atomos/Button";
+import Avatar from "../components/atomos/Avatar";
+import Card, {
+  CardTitle,
+  CardHeader,
+  CardContent,
+  CardFooter,
+} from "../components/atomos/Card";
+import Input from "../components/atomos/Input";
+import Textarea from "../components/atomos/Textarea";
+import {
+  CompassIcon,
+  HomeIcon,
+  SettingsIcon,
+  TextIcon,
+  CogIcon,
+  CircleIcon,
+  LogOutIcon,
+  SearchIcon,
+} from "../components/atomos/Icons";
 
 export default function PerfilPage() {
   return (
@@ -22,9 +36,14 @@ export default function PerfilPage() {
       <div className="flex-1">
         <header className="flex justify-between items-center p-4 bg-[#111827] text-white">
           <SearchIcon className="h-6 w-6" />
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white">Crear Subasta</Button>
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+            Crear Subasta
+          </Button>
           <Avatar>
-            <AvatarImage alt="User avatar" src="/placeholder.svg?height=32&width=32" />
+            <AvatarImage
+              alt="User avatar"
+              src="/placeholder.svg?height=32&width=32"
+            />
           </Avatar>
         </header>
         <main className="p-6">
@@ -37,7 +56,10 @@ export default function PerfilPage() {
               <CardContent>
                 <div className="flex items-center space-x-4">
                   <Avatar>
-                    <AvatarImage alt="User profile" src="/placeholder.svg?height=64&width=64" />
+                    <AvatarImage
+                      alt="User profile"
+                      src="/placeholder.svg?height=64&width=64"
+                    />
                   </Avatar>
                   <Button variant="outline">Cambiar</Button>
                 </div>
@@ -72,8 +94,6 @@ export default function PerfilPage() {
     </div>
   );
 }
-
-
 
 // // PerfilPage.jsx
 // import React from 'react';
