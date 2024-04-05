@@ -1,7 +1,7 @@
 import TargetaInfoFinca from "../moleculas/TargetaFinca";
 const TargetasCafetero= ({children})=>{
     return ( 
-        <div >
+        <div className="h-full w-full">
             <TargetaInfoFinca/>
             
                         {children}

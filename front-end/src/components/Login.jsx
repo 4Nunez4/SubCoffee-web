@@ -14,20 +14,17 @@ export const Login = () => {
         email_user: email,
         password_user: password
       });
-      alert(response.data.message); // Muestra mensaje de éxito
+      alert(response.data.message);
       setShowModal(true);
     } catch (error) {
       alert('Asegurese que los datos ingresados sean correctos.', error); // Muestra mensaje de error
-      setShowModal(true); // Mostrar el modal
       console.error('Error al iniciar sesión:', error);
     }
   };
 
   return (
     <div>
-      <div className={`modal ${showModal ? 'show' : ''}`}>
-        <div className="modal-content">
-          <span className="close" onClick={() => setShowModal(false)}>&times;</span>
+     
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="flex flex-col md:flex-row bg-white dark:bg-white-600 shadow-md rounded-lg max-w-3xl mx-auto border border-gray-700 p-8">
         <div className="md:w-1/2 md:p-4">
@@ -81,8 +78,7 @@ export const Login = () => {
       </div>
     </div>
     </div>
-    </div>
-    </div>
+    
 
   );
 };

@@ -15,27 +15,7 @@ check(
         .not()
         .isEmpty()
         .isLength({ max: 100 }),
-check(
-            "imagen_fin",
-            "La imagen es obligatoria"
-          )
-          .exists()
-          .not()
-          .isEmpty()
-          .custom((value, { req }) => {
-              if (value === null || value === undefined) {
-                  throw new Error('La imagen no puede ser nula');
-              }
-      
-              if (value === '') {
-                  throw new Error('La imagen no puede estar vacía');
-              }
-      
-              if (!isNaN(value)) {
-                  throw new Error('La imagen no puede ser un número');
-              }
-              return true;
-          }),
+
 check("descripcion_fin", "Descripción obligatoria"
 )
           .not()
@@ -82,27 +62,7 @@ export const validateActualizarFinca = [
             .not()
             .isEmpty()
             .isLength({ max: 100 }),
-    check(
-                "imagen_fin",
-                "La imagen es obligatoria"
-              )
-              .exists()
-              .not()
-              .isEmpty()
-              .custom((value, { req }) => {
-                  if (value === null || value === undefined) {
-                      throw new Error('La imagen no puede ser nula');
-                  }
-          
-                  if (value === '') {
-                      throw new Error('La imagen no puede estar vacía');
-                  }
-          
-                  if (!isNaN(value)) {
-                      throw new Error('La imagen no puede ser un número');
-                  }
-                  return true;
-              }),
+
     check("descripcion_fin", 
     "Descripción obligatoria"
     )
