@@ -1,4 +1,4 @@
-import react from "React"
+import React from "react";
 
 const InputForm = React.forwardRef(({ placeholder, type }, ref) => {
   return (
@@ -8,7 +8,7 @@ const InputForm = React.forwardRef(({ placeholder, type }, ref) => {
         type={type}
         ref={ref}
         required
-        className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer"
+        className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-red-700 mb-2 top-4 cursor-pointer"
       />
     </div>
   );

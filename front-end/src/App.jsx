@@ -12,7 +12,7 @@ import Oferta from "./pages/Oferta.jsx";
 import Historial from "./pages/Historial.jsx";
 import RegistrarFinca from "./pages/RegistrarFinca.jsx";
 
-import CrearSubasta from "./pages/CrearSubasta.jsx"
+import CrearSubasta from "./pages/CrearSubasta.jsx";
 import Home from "./pages/Home.jsx"
 import RegistroUser from "../src/components/moleculas/RegistroUsuario.jsx"
 
