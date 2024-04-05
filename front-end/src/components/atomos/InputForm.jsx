@@ -2,7 +2,7 @@ import react from "React"
 
 const InputForm = React.forwardRef(({ placeholder, type }, ref) => {
   return (
-    <div className="relative">
+    <div className="flex flex-col">
       <input
         placeholder={placeholder}
         type={type}

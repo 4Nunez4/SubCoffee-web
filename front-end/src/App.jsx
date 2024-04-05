@@ -14,6 +14,7 @@ import RegistrarFinca from "./pages/RegistrarFinca.jsx";
 
 import CrearSubasta from "./pages/CrearSubasta.jsx"
 import Home from "./pages/Home.jsx"
+import RegistroUser from "../src/components/moleculas/RegistroUsuario.jsx"
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
 
           <Route path="/CrearSubasta" element={<CrearSubasta />} />
           <Route path="/Home" element={<Home />} />
+          <Route path="/RegistroUser" element={<RegistroUser />}/>
         </Routes>
       </Layout>
     </BrowserRouter>

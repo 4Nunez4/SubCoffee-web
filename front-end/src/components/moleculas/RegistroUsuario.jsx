@@ -1,7 +1,6 @@
 import React, {  useRef } from "react";
 import axios from "axios";
-import BotonForm from "BotonForm"
-
+import cafeRe from "/src/assets/cofeLogin.png"
 
 function Registro(){
 
@@ -46,26 +45,41 @@ function Registro(){
     }
 
         return(
+
+            <div className="flex flex-col">
+        
+            <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
+
+                <div className=' flex flex-col justify-center bg-slate-50 shadow-md rounded-lg px-8 py-6 border max-w-[90%] max-h-[90%] auto-cols-auto border-stone-950 overflow-auto'>
+
             <form method='post' onSubmit={funcion}>
 
-                <input type="number" name="pk_cedula_user" placeholder="cedula" ref={pk_cedula_user} required/> <br/>
-                <input type="text" name="nombre_user" placeholder="nombre" ref={nombre_user} required/> <br/>
-                <input type="text" name="telefono_user" placeholder="telefono" ref={telefono_user} required/> <br/>
-                <input type="email" name="email_user" placeholder="correo" ref={email_user} required/> <br/>
-                <input type="password" name="password_user" placeholder="password" ref={password_user} required/> <br/>
-                <input type="date" name="fecha_nacimiento_user" placeholder="fecha_nacimiento" ref={fecha_nacimiento_user} required/> <br/>
+                <input className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="number" name="pk_cedula_user" placeholder="cedula" ref={pk_cedula_user} required/> <br/>
 
-                <select name="rol_user" ref={rol_user}>
+                <input className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="text" name="nombre_user" placeholder="nombre" ref={nombre_user} required/> <br/>
+
+                <input className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="text" name="telefono_user" placeholder="telefono" ref={telefono_user} required/> <br/>
+
+                <input className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="email" name="email_user" placeholder="correo" ref={email_user} required/> <br/>
+
+                <input className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="password" name="password_user" placeholder="password" ref={password_user} required/> <br/>
+
+                <input className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="date" name="fecha_nacimiento_user" placeholder="fecha_nacimiento" ref={fecha_nacimiento_user} required/> <br/>
+
+                <select className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" name="rol_user" ref={rol_user}>
                     <option value="admin">Administrador</option>
                     <option value="vendedor">Vendedor</option>
                     <option value="comprador">comprador</option>
                 </select>
 
-                <input type="text" name="descripcion_user" placeholder='Descripcion' ref={descripcion_user} /><br/>
+                <input className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" type="text" name="descripcion_user" placeholder='Descripcion' ref={descripcion_user} /><br/>
 
-                <button type='submit'>Registrarse</button>
-                <button>Listar</button>
+                <button type="submit">Registrarse</button>
             </form>
+
+            </div>
+            </div>
+            </div>
         )
 }
 
