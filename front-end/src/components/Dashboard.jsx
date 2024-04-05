@@ -9,7 +9,7 @@ import borbon from '../assets/cafe-borbon.jpg';
 import caturra from '../assets/cafe-caturra.jpg';
 import tabi from '../assets/cafe-tabiejm.jpg';
 import typica from '../assets/cafe-typica.jpg'
-import FootPage from './footPage';
+import FootPage from '../components/organismos/FootPageO.jsx';
 
 
 function Dashboard() {

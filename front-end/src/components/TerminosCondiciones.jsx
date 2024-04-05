@@ -1,5 +1,8 @@
+// TerminosyCondiciones.js
 import React, { useState } from 'react';
-import { colors } from './atomos/themes';
+import Checkbox from './atomos/CheckBox';
+import Button from './moleculas/ButtonLogin';
+import Text from './moleculas/TextLogin';
 import logo from '../assets/logosubcoffe.png';
 
 export const TerminosyCondiciones = () => {
@@ -9,8 +12,13 @@ export const TerminosyCondiciones = () => {
     setAceptoTerminos(!aceptoTerminos);
   };
 
+  const handleRegistrarmeClick = () => {
+  
+  };
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-4xl font-bold text-center mb-8 mt-4">Términos y Condiciones</h1>
       <div className="bg-white shadow-md rounded-lg px-8 py-6 w-full max-w-screen-lg border overflow-y-auto">
         
@@ -31,7 +39,6 @@ export const TerminosyCondiciones = () => {
           <h2 className="text-xl font-semibold mb-3">2. Registro de Usuarios</h2>
           <p className="mb-4">Para acceder a ciertas funciones del Sitio Web, incluyendo la participación en subastas, deberá registrarse y crear una cuenta de usuario. Al registrarse, se compromete a proporcionar información verdadera, precisa, actualizada y completa sobre usted, según lo solicitado por el formulario de registro. SubCoffe se reserva el derecho de suspender o terminar su cuenta si se descubre que cualquier información proporcionada es falsa, inexacta, desactualizada o incompleta.</p>
         
-          {/* Agregar el resto de los elementos aquí */}
 
         </div>
 
@@ -70,25 +77,21 @@ export const TerminosyCondiciones = () => {
 
     
         <div className="flex items-center mb-4 pt-12">
-        <input
-          type="checkbox"
+        <Checkbox
           id="aceptoTerminos"
           checked={aceptoTerminos}
           onChange={handleAceptoTerminosChange}
-          className="mr-2"
+          label="Acepto los términos y condiciones"
         />
-        <label htmlFor="aceptoTerminos" className="text-sm text-gray-700">Acepto los términos y condiciones</label>
+        <Button
+          disabled={!aceptoTerminos}
+          onClick={handleRegistrarmeClick}
+        >
+          Registrarme
+        </Button>
       </div>
-
-      <button
-        disabled={!aceptoTerminos}
-        className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${!aceptoTerminos ? 'cursor-not-allowed' : ''}`}
-      >
-        Registrarme
-      </button>
-      </div>
-      
-      
     </div>
+    </div>
+ 
   );
 };
