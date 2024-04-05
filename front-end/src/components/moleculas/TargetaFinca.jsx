@@ -5,7 +5,7 @@ import TextoNegrita from "../atomos/TargetaInformacionFinca/textNegrita";
 import CenTextCard from "../atomos/TargetaInformacionFinca/CenTextCard";
 const TargetaInfoFinca= ({children})=> {
     return ( 
-            <div>
+            <div className="w-full h-full">
         <Targeta>
              <Avatar src="/src/assets/cafe4.jfif"></Avatar>   
 

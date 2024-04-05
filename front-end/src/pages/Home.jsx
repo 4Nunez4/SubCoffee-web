@@ -1,6 +1,8 @@
 import React, {useState} from "react"
 import { FaChevronLeft } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
+import FootPagelIMG from "../assets/footPageIMG.png";
+
 
 function Home(){
 
@@ -37,7 +39,7 @@ function Home(){
 
     return(
        
-     <div className="max-w-[1400px] h-[400px] w-full m-auto py-16 px-4 relative group">
+     <div className="max-w-[1600px] h-[600px] w-full m-auto py-10 px-4 relative group">
       <div style={{ backgroundImage: `url(${slides[currentIndex].url})` }} className="w-full h-full rounded-2xl bg-center bg-cover duration-500">
       </div>
 
@@ -54,13 +56,114 @@ function Home(){
           <div key={index} onClick={()=>gotoNextSlide(index)}>
           </div>
         ))}
+
       </div>
 
+        <p className ="flex flex-col ustify-center items-center font-extrabold text-2xl font-sans">¡Bienvenido a SubCoffee, donde cada grano de cafe cuenta!</p> 
+
       <>
-        <h1 className="font-medium flex-row">Cafe Robusta Subasta</h1>
+        <h1 className="font-medium flex flex-col font-black text-2xl font-sans p-3">Borbón Rosado</h1>
+        <div className= "flex flex-row py-5">
+        <div className="flex flex-col w-96 h-96 px-2.5">
+          <div className="flex flex-col ">
+            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
+            <div>
+            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
+            </div>
+            <div>
+            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col w-96 h-96 px-2.5">
+          <div className="flex flex-col">
+            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
+            <div>
+            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
+            </div>
+            <div>
+            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col w-96 h-96 px-2.5">
+          <div className="flex flex-col">
+            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
+            <div>
+            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
+            </div>
+            <div>
+            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col w-96 h-96 px-2.5">
+          <div className="flex flex-col">
+            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
+            <div>
+            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
+            </div>
+            <div>
+            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
+            </div>
+          </div>
+        </div>
+        </div>
 
 
-        <h1 className="font-medium flex-row">Cafe Arabico Subastas</h1>
+        <h1 className="font-medium flex-row font-black text-2xl font-sans py-10">Arabico</h1>
+            <div className= "flex flex-row py-5">
+        <div className="flex flex-col w-96 h-96 px-2.5">
+          <div className="flex flex-col ">
+            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
+            <div>
+            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
+            </div>
+            <div>
+            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col w-96 h-96 px-2.5">
+          <div className="flex flex-col">
+            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
+            <div>
+            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
+            </div>
+            <div>
+            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col w-96 h-96 px-2.5">
+          <div className="flex flex-col">
+            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
+            <div>
+            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
+            </div>
+            <div>
+            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col w-96 h-96 px-2.5">
+          <div className="flex flex-col">
+            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
+            <div>
+            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
+            </div>
+            <div>
+            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
+            </div>
+          </div>
+        </div>
+        </div>
 
       </>  
 
@@ -69,10 +172,6 @@ function Home(){
 
 //slidesmini
 
-/* className="shadow-sm rounded-md px-3 py-2 border border-black focus:outline-none focus:border-blue-700 mb-2 w-64 cursor-pointer" */
-/*  <div className="flex flex-col w-[30%] h-[30%] mt-96">
-                            <img src={ImagenSuba} />
-                            </div> */
 
 
 export default Home

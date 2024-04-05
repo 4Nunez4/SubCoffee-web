@@ -34,6 +34,7 @@ function App() {
           <Route path="/Oferta" element={<Oferta />} />
 
           <Route path="/CrearSubasta" element={<CrearSubasta />} />
+          <Route path="/Home" element={<Home />} />
         </Routes>
       </Layout>
     </BrowserRouter>

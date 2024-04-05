@@ -1,12 +1,10 @@
-// finca.controller.js
-import multer from 'multer';
+import multer from "multer";
 import { pool } from "../databases/conexion.js";
 import { validationResult } from "express-validator";
 
-// Configuración de Multer
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'public/img');
+        cb(null, "public/img");
     },
     filename: function(req, file, cb) {
         cb(null, file.originalname);
@@ -24,7 +22,6 @@ export const registrar = async (req, res) => {
             return res.status(400).json(errors);
         }
         const { nombre_fin, ubicacion_fin, descripcion_fin, municipio_fin, departamento_fin, fk_id_usuario } = req.body;
-        // Aquí asumimos que 'imagen_fin' se actualizará con el nombre de la imagen cargada
         const imagen_fin = req.file.filename; // Obtiene el nombre del archivo cargado
         const [rows] = await pool.query(`INSERT INTO finca(nombre_fin, ubicacion_fin, imagen_fin, descripcion_fin, municipio_fin, departamento_fin, fk_id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)`, [nombre_fin, ubicacion_fin, imagen_fin, descripcion_fin, municipio_fin, departamento_fin, fk_id_usuario]);
         if (rows.affectedRows) {
@@ -52,25 +49,29 @@ export const listar = async(req,res)=>{
     }
 }
 //actualizar un registro de la tabla finca por su id 
-export const actualizar =async(req,res) =>{
+export const actualizar = async (req, res) => {
     try {
         let errors = validationResult(req);
         if (!errors.isEmpty()) {
-          return res.status(400).json(errors);
+            return res.status(400).json(errors);
         }
         const id = req.params.id;
-        const {nombre_fin,ubicacion_fin,imagen_fin,descripcion_fin,municipio_fin,departamento_fin} = req.body;
-        const [result]  = await pool.query('update finca set nombre_fin = COALESCE(?,nombre_fin), ubicacion_fin = COALESCE(?,ubicacion_fin), imagen_fin = COALESCE(?,imagen_fin), descripcion_fin = COALESCE(?,descripcion_fin), municipio_fin = COALESCE(?,municipio_fin),departamento_fin = COALESCE(?,departamento_fin) where pk_id_fin = ?',[nombre_fin,ubicacion_fin,imagen_fin,descripcion_fin,municipio_fin,departamento_fin,id]);
-        if(result.affectedRows>0){
-            res.status(201).json({status:200,message:'Se ha actualizado correctamente'})
-        } else{
-            res.status(404).json({status:404,message:'No se han realizado cambios'})
-        }
-    }catch(err){
-        res.status(500).json({status:500,message: "Ocurrio un error en el servidor", err})
+        const { nombre_fin, ubicacion_fin, descripcion_fin, municipio_fin, departamento_fin } = req.body;
 
+        // Verifica si se ha cargado una nueva imagen
+        let imagen_fin = req.file ? req.file.filename : null;
+
+        const [result] = await pool.query('UPDATE finca SET nombre_fin = COALESCE(?,nombre_fin), ubicacion_fin = COALESCE(?,ubicacion_fin), imagen_fin = COALESCE(?,imagen_fin), descripcion_fin = COALESCE(?,descripcion_fin), municipio_fin = COALESCE(?,municipio_fin), departamento_fin = COALESCE(?,departamento_fin) WHERE pk_id_fin = ?', [nombre_fin, ubicacion_fin, imagen_fin, descripcion_fin, municipio_fin, departamento_fin, id]);
+        if (result.affectedRows > 0) {
+            res.status(200).json({ status: 200, message: 'Se ha actualizado correctamente' });
+        } else {
+            res.status(404).json({ status: 404, message: 'No se han realizado cambios' });
+        }
+    } catch (err) {
+        res.status(500).json({ status: 500, message: "Ocurrió un error en el servidor", err });
     }
-}
+};
+
 
 //obtener un registro especifico de la tabla fincas por su id
 export const buscar = async(req,res)=>{
