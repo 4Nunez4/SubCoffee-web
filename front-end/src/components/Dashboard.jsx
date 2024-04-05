@@ -9,14 +9,12 @@ import borbon from '../assets/cafe-borbon.jpg';
 import caturra from '../assets/cafe-caturra.jpg';
 import tabi from '../assets/cafe-tabiejm.jpg';
 import typica from '../assets/cafe-typica.jpg'
+import FootPage from './footPage';
 
 
 function Dashboard() {
-    
-
-    
+ 
   return (
-
       <div className="flex flex-col items-center justify-center min-h-screen">
           <div className=" relative bg-white w-full h-auto overflow-hidden ">
               <img className="w-full h-4/5 object-cover  "src={logo}  />
@@ -70,70 +68,61 @@ function Dashboard() {
           </ul>
           </IconDash>
         </div>
-        {/* <hr className="border-1 border-green-600 w-full mt-24" style={{ borderColor: colors.verdePage }} /> */}
+        <hr className="border-1 border-green-600 w-full mt-24" style={{ borderColor: colors.verdePage }} />
 
+        <h1 className="font-bold pt-12 text-3xl mb-4">Subasta Categorías </h1>
 
-
-        <h1>Categorias</h1>
-
-<div id="default-carousel" class="relative w-full" data-carousel="slide">
-    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-1.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."></img>
-        </div>
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-2.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."></img>
-        </div>
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-3.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."></img>
-        </div>
+        <div className="w-full pt-12 flex justify-between">
+                    <div className="w-1/4 mx-1 border border-gray-300 rounded-lg p-4">
+                        <p className="text-center font-bold mb-2">Caturra</p>
+                        <img src={caturra} alt="Caturra" className="w-full rounded-lg mb-2" />
+                        <br /><span className="font-semibold text-gray-800">Pitalito, Huila</span> <br /><span className="text-gray-700 pb-6">Fecha de fin: 2024-04-04</span>
+                        <p className="text-sm text-gray-700">La variedad Caturra es conocida por su sabor suave y dulce, con notas de chocolate y frutos secos. </p>
+                    </div>
+                    <div className="w-1/4 mx-1 border border-gray-300 rounded-lg p-4">
+                        <p className="text-center font-bold mb-2">Borbon</p>
+                        <img src={borbon} alt="Borbon" className="w-full rounded-lg mb-2" />
+                        <br /><span className="font-semibold text-gray-800">Pitalito, Huila</span> <br /><span className="text-gray-700 pb-6">Fecha de fin: 2024-04-04</span>
+                        <p className="text-sm text-gray-700">La variedad Borbon tiene un sabor afrutado y floral, con un cuerpo medio y acidez equilibrada.</p>
+                    </div>
+                    <div className="w-1/4 mx-1 border border-gray-300 rounded-lg p-4">
+                        <p className="text-center font-bold mb-2">Tabi</p>
+                        <img src={tabi} alt="Tabi" className="w-full rounded-lg mb-2" />
+                        <br /><span className="font-semibold text-gray-800">Pitalito, Huila</span> <br /><span className="text-gray-700 pb-6">Fecha de fin: 2024-04-04</span>
+                        <p className="text-sm text-gray-700">La variedad Tabi es conocida por su perfil de sabor complejo, con notas frutales y florales y una acidez brillante.</p>
+                    </div>
+                    <div className="w-1/4 mx-1 border border-gray-300 rounded-lg p-4">
+                        <p className="text-center font-bold mb-2">Typica</p>
+                        <img src={typica} alt="Typica" className="w-full rounded-lg mb-2" />
+                        <br /><span className="font-semibold text-gray-800">Pitalito, Huila</span> <br /><span className="text-gray-700 pb-6">Fecha de fin: 2024-04-04</span>
+                        <p className="text-sm text-gray-700">La variedad Typica es apreciada por su sabor suave y equilibrado, con notas cítricas y chocolate.</p>
+                    </div>
+                </div>
+                <hr className="border-1 border-green-600 w-full mt-24" style={{ borderColor: colors.verdePage }} />
+               
         
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-4.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."></img>
+                <div>
+                    <div className="flex justify-center items-center">
+                        <h1 className="text-7xl font-bold pt-10" style={{ color: colors.verdePage }}>Sub</h1>
+                        <h1 className="text-7xl text-black font-sans font-bold pt-10">Coffe</h1>
+                    </div>
+                    <h2 className="text-3xl font-bold mb-4 pt-11">Únete a la Comunidad del Café Especial</h2>
+                </div>
+
+                <div className="w-full flex justify-center items-center pt-2">
+                    <div className="w-1/2 mx-32 rounded-lg p-4 text-center">
+                        <p className="text-base text-gray-700 pb-5">Cada clic es una oportunidad. No temas pujar, porque detrás de cada número hay una historia de tierra, sol y dedicación. ¡Haz tu oferta y sé parte de la magia del café!</p>
+                        <ButtonRI to="/registro">Registrarse</ButtonRI>
+                    </div>
+                    <div className="w-1/2 mx-32 rounded-lg p-4 text-center">
+                        <p className="text-base text-gray-700 pb-5">Tu puja es tu voz en esta danza de granos. Eleva tus ofertas con confianza y deja que el aroma del café guíe tus movimientos. ¡Que cada lote sea una sinfonía de pasión y sabor!</p>
+                        <ButtonRI to="/login">Iniciar Sesión</ButtonRI>
+                    </div>
+                </div>
+            </div>
+            <FootPage />
         </div>
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/docs/images/carousel/carousel-5.svg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."></img>
-        </div>
-    </div>
-
-    <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-        <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-    </div>
-    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-            </svg>
-            <span class="sr-only">Previous</span>
-        </span>
-    </button>
-    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-            </svg>
-            <span class="sr-only">Next</span>
-        </span>
-    </button>
-</div>
-
-
-
-
-                
-     
-  </div>
-</div>
-
-
-  
-
-
-  );
+    );
 }
 
 export default Dashboard;
