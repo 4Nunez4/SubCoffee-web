@@ -1,6 +1,23 @@
 import {pool} from '../databases/conexion.js';
 import { validationResult } from 'express-validator';
-import {multer} from 'multer'
+import multer from "multer"
+
+
+const storage = multer.diskStorage(
+    {
+        destination: function(req,img,cb){
+            cb(null, "public/img")
+        },
+
+        filename: function(req,img,cb){
+            cb(null,img.originalname)
+        }
+    }
+)
+const upload = multer({storage:storage})
+export const cargarImagen= upload.single('img')
+
+
 
 
 export const listarVariedad = async (req,res) =>{
@@ -27,7 +44,8 @@ export const guardarVariedad= async (req, res) => {
             }
     
             const {tipo_vari, descripcion_vari, puntuacion_vari, estado_vari} = req.body;
-            const [rows] = await pool.query("INSERT INTO variedad(tipo_vari, descripcion_vari, puntuacion_vari,estado_vari) VALUES (?,?,?,?)", [tipo_vari, descripcion_vari, puntuacion_vari ,estado_vari ]);
+            let imagenVari = req.file.originalname
+            const [rows] = await pool.query("INSERT INTO variedad(tipo_vari, descripcion_vari, imagenVari, puntuacion_vari,estado_vari) VALUES (?,?,?,?,?)", [tipo_vari, descripcion_vari, puntuacion_vari, imagenVari ,estado_vari ]);
             if(rows.affectedRows){
                 res.status(200).json({status:500, message:"Variedad creada con exito"});
             }else{

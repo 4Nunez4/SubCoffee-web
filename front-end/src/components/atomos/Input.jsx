@@ -1,7 +1,10 @@
-import React from "react";
+// Input.jsx
+import React from 'react';
 
-function Input({ placeholder }) {
-    return <input type="text" placeholder={placeholder} className="p-2 pl-4 pr-10 rounded border border-gray-400 w-full" />;
-}
+const Input = ({ placeholder, type = "text" }) => {
+  return (
+    <input className="bg-gray-800 text-white px-4 py-2 rounded focus:outline-none focus:ring focus:border-blue-500" type={type} placeholder={placeholder} />
+  );
+};
 
 export default Input;

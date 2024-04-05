@@ -44,18 +44,24 @@ function NotificacionesCard({ notificacion }) {
 
   return (
     <div className="my-4 mx-16 py-3 px-6 rounded-lg border border-black overflow-y-auto" style={{ maxHeight: '80vh' }}>
+
       <nav className="flex justify-between items-center mb-4">
+
         <span className="font-bold text-2xl ml-3">Notificaciones</span>
+
         <div className="m-4 relative w-2/4">
           <input type="text" placeholder="Buscar notificación" className="p-2 pl-10 pr-10 rounded border border-gray-400 w-full" />
           <FaMagnifyingGlass className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 " />
           <FaBarsProgress className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer" />
         </div>
+
         <div className="flex gap-x-5">
           <button className="bg-green-500 text-white px-4 border hover:border-green-500 py-2 rounded hover:bg-white hover:text-green-500">Todo</button>
           <button className="bg-green-500 text-white px-4 border hover:border-green-500 py-2 rounded hover:bg-white hover:text-green-500">No leídos</button>
         </div>
+
       </nav>
+      
       {Notificaciones.map((notificacion) => (
         <Link key={notificacion.id} className="flex border rounded-lg p-2 my-4 border-gray-500 shadow-md hover:bg-gray-200 hover:opacity-80">
           <div className="flex items-center mx-4">
