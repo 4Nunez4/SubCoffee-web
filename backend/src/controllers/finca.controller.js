@@ -1,23 +1,41 @@
+// finca.controller.js
+import multer from 'multer';
 import { pool } from "../databases/conexion.js";
 import { validationResult } from "express-validator";
 
-export const registrar = async (req,res)=>{
+// Configuración de Multer
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'public/img');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+export const Imagen = upload.single('img');
+
+export const registrar = async (req, res) => {
     try {
         let errors = validationResult(req);
         if (!errors.isEmpty()) {
-          return res.status(400).json(errors);
+            return res.status(400).json(errors);
         }
-        const {nombre_fin,ubicacion_fin,imagen_fin,descripcion_fin,municipio_fin,departamento_fin,fk_id_usuario}=req.body;
-        const [rows]=await pool.query(`INSERT INTO finca(nombre_fin, ubicacion_fin, imagen_fin, descripcion_fin, municipio_fin,departamento_fin, fk_id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)`, [nombre_fin,ubicacion_fin,imagen_fin,descripcion_fin,municipio_fin,departamento_fin,fk_id_usuario]);
-        if(rows.affectedRows){
-            res.status(200).json({status:500, message:"Finca registrada con exito"});
-        }else{
-            res.status(404).json({status:404, message:"Error al registrar la finca"});
+        const { nombre_fin, ubicacion_fin, descripcion_fin, municipio_fin, departamento_fin, fk_id_usuario } = req.body;
+        // Aquí asumimos que 'imagen_fin' se actualizará con el nombre de la imagen cargada
+        const imagen_fin = req.file.filename; // Obtiene el nombre del archivo cargado
+        const [rows] = await pool.query(`INSERT INTO finca(nombre_fin, ubicacion_fin, imagen_fin, descripcion_fin, municipio_fin, departamento_fin, fk_id_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)`, [nombre_fin, ubicacion_fin, imagen_fin, descripcion_fin, municipio_fin, departamento_fin, fk_id_usuario]);
+        if (rows.affectedRows) {
+            res.status(200).json({ status: 200, message: "Finca registrada con éxito" });
+        } else {
+            res.status(404).json({ status: 404, message: "Error al registrar la finca" });
         }
-    }catch(a){
-        res.status(500).json({status:500, message:"Fallo el sistema : "+a})
+    } catch (a) {
+        res.status(500).json({ status: 500, message: "Fallo el sistema: " + a });
     }
-}
+};
 //obtener todos los registros de la tabla fincas
 export const listar = async(req,res)=>{
     try{
