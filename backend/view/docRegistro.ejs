@@ -57,7 +57,7 @@
                         "email_user": "pepito@hotmail.com",
                         "password_user": "7382b",
                         "descripcion_user": "hola, esta funcionando ?",
-                        "img": img,
+                        "img": file,
                         "telefono_user": "3207383",
                         "fecha_nacimiento_user": "2005-02-10",
                         "rol_user": "admin",
@@ -77,14 +77,14 @@
 
                     INCORRECTO 
                     STATUS: 404 
-                    BODY :{
+                    BODY JSON{
                         STATUS: 404
                         MESSAGE: "Error, El registro fue denegado"
                     } <br>
 
                     ERROR-SERVIDOR: 
                     STATUS: 500 
-                    BODY : JSON{
+                    BODY JSON{
                         STATUS:500,
                         MESSAGE: "ERROR EN EL SERVIDOR"
                     }
@@ -158,7 +158,7 @@
                         "email_user": "pepito@hotmail.com",
                         "password_user": "7382b",
                         "descripcion_user": "hola, esta funcionando ?",
-                        "img": img,
+                        "img": file,
                         "telefono_user": "3207383",
                         "fecha_nacimiento_user": "2005-02-10",
                         "rol_user": "admin",
@@ -174,7 +174,7 @@
 
                     ERROR-SERVIDOR: 
                     STATUS: 500 
-                    BODY : JSON{
+                    BODY JSON{
                         STATUS:500,
                         MESSAGE: "ERROR EN EL SERVIDOR"
                     } 
@@ -238,7 +238,7 @@
                         "email_user": "pepito@hotmail.com",
                         "password_user": "7382b",
                         "descripcion_user": "hola, esta funcionando ?",
-                        "img": img,
+                        "img": file,
                         "telefono_user": "3207383",
                         "fecha_nacimiento_user": "2020-10-10",
                         "rol_user": "admin",
@@ -251,19 +251,19 @@
                 <td>
                     
                     CORRECTO: 
-                    STATUS:200 
+                    STATUS 200 
                     MESSAGE: "Felicidades, La actualizacion del usuario fue un exito" <br>
 
-                    INCORRECTO 
-                    STATUS: 404 
-                    BODY :{
+                    INCORRECTO :
+                    STATUS 404 
+                    BODY JSON{
                         STATUS: 404
                         MESSAGE: "Error, La actualizacion fue denegada"
                     } <br>
 
-                    ERROR: 
-                    STATUS: 500 
-                    BODY : JSON{
+                    ERROR-SERVIDOR:
+                    STATUS 500 
+                    BODY JSON{
                         STATUS:500,
                         MESSAGE: "ERROR EN EL SERVIDOR"
                     }
@@ -338,7 +338,7 @@
                             "email_user": "pepito@hotmail.com",
                             "password_user": "7382b",
                             "descripcion_user": "hola, esta funcionando ?",
-                            "imagen_user": img,
+                            "img": file,
                             "telefono_user": "3207383",
                             "fecha_nacimiento_user": "1899-11-30T04:56:16.000Z",
                             "rol_user": "admin",
@@ -347,9 +347,9 @@
                     } <br>
 
 
-                    INCORRECTO 
+                    INCORRECTO :
                     STATUS: 404 
-                    BODY :{
+                    BODY {
                         STATUS: 404
                         MESSAGE: 'Error, No se encuentra de usuario'
                     } <br>
@@ -422,22 +422,22 @@
                 <td>RESPUESTA JSON</td>
                 <td>
                     
-                    CORRECTO: 
-                    STATUS:200 
+                    CORRECTO:
+                    STATUS 200,
                     MESSAGE: 'Se elimino el usuario exitasamente' <br> 
 
-                    INCORRECTO 
-                    STATUS: 404 
-                    BODY :{
-                        STATUS: 404
-                        MESSAGE: 'Error, no se elimino usuario'
+                    INCORRECTO
+                    STATUS 404,
+                    BODY JSON{
+                        STATUS 404
+                        MESSAGE 'Error, no se elimino usuario'
                     } <br>
 
-                    ERROR: 
-                    STATUS: 500 
-                    BODY : JSON{
-                        STATUS:500,
-                        MESSAGE: "ERROR EN EL SERVIDOR"
+                    ERROR-JSON: 
+                    STATUS 500 
+                    BODY JSON{
+                        STATUS 500,
+                        MESSAGE "ERROR EN EL SERVIDOR"
                     }
                 </td>
             </tr>
@@ -501,21 +501,21 @@
                 <td>
                     
                     CORRECTO: 
-                    STATUS:200 
-                    MESSAGE: 'Se desactivo el usuario exitasamente'  <br>
+                    STATUS:200,
+                    MESSAGE 'Se desactivo el usuario exitasamente'  <br>
 
                     INCORRECTO:
-                    STATUS: 404 
-                    BODY :{
-                        STATUS: 404
-                        MESSAGE: 'Error, no se desactivo usuario'
+                    STATUS 404 
+                    BODY JSON:{
+                        STATUS 404,
+                        MESSAGE 'Error, no se desactivo usuario'
                     } <br>
 
                     ERROR-SERVIDOR: 
-                    STATUS: 500 
-                    BODY : JSON{
-                        STATUS:500,
-                        MESSAGE: "ERROR EN EL SERVIDOR"
+                    STATUS 500 
+                    BODY JSON{
+                        STATUS 500,
+                        MESSAGE "ERROR EN EL SERVIDOR"
                     }
                 </td>
             </tr>
@@ -578,22 +578,22 @@
                 <td>RESPUESTA JSON</td>
                 <td>
                     
-                    CORRECTO: 
-                    STATUS:200 
+                    CORRECTO : 
+                    STATUS 200 
                     MESSAGE: 'Se activo el usuario exitasamente' <br>
 
                     INCORRECTO :
-                    STATUS: 404 
-                    BODY :{
-                        STATUS: 404
-                        MESSAGE: 'Error, no se activo usuario'
+                    STATUS 404 
+                    BODY JSON{
+                        STATUS 404,
+                        MESSAGE 'Error, no se activo usuario'
                     } <br>
 
-                    ERROR: 
-                    STATUS: 500 
-                    BODY : JSON{
-                        STATUS:500,
-                        MESSAGE: "ERROR EN EL SERVIDOR"
+                    ERROR-SERVIDOR: 
+                    STATUS 500 
+                    BODY JSON{
+                        STATUS 500,
+                        MESSAGE "ERROR EN EL SERVIDOR"
                     } <br>
                 </td>
             </tr>
