@@ -62,7 +62,7 @@ function Home(){
         <p className ="flex flex-col ustify-center items-center font-extrabold text-2xl font-sans">¡Bienvenido a SubCoffee, donde cada grano de cafe cuenta!</p> 
 
       <>
-        <h1 className="font-medium flex flex-col font-black text-2xl font-sans p-3">Borbón Rosado</h1>
+        <h1 className="font-medium flex flex-col text-2xl font-sans p-3">Borbón Rosado</h1>
         <div className= "flex flex-row py-5">
         <div className="flex flex-col w-96 h-96 px-2.5">
           <div className="flex flex-col ">
