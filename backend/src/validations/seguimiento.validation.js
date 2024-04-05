@@ -5,25 +5,25 @@ export const validarRegistrarSeguimiento = [
     .not()
     .isEmpty()
     .isLength({ max: 50 }),
-  check("imagen_seg")
-    .exists()
-    .withMessage("La imagen es obligatoria")
-    .not()
-    .isEmpty()
-    .custom((value, { req }) => {
-      if (value === null || value === undefined) {
-        throw new Error("La imagen no puede ser nula");
-      }
+  // check("imagen_seg")
+  //   .exists()
+  //   .withMessage("La imagen es obligatoria")
+  //   .not()
+  //   .isEmpty()
+  //   .custom((value, { req }) => {
+  //     if (value === null || value === undefined) {
+  //       throw new Error("La imagen no puede ser nula");
+  //     }
 
-      if (value === "") {
-        throw new Error("La imagen no puede estar vacía");
-      }
+  //     if (value === "") {
+  //       throw new Error("La imagen no puede estar vacía");
+  //     }
 
-      if (!isNaN(value)) {
-        throw new Error("La imagen no puede ser un número");
-      }
-      return true;
-    }),
+  //     if (!isNaN(value)) {
+  //       throw new Error("La imagen no puede ser un número");
+  //     }
+  //     return true;
+  //   }),
   check("fk_id_produccion", "Digite un id registrado")
     .not()
     .isEmpty()
@@ -41,25 +41,25 @@ export const validarActualizarSeguimiento = [
     .not()
     .isEmpty()
     .isLength({ max: 50 }),
-  check("imagen_seg")
-    .exists()
-    .withMessage("La imagen es obligatoria")
-    .not()
-    .isEmpty()
-    .custom((value, { req }) => {
-      if (value === null || value === undefined) {
-        throw new Error("La imagen no puede ser nula");
-      }
+  // check("imagen_seg")
+  //   .exists()
+  //   .withMessage("La imagen es obligatoria")
+  //   .not()
+  //   .isEmpty()
+  //   .custom((value, { req }) => {
+  //     if (value === null || value === undefined) {
+  //       throw new Error("La imagen no puede ser nula");
+  //     }
 
-      if (value === "") {
-        throw new Error("La imagen no puede estar vacía");
-      }
+  //     if (value === "") {
+  //       throw new Error("La imagen no puede estar vacía");
+  //     }
 
-      if (!isNaN(value)) {
-        throw new Error("La imagen no puede ser un número");
-      }
-      return true;
-    }),
+  //     if (!isNaN(value)) {
+  //       throw new Error("La imagen no puede ser un número");
+  //     }
+  //     return true;
+  //   }),
   check("fk_id_produccion", "Digite un id registrado")
     .not()
     .isEmpty()
