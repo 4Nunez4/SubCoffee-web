@@ -3,6 +3,6 @@ import React from 'react'
 
 export default function MiCuenta() {
   return (
-    <div>Campo para la interfaz de Perfil de Usuario</div>
+    <div>Campo para la interfaz de Mi Cuenta, donde se encontrará el crud del perfil</div>
   )
 }

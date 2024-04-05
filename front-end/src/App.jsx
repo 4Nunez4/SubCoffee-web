@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard";
 import MiCuenta from "./pages/MiCuenta.jsx";
+import PerfilUsuario from "./pages/PerfilUsuario.jsx";
 import Subasta from "./pages/Subasta.jsx";
 import ChatInfo from "./components/ChatInfo.jsx"
 import { TerminosyCondiciones } from "./components/TerminosCondiciones";
@@ -23,7 +24,8 @@ function App() {
           <Route path="/historial" element={<Historial />} />
           <Route path="/registrarfinca" element={<RegistrarFinca />} />
           <Route path="/login" element={<Login/>}/>
-          <Route path="/MiCuenta" element={<MiCuenta />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          <Route path="/MiCuenta" element={<MiCuenta />} /> 
+          <Route path="/perfil" element={<PerfilUsuario />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
           <Route path="/chat" element={<ChatInfo />} />
           <Route path="*" element={<Dashboard />} />
           <Route path="/subasta" element={<Subasta />} />
