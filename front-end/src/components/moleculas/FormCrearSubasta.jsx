@@ -4,12 +4,11 @@ import { FaX } from "react-icons/fa6";
 function CrearSubasta(){
 
     return(
-        <div>
         <div className="flex flex-col">
         
             <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
 
-                <div className=' flex flex-col justify-center bg-slate-50 shadow-md rounded-lg px-8 py-6 border border-gray-700 w-[90%] h-[90%] auto-cols-auto border-stone-950'>
+                <div className=' flex flex-col justify-center bg-slate-50 shadow-md rounded-lg px-8 py-6 border border-gray-700 w-[90%] h-[90%] auto-cols-auto'>
 
                             <div className="flex flex-col">
                             <h1 className="flex flex-col justify-center items-center text-xl font-semibold">Crear Tu Subasta Ya</h1> 
@@ -19,7 +18,6 @@ function CrearSubasta(){
                             <p className="flex flex-col justify-center items-center text-xl mb-4">¡Subasta Tu pasión y despierta el aroma del éxito!</p> 
                             </div>
 
-                            
                             <form action="#">
 
                                 <div className="flex flex-col">
@@ -77,21 +75,12 @@ function CrearSubasta(){
                                 </div>
 
                                 <div className="flex flex-col">
-                                <button  onClick={() => alert("Datos Registrados Con Exito")} className="bg-slate-300 rounded-md focus:outline-none focus:border-amber-700 px-3 py-2 cursor-pointer hover:border-black hover:bg-green-500 w-64" type="submit"><p>Crear Subasta</p></button>
+                                <button  onClick={() => alert("Datos Registrados Con Exito")} className="bg-slate-300 rounded-md focus:outline-none focus:border-amber-700 px-3 py-2 cursor-pointer hover:border-black hover:bg-green-500 w-64 ml-96" type="submit"><p>Crear Subasta</p></button>
                                 </div>
                             </form>
-                                    <div className="flex flex-col justify-center items-center">
-                                    <img
-                                        src={ImagenSuba}
-                                        alt="Imagen"
-                                        className="object-cover rounded-lg w-3/4 md:w-full h-full"
-                                        style={{ maxWidth: '230px' }}
-                                    />
-                                    </div>
                     </div>
                 </div>
             </div>
-        </div>    
     )
 }
 
