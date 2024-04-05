@@ -7,7 +7,7 @@ import { validarGuardarVariedad, validarActualizarVar } from '../validations/var
 
 
 
- variedadesRoute.post('/variedad',validartoken,validartoken,validarGuardarVariedad, guardarVariedad);
+ variedadesRoute.post('/variedad',validartoken,validarGuardarVariedad, guardarVariedad);
  variedadesRoute.put('/variedad/:id',validartoken,validarActualizarVar,actualizarVariedad);
  variedadesRoute.get('/variedad',validartoken, listarVariedad);
  variedadesRoute.get('/variedad/:id',validartoken,buscarvariedad);
