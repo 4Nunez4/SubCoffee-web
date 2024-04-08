@@ -7,6 +7,7 @@ export const validarUsuario =async(req, res)=>{
         let {email_user,password_user}=req.body;
         let sql = `select * from usuarios where email_user='${email_user}' and password_user='${password_user}'`;
         const[rows]=await pool.query(sql);
+        // console.log(validarUsuario)
         if(rows.length > 0){
             // PARA GENERAR EL TOKEN 
         let token=Jwt.sign({rows},process.env.AUT_SECRET,{expiresIn:process.env.AUT_EXPIRET})

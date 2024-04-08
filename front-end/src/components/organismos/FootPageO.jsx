@@ -1,7 +1,7 @@
 import React from 'react';
 import logoSub from '../../assets/logosubcoffe.png';
 import footPageImg from '../../assets/footPageIMG.png';
-import SocialIcons from '../atomos/iconFootPge';
+import SocialIcons from '../atomos/dashboard/iconFootPge';
 import senaLogo from '../../assets/senaLogoPng.png';
 
 function FootPage() {

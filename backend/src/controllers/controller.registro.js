@@ -24,9 +24,12 @@ import { validationResult } from "express-validator"
     try {
 
         const errors = validationResult(req)
-        if(!errors.isEmpty()){
-            return res.status(400).json(errors)
-        }
+        if (!errors.isEmpty()) {
+            console.log('Errores de validación:', errors.array()); // Imprimir errores de validación en la consola
+            return res.status(400).json(errors.array()); // Devolver los errores de validación como respuesta
+          }
+      
+        console.log(registrar);
 
         const {pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user, estado_user} = req.body
 

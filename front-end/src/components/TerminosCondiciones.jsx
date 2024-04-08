@@ -1,9 +1,11 @@
 // TerminosyCondiciones.js
 import React, { useState } from 'react';
-import Checkbox from './atomos/CheckBox';
+import Checkbox from './atomos/dashboard/CheckBox';
 import Button from './moleculas/ButtonLogin';
 import Text from './moleculas/TextLogin';
 import logo from '../assets/logosubcoffe.png';
+import ButtonRI from './atomos/dashboard/ButtonRI';
+
 
 export const TerminosyCondiciones = () => {
   const [aceptoTerminos, setAceptoTerminos] = useState(false);
@@ -83,12 +85,12 @@ export const TerminosyCondiciones = () => {
           onChange={handleAceptoTerminosChange}
           label="Acepto los términos y condiciones"
         />
-        <Button
+        <ButtonRI
           disabled={!aceptoTerminos}
           onClick={handleRegistrarmeClick}
         >
           Registrarme
-        </Button>
+        </ButtonRI>
       </div>
     </div>
     </div>
