@@ -14,8 +14,8 @@ import RegistrarFinca from "./pages/RegistrarFinca.jsx";
 
 import CrearSubasta from "./pages/CrearSubasta.jsx";
 import Home from "./pages/Home.jsx"
+import FormCrearSubasta from "../src/components/moleculas/FormCrearSubasta"
 
-import Registro from "./components/moleculas/FormCrearSubasta.jsx";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
           <Route path="/registrarfinca" element={<RegistrarFinca />} />
           <Route path="/login" element={<Login/>}/>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/subcoffee" element={<SubCoffee />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          <Route path="/subcoffee" element={<SubCoffee />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
           <Route path="/chat" element={<ChatInfo />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/subasta" element={<Subasta />} />
@@ -37,7 +37,9 @@ function App() {
 
           <Route path="/CrearSubasta" element={<CrearSubasta />} />
           <Route path="/Home" element={<Home />} />
-          <Route path="/Registro" element={<Registro />}/>
+          <Route path="/CrearSubastaForm" element={<FormCrearSubasta />}/>
+
+          
         </Routes>
       </Layout>
     </BrowserRouter>

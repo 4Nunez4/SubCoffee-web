@@ -1,40 +1,92 @@
 import React from "react";
-import InputForm from "../atomos/AtomosFormulario/InputForm";
-import SelectForm from "../atomos/AtomosFormulario/SelectForm";
 
+function FormCrearSubasta(){
 
+    return(
 
-function Registro(){
-        return(
-            <div className="flex flex-col">
-            
-            <form method='post' onSubmit={funcion}>
+        <div className="flex flex-col">
 
-                <InputForm type="number" name="pk_cedula_user" placeholder="cedula" ref={pk_cedula_user} required/> <br/>
+            <form>
 
-                <InputForm type="text" name="nombre_user" placeholder="nombre" ref={nombre_user} required/> <br/>
+                <div className='flex flex-col'> 
 
-                <InputForm type="text" name="telefono_user" placeholder="telefono" ref={telefono_user} required/> <br/>
+                    <div className="flex flex-col">
+                        <input className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
+                        type="number" 
+                        values = "variedad" 
+                        placeholder= "Tipo de variedad" 
+                        required/>
+                    </div>   
 
-                <InputForm type="email" name="email_user" placeholder="correo" ref={email_user} required/> <br/>
+                    <div className="flex flex-col">
+                        <input className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer"
+                        type="number" 
+                        values = "factor" 
+                        placeholder= "Puntuacion/Factor" 
+                        required/>
+                    </div>
 
-                <InputForm type="password" name="password_user" placeholder="password" ref={password_user} required/> <br/>
+                    <div className="flex flex-col">
+                        <input className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
+                        type="text" 
+                        values = "cantidad" 
+                        placeholder="Cantidad de cafe" 
+                        required/>
+                    </div>
 
-                <InputForm type="date" name="fecha_nacimiento_user" placeholder="fecha_nacimiento" ref={fecha_nacimiento_user} required/> <br/>
+                    <div className="flex flex-col">
+                        <input className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
+                        type="number" 
+                        values = "monto" 
+                        placeholder="Monto inicial" 
+                        required/>
+                    </div>
 
-                <SelectForm name="rol_user" ref={rol_user}>
-                    <option value="admin">Administrador</option>
-                    <option value="vendedor">Vendedor</option>
-                    <option value="comprador">comprador</option>
-                </SelectForm>
+                    <div className="flex flex-col">
+                        <input className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
+                        type="date" 
+                        values="FechaFin" 
+                        placeholder="Fecha Fin" 
+                        required/>
+                    </div>
 
-                <InputForm type="text" name="descripcion_user" placeholder='Descripcion' ref={descripcion_user} required /><br/>
+                    <div className="flex flex-col">
+                        <input className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer"
+                        type="text" 
+                        values = "NombreCertificado" 
+                        placeholder="Nombre de certificado" 
+                        required/>
+                    </div>
 
+                    <div className="flex flex-col">
+                        <input className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
+                        type="text" 
+                        values = "DocumentoCertificado" 
+                        placeholder = "Suba el documentó que certifica la calidad de su café"
+                        required/>
+                    </div>
 
-                <button>Hola</button>
+                    <div className="flex flex-col">
+                        <input className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
+                        type="text" 
+                        values = "imagen" 
+                        placeholder="Suba una imagen del café con orientación horizontal"
+                        required/>
+                    </div>
+
+                    <div className="flex flex-col">
+                        <input  className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer " 
+                        type="text" 
+                        values = "discripcion" 
+                        placeholder="Descripcion de la subasta" 
+                        required/>
+
+                        <button>Hola Crea tu subasta </button>
+                    </div>
+                </div>
             </form>
-            </div>
-        )
+        </div>
+    )
 }
 
-export default Registro
+export default FormCrearSubasta

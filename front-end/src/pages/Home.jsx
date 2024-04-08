@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import { FaChevronLeft } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import FootPagelIMG from "../assets/footPageIMG.png";
+import Navbar from "../components/Navbar"
 
 
 function Home(){
