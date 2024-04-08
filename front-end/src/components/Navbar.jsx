@@ -34,7 +34,7 @@ function Navbar() {
             </div>
             <ul className="flex gap-x-5 p-5">
               <li>
-                <Link to={"/"}>Crear subasta</Link>
+                <Link to={"/ResultadoModal"}>Crear subasta</Link>
               </li>
               <li>
                 <Link to={"/"}>

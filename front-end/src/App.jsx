@@ -12,9 +12,9 @@ import Oferta from "./pages/Oferta.jsx";
 import Historial from "./pages/Historial.jsx";
 import RegistrarFinca from "./pages/RegistrarFinca.jsx";
 
-import CrearSubasta from "./pages/CrearSubasta.jsx";
+/* import CrearSubasta from "./pages/CrearSubasta.jsx"; */
 import Home from "./pages/Home.jsx"
-import FormCrearSubasta from "../src/components/moleculas/FormCrearSubasta"
+import ResultadoModal from "./pages/ResultadosModal.jsx";
 
 
 function App() {
@@ -35,11 +35,9 @@ function App() {
           <Route path="/Notificaciones" element={<Notificaciones />} />
           <Route path="/Oferta" element={<Oferta />} />
 
-          <Route path="/CrearSubasta" element={<CrearSubasta />} />
+          {/* <Route path="/CrearSubasta" element={<CrearSubasta />} /> */}
           <Route path="/Home" element={<Home />} />
-          <Route path="/CrearSubastaForm" element={<FormCrearSubasta />}/>
-
-          
+          <Route path="/ResultadoModal" element={<ResultadoModal />} />
         </Routes>
       </Layout>
     </BrowserRouter>
