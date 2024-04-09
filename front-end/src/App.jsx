@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import Dashboard from "./components/Dashboard";
 import MiCuenta from "./pages/MiCuenta.jsx";
 import PerfilUsuario from "./pages/PerfilUsuario.jsx";
 import Subasta from "./pages/Subasta.jsx";
@@ -13,28 +12,26 @@ import Historial from "./pages/Historial.jsx";
 import RegistrarFinca from "./pages/RegistrarFinca.jsx";
 import CrearSubasta from "./pages/CrearSubasta.jsx";
 import Home from "./pages/Home.jsx"
-import RegistroUser from "../src/components/moleculas/RegistroUsuario.jsx"
-
 
 function App() {
   return (
     <BrowserRouter>
       <Layout>
         <Routes>
+          {/* <Route path="/" element={<Home />} /> */}
           <Route path="/historial" element={<Historial />} />
           <Route path="/registrarfinca" element={<RegistrarFinca />} />
           <Route path="/login" element={<Login/>}/>
           <Route path="/MiCuenta" element={<MiCuenta />} /> 
           <Route path="/perfil" element={<PerfilUsuario />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
           <Route path="/chat" element={<ChatInfo />} />
-          <Route path="*" element={<Dashboard />} />
           <Route path="/subasta" element={<Subasta />} />
           <Route path="/terminosycondiciones" element={<TerminosyCondiciones/>} />
           <Route path="/Notificaciones" element={<Notificaciones />} />
           <Route path="/Oferta" element={<Oferta />} />
           <Route path="/CrearSubasta" element={<CrearSubasta />} />
           <Route path="/Home" element={<Home />} />
-          <Route path="/ResultadoModal" element={<ResultadoModal />} />
+          {/* <Route path="/ResultadoModal" element={<ResultadoModal />} /> */}
         </Routes>
       </Layout>
     </BrowserRouter>
