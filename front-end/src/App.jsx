@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import Dashboard from "./components/organismos/Dashboard.jsx";
-import SubCoffee from "./pages/SubCoffee";
-import NotFound from "./pages/NotFound";
+import Dashboard from "./components/Dashboard";
+import MiCuenta from "./pages/MiCuenta.jsx";
+import PerfilUsuario from "./pages/PerfilUsuario.jsx";
 import Subasta from "./pages/Subasta.jsx";
 import ChatInfo from "./components/ChatInfo.jsx"
 import { TerminosyCondiciones } from "./components/TerminosCondiciones";
@@ -11,11 +11,9 @@ import { Login } from "./components/Login";
 import Oferta from "./pages/Oferta.jsx";
 import Historial from "./pages/Historial.jsx";
 import RegistrarFinca from "./pages/RegistrarFinca.jsx";
-import Registro from "./components/Registro.jsx";
-
-/* import CrearSubasta from "./pages/CrearSubasta.jsx"; */
+import CrearSubasta from "./pages/CrearSubasta.jsx";
 import Home from "./pages/Home.jsx"
-import ResultadoModal from "./pages/ResultadosModal.jsx";
+import RegistroUser from "../src/components/moleculas/RegistroUsuario.jsx"
 
 
 function App() {
@@ -26,18 +24,15 @@ function App() {
           <Route path="/historial" element={<Historial />} />
           <Route path="/registrarfinca" element={<RegistrarFinca />} />
           <Route path="/login" element={<Login/>}/>
-          <Route path="/registro" element={<Registro/>}/>          
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/subcoffee" element={<SubCoffee />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+          <Route path="/MiCuenta" element={<MiCuenta />} /> 
+          <Route path="/perfil" element={<PerfilUsuario />} />                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
           <Route path="/chat" element={<ChatInfo />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<Dashboard />} />
           <Route path="/subasta" element={<Subasta />} />
-          <Route path="*" element={<NotFound />} />
           <Route path="/terminosycondiciones" element={<TerminosyCondiciones/>} />
           <Route path="/Notificaciones" element={<Notificaciones />} />
           <Route path="/Oferta" element={<Oferta />} />
-
-          {/* <Route path="/CrearSubasta" element={<CrearSubasta />} /> */}
+          <Route path="/CrearSubasta" element={<CrearSubasta />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/ResultadoModal" element={<ResultadoModal />} />
         </Routes>
