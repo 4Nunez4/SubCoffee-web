@@ -5,7 +5,6 @@ import cafeLo from '../assets/cofeLogin.png';
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +14,7 @@ export const Login = () => {
         password_user: password
       });
       alert(response.data.message);
-      setShowModal(true);
+     
     } catch (error) {
       alert('Asegurese que los datos ingresados sean correctos.', error); // Muestra mensaje de error
       console.error('Error al iniciar sesión:', error);
@@ -28,7 +27,7 @@ export const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="flex flex-col md:flex-row bg-white dark:bg-white-600 shadow-md rounded-lg max-w-3xl mx-auto border border-gray-700 p-8">
         <div className="md:w-1/2 md:p-4">
-          <form className="md:px-3" onSubmit={handleSubmit}>
+          <form className="md:px-2" onSubmit={handleSubmit}>
             <h1 className="text-2xl font-extrabold text-center mb-4 dark:text-black-200">INICIAR SESIÓN</h1>
             <div className="mb-4">
               <label htmlFor="correo" className="block text-sm font-medium text-black-700 dark:text-gray-800 mb-2">Correo</label>
@@ -71,7 +70,7 @@ export const Login = () => {
           <img
             src={cafeLo}
             alt="Imagen"
-            className="object-cover rounded-lg w-3/4 md:w-full h-full"
+            className="object-cover rounded-lg w-4/5 md:w-full h-full"
             style={{ maxWidth: '230px' }}
           />
         </div>

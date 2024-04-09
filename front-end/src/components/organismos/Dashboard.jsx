@@ -1,15 +1,14 @@
-import logo from '../assets/img1dashboard.png';
-import cafe from '../assets/cafe-dashboard-2.jpg';
-import { colors } from './atomos/themes';
-import { IconDash, IconDashP } from './atomos/Icon';
-import ButtonRI from './atomos/ButtonRI';
-import textPage from './atomos/text';
-import logoSub from '../assets/logosubcoffe.png';
-import borbon from '../assets/cafe-borbon.jpg';
-import caturra from '../assets/cafe-caturra.jpg';
-import tabi from '../assets/cafe-tabiejm.jpg';
-import typica from '../assets/cafe-typica.jpg'
-import FootPage from './footPage';
+import logo from '../../assets/img1dashboard.png';
+import { colors } from '../atomos/dashboard/themes.jsx';
+import { IconDash, IconDashP } from '../atomos/Icon.jsx';
+import ButtonRI from '../atomos/dashboard/ButtonRI.jsx';
+import textPage from '../atomos/text.jsx';
+import logoSub from '../../assets/logosubcoffe.png';
+import borbon from '../../assets/cafe-borbon.jpg';
+import caturra from '../../assets/cafe-caturra.jpg';
+import tabi from '../../assets/cafe-tabiejm.jpg';
+import typica from '../../assets/cafe-typica.jpg'
+import FootPage from './FootPageO.jsx';
 
 
 function Dashboard() {
