@@ -1,13 +1,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CiCircleList, CiSearch } from "react-icons/ci";
+import { icono } from "./atomos/IconsAtom";
+import IconHeaderAtom from "./atomos/IconHeaderAtom";
+import ModalMessaAndNoti from "./moleculas/ModalMessaAndNoti";
+import ButtonCerrarModalAtom from "./atomos/ButtonCerrarModalAtom";
 
 function Navbar() {
   const [isAuthenticated] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [abrirBell, setAbrirBell] = useState(false);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const toggleAbrirBell = () => {
+    setAbrirBell(!abrirBell);
   };
 
   return (
@@ -33,6 +42,9 @@ function Navbar() {
               <CiCircleList className="absolute" />
             </div>
             <ul className="flex gap-x-5 p-5">
+              <IconHeaderAtom onClick={toggleAbrirBell}>
+                <icono.iconoCampana className="h-5 w-5" />
+              </IconHeaderAtom>
               <li>
                 <Link to={"/ResultadoModal"}>Crear subasta</Link>
               </li>
@@ -46,6 +58,16 @@ function Navbar() {
                 </Link>
               </li>
             </ul>
+            {abrirBell && (
+              <div className="absolute top-16 right-32 flex justify-center items-center">
+                <div className="bg-blanco rounded-xl w-80">
+                  <ModalMessaAndNoti onClose={toggleAbrirBell} />
+                </div>
+                <ButtonCerrarModalAtom
+                  onClose={() => toggleAbrirBell(false)}
+                />
+              </div>
+            )}
           </nav>
         </div>
       ) : (

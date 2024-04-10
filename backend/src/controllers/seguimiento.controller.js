@@ -1,5 +1,24 @@
+import multer from "multer"
 import { pool } from "../databases/conexion.js";
 import { validationResult } from "express-validator";
+
+//////////
+
+const storage = multer.diskStorage(
+    {
+        destination: function(req,img,cb){
+            cb(null, "public/img")
+        },
+
+        filename: function(req,img,cb){
+            cb(null,img.originalname)
+        }
+    }
+)
+const upload = multer({storage:storage})
+export const cargarImagen= upload.single('img')
+
+////////
 
 export const listar = async(req, res) => {
     try {
@@ -28,8 +47,9 @@ export const registrar = async (req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const  { nombre_seg, imagen_seg, fk_id_produccion, fk_id_usuario, estado_seg } = req.body;
+        const  { nombre_seg, fk_id_produccion, fk_id_usuario, estado_seg } = req.body;
 
+        let imagen_seg = req.file.originalname
 //        if (!nombre_seg.trim() || !fecha_seg.trim() || !fk_id_produccion || !fk_id_usuario) {
 //            return res.status(400).json({
 //                "mensaje": "Por favor, proporcione todos los campos necesarios."
@@ -62,13 +82,9 @@ export const actualizar = async (req, res) => {
             return res.status(400).json({ errors: errors.array() });
         }
         const id = req.params.id;
-        const { nombre_seg, fecha_seg, imagen_seg, estado_seg} = req.body;
+        const { nombre_seg, fecha_seg, estado_seg} = req.body;
 
-//        if (!nombre_seg.trim() || !fecha_seg.trim() || !fk_id_produccion || !fk_id_usuario) {
-//            return res.status(400).json({
-//                "mensaje": "Por favor, proporcione todos los campos necesarios."
-//            });
-//        }
+        let imagen_seg = req.file.originalname
 
         const [resultado] = await pool.query("update seguimiento set nombre_seg=COALESCE(?, nombre_seg), fecha_seg=COALESCE(?, fecha_seg), imagen_seg=COALESCE(?, imagen_seg), estado_seg=COALESCE(?, estado_seg) where pk_id_seg=?",
             [nombre_seg, fecha_seg, imagen_seg, estado_seg, id]);

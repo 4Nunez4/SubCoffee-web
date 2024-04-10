@@ -1,0 +1,11 @@
+export { default as ChatInfo } from './ChatInfo';
+export { default as Dashboard } from './Dashboard';
+export { default as Layout } from './Layout';
+export { default as Login, Login } from './Login';
+export { default as Navbar } from './Navbar';
+export { default as NotificacionesCard } from './NotificacionesCard';
+export { default as Sidebar } from './Sidebar';
+export { default as SubastaInfoUser } from './Subastainf';
+export { TerminosyCondiciones } from './TerminosCondiciones';
+export { default as FootPage } from './footPage';
+export * from './plantillas';

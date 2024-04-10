@@ -43,7 +43,7 @@
       <tr>
         <td>PETICION BODY</td>
         <td>
-          { "nombre_seg": "Un seguimiento", "imagen_seg": "NULL",
+          { "nombre_seg": "Un seguimiento", "imagen_seg": file,
           "fk_id_produccion": 2, "fk_id_usuario": 1084251889, "estado_seg":
           "activo" }
         </td>
@@ -106,7 +106,7 @@
         <td>RESPUESTA JSON</td>
         <td>
           Correcto: Status:200 JSON: { pk_id_seg: 3, nombre_seg: 'Tercer
-          Seguimiento', fecha_seg: 2024-02-14, imagen_seg: '', fk_id_produccion:
+          Seguimiento', fecha_seg: 2024-02-14, imagen_seg: file, fk_id_produccion:
           1, fk_id_usuario: 1, "estado_seg": "activo" } Incorrecto: Status:404
           body:{ status:500 message:"No se encontraron seguimientos registrados
           :c" } Error: Status:505 body:{ "error en el sistema" }
@@ -160,7 +160,7 @@
         <td>PETICION BODY</td>
         <td>
           { "nombre_seg": "Tercer Seguimiento", "fecha_seg": "2024-02-20",
-          "imagen_seg": "NULL" "estado_seg": "activo" }
+          "imagen_seg": file, "estado_seg": "activo" }
         </td>
       </tr>
       <tr>

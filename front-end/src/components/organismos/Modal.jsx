@@ -10,12 +10,11 @@ export const Modal = ({open, onClose }) => {
 
                     <div className="flex flex-col justify-center bg-slate-50 shadow-md rounded-lg px-8 py-6 border max-w-[90%] max-h-[90%] auto-cols-auto border-stone-950 overflow-auto">
 
-                   <FormCrearSubasta/>
-
                         <div>
                             <FaX className="cursor-pointer" onClick={onClose}/>
                         </div>
 
+                   <FormCrearSubasta/>
                     </div>
                 </div>
             )}

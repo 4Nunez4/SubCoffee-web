@@ -16,7 +16,9 @@ const Sidebar = () => {
   const Menus = [
 
     { title: "user", link: "/dashboard", icon: AiOutlineUser },
-    { title: "messages", link: "/subcoffee", icon: FiMessageSquare },
+
+    { title: "Mi Cuenta", link: "/MiCuenta", icon: FiMessageSquare },
+    { title: "Perfil", link: "/perfil", icon: AiOutlineUser },
 
     { title: "chat", link: "/chat", icon: FiBarChart },
     { title: "Notificaciones", link: "/Notificaciones", icon: IoNotificationsOutline },
