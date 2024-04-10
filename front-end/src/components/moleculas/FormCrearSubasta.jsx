@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function FormCrearSubasta(){
 
-    const baseURL = 'localhost:4000/produccion/registrar'
+    const baseURL = 'http://localhost:4000/produccion/registrar'
 
     const pk_id_pro = useRef(null)
     const cantidad_pro = useRef(null)
@@ -14,37 +14,38 @@ function FormCrearSubasta(){
     const handleSubmit = async (e) =>{
         e.preventDefault()
    
-    try {
-      const data = {
-            pk_id_pro: pk_id_pro.current.value,
-            cantidad_pro: cantidad_pro.current.value,
-            fk_id_variedad: fk_id_variedad.current.value,
-            fk_id_finca: fk_id_finca.current.value,
-            estado_pro: estado_pro.current.value
-      }
-      axios.post(baseURL, data).then((response) => {
-        console.log(response)
-        if(response.status == 201){
-            alert('produccion')
-        }else{
-            alert('produccion')
+        try {
+            const data = {
+                    pk_id_pro: pk_id_pro.current.value,
+                    cantidad_pro: cantidad_pro.current.value,
+                    fk_id_variedad: fk_id_variedad.current.value,
+                    fk_id_finca: fk_id_finca.current.value,
+                    estado_pro: estado_pro.current.value
+            }
+
+            axios.post(baseURL, data).then((response) => {
+                console.log(response)
+                if(response.status == 201){
+                    alert('produccion')
+                }else{
+                    alert('produccion')
+                }
+            })
         }
-      })
-    }
-    catch(error){
-            console.log('NOT', error)
+        catch(error){
+                console.log('NOT', error)
+        }
+
     }
 
-     }
-
-        const baseURLLISTAR = 'http://localhost:4000/produccion/listar'
+    const baseURLLISTAR = 'http://localhost:4000/produccion/listar'
     const [variedad, setVariedad] = useState([])
 
     useEffect(() => {
     try {
       axios.get( baseURLLISTAR, {
         headers: {
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb3dzIjpbeyJwa19jZWR1bGFfdXNlciI6MTA4NDI1MTg4OSwibm9tYnJlX3VzZXIiOiJKdWFuIENhbWlsbyBSZWFscGUiLCJlbWFpbF91c2VyIjoianVhbkBnbWFpbC5jb20iLCJwYXNzd29yZF91c2VyIjoiMTIzNDU2Nzg5IiwiZGVzY3JpcGNpb25fdXNlciI6IlNveSB1biBjaGljbyBhbWlnYWJsZSIsImltYWdlbl91c2VyIjoiIiwidGVsZWZvbm9fdXNlciI6IjMxNTc4NzQ1OTMiLCJmZWNoYV9uYWNpbWllbnRvX3VzZXIiOiIyMDA1LTA2LTE3VDA1OjAwOjAwLjAwMFoiLCJyb2xfdXNlciI6ImFkbWluIiwiZXN0YWRvX3VzZXIiOm51bGx9XSwiaWF0IjoxNzEyNzEzMTQ2LCJleHAiOjE3MTI3OTk1NDZ9.LqnN7bgaQtuY1gSSzuZXFUAcFmcneakHysY3geIvVwE"
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb3dzIjpbeyJwa19jZWR1bGFfdXNlciI6MTA3OTM3MzgsIm5vbWJyZV91c2VyIjoiVmFsZW50aW5hIERpYXogTGVybWEgIiwiZW1haWxfdXNlciI6InZhbGVudGluYUBnbWFpbC5jb20iLCJwYXNzd29yZF91c2VyIjoiMTIzIiwiZGVzY3JpcGNpb25fdXNlciI6IkNhZmV0ZXJvcyIsImltYWdlbl91c2VyIjpudWxsLCJ0ZWxlZm9ub191c2VyIjoiMzIwNDYyMjY4MCIsImZlY2hhX25hY2ltaWVudG9fdXNlciI6IjE4OTktMTEtMzBUMDQ6NTY6MTYuMDAwWiIsInJvbF91c2VyIjoiYWRtaW4iLCJlc3RhZG9fdXNlciI6bnVsbH1dLCJpYXQiOjE3MTI3NzAzMzgsImV4cCI6MTcxMjg1NjczOH0.jl3nPPKpNdquJYnwdy7T8aDFdl0_G9LFngitw3oyxHk"
         }
       }).then((response) => {
         console.log(response)
@@ -54,7 +55,7 @@ function FormCrearSubasta(){
     catch(error){
         console.log("ERROR SERVIOR", error)
     }
-  })
+  }, [])
 
     return(
 
@@ -62,9 +63,7 @@ function FormCrearSubasta(){
 
         <div className="flex flex-col z-10 ">
             <p className="flex flex-col justify-center items-center text-xl font-semibold z-10">Crear Tu Subasta Ya</p>
-            <p className="flex flex-col justify-center items-center text-xl mb-4 z-10 f
-            
-            ont-semibold">¡Subasta Tu pasión y despierta el aroma del éxito!</p> 
+            <p className="flex flex-col justify-center items-center text-xl mb-4 z-10 font-semibold">¡Subasta Tu pasión y despierta el aroma del éxito!</p> 
         </div>
 
             <form method='post' onSubmit={handleSubmit}>
@@ -77,10 +76,11 @@ function FormCrearSubasta(){
 
                         <option>Tipo de variedad</option>
                         {variedad.map(vari => (
-                            <option key={vari.tipo_vari} value={vari.tipo_vari}>
-                            {vari.tipo_vari}
+                            <option key={vari.pk_id_vari} value={vari.pk_id_vari}>
+                            {vari.tipo}
                             </option>
                         ))}
+                        
                         </select>
 
                     </div>   
@@ -93,8 +93,8 @@ function FormCrearSubasta(){
 
                         <option>Puntuacion/Factor</option>
                         {variedad.map(vari2 => (
-                            <option key={vari2. puntuacion_vari} value={vari2.puntuacion_vari}>
-                            {vari2.puntuacion_vari}
+                            <option key={vari2.pk_id_vari} value={vari2.pk_id_vari}>
+                            {vari2.puntuacion}
                             </option>
                         ))} 
                         </select>
@@ -105,6 +105,7 @@ function FormCrearSubasta(){
                         type="text" 
                         values = "cantidad" 
                         placeholder="Cantidad de cafe" 
+                        ref={cantidad_pro}
                         required/>
                     </div>
 
@@ -156,8 +157,8 @@ function FormCrearSubasta(){
                         ref={fk_id_variedad} >
                         <option>Descripcion variedad a subastar</option>
                         {variedad.map(vari3 => (
-                            <option key={vari3.descripcion_vari} value={vari3.descripcion_vari} >
-                            {vari3.descripcion_vari}
+                            <option key={vari3.pk_id_vari} value={vari3.pk_id_vari} >
+                            {vari3.descripcion}
                             </option>
 
                         ))}
