@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { CiCircleList, CiSearch } from "react-icons/ci";
 
 function Navbar() {
-  const [isAuthenticated] = useState(false);
+  const [isAuthenticated] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (e) => {
