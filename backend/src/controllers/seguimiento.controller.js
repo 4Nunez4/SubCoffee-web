@@ -82,8 +82,11 @@ export const actualizar = async (req, res) => {
         const errors = validationResult(req);
        
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            console.log('Errores de validación:', errors.array()); // Imprimir errores de validación en la consola
+            return res.status(400).json(errors.array()); // Devolver los errores de validación como respuesta
+          
         }
+        console.log(actualizar);
         const id = req.params.id;
         const { nombre_seg, fecha_seg, estado_seg} = req.body;
 
@@ -94,7 +97,7 @@ export const actualizar = async (req, res) => {
 
         if (resultado.affectedRows > 0) {
             res.status(200).json({
-                "mensaje": "El seguimiento ha sido actualizado exitosamente"
+                "mensaje": "El seguimiento se ha sido actualizado exitosamente"
             });
         } else {
             res.status(404).json({
