@@ -45,8 +45,11 @@ export const registrar = async (req, res) => {
         const errors = validationResult(req);
        
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            console.log('Errores de validación:', errors.array()); // Imprimir errores de validación en la consola
+            return res.status(400).json(errors.array()); // Devolver los errores de validación como respuesta
+          
         }
+        console.log(registrar);
         const  { nombre_seg, fk_id_produccion, fk_id_usuario, estado_seg } = req.body;
 
         let imagen_seg = req.file.originalname
