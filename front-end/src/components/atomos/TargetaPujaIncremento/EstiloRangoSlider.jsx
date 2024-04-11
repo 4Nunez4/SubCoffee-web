@@ -1,4 +1,5 @@
 import React from 'react';
+import './custom-styles.css';
 
 const SliderAtom = ({ value, onChange }) => {
   return (
@@ -9,7 +10,7 @@ const SliderAtom = ({ value, onChange }) => {
       step="1000"
       value={value}
       onChange={onChange}
-      className="w-full bg-blue-800 appearance-none h-8 rounded-full"
+      className="w-full appearance-none h-8 rounded-full"
     />
   );
 };
