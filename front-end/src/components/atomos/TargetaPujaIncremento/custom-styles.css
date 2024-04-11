@@ -1,0 +1,23 @@
+/* Estilos personalizados para el input de tipo range */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Elimina el estilo predeterminado del navegador */
+    appearance: none;
+    width: 40px; /* Ajusta el tamaño del thumb */
+    height: 40px; /* Ajusta el tamaño del thumb */
+    border-radius: 50%; /* Hace el thumb redondo */
+    background: #FFA500; /* Color del thumb */
+    cursor: pointer; /* Cambia el cursor al pasar el cursor */
+    border: 2px solid #FFF; /* Añade un borde blanco alrededor del thumb */
+   }
+   
+   input[type="range"]::-moz-range-thumb {
+    width: 20px; /* Ajusta el tamaño del thumb */
+    height: 20px; /* Ajusta el tamaño del thumb */
+    border-radius: 50%; /* Hace el thumb redondo */
+    background: #FFA500; /* Color del thumb */
+    cursor: pointer; /* Cambia el cursor al pasar el cursor */
+    border: 2px solid #FFF; /* Añade un borde blanco alrededor del thumb */
+   }
+   
+
+   

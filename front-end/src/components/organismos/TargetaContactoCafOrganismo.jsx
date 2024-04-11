@@ -1,20 +1,24 @@
 import React from 'react';
-import AvatarWithTextMolecule from '../moleculas/AvataryTextoInfoCaf';
-import { ContactInfoAtom, FaPhoneAlt, FaAddressCard } from '../atomos/TargetaDueñoSubasta/ContactoInformacionAtomo'
-import TextAtom from '../atomos/TargetaDueñoSubasta/TextoDueñoSubastaAtomo';
+import {Card, CardHeader, CardBody, Image} from "@nextui-org/react";
 
 const ContactCardOrganism = () => {
   return (
-    <div className="h-full bg-blue-500 rounded-lg shadow-md overflow-hidden place-content-center text-white">
-      <div className="p-4  grid grid-rows-3 grid-flow-col gap-3">
-        <AvatarWithTextMolecule src="/src/assets/profile_user4.jfif" />
-        <TextAtom>Camilo montolla </TextAtom>
-        <div className="grid grid-rows-2 grid-flow-col gap-2 text-center place-content-center">
-          <ContactInfoAtom icon={<FaPhoneAlt />} text="3203986077" />
-          <ContactInfoAtom icon={<FaAddressCard />} text="1079534436" />
-        </div>
-      </div>
-    </div>
+      <Card className="py-4 overflow-hidden place-content-center h-full bg-lime-600 text-white">
+      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+        <h4 className="font-bold text-large">Jorge Enrique Nuñez Molina</h4>
+        <p className="text-tiny uppercase font-bold">cedula</p>
+        <p className="text-tiny uppercase font-bold">telefono</p>
+        
+      </CardHeader>
+      <CardBody className="overflow-visible py-2">
+        <Image
+          alt="Card background"
+          className="object-cover rounded-xl"
+          src="/src/assets/profile_user2.jfif"
+          width={270}
+        />
+      </CardBody>
+    </Card>
   );
 };
 

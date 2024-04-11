@@ -6,7 +6,7 @@ import ButtonGridOrganism from "../organismos/BotonesSubastaOrganismos";
 
 const SubastaOfertador = ({ children }) => {
   return (
-    <div class="bg-white text-black w-full grid grid-cols-5 gap-2 h-full p-8">
+    <div class="bg-white text-white w-full grid grid-cols-5 gap-2 h-full p-8">
       <div className=" col-span-4">
       <TargetasCafetero/>
       </div>
@@ -14,7 +14,7 @@ const SubastaOfertador = ({ children }) => {
     <ContactCardOrganism/>
   </div>
  
-      <div className=" bg-blue-900 rounded-lg shadow-md overflow-hidden col-span-4">
+      <div className=" col-span-4">
       <CardOrganism/>
       </div>
 
