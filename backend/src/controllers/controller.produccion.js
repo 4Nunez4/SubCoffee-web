@@ -22,7 +22,7 @@ export const registrarProduccion = async(req,res) => {
 
 export const listarProduccion = async(req,res) => {
     try {
-        let sql ='select * from produccion';
+        let sql ='SELECT pk_id_vari, tipo_vari as tipo, descripcion_vari as descripcion, puntuacion_vari as puntuacion FROM produccion JOIN variedad on fk_id_variedad = pk_id_vari';
         const [result] = await pool.query(sql);
         if(result.length > 0) {
             res.status(200).json(result);

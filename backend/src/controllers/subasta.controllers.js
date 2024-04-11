@@ -3,7 +3,7 @@ import { validationResult } from "express-validator";
 
 export const listar = async(req, res) => {
     try {
-        const [ resultado ] = await pool.query("select * from subasta")
+        const [ resultado ] = await pool.query("SELECT pk_id_pro, cantidad_pro as cantidad FROM subasta JOIN produccion on fk_id_produccion = pk_id_pro")
 
         if(resultado.length > 0) {
             res.status(200).json(resultado)
@@ -28,7 +28,7 @@ export const registrar = async (req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const  { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion } = req.body;        ;
+        const  { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion } = req.body; 
 
         // if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !) {
         //     return res.status(400).json({
