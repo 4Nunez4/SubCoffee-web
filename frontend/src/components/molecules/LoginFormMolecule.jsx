@@ -13,7 +13,7 @@ import AuthContext from "../../context/AuthContext";
 const LoginFormMolecule = () => {
   const navigation = useNavigate();
   const { setUsers } = useContext(AuthContext);
-  const URL = "http://localhost:9722/auth/login";
+  const URL = "http://localhost:4000/auth/login";
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -40,7 +40,12 @@ const LoginFormMolecule = () => {
           toast.error("Usuario no registrado");
         }
       })
-      .catch((error) => console.log(error));
+      .catch(error => {
+        console.error('Error en la solicitud de inicio de sesión:', error);
+        if (error.response) {
+          console.error('Respuesta del servidor:', error.response.data);
+        }
+      });
   };
 
   return (
