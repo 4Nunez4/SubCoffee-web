@@ -2,28 +2,34 @@ import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios';
 
 function FormCrearSubasta(){
+ 
+    const baseURL = 'http://localhost:4000/subasta/registrar'
 
-    const baseURL = 'http://localhost:4000/produccion/registrar'
+    const fecha_inicio_sub = useRef(null)
+    const fecha_fin_sub = useRef(null)
+    const precio_inicial_sub = useRef(null)
+    const precio_final_sub = useRef(null)
+    const estado_sub = useRef(null)
+    const fk_id_produccion = useRef(null)
 
-    const pk_id_pro = useRef(null)
-    const cantidad_pro = useRef(null)
-    const fk_id_variedad = useRef(null)
-    const fk_id_finca = useRef(null)
-    const estado_pro = useRef(null)
-
-    const handleSubmit = async (e) =>{
+    const handle = async (e) =>{
         e.preventDefault()
    
         try {
             const data = {
-                    pk_id_pro: pk_id_pro.current.value,
-                    cantidad_pro: cantidad_pro.current.value,
-                    fk_id_variedad: fk_id_variedad.current.value,
-                    fk_id_finca: fk_id_finca.current.value,
-                    estado_pro: estado_pro.current.value
+                    fecha_fin_sub: fecha_fin_sub.current.value,
+                    fecha_inicio_sub: fecha_inicio_sub.current.value,
+                    precio_inicial_sub: precio_inicial_sub.current.value,
+                    precio_final_sub: precio_final_sub.current.value,
+                    estado_sub: estado_sub.current.value,
+                    fk_id_produccion: fk_id_produccion.current.value,
             }
 
-            axios.post(baseURL, data).then((response) => {
+            axios.post(baseURL, data, {
+                headers: {
+                    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb3dzIjpbeyJwa19jZWR1bGFfdXNlciI6MTA4NDI1MTg4OSwibm9tYnJlX3VzZXIiOiJKdWFuIENhbWlsbyBSZWFscGUiLCJlbWFpbF91c2VyIjoianVhbkBnbWFpbC5jb20iLCJwYXNzd29yZF91c2VyIjoiMTIzNDU2Nzg5IiwiZGVzY3JpcGNpb25fdXNlciI6IlNveSB1biBjaGljbyBhbWlnYWJsZSIsImltYWdlbl91c2VyIjoiIiwidGVsZWZvbm9fdXNlciI6IjMxNTc4NzQ1OTMiLCJmZWNoYV9uYWNpbWllbnRvX3VzZXIiOiIyMDA1LTA2LTE3VDA1OjAwOjAwLjAwMFoiLCJyb2xfdXNlciI6ImFkbWluIiwiZXN0YWRvX3VzZXIiOm51bGx9XSwiaWF0IjoxNzEyODgzNzM3LCJleHAiOjE3MTI5NzAxMzd9.OWx0uLBUknBINFxn-VgjS-M86Cv5me8DdM2YWiYke3c"
+                }
+            }).then((response) => {
                 console.log(response)
                 if(response.status == 201){
                     alert('produccion')
@@ -38,18 +44,19 @@ function FormCrearSubasta(){
 
     }
 
-    const baseURLLISTAR = 'http://localhost:4000/produccion/listar'
-    const [variedad, setVariedad] = useState([])
 
+   const baseURLLISTARPro = 'http://localhost:4000/subasta/listar'
+
+    const [produccion, setProduccion] = useState([])
     useEffect(() => {
     try {
-      axios.get( baseURLLISTAR, {
+      axios.get( baseURLLISTARPro, {
         headers: {
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb3dzIjpbeyJwa19jZWR1bGFfdXNlciI6MTA3OTM3MzgsIm5vbWJyZV91c2VyIjoiVmFsZW50aW5hIERpYXogTGVybWEgIiwiZW1haWxfdXNlciI6InZhbGVudGluYUBnbWFpbC5jb20iLCJwYXNzd29yZF91c2VyIjoiMTIzIiwiZGVzY3JpcGNpb25fdXNlciI6IkNhZmV0ZXJvcyIsImltYWdlbl91c2VyIjpudWxsLCJ0ZWxlZm9ub191c2VyIjoiMzIwNDYyMjY4MCIsImZlY2hhX25hY2ltaWVudG9fdXNlciI6IjE4OTktMTEtMzBUMDQ6NTY6MTYuMDAwWiIsInJvbF91c2VyIjoiYWRtaW4iLCJlc3RhZG9fdXNlciI6bnVsbH1dLCJpYXQiOjE3MTI3NzAzMzgsImV4cCI6MTcxMjg1NjczOH0.jl3nPPKpNdquJYnwdy7T8aDFdl0_G9LFngitw3oyxHk"
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb3dzIjpbeyJwa19jZWR1bGFfdXNlciI6MTA4NDI1MTg4OSwibm9tYnJlX3VzZXIiOiJKdWFuIENhbWlsbyBSZWFscGUiLCJlbWFpbF91c2VyIjoianVhbkBnbWFpbC5jb20iLCJwYXNzd29yZF91c2VyIjoiMTIzNDU2Nzg5IiwiZGVzY3JpcGNpb25fdXNlciI6IlNveSB1biBjaGljbyBhbWlnYWJsZSIsImltYWdlbl91c2VyIjoiIiwidGVsZWZvbm9fdXNlciI6IjMxNTc4NzQ1OTMiLCJmZWNoYV9uYWNpbWllbnRvX3VzZXIiOiIyMDA1LTA2LTE3VDA1OjAwOjAwLjAwMFoiLCJyb2xfdXNlciI6ImFkbWluIiwiZXN0YWRvX3VzZXIiOm51bGx9XSwiaWF0IjoxNzEyODgzNzM3LCJleHAiOjE3MTI5NzAxMzd9.OWx0uLBUknBINFxn-VgjS-M86Cv5me8DdM2YWiYke3c"
         }
       }).then((response) => {
         console.log(response)
-        setVariedad(response.data)
+        setProduccion(response.data)
       })
     }
     catch(error){
@@ -66,47 +73,32 @@ function FormCrearSubasta(){
             <p className="flex flex-col justify-center items-center text-xl mb-4 z-10 font-semibold">¡Subasta Tu pasión y despierta el aroma del éxito!</p> 
         </div>
 
-            <form method='post' onSubmit={handleSubmit}>
+            <form method='post' onSubmit={handle}>
                 <div className='flex flex-col'> 
 
-                    <div className="flex flex-col">
-                        <select className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
-                        values="variedad"
-                        ref={fk_id_variedad}>
-
-                        <option>Tipo de variedad</option>
-                        {variedad.map(vari => (
-                            <option key={vari.pk_id_vari} value={vari.pk_id_vari}>
-                            {vari.tipo}
-                            </option>
-                        ))}
-                        
-                        </select>
-
-                    </div>   
-
-                    <div className="flex flex-col">
-                        <select className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer"
-                        values = "factor" 
-                        placeholder= "PuntuacionFactor"  
-                        ref={fk_id_variedad}>
-
-                        <option>Puntuacion/Factor</option>
-                        {variedad.map(vari2 => (
-                            <option key={vari2.pk_id_vari} value={vari2.pk_id_vari}>
-                            {vari2.puntuacion}
-                            </option>
-                        ))} 
-                        </select>
-                    </div>
-
-                    <div className="flex flex-col">
-                        <input className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
+                    {/* <div className="flex flex-col">
+                        <select className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
                         type="text" 
                         values = "cantidad" 
                         placeholder="Cantidad de cafe" 
-                        ref={cantidad_pro}
-                        required/>
+                        ref= {fk_id_produccion}>
+
+                        <option>Cantidad kilos de cafe</option>
+                        {produccion.map(pro => (
+                            <option key={pro.pk_id_pro} value={pro.pk_id_pro}>
+                            {pro.cantidad}
+                            </option>
+                        ))} 
+                        </select>
+                    </div> */}
+
+                        <div className="flex flex-col">
+                        <input className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
+                        type="number" 
+                        values = "monto" 
+                        placeholder="fk_id_produccion" 
+                        ref={fk_id_produccion}
+                        />
                     </div>
 
                     <div className="flex flex-col">
@@ -114,7 +106,25 @@ function FormCrearSubasta(){
                         type="number" 
                         values = "monto" 
                         placeholder="Monto inicial" 
-                        required/>
+                        ref={precio_inicial_sub}
+                        />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <input className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
+                        type="number" 
+                        values = "monto" 
+                        placeholder="Monto final" 
+                        ref={precio_final_sub}
+                        />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <input className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
+                        type="date" 
+                        values="FechaInicio" 
+                        placeholder="Fecha inicio" 
+                        ref={fecha_inicio_sub}/>
                     </div>
 
                     <div className="flex flex-col">
@@ -122,10 +132,22 @@ function FormCrearSubasta(){
                         type="date" 
                         values="FechaFin" 
                         placeholder="Fecha Fin" 
-                        required/>
+                        ref={fecha_fin_sub}/>
                     </div>
 
                     <div className="flex flex-col">
+                        <select className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
+                        type="date" 
+                        values="FechaFin" 
+                        placeholder="Fecha Fin" 
+                        ref={estado_sub}>
+                            <option>abierta</option>
+                            <option>cerrada</option>
+                            <option>espera</option>
+                        </select>
+                    </div>
+
+                    {/* <div className="flex flex-col">
                         <input className="shadow-sm rounded-md px-3 py-2 w-full  border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer"
                         type="text" 
                         values = "NombreCertificado" 
@@ -147,25 +169,9 @@ function FormCrearSubasta(){
                         values = "imagen" 
                         placeholder="Suba una imagen del café con orientación horizontal"
                         required/>
-                    </div>
+                    </div> */}
 
-                    <div className="flex flex-col">
-                        <select  className="shadow-sm rounded-md px-3 py-2 w-full border border-black focus:outline-none focus:border-blue-700 mb-2 top-4 cursor-pointer" 
-                        type="text" 
-                        values = "discripcion" 
-                        placeholder="Descripcion de la subasta" 
-                        ref={fk_id_variedad} >
-                        <option>Descripcion variedad a subastar</option>
-                        {variedad.map(vari3 => (
-                            <option key={vari3.pk_id_vari} value={vari3.pk_id_vari} >
-                            {vari3.descripcion}
-                            </option>
-
-                        ))}
-                        </select>
-
-                        <button>Hola Crea tu subasta </button>
-                    </div>
+                        <button className="bg-green-500" type='submit'> Crear Subasta </button>
                 </div>
             </form>
         </div>

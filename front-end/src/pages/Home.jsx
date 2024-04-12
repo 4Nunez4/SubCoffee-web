@@ -1,9 +1,9 @@
-import React, {useState} from "react"
+import React, { useEffect, useState } from "react"
 import { FaChevronLeft } from "react-icons/fa6";
 import { FaChevronRight } from "react-icons/fa6";
 import FootPagelIMG from "../assets/footPageIMG.png";
 import Navbar from "../components/Navbar"
-
+import axios from 'axios';
 
 function Home(){
 
@@ -38,6 +38,29 @@ function Home(){
     setCurrentIndex(id)
   }
 
+
+  const baseURL = 'http://localhost:4000/subasta/listar'
+   const[post, setPost] = useState(null)
+
+  useEffect(() => {
+    try {
+      axios.get( baseURL, {
+        headers: {
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb3dzIjpbeyJwa19jZWR1bGFfdXNlciI6MTA4NDI1MTg4OSwibm9tYnJlX3VzZXIiOiJKdWFuIENhbWlsbyBSZWFscGUiLCJlbWFpbF91c2VyIjoianVhbkBnbWFpbC5jb20iLCJwYXNzd29yZF91c2VyIjoiMTIzNDU2Nzg5IiwiZGVzY3JpcGNpb25fdXNlciI6IlNveSB1biBjaGljbyBhbWlnYWJsZSIsImltYWdlbl91c2VyIjoiIiwidGVsZWZvbm9fdXNlciI6IjMxNTc4NzQ1OTMiLCJmZWNoYV9uYWNpbWllbnRvX3VzZXIiOiIyMDA1LTA2LTE3VDA1OjAwOjAwLjAwMFoiLCJyb2xfdXNlciI6ImFkbWluIiwiZXN0YWRvX3VzZXIiOm51bGx9XSwiaWF0IjoxNzEyODgzNzM3LCJleHAiOjE3MTI5NzAxMzd9.OWx0uLBUknBINFxn-VgjS-M86Cv5me8DdM2YWiYke3c"
+        }
+      }).then((response) => {
+        console.log(response)
+        setPost(response.data)
+      })
+    }
+    catch(error){
+        console.log("ERROR SERVIOR", error)
+    }
+  }, [])
+
+  if(!post) return null
+
+
     return(
        
      <div className="max-w-[1600px] h-[600px] w-full m-auto py-10 px-4 relative group">
@@ -62,117 +85,32 @@ function Home(){
 
         <p className ="flex flex-col ustify-center items-center font-extrabold text-2xl font-sans">¡Bienvenido a SubCoffee, donde cada grano de cafe cuenta!</p> 
 
+
+
       <>
         <h1 className="font-medium flex flex-col text-2xl font-sans p-3">Borbón Rosado</h1>
         <div className= "flex flex-row py-5">
         <div className="flex flex-col w-96 h-96 px-2.5">
-          <div className="flex flex-col ">
-            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
-            <div>
-            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
-            </div>
-            <div>
-            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
-            </div>
-          </div>
-        </div>
+        <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
 
-        <div className="flex flex-col w-96 h-96 px-2.5">
-          <div className="flex flex-col">
-            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
-            <div>
-            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
-            </div>
-            <div>
-            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
-            </div>
-          </div>
-        </div>
+       {post.map(subasta =>( 
+        
+            <label key={subasta.pk_id_sub} value={subasta.pk_id_sub} >
+            {subasta.fecha_inicio_sub}
+            </label>
+            ))} 
 
-        <div className="flex flex-col w-96 h-96 px-2.5">
-          <div className="flex flex-col">
-            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
-            <div>
-            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
-            </div>
-            <div>
-            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
-            </div>
-          </div>
-        </div>
+            {/*<label>Fecha_inicio {post.fecha_inicio_sub}</label>
+            <label>precio_inicial {post.precio_inicial_sub}</label>
+            <label>estado {post.estado_sub}</label>
+            <label>produccion {post.fk_id_produccion}</label>*/}
 
-        <div className="flex flex-col w-96 h-96 px-2.5">
-          <div className="flex flex-col">
-            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
-            <div>
-            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
-            </div>
-            <div>
-            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
-            </div>
+            <button className="bg-green-500"  onClick={() => setModalOpen(true)}>Ver Mas +</button>
           </div>
-        </div>
-        </div>
-
-
-        <h1 className="font-medium flex-row font-black text-2xl font-sans py-10">Arabico</h1>
-            <div className= "flex flex-row py-5">
-        <div className="flex flex-col w-96 h-96 px-2.5">
-          <div className="flex flex-col ">
-            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
-            <div>
-            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
-            </div>
-            <div>
-            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col w-96 h-96 px-2.5">
-          <div className="flex flex-col">
-            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
-            <div>
-            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
-            </div>
-            <div>
-            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col w-96 h-96 px-2.5">
-          <div className="flex flex-col">
-            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
-            <div>
-            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
-            </div>
-            <div>
-            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col w-96 h-96 px-2.5">
-          <div className="flex flex-col">
-            <img className="flex flex-col w h-60 rounded" src={FootPagelIMG} alt="FootPagelIMG" />
-            <div>
-            <label className="font-extrabold">Pitalito,Huila Fecha de fin: 2024-04-04</label>
-            </div>
-            <div>
-            <label className="p-10" >El fragmento estándar de Lorem Ipsum utilizado desde el siglo XVI se reproduce a continuación para aquellos interesados. Las secciones 1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" de Cicerón también se reproducen en su forma ori</label>
-            </div>
-          </div>
-        </div>
         </div>
 
       </>  
-
-          </div>
+  </div>
 )}
-
-//slidesmini
-
-
 
 export default Home

@@ -30,8 +30,9 @@ function App() {
           <Route path="/Notificaciones" element={<Notificaciones />} />
           <Route path="/Oferta" element={<Oferta />} />
           <Route path="/CrearSubasta" element={<CrearSubasta />} />
-          <Route path="/Home" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/ResultadoModal" element={<ResultadoModal />} />
+
         </Routes>
       </Layout>
     </BrowserRouter>
