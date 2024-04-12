@@ -2,7 +2,7 @@ import TargetasCafetero from "../organismos/targetasCaf";
 import CardContainer from "../organismos/TargetaGanadorOrganismo";
 import Card from "../moleculas/TargetaGanadoresMolecula";
 import ContactCardOrganism from "../organismos/TargetaContactoCafOrganismo";
-import ButtonGridOrganism from "../organismos/BotonesSubastaOrganismos";
+import ButtonCafeteroOrganism from "../organismos/BotonesCafeteroOrganismos";
 
 
 const SubastaCafetero = ({ children }) => {
@@ -25,7 +25,7 @@ const SubastaCafetero = ({ children }) => {
 
       
      <div className=" col-span-1 ">
-      <ButtonGridOrganism/>
+      <ButtonCafeteroOrganism/>
      </div>
       
 
