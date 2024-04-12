@@ -3,7 +3,7 @@ import { validationResult } from "express-validator";
 
 export const listar = async(req, res) => {
     try {
-        const [ resultado ] = await pool.query("SELECT pk_id_pro, cantidad_pro as cantidad FROM subasta JOIN produccion on fk_id_produccion = pk_id_pro")
+        const [ resultado ] = await pool.query("SELECT pk_id_pro as pk_pro FROM subasta JOIN produccion on fk_id_produccion = pk_id_pro")
 
         if(resultado.length > 0) {
             res.status(200).json(resultado)
@@ -30,12 +30,6 @@ export const registrar = async (req, res) => {
         }
         const  { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion } = req.body; 
 
-        // if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !) {
-        //     return res.status(400).json({
-        //         "mensaje": "Por favor, proporcione todos los campos necesarios."
-        //     });
-        // }
-        
 
         const [resultado] = await pool.query("insert into subasta (fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion) values (?, ?, ?, ?, ?, ?)",
             [fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion]);
@@ -65,12 +59,6 @@ export const actualizar = async (req, res) => {
 
         const { id } = req.params;
         const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub } = req.body;
-
-//        if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !) {
-//           return res.status(400).json({
-//               "mensaje": "Por favor, proporcione todos los campos necesarios."
-//           });
-//       }
 
         const [resultado] = await pool.query("update subasta set fecha_inicio_sub=COALESCE(?, fecha_inicio_sub), fecha_fin_sub=COALESCE(?, fecha_fin_sub), precio_inicial_sub=COALESCE(?, precio_inicial_sub), precio_final_sub=COALESCE(?, precio_final_sub), estado_sub=COALESCE(?, estado_sub) where pk_id_sub=?",
             [fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, id]);
