@@ -15,12 +15,10 @@ const SubastaCafetero = ({ children }) => {
     <ContactCardOrganism/>
   </div>
  
-      <div className=" bg-blue-900 rounded-lg shadow-md overflow-hidden col-span-4">
-        <CardContainer>
-          <Card numero="1" nombre="juan camilo realpe" puja="$3.000.000" />
-          <Card numero="2" nombre="mancani " puja="$2.000.000" />
-          <Card numero="3" nombre="pistacho" puja="$1.000.000" />
-        </CardContainer>
+      <div className=" overflow-hidden col-span-4">
+        <CardContainer/>
+       
+        
       </div>
 
       
