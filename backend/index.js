@@ -32,7 +32,7 @@ app.use("/user", routerChat);
 app.use("/user", routerDocument);
 app.use("/postulacion", postulacionRoutes);
 app.use("/variedad", variedadesRoute);
-app.use(autenticacionRouter)
+app.use("/auth", autenticacionRouter)
 
 
 

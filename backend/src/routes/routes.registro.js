@@ -2,22 +2,22 @@ import { Router } from "express";
 import { activar, actualizar, buscar, cargarImagen, desactivar, eliminar, listar, registrar } from "../controllers/controller.registro.js";
 import { validarUsuarioActualizar, validarUsuarioRegister } from "../validations/registro.validacion.js";
 
-import { validartoken } from "../controllers/autenticacionController.js";
+import { verificarUserToken } from "../controllers/autenticacionController.js";
 
 const router = Router()
 
-router.get("/listar", validartoken, listar)
+router.get("/listar", verificarUserToken, listar)
 
 router.post("/registrar", cargarImagen, validarUsuarioRegister, registrar)
 
-router.put("/actualizar/:id", cargarImagen , validartoken, validarUsuarioActualizar, actualizar)
+router.put("/actualizar/:id", cargarImagen , verificarUserToken, validarUsuarioActualizar, actualizar)
 
-router.get("/buscar/:id", validartoken,buscar)
+router.get("/buscar/:id", verificarUserToken,buscar)
 
-router.delete("/eliminar/:id", validartoken,eliminar)
+router.delete("/eliminar/:id", verificarUserToken,eliminar)
 
-router.put("/desactivar/:id", validartoken,desactivar)
+router.put("/desactivar/:id", verificarUserToken,desactivar)
 
-router.put("/activar/:id", validartoken,activar)
+router.put("/activar/:id", verificarUserToken,activar)
 
 export default router
