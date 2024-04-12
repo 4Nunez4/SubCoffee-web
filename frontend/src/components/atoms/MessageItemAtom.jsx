@@ -1,0 +1,19 @@
+import React from "react";
+import AvatarAtom from "./AvatarAtom";
+
+const MessageItemAtom = ({ mensaje }) => {
+  return (
+    <div className="flex items-center gap-x-1 rounded p-1 cursor-pointer transition duration-300 ease-in-out transform hover:bg-blancoMedio1 hover:shadow-md">
+      <AvatarAtom
+        img={mensaje.foto}
+      />
+      <div>
+        <p className="text-sm font-semibold">{mensaje.usuario}</p>
+        <p className="text-xs">{mensaje.texto}</p>
+        <p className="text-xs text-grisMedio2">{mensaje.fecha}</p>
+      </div>
+    </div>
+  );
+};
+
+export default MessageItemAtom;

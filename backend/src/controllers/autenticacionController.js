@@ -1,37 +1,45 @@
-
 import { pool } from "../databases/conexion.js";
-import  Jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
-export const validarUsuario =async(req, res)=>{
-    try{
-        let {email_user,password_user}=req.body;
-        let sql = `select * from usuarios where email_user='${email_user}' and password_user='${password_user}'`;
-        const[rows]=await pool.query(sql);
-        // console.log(validarUsuario)
-        if(rows.length > 0){
-            // PARA GENERAR EL TOKEN 
-        let token=Jwt.sign({rows},process.env.AUT_SECRET,{expiresIn:process.env.AUT_EXPIRET})
-        return res.status(200).json({ 'user':rows , 'token':token, message: 'token generado con exito'});
-        } else{
-          return res.status(404).json({"message":"usuario no autorizado"})  
-        } 
-    }catch{
-        return res.status(500).json({"message":"el servidor esta caido intente otra vez"})
+export const validarUser = async (req, res) => {
+    try {
+        const { correo, password } = req.body;
+        const sql = `SELECT * FROM usuarios WHERE email_user = '${correo}'`;
+        const [rows] = await pool.query(sql);
+        if (rows.length === 0) {
+            return res.status(401).json({ message: "Usuario no registrado" });
+        }
+        const user = rows[0]; // Obtener el primer usuario de los resultados
+        const validPassword = await bcrypt.compare(password, user.password_user);
+        if (!validPassword) {
+            return res.status(401).json({ message: "Contraseña incorrecta" });
+        }
+        const token = jwt.sign({ rows }, process.env.AUT_SECRET, {
+            expiresIn: process.env.AUT_EXPIRET,
+        });
+        res.status(200).json({ user, token });
+    } catch (error) {
+        res.status(500).json({ message: "Error en el servidor" });
     }
-}
+};
 
-export const validartoken=async(req,res,next)=>{
-    let token_usuario = req.headers['token'];
-    if(!token_usuario){
-        return res.status(404).json({"message":"usuario no autorizado"})
-    }else{
-        const token=Jwt.verify(token_usuario,process.env.AUT_SECRET,(error,decoded)=>{
-            if(error){
-                return res.status(404).json({"message":"token incorrecto"})
-            }else{
-                next();
-            }
-        })
+export const verificarUserToken = async (req, res, next) => {
+    try {
+        const token_client = req.headers["token"];
+        if (!token_client) {
+            res.status(404).json({ message: "No autorizado ☢️" });
+        } else {
+            jwt.verify(token_client, process.env.AUT_SECRET, (err, decoded) => {
+                if (err) {
+                    res.status(401).json({ message: "Token no valido" });
+                } else {
+                    console.log(decoded);
+                    next();
+                }
+            });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error });
     }
-
-}
+};

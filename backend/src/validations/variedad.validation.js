@@ -18,7 +18,12 @@ export const validarGuardarVariedad = [
             throw new Error("Estado no valido")
         }
         return true;
-    })
+    }),
+    check("fk_finca", "Digite un id registrado")
+    .not()
+    .isEmpty()
+    .isInt({ min: 1 })
+    .toInt(),
  
 ]
 export const validarActualizarVar = [
@@ -37,5 +42,10 @@ export const validarActualizarVar = [
             throw new Error("Estado no valido")
         }
         return true;
-    })
+    }),
+    check("fk_finca", "Digite un id registrado")
+    .not()
+    .isEmpty()
+    .isInt({ min: 1 })
+    .toInt(),
 ]
