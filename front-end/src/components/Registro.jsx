@@ -12,29 +12,35 @@ const Registro = () => {
   const [rol, setRol] = useState('');
   const [estado, setEstado] = useState('');
   const [file, setFile] = useState(null);
+  const [validationErrors, setValidationErrors] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('img', file);
+    formData.append('pk_cedula_user', cedula);
+    formData.append('nombre_user', nombre);
+    formData.append('email_user', email);
+    formData.append('password_user', password);
+    formData.append('descripcion_user', descripcion);
+    formData.append('telefono_user', telefono);
+    formData.append('fecha_nacimiento_user', fechaNacimiento);
+    formData.append('rol_user', rol);
+    formData.append('estado_user', estado);
+   
     try {
-      const formData = new FormData();
-      formData.append('img', file);
-      formData.append('email_user', email);
-      formData.append('password_user', password);
-      formData.append('nombre_user', nombre);
-      formData.append('pk_cedula_user', cedula);
-      formData.append('descripcion_user', descripcion);
-      formData.append('telefono_user', telefono);
-      formData.append('fecha_nacimiento_user', fechaNacimiento);
-      formData.append('rol_user', rol);
-      formData.append('estado_user', estado);
-
-      const response = await axios.post('http://localhost:4000/usuario/registrar', formData);
-      alert(response.data.message);
+       const response = await axios.post('http://localhost:4000/usuario/registrar', formData, {
+         headers: {
+           'Content-Type': 'multipart/form-data',
+         },
+       });
+       alert(response.data.message);
     } catch (error) {
-      alert('Asegúrese de que los datos ingresados sean correctos.'+ error);
-      console.error('Error al registrar usuario:', error);
+       console.error('Error al registrar usuario:', error);
+       alert('Error al registrar usuario. Por favor, inténtalo de nuevo.');
     }
-  };
+   };
+   
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -133,8 +139,9 @@ const Registro = () => {
               required
             >
               <option value="">Seleccione un rol</option>
+              <option value="vendedor">Vendedor</option>
+              <option value="comprador">Comprador</option>
               <option value="admin">Administrador</option>
-              <option value="user">Usuario</option>
             </select>
           </div>
           <div>
@@ -147,8 +154,8 @@ const Registro = () => {
               required
             >
               <option value="">Seleccione un estado</option>
-              <option value="activo">Activo</option>
-              <option value="inactivo">Inactivo</option>
+              <option value="Activo">Activo</option>
+              <option value="Inactivo">Inactivo</option>
             </select>
           </div>
           <div>
@@ -161,6 +168,16 @@ const Registro = () => {
               required
             />
           </div>
+          {validationErrors.length > 0 && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+              <strong>Error de validación:</strong>
+              <ul>
+                {validationErrors.map((error, index) => (
+                  <li key={index}>{error.msg}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <button
             type="submit"
             className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
