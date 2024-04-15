@@ -35,7 +35,6 @@ app.use("/variedad", variedadesRoute);
 app.use("/auth", autenticacionRouter)
 
 
-
 app.set("view engine", "ejs");
 
 app.set("views", "./view");

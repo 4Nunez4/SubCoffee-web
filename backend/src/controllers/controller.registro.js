@@ -18,6 +18,7 @@ import { validationResult } from "express-validator"
     const upload = multer({storage:storage})
     export const cargarImagen= upload.single('img')
 
+    
 
    //REGISTRAR-USUARIOS
    export const registrar = async (req, res) =>{
