@@ -6,7 +6,7 @@ import { verificarUserToken } from "../controllers/autenticacionController.js";
 const router = Router()
 
 router.get("/listar",verificarUserToken, listar)
-router.post("/registrar", cargarImagen,validarRegistrarSubasta, registrarSubasta)
+router.post("/registrar", verificarUserToken, cargarImagen,validarRegistrarSubasta, registrarSubasta)
 router.put("/actualizar/:id",verificarUserToken, validarActualizarSubasta, actualizarSubasta)
 router.get("/buscar/:id",verificarUserToken, buscar)
 router.delete("/eliminar/:id",verificarUserToken, eliminar)
