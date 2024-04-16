@@ -36,38 +36,36 @@ export const listar = async(req, res) => {
         });
     }
 }
-
 export const registrar = async (req, res) => {
     try {
+        //VALIDACION DE ERRORES DE LOS DATOS DE LA SUBASTA
         const errors = validationResult(req);
-       
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const  { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion } = req.body;        ;
 
-        // if (!fecha_inicio_sub.trim() || !fecha_fin_sub.trim() || !precio_inicial_sub || !precio_final_sub || !estado_sub.trim() || !fk_id_produccion || !) {
-        //     return res.status(400).json({
-        //         "mensaje": "Por favor, proporcione todos los campos necesarios."
-        //     });
-        // }
-        const [resultado] = await pool.query("insert into subasta (fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion) values (?, ?, ?, ?, ?, ?)",
-            [fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, fk_id_produccion]);
+        const  {pk_id_sub, fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad, estado_sub, certificado_sub, fk_variedad } = req.body;
 
-        if (resultado.affectedRows > 0) {
-            res.status(200).json({
-                "mensaje": "Su subasta ha sido exitosa"
-            });
-        } 
-        
+        let imagen_sub = req.file.originalname
+        /* let certificado_sub = req.file.originalname */
+
+        const [resultado] = await pool.query("INSERT INTO subasta (pk_id_sub, fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad, estado_sub, certificado_sub, fk_variedad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [pk_id_sub, fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad, estado_sub, certificado_sub, fk_variedad]);
+
+        if (resultado.affectedRows > 0)
+        {
+            res.status(200).json({"mensaje": "Su subasta ha sido exitosa"});
+        }
+        else 
+        {
+            res.status(404).json({"mensaje": "No se encontró ninguna subasta con el id proporcionado"});
+        }
 
     } catch (error) {
         console.error("Error en el bloque try:", error);
-        res.status(500).json({
-            "mensaje": "Error interno del servidor"
-        });
+        res.status(500).json({"mensaje": "Error interno del servidor"});
     }
 }
+
 
 export const actualizarSubasta = async (req, res) => {
     try {
@@ -115,11 +113,11 @@ export const desactivarSubasta = async (req, res) => {
         
         if (subastaExiste.length === 0) {
             return res.status(404).json({ status: 404, message: 'El id de la subasta es incorrecto' });
-        } else if (subastaExiste[0].estado_sub === 'inactivo') {
+        } else if (subastaExiste[0].estado_sub === 'cerrada') {
             return res.status(400).json({ status: 400, message: 'La subasta ya está inactiva' });
         }
 
-        const [resultado] = await pool.query("UPDATE subasta SET estado_sub = ? WHERE pk_id_sub = ?", ['inactivo', id]);
+        const [resultado] = await pool.query("UPDATE subasta SET estado_sub = ? WHERE pk_id_sub = ?", ['cerrada', id]);
         
         if (resultado.affectedRows > 0) {
             res.status(200).json({ status: 200, message: "La subasta ha sido desactivada exitosamente" });
