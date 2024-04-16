@@ -33,7 +33,7 @@ const uploadPdf = multer({storage:storagePdf})
 export const cargarPdf= uploadPdf.single('pdf') */
 
 
-//LISTAR-SUBASTAS
+//LISTAR-SUBASTA
 export const listar = async(req, res) => {
     try {
         const [ resultado ] = await pool.query("SELECT * FROM subasta")
@@ -54,7 +54,6 @@ export const listar = async(req, res) => {
     }
 }
 
-
 //REGISTRAR-SUBASTA
 export const registrarSubasta = async (req, res) => {
     try {
@@ -63,13 +62,12 @@ export const registrarSubasta = async (req, res) => {
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-
-        const  {pk_id_sub, fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad, estado_sub, certificado_sub, fk_variedad } = req.body;
+        const  {pk_id_sub, fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad_sub, estado_sub, certificado_sub, fk_variedad } = req.body;
 
         let imagen_sub = req.file.originalname
         /* let certificado_sub = req.file.originalname */
 
-        const [resultado] = await pool.query("INSERT INTO subasta (pk_id_sub, fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad, estado_sub, certificado_sub, fk_variedad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [pk_id_sub, fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad, estado_sub, certificado_sub, fk_variedad]);
+        const [resultado] = await pool.query("INSERT INTO subasta (pk_id_sub, fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad_sub, estado_sub, certificado_sub, fk_variedad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [pk_id_sub, fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad_sub, estado_sub, certificado_sub, fk_variedad]);
 
         if (resultado.affectedRows > 0)
         {
@@ -95,13 +93,13 @@ export const actualizarSubasta = async (req, res) => {
         }
 
         const id = req.params.id;
-        const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad, estado_sub, certificado_sub, fk_variedad } = req.body;
+        const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad_sub, estado_sub, certificado_sub, fk_variedad } = req.body;
 
         let imagen_sub = req.file.originalname
 
-        const [resultado] = await pool.query("UPDATE subasta SET fecha_inicio_sub=COALESCE(?, fecha_inicio_sub), fecha_fin_sub=COALESCE(?, fecha_fin_sub), imagen_sub=COALESCE(?, imagen_sub), precio_inicial_sub=COALESCE(?, precio_inicial_sub), precio_final_sub=COALESCE(?, precio_final_sub), unidad_peso_sub=COALESCE(?, unidad_peso_sub), cantidad=COALESCE(?, cantidad), estado_sub=COALESCE(?, estado_sub), certificado_sub=COALESCE(?, certificado_sub), fk_variedad=COALESCE(?, fk_variedad)  where pk_id_sub = ?",
+        const [resultado] = await pool.query("UPDATE subasta SET fecha_inicio_sub=COALESCE(?, fecha_inicio_sub), fecha_fin_sub=COALESCE(?, fecha_fin_sub), imagen_sub=COALESCE(?, imagen_sub), precio_inicial_sub=COALESCE(?, precio_inicial_sub), precio_final_sub=COALESCE(?, precio_final_sub), unidad_peso_sub=COALESCE(?, unidad_peso_sub), cantidad_sub=COALESCE(?, cantidad_sub), estado_sub=COALESCE(?, estado_sub), certificado_sub=COALESCE(?, certificado_sub), fk_variedad=COALESCE(?, fk_variedad)  where pk_id_sub = ?",
 
-            [ fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad, estado_sub, certificado_sub, fk_variedad, id]);
+            [ fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad_sub, estado_sub, certificado_sub, fk_variedad, id]);
 
         if (resultado.affectedRows > 0) {
             res.status(200).json({
@@ -122,43 +120,6 @@ export const actualizarSubasta = async (req, res) => {
     }
 }
 
-
-/* export const actualizar = async (req, res) => {
-    try {
-        const errors = validationResult(req);
-       
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-
-        const { id } = req.params;
-        const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub } = req.body;
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 9af0e03b047014cc14bcbea0f93d0ccdbc4fc56e
-        const [resultado] = await pool.query("update subasta set fecha_inicio_sub=COALESCE(?, fecha_inicio_sub), fecha_fin_sub=COALESCE(?, fecha_fin_sub), precio_inicial_sub=COALESCE(?, precio_inicial_sub), precio_final_sub=COALESCE(?, precio_final_sub), estado_sub=COALESCE(?, estado_sub) where pk_id_sub=?",
-            [fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, estado_sub, id]);
-
-        if (resultado.affectedRows > 0) {
-            res.status(200).json({
-                "mensaje": "La subasta ha sido actualizada exitosamente"
-            });
-        } else {
-            res.status(404).json({
-                "mensaje": "No se encontró ninguna subasta con el id proporcionado"
-            });
-        }
-        
-
-    } catch (error) {
-        console.error("Error en el bloque try:", error);
-        res.status(500).json({
-            "mensaje": "Error interno del servidor"
-        });
-    }
-} */
 
 //BUSCAR-SUBASTA
 
