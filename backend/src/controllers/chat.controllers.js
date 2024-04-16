@@ -1,6 +1,19 @@
+import multer from "multer";
 import { pool } from "../databases/conexion.js";
 import { validationResult } from "express-validator";
 
+// para guardar la imagen de el chat en la carpeta public img 
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+      cb(null, "public/img");
+  },
+  filename: function(req, file, cb) {
+      cb(null, file.originalname);
+  }
+});
+const upload = multer({ storage: storage });
+
+export const Imagen = upload.single('img');
 
                // constante para crear un chat //
 export const createChat = async (req, res) => {
@@ -11,9 +24,10 @@ export const createChat = async (req, res) => {
     }
 
     const { mensaje_chat, fk_id_subasta, fk_id_usuario } = req.body;
+    const imagen_chat = req.file.filename;
     const [rows] = await pool.query(
-      "INSERT INTO chat(mensaje_chat,fk_id_subasta,fk_id_usuario) VALUES (?,?,?)",
-      [mensaje_chat, fk_id_subasta, fk_id_usuario]
+      "INSERT INTO chat(mensaje_chat,fk_id_subasta,fk_id_usuario,imagen_chat) VALUES (?,?,?,?)",
+      [mensaje_chat, fk_id_subasta, fk_id_usuario,imagen_chat]
     );
     if (rows.affectedRows) {
       res
@@ -32,7 +46,7 @@ export const createChat = async (req, res) => {
 export const getChats = async (req, res) => {
   try {
     const [rows] = await pool.query(
-      `SELECT c.mensaje_chat, c.fecha_chat, u.nombre_user FROM chat c INNER JOIN usuarios u ON c.fk_id_usuario = u.pk_cedula_user`
+      `SELECT c.pk_id_chat, c.mensaje_chat, c.imagen_chat, c.fecha_chat, u.nombre_user FROM chat c INNER JOIN usuarios u ON c.fk_id_usuario = u.pk_cedula_user`
     );
     if (rows.length > 0) {
       res.status(200).json({
@@ -58,9 +72,12 @@ export const updateChat = async (req, res) => {
     }
     const id = req.params.id;
     const { mensaje_chat } = req.body;
+    // Verifica si se ha cargado una nueva imagen
+    let imagen_chat = req.file ? req.file.filename : null;
+
     const [result] = await pool.query(
-      "UPDATE chat SET mensaje_chat = COALESCE(?, mensaje_chat) WHERE pk_id_chat = ?",
-      [mensaje_chat, id]
+      "UPDATE chat SET mensaje_chat = COALESCE(?, mensaje_chat), imagen_chat = COALESCE(?,imagen_chat) WHERE pk_id_chat = ?",
+      [mensaje_chat,imagen_chat, id]
     );
     if (result.affectedRows > 0) {
       res.status(200).json({
@@ -81,7 +98,7 @@ export const updateChat = async (req, res) => {
 
 export const getChat = async (req, res) => {
   try {
-    const [rows] = await pool.query("SELECT c.mensaje_chat, c.fecha_chat, u.nombre_user FROM chat c INNER JOIN usuarios u ON c.fk_id_usuario = u.pk_cedula_user WHERE pk_id_chat = ?", [
+    const [rows] = await pool.query("SELECT c.mensaje_chat, c.imagen_chat, c.fecha_chat, u.nombre_user FROM chat c INNER JOIN usuarios u ON c.fk_id_usuario = u.pk_cedula_user WHERE pk_id_chat = ?", [
       req.params.id,
     ]);
     if (rows.length > 0) {
