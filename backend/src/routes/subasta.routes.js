@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { listar, buscar, eliminar, cargarImagen, registrarSubasta, actualizarSubasta} from "../controllers/subasta.controllers.js";
+import { listar, buscar, eliminar, cargarImagen, registrarSubasta, actualizarSubasta, desactivarSubasta} from "../controllers/subasta.controllers.js";
 import { validarActualizarSubasta, validarRegistrarSubasta} from "../validations/subasta.validation.js";
 import { verificarUserToken } from "../controllers/autenticacionController.js";
 
@@ -10,6 +10,6 @@ router.post("/registrar", verificarUserToken, cargarImagen,validarRegistrarSubas
 router.put("/actualizar/:id",verificarUserToken, cargarImagen, validarActualizarSubasta, actualizarSubasta)
 router.get("/buscar/:id",verificarUserToken, buscar)
 router.delete("/eliminar/:id",verificarUserToken, eliminar)
-router
+router.put("/desactivar/:id", verificarUserToken, desactivarSubasta)
 
 export default router
