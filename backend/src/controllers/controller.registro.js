@@ -171,3 +171,4 @@ export const activar = async (req, res)=>{
         res.status(500).json({'status':500, 'message':'ERROR SERVIDOR', error})
     }
 }
+

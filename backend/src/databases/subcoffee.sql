@@ -29,12 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `chat` (
   `pk_id_chat` int(11) NOT NULL,
-  `mensaje_chat` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `mensaje_chat` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `imagen_chat` varchar(255) NOT NULL,
   `fecha_chat` timestamp NOT NULL DEFAULT current_timestamp(),
   `fk_id_subasta` int(11) NOT NULL,
   `fk_id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -103,7 +103,7 @@ CREATE TABLE `finca` (
   `estado_fin` enum('activo','inactivo') DEFAULT NULL,
   `fk_id_usuario` int(11) NOT NULL,
   `fk_vereda` bigint(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -173,7 +173,7 @@ CREATE TABLE `notificaciones` (
   `texto_not` varchar(150) NOT NULL,
   `fk_id_subasta` int(11) NOT NULL,
   `fk_id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -187,7 +187,7 @@ CREATE TABLE `ofertas` (
   `oferta_pos` int(11) NOT NULL,
   `fk_id_usuario` int(11) NOT NULL,
   `fk_id_subasta` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -218,7 +218,7 @@ CREATE TABLE `subasta` (
   `estado_sub` enum('abierta','espera','cerrada') NOT NULL,
   `certificado_sub` varchar(255) DEFAULT NULL,
   `fk_variedad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -237,7 +237,7 @@ CREATE TABLE `usuarios` (
   `fecha_nacimiento_user` date NOT NULL,
   `rol_user` enum('vendedor','comprador','admin') NOT NULL,
   `estado_user` enum('activo','inactivo') DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
@@ -262,7 +262,7 @@ CREATE TABLE `variedad` (
   `imagen_vari` varchar(100) DEFAULT NULL,
   `estado_vari` enum('activo','inactivo') NOT NULL,
   `fk_finca` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 

@@ -6,7 +6,7 @@ import multer from "multer"
  const storage = multer.diskStorage(
      {
          destination: function(req,img,cb){
-             cb(null, "public/img")
+             cb(null, "public/imgVariedad")
          },
 
          filename: function(req,img,cb){
@@ -43,11 +43,11 @@ export const guardarVariedad= async (req, res) => {
                 return res.status(400).json(error)
             }
     
-            const {tipo_vari, descripcion_vari, puntuacion_vari, estado_vari} = req.body;
+            const {tipo_vari, descripcion_vari, puntuacion_vari, estado_vari, fk_finca} = req.body;
                 
              let imagen_vari = req.file.originalname
 
-            const [rows] = await pool.query("INSERT INTO variedad(tipo_vari, descripcion_vari,imagen_vari, puntuacion_vari,estado_vari) VALUES (?,?,?,?,?)", [tipo_vari, descripcion_vari,imagen_vari, puntuacion_vari ,estado_vari ]);
+            const [rows] = await pool.query("INSERT INTO variedad(tipo_vari, descripcion_vari,imagen_vari, puntuacion_vari,estado_vari. fk_finca) VALUES (?,?,?,?,?,?)", [tipo_vari, descripcion_vari,imagen_vari, puntuacion_vari ,estado_vari, fk_finca ]);
             if(rows.affectedRows){
                 res.status(200).json({status:500, message:"Variedad creada con exito"});
                 
@@ -66,8 +66,8 @@ export const actualizarVariedad = async (req, res) => {
             return res.status(400).json(errors)
         }
         const id = req.params.id;
-        const { tipo_vari, descripcion_vari, puntuacion_vari, estado_vari } = req.body;
-        const [result] = await pool.query("UPDATE variedad SET tipo_vari = ?, descripcion_vari = ?, puntuacion_vari = ?, estado_vari = ? WHERE pk_id_vari = ?", [tipo_vari, descripcion_vari, puntuacion_vari,estado_vari, id]);
+        const { tipo_vari, descripcion_vari, puntuacion_vari, estado_vari, fk_finca } = req.body;
+        const [result] = await pool.query("UPDATE variedad SET tipo_vari = ?, descripcion_vari = ?, puntuacion_vari = ?, estado_vari = ?, fk_finca = ? WHERE pk_id_vari = ?", [tipo_vari, descripcion_vari, puntuacion_vari,estado_vari,fk_finca, id]);
         if(result.affectedRows > 0) {
             res.status(200).json({ status: 200, message: 'La variedad ha sido actualizada exitosamente' });
         }else {
