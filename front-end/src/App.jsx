@@ -6,14 +6,12 @@ import Subasta from "./pages/Subasta.jsx";
 import ChatInfo from "./components/ChatInfo.jsx"
 import { TerminosyCondiciones } from "./components/TerminosCondiciones";
 import Notificaciones from "./pages/Notificaciones.jsx";
-import Login from "./components/Login.jsx";
+import { Login } from "./components/Login";
 import Oferta from "./pages/Oferta.jsx";
 import Historial from "./pages/Historial.jsx";
 import RegistrarFinca from "./pages/RegistrarFinca.jsx";
 import CrearSubasta from "./pages/CrearSubasta.jsx";
 import Home from "./pages/Home.jsx"
-import Registro from "./components/Registro.jsx";
-import Dashboard from "./components/organismos/Dashboard.jsx"
 
 function App() {
   return (
@@ -21,8 +19,6 @@ function App() {
       <Layout>
         <Routes>
           {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/dashboard" element={<Dashboard/>} />
-          <Route path="/registro" element={<Registro />} />
           <Route path="/historial" element={<Historial />} />
           <Route path="/registrarfinca" element={<RegistrarFinca />} />
           <Route path="/login" element={<Login/>}/>
