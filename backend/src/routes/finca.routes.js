@@ -1,17 +1,16 @@
-// finca.routes.js
 import { Router } from "express";
-import {Imagen, registrar, listar,actualizar,buscar,borrar,desactivar,activar } from "../controllers/finca.controller.js";
-import { validateActualizarFinca, validateRegistarFinca } from "../validations/finca.validacion.js";
+import { activarFinca, cargarImagen, createFinca, deleteFinca, desactivarFinca, getFinca, getFincas, updateFinca } from "../controllers/finca.controller.js";
 import { verificarUserToken } from "../controllers/autenticacionController.js";
+import { validationCreateFinca, validationUpdateFinca } from "../validations/finca.validation.js";
 
-const FincaRouter = Router();
+const routerFinca = Router();
 
-FincaRouter.post("/registrar",Imagen,verificarUserToken,validateRegistarFinca, registrar)
-FincaRouter.get("/listar",verificarUserToken, listar)
-FincaRouter.put("/actualizar/:id",Imagen,verificarUserToken,validateActualizarFinca, actualizar)
-FincaRouter.get("/buscar/:id",verificarUserToken, buscar)
-FincaRouter.delete("/eliminar/:id",verificarUserToken, borrar)
-FincaRouter.put("/desactivar/:id",verificarUserToken, desactivar)
-FincaRouter.put("/activar/:id",verificarUserToken, activar)
+routerFinca.get("/finca", verificarUserToken, getFincas);
+routerFinca.get("/finca/:id", verificarUserToken, getFinca);
+routerFinca.post("/finca", verificarUserToken, cargarImagen, validationCreateFinca, createFinca);
+routerFinca.put("/finca/:id", verificarUserToken, cargarImagen, validationUpdateFinca, updateFinca);
+routerFinca.delete("/finca/:id", verificarUserToken, deleteFinca);
+routerFinca.put("/fincaac/:id", verificarUserToken, activarFinca);
+routerFinca.put("/fincades/:id", verificarUserToken, desactivarFinca);
 
-export default FincaRouter;
+export default routerFinca;
