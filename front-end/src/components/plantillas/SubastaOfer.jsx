@@ -1,7 +1,7 @@
 import TargetasCafetero from "../organismos/targetasCaf";
 import CardOrganism from "../organismos/TargetaPujaOrganismo";
 import ContactCardOrganism from "../organismos/TargetaContactoCafOrganismo";
-import ButtonGridOrganism from "../organismos/BotonesSubastaOrganismos";
+import ButtonOfertaOrganism from "../organismos/BotonesOfertaOrganismos";
 
 
 const SubastaOfertador = ({ children }) => {
@@ -20,7 +20,7 @@ const SubastaOfertador = ({ children }) => {
 
       
      <div className=" col-span-1 ">
-      <ButtonGridOrganism/>
+      <ButtonOfertaOrganism/>
      </div>
       
 
