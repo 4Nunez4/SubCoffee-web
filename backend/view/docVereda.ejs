@@ -7,24 +7,22 @@
 </head>
 <body>
     <hr>
-    <h2>Requerimiento. Documentacion de finca</h2>
+    <h2>Requerimiento. Documentacion de vereda</h2>
     <hr>
-    <h3>Crear finca</h3>
+    <h3>Crear vereda</h3>
     <table>
         <tr><td>Numero 1</td><td>1</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Crear finca </td></tr>
-        <tr><td>URI</td><td>/v1/finca</tr>
-        <tr><td>Descripcion:</td><td>Permite registrar fincas en la base de datos</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Crear vereda </td></tr>
+        <tr><td>URI</td><td>/v1/veredas</tr>
+        <tr><td>Descripcion:</td><td>Permite registrar veredas en la base de datos</td></tr>
         <tr><td>Verbo HTTP:</td><td>POST</td></tr>
         <tr><td>HEADER:</td><td>token: token</td></tr>
-        <tr><td>Usuarios:</td><td>ADMINISTRADOR, VENDEDOR</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR</td></tr>
         <tr><td>PETICION BODY</td><td> 
             {
-                "nombre_fin": "Napoles",
-                "imagen_fin": "",
-                "descripcion_fin": "A tan solo 5 minutos del casco urbano ",
-                "fk_id_usuario": 1084251889
-                "fk_vereda": 6
+                "pk_codigo_muni": "11111",
+                "nombre_muni": "Prueba11111",
+                "fk_departamento": "41"
             }
     </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -32,12 +30,12 @@
             Status:200
             JSON:
             {
-              message:"Finca creada con exito"
+              message:"vereda creado exitosamente"
             }
             Incorrecto:
             Status:404
             body:{
-                message:"Error al registrar la finca"
+                message:"Error al crear el vereda"
             }
             Error:
             Status:500
@@ -54,54 +52,40 @@
     </table>
 
     <hr>
-    <h3>Listar fincas</h3>
+    <h3>Listar veredas</h3>
     <table>
         <tr><td>Numero </td><td>2</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Listar fincas </td></tr>
-        <tr><td>URI</td><td>/v1/finca</tr>
-        <tr><td>Descripcion:</td><td>Permite listar todas las fincas registradas</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Listar veredas </td></tr>
+        <tr><td>URI</td><td>/v1/veredas</tr>
+        <tr><td>Descripcion:</td><td>Permite listar todas las veredas registradas</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
         <tr><td>HEADER:</td><td>token: token</td></tr>
-        <tr><td>Usuarios:</td><td>ADMINISTRADOR, VENDEDOR</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR</td></tr>
         <tr><td>PETICION BODY</td><td> NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             {
-                "message": "Las fincas encontradas con exito",
-                "data": [
-                    {
-                        "pk_id_fin": 9,
-                        "nombre_fin": "Casa blanca Diamonte",
-                        "imagen_fin": "finca.jpg",
-                        "descripcion_fin": "Hermosa finca de campo cafetera",
-                        "estado_fin": "activo",
-                        "fk_id_usuario": 1084252915,
-                        "fk_vereda": 5
-                    },
-                    {
-                        "pk_id_fin": 10,
-                        "nombre_fin": "Casa blanca Diamont",
-                        "imagen_fin": "finca.jpg",
-                        "descripcion_fin": "Hermosa casa de campo con jardín, piscina y cafe",
-                        "estado_fin": "activo",
-                        "fk_id_usuario": 1084252915,
-                        "fk_vereda": 6
-                    },
-                    {
-                        "pk_id_fin": 12,
-                        "nombre_fin": "Casa blanca Diamont",
-                        "imagen_fin": "finca.jpg",
-                        "descripcion_fin": "Hermosa casa de campo con jardín, piscina y cafe",
-                        "estado_fin": "activo",
-                        "fk_id_usuario": 1084252915,
-                        "fk_vereda": 6
-                    },
-                }
-        ]
+                "pk_codigo_muni": 41001,
+                "nombre_muni": "Neiva",
+                "estado_muni": "activo",
+                "fk_departamento": 41
+            },
+            {
+                "pk_codigo_muni": 41006,
+                "nombre_muni": "Acevedo",
+                "estado_muni": "activo",
+                "fk_departamento": 41
+            },
+            {
+                "pk_codigo_muni": 41013,
+                "nombre_muni": "Aipe",
+                "estado_muni": "activo",
+                "fk_departamento": 41
+            },
             Incorrecto:
             Status:404
             body:{
-                message:" 'No se encontraron fincas"
+                message:" 'No se encontraron veredas"
             }
             Error:
             Status:500
@@ -118,21 +102,20 @@
     </table>
    
     <hr>
-    <h3>Actualizar finca</h3>
+    <h3>Actualizar vereda</h3>
     <table>
         <tr><td>Numero </td><td>3</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Actualizar finca </td></tr>
-        <tr><td>URI</td><td>/v1/finca/:id</tr>
-        <tr><td>Descripcion:</td><td>Permite actualizar fincas en la base de datos por medio de su id       </td></tr>
+        <tr><td>Nombre del Servicio </td><td>Actualizar vereda </td></tr>
+        <tr><td>URI</td><td>/v1/veredas/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite actualizar veredas en la base de datos por medio de su id       </td></tr>
         <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
         <tr><td>HEADER:</td><td>token: token</td></tr>
-        <tr><td>Usuarios:</td><td>ADMINISTRADOR, VENDEDOR</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR</td></tr>
         <tr><td>PETICION BODY</td><td> 
             {
-                "nombre_fin": "Napoles",
-                "imagen_fin": "",
-                "descripcion_fin": "A tan solo 5 minutos del casco urbano ",
-                "fk_vereda": 6
+                "pk_codigo_muni": "11112",
+                "nombre_muni": "Prueba11112",
+                "fk_departamento": "41"
             }
     </td></tr>
         <tr><td>RESPUESTA JSON</td><td>
@@ -140,14 +123,12 @@
             Status:200
             JSON:
             {
-                
-                message: 'Finca actualizada con exito'
-                
+                message: 'vereda actualizado con exito'
             }
             Incorrecto:
             Status:404
             body:{
-                message: 'No se pudo actualizar la finca con el IDs'
+                message: 'No se pudo actualizar el vereda con el IDs'
             }
             Error:
             Status:500
@@ -164,38 +145,30 @@
     </table>
    
     <hr>
-    <h3>Buscar finca</h3>
+    <h3>Buscar vereda</h3>
     <table>
         <tr><td>Numero </td><td>4</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Buscar fincas registradas </td></tr>
-        <tr><td>URI</td><td>/v1/finca/:id</tr>
-        <tr><td>Descripcion:</td><td>Permite buscar fincas en la base de datos por medio de su ID</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Buscar veredas registradas </td></tr>
+        <tr><td>URI</td><td>/v1/veredas/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite buscar veredas en la base de datos por medio de su ID</td></tr>
         <tr><td>Verbo HTTP:</td><td>GET</td></tr>
         <tr><td>HEADER:</td><td>token: token</td></tr>
-        <tr><td>Usuarios:</td><td>ADMINISTRADOR, VENDEDOR</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR</td></tr>
         <tr><td>PETICION BODY</td><td> NULL</td></tr>
         <tr><td>RESPUESTA JSON</td><td>
             Correcto:
             Status:200
             JSON:
             {
-                "message": "Finca encontrada",
-                "data": [
-                    {
-                        "pk_id_fin": 9,
-                        "nombre_fin": "Casa blanca Diamonte",
-                        "imagen_fin": "finca.jpg",
-                        "descripcion_fin": "Hermosa finca de campo cafetera",
-                        "estado_fin": "activo",
-                        "fk_id_usuario": 1084252915,
-                        "fk_vereda": 5
-                    }
-                ]
+                "pk_codigo_muni": 41885,
+                "nombre_muni": "Yaguará",
+                "estado_muni": "activo",
+                "fk_departamento": 41
             }
             Incorrecto:
             Status:404
             body:{
-                message: 'id de finca no encontrado'
+                message: 'id de vereda no encontrado'
             }
             Error:
             Status:500
@@ -212,12 +185,12 @@
     </table>
 
     <hr>
-    <h3>Eliminar finca</h3>
+    <h3>Eliminar vereda</h3>
     <table>
         <tr><td>Numero </td><td>5</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Eliminar finca</td></tr>
-        <tr><td>URI</td><td>/v1/finca/:id</tr>
-        <tr><td>Descripcion:</td><td>Permite eliminar finca en la base de datos por medio de su id</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Eliminar vereda</td></tr>
+        <tr><td>URI</td><td>/v1/veredas/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite eliminar vereda en la base de datos por medio de su id</td></tr>
         <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
         <tr><td>HEADER:</td><td>token: token</td></tr>
         <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
@@ -227,12 +200,12 @@
             Status:200
             JSON:
             {
-                "message": "Finca eliminada con exito"    
+                "message": "vereda eliminado con exito"    
             }
             Incorrecto:
             Status:404
             body:{
-                message: '"Error con el ID al eliminar la finca'
+                message: '"Error con el ID al eliminar la vereda'
             }
             Error:
             Status:500
@@ -249,7 +222,7 @@
         </td></tr>
     </table>
     
-    <h3>DESACTIVAR finca</h3>
+    <h3>DESACTIVAR vereda</h3>
     <table>
         <tr>
             <td>NUMERO</td>
@@ -258,17 +231,17 @@
 
         <tr>
             <td>NOMBRE DEL ENDPOINT</td>
-            <td>DESACTIVAR finca</td>
+            <td>DESACTIVAR vereda</td>
         </tr>
 
         <tr>
             <td>URI</td>
-            <td>/v1/finca/:id</td>
+            <td>/v1/veredas/:id</td>
         </tr>
 
         <tr>
             <td>DESCRIPCION</td>
-            <td>Permite desactivar finca</td>
+            <td>Permite desactivar vereda</td>
         </tr>
 
         <tr>
@@ -283,7 +256,7 @@
 
         <tr>
             <td>USUARIOS</td>
-            <td>ADMINISTRADOR, VENDEDOR</td>
+            <td>ADMINISTRADOR</td>
         </tr>
 
         <tr>
@@ -297,13 +270,13 @@
                 
                 CORRECTO: 
                 STATUS:200 
-                MESSAGE: 'Finca desactivada exitosamente' 
+                MESSAGE: 'vereda desactivado exitosamente' 
 
                 INCORRECTO 
                 STATUS: 404 
                 BODY :{
                     STATUS: 404
-                    MESSAGE: 'No se encontró ninguna Finca con el ID ${id}"
+                    MESSAGE: 'No se encontró ningun vereda con el ID ${id}"
                 }
 
                 ERROR: 
@@ -326,8 +299,7 @@
         </tr>
     </table>
 
-
-    <h3>ACTIVAR finca</h3>
+    <h3>ACTIVAR vereda</h3>
     <table>
         <tr>
             <td>NUMERO</td>
@@ -336,17 +308,17 @@
 
         <tr>
             <td>NOMBRE DEL ENDPOINT</td>
-            <td>ACTIVAR finca</td>
+            <td>ACTIVAR vereda</td>
         </tr>
 
         <tr>
             <td>URI</td>
-            <td>/v1/finca/:id</td>
+            <td>/v1/vereda/:id</td>
         </tr>
 
         <tr>
             <td>DESCRIPCION</td>
-            <td>Permite activar finca</td>
+            <td>Permite activar vereda</td>
         </tr>
 
         <tr>
@@ -361,7 +333,7 @@
 
         <tr>
             <td>USUARIOS</td>
-            <td>ADMINISTRADOR, VENDEDOR</td>
+            <td>ADMINISTRADOR</td>
         </tr>
 
         <tr>
@@ -375,13 +347,13 @@
                 
                 CORRECTO: 
                 STATUS:200 
-                MESSAGE: 'Finca activada exitosamente' 
+                MESSAGE: 'vereda activado exitosamente'
 
                 INCORRECTO 
                 STATUS: 404 
                 BODY :{
                     STATUS: 404
-                    MESSAGE: 'No se encontró ninguna Finca con el ID ${id}'
+                    MESSAGE: 'No se encontró ningun vereda con el ID ${id}'
                 }
 
                 ERROR: 
