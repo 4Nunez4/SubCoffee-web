@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardFooter, Image, Button, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure} from "@nextui-org/react";
 
-const TargetasCafetero = ({ children }) => {
+const TargetaInfSubasta = ({ children }) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   return (
     <div className="  h-full w-full rounded-xl shadow-md overflow-hidden grid grid-cols-4 gap-4 text-cente">
@@ -20,7 +20,7 @@ const TargetasCafetero = ({ children }) => {
           removeWrapper
           alt="Relaxing app background"
           className="z-0 w-full h-full object-cover"
-          src="/src/assets/cafe-caturra.jpg"
+          src="../../../../assets/cafe3.jfif"
         />
         <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
           <div className="flex flex-grow gap-2 items-center">
@@ -78,4 +78,4 @@ const TargetasCafetero = ({ children }) => {
   );
 };
 
-export default TargetasCafetero;
+export default TargetaInfSubasta;

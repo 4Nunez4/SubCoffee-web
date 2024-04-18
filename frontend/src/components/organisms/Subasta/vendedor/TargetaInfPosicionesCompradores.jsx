@@ -2,7 +2,7 @@ import React from "react";
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Pagination, getKeyValue} from "@nextui-org/react";
 import {users} from "./data";
 
-const CardContainer = ({ children }) => {
+const TargetaInfPosicionesCompradores = ({ children }) => {
 
   const [page, setPage] = React.useState(1);
   const rowsPerPage = 3;
@@ -57,4 +57,4 @@ const CardContainer = ({ children }) => {
     );
 }
 
-export default CardContainer;
+export default TargetaInfPosicionesCompradores;

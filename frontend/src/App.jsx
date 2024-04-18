@@ -14,6 +14,9 @@ import AyudaPage from "./pages/AyudaPage";
 import DashboardContentOrganims from "./components/organisms/DashboardContentOrganims";
 import UsersPage from "./pages/UsersPage";
 import PoliticasYCondicionesPage from "./pages/PoliticasYCondicionesPage";
+import SubastaComprador from "./pages/SubastaComprador";
+import SubastaVendedor from "./pages/SubastaVendedor";
+
 
 function App() {
   return (
@@ -42,6 +45,8 @@ function App() {
               <Route path="/ayudaCrear" element={<ComoCrearUnaSubasta />} />
               <Route path="/ayudacomopujar" element={<ComoPujarUnaSubasta />} />
               <Route path="/ayuda" element={<AyudaPage />} />
+              <Route path="/subastaVendedor" element={<SubastaVendedor />} />
+              <Route path="/subastacomprador" element={<SubastaComprador />} />
             </Route>
 
             <Route path="*" element={<NotFoundPage />} />
