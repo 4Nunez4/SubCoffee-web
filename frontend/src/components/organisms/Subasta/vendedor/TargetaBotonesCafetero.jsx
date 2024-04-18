@@ -5,7 +5,7 @@ import { FaTrashCan } from "react-icons/fa6";
 
 import {Button} from "@nextui-org/react";
 
-const ButtonCafeteroOrganism = () => {
+const TargetaBotonesCafetero = () => {
   return (
     <div className="grid grid-cols-1 gap-2   bg-gray-100 h-full rounded-lg ">
       <Button color="warning" variant="shadow" className=' h-full text-white' >
@@ -21,4 +21,4 @@ const ButtonCafeteroOrganism = () => {
   );
 };
 
-export default ButtonCafeteroOrganism;
+export default TargetaBotonesCafetero;

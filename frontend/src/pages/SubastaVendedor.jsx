@@ -1,25 +1,22 @@
-import TargetasCafetero from "../organismos/targetasCaf";
-import CardContainer from "../organismos/TargetaGanadorOrganismo";
 
-import ContactCardOrganism from "../organismos/TargetaContactoCafOrganismo";
-import ButtonCafeteroOrganism from "../organismos/BotonesCafeteroOrganismos";
+import { TargetaInfVendedor,TargetaInfSubasta,TargetaInfPosicionesCompradores,TargetaBotonesCafetero} from "../components/organisms/Subasta/vendedor/index.js"
 
-const SubastaCafetero = ({ children }) => {
+const SubastaVendedor = ({ children }) => {
   return (
     <div class="bg-white text-black w-full grid grid-cols-5 gap-2 h-full p-8">
       <div className="col-span-4">
-        <TargetasCafetero />
+        <TargetaInfSubasta />
       </div>
       <div className=" col-span-1">
-        <ContactCardOrganism />
+        <TargetaInfVendedor />
       </div>
 
       <div className=" overflow-hidden col-span-4">
-        <CardContainer />
+        <TargetaInfPosicionesCompradores />
       </div>
 
       <div className=" col-span-1 ">
-        <ButtonCafeteroOrganism />
+        <TargetaBotonesCafetero />
       </div>
 
       {children}
@@ -27,4 +24,4 @@ const SubastaCafetero = ({ children }) => {
   );
 };
 
-export default SubastaCafetero;
+export default SubastaVendedor;

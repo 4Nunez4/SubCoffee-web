@@ -1,7 +1,7 @@
 import React from 'react';
 import './custom-styles.css';
 
-const SliderAtom = ({ value, onChange }) => {
+const PujaSlider = ({ value, onChange }) => {
   return (
     <input
       type="range"
@@ -15,4 +15,4 @@ const SliderAtom = ({ value, onChange }) => {
   );
 };
 
-export default SliderAtom;
+export default PujaSlider;

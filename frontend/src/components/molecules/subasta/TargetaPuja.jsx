@@ -1,5 +1,5 @@
 import React from "react";
-import SliderAtom from "../atomos/TargetaPujaIncremento/EstiloRangoSlider";
+import PujaSlider from "../../atoms/subasta/PujaSlider";
 
 import { Card, CardBody, Button } from "@nextui-org/react";
 import { AiOutlineDollar } from "react-icons/ai";
@@ -7,7 +7,7 @@ import { AiOutlineMinusCircle } from "react-icons/ai";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 
-const CardMolecule = ({ amount, handleSliderChange, onIncrement, onDecrement }) => {
+const TargetaPuja = ({ amount, handleSliderChange, onIncrement, onDecrement }) => {
  
   const formatAmount = (value) => {
     const parts = value.toString().split(".");
@@ -27,7 +27,7 @@ const CardMolecule = ({ amount, handleSliderChange, onIncrement, onDecrement }) 
               <p className="text-xl font-semibold">2 yo</p>
               <p className="text-xl font-semibold">${formatAmount(amount)}</p>
             </div>
-            <SliderAtom value={amount} onChange={handleSliderChange} />
+            <PujaSlider value={amount} onChange={handleSliderChange} />
             <p className="text-center mt-4">aumentar + ${formatAmount(amount) + 0}</p>
           </div>
         </div>
@@ -65,4 +65,4 @@ const CardMolecule = ({ amount, handleSliderChange, onIncrement, onDecrement }) 
   );
 };
 
-export default CardMolecule;
+export default TargetaPuja;
