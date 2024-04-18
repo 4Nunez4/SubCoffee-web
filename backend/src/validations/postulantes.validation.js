@@ -2,17 +2,9 @@ import { check } from "express-validator"
 
 
 
-export const validarguardarPostulacion = [
-    check("oferta_pos", "El precio no puede superar los 15 caracteres").not().isEmpty().isLength({ max: 12 }),
-    check(
-        "fk_id_usuario", "La identificacion no fue encontrada." ).not().isEmpty().isInt({ min: 1 }).toInt().isNumeric({ no_symbols: true }).isLength({ max: 15}),
-        check("estado_pos", "El estado es obligatorio por favor ingrese uno de los dos estados permitidos (activo, inactivo)").not().isEmpty().custom((value)=>{
-            const estado =['activo','inactivo'];
-            if(!estado.includes(value)){
-                throw new Error("Estado no valido")
-            }
-            return true;
-        })
+export const validarGuardarPostulante = [
+    check("fk_id_usuario", "La identificacion no fue encontrada." ).not().isEmpty().isInt({ min: 1 }).toInt().isNumeric({ no_symbols: true }).isLength({ max: 15}),
+    check("fk_id_subasta", "La subasta es obligatoria." ).not().isEmpty().isInt({ min: 1 }).toInt().isNumeric({ no_symbols: true }).isLength({ max: 15}),
 ];
 
 export const validarActualizacionPos = [

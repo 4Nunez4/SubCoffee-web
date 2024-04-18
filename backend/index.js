@@ -4,7 +4,7 @@ import ejs from "ejs";
 import routerDocument from "./src/routes/notificaciones.routes.js";
 import routerChat from "./src/routes/chat.routes.js";
 import rutasSubastas from "./src/routes/subasta.routes.js";
-import postulacionRoutes from "./src/routes/postulacion.routes.js";
+import postulantesRoutes from "./src/routes/postulantes.routes.js";
 import autenticacionRouter from "./src/routes/autenticacion.routes.js";
 import cors from 'cors';
 
@@ -37,7 +37,7 @@ app.use("/v1", routertipovari);
 app.use("/subasta",rutasSubastas);
 app.use("/user", routerChat);
 app.use("/user", routerDocument);
-app.use("/postulacion", postulacionRoutes);
+app.use("/postulantes", postulantesRoutes);
 
 app.set("view engine", "ejs");
 
