@@ -6,7 +6,7 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Documentacion de la Api</h1>
+    <h1>Documentación de la Api</h1>
     <hr />
     <h2>Requerimiento 1. Documentacion del Registro de usuario</h2>
     <hr />
@@ -42,37 +42,29 @@
       </tr>
       <tr>
         <td>PETICION BODY</td>
-        <td>
-            {
-                "correo":"juan@gmail.com",
-                "password":"123456"
-            }
-        </td>
+        <td>{ "correo":"juan@gmail.com", "password":"123456" }</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTO: {
-            "user": {
-                "pk_cedula_user": 1084251889,
-                "nombre_user": "Juanca Realpe",
-                "email_user": "juan@gmail.com",
-                "password_user": "123456",
-                "descripcion_user": null,
-                "imagen_user": null,
-                "telefono_user": "3157874593",
-                "fecha_nacimiento_user": "2005-06-17T05:00:00.000Z",
-                "rol_user": "admin",
-                "estado_user": "activo"
-            },
-            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb3dzIjpbeyJwa19jZWR1bGFfdXNlciI6MTA4NDI1MTg4OSwibm9tYnJlX3VzZXIiOiJKdWFuY2EgUmVhbHBlIiwiZW1haWxfdXNlciI6Imp1YW5AZ21haWwuY29tIiwicGFzc3dvcmRfdXNlciI6IjEyMzQ1NiIsImRlc2NyaXBjaW9uX3VzZXIiOm51bGwsImltYWdlbl91c2VyIjpudWxsLCJ0ZWxlZm9ub191c2VyIjoiMzE1Nzg3NDU5MyIsImZlY2hhX25hY2ltaWVudG9fdXNlciI6IjIwMDUtMDYtMTdUMDU6MDA6MDAuMDAwWiIsInJvbF91c2VyIjoiYWRtaW4iLCJlc3RhZG9fdXNlciI6ImFjdGl2byJ9XSwiaWF0IjoxNzEzNDgzMDIzLCJleHAiOjE3MTM1Njk0MjN9.mMzc0uwURJosK-tryqA8JbKG38HrVNeSDO9_-0ujikU"
-        } <br />
+          CORRECTO: { "user": { 
+            "pk_cedula_user": 1084251889,
+            "nombre_user": "Juanca Realpe",
+            "email_user": "juan@gmail.com",
+            "password_user": "123456",
+            "descripcion_user": null, 
+            "imagen_user": null,
+            "telefono_user": "3157874593", 
+            "fecha_nacimiento_user": "2005-06-17T05:00:00.000Z",
+            "rol_user": "admin", 
+            "estado_user": "activo" 
+        }, "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb3dzIjpbeyJwa19jZWR1bGFfdXNlciI6MTA4NDI1MTg4OSwibm9tYnJlX3VzZXIiOiJKdWFuY2EgUmVhbHBlIiwiZW1haWxfdXNlciI6Imp1YW5AZ21haWwuY29tIiwicGFzc3dvcmRfdXNlciI6IjEyMzQ1NiIsImRlc2NyaXBjaW9uX3VzZXIiOm51bGwsImltYWdlbl91c2VyIjpudWxsLCJ0ZWxlZm9ub191c2VyIjoiMzE1Nzg3NDU5MyIsImZlY2hhX25hY2ltaWVudG9fdXNlciI6IjIwMDUtMDYtMTdUMDU6MDA6MDAuMDAwWiIsInJvbF91c2VyIjoiYWRtaW4iLCJlc3RhZG9fdXNlciI6ImFjdGl2byJ9XSwiaWF0IjoxNzEzNDgzMDIzLCJleHAiOjE3MTM1Njk0MjN9.mMzc0uwURJosK-tryqA8JbKG38HrVNeSDO9_-0ujikU"
+          } <br />
 
-          INCORRECTO STATUS: 404 BODY JSON{ STATUS: 404 MESSAGE: "No se pudo
-          crear el usuario" } <br />
+          INCORRECTO STATUS: 404 BODY JSON{ STATUS: 404 MESSAGE: "Correo incorrecto" } <br />
+          INCORRECTO STATUS: 404 BODY JSON{ STATUS: 404 MESSAGE: "Contraseña incorrecta" } <br />
 
-          ERROR-SERVIDOR: STATUS: 500 BODY JSON{ STATUS:500, MESSAGE: "Error en
-          el sistema" }
+          ERROR-SERVIDOR: STATUS: 500 BODY JSON{ STATUS:500, MESSAGE: "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
@@ -117,10 +109,15 @@
       <tr>
         <td>PETICION BODY</td>
         <td>
-          { "cedula_user": 100000002, "nombre_user": "Pepito Perez",
-          "email_user": "pepito@gmail.com", "password_user": "123456789",
-          "telefono_user": "3186452162", "fechanacimiento_user": "2006-01-10",
-          "rol_user": "vendedor" }
+            {
+                "cedula_user": 100000,
+                "nombre_user": "Pepito Perez",
+                "email_user": "pepito@gmail.com",
+                "password_user": "123456789",
+                "telefono_user": "3100000000",
+                "fechanacimiento_user": "2000-01-01",
+                "rol_user": "vendedor"
+              }
         </td>
       </tr>
       <tr>
@@ -128,11 +125,9 @@
         <td>
           CORRECTO: STATUS:200 MESSAGE: "Usuario creado exitosamente" <br />
 
-          INCORRECTO STATUS: 404 BODY JSON{ STATUS: 404 MESSAGE: "No se pudo
-          crear el usuario" } <br />
+          INCORRECTO STATUS: 404 BODY JSON{ STATUS: 404 MESSAGE: "No se pudo crear el usuario" } <br />
 
-          ERROR-SERVIDOR: STATUS: 500 BODY JSON{ STATUS:500, MESSAGE: "Error en
-          el sistema" }
+          ERROR-SERVIDOR: STATUS: 500 BODY JSON{ STATUS:500, MESSAGE: "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
@@ -162,8 +157,7 @@
       <tr>
         <td>DESCRIPCION</td>
         <td>
-          Permite listar a los usuarios que se encuentran registrados en la base
-          de datos
+          Permite listar a los usuarios que se encuentran registrados en la base de datos
         </td>
       </tr>
       <tr>
@@ -176,7 +170,7 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR</td>
+        <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
@@ -185,20 +179,39 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTA: STATUS:200 JSON { "pk_cedula_user": 2147483647,
-          "nombre_user": "Pepito Perez", "email_user": "pepito@gmail.com",
-          "password_user":
-          "$2b$12$87E0QkFbfntUMd/1208Jme/tF5lwmTCMB0jlNS92veygZv9MkyiqS",
-          "descripcion_user": null, "imagen_user": null, "telefono_user":
-          "3186452162", "fecha_nacimiento_user": "2006-08-10T05:00:00.000Z",
-          "rol_user": "vendedor", "estado_user": "activo" }
+          CORRECTA: STATUS:200 JSON {
+            "message": "Los usuarios son: ",
+            "data": [
+                {
+                    "pk_cedula_user": 100000,
+                    "nombre_user": "Pepito Perez",
+                    "email_user": "pepito@gmail.com",
+                    "password_user": "$2b$12$.BD.D1I5g44mkcdn18nYR.nipqa3WBrc3sPRMeO/JDZwuAHF2Y0zS",
+                    "descripcion_user": null,
+                    "imagen_user": null,
+                    "telefono_user": "3100000000",
+                    "fecha_nacimiento_user": "2000-01-01T05:00:00.000Z",
+                    "rol_user": "vendedor",
+                    "estado_user": "activo"
+                },
+                {
+                    "pk_cedula_user": 1084252915,
+                    "nombre_user": "Andres",
+                    "email_user": "andres@gmail.com",
+                    "password_user": "$2b$12$S6SGNywU6GOsgRj6.HwIPuGqsTlKItSH8LcN8/lhCqV/.A9VgcygC",
+                    "descripcion_user": null,
+                    "imagen_user": null,
+                    "telefono_user": "3186452162",
+                    "fecha_nacimiento_user": "2006-06-10T05:00:00.000Z",
+                    "rol_user": "vendedor",
+                    "estado_user": "activo"
+                },
+            }
           <br />
 
-          INCORRECTO: STATUS: 404 BODY :{ STATUS: 404 MESSAGE: "No hay usuarios
-          registrados por el momento" } <br />
+          INCORRECTO: STATUS: 404 BODY :{ STATUS: 404 MESSAGE: "No hay usuarios registrados por el momento" } <br />
 
-          ERROR-SERVIDOR: STATUS: 500 BODY JSON{ STATUS:500, MESSAGE: "Error en
-          el sistema" }
+          ERROR-SERVIDOR: STATUS: 500 BODY JSON{ STATUS:500, MESSAGE: "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
@@ -239,15 +252,20 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR</td>
+        <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
         <td>
-          { "nombre_user": "Pepito", "email_user": "pepito@hotmail.com",
-          "password_user": "123456789", "descripcion_user": "hola, esta
-          funcionando ?", "img": file, "telefono_user": "3207383",
-          "fecha_nacimiento_user": "2020-10-10", "rol_user": "admin", }
+          { "cedula_user": "100000",
+            "nombre_user": "Pepito",
+            "email_user": "pepito@hotmail.com",
+            "descripcion_user": "Hola, soy muy bueno.", 
+            "password_user": "123456789", 
+            "telefono_user": "3207383",
+            "fecha_nacimiento_user": "2020-10-10", 
+            "rol_user": "admin", 
+            "img": file }
         </td>
       </tr>
       <tr>
@@ -255,11 +273,9 @@
         <td>
           CORRECTO: STATUS 200 MESSAGE: "Usuario actualizado con exito" <br />
 
-          INCORRECTO : STATUS 404 BODY JSON{ STATUS: 404 MESSAGE: ""No se pudo
-          actualizar el usuario" } <br />
+          INCORRECTO : STATUS 404 BODY JSON{ STATUS: 404 MESSAGE: ""No se pudo actualizar el usuario" } <br />
 
-          ERROR-SERVIDOR: STATUS 500 BODY JSON{ STATUS:500, MESSAGE: "Error en
-          el sistema" }
+          ERROR-SERVIDOR: STATUS 500 BODY JSON{ STATUS:500, MESSAGE: "Error en el servidor" } + error
         </td>
       </tr>
       <tr>
@@ -300,7 +316,7 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR</td>
+        <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
         <td>PETICION</td>
@@ -309,20 +325,26 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTO: STATUS:200 JSON { "message": "Usuario encontrado con exito",
-          "data": [ { "pk_cedula_user": 100000000, "nombre_user": "Pepito
-          Pérez", "email_user": "pepito@gmail.com", "password_user":
-          "$2b$12$Y1FhN6kQ4YXM4u1B3hIR5uFLB9rxAI0CKtO/kWm.USmuE/ViGbXpe",
-          "descripcion_user": "Hola, soy muy bueno", "imagen_user":
-          "imagen_perfil.jpg", "telefono_user": "312942843",
-          "fecha_nacimiento_user": "1983-02-10T05:00:00.000Z", "rol_user":
-          "admin", "estado_user": "activo" } ] }
-          <br />
-          INCORRECTO : STATUS: 404 BODY { STATUS: 404 MESSAGE: 'Error al
-          encontrar el usuario' } <br />
+          CORRECTO: STATUS:200 JSON {
+            "message": "Usuario encontrado con exito",
+            "data": [
+                {
+                    "pk_cedula_user": 100000,
+                    "nombre_user": "Pepito Pérezz",
+                    "email_user": "pepito1@gmail.com",
+                    "password_user": "$2b$12$d.V0vVLdgDhKfuA.Gr8ycOKEpd68fj94291QQKyc.B3s6H4zNEpHO",
+                    "descripcion_user": "Hola, soy muy bueno.",
+                    "imagen_user": "imagen_perfil1.jpg",
+                    "telefono_user": "3100000001",
+                    "fecha_nacimiento_user": "2000-11-11T05:00:00.000Z",
+                    "rol_user": "vendedor",
+                    "estado_user": "activo"
+                }
+            ]
+        }<br />
+          INCORRECTO : STATUS: 404 BODY { STATUS: 404 MESSAGE: 'Error al encontrar el usuario' } <br />
 
-          ERROR-SERVIDOR: STATUS: 500 BODY : JSON{ STATUS:500, MESSAGE: "Error
-          en el sistema" }
+          ERROR-SERVIDOR: STATUS: 500 BODY : JSON{ STATUS:500, MESSAGE: "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
@@ -374,11 +396,9 @@
         <td>
           CORRECTO: STATUS 200, MESSAGE: 'Usuario eliminado con exito' <br />
 
-          INCORRECTO STATUS 404, BODY JSON{ STATUS 404 MESSAGE 'Error con el ID
-          al eliminar el usuario' } <br />
+          INCORRECTO STATUS 404, BODY JSON{ STATUS 404 MESSAGE 'Error con el ID al eliminar el usuario' } <br />
 
-          ERROR-JSON: STATUS 500 BODY JSON{ STATUS 500, MESSAGE "Error en el
-          sistema" }
+          ERROR-JSON: STATUS 500 BODY JSON{ STATUS 500, MESSAGE "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
@@ -428,14 +448,11 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTO: STATUS:200, MESSAGE 'Usuario desactivado exitosamente'
-          <br />
+          CORRECTO: STATUS:200, MESSAGE 'Usuario desactivado exitosamente' <br />
 
-          INCORRECTO: STATUS 404 BODY JSON:{ STATUS 404, MESSAGE 'No se encontró
-          ningun usuario con el ID ${id}' } <br />
+          INCORRECTO: STATUS 404 BODY JSON:{ STATUS 404, MESSAGE 'No se encontró ningun usuario con el ID ${id}' } <br />
 
-          ERROR-SERVIDOR: STATUS 500 BODY JSON{ STATUS 500, MESSAGE "Error en el
-          sistema" }
+          ERROR-SERVIDOR: STATUS 500 BODY JSON{ STATUS 500, MESSAGE "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
@@ -487,11 +504,9 @@
         <td>
           CORRECTO : STATUS 200 MESSAGE: 'Usuario activado exitosamente' <br />
 
-          INCORRECTO : STATUS 404 BODY JSON{ STATUS 404, MESSAGE 'No se encontró
-          ningun usuario con el ID ${id}' } <br />
+          INCORRECTO : STATUS 404 BODY JSON{ STATUS 404, MESSAGE 'No se encontró ningun usuario con el ID ${id}' } <br />
 
-          ERROR-SERVIDOR: STATUS 500 BODY JSON{ STATUS 500, MESSAGE "Error en el
-          sistema" } <br />
+          ERROR-SERVIDOR: STATUS 500 BODY JSON{ STATUS 500, MESSAGE "Error en el servidor" } <br />
         </td>
       </tr>
       <tr>
