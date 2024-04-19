@@ -1,20 +1,20 @@
 import { pool } from "../databases/conexion.js";
 import jwt from "jsonwebtoken";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 
 export const validarUser = async (req, res) => {
     try {
         const { correo, password } = req.body;
-        const sql = `SELECT * FROM usuarios WHERE email_user = '${correo}' AND  password_user = '${password}';`;
+        const sql = `SELECT * FROM usuarios WHERE email_user = '${correo}'`;
         const [rows] = await pool.query(sql);
         if (rows.length === 0) {
             return res.status(401).json({ message: "Usuario no registrado" });
         }
         const user = rows[0]; // Obtener el primer usuario de los resultados
-        // const validPassword = await bcrypt.compare(password, user.password_user);
-        // if (!validPassword) {
-        //     return res.status(401).json({ message: "Contraseña incorrecta" });
-        // }
+        const validPassword = await bcrypt.compare(password, user.password_user);
+        if (!validPassword) {
+            return res.status(401).json({ message: "Contraseña incorrecta" });
+        }
         const token = jwt.sign({ rows }, process.env.AUT_SECRET, {
             expiresIn: process.env.AUT_EXPIRET,
         });
