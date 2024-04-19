@@ -6,7 +6,7 @@ export const validationDepartamento = [
     .isEmpty()
     .toInt()
     .isNumeric({ no_symbols: true }),
-  check("nombre_depart", "El nombre del departamento es obligatorio")
+  check("nombre_depar", "El nombre del departamento es obligatorio")
     .not()
     .isEmpty()
     .isLength({ max: 255 }),
