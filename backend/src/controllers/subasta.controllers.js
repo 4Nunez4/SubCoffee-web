@@ -15,6 +15,7 @@ const upload = multer({ storage: storage });
 export const subastaFiles = upload.fields([{ name: 'imagen_sub' }, { name: 'certificado_sub' }]);
 
 // Función para registrar una subasta
+   ///no tocar porque se jode esta monda
 export const registrar = async (req, res) => {
  try {
     const errors = validationResult(req);
@@ -71,6 +72,7 @@ export const registrar = async (req, res) => {
     });
  }
 };
+   ///no tocar porque se jode esta monda
 
 // lista todas las subastas en progreso  
 export const listar = async (req, res) => {
@@ -92,7 +94,7 @@ export const listar = async (req, res) => {
   }
 };
 // actualizar una subasta
-
+   ///no tocar porque se jode esta monda
 export const actualizar = async (req, res) => {
     try {
        const errors = validationResult(req);
@@ -155,6 +157,7 @@ export const actualizar = async (req, res) => {
        });
     }
    };
+   ///no tocar porque se jode esta monda
    
 // busca una subasta
 export const buscar = async (req, res) => {
@@ -215,3 +218,57 @@ export const eliminar = async (req, res) => {
     });
   }
 };
+export const SubastaAbierta = async (req, res) => {
+    const id = req.params.id;
+    try {
+      const [result] = await pool.query(`UPDATE subasta SET estado_sub = 1 WHERE pk_id_sub = '${id}'`);
+      if (result.affectedRows > 0) {
+        res.status(200).json({ message: "Subasta Abierta " });
+      } else {
+        res.status(404).json({ message: `No se encontró ninguna Subasta con el ID ${id}` });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error en el sistema", error: error.message });
+    }
+  };
+  
+  export const SubastaEspera = async (req, res) => {
+    const id = req.params.id;
+    try {
+      const [result] = await pool.query(`UPDATE subasta SET estado_sub = 2 WHERE pk_id_sub = ${id}`);
+      if (result.affectedRows > 0) {
+        res.status(200).json({ message: "Subasta en Espera " });
+      } else {
+        res.status(404).json({ message: `No se encontró ninguna Subasta con el ID ${id}` });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error en el sistema", error: error.message });
+    }
+  };
+  export const SubastaCerrada = async (req, res) => {
+    const id = req.params.id;
+    try {
+      const [result] = await pool.query(`UPDATE subasta SET estado_sub = 3 WHERE pk_id_sub = '${id}'`);
+      if (result.affectedRows > 0) {
+        res.status(200).json({ message: "Subasta Cerrada" });
+      } else {
+        res.status(404).json({ message: `No se encontró ninguna Subasta con el ID ${id}` });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error en el sistema", error: error.message });
+    }
+  };
+  
+  export const SubastaProceso = async (req, res) => {
+    const id = req.params.id;
+    try {
+      const [result] = await pool.query(`UPDATE subasta SET estado_sub = 4 WHERE pk_id_sub = ${id}`);
+      if (result.affectedRows > 0) {
+        res.status(200).json({ message: "Subasta en Proceso" });
+      } else {
+        res.status(404).json({ message: `No se encontró ninguna Subasta con el ID ${id}` });
+      }
+    } catch (error) {
+      res.status(500).json({ message: "Error en el sistema", error: error.message });
+    }
+  };
