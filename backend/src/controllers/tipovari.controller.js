@@ -11,14 +11,14 @@ export const getTipoVariedades = async (req, res) => {
       res.status(404).json({ message: "Error al buscar los tipos de variedades" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error: error.message });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
 export const getTipoVariedad = async (req, res) => {
   try {
     const id = req.params.id;
-    let sql = `SELECT * FROM tipo_variedad WHERE pk_id_tip_vari = '${id}'`;
+    let sql = `SELECT * FROM tipo_variedad WHERE pk_id_tipo_vari = '${id}'`;
     const [result] = await pool.query(sql);
     if (result.length > 0) {
       res.status(200).json({ message: "Tipo de variedad encontrada", data: result });
@@ -26,7 +26,7 @@ export const getTipoVariedad = async (req, res) => {
       res.status(404).json({ message: "Error al buscar el tipo de variedad con ese ID" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error: error.message });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -48,7 +48,7 @@ export const createTipoVariedad = async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error en el sistema", error: error.message });
+      .json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -69,7 +69,7 @@ export const updateTipoVariedad = async (req, res) => {
       res.status(404).json({  message: "Error al actualizar el tipo de variedad con ese ID",});
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error: error.message });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -84,7 +84,7 @@ export const deleteTipoVariedad = async (req, res) => {
       res.status(404).json({ message: "Error al eliminar el tipo de variedad con ese ID" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error: error.message });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -92,7 +92,7 @@ export const activarTipoVariedad = async (req, res) => {
   const id = req.params.id;
   try {
     const [result] = await pool.query(
-      `UPDATE tipo_variedad SET estado_tipo_vari = 1 WHERE pk_id_tip_vari = '${id}'`
+      `UPDATE tipo_variedad SET estado_tipo_vari = 1 WHERE pk_id_tipo_vari = '${id}'`
     );
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Tipo de variedad activada exitosamente" });
@@ -100,20 +100,20 @@ export const activarTipoVariedad = async (req, res) => {
       res.status(404).json({  message: `No se encontró ningun tipo de variedad con el ID ${id}`,});
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error: error.message });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
 export const desactivarTipoVariedad = async (req, res) => {
   const id = req.params.id;
   try {
-    const [result] = await pool.query(`UPDATE tipo_variedad SET estado_tipo_vari = 2 WHERE pk_id_tip_vari = ${id}`);
+    const [result] = await pool.query(`UPDATE tipo_variedad SET estado_tipo_vari = 2 WHERE pk_id_tipo_vari = ${id}`);
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Tipo de variedad desactivada exitosamente" });
     } else {
       res.status(404).json({  message: `No se encontró ningun tipo de variedad con el ID ${id}`,});
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error: error.message });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };

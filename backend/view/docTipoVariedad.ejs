@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <hr />
+    <h2>Requerimiento. Documentación de tipos de variedad</h2>
+    <hr />
+    <h3>Crear tipos de variedades</h3>
+    <table>
+      <tr>
+        <td>Numero 1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Nombre Del Servicio</td>
+        <td>Crear tipos de variedades</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/tipo_vari</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite registrar tipos de variedades en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>
+            {
+                "nombre_tipo_vari": "Tabi"
+            }
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: { message: "Tipo de variedad creada con exito" } <br>
+          Incorrecto: Status:404 body:{ message: "Error al crear el tipo de variedad" } <br>
+          Error: Status:500 body:{ message:"Error en el servidor : " + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Listar tipos de variedades</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Nombre Del Servicio</td>
+        <td>Listar tipos de variedades</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/tipo_vari</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite listar todos los tipos de variedades registrados</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: {
+            "message": "Tipos de variedades encontradas",
+            "data": [
+                {
+                    "pk_id_tipo_vari": 1,
+                    "nombre_tipo_vari": "Tipica",
+                    "estado_tipo_vari": "activo"
+                },
+                {
+                    "pk_id_tipo_vari": 2,
+                    "nombre_tipo_vari": "Caturra",
+                    "estado_tipo_vari": "activo"
+                },]} <br>
+          Incorrecto: Status:404 body:{ message:'Error al buscar los tipos de variedades' } <br>
+          Error: Status:500 body:{ message:"Error en el servidor" + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Actualizar tipos de variedades</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Nombre Del Servicio</td>
+        <td>Actualizar tipos de variedades</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/tipo_vari/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite actualizar los tipos de variedades en la base de datos por medio de su id
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>
+            {
+                "nombre_tipo_vari":"Tipica"
+            }
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: { message: 'Tipo de variedad actualizada con exito' } <br>
+          Incorrecto: Status:404 body:{ message: 'Error al actualizar el tipo de variedad con ese ID' } <br> 
+          Error: Status:500 body:{ message: "Error en el servidor" + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Buscar tipos de variedades</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Nombre Del Servicio</td>
+        <td>Buscar tipos variedads registradas</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/tipo_vari/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite buscar los tipos variedades en la base de datos por medio de su ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: {
+            "message": "Tipo de variedad encontrada",
+            "data": [
+                {
+                    "pk_id_tipo_vari": 1,
+                    "nombre_tipo_vari": "Tipica",
+                    "estado_tipo_vari": "activo"
+                }
+            ]
+        } <br> 
+          Incorrecto: Status:404 body:{ message: 'Error al buscar el tipo de variedad con ese ID' } <br>
+          Error: Status:500 body:{ message: "Error en el servidor" + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Eliminar los tipos de variedades</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre Del Servicio</td>
+        <td>Eliminar los tipos de variedades</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/tipo_vari/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite eliminar los tipos de variedades en la base de datos por medio de su id
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>DELETE</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: { message: "Tipo de variedad eliminada con exito" } <br> 
+          Incorrecto: Status:404 body:{ message: 'Error al eliminar el tipo de variedad con ese ID'} <br> 
+          Error: Status:500 body:{ message: "Error en el servidor" + error }
+          <tr>
+            <td>Desarrollador:</td>
+            <td>Juan Camilo Realpe Ceron</td>
+          </tr>
+          <tr>
+            <td>Rama:</td>
+            <td>DEVjcrc</td>
+          </tr>
+        </td>
+      </tr>
+    </table>
+
+    <h3>Desactivar los tipos de variedades</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>Nombre Del Servicio</td>
+        <td>Desactivar los tipos de variedades</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/tipo_vari/:id</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCION</td>
+        <td>Permite desactivar los tipos de variedades</td>
+      </tr
+      <tr>
+        <td>VERBO</td>
+        <td>PUT</td>
+      </tr
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR</td>
+      </tr
+      <tr>
+        <td>PETICION</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+            Correcto: Status:200 json: { message: 'Tipo de variedad desactivada exitosamente'} <br>
+            Incorrecto: Status:404 body:{ message: 'No se encontró ningun tipo de variedad con el ID ${id}" } <br> 
+            Error: Status:500 body:{ message: "Error en el servidor" + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <h3>Activar tipos variedad</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>Nombre Del Servicio</td>
+        <td>Activar tipos variedad</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/tipos variedadsac/:id</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCION</td>
+        <td>Permite activar tipos variedad</td>
+      </tr>
+      <tr>
+        <td>VERBO</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+            Correcto: Status:200 json: { message: 'Tipo de variedad activada exitosamente' } <br>
+            Incorrecto: Status:404 body:{ message: 'No se encontró ningun tipo de variedad con el ID ${id}' } <br> 
+            Error: Status:500 body:{ message: "Error en el servidor" + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+  </body>
+</html>
