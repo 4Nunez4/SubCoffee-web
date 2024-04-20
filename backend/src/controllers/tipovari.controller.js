@@ -61,7 +61,7 @@ export const updateTipoVariedad = async (req, res) => {
 
     const id = req.params.id;
     const { nombre_tipo_vari } = req.body;
-    let sql = `UPDATE tipo_variedad SET nombre_tipo_vari = '${nombre_tipo_vari}' WHERE pk_id_tip_vari = '${id}'`;
+    let sql = `UPDATE tipo_variedad SET nombre_tipo_vari = '${nombre_tipo_vari}' WHERE pk_id_tipo_vari = '${id}'`;
     const [result] = await pool.query(sql);
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Tipo de variedad actualizada con exito" });
@@ -76,12 +76,13 @@ export const updateTipoVariedad = async (req, res) => {
 export const deleteTipoVariedad = async (req, res) => {
   try {
     const id = req.params.id;
-    let sql = `DELETE FROM tipo_variedad WHERE pk_id_tip_vari = ${id}`;
-    const [result] = await pool.query(sql);
-    if (result.length > 0) {
-      res.status(200).json({ message: "Tipo de variedad eliminada con exito" });
+    const sql = `DELETE FROM tipo_variedad WHERE pk_id_tipo_vari = ?`;
+    const [result] = await pool.query(sql, [id]);
+
+    if (result.affectedRows > 0) {
+      res.status(200).json({ message: "Tipo de variedad eliminada con éxito" });
     } else {
-      res.status(404).json({ message: "Error al eliminar el tipo de variedad con ese ID" });
+      res.status(404).json({ message: "No se encontró el tipo de variedad con ese ID" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
