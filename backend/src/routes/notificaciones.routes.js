@@ -3,12 +3,11 @@ import { createNotification, deleteNotification, getNotification, getNotificatio
 import { validateCreateNotificacion, validateActualizarNotificacion } from "../validations/notificacion.validacion.js";
 import { verificarUserToken } from "../controllers/autenticacionController.js";
 
-const routerDocument = Router()
+const rutNotificaciones = Router()
 
-routerDocument.get('/notificaciones', verificarUserToken, getNotifications)
-routerDocument.get('/notificaciones/:id', verificarUserToken, getNotification)
-routerDocument.post('/notificaciones', verificarUserToken, validateCreateNotificacion, createNotification)
-routerDocument.put('/notificaciones/:id', verificarUserToken, validateActualizarNotificacion, updateNotification)
-routerDocument.delete('/notificaciones/:id', verificarUserToken, deleteNotification)
-
-export default routerDocument;
+rutNotificaciones.get('/notificaciones', verificarUserToken, getNotifications)
+rutNotificaciones.get('/notificaciones/:id', verificarUserToken, getNotification)
+rutNotificaciones.post('/notificaciones', verificarUserToken, validateCreateNotificacion, createNotification)
+rutNotificaciones.put('/notificaciones/:id', verificarUserToken, validateActualizarNotificacion, updateNotification)
+rutNotificaciones.delete('/notificaciones/:id', verificarUserToken, deleteNotification)
+export default rutNotificaciones;

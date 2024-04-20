@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import ejs from "ejs";
-import routerDocument from "./src/routes/notificaciones.routes.js";
+import rutNotificaciones from "./src/routes/notificaciones.routes.js";
 import routerChat from "./src/routes/chat.routes.js";
 import rutasSubastas from "./src/routes/subasta.routes.js";
 import postulantesRoutes from "./src/routes/postulantes.routes.js";
@@ -36,7 +36,7 @@ app.use("/v1", routerVariedad);
 app.use("/v1", routertipovari);
 app.use("/subasta",rutasSubastas);
 app.use("/user", routerChat);
-app.use("/user", routerDocument);
+app.use("/v1", rutNotificaciones);
 app.use("/postulantes", postulantesRoutes);
 
 app.set("view engine", "ejs");

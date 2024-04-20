@@ -18,7 +18,7 @@ export const subastaFiles = upload.fields([
 ]);
 
 // Función para registrar una subasta
-///no tocar porque se jode esta monda
+///no tocar porque se jode esta 
 export const registrar = async (req, res) => {
   try {
     const errors = validationResult(req);
