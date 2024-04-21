@@ -39,7 +39,7 @@ export const listarOfertas = async (req, res) => {
       return res.status(404).send({ mesage: "no hay ofertas" });
     }
   } catch (error) {
-    res.status(500).json({ status: 500, mesage: "ERROR SERVIDOR" + error });
+    res.status(500).json({ status: 500, mesage: "Error en el servidor " + error });
   }
 };
 export const atualizarOfertas = async (req, res) => {
@@ -109,35 +109,5 @@ export const eliminarOferta = async (req, res) => {
       } catch (error) {
         res.status(500).json({ status: 500, message: "Error en el sistema." });
       }
-};
-
-export const desactivarOfertas = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const { estado_pos } = req.body;
-    const [ofertasExiste] = await pool.query(
-      "UPDATE ofertas SET estado_pos = COALESCE(?, estado_pos) WHERE pk_id_pos = ?",
-      [estado_pos, id]
-    );
-    if (ofertasExiste.length === 0) {
-      res
-        .status(404)
-        .json({ status: 404, message: "El id de la ofertas es incorrecto" });
-    } else {
-      const [result] = await pool.query(
-        "UPDATE ofertas SET estado_pos = ? WHERE pk_id_pos = ?",
-        ["inactivo", id]
-      );
-      if (result.affectedRows > 0) {
-        res
-          .status(200)
-          .json({ status: 200, message: "ofertas desactivada exitosamente" });
-      }
-    }
-  } catch (error) {
-    res
-      .status(500)
-      .json({ status: 500, message: "Error en el sistema" + error });
-  }
 };
 

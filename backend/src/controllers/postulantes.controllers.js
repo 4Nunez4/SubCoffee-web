@@ -40,7 +40,7 @@ export const getPostulantes = async (req, res) => {
          return res.status(404).send({ message: "Error no hay postulantes" }); // Corregido el nombre de la propiedad 'mesage' a 'message'
        }
     } catch (error) {
-       res.status(500).json({ status: 500, message: "ERROR SERVIDOR " + error }); // Corregido el nombre de la propiedad 'mesage' a 'message'
+       res.status(500).json({ status: 500, message: "Error en el servidor " + error }); // Corregido el nombre de la propiedad 'mesage' a 'message'
     }
    };
 

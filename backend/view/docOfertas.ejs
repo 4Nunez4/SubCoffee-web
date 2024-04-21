@@ -3,30 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notificaciones</title>
+    <title>Ofertas</title>
   </head>
   <body>
     <hr>
-    <h2>Requerimiento. Documentación de notificaciones</h2>
+    <h2>Requerimiento. Documentación de ofertas</h2>
     <hr>
 
-    <h3>Crear notificación</h3>
+    <h3>Crear oferta</h3>
     <table>
-
         <td>NUMERO</td>
         <td>1</td>
       </tr>
       <tr>
         <td>NOMBRE DEL SERVICIO</td>
-        <td>Crear notificación</td>
+        <td>Crear oferta</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/notificaciones</td>
+        <td>http://localhost:4000/v1/oferta</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
-        <td>Permite crear una notificacion en la base de datos</td>
+        <td>Permite crear ofertas en la base de datos</td>
       </tr>
       <tr>
         <td>VERBO HTTP</td>
@@ -43,20 +42,19 @@
       <tr>
         <td>PETICIÓN body</td>
         <td>
-          {
-            "tipo_not": "mensaje",
-            "texto_not"	: "la suasta a iniciado empieza a subastar",
-            "fk_id_subasta": 11,
-            "fk_id_usuario": 1084253677
-            }
+            {
+                "oferta_ofer": 2000,
+                "fk_id_usuario": 1084252915,
+                "fk_id_subasta": 11
+                }
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: 'Notificación creada exitosamente.'} 
-          Incorrecto: JSON:{status: 404, message: "Error al crear la notificación."} 
-          Error: JSON:{status: 500, message:'Error en el sistema.'}
+          Correcto: JSON:{status: 200, message: "Se registro con exito la oferta."}
+          Incorrecto: JSON:{status: 404, message: "Error al registrar la oferta."}
+          Error: JSON:{status: 500, message: "Error servidor "}
         </td>
       </tr>
       <tr>
@@ -69,23 +67,23 @@
       </tr>
     </table>
     <hr>
-    <h3>Listar notificaciones</h3>
+
+    <h3>listar ofertas</h3>
     <table>
-      <tr>
         <td>NUMERO</td>
-        <td>2</td>
+        <td>1</td>
       </tr>
       <tr>
         <td>NOMBRE DEL SERVICIO</td>
-        <td>Listar todas las notificaciones</td>
+        <td>listar ofertas</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/notificaciones</td>
+        <td>http://localhost:4000/v1/oferta</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
-        <td>Permite listar todas las notificaciones de la base de datos</td>
+        <td>Permite listar ofertas de la base de datos</td>
       </tr>
       <tr>
         <td>VERBO HTTP</td>
@@ -97,18 +95,18 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR, USUARIO</td>
+        <td>Administrador, Usuarios</td>
       </tr>
       <tr>
         <td>PETICIÓN body</td>
-        <td>NULL</td>
+        <td>Null</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message:"Notificaciones encontradas con éxito', data:rows} 
-          Incorrecto: JSON:{status: 404, message: 'No se encontraron notificaciones.'} 
-          Error: JSON:{status: 500, message:'Error en el sistema.'}
+          Correcto: JSON:{status: 200, .json(result)}
+          Incorrecto: JSON:{status: 404, message: "no hay ofertas"}
+          Error: JSON:{status: 500, message: "Error en el servidor "}
         </td>
       </tr>
       <tr>
@@ -121,22 +119,23 @@
       </tr>
     </table>
     <hr>
-    <h3>Actualizar notificación</h3>
+
+    <h3>actualizar oferta</h3>
     <table>
         <td>NUMERO</td>
-        <td>3</td>
+        <td>1</td>
       </tr>
       <tr>
         <td>NOMBRE DEL SERVICIO</td>
-        <td>actualizar notificación</td>
+        <td>actualizar oferta</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/notificaciones/7</td>
+        <td>http://localhost:4000/v1/oferta/14</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
-        <td>Permite actualizar las notificaciones de la base de datos</td>
+        <td>Permite actualizar ofertas de la base de datos</td>
       </tr>
       <tr>
         <td>VERBO HTTP</td>
@@ -153,18 +152,17 @@
       <tr>
         <td>PETICIÓN body</td>
         <td>
-          {
-            "tipo_not": "cierre",
-            "texto_not"	: "la suasta a finalizado"
+            {
+                "oferta_ofer": 8000
             }
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: 'Notificación actualizada exitosamente.'} 
-          Incorrecto: JSON:{status: 404, message: "El ID proporcionado no existe."} 
-          Error: JSON:{status: 500, message: 'Error en el sistema.'}
+          Correcto: JSON:{status: 200, message: "oferta actualizada exitosamente"}
+          Incorrecto: JSON:{status: 404, message: "El ID de la oferta es incorrecto"}
+          Error: JSON:{status: 500, message: "Error en el sistema"}
         </td>
       </tr>
       <tr>
@@ -176,26 +174,25 @@
         <td>DEVjenm</td>
       </tr>
     </table>
-<hr>
-    <h3>Buscar notificación</h3>
-    <table>
+    <hr>
 
+    
+    <h3>listar una oferta</h3>
+    <table>
         <td>NUMERO</td>
-        <td>4</td>
+        <td>1</td>
       </tr>
       <tr>
         <td>NOMBRE DEL SERVICIO</td>
-        <td>Listar notificación</td>
+        <td>listar una oferta</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/notificaciones/7</td>
+        <td>http://localhost:4000/v1/oferta/14</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
-        <td>
-          Permite listar una notificación en especifico de la base de datos
-        </td>
+        <td>Permite listar una oferta de la base de datos</td>
       </tr>
       <tr>
         <td>VERBO HTTP</td>
@@ -211,14 +208,14 @@
       </tr>
       <tr>
         <td>PETICIÓN body</td>
-        <td>NULL</td>
+        <td>Null</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message:"notificación encontrada exitosamente."} 
-          Incorrecto: JSON:{status: 404, message: 'Error con ID de Notificación, no encontrado.'} 
-          Error: JSON:{status: 500, message: 'Error en el sistema.'}
+          Correcto: JSON:{status: 200, data: rows }
+          Incorrecto: JSON:{status: 404, message: "Error ID ofertas no encontrada"}
+          Error: JSON:{status: 500, message: "Error al obtener la oferta"}
         </td>
       </tr>
       <tr>
@@ -230,24 +227,25 @@
         <td>DEVjenm</td>
       </tr>
     </table>
- <hr>
-    <h3>Eliminar notificación</h3>
-    <table>
+    <hr>
 
+
+    <h3>eliminar una oferta</h3>
+    <table>
         <td>NUMERO</td>
-        <td>5</td>
+        <td>1</td>
       </tr>
       <tr>
         <td>NOMBRE DEL SERVICIO</td>
-        <td>Eliminar notificación</td>
+        <td>eliminar una oferta</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/notificaciones/7</td>
+        <td>http://localhost:4000/v1/oferta/14</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
-        <td>Permite eliminar las notificaciones de la base de datos</td>
+        <td>Permite eliminar una oferta de la base de datos</td>
       </tr>
       <tr>
         <td>VERBO HTTP</td>
@@ -263,14 +261,14 @@
       </tr>
       <tr>
         <td>PETICIÓN body</td>
-        <td>NULL</td>
+        <td>Null</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: 'Notificación eliminada exitosamente.'} 
-          Incorrecto: JSON:{status: 404, message: 'La notificación con el ID proporcionado no existe.'} 
-          Error: JSON:{status: 500, message: 'Error en el sistema.'}
+          Correcto: JSON:{status: 200, message: "oferta eliminada con éxito." }
+          Incorrecto: JSON:{status: 404, message:"No se encontró la oferta con el ID especificado."}
+          Error: JSON:{status: 500, message: "Error en el sistema."}
         </td>
       </tr>
       <tr>
@@ -282,5 +280,4 @@
         <td>DEVjenm</td>
       </tr>
     </table>
-  </body>
-</html>
+    <hr>
