@@ -6,30 +6,29 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Documentación de la Api</h1>
     <hr />
-    <h2>Requerimiento 1. Documentacion del Registro de usuario</h2>
+    <h2>Requerimiento. Documentación de usuario</h2>
     <hr />
-    <h3>AUTENTICAR USUARIOS</h3>
+    <h3>Autenticar usuarios</h3>
     <table>
       <tr>
-        <td>NUMERO</td>
+        <td>Número</td>
         <td>1</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL ENDPOINT</td>
-        <td>AUTENTICAR USUARIOS</td>
+        <td>Nombre del Servicio</td>
+        <td>Autenticar usuarios</td>
       </tr>
       <tr>
         <td>URI</td>
         <td>/auth/login</td>
       </tr>
       <tr>
-        <td>DESCRIPCION</td>
+        <td>Descripción:</td>
         <td>Permite autenticar a los usuarios</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>POST</td>
       </tr>
       <tr>
@@ -37,7 +36,7 @@
         <td>NULL</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR, COMPRADOR, VENDEDOR</td>
       </tr>
       <tr>
@@ -47,7 +46,7 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTO: { "user": { 
+          Correcto: Status:200 json: { "user": { 
             "pk_cedula_user": 1084251889,
             "nombre_user": "Juanca Realpe",
             "email_user": "juan@gmail.com",
@@ -55,47 +54,46 @@
             "descripcion_user": null, 
             "imagen_user": null,
             "telefono_user": "3157874593", 
-            "fecha_nacimiento_user": "2005-06-17T05:00:00.000Z",
+            "fecha_nacimiento_user": "2005-06-17",
             "rol_user": "admin", 
             "estado_user": "activo" 
-        }, "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb3dzIjpbeyJwa19jZWR1bGFfdXNlciI6MTA4NDI1MTg4OSwibm9tYnJlX3VzZXIiOiJKdWFuY2EgUmVhbHBlIiwiZW1haWxfdXNlciI6Imp1YW5AZ21haWwuY29tIiwicGFzc3dvcmRfdXNlciI6IjEyMzQ1NiIsImRlc2NyaXBjaW9uX3VzZXIiOm51bGwsImltYWdlbl91c2VyIjpudWxsLCJ0ZWxlZm9ub191c2VyIjoiMzE1Nzg3NDU5MyIsImZlY2hhX25hY2ltaWVudG9fdXNlciI6IjIwMDUtMDYtMTdUMDU6MDA6MDAuMDAwWiIsInJvbF91c2VyIjoiYWRtaW4iLCJlc3RhZG9fdXNlciI6ImFjdGl2byJ9XSwiaWF0IjoxNzEzNDgzMDIzLCJleHAiOjE3MTM1Njk0MjN9.mMzc0uwURJosK-tryqA8JbKG38HrVNeSDO9_-0ujikU"
+        }, "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
           } <br />
-
-          INCORRECTO STATUS: 404 BODY JSON{ STATUS: 404 MESSAGE: "Correo incorrecto" } <br />
-          INCORRECTO STATUS: 404 BODY JSON{ STATUS: 404 MESSAGE: "Contraseña incorrecta" } <br />
-
-          ERROR-SERVIDOR: STATUS: 500 BODY JSON{ STATUS:500, MESSAGE: "Error en el servidor" + error }
+          Incorrecto: Status:404 body: { "Correo incorrecto" } <br />
+          Incorrecto: Status:404 body: { "Contraseña incorrecta" } <br />
+          Error: Status:500 body: { "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
-        <td>DESARROLADOR</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA</td>
+        <td>Rama:</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
 
+    <h3>Registrar usuarios</h3>
     <table>
       <tr>
-        <td>NUMERO</td>
+        <td>Número</td>
         <td>2</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL ENDPOINT</td>
-        <td>REGISTRAR USUARIOS</td>
+        <td>Nombre del Servicio</td>
+        <td>Registrar usuarios</td>
       </tr>
       <tr>
         <td>URI</td>
         <td>/v1/users</td>
       </tr>
       <tr>
-        <td>DESCRIPCION</td>
+        <td>Descripción:</td>
         <td>Permite registrar a los usuarios</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>POST</td>
       </tr>
       <tr>
@@ -103,7 +101,7 @@
         <td>NULL</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR</td>
       </tr>
       <tr>
@@ -123,45 +121,43 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTO: STATUS:200 MESSAGE: "Usuario creado exitosamente" <br />
-
-          INCORRECTO STATUS: 404 BODY JSON{ STATUS: 404 MESSAGE: "No se pudo crear el usuario" } <br />
-
-          ERROR-SERVIDOR: STATUS: 500 BODY JSON{ STATUS:500, MESSAGE: "Error en el servidor" + error }
+          Correcto: Status:200 json: { "Usuario creado exitosamente" } <br />
+          Incorrecto: Status:404 body: { "No se pudo crear el usuario" } <br />
+          Error: Status:500 body: { "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
-        <td>DESARROLADOR</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA</td>
+        <td>Rama:</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
 
-    <h3>LISTAR USUARIOS</h3>
+    <h3>Listar usuarios</h3>
     <table>
       <tr>
-        <td>NUMERO</td>
+        <td>Número</td>
         <td>3</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL ENDPOINT</td>
-        <td>LISTAR USUARIOS</td>
+        <td>Nombre del Servicio</td>
+        <td>Listar usuarios</td>
       </tr>
       <tr>
         <td>URI</td>
         <td>/v1/users</td>
       </tr>
       <tr>
-        <td>DESCRIPCION</td>
+        <td>Descripción:</td>
         <td>
           Permite listar a los usuarios que se encuentran registrados en la base de datos
         </td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>GET</td>
       </tr>
       <tr>
@@ -169,7 +165,7 @@
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
@@ -179,8 +175,8 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTA: STATUS:200 JSON {
-            "message": "Los usuarios son: ",
+          Correcto: Status:200 json: {
+            "message": "Los Usuarios son: ",
             "data": [
                 {
                     "pk_cedula_user": 100000,
@@ -190,7 +186,7 @@
                     "descripcion_user": null,
                     "imagen_user": null,
                     "telefono_user": "3100000000",
-                    "fecha_nacimiento_user": "2000-01-01T05:00:00.000Z",
+                    "fecha_nacimiento_user": "2000-01-01",
                     "rol_user": "vendedor",
                     "estado_user": "activo"
                 },
@@ -208,42 +204,40 @@
                 },
             }
           <br />
-
-          INCORRECTO: STATUS: 404 BODY :{ STATUS: 404 MESSAGE: "No hay usuarios registrados por el momento" } <br />
-
-          ERROR-SERVIDOR: STATUS: 500 BODY JSON{ STATUS:500, MESSAGE: "Error en el servidor" + error }
+          Incorrecto: Status:404 body: { "No hay Usuarios registrados por el momento" } <br />
+          Error: Status:500 body: { "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
-        <td>DESARROLADOR</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA</td>
+        <td>Rama:</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
 
-    <h3>ACTUALIZAR USUARIOS</h3>
+    <h3>Actualizar usuarios</h3>
     <table>
       <tr>
-        <td>NUMERO</td>
+        <td>Número</td>
         <td>4</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL ENDPOINT</td>
-        <td>ACTUALIZAR USUARIOS</td>
+        <td>Nombre del Servicio</td>
+        <td>Actualizar usuarios</td>
       </tr>
       <tr>
         <td>URI</td>
         <td>/v1/users/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCION</td>
+        <td>Descripción:</td>
         <td>Permite actualizar los datos de los usuarios</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>PUT</td>
       </tr>
       <tr>
@@ -251,7 +245,7 @@
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
@@ -271,43 +265,41 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTO: STATUS 200 MESSAGE: "Usuario actualizado con exito" <br />
-
-          INCORRECTO : STATUS 404 BODY JSON{ STATUS: 404 MESSAGE: ""No se pudo actualizar el usuario" } <br />
-
-          ERROR-SERVIDOR: STATUS 500 BODY JSON{ STATUS:500, MESSAGE: "Error en el servidor" } + error
+          Correcto: Status:200 json: { "Usuario actualizado con exito" }<br />
+          Incorrecto: Status:404 body: { "No se pudo actualizar el usuario" } <br />
+          Error: Status:500 body: { "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
-        <td>DESARROLADOR</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA</td>
+        <td>Rama:</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
 
-    <h3>BUSCAR USUARIOS</h3>
+    <h3>Buscar usuarios</h3>
     <table>
       <tr>
-        <td>NUMERO</td>
+        <td>Número</td>
         <td>5</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL ENDPOINT</td>
-        <td>BUSCAR USUARIOS</td>
+        <td>Nombre del Servicio</td>
+        <td>Buscar usuarios</td>
       </tr>
       <tr>
         <td>URI</td>
         <td>/v1/users/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCION</td>
-        <td>Permite buscar a los usuarios</td>
+        <td>Descripción:</td>
+        <td>Permite buscar a los usuarios registrados en la base de datos</td>
       </tr>
       <tr>
-        <td>VERBO</td>
+        <td>Verbo</td>
         <td>GET</td>
       </tr>
       <tr>
@@ -315,7 +307,7 @@
         <td>NULL</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
@@ -325,7 +317,7 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTO: STATUS:200 JSON {
+          Correcto: Status:200 json: {
             "message": "Usuario encontrado con exito",
             "data": [
                 {
@@ -336,47 +328,46 @@
                     "descripcion_user": "Hola, soy muy bueno.",
                     "imagen_user": "imagen_perfil1.jpg",
                     "telefono_user": "3100000001",
-                    "fecha_nacimiento_user": "2000-11-11T05:00:00.000Z",
+                    "fecha_nacimiento_user": "2000-11-11",
                     "rol_user": "vendedor",
                     "estado_user": "activo"
                 }
             ]
         }<br />
-          INCORRECTO : STATUS: 404 BODY { STATUS: 404 MESSAGE: 'Error al encontrar el usuario' } <br />
-
-          ERROR-SERVIDOR: STATUS: 500 BODY : JSON{ STATUS:500, MESSAGE: "Error en el servidor" + error }
+          Incorrecto: Status:404 body: { 'Error al encontrar el usuario' } <br />
+          Error: Status:500 body: { "Error en el servidor" + error}
         </td>
       </tr>
       <tr>
-        <td>DESARROLADOR</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA</td>
+        <td>Rama:</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
 
-    <h3>ELIMINAR USUARIOS</h3>
+    <h3>Eliminar usuarios</h3>
     <table>
       <tr>
-        <td>NUMERO</td>
+        <td>Número</td>
         <td>6</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL ENDPOINT</td>
-        <td>ELIMINAR USUARIOS</td>
+        <td>Nombre del Servicio</td>
+        <td>Eliminar usuarios</td>
       </tr>
       <tr>
         <td>URI</td>
         <td>/v1/users/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCION</td>
+        <td>Descripción:</td>
         <td>Permite eliminar a usuarios</td>
       </tr>
       <tr>
-        <td>VERBO</td>
+        <td>Verbo</td>
         <td>DELETE</td>
       </tr>
       <tr>
@@ -384,7 +375,7 @@
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR</td>
       </tr>
       <tr>
@@ -394,43 +385,41 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTO: STATUS 200, MESSAGE: 'Usuario eliminado con exito' <br />
-
-          INCORRECTO STATUS 404, BODY JSON{ STATUS 404 MESSAGE 'Error con el ID al eliminar el usuario' } <br />
-
-          ERROR-JSON: STATUS 500 BODY JSON{ STATUS 500, MESSAGE "Error en el servidor" + error }
+          Correcto: Status:200 json: { 'Usuario eliminado con exito' } <br />
+          Incorrecto: Status:404 body: { 'Error con el ID al eliminar el usuario' } <br />
+          Error: Status:500 body: { "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
-        <td>DESARROLADOR</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA</td>
+        <td>Rama:</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
 
-    <h3>DESACTIVAR USUARIOS</h3>
+    <h3>Desactivar usuarios</h3>
     <table>
       <tr>
-        <td>NUMERO</td>
+        <td>Número</td>
         <td>7</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL ENDPOINT</td>
-        <td>DESACTIVAR USUARIOS</td>
+        <td>Nombre del Servicio</td>
+        <td>Desactivar usuarios</td>
       </tr>
       <tr>
         <td>URI</td>
         <td>/v1/users/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCION</td>
-        <td>Permite desactivar usuarios</td>
+        <td>Descripción:</td>
+        <td>Permite desactivar a los usuarios</td>
       </tr>
       <tr>
-        <td>VERBO</td>
+        <td>Verbo</td>
         <td>PUT</td>
       </tr>
       <tr>
@@ -438,7 +427,7 @@
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR</td>
       </tr>
       <tr>
@@ -448,43 +437,41 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTO: STATUS:200, MESSAGE 'Usuario desactivado exitosamente' <br />
-
-          INCORRECTO: STATUS 404 BODY JSON:{ STATUS 404, MESSAGE 'No se encontró ningun usuario con el ID ${id}' } <br />
-
-          ERROR-SERVIDOR: STATUS 500 BODY JSON{ STATUS 500, MESSAGE "Error en el servidor" + error }
+          Correcto: Status:200 json: { 'Usuario desactivado exitosamente' } <br />
+          Incorrecto: Status:404 body: { 'No se encontró ningun usuario con el ID ${id}' } <br />
+          Error: Status:500 body: { "Error en el servidor" + error }
         </td>
       </tr>
       <tr>
-        <td>DESARROLADOR</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA</td>
+        <td>Rama:</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
 
-    <h3>ACTIVAR USUARIOS</h3>
+    <h3>Activar usuarios</h3>
     <table>
       <tr>
-        <td>NUMERO</td>
+        <td>Número</td>
         <td>8</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL ENDPOINT</td>
-        <td>ACTIVAR USUARIOS</td>
+        <td>Nombre del Servicio</td>
+        <td>Activar usuarios</td>
       </tr>
       <tr>
         <td>URI</td>
         <td>/v1/users/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCION</td>
-        <td>Permite activar usuarios</td>
+        <td>Descripción:</td>
+        <td>Permite activar a los usuarios</td>
       </tr>
       <tr>
-        <td>VERBO</td>
+        <td>Verbo</td>
         <td>PUT</td>
       </tr>
       <tr>
@@ -492,7 +479,7 @@
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR</td>
       </tr>
       <tr>
@@ -502,19 +489,17 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          CORRECTO : STATUS 200 MESSAGE: 'Usuario activado exitosamente' <br />
-
-          INCORRECTO : STATUS 404 BODY JSON{ STATUS 404, MESSAGE 'No se encontró ningun usuario con el ID ${id}' } <br />
-
-          ERROR-SERVIDOR: STATUS 500 BODY JSON{ STATUS 500, MESSAGE "Error en el servidor" } <br />
+          Correcto: Status:200 json: { 'Usuario activado exitosamente' } <br />
+          Incorrecto: Status:404 body: { 'No se encontró ningun usuario con el ID ${id}' } <br />
+          Error: Status:500 body: { "Error en el servidor" + error } <br />
         </td>
       </tr>
       <tr>
-        <td>DESARROLADOR</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA</td>
+        <td>Rama:</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
