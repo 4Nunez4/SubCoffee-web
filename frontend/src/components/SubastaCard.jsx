@@ -113,13 +113,13 @@ function SubastaCard() {
 
   return (
     <div
-      className="grid grid-cols-3 justify-center overflow-x-auto md:w-[980px] "
+      className="grid grid-cols-3 justify-center overflow-x-auto md:w-[980px] gap-x-6"
       style={{  scrollbarWidth: "none" }}
     >
       {Subastas.map((subasta, i) => (
         <Link
           key={i}
-          className="bg-gray-50 p-2 rounded-lg shadow-md mb-4 border hover:bg-green-50"
+          className="bg-gray-50 p-2 rounded-lg shadow-md mb-4 border hover:bg-gray-100"
         >
           <h2 className="text-xl font-semibold py-2 text-center">
             {subasta.title}

@@ -13,7 +13,7 @@ function ModalLogoutMolecule() {
   return (
     <div className="bg-white rounded-xl flex flex-col justify-center items-center w-52 border border-grisOscuro shadow-md p-2 text-sm gap-y-2">
       <LinkButtonAtom to="/profile">Perfil</LinkButtonAtom>
-      <ButtonAtomFull onClick={handleCerrarSesion} color="verdeSena1" colorHover="verdeSena2">
+      <ButtonAtomFull onClick={handleCerrarSesion} text="gray-700" color="gray-300" colorHover="gray-400">
         Cerrar sesión
       </ButtonAtomFull>
       {mostrarAviso && (

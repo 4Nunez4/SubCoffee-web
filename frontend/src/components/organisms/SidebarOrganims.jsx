@@ -21,10 +21,10 @@ const SidebarOrganims = () => {
 
   return (
     <>
-      <div className="flex min-h-screen bg-blancoMedio1">
+      <div className="flex min-h-screen">
         <div
           className={`${open ? "w-64" : "w-20"
-            } bg-green-600 max-h-full p-5 pt-5 relative duration-300`}
+            } bg-gray-600 max-h-full p-5 pt-5 relative duration-300`}
         >
           <img
             src="./src/assets/control.png"
@@ -34,8 +34,8 @@ const SidebarOrganims = () => {
           />
           <div className={`flex items-center`}>
             <AvatarAtom img="isotipo-SubCoffee.png" className={`${open && "rotate-[360deg]"}`} />
-            <TextSubAtom to="/subcoffee" color="cafeClaroLogo" text="Sub" className={`${!open && "scale-0"}`} />
-            <TextSubAtom to="/subcoffee" color="cafeOscuroLogo" text="Coffee" className={`${!open && "scale-0"}`} />
+            <TextSubAtom to="/subcoffee" color="text-gray-500" text="Sub" className={`${!open && "scale-0"}`} />
+            <TextSubAtom to="/subcoffee" color="text-gray-800" text="Coffee" className={`${!open && "scale-0"}`} />
           </div>
           <ul className="pt-6">
             {Menus.map((Menu, index) => (
@@ -43,8 +43,8 @@ const SidebarOrganims = () => {
                 to={Menu?.link}
                 key={index}
                 onClick={() => setActiveLink(Menu.link)}
-                className={`flex rounded-md p-2 cursor-pointer hover:bg-green-500 text-gray-300 text-sm items-center gap-x-4 ${Menu.gap ? "mt-9" : "mt-2"
-                  } ${activeLink === Menu.link ? "bg-green-500" : ""}`}
+                className={`flex rounded-md p-2 cursor-pointer hover:bg-gray-500 text-gray-300 text-sm items-center gap-x-4 ${Menu.gap ? "mt-9" : "mt-2"
+                  } ${activeLink === Menu.link ? "bg-gray-500" : ""}`}
               >
                 <div>{React.createElement(Menu?.icon, { size: "20" })}</div>
                 <span
