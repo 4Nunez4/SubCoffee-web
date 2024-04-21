@@ -15,6 +15,7 @@ import routerMunicipio from "./src/routes/municipio.routes.js"
 import routerFinca from "./src/routes/finca.routes.js"
 import routerVariedad from "./src/routes/variedad.routes.js"
 import routertipovari from "./src/routes/tipovariedad.routes.js"
+import ofertasRoutes from "./src/routes/ofertas.routes.js";
 
 const app = express();
 app.use(cors());
@@ -38,6 +39,7 @@ app.use("/subasta",rutasSubastas);
 app.use("/user", routerChat);
 app.use("/v1", rutNotificaciones);
 app.use("/postulantes", postulantesRoutes);
+app.use("/v1", ofertasRoutes);
 
 app.set("view engine", "ejs");
 
