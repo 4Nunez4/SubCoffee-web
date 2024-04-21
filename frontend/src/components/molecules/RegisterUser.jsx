@@ -1,15 +1,13 @@
 import React, { useRef, useEffect } from "react";
-import axiosClient from "../../api/axios";
-import ButtonAtom from "../atoms/ButtonAtom";
 import InputWithToggleIconAtom from "../atoms/InputWithToggleIconAtom";
 import InputWithIconAtom from "../atoms/InputWithIconAtom";
 import SelectInputAtom from "../atoms/SelectInputAtom";
 import OptionAtom from "../atoms/OptionAtom";
 import TitleForModal from "../atoms/TitleForModal";
-import toast from "react-hot-toast";
 import { icono } from "../atoms/IconsAtom";
+import { Button } from "@nextui-org/react";
 
-const RegisterFormMolecule = ({ onClose, mode, userId }) => {
+const RegisterFormMolecule = ({ mode, initialData, handleSubmit, actionLabel }) => {
   const cedula = useRef(null);
   const fullName = useRef(null);
   const email = useRef(null);
@@ -19,62 +17,43 @@ const RegisterFormMolecule = ({ onClose, mode, userId }) => {
   const rol = useRef(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (mode === "update" && userId) {
-        try {
-          const response = await axiosClient.get(`/v1/users/${userId}`);
-          const userData = response.data;
+    if (mode === "update" && initialData) {
+      try {
+        console.log(initialData);
 
-          cedula.current.value = userData.cedula_user;
-          fullName.current.value = userData.nombre_user;
-          email.current.value = userData.email_user;
-          phoneNumber.current.value = userData.telefono_user;
-          birthdate.current.value = userData.fechanacimiento_user;
-          rol.current.value = userData.rol_user;
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
+        cedula.current.value = initialData.cedula_user;
+        fullName.current.value = initialData.nombre_user;
+        email.current.value = initialData.email_user;
+        phoneNumber.current.value = initialData.telefono_user;
+        birthdate.current.value = initialData.fechanacimiento_user;
+        rol.current.value = initialData.rol_user;
+      } catch (error) {
+        console.error("Error fetching user data:", error);
       }
-    };
-
-    fetchData();
-  }, [mode, userId]);
+    }
+  }, [mode, initialData]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    const data = {
-      cedula_user: cedula.current.value,
-      nombre_user: fullName.current.value,
-      email_user: email.current.value,
-      password_user: password.current.value,
-      telefono_user: phoneNumber.current.value,
-      fechanacimiento_user: birthdate.current.value,
-      rol_user: rol.current.value,
-    };
-
     try {
-      let response;
-      if (mode === "create") {
-        response = await axiosClient.post("/v1/users", data);
-      } else if (mode === "update" && userId) {
-        response = await axiosClient.put(`/v1/users/${userId}`, data);
-      }
-
-      if (response.status === 200) {
-        toast.success("Usuario registrado/actualizado con éxito", {duration: 2000});
-        onClose();
-      } else {
-        toast.error("Error al registrar/actualizar el usuario");
-      }
+      const data = {
+        cedula_user: cedula.current.value,
+        nombre_user: fullName.current.value,
+        email_user: email.current.value,
+        password_user: password.current.value,
+        telefono_user: phoneNumber.current.value,
+        fechanacimiento_user: birthdate.current.value,
+        rol_user: rol.current.value,
+      };
+      handleSubmit(data, e);
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("Error al registrar/actualizar el usuario");
+      console.log(error);
+      alert("Error en el servidor " + error);
     }
   };
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
+    <form onSubmit={onSubmit} className="space-y-4 p-4">
       <TitleForModal>
         {mode === "update" ? "Actualizar Usuario" : "Registrar Usuario"}
       </TitleForModal>
@@ -129,9 +108,9 @@ const RegisterFormMolecule = ({ onClose, mode, userId }) => {
         ref={password}
       />
       <center>
-        <ButtonAtom type="submit">
-          {mode === "update" ? "Actualizar" : "Registrar"}
-        </ButtonAtom>
+        <Button type="submit" color="primary">
+          {actionLabel}
+        </Button>
       </center>
     </form>
   );
