@@ -1,222 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Subasta</title>
-</head>
-<body>
-    
-    <hr>
+  </head>
+  <body>
+    <hr />
     <h2>Requerimiento. Documentacion de Subasta</h2>
-    <hr>
+    <hr />
     <h3>Crear Subasta</h3>
     <table>
-        <tr><td>Numero </td><td>1</td></tr>
-        <tr><td>Nombre del Servicio </td><td>Crear Subasta</td></tr>
-        <tr><td>URI</td><td>subasta/registrar</td></tr>
-        <tr><td>Descripcion:</td><td>Permite Agregar subastas, registrarlas en la base de datos    </td></tr>
-        <tr><td>Verbo HTTP:</td><td>POST</td></tr>
-        <tr><td>HEADER:</td><td>token: token</td></tr>
-        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
-        <tr><td>PETICION BODY</td><td>
+      <tr>
+        <td>Numero</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Crear Subasta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/subasta/registrar</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite Agregar subastas, registrarlas en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>Administrador,Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>
             {
-                "fecha_inicio_sub": "2024-02-02",
-                "fecha_fin_sub": "2024-02-14",
-                "precio_inicial_sub": 100000,
-                "precio_final_sub": 2000000,
-                "estado_sub": "espera",
-                "fk_id_produccion": 1,
-                "fk_id_postulacion": 1
+                "fecha_inicio_sub": "2023-04-04T05:00:00.000Z",
+                "fecha_fin_sub": "2023-04-06T05:00:00.000Z",
+                "imagen_sub": "logo redondo sc.png",
+                "precio_inicial_sub": 1000,
+                "precio_final_sub": 2000,
+                "cantidad_sub": 5,
+                "unidad_peso_sub": "Kilogramo",
+                "fk_variedad": 7,
+                "estado_sub": "cerrada",
+                "certificado_sub": "logo y paleta subcoffe (1).pdf",
+                "descripcion_sub": "Descripción de la subasta",
             }
-    </td></tr>
-        <tr><td>RESPUESTA JSON</td><td>
-            Correcto:
-            Status:200
-            "mensaje": "Su subasta ha sido exitosa"
-            Incorrecto:
-            status(400)
-            BODY:{
-                "mensaje": "Por favor, proporcione todos los campos necesarios."
-            }
-            Error:
-            Status:505
-            body:{
-                    "mensaje": "Error interno del servidor"
-                }
-        </td></tr><tr>
-            <td>DESARROLLADOR</td>
-            <td>James Alfaro Muñoz Bolaños</td>
-          </tr>
-          <tr>
-            <td>RAMA:</td>
-            <td>DEVjamb</td>
-          </tr>
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 "mensaje": "Su subasta ha sido creada con exito"
+          Incorrecto: status(400) BODY:{ "mensaje": "Error al insertar la subasta" }
+          Error: Status:505 body:{ "mensaje":"Error interno del servidor" }
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjenm</td>
+      </tr>
     </table>
-    
-    <hr>
+
+    <hr />
     <h3>Listar subasta</h3>
-<table>
-    <tr><td>Numero </td><td>2</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Listar Subastas</td></tr>
-    <tr><td>URI</td><td>/subasta/listar</td></tr>
-    <tr><td>Descripcion:</td><td>Permite listar las subastas registradas en la base de datos    </td></tr>
-    <tr><td>Verbo HTTP:</td><td>GET</td></tr>
-    <tr><td>HEADER:</td><td>token: token</td></tr>
-    <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
-    <tr><td>PETICION BODY</td><td>NULL</td></tr>
-    <tr><td>RESPUESTA JSON</td><td>
-        Correcto:
-        Status:200
-        JSON:
-        {   
-            pk_id_sub: 3,
-            fecha_inicio_sub: '2024-02-02', 
-            fecha_fin_sub: '2024-02-14', 
-            precio_inicial_sub: 0.00,
-            precio_final_sub: 2.000, 
-            estado_sub: 'cerrada', 
-            fk_id_produccion: 1, 
-            fk_id_postulacion: 1 
-        }
-        Incorrecto:
-        Status:404
-        body:{
-            status:500
-            message:"No se encontraron subastas registradas :c"
-        }
-        Error:
-        Status:505
-        body:{
-            "error en el sistema"
-        }
-    </td></tr><tr>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Listar Subastas</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/subasta/listar</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite listar las subastas registradas en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 JSON: {resultado } 
+          Incorrecto: Status:404 body:{ status:404 message:"No se encontraron subastas " } 
+          Error:Status:500 body:{ mensaje: "Error interno del servidor"}
+        </td>
+      </tr>
+      <tr>
         <td>DESARROLLADOR</td>
-        <td>James Alfaro Muñoz Bolaños</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjamb</td>
+        <td>DEVjenm</td>
       </tr>
-</table>
+    </table>
 
-
-<hr>
-<h3>Actualizar Subasta</h3>
-<table> 
-    <tr><td>Numero </td><td>3</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Actualizar Subasta</td></tr>
-    <tr><td>URI</td><td>/subasta/actualizar/:id</td></tr>
-    <tr><td>Descripcion:</td><td>Permite actualizar las subastas con id proporcionado registradas en la base de datos    </td></tr>
-    <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
-    <tr><td>HEADER:</td><td>token: token</td></tr>
-    <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
-    <tr><td>PETICION BODY</td><td>
-        {
-            "estado_sub": "cerrada"
-        }
-</td></tr>
-    <tr><td>RESPUESTA JSON</td><td>
-        Correcto:
-        Status:200
-        body{
-            "mensaje": "La subasta ha sido actualizada exitosamente"
-        }
-        Incorrecto:
-        Status:404
-        body:{
-            status:500
-            "mensaje": "No se encontró ninguna subasta con el id proporcionado"
-        }
-        Error:
-        Status:505
-        body:{
-            "Error interno del servidor"
-        }
-    </td></tr><tr>
+    <hr />
+    <h3>Actualizar Subasta</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Actualizar Subasta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/subasta/actualizar/12</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite actualizar las subastas con id proporcionado registradas en la
+          base de datos
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR, USUARIO</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>
+            {
+                "fecha_inicio_sub": "2023-04-04T05:00:00.000Z",
+                "fecha_fin_sub": "2023-04-06T05:00:00.000Z",
+                "imagen_sub": "logo redondo sc.png",
+                "precio_inicial_sub": 500000,
+                "precio_final_sub": 2000000,
+                "cantidad_sub": 5,
+                "unidad_peso_sub": "Kilogramo",
+                "fk_variedad": 7,
+                "estado_sub": "cerrada",
+                "certificado_sub": "logo y paleta subcoffe (1).pdf",
+                "descripcion_sub": "Descripción de la subasta",
+            }
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 body{ "mensaje": "La subasta ha sido actualizada exitosamente" } 
+          Incorrecto: Status:404 body:{ status:404 "mensaje": "No se encontró ninguna subasta con el id proporcionado"} 
+          Error:vStatus:500 body:{ mensaje: "Error interno del servidor" }
+        </td>
+      </tr>
+      <tr>
         <td>DESARROLLADOR</td>
-        <td>James Alfaro Muñoz Bolaños</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjamb</td>
+        <td>DEVjenm</td>
       </tr>
-</table>
+    </table>
 
-<hr>
-<h3>Buscar Subasta</h3>
-<table>
-    <tr><td>Numero </td><td>4</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Listar Subasta</td></tr>
-    <tr><td>URI</td><td>/subasta/buscar/:id</td></tr>
-    <tr><td>Descripcion:</td><td>Permite listar la subasta con id proporcionado registrada en la base de datos    </td></tr>
-    <tr><td>Verbo HTTP:</td><td>GET</td></tr>
-    <tr><td>HEADER:</td><td>token: token</td></tr>
-    <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
-    <tr><td>PETICION BODY</td><td>NULL</td></tr>
-    <tr><td>RESPUESTA JSON</td><td>
-        Correcto:
-        Status:200
-        JSON:
-        "mensaje": "Datos de subasta obtenidos correctamente",
-            "data": resultado[0]
-        Incorrecto:
-        Status:404
-        body:{
-            status:500
-            "mensaje": "No se encontró ninguna subasta con el id consultado."
-        }
-        Error:
-        Status:505
-        body:{
-            "Error interno del servidor"
-        }
-    </td></tr><tr>
+    <hr />
+    <h3>Buscar Subasta</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Listar Subasta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/subasta/buscar/12</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite listar la subasta con id proporcionado registrada en la base
+          de datos
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 JSON: "mensaje": "Datos de subasta obtenidos correctamente"
+          Incorrecto: Status:404 body:{ status:404 "mensaje": "No se encontró ninguna subasta con el id consultado."} 
+          Error: Status:500 body:{ "Error interno del servidor" }
+        </td>
+      </tr>
+      <tr>
         <td>DESARROLLADOR</td>
-        <td>James Alfaro Muñoz Bolaños</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjamb</td>
+        <td>DEVjenm</td>
       </tr>
-</table>
+    </table>    
 
-<hr>
-<h3>Eliminar Subasta</h3>
-<table>
-    <tr><td>Numero </td><td>5</td></tr>
-    <tr><td>Nombre del Servicio </td><td>Eliminar Subasta</td></tr>
-    <tr><td>URI</td><td>/subasta/eliminar/:id</td></tr>
-    <tr><td>Descripcion:</td><td>Permite eliminar la subasta con id proporcionado registradas en la base de datos     </td></tr>
-    <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
-    <tr><td>HEADER:</td><td>token: token</td></tr>
-    <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
-    <tr><td>PETICION BODY</td><td>NULL</td></tr>
-    <tr><td>RESPUESTA JSON</td><td>
-        Correcto:
-        Status:200
-        JSON:{
-        "mensaje": "Subasta eliminada exitosamente."
-        }
-        Incorrecto:
-        Status:404
-        body:{
-            status:500
-            "mensaje": "No se encontró una subasta con el id proporcionado."
-        }
-        Error:
-        Status:505
-        body:{
-            "Error interno del servidor"
-        }
-    </td></tr><tr>
+    <hr />
+    <h3>Eliminar Subasta</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Eliminar Subasta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/subasta/eliminar/12</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite eliminar la subasta con id proporcionado registradas en la
+          base de datos
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>DELETE</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 JSON:{ "mensaje": "Subasta eliminada exitosamente." } 
+          Incorrecto: Status:404 body:{ status:404 "mensaje": "No se encontró una subasta con el id proporcionado." } 
+          Error: Status:500 body:{ "Error interno del servidor" }
+        </td>
+      </tr>
+      <tr>
         <td>DESARROLLADOR</td>
-        <td>James Alfaro Muñoz Bolaños</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjamb</td>
+        <td>DEVjenm</td>
       </tr>
-</table>
-</body>
+    </table>
+
+
+    <hr />
+    <h3>Abrir Subasta</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Abrir Subasta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/subasta/abierta/13</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite abrir la subasta con id proporcionado registrados en la
+          base de datos
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 JSON:{ "mensaje": "Subasta abrir exitosamente." } 
+          Incorrecto: Status:404 body:{ status:404 "mensaje": "No se encontró una subasta con el id proporcionado." } 
+          Error: Status:500 body:{ "Error interno del servidor" }
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+
+
+    <hr />
+    <h3>cerrar Subasta</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>cerrar Subasta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/subasta/cerrada/13</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite cerrar la subasta con id proporcionado registrados en la
+          base de datos
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 JSON:{ "mensaje": "Subasta cerrada exitosamente." } 
+          Incorrecto: Status:404 body:{ status:404 "mensaje": "No se encontró una subasta con el id proporcionado." } 
+          Error: Status:500 body:{ "Error interno del servidor" }
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>espera Subasta</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>espera Subasta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/subasta/espera/12</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite clocar en espera la subasta con id proporcionado registrados en la
+          base de datos
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 JSON:{ "mensaje": "Subasta en espera exitosamente." } 
+          Incorrecto: Status:404 body:{ status:404 "mensaje": "No se encontró una subasta con el id proporcionado." } 
+          Error: Status:500 body:{ "Error interno del servidor" }
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+
+
+    <hr />
+    <h3>proceso Subasta</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>proceso Subasta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/subasta/proceso/13</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite clocar en proceso la subasta con id proporcionado registrados en la
+          base de datos
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 JSON:{ "mensaje": "Subasta en proceso exitosamente." } 
+          Incorrecto: Status:404 body:{ status:404 "mensaje": "No se encontró una subasta con el id proporcionado." } 
+          Error: Status:500 body:{ "Error interno del servidor" }
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+  </body>
 </html>
