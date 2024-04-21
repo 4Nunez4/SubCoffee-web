@@ -17,6 +17,7 @@ import UsersPage from "./pages/UsersPage";
 import PoliticasYCondicionesPage from "./pages/PoliticasYCondicionesPage";
 import GeografiaFullPage from "./pages/GeografiaFullPage";
 import UsersT from "./pages/UsersT";
+import { DepartamentoT } from "./pages/DepartamentoT";
 
 function App() {
   const storedUser = localStorage.getItem("user");
@@ -44,6 +45,7 @@ function App() {
                         path="/geografia"
                         element={<GeografiaFullPage />}
                       />
+                      <Route path="/departamentos" element={<DepartamentoT/>} />
                     </>
                   )}
                 </Route>

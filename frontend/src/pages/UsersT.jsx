@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axiosClient from "../api/axios";
 import UsersTable from "../components/Guard/UsersTable.jsx";
-import ModalButtonAceptar from "../components/organisms/ModalButtonAceptar.jsx";
 import FormUserOrganism from "../components/organisms/FormUserOrganism.jsx";
 import toast from "react-hot-toast";
 
 export function UsersT() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalAcciones, setModalAcciones] = useState(false);
   const [mode, setMode] = useState("create");
   const [initialData, setInitialData] = useState(null);
   const [results, setResults] = useState([]);
@@ -90,11 +88,7 @@ const id =localStorage.getItem('idUser')
   };
 
   return (
-    <div className="w-full flex flex-col items-center px-10">
-      <ModalButtonAceptar
-        isOpen={modalAcciones}
-        onClose={() => setModalAcciones(false)}
-      />
+    <div className="w-full bg-gray-100 flex flex-col items-center px-10">
       <FormUserOrganism
         open={modalOpen}
         onClose={() => setModalOpen(false)}
