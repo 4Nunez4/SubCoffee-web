@@ -38,7 +38,7 @@ app.use("/v1", routertipovari);
 app.use("/subasta",rutasSubastas);
 app.use("/user", routerChat);
 app.use("/v1", rutNotificaciones);
-app.use("/postulantes", postulantesRoutes);
+app.use("/v1", postulantesRoutes);
 app.use("/v1", ofertasRoutes);
 
 app.set("view engine", "ejs");

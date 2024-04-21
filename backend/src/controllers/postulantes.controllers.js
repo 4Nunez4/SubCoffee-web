@@ -1,124 +1,134 @@
-import { pool } from '../databases/conexion.js';
-import { validationResult } from 'express-validator';
+import { pool } from "../databases/conexion.js";
+import { validationResult } from "express-validator";
 
-
-export const getPostulantes = async (req,res) =>{
-    try {
-        let sql = 'select * from postulantes'
-        const [result] = await pool.query(sql)
-        
-        if(result.length > 0){
-            return res.status(200).json(result)
-        }
-        else{
-            return res.status(404).send({'mesage': 'Error no hay postulantes'})
-        }
-    } catch (error) {
-        res.status(500).json({'status': 500,'mesage': 'ERROR SERVIDOR' + error})
-    }
-};
-
-export const guardarPostulantes = async (req,res)=> {
-    
+export const guardarPostulantes = async (req, res) => {
   try {
-    const errors  = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(400).json(errors);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json(errors);
     }
-  const { fk_id_usuario, fk_id_subasta } = req.body;
+    const { fk_id_usuario, fk_id_subasta,estado_post } = req.body;
 
-
-      const [rows] = await pool.query("INSERT INTO postulantes(fk_id_usuario, fk_id_subasta) VALUES (?,?)", [fk_id_usuario, fk_id_subasta]);
-      if(rows.affectedRows){
-          res.status(200).json({status: 200, message: "Se registro con exito el postulantes."});
-      } else {
-          res.status(404).json({status: 404, message: "Error al registrar el postulantes." });
-      }
+    const [rows] = await pool.query(
+      "INSERT INTO postulantes(fk_id_usuario, fk_id_subasta,estado_post) VALUES (?,?,?)",
+      [fk_id_usuario, fk_id_subasta,estado_post]
+    );
+    if (rows.affectedRows) {
+      res
+        .status(200)
+        .json({
+          status: 200,
+          message: "Se registro con exito el postulantes.",
+        });
+    } else {
+      res
+        .status(404)
+        .json({ status: 404, message: "Error al registrar el postulantes." });
+    }
   } catch (error) {
-      res.status(500).json({status: 500, message: "Error servidor " + error});
+    res.status(500).json({ status: 500, message: "Error servidor " + error });
   }
 };
-
-export const getPostulante = async (req,res) =>{
-  try{
-    const [rows] = await pool.query("SELECT * FROM postulantes WHERE fk_id_usuario = ?", [req.params.id]);
-    if(rows.length >0){
-      res.status(200).json({status:200, data:rows});
-    }else{
-      res.status(404).json({status:404, message: 'Error ID postulantes no encontrada' });
+export const getPostulantes = async (req, res) => {
+    try {
+       let sql = "SELECT p.pk_id_post, p.estado_post, p.fk_id_usuario, p.fk_id_subasta, u.nombre_user FROM postulantes p INNER JOIN usuarios u ON p.fk_id_usuario = u.pk_cedula_user";
+       const [result] = await pool.query(sql);
+   
+       if (result.length > 0) {
+         return res.status(200).json(result);
+       } else {
+         return res.status(404).send({ message: "Error no hay postulantes" }); // Corregido el nombre de la propiedad 'mesage' a 'message'
+       }
+    } catch (error) {
+       res.status(500).json({ status: 500, message: "ERROR SERVIDOR " + error }); // Corregido el nombre de la propiedad 'mesage' a 'message'
     }
+   };
 
-  }catch(e){
-    res.status(500).json({ status:500, message: 'Error al obtener las postulantes', e });
+
+export const getPostulante = async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      "SELECT p.pk_id_post,p.estado_post, p.fk_id_usuario, p.fk_id_subasta, u.nombre_user FROM postulantes p INNER JOIN usuarios u ON p.fk_id_usuario = u.pk_cedula_user WHERE pk_id_post = ?",
+      [req.params.id]
+    );
+    if (rows.length > 0) {
+      res.status(200).json({ status: 200, data: rows });
+    } else {
+      res
+        .status(404)
+        .json({ status: 404, message: "Error ID postulantes no encontrada" });
+    }
+  } catch (e) {
+    res
+      .status(500)
+      .json({ status: 500, message: "Error al obtener las postulantes", e });
   }
 };
-
-  export const updatePostulacion = async (req, res) => {
-      try {
-        const errores  = validationResult(req);
-        if(!errores.isEmpty()){
-            return res.status(400).json(errores);
-        }
-        
-          const id = req.params.id;
-          const {oferta_pos, estado_pos}= req.body;
-          const [result] = await pool.query("UPDATE postulacion SET oferta_pos = COALESCE(?, oferta_pos) ,estado_pos = COALESCE(?, estado_pos) WHERE pk_id_pos = ?", [ oferta_pos,estado_pos, id]);
-          if(result.affectedRows > 0) {
-              res.status(200).json({ status: 200, message: 'Postulacion actualizada exitosamente' });
-          }else {
-              res.status(404).json({status: 404, message: "El ID de la postulacion es incorrecto"})
-          }
-      } catch (error) {
-          res.status(500).json({ status: 500, message: 'Error en el sistema'+ error});
-      }
-  }
 
 export const deletePostulante = async (req, res) => {
-   try {
-       const [result] = await pool.query("DELETE FROM postulantes WHERE fk_id_usuario = ?", [req.params.id]);
-       if(result.affectedRows === 0){
-           res.status(404).json({status: 404, message: 'El postulante con el ID proporcionado no existe'});
-       }else {
-           res.status(200).json({status: 200, message: 'Postulante es eliminado exitosamente' });
-       }
-   } catch (error) {
-       res.status(500).json({status: 500, message: 'Error al eliminar la postulacion', error });
-   }
- };
-export const desactivarPostulacion = async (req, res) => {
-    try {
-        const id = req.params.id;
-        const {estado_pos}= req.body;
-        const [postulacionExiste] = await pool.query("UPDATE postulacion SET estado_pos = COALESCE(?, estado_pos) WHERE pk_id_pos = ?", [estado_pos, id]);
-        if(postulacionExiste.length === 0) {
-            res.status(404).json({ status: 404, message: 'El id de la postulacion es incorrecto' });
-        }else {
-            const [result] = await pool.query("UPDATE postulacion SET estado_pos = ? WHERE pk_id_pos = ?", ["inactivo", id]);
-            if(result.affectedRows >0){
-                 res.status(200).json({ status: 200, message: 'Postulacion desactivada exitosamente' });
-            }
-           
-        }
-    } catch (error) {
-        res.status(500).json({ status: 500, message: 'Error en el sistema'+ error});
+  try {
+    const [result] = await pool.query(
+      "DELETE FROM postulantes WHERE pk_id_post = ?",
+      [req.params.id]
+    );
+    if (result.affectedRows === 0) {
+      res
+        .status(404)
+        .json({
+          status: 404,
+          message: "El postulante con el ID proporcionado no existe",
+        });
+    } else {
+      res
+        .status(200)
+        .json({ status: 200, message: "Postulante es eliminado exitosamente" });
     }
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        status: 500,
+        message: "Error al eliminar la postulacion",
+        error,
+      });
+  }
 };
-
-export const activarPostulacion = async (req, res) => {
+export const postulacionActiva = async (req, res) => {
+    const id = req.params.id;
     try {
-        const id = req.params.id;
-        const {estado_pos}= req.body;
-        const [postulacionExiste] = await pool.query("UPDATE postulacion SET estado_pos = COALESCE(?, estado_pos) WHERE pk_id_pos = ?", [estado_pos, id]);
-        if(postulacionExiste.length === 0) {
-            res.status(404).json({ status: 404, message: 'El id de la postulacion es incorrecto' });
-        }else {
-            const [result] = await pool.query("UPDATE postulacion SET estado_pos = ? WHERE pk_id_pos = ?", ["activo", id]);
-            if(result.affectedRows >0){
-                 res.status(200).json({ status: 200, message: 'Postulacion activada exitosamente' });
-            }
-           
-        }
+      const [result] = await pool.query(
+        `UPDATE postulantes SET estado_post = 1 WHERE pk_id_post = '${id}'`
+      );
+      if (result.affectedRows > 0) {
+        res.status(200).json({ message: "postulacion Activa " });
+      } else {
+        res
+          .status(404)
+          .json({ message: `No se encontró ninguna postulacion con el ID ${id}` });
+      }
     } catch (error) {
-        res.status(500).json({ status: 500, message: 'Error en el sistema'+ error});
+      res
+        .status(500)
+        .json({ message: "Error en el sistema", error: error.message });
     }
-};
+  };
+  
+  export const postulacionInactiva = async (req, res) => {
+    const id = req.params.id;
+    try {
+      const [result] = await pool.query(
+        `UPDATE postulantes SET estado_post = 2 WHERE pk_id_post = ${id}`
+      );
+      if (result.affectedRows > 0) {
+        res.status(200).json({ message: "postulacion Inactiva" });
+      } else {
+        res
+          .status(404)
+          .json({ message: `No se encontró ninguna postulacion con el ID ${id}` });
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: "Error en el sistema", error: error.message });
+    }
+  };
