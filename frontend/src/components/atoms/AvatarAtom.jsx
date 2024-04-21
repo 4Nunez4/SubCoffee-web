@@ -5,8 +5,8 @@ const AvatarAtom = ({ img, className }) => {
     <div>
       <img
         src={`./src/assets/${img}`}
-        alt="Logo Subcoffee"
-        className={`h-8 w-auto mr-2 rounded-full ${className} cursor-pointer duration-500`}
+        alt="Photo"
+        className={`h-10 w-auto mr-2 rounded-full ${className} cursor-pointer duration-500`}
       />
     </div>
   );

@@ -42,7 +42,7 @@ const TiposDeCafeOrganism = () => {
 
   return (
     <div
-      className="flex justify-center w-full space-x-6 p-6 overflow-x-auto "
+      className="flex justify-center w-full space-x-6 p-6 overflow-x-auto"
       style={{ scrollbarWidth: "none" }}
     >
       {datos.map((dato, i) => (

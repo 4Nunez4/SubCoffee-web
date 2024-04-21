@@ -46,15 +46,15 @@ function SubastaPage() {
   }, [currentIndex]);
 
   return (
-    <div className="px-14 bg-gray-100">
+    <div className="px-14 bg-gray-200">
       <div className="max-w-[1600px] h-auto w-full m-auto pt-10 p-4">
         <div
-          className="w-full h-96 rounded-2xl bg-cover duration-500"
+          className="w-full h-96 rounded-2xl bg-center bg-cover duration-500"
           style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
         ></div>
         <div className="flex justify-center">
           <div
-            className="text-2xl text-bold rounded-full p-2 text-rojo cursor-pointer transition duration-300"
+            className="text-2xl text-bold rounded-full p-2 text-gray-700 cursor-pointer transition duration-300"
             onClick={prevSlide}
           >
             <FaChevronLeft size={25} />
@@ -71,14 +71,14 @@ function SubastaPage() {
             ))}
           </div>
           <div
-            className="text-2xl text-bold rounded-full p-2 cursor-pointer transition duration-300"
+            className="text-2xl text-bold rounded-full p-2 text-gray-700 cursor-pointer transition duration-300"
             onClick={nextSlide}
           >
             <FaChevronRight size={25} />
           </div>
         </div>
 
-        <p className="left-0 right-0 text-center transition duration-300">
+        <p className="left-0 right-0 text-center text-negro transition duration-300">
           ¡Tu finca tiene una historia que contar!
         </p>
       </div>
