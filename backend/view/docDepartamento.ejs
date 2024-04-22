@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <hr />
+    <h2>Requerimiento. Documentación de departamento</h2>
+    <hr />
+    <h3>Crear departamento</h3>
+    <table>
+      <tr>
+        <td>Numero 1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Crear departamento</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/departamentos</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite registrar departamentos en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>
+            {
+                "pk_codigo_depar": "100",
+                "nombre_depar": "nuevo departamento"
+            }
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: { message: "Departamento creado exitosamente" } <br>
+          Incorrecto: Status:404 body:{ message: "Error al crear el departamento" } <br>
+          Error: Status:500 body:{ message:"Error en el servidor : " + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Listar departamentos</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Listar departamentos</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/departamentos</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite listar todas las departamentos registradas</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: [ 
+          {
+            "pk_codigo_depar": 5,
+            "nombre_depar": "Antioquia",
+            "estado_depar": "activo"
+          },
+          {
+            "pk_codigo_depar": 8,
+            "nombre_depar": "Atlántico",
+            "estado_depar": "activo"
+          }] <br>
+          Incorrecto: Status:404 body:{ message:'No se encontraron departamentos' } <br>
+          Error: Status:500 body:{ message:"Error en el servidor" + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Actualizar departamento</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Actualizar departamento</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/departamentos/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite actualizar departamentos en la base de datos por medio de su id
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>
+            {
+                "pk_codigo_depar": "101",
+                "nombre_depar": "nueva prueba1"
+            }
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: { message: 'Departamento actualizado exitosamente' } <br>
+          Incorrecto: Status:404 body:{ message: 'Departamento no encontrado' } <br> 
+          Error: Status:500 body:{ message: "Error en el servidor" + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Buscar departamentos</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Buscar departamentos registradas</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/departamentos/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite buscar departamentos en la base de datos por medio de su ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: {
+            "pk_codigo_depar": 100,
+            "nombre_depar": "nueva prubea1",
+            "estado_depar": "activo"
+        } <br> 
+          Incorrecto: Status:404 body:{ message: 'Departamento no encontrado' } <br>
+          Error: Status:500 body:{ message: "Error en el servidor" + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Eliminar departamento</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Eliminar departamento</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/departamentos/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite eliminar departamento en la base de datos por medio de su id
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>DELETE</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: { message: "Departamento eliminado exitosamente" } <br> 
+          Incorrecto: Status:404 body:{ message: '"Departamento no encontrado'} <br> 
+          Error: Status:500 body:{ message: "Error en el servidor" + error }
+          <tr>
+            <td>Desarrollador:</td>
+            <td>Juan Camilo Realpe Ceron</td>
+          </tr>
+          <tr>
+            <td>Rama:</td>
+            <td>DEVjcrc</td>
+          </tr>
+        </td>
+      </tr>
+    </table>
+
+    <h3>Desactivar departamento</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>6</td>
+      </tr>
+
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>DESACTIVAR departamento</td>
+      </tr>
+
+      <tr>
+        <td>URI</td>
+        <td>/v1/departamentosdes/:id</td>
+      </tr>
+
+      <tr>
+        <td>DESCRIPCION</td>
+        <td>Permite desactivar departamento</td>
+      </tr>
+
+      <tr>
+        <td>VERBO</td>
+        <td>PUT</td>
+      </tr>
+
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+
+      <tr>
+        <td>PETICION</td>
+        <td>NULL</td>
+      </tr>
+
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+            Correcto: Status:200 json: { message: 'departamento desactivado exitosamente'} <br>
+            Incorrecto: Status:404 body:{ message: 'Departamento no encontrado" } <br> 
+            Error: Status:500 body:{ message: "Error en el servidor" + error }
+        </td>
+      </tr>
+
+      <tr>
+        <td>DESARROLADOR</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+
+      <tr>
+        <td>RAMA</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <h3>Activar departamento</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>7</td>
+      </tr>
+
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>ACTIVAR departamento</td>
+      </tr>
+
+      <tr>
+        <td>URI</td>
+        <td>/v1/departamentosac/:id</td>
+      </tr>
+
+      <tr>
+        <td>DESCRIPCION</td>
+        <td>Permite activar departamento</td>
+      </tr>
+
+      <tr>
+        <td>VERBO</td>
+        <td>PUT</td>
+      </tr>
+
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+
+      <tr>
+        <td>PETICION</td>
+        <td>NULL</td>
+      </tr>
+
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+            Correcto: Status:200 json: { message: 'departamento activado exitosamente' } <br>
+            Incorrecto: Status:404 body:{ message: 'Departamento no encontrado' } <br> 
+            Error: Status:500 body:{ message: "Error en el servidor" + error }
+        </td>
+      </tr>
+
+      <tr>
+        <td>DESARROLADOR</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+
+      <tr>
+        <td>RAMA</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+  </body>
+</html>

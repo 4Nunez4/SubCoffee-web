@@ -3,25 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Chat</title>
   </head>
   <body>
     <hr>
-    <h2>Requerimiento. Documentación de chat ajustar a los cambios</h2>
+    <h2>Requerimiento. Documentación de chat </h2>
     <hr>
 
     <h3>Crear chat</h3>
     <table>
         <td>NUMERO</td>
         <td>1</td>
-      </tr>
+      
       <tr>
         <td>NOMBRE DEL SERVICIO</td>
         <td>Crear chat</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/chats</td>
+        <td>http://localhost:4000/user/chats</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
@@ -37,11 +37,18 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR, USUARIO</td>
+        <td>Administradores, Usuarios</td>
       </tr>
       <tr>
         <td>PETICIÓN body</td>
-        <td>{"mensaje_chat": "Holaaaaa!", "fk_id_subasta" : 1, "fk_id_usuario":1084251889}</td>
+        <td>
+          {
+          "mensaje_chat": "Para el 5 de marzo!",
+          "img": "Captura de pantalla 2023-06-11 130036.png",
+          "fk_id_subasta": 11,
+          "fk_id_usuario": 10000
+          }
+    </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
@@ -53,11 +60,11 @@
       </tr>
       <tr>
         <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjcrc</td>
+        <td>DEVjenm</td>
       </tr>
     </table>
     <hr>
@@ -74,7 +81,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/chats</td>
+        <td>http://localhost:4000/user/chats</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
@@ -90,7 +97,7 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR Y USUARIO</td>
+        <td>Administrador, usuarios</td>
       </tr>
       <tr>
         <td>PETICIÓN body</td>
@@ -99,19 +106,18 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: "Mensajes encontrados con
-          exito.", data: rows } Incorrecto: JSON:{status: 404, message: "No se
-          encontraron mensajes." } Error: JSON:{status: 500, message: "Error en
-          el sistema."}
+          Correcto: JSON:{status: 200, message: "Mensajes encontrados con exito." } 
+          Incorrecto: JSON:{status: 404, message: "No se encontraron mensajes." } 
+          Error: JSON:{status: 500, message: "Error en el sistema."}
         </td>
       </tr>
       <tr>
         <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjcrc</td>
+        <td>DEVjenm</td>
       </tr>
     </table>
     <hr>
@@ -120,7 +126,7 @@
     <table>
         <td>NUMERO</td>
         <td>3</td>
-      </tr>
+      
       <tr>
         <td>NOMBRE DEL SERVICIO</td>
         <td>actualizar chat</td>
@@ -143,28 +149,32 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR, USUARIO</td>
+        <td>Administrador, Usuarios</td>
       </tr>
       <tr>
         <td>PETICIÓN body</td>
-        <td>{ "mensaje_chat": "Si si si?" }</td>
+        <td>
+          {
+            "mensaje_chat": "hola",
+            "img": "Captura de pantalla 2023-06-11 130036.png",
+        }
+        </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: "El mensaje ha sido actualizado
-          con éxito." } Incorrecto: JSON:{status: 404, message: "No se encontró
-          el mensaje con el ID especificado."} Error: JSON:{status: 500,
-          message: "Error en el sistema."}
+          Correcto: JSON:{status: 200, message: "El mensaje ha sido actualizado con éxito." } 
+          Incorrecto: JSON:{status: 404, message: "No se encontró el mensaje con el ID especificado."} 
+          Error: JSON:{status: 500, message: "Error en el sistema."}
         </td>
       </tr>
       <tr>
         <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjcrc</td>
+        <td>DEVjenm</td>
       </tr>
     </table>
     <hr>
@@ -181,7 +191,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/chats/1</td>
+        <td>localhost:4000/user/chats/7</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
@@ -197,7 +207,7 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR Y USUARIO</td>
+        <td>Administrador, Usuarios</td>
       </tr>
       <tr>
         <td>PETICIÓN body</td>
@@ -206,19 +216,18 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto JSON:{status: 200, message:"Mensaje encontrado con exito",
-          data:rows} Incorrecto: JSON:{status: 404, message: "Error con ID al
-          encontrar el mensaje." } Error: JSON:{status: 500, message: "Error en
-          el sistema."}
+          Correcto JSON:{status: 200, message:"Mensaje encontrado con exito"} 
+          Incorrecto: JSON:{status: 404, message: "Error con ID al encontrar el mensaje." } 
+          Error: JSON:{status: 500, message: "Error en el sistema."}
         </td>
       </tr>
       <tr>
         <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjcrc</td>
+        <td>DEVjenm</td>
       </tr>
     </table>
     <hr>
@@ -234,7 +243,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/chats/1</td>
+        <td>localhost:4000/user/chats/7</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
@@ -250,7 +259,7 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR, USUARIO</td>
+        <td>Administradores, Usuarios</td>
       </tr>
       <tr>
         <td>PETICIÓN body</td>
@@ -260,18 +269,17 @@
         <td>RESPUESTA JSON</td>
         <td>
           Correcto: JSON:{status: 200, message: "Chat eliminado con éxito."}
-          Incorrecto: JSON:{status: 404, message: "No se encontró el mensaje con
-          el ID especificado."} Error: JSON:{status: 500, message: "Error en el
-          sistema."}
+          Incorrecto: JSON:{status: 404, message: "No se encontró el mensaje conel ID especificado."} 
+          Error: JSON:{status: 500, message: "Error en el sistema."}
         </td>
       </tr>
       <tr>
         <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjcrc</td>
+        <td>DEVjenm</td>
       </tr>
     </table>
   </body>

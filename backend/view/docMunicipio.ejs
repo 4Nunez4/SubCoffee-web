@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <hr />
+    <h2>Requerimiento. Documentación de municipio</h2>
+    <hr />
+    <h3>Crear municipio</h3>
+    <table>
+      <tr>
+        <td>Numero 1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Crear municipio</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite registrar municipios en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>
+            {
+                "pk_codigo_muni": "100",
+                "nombre_muni": "nuevo municipio",
+                "fk_departamento": "41"
+            }
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: { message: "municipio creado exitosamente" } <br>
+          Incorrecto: Status:404 body:{ message: "No se pudo crear el municipio" } <br>
+          Error: Status:500 body:{ message: "Error en el servidor: " + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Listar municipios</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Listar municipios</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite listar todas las municipios registradas</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: [ {
+            "pk_codigo_muni": 100,
+            "nombre_muni": "nuevo municipio",
+            "estado_muni": "activo",
+            "fk_departamento": 41,
+            "nombre_depar": "Huila"
+          },
+          {
+            "pk_codigo_muni": 41001,
+            "nombre_muni": "Neiva",
+            "estado_muni": "activo",
+            "fk_departamento": 41,
+            "nombre_depar": "Huila"
+          },]<br> 
+          Incorrecto: Status:404 body:{ message: 'No se encontraron municipios" } <br> 
+          Error: Status:500 body:{ message:"Error en el servidor" + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Actualizar municipio</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Actualizar municipio</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite actualizar municipios en la base de datos por medio de su id
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>
+            {
+                "pk_codigo_muni": "101",
+                "nombre_muni": "nueva prueba municipio",
+                "fk_departamento": "41"
+            }
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: { message: 'municipio actualizado exitosamente' } <br> 
+          Incorrecto: Status:404 body:{ message: 'Municipio no encontrado' } <br>
+          Error: Status:500 body:{ message: "Error en el servidor" + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Buscar municipios</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Buscar municipios registradas</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite buscar municipios en la base de datos por medio de su ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: {
+            "pk_codigo_muni": 1001,
+            "nombre_muni": "nueva prueba municipio",
+            "estado_muni": "activo",
+            "fk_departamento": 41,
+            "nombre_depar": "Huila"
+          } <br>
+          Incorrecto: Status:404 body:{ message: 'Municipio no encontrado' } <br>
+          Error: Status:500 body:{ message: "Error en el servidor" + error }
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Eliminar municipio</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Eliminar municipio</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite eliminar municipio en la base de datos por medio de su id
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>DELETE</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: Status:200 json: { message: "Municipio eliminado exitosamente" } <br> 
+          Incorrecto: Status:404 body:{ message: 'Municipio no encontrado' } <br>
+          Error: Status:500 body:{ message: "Error en el servidor" + error }
+          <tr>
+            <td>Desarrollador:</td>
+            <td>Juan Camilo Realpe Ceron</td>
+          </tr>
+          <tr>
+            <td>Rama:</td>
+            <td>DEVjcrc</td>
+          </tr>
+        </td>
+      </tr>
+    </table>
+
+    <h3>DESACTIVAR municipio</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>DESACTIVAR municipio</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios/:id</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCION</td>
+        <td>Permite desactivar municipio</td>
+      </tr>
+      <tr>
+        <td>VERBO</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+            Correcto: Status:200 json: { message: 'Municipio desactivado exitosamente'} <br>
+            Incorrecto: Status:404 body:{ message: 'Municipio no encontrado' } <br>
+            Error: Status:500 body:{ message: "Error en el servidor" + error }
+         </td>
+      </tr>
+      <tr>
+        <td>DESARROLADOR</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <h3>ACTIVAR municipio</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>ACTIVAR municipio</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipio/:id</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCION</td>
+        <td>Permite activar municipio</td>
+      </tr>
+      <tr>
+        <td>VERBO</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+            Correcto: Status:200 json: { message: 'Municipio activado exitosamente' } <br>
+            Incorrecto: Status:404 body:{ message: 'Municipio no encontrado' } <br>
+            Error: Status:500 body:{ message: "Error en el servidor" + error }
+         </td>
+      </tr>
+      <tr>
+        <td>DESARROLADOR</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+  </body>
+</html>

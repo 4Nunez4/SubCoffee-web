@@ -10,7 +10,7 @@ export const getDepartamentos = async (req, res) => {
       res.status(404).json({ message: "No hay departamentos registrados" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -24,7 +24,7 @@ export const getDepartamentoById = async (req, res) => {
       res.status(404).json({ message: "Departamento no encontrado" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -35,15 +35,15 @@ export const createDepartamento = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { pk_codigo_depar, nombre_depart } = req.body;
-    const [result] = await pool.query(`INSERT INTO departamento (pk_codigo_depar, nombre_depart, estado_depar) VALUES ('${pk_codigo_depar}' ,'${nombre_depart}', 'activo')`);
+    const { pk_codigo_depar, nombre_depar } = req.body;
+    const [result] = await pool.query(`INSERT INTO departamento (pk_codigo_depar, nombre_depar, estado_depar) VALUES ('${pk_codigo_depar}' ,'${nombre_depar}', 'activo')`);
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Departamento creado exitosamente" });
     } else {
       res.status(404).json({ message: "Error al crear el departamento" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -55,15 +55,15 @@ export const updateDepartamento = async (req, res) => {
     }
 
     const id = req.params.id;
-    const { pk_codigo_depar, nombre_depart } = req.body;
-    const [result] = await pool.query(`UPDATE departamento SET pk_codigo_depar = '${pk_codigo_depar}', nombre_depart = '${nombre_depart}' WHERE pk_codigo_depar = '${id}'`);
+    const { pk_codigo_depar, nombre_depar } = req.body;
+    const [result] = await pool.query(`UPDATE departamento SET pk_codigo_depar = '${pk_codigo_depar}', nombre_depar = '${nombre_depar}' WHERE pk_codigo_depar = '${id}'`);
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Departamento actualizado exitosamente" });
     } else {
       res.status(404).json({ message: "Departamento no encontrado" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -77,7 +77,7 @@ export const deleteDepartamento = async (req, res) => {
       res.status(404).json({ message: "Departamento no encontrado" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -93,7 +93,7 @@ export const activarDepartamento = async (req, res) => {
       res.status(404).json({ message: "Departamento no encontrado" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -111,6 +111,6 @@ export const desactivarDepartamento = async (req, res) => {
       res.status(404).json({ message: "Departamento no encontrado" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
