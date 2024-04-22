@@ -2,19 +2,15 @@ import React, { useState } from "react";
 import ButtonAtom from "../components/atoms/ButtonAtom";
 import AbrirModalTemplate from "../components/templates/AbrirModalTemplate";
 import ButtonCerrarModalAtom from "../components/atoms/ButtonCerrarModalAtom";
-import RegisterPageMunicipio from "../components/organisms/RegisterPageMunicipio";
 import RegisterPageVereda from "../components/organisms/RegisterPageVereda";
 import RegisterPageTipoVariedad from "../components/organisms/RegisterPageTipoVariedad";
 import { DepartamentoT } from "./DepartamentoT";
+import MunicipioT from "./MunicipioT";
 
 function GeografiaFullPage() {
-  const [abrirModalMunicipio, setAbrirModalMunicipio] = useState(false);
   const [abrirModalVereda, setAbrirModalVereda] = useState(false);
   const [abrirModalTipoVari, setAbrirModalTipoVari] = useState(false);
 
-  const toggleAbrirModalMunicipio = () => {
-    setAbrirModalMunicipio(!abrirModalMunicipio);
-  };
   const toggleAbrirModalVereda = () => {
     setAbrirModalVereda(!abrirModalVereda);
   };
@@ -23,26 +19,15 @@ function GeografiaFullPage() {
   };
 
   return (
-    <div className="flex flex-col p-10 gap-x-4 bg-gray-100">
+    <div className="flex flex-col px-10 gap-x-4 bg-gray-100">
       <DepartamentoT />
-      <ButtonAtom onClick={() => setAbrirModalMunicipio(true)}>
-        Registrar Municipio
-      </ButtonAtom>
+      <MunicipioT />
       <ButtonAtom onClick={() => setAbrirModalVereda(true)}>
         Registrar Vereda
       </ButtonAtom>
       <ButtonAtom onClick={() => setAbrirModalTipoVari(true)}>
         Registrar Tipo variedad
       </ButtonAtom>
-      {abrirModalMunicipio && (
-        <AbrirModalTemplate>
-          <RegisterPageMunicipio
-            onClose={toggleAbrirModalMunicipio}
-            mode="create"
-          />
-          <ButtonCerrarModalAtom onClose={toggleAbrirModalMunicipio} />
-        </AbrirModalTemplate>
-      )}
       {abrirModalVereda && (
         <AbrirModalTemplate>
           <RegisterPageVereda
