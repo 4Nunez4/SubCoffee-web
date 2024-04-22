@@ -55,7 +55,7 @@ export function MunicipioT() {
     { uid: "actions", name: "Acciones", sortable: false },
   ];
 
-const id =localStorage.getItem('idUser')
+const id =localStorage.getItem('id_muni')
   
   const handleSubmit = async (data, e) => {
     e.preventDefault();

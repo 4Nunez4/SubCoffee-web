@@ -36,7 +36,7 @@ export default function MunicipioTable({ registrar, data, results, actualizar, d
   const [page, setPage] = useState(1);
 
   const handleUpdateUser = (id) => {
-    localStorage.setItem("idUser", id);
+    localStorage.setItem("id_muni", id);
     actualizar(id)
   };
 

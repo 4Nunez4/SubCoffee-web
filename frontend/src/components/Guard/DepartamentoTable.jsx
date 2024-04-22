@@ -37,7 +37,7 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
   const [page, setPage] = useState(1);
 
   const handleUpdateUser = (id) => {
-    localStorage.setItem("idUser", id);
+    localStorage.setItem("id_depar", id);
     actualizar(id)
   };
 

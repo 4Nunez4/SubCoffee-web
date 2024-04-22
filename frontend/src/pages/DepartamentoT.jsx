@@ -54,7 +54,7 @@ export function DepartamentoT() {
     { uid: "actions", name: "Acciones", sortable: false },
   ];
 
-const id =localStorage.getItem('idUser')
+const id =localStorage.getItem('id_depar')
   
   const handleSubmit = async (data, e) => {
     e.preventDefault();
