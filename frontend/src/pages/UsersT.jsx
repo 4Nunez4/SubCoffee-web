@@ -92,7 +92,6 @@ const id =localStorage.getItem('idUser')
       <FormUserOrganism
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={mode === "create" ? "Registrar Usuario" : "Actualizar Usuario"}
         actionLabel={mode === "create" ? "Registrar" : "Actualizar"}
         initialData={initialData}
         handleSubmit={handleSubmit}
