@@ -19,16 +19,20 @@ function RegistrarFinca() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const register = await axios.post('http://localhost:4000/finca/registrar', formFinca);
+      const register = await axios.post('http://localhost:4000/finca/registrar',formFinca);
 
       if(register.ok) {
-        console.log('Se registro la finca exitosamente.');
+        console.log('Se registró la finca exitosamente.');
       } else {
-        console.log('No se registro la finca.');
+        console.log('No se registró la finca.');
       }
     } catch (e) {
       console.error('Error: '+e);
     }
+  }
+
+  const handleCancel = () => {
+    // Add cancel logic here
   }
 
   return (

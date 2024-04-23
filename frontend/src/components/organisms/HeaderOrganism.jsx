@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import AuthContext from "../../context/AuthContext";
+import React, { useState } from "react";
 
 import { icono } from "../atoms/IconsAtom";
 import TextSubAtom from "../atoms/TextSubAtom";
@@ -12,16 +11,13 @@ import IconHeaderAtom from "../atoms/IconHeaderAtom";
 import ButtonCerrarModalAtom from "../atoms/ButtonCerrarModalAtom";
 import AbrirModalTemplate from "../templates/AbrirModalTemplate";
 import LoginPageOrganism from "./LoginPageOrganism";
-import RegisterPageOrganism from "./RegisterPageOrganism";
-import SubastaFormPageOrganism from "./SubastaFormPageOrganism";
 import ModalBuscarMolecule from "../molecules/ModalBuscarMolecule";
+import { User } from "@nextui-org/react";
 
 function HeaderOrganism() {
   const [abrirModalLogin, setAbrirModalLogin] = useState(false);
   const isAuthenticated = window.localStorage.getItem("token");
   const [abrirCerrarSesion, setAbrirCerrarSesion] = useState(false);
-  const [abrirModalRegister, setAbrirModalRegister] = useState(false);
-  const [abrirModalSubasta, setAbrirModalSubasta] = useState(false);
   const [abrirBell, setAbrirBell] = useState(false);
   const [abrirBuscador, setAbrirBuscador] = useState(false);
   const [isMoonSelected, setIsMoonSelected] = useState(false);
@@ -39,10 +35,6 @@ function HeaderOrganism() {
     setAbrirBell(!abrirBell);
     setAbrirCerrarSesion(false);
     setAbrirBuscador(false);
-  };
-
-  const toggleAbrirModalRegister = () => {
-    setAbrirModalRegister(!abrirModalRegister);
   };
 
   const toggleAbrirModalBuscador = () => {
@@ -64,7 +56,7 @@ function HeaderOrganism() {
   return (
     <>
       {isAuthenticated ? (
-        <nav className="flex justify-between items-center bg-verdeSena2 w-full p-4 shadow-sm">
+        <nav className="flex justify-between items-center bg-gray-400 w-full p-4 shadow-sm">
           <div className="flex flex-col">
             <TextSubAtom
               to="/subcoffee"
@@ -74,19 +66,6 @@ function HeaderOrganism() {
           </div>
           <SearchBarMolecule onClick={() => setAbrirBuscador(true)} />
           <div className="flex gap-x-3 items-center">
-            {users.rol_user == "vendedor" && (
-              <ButtonAtom onClick={() => setAbrirModalSubasta(true)}>
-                Crear subasta
-              </ButtonAtom>
-            )}
-            {
-              users.rol_user === "admin" && (
-                <ButtonAtom onClick={() => setAbrirModalRegister(true)}>
-                  Registrar usuario
-                </ButtonAtom>
-
-              )
-            }
             <IconHeaderAtom onClick={toggleAbrirBell}>
               <icono.iconoCampana className="h-5 w-5" />
             </IconHeaderAtom>
@@ -103,29 +82,23 @@ function HeaderOrganism() {
             )}
             {users && (
               <button
-                className="flex items-center gap-x-2"
+                className="flex flex-col items-center h-8 -mt-3"
                 onClick={toggleCerrarSesionModal}
               >
-                <AvatarAtom img="/profile_user.jfif" />
-                <div className="">
-                  <span className="text-blanco text-sm">
-                    {users.nombre_user}
-                  </span>
-                  <p className="text-xs text-blancoMedio1">
-                    {users.rol_user}
-                  </p>
-                </div>
+              <User   
+                name={`${users.nombre_user}`}
+                className="text-gray-200"
+                description={`${users.rol_user}`}
+                avatarProps={{
+                  src: `./src/assets/${users.imagen_user}`
+                }}
+                />
+                <p className="-mt-5 text-sm text-gray-300">
+                  {`${users.rol_user}`}
+                </p> 
               </button>
             )}
           </div>
-          {abrirModalSubasta && (
-            <AbrirModalTemplate>
-              <SubastaFormPageOrganism />
-              <ButtonCerrarModalAtom
-                onClose={() => setAbrirModalSubasta(false)}
-              />
-            </AbrirModalTemplate>
-          )}
           {abrirCerrarSesion && (
             <div className="absolute top-16 right-2 flex justify-center items-center">
               <div className="bg-blanco rounded-xl">
@@ -147,15 +120,9 @@ function HeaderOrganism() {
               </div>
             </div>
           )}
-          {abrirModalRegister && (
-            <AbrirModalTemplate>
-              <RegisterPageOrganism onClose={toggleAbrirModalRegister} />
-              <ButtonCerrarModalAtom onClose={toggleAbrirModalRegister} />
-            </AbrirModalTemplate>
-          )}
         </nav>
       ) : (
-        <nav className="flex justify-between items-center bg-verdeSena1 fixed w-full m-0 top-0 p-4 shadow-sm">
+        <nav className="flex justify-between items-center bg-gray-300 fixed w-full m-0 top-0 p-4 shadow-sm">
           <div className="flex items-center">
             <AvatarAtom img="isotipo-SubCoffee.png" />
             <TextSubAtom to="/" color="cafeClaroLogo" text="Sub" />

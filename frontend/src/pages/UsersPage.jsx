@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import UsersListOrganism from "../components/organisms/UsersListOrganism";
 import { icono } from "../components/atoms/IconsAtom";
 import IconHeaderAtom from "../components/atoms/IconHeaderAtom";
-import AuthContext from "../context/AuthContext";
 import axiosClient from "../api/axios";
 
 function UsersPage() {
@@ -11,7 +10,6 @@ function UsersPage() {
     console.log("hello");
   };
 
-  // const { users } = useContext(AuthContext);
   const [users, setusers] = useState([]);
 
   if (!users) {

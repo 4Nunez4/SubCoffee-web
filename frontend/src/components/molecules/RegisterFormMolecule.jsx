@@ -1,16 +1,15 @@
-import React, { useRef } from "react";
-import axios from "axios";
-
+import React, { useRef, useEffect } from "react";
+import axiosClient from "../../api/axios";
 import ButtonAtom from "../atoms/ButtonAtom";
 import InputWithToggleIconAtom from "../atoms/InputWithToggleIconAtom";
 import InputWithIconAtom from "../atoms/InputWithIconAtom";
-import { icono } from "../atoms/IconsAtom";
 import SelectInputAtom from "../atoms/SelectInputAtom";
 import OptionAtom from "../atoms/OptionAtom";
+import TitleForModal from "../atoms/TitleForModal";
 import toast from "react-hot-toast";
-import axiosClient from "../../api/axios";
+import { icono } from "../atoms/IconsAtom";
 
-const RegisterFormMolecule = ({ onClose }) => {
+const RegisterFormMolecule = ({ onClose, mode, userId }) => {
   const cedula = useRef(null);
   const fullName = useRef(null);
   const email = useRef(null);
@@ -18,7 +17,28 @@ const RegisterFormMolecule = ({ onClose }) => {
   const phoneNumber = useRef(null);
   const birthdate = useRef(null);
   const rol = useRef(null);
-  const URL = "http://localhost:9722/v1/users";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (mode === "update" && userId) {
+        try {
+          const response = await axiosClient.get(`/v1/users/${userId}`);
+          const userData = response.data;
+
+          cedula.current.value = userData.cedula_user;
+          fullName.current.value = userData.nombre_user;
+          email.current.value = userData.email_user;
+          phoneNumber.current.value = userData.telefono_user;
+          birthdate.current.value = userData.fechanacimiento_user;
+          rol.current.value = userData.rol_user;
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [mode, userId]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -33,23 +53,31 @@ const RegisterFormMolecule = ({ onClose }) => {
       rol_user: rol.current.value,
     };
 
-    await axiosClient
-      .post("/v1/users", data)
-      .then((response) => {
-        if (response.status === 200) {
-          toast.success("Usuario registrado con éxito, ya puedes loguearte", {
-            duration: 2000,
-          });
-          onClose();
-        } else {
-          toast.error("Error al registrar el usuario");
-        }
-      })
-      .catch((error) => console.log(error));
+    try {
+      let response;
+      if (mode === "create") {
+        response = await axiosClient.post("/v1/users", data);
+      } else if (mode === "update" && userId) {
+        response = await axiosClient.put(`/v1/users/${userId}`, data);
+      }
+
+      if (response.status === 200) {
+        toast.success("Usuario registrado/actualizado con éxito", {duration: 2000});
+        onClose();
+      } else {
+        toast.error("Error al registrar/actualizar el usuario");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Error al registrar/actualizar el usuario");
+    }
   };
 
   return (
     <form onSubmit={onSubmit} className="space-y-4">
+      <TitleForModal>
+        {mode === "update" ? "Actualizar Usuario" : "Registrar Usuario"}
+      </TitleForModal>
       <InputWithIconAtom
         icon={icono.iconoUser}
         placeholder="Nombre Completo"
@@ -57,7 +85,7 @@ const RegisterFormMolecule = ({ onClose }) => {
         type="text"
         ref={fullName}
       />
-      <div className="grid grid-cols-2 space-x-2">
+      <div className="grid grid-cols-2 items-center">
         <InputWithIconAtom
           icon={icono.iconoCedula}
           placeholder="Cédula"
@@ -80,7 +108,7 @@ const RegisterFormMolecule = ({ onClose }) => {
         type="email"
         ref={email}
       />
-      <div className="grid grid-cols-2 space-x-2 items-center">
+      <div className="grid grid-cols-2 items-center">
         <InputWithIconAtom
           icon={icono.iconoCelular}
           placeholder="Teléfono"
@@ -100,12 +128,10 @@ const RegisterFormMolecule = ({ onClose }) => {
         type="password"
         ref={password}
       />
-      <div className="flex mt-4 gap-x-2">
-        <input type="checkbox" />
-        <p className="text-grisMedio2">Acepta terminos y condiciones</p>
-      </div>
       <center>
-        <ButtonAtom type="submit">Registrarse</ButtonAtom>
+        <ButtonAtom type="submit">
+          {mode === "update" ? "Actualizar" : "Registrar"}
+        </ButtonAtom>
       </center>
     </form>
   );

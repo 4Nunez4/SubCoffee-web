@@ -8,19 +8,19 @@ export const validarUser = async (req, res) => {
         const sql = `SELECT * FROM usuarios WHERE email_user = '${correo}'`;
         const [rows] = await pool.query(sql);
         if (rows.length === 0) {
-            return res.status(401).json({ message: "Usuario no registrado" });
+            return res.status(404).json({ message: "Correo incorrecto" });
         }
         const user = rows[0]; // Obtener el primer usuario de los resultados
         const validPassword = await bcrypt.compare(password, user.password_user);
         if (!validPassword) {
-            return res.status(401).json({ message: "Contraseña incorrecta" });
+            return res.status(404).json({ message: "Contraseña incorrecta" });
         }
         const token = jwt.sign({ rows }, process.env.AUT_SECRET, {
             expiresIn: process.env.AUT_EXPIRET,
         });
         res.status(200).json({ user, token });
     } catch (error) {
-        res.status(500).json({ message: "Error en el servidor" });
+        res.status(500).json({ message: "Error en el servidor" + error });
     }
 };
 

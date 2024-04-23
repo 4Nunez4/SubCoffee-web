@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ofertas</title>
+  </head>
+  <body>
+    <hr>
+    <h2>Requerimiento. Documentación de ofertas</h2>
+    <hr>
+
+    <h3>Crear oferta</h3>
+    <table>
+        <td>NUMERO</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>NOMBRE DEL SERVICIO</td>
+        <td>Crear oferta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/v1/oferta</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCIÓN</td>
+        <td>Permite crear ofertas en la base de datos</td>
+      </tr>
+      <tr>
+        <td>VERBO HTTP</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN body</td>
+        <td>
+            {
+                "oferta_ofer": 2000,
+                "fk_id_usuario": 1084252915,
+                "fk_id_subasta": 11
+                }
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: JSON:{status: 200, message: "Se registro con exito la oferta."}
+          Incorrecto: JSON:{status: 404, message: "Error al registrar la oferta."}
+          Error: JSON:{status: 500, message: "Error servidor "}
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+    <hr>
+
+    <h3>listar ofertas</h3>
+    <table>
+        <td>NUMERO</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>NOMBRE DEL SERVICIO</td>
+        <td>listar ofertas</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/v1/oferta</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCIÓN</td>
+        <td>Permite listar ofertas de la base de datos</td>
+      </tr>
+      <tr>
+        <td>VERBO HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN body</td>
+        <td>Null</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: JSON:{status: 200, .json(result)}
+          Incorrecto: JSON:{status: 404, message: "no hay ofertas"}
+          Error: JSON:{status: 500, message: "Error en el servidor "}
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+    <hr>
+
+    <h3>actualizar oferta</h3>
+    <table>
+        <td>NUMERO</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>NOMBRE DEL SERVICIO</td>
+        <td>actualizar oferta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/v1/oferta/14</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCIÓN</td>
+        <td>Permite actualizar ofertas de la base de datos</td>
+      </tr>
+      <tr>
+        <td>VERBO HTTP</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN body</td>
+        <td>
+            {
+                "oferta_ofer": 8000
+            }
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: JSON:{status: 200, message: "oferta actualizada exitosamente"}
+          Incorrecto: JSON:{status: 404, message: "El ID de la oferta es incorrecto"}
+          Error: JSON:{status: 500, message: "Error en el sistema"}
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+    <hr>
+
+    
+    <h3>listar una oferta</h3>
+    <table>
+        <td>NUMERO</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>NOMBRE DEL SERVICIO</td>
+        <td>listar una oferta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/v1/oferta/14</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCIÓN</td>
+        <td>Permite listar una oferta de la base de datos</td>
+      </tr>
+      <tr>
+        <td>VERBO HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN body</td>
+        <td>Null</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: JSON:{status: 200, data: rows }
+          Incorrecto: JSON:{status: 404, message: "Error ID ofertas no encontrada"}
+          Error: JSON:{status: 500, message: "Error al obtener la oferta"}
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+    <hr>
+
+
+    <h3>eliminar una oferta</h3>
+    <table>
+        <td>NUMERO</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>NOMBRE DEL SERVICIO</td>
+        <td>eliminar una oferta</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>http://localhost:4000/v1/oferta/14</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCIÓN</td>
+        <td>Permite eliminar una oferta de la base de datos</td>
+      </tr>
+      <tr>
+        <td>VERBO HTTP</td>
+        <td>DELETE</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>Administrador, Usuarios</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN body</td>
+        <td>Null</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          Correcto: JSON:{status: 200, message: "oferta eliminada con éxito." }
+          Incorrecto: JSON:{status: 404, message:"No se encontró la oferta con el ID especificado."}
+          Error: JSON:{status: 500, message: "Error en el sistema."}
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>RAMA:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+    <hr>

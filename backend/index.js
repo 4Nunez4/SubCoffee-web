@@ -1,16 +1,21 @@
 import express from "express";
 import bodyParser from "body-parser";
 import ejs from "ejs";
-import rutaProduccion from "./src/routes/router.produccion.js";
-import router from "./src/routes/routes.registro.js";
-import routerDocument from "./src/routes/notificaciones.routes.js";
+import rutNotificaciones from "./src/routes/notificaciones.routes.js";
 import routerChat from "./src/routes/chat.routes.js";
 import rutasSubastas from "./src/routes/subasta.routes.js";
-import postulacionRoutes from "./src/routes/postulacion.routes.js";
-import variedadesRoute from "./src/routes/variedades.routes.js";
-import FincaRouter from "./src/routes/finca.routes.js";
+import postulantesRoutes from "./src/routes/postulantes.routes.js";
 import autenticacionRouter from "./src/routes/autenticacion.routes.js";
 import cors from 'cors';
+
+import routerUser from "./src/routes/user.routes.js";
+import routerVereda from "./src/routes/veredas.routes.js";
+import routerDepart from "./src/routes/departamento.routes.js"
+import routerMunicipio from "./src/routes/municipio.routes.js"
+import routerFinca from "./src/routes/finca.routes.js"
+import routerVariedad from "./src/routes/variedad.routes.js"
+import routertipovari from "./src/routes/tipovariedad.routes.js"
+import ofertasRoutes from "./src/routes/ofertas.routes.js";
 
 const app = express();
 app.use(cors());
@@ -22,17 +27,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.use("/finca",FincaRouter);
-app.use("/subasta",rutasSubastas);
-app.use("/produccion", rutaProduccion);
-app.use("/usuario", router);
-app.use("/user", routerChat);
-app.use("/user", routerDocument);
-app.use("/postulacion", postulacionRoutes);
-app.use("/variedad", variedadesRoute);
 app.use("/auth", autenticacionRouter)
-
-
+app.use("/v1", routerUser);
+app.use("/v1", routerDepart);
+app.use("/v1", routerVereda);
+app.use("/v1", routerMunicipio);
+app.use("/v1", routerFinca);
+app.use("/v1", routerVariedad);
+app.use("/v1", routertipovari);
+app.use("/subasta",rutasSubastas);
+app.use("/user", routerChat);
+app.use("/v1", rutNotificaciones);
+app.use("/v1", postulantesRoutes);
+app.use("/v1", ofertasRoutes);
 
 app.set("view engine", "ejs");
 

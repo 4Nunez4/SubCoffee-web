@@ -40,12 +40,7 @@ const LoginFormMolecule = () => {
           toast.error("Usuario no registrado");
         }
       })
-      .catch(error => {
-        console.error('Error en la solicitud de inicio de sesión:', error);
-        if (error.response) {
-          console.error('Respuesta del servidor:', error.response.data);
-        }
-      });
+      .catch((error) => console.log(error));
   };
 
   return (

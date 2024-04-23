@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Notificaciones</title>
   </head>
   <body>
     <hr>
@@ -38,31 +38,34 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR, USUARIO</td>
+        <td>Administrador, Usuarios</td>
       </tr>
       <tr>
         <td>PETICIÓN body</td>
         <td>
-          { "tipo_not":"mensaje", "fecha_not":"2024-02-20", "texto_not":"Hola,
-          buenos dias", "fk_id_subasta":1, "fk_id_usuario":1084251889 }
+          {
+            "tipo_not": "mensaje",
+            "texto_not"	: "la suasta a iniciado empieza a subastar",
+            "fk_id_subasta": 11,
+            "fk_id_usuario": 1084253677
+            }
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: 'Notificación creada
-          exitosamente.'} Incorrecto: JSON:{status: 404, message: "Error al
-          crear la notificación."} Error: JSON:{status: 500, message:'Error en
-          el sistema.'}
+          Correcto: JSON:{status: 200, message: 'Notificación creada exitosamente.'} 
+          Incorrecto: JSON:{status: 404, message: "Error al crear la notificación."} 
+          Error: JSON:{status: 500, message:'Error en el sistema.'}
         </td>
       </tr>
       <tr>
         <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjcrc</td>
+        <td>DEVjenm</td>
       </tr>
     </table>
     <hr>
@@ -78,7 +81,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/notificaciones</td>
+        <td>http://localhost:4000/v1/notificaciones</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
@@ -103,19 +106,18 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message:"Notificaciones encontradas con
-          éxito', data:rows} Incorrecto: JSON:{status: 404, message: 'No se
-          encontraron notificaciones.'} Error: JSON:{status: 500, message:
-          'Error en el sistema.'}
+          Correcto: JSON:{status: 200, message:"Notificaciones encontradas con éxito', data:rows} 
+          Incorrecto: JSON:{status: 404, message: 'No se encontraron notificaciones.'} 
+          Error: JSON:{status: 500, message:'Error en el sistema.'}
         </td>
       </tr>
       <tr>
         <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjcrc</td>
+        <td>DEVjenm</td>
       </tr>
     </table>
     <hr>
@@ -130,7 +132,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/notificaciones/1</td>
+        <td>http://localhost:4000/v1/notificaciones/7</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
@@ -146,28 +148,32 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR, USUARIO</td>
+        <td>Administrador, Usuarios</td>
       </tr>
       <tr>
         <td>PETICIÓN body</td>
-        <td>{ "tipo_not":"cierre" }</td>
+        <td>
+          {
+            "tipo_not": "cierre",
+            "texto_not"	: "la suasta a finalizado"
+            }
+        </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: 'Notificación actualizada
-          exitosamente.'} Incorrecto: JSON:{status: 404, message: "El ID
-          proporcionado no existe."} Error: JSON:{status: 500, message: 'Error
-          en el sistema.'}
+          Correcto: JSON:{status: 200, message: 'Notificación actualizada exitosamente.'} 
+          Incorrecto: JSON:{status: 404, message: "El ID proporcionado no existe."} 
+          Error: JSON:{status: 500, message: 'Error en el sistema.'}
         </td>
       </tr>
       <tr>
         <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjcrc</td>
+        <td>DEVjenm</td>
       </tr>
     </table>
 <hr>
@@ -183,7 +189,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/notificaciones/1</td>
+        <td>http://localhost:4000/v1/notificaciones/7</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
@@ -201,7 +207,7 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR, USUARIO</td>
+        <td>Administrador, Usuarios</td>
       </tr>
       <tr>
         <td>PETICIÓN body</td>
@@ -210,19 +216,18 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message:"notificación encontrada
-          exitosamente.", data:rows} Incorrecto: JSON:{status: 404, message:
-          'Error con ID de Notificación, no encontrado.'} Error: JSON:{status:
-          500, message: 'Error en el sistema.'}
+          Correcto: JSON:{status: 200, message:"notificación encontrada exitosamente."} 
+          Incorrecto: JSON:{status: 404, message: 'Error con ID de Notificación, no encontrado.'} 
+          Error: JSON:{status: 500, message: 'Error en el sistema.'}
         </td>
       </tr>
       <tr>
         <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjcrc</td>
+        <td>DEVjenm</td>
       </tr>
     </table>
  <hr>
@@ -238,7 +243,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/notificaciones/1</td>
+        <td>http://localhost:4000/v1/notificaciones/7</td>
       </tr>
       <tr>
         <td>DESCRIPCIÓN</td>
@@ -254,7 +259,7 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>ADMINISTRADOR, USUARIO</td>
+        <td>Administrador, Usuarios</td>
       </tr>
       <tr>
         <td>PETICIÓN body</td>
@@ -263,19 +268,18 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: 'Notificación eliminada
-          exitosamente.'} Incorrecto: JSON:{status: 404, message: 'La
-          notificación con el ID proporcionado no existe.'} Error: JSON:{status:
-          500, message: 'Error en el sistema.'}
+          Correcto: JSON:{status: 200, message: 'Notificación eliminada exitosamente.'} 
+          Incorrecto: JSON:{status: 404, message: 'La notificación con el ID proporcionado no existe.'} 
+          Error: JSON:{status: 500, message: 'Error en el sistema.'}
         </td>
       </tr>
       <tr>
         <td>DESARROLLADOR</td>
-        <td>JUAN CAMILO REALPE CERON</td>
+        <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
         <td>RAMA:</td>
-        <td>DEVjcrc</td>
+        <td>DEVjenm</td>
       </tr>
     </table>
   </body>
