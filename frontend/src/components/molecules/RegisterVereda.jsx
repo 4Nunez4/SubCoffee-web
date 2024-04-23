@@ -7,38 +7,38 @@ import { SelectorIcon } from "../../nextui/SelectorIcon";
 import { icono } from "../atoms/IconsAtom";
 import axiosClient from "../../api/axios";
 
-const RegisterMunicipioMolecule = ({
+const RegisterVeredaMolecule = ({
   mode,
   initialData,
   handleSubmit,
   actionLabel,
 }) => {
-  const codigoMunicipioRef = useRef(null);
-  const nombreMunicipioRef = useRef(null);
-  const [departamentoIdRef, setDepartamentoIdRef] = useState("");
-  const [departamentos, setDepartamentos] = useState([]);
+  const codigoVeredaRef = useRef(null);
+  const nombreVeredaRef = useRef(null);
+  const [municipioIdRef, setmunicipioIdRef] = useState("");
+  const [municipios, setmunicipios] = useState([]);
 
   useEffect(() => {
-    const fetchDepartamentos = async () => {
+    const fetchmunicipios = async () => {
       try {
-        const response = await axiosClient.get("/v1/departamentos");
-        setDepartamentos(response.data);
+        const response = await axiosClient.get("/v1/municipios");
+        setmunicipios(response.data);
       } catch (error) {
-        console.error("Error fetching departamentos:", error);
-        toast.error("Error al cargar la lista de departamentos");
+        console.error("Error fetching municipios:", error);
+        toast.error("Error al cargar la lista de municipios");
       }
     };
 
-    fetchDepartamentos();
+    fetchmunicipios();
     if (mode === "update" && initialData) {
       try {
         console.log(initialData);
-        codigoMunicipioRef.current.value = initialData.pk_codigo_muni;
-        nombreMunicipioRef.current.value = initialData.nombre_muni;
-        setDepartamentoIdRef(initialData.fk_departamento);
+        codigoVeredaRef.current.value = initialData.pk_id_vere;
+        nombreVeredaRef.current.value = initialData.nombre_vere;
+        setmunicipioIdRef(initialData.fk_municipio);
       } catch (error) {
-        console.error("Error fetching departamento data:", error);
-        toast.error("Error al cargar datos del municipio");
+        console.error("Error fetching municipio data:", error);
+        toast.error("Error al cargar datos del Vereda");
       }
     }
   }, [mode, initialData]);
@@ -48,9 +48,10 @@ const RegisterMunicipioMolecule = ({
 
     try {
       const data = {
-        pk_codigo_muni: codigoMunicipioRef.current.value,
-        nombre_muni: nombreMunicipioRef.current.value,
-        fk_departamento: departamentoIdRef,
+        pk_id_vere: codigoVeredaRef.current.value,
+        nombre_vere
+        : nombreVeredaRef.current.value,
+        fk_municipio: municipioIdRef,
       };
       handleSubmit(data, e);
     } catch (error) {
@@ -62,22 +63,22 @@ const RegisterMunicipioMolecule = ({
   return (
     <form onSubmit={onSubmit} className="space-y-4 p-4">
       <TitleForModal>
-        {mode === "update" ? "Actualizar Municipio" : "Registrar Municipio"}
+        {mode === "update" ? "Actualizar Vereda" : "Registrar Vereda"}
       </TitleForModal>
       <InputWithIconAtom
         icon={icono.iconoUser}
-        placeholder="Codigo del Municipio"
+        placeholder="Codigo del Vereda"
         required
-        ref={codigoMunicipioRef}
+        ref={codigoVeredaRef}
       />
       <InputWithIconAtom
         icon={icono.iconoUser}
-        placeholder="Nombre del Municipio"
+        placeholder="Nombre del Vereda"
         required
-        ref={nombreMunicipioRef}
+        ref={nombreVeredaRef}
       />
       <Select
-        label="Departamento"
+        label="municipio"
         className="max-w-sm border border-gray-200 rounded-lg"
         variant="bordered"
         popoverProps={{
@@ -86,15 +87,15 @@ const RegisterMunicipioMolecule = ({
             content: "p-0 border-small border-divider bg-background",
           },
         }}
-        value={departamentoIdRef}
-        onChange={(e) => setDepartamentoIdRef(e.target.value)}
+        value={municipioIdRef}
+        onChange={(e) => setmunicipioIdRef(e.target.value)}
       >
-        {departamentos.map((departamento) => (
+        {municipios.map((municipio) => (
           <SelectItem
-          key={departamento.pk_codigo_depar}
-          value={departamento.pk_codigo_depar}
+          key={municipio.pk_codigo_muni}
+          value={municipio.pk_codigo_muni}
           >
-            {departamento.nombre_depar}
+            {municipio.nombre_depar}
           </SelectItem>
         ))}
       </Select>
@@ -107,4 +108,4 @@ const RegisterMunicipioMolecule = ({
   );
 };
 
-export default RegisterMunicipioMolecule;
+export default RegisterVeredaMolecule;
