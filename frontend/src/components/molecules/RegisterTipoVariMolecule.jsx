@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+/* import React, { useRef, useEffect, useState } from "react";
 import axiosClient from "../../api/axios";
 import ButtonAtom from "../atoms/ButtonAtom";
 import InputWithIconAtom from "../atoms/InputWithIconAtom";
@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { icono } from "../atoms/IconsAtom";
 
 const RegisterTipoVariMolecule = ({ onClose, mode, tipoVariId }) => {
+
   const nombreTipoVariRef = useRef(null);
   const [tiposVariedad, setTiposVariedad] = useState([]);
 
@@ -88,6 +89,72 @@ const RegisterTipoVariMolecule = ({ onClose, mode, tipoVariId }) => {
         <ButtonAtom type="submit">
           {mode === "update" ? "Actualizar" : "Registrar"}
         </ButtonAtom>
+      </center>
+    </form>
+  );
+};
+
+export default RegisterTipoVariMolecule;
+ */
+
+import React, { useRef, useEffect } from "react";
+import InputWithIconAtom from "../atoms/InputWithIconAtom";
+import TitleForModal from "../atoms/TitleForModal";
+import toast from "react-hot-toast";
+import { icono } from "../atoms/IconsAtom";
+import { Button } from "@nextui-org/react";
+
+const RegisterTipoVariMolecule = ({ mode, initialData, handleSubmit, actionLabel }) => {
+  const nombre_tipo_vari = useRef(null);
+
+  useEffect(() => {
+    if (mode === "update" && initialData) {
+      try {
+          console.log(initialData);
+
+          nombre_tipo_vari.current.value = initialData.nombre_tipo_vari
+        } catch (error) {
+          console.error("Error fetching Tipo de variedad data:", error);
+        }
+      }
+
+  }, [mode, initialData]);
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+    const data = {
+      nombre_tipo_vari: nombre_tipo_vari.current.value,
+    };
+    handleSubmit(data,e)
+  } catch (error) {
+    console.log(error);
+    toast.success("Error en el servidor " + error);
+  }
+  };
+
+  return (
+    <form onSubmit={onSubmit} className="space-y-4 p-4">
+
+      <TitleForModal>
+        {mode === "update"
+          ? "Actualizar Tipo variedad"
+          : "Registrar Tipo Variedad"}
+      </TitleForModal>
+
+      <InputWithIconAtom
+        icon={icono.iconoCampana}
+        placeholder="Nombre de la Variedad"
+        required
+        type="text"
+        ref={nombre_tipo_vari}
+      />
+
+      <center>
+        <Button type="submit" color="primary">
+          {actionLabel}
+        </Button>
       </center>
     </form>
   );

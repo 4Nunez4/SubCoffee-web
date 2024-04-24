@@ -58,6 +58,7 @@ export const validarRegistrarSubasta=[
     .isNumeric(), // Verifica que la variedad sea un número
 ];
 
+
 export const validarActualizarSubasta=[
     check('fecha_inicio_sub', 'El formato de fecha-hora no es correcto')
     .not()
