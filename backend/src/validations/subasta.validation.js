@@ -1,24 +1,6 @@
 import { check } from "express-validator";
 
 export const validarRegistrarSubasta=[
-<<<<<<< HEAD
-    check('fecha_inicio_sub','El formato de fecha-hora no es correct')
-    .exists()
-    .isISO8601()
-    .toDate(),
-
-    check('fecha_fin_sub','El formato de fecha-hora no es correcto')
-    .exists()
-    .isISO8601()
-    .toDate(),
-
-    check('estado_sub','Escriba un estado permitido: abierta, espera o cerrada')
-    .exists()
-    .isIn(['abierta', 'espera', 'cerrada']),
-    check('precio_inicial_sub','Por favor, digite una cantidad')
-    .exists()
-    .isInt(),
-=======
     check('fecha_inicio_sub', 'El formato de fecha-hora no es correcto')
     .not()
     .isEmpty()
@@ -74,7 +56,6 @@ export const validarRegistrarSubasta=[
     .isEmpty()
     .exists()
     .isNumeric(), // Verifica que la variedad sea un número
->>>>>>> 86238db3e52402c6101782f78cc3b4cf2c2a6359
 ];
 
 
@@ -82,11 +63,6 @@ export const validarActualizarSubasta=[
     check('fecha_inicio_sub', 'El formato de fecha-hora no es correcto')
     .not()
     .isEmpty()
-<<<<<<< HEAD
-    .isInt({ min: 1 })
-    .toInt(),
-]
-=======
     .exists()
     .isISO8601(), // Asegura que la fecha esté en formato ISO 8601
 
@@ -140,4 +116,3 @@ export const validarActualizarSubasta=[
     .exists()
     .isNumeric(), // Verifica que la variedad sea un número
 ]
->>>>>>> 86238db3e52402c6101782f78cc3b4cf2c2a6359
