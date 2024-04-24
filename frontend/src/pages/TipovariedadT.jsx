@@ -17,19 +17,22 @@ export function TipoVariedadT() {
     const fetchVariedadList = async () => {
         try {
             const response = await axiosClient.get("/v1/tipo_vari");
-            setResults(response.data);
+            setResults(response.data.data);
         } catch (error) {
             console.error("Error fetching tipo de variedades list:", error);
         }
     };
 
-    const peticionDesactivar = async (pk_id_tipo_vari) => {
+    const peticionDesactivar = (pk_id_tipo_vari) => {
         try {
-            const response = await axiosClient.put(`/v1/tipo_vari/${pk_id_tipo_vari}`);
+            axiosClient.put(`/v1/tipo_varides/${pk_id_tipo_vari}`, null).then((response) => {
+
+                console.log(response.data)
+
             if (response.status === 200) {
                 toast.success(response.data.message);
                 fetchVariedadList(); 
-            }
+            }  })
         } catch (error) {
             toast.error("Error en el sistema " + error);
         }
@@ -37,7 +40,7 @@ export function TipoVariedadT() {
 
     const peticionActivar = async (pk_id_tipo_vari) => {
         try {
-            const response = await axiosClient.put(`/v1/tipo_vari/${pk_id_tipo_vari}`);
+            const response = await axiosClient.put(`/v1/tipo_variac/${pk_id_tipo_vari}`);
             if (response.status === 200) {
                 toast.success(response.data.message);
                 fetchVariedadList(); 
@@ -68,7 +71,7 @@ export function TipoVariedadT() {
             if (response.status === 200) {
                 toast.success(message);
                 setModalOpen(false);
-                fetchVariedadList(); // Actualizar la lista de departamentos después de crear o actualizar
+                fetchVariedadList(); 
             }
             else {
                 toast.error(message);

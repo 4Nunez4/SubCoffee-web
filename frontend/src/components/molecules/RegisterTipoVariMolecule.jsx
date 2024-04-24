@@ -139,8 +139,8 @@ const RegisterTipoVariMolecule = ({ mode, initialData, handleSubmit, actionLabel
 
       <TitleForModal>
         {mode === "update"
-          ? "Actualizar Tipo_variedad"
-          : "Registrar Tipo_Variedad"}
+          ? "Actualizar Tipo variedad"
+          : "Registrar Tipo Variedad"}
       </TitleForModal>
 
       <InputWithIconAtom
