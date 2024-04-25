@@ -18,6 +18,8 @@ import PoliticasYCondicionesPage from "./pages/PoliticasYCondicionesPage";
 import GeografiaFullPage from "./pages/GeografiaFullPage";
 import UsersT from "./pages/UsersT";
 import { DepartamentoT } from "./pages/DepartamentoT";
+import TipoVariedadT from "./pages/TipovariedadT";
+import MiSubastaT from "./pages/MiSubastaT";
 
 function App() {
   const storedUser = localStorage.getItem("user");
@@ -39,13 +41,20 @@ function App() {
                   <Route path="/ayudaaa" element={<AyudaPage />} />
                   {users && users.rol_user === "admin" && (
                     <>
-                      <Route path="/usuarios" element={<UsersPage />} />
                       <Route path="/users" element={<UsersT />} />
-                      <Route
-                        path="/geografia"
-                        element={<GeografiaFullPage />}
-                      />
+                      <Route path="/geografia" element={<GeografiaFullPage />} />
                       <Route path="/departamentos" element={<DepartamentoT/>} />
+                      <Route path="/tipo_variedad" element={<TipoVariedadT />} />
+                    </>
+                  )}
+                  {users && users.rol_user === "vendedor" && (
+                    <>
+                      <Route path="/mi_subasta" element={<MiSubastaT />} />
+                    </>
+                  )}
+                  {users && users.rol_user === "comprador" && (
+                    <>
+                      <Route path="/usuarios" element={<UsersPage />} />
                     </>
                   )}
                 </Route>
