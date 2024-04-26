@@ -54,6 +54,8 @@ export default function MunicipioTable({ registrar, data, results, actualizar, d
       filteredResults = filteredResults.filter((results) =>
           String(results.pk_codigo_muni).toLowerCase().includes(filterValue.toLowerCase()) ||
           String(results.nombre_muni).toLowerCase().includes(filterValue.toLowerCase()) ||
+          String(results.nombre_depar).toLowerCase().includes(filterValue.toLowerCase()) ||
+          String(results.fk_departamento).toLowerCase().includes(filterValue.toLowerCase()) ||
           String(results.estado_muni).toLowerCase().includes(filterValue.toLowerCase())
       );
     }

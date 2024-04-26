@@ -9,44 +9,50 @@ import { Button, Select, SelectItem } from "@nextui-org/react";
 const RegisterVeredaMolecule = ({ mode, initialData, handleSubmit, actionLabel }) => {
   const nombreVeredaRef = useRef(null);
   const [municipios, setMunicipios] = useState([]);
-  const [municipiosRef, setMunicipiosRef] = useState(""); // Inicializa como una cadena vacía
+  const [municipiosRef, setMunicipiosRef] = useState("");
+  const [departamentos, setDepartamentos] = useState([]);
+  const [departamentosRef, setDepartamentosRef] = useState('');
 
   useEffect(() => {
-    const fetchMunicipios = async () => {
+    const fetchDepar = async () => {
       try {
-        const response = await axiosClient.get("/v1/municipios");
-        setMunicipios(response.data);
+        const response = await axiosClient.get("/v1/departamentos");
+        setDepartamentos(response.data);
       } catch (error) {
-        console.error("Error fetching municipios:", error);
-        toast.error("Error al cargar la lista de municipios");
+        console.error("Error fetching departamentos:", error);
+        toast.error("Error al cargar la lista de departamentos");
       }
     };
-    fetchMunicipios();
+    fetchDepar();
+  }, []);
 
-    if (mode === "update" && initialData) {
-      try {
-        if (initialData) {
-          nombreVeredaRef.current.value = initialData.nombre_vere; // Asigna el valor al input
-          setMunicipiosRef(initialData.fk_municipio); // Asigna el valor al estado de referencia
-        }
-      } catch (error) {
-        toast.error("Error en el servidor:", error);
-      }
+  const fetchMunicipios = async (departamentos) => {
+    try {
+      const response = await axiosClient.get(`/v1/municipiosdep/${departamentos}`);
+      setMunicipios(response.data);
+    } catch (error) {
+      console.error("Error fetching municipios:", error);
+      toast.error("Error al cargar la lista de municipios");
     }
-  }, [mode, initialData]);
+  };
+
+  const handleDepartamentoChange = (e) => {
+    const selectedDepartamentoId = e.target.value;
+    setDepartamentosRef(selectedDepartamentoId);
+    fetchMunicipios(selectedDepartamentoId);
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const data = {
-        nombre_vere: nombreVeredaRef.current.value, // Accede al valor del input
-        fk_municipio: municipiosRef, // Usa directamente el estado de referencia
+        nombre_vere: nombreVeredaRef.current.value,
+        fk_municipio: municipiosRef,
       };
       handleSubmit(data, e);
     } catch (error) {
-      console.log(error);
-      alert("Error en el servidor " + error);
+      console.error("Error en el servidor:", error);
+      toast.error("Error en el servidor");
     }
   };
 
@@ -62,20 +68,32 @@ const RegisterVeredaMolecule = ({ mode, initialData, handleSubmit, actionLabel }
         ref={nombreVeredaRef}
       />
       <Select
-        label="Vereda"
+        label="Departamento"
+        value={departamentosRef}
+        onChange={handleDepartamentoChange}
+      >
+        {departamentos.map((departamento) => (
+          <SelectItem
+            key={departamento.pk_codigo_depar}
+            value={departamento.pk_codigo_depar}
+          >
+            {departamento.nombre_depar}
+          </SelectItem>
+        ))}
+      </Select>
+      <Select
+        label="Municipio"
         value={municipiosRef}
         onChange={(e) => setMunicipiosRef(e.target.value)}
       >
-        {municipios
-          .filter((municipio) => municipio.estado_muni === "activo")
-          .map((municipio) => (
-            <SelectItem
-              key={municipio.pk_codigo_muni}
-              value={municipio.pk_codigo_muni}
-            >
-              {municipio.nombre_muni}
-            </SelectItem>
-          ))}
+        {municipios.map((municipio) => (
+          <SelectItem
+            key={municipio.pk_codigo_muni}
+            value={municipio.pk_codigo_muni}
+          >
+            {municipio.nombre_muni}
+          </SelectItem>
+        ))}
       </Select>
       <center>
         <Button type="submit" color="primary">

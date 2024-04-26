@@ -54,6 +54,7 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
       filteredResults = filteredResults.filter((results) =>
           String(results.pk_id_vere).toLowerCase().includes(filterValue.toLowerCase()) ||
           String(results.nombre_vere).toLowerCase().includes(filterValue.toLowerCase()) ||
+          String(results.nombre_muni).toLowerCase().includes(filterValue.toLowerCase()) ||
           String(results.estado_vere).toLowerCase().includes(filterValue.toLowerCase())
       );
     }
