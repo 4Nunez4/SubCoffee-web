@@ -33,21 +33,23 @@ export const getVariedades = async (req, res) => {
   }
 };
 
-export const getVariedad = async (req, res) => {
+export const getVariedadUser = async (req, res) => {
   try {
     const id = req.params.id
-    let sql = `      
-      SELECT v.*, f.nombre_fin AS nombre_finca, t.nombre_tipo_vari AS nombre_tipo_variedad
-      FROM variedad v
-      INNER JOIN finca f ON v.fk_finca = f.pk_id_fin
-      INNER JOIN tipo_variedad t ON v.fk_tipo_variedad = t.pk_id_tipo_vari 
-      WHERE pk_id_vari = '${id}'
+    let sql = 
+    `
+      SELECT v.*, t.*, f.*
+      FROM usuarios u
+      JOIN finca f ON u.pk_cedula_user = f.fk_id_usuario
+      JOIN variedad v ON f.pk_id_fin = v.fk_finca
+      JOIN tipo_variedad t ON v.fk_tipo_variedad = t.pk_id_tipo_vari
+      WHERE u.pk_cedula_user = ${id};
     `;
     const [result] = await pool.query(sql);
     if (result.length > 0) {
-      res.status(200).json({ message: "Variedades encontradas", data: result });
+      res.status(200).json({ message: "Variedades de usuario encontradas", data: result });
     } else {
-      res.status(404).json({ message: "Error al buscar la variedad con ese ID" });
+      res.status(404).json({ message: "Error al buscar la variedad con el ID del usuario" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });

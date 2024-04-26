@@ -17,24 +17,18 @@ const SidebarOrganims = () => {
     { title: "Inicio", link: "/subcoffee", icon: AiOutlineUser },
     ...(users && users.rol_user === "admin"
       ? [
-          { title: "Uusarios", link: "/users", icon: AiOutlineUser },
-          { title: "Usuarios", link: "/usuarios", icon: AiOutlineUser },
-          {
-            title: "Geografía",
-            link: "/geografia",
-            icon: AiOutlineHeart,
-          },
+          { title: "Usuarios", link: "/users", icon: AiOutlineUser },
+          { title: "Tipo Variedad", link: "/tipo_variedad", icon: AiOutlineUser },
+          { title: "Geografía", link: "/geografia", icon: AiOutlineHeart },
         ]
       : []),
     ...(users && users.rol_user === "vendedor"
       ? [
-          {
-            title: "Mis subastas",
-            link: "/ayuda",
-            icon: AiOutlineHeart,
-            gap: true,
-          },
+          { title: "Mis subastas", link: "/mi_subasta", icon: AiOutlineHeart },
         ]
+      : []),
+    ...(users && users.rol_user === "comprador"
+      ? [{ title: "Usuarios", link: "/usuarios", icon: AiOutlineUser }]
       : []),
     { title: "Ayudaaa", link: "/ayudaaa", icon: AiOutlineHeart, gap: true },
     { title: "Configuración", link: "/configuration", icon: RiSettings4Line },

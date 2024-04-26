@@ -93,14 +93,14 @@ function HeaderOrganism() {
                   src: `./src/assets/${users.imagen_user}`
                 }}
                 />
-                <p className="-mt-5 text-sm text-gray-300">
+                <p className="-mt-5 text-sm text-gray-300 ml-4">
                   {`${users.rol_user}`}
                 </p> 
               </button>
             )}
           </div>
           {abrirCerrarSesion && (
-            <div className="absolute top-16 right-2 flex justify-center items-center">
+            <div className="absolute top-16 right-2 flex justify-center items-center z-20">
               <div className="bg-blanco rounded-xl">
                 <ModalCerrarSesion onClose={toggleCerrarSesionModal} />
               </div>
