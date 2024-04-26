@@ -12,13 +12,14 @@ import Historial from "./pages/Historial.jsx";
 import RegistrarFinca from "./pages/RegistrarFinca.jsx";
 import CrearSubasta from "./pages/CrearSubasta.jsx";
 import Home from "./pages/Home.jsx"
+import ResultadoModal from "./pages/ResultadosModal.jsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Layout>
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<Home />} />
           <Route path="/historial" element={<Historial />} />
           <Route path="/registrarfinca" element={<RegistrarFinca />} />
           <Route path="/login" element={<Login/>}/>
@@ -30,8 +31,8 @@ function App() {
           <Route path="/Notificaciones" element={<Notificaciones />} />
           <Route path="/Oferta" element={<Oferta />} />
           <Route path="/CrearSubasta" element={<CrearSubasta />} />
-          <Route path="/Home" element={<Home />} />
-          {/* <Route path="/ResultadoModal" element={<ResultadoModal />} /> */}
+          <Route path="/ResultadoModal" element={<ResultadoModal/>}  />
+
         </Routes>
       </Layout>
     </BrowserRouter>

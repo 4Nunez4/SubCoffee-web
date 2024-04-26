@@ -5,12 +5,10 @@ function ResultadoModal(){
 
     const[modalOpen, setModalOpen] = useState(false)
 
-
-
     return(
     <div>
 
-        <button onClick={() => setModalOpen(true)}> Abrir </button>
+        <button onClick={() => setModalOpen(true)}> HOLAAAAAA </button>
         <ModalForm 
             open={modalOpen}
             onClose={() => setModalOpen(false)}

@@ -3,14 +3,14 @@ import ButtonAtom from "../components/atoms/ButtonAtom";
 import AbrirModalTemplate from "../components/templates/AbrirModalTemplate";
 import ButtonCerrarModalAtom from "../components/atoms/ButtonCerrarModalAtom";
 import RegisterPageVereda from "../components/organisms/RegisterPageVereda";
-import RegisterPageTipoVariedad from "../components/organisms/RegisterPageTipoVariedad";
+/* import RegisterPageTipoVariedad from "../components/organisms/RegisterPageTipoVariedad"; */
 import { DepartamentoT } from "./DepartamentoT";
 import MunicipioT from "./MunicipioT";
 import VeredaT from "./VeredaT";
 
 function GeografiaFullPage() {
   const [abrirModalVereda, setAbrirModalVereda] = useState(false);
-  const [abrirModalTipoVari, setAbrirModalTipoVari] = useState(false);
+/*   const [abrirModalTipoVari, setAbrirModalTipoVari] = useState(false); */
 
   const toggleAbrirModalVereda = () => {
     setAbrirModalVereda(!abrirModalVereda);
@@ -40,7 +40,7 @@ function GeografiaFullPage() {
           <ButtonCerrarModalAtom onClose={toggleAbrirModalVereda} />
         </AbrirModalTemplate>
       )}
-      {abrirModalTipoVari && (
+{/*       {abrirModalTipoVari && (
         <AbrirModalTemplate>
           <RegisterPageTipoVariedad
             onClose={toggleAbrirModalTipoVari}
@@ -48,7 +48,7 @@ function GeografiaFullPage() {
           />
           <ButtonCerrarModalAtom onClose={toggleAbrirModalTipoVari} />
         </AbrirModalTemplate>
-      )}
+      )} */}
     </div>
   );
 }
