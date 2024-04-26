@@ -70,6 +70,13 @@ const RegisterVeredaMolecule = ({ mode, initialData, handleSubmit, actionLabel }
       <Select
         label="Departamento"
         value={departamentosRef}
+        variant="bordered"
+        popoverProps={{
+          classNames: {
+            base: "before:bg-default-200",
+            content: "p-0 border-small border-divider bg-background",
+          },
+        }}
         onChange={handleDepartamentoChange}
       >
         {departamentos.map((departamento) => (
@@ -84,6 +91,13 @@ const RegisterVeredaMolecule = ({ mode, initialData, handleSubmit, actionLabel }
       <Select
         label="Municipio"
         value={municipiosRef}
+        variant="bordered"
+        popoverProps={{
+          classNames: {
+            base: "before:bg-default-200",
+            content: "p-0 border-small border-divider bg-background",
+          },
+        }}
         onChange={(e) => setMunicipiosRef(e.target.value)}
       >
         {municipios.map((municipio) => (

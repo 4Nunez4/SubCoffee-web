@@ -78,7 +78,7 @@ const RegisterMunicipioMolecule = ({
       />
       <Select
         label="Departamento"
-        className="max-w-sm border border-gray-200 rounded-lg"
+        className="max-w-sm"
         variant="bordered"
         popoverProps={{
           classNames: {
