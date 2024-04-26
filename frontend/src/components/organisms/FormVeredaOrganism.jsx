@@ -1,6 +1,6 @@
 import React from "react";
 import { ModalForm } from "./ModalForm";
-import RegisterVeredaMolecule from "../molecules/RegisterVeredaMolecule";
+import RegisterVeredaMolecule from "../molecules/RegisterVereda";
 
 function FormVeredaOrganism ({ open, onClose, handleSubmit, actionLabel, initialData, mode }) {
   return (
