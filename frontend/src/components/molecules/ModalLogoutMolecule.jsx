@@ -5,6 +5,8 @@ import ButtonAtomFull from "../atoms/ButtonAtomFull";
 
 function ModalLogoutMolecule() {
   const [mostrarAviso, setMostrarAviso] = useState(false);
+  const storedUser = localStorage.getItem("user");
+  const users = storedUser ? JSON.parse(storedUser) : null;
 
   const handleCerrarSesion = () => {
     setMostrarAviso(!mostrarAviso);
@@ -12,7 +14,7 @@ function ModalLogoutMolecule() {
 
   return (
     <div className="bg-white rounded-xl flex flex-col justify-center items-center w-52 border border-grisOscuro shadow-md p-2 text-sm gap-y-2">
-      <LinkButtonAtom to="/profile">Perfil</LinkButtonAtom>
+      <LinkButtonAtom to={`/profile/${users.pk_cedula_user}`}>Perfil</LinkButtonAtom>
       <ButtonAtomFull onClick={handleCerrarSesion} color="verdeSena1" colorHover="verdeSena2">
         Cerrar sesión
       </ButtonAtomFull>
