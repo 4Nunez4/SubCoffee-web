@@ -56,7 +56,7 @@ function HeaderOrganism() {
   return (
     <>
       {isAuthenticated ? (
-        <nav className="flex justify-between items-center bg-gray-400 w-full p-4 shadow-sm">
+        <nav className="flex justify-between items-center bg-gray-300 w-full p-4 shadow-sm">
           <div className="flex flex-col">
             <TextSubAtom
               to="/subcoffee"
@@ -87,15 +87,11 @@ function HeaderOrganism() {
               >
               <User   
                 name={`${users.nombre_user}`}
-                className="text-gray-200"
                 description={`${users.rol_user}`}
                 avatarProps={{
-                  src: `./src/assets/${users.imagen_user}`
-                }}
+                  src: `./public/img/${users.imagen_user ? users.imagen_user :  "usernotfound.png"}`
+              }}
                 />
-                <p className="-mt-5 text-sm text-gray-300 ml-4">
-                  {`${users.rol_user}`}
-                </p> 
               </button>
             )}
           </div>

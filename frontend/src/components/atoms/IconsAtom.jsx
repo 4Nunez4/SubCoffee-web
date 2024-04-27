@@ -25,8 +25,20 @@ import { GiPriceTag } from "react-icons/gi";
 import { FaSwatchbook } from "react-icons/fa";
 import { Md18UpRating } from "react-icons/md";
 import { MdProductionQuantityLimits } from "react-icons/md";
+import { FaHome } from "react-icons/fa";
+import { MdLocalFlorist } from "react-icons/md";
+import { IoMdHelpCircleOutline } from "react-icons/io";
+import { MdOutlinePrivacyTip } from "react-icons/md";
+import { FcDataConfiguration } from "react-icons/fc";
+import { BiWorld } from "react-icons/bi";
 
 export const icono = {
+  iconoWorl : BiWorld,
+  iconoConfiguracion : FcDataConfiguration,
+  iconoPrivacidad : MdOutlinePrivacyTip,
+  iconoAyuda : IoMdHelpCircleOutline,
+  iconoFlor : MdLocalFlorist,
+  iconoHome: FaHome,
   iconoGmail: HiOutlineMail,
   iconoConOjo: HiEye,
   iconoConOjoCerrado: HiEyeOff,

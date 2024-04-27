@@ -89,7 +89,7 @@ export default function FincaT() {
   };
   
   return (
-    <div className="w-full flex flex-col items-center px-10">
+    <div className="w-full flex bg-gray-100 flex-col items-center px-10">
         <FormFincaOrganims
           open={modalOpen}
           onClose={() => setModalOpen(false)}

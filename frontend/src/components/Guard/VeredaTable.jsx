@@ -189,7 +189,7 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
           <Input
             isClearable
             className="w-full sm:max-w-[44%] border rounded-xl border-grisMedio"
-            placeholder="Buscar..."
+            placeholder="Buscar vereda..."
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}

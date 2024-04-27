@@ -87,7 +87,7 @@ const RegisterFormMolecule = ({ mode, initialData, handleSubmit, actionLabel }) 
         type="email"
         ref={email}
       />
-      <div className="grid grid-cols-2 items-center">
+      <div className="grid grid-cols-2 items-center gap-x-2">
         <InputWithIconAtom
           icon={icono.iconoCelular}
           placeholder="Teléfono"
@@ -96,6 +96,7 @@ const RegisterFormMolecule = ({ mode, initialData, handleSubmit, actionLabel }) 
           ref={phoneNumber}
         />
         <SelectInputAtom ref={rol}>
+          <OptionAtom value="admin" label="Admin" />
           <OptionAtom value="vendedor" label="Vendedor" />
           <OptionAtom value="comprador" label="Comprador" />
         </SelectInputAtom>

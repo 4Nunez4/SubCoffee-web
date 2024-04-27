@@ -192,7 +192,7 @@ export default function VariedadUserTable({ registrar, data, results, actualizar
           <Input
             isClearable
             className="w-full sm:max-w-[44%] border rounded-xl border-grisMedio"
-            placeholder="Buscar..."
+            placeholder="Buscar variedad..."
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}

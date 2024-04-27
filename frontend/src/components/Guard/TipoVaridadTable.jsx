@@ -167,7 +167,7 @@
             <Input
                 isClearable
                 className="w-full sm:max-w-[44%] border rounded-xl border-grisMedio"
-                placeholder="Buscar..."
+                placeholder="Buscar tipo variedad..."
                 startContent={<SearchIcon />}
                 value={filterValue}
                 onClear={() => onClear()}

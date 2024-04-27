@@ -46,7 +46,7 @@ function SubastaPage() {
   }, [currentIndex]);
 
   return (
-    <div className="px-14 bg-gray-200">
+    <div className="px-10 bg-gray-100">
       <div className="max-w-[1600px] h-auto w-full m-auto pt-10 p-4">
         <div
           className="w-full h-96 rounded-2xl bg-center bg-cover duration-500"
@@ -81,10 +81,6 @@ function SubastaPage() {
         <p className="left-0 right-0 text-center text-negro transition duration-300">
           ¡Tu finca tiene una historia que contar!
         </p>
-      </div>
-      <div className="flex justify-center space-x-4 left-0 right-0">
-        <ButtonAtom onClick={toggleAbrirModalFinca}>Crear finca</ButtonAtom>
-        <ButtonAtom onClick={toggleAbrirModalVari}>Crear Variedad</ButtonAtom>
       </div>
       <div className="w-full">
         <h1 className="font-semibold py-5">Borbon</h1>

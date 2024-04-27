@@ -89,7 +89,7 @@ export function TipoVariedadT() {
     };
 
     return (
-        <div className="w-full flex flex-col items-center px-10">
+        <div className="w-full flex bg-gray-100 flex-col items-center px-10">
             <FormTipovariedadOrganism
                 open={modalOpen}
                 onClose={() => setModalOpen(false)}

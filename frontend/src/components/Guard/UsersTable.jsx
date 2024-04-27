@@ -194,7 +194,7 @@ export default function UsersTable({ registrarUser, data, results, actualizarUse
           <Input
             isClearable
             className="w-full sm:max-w-[44%] border rounded-xl border-grisMedio"
-            placeholder="Buscar..."
+            placeholder="Buscar usuario..."
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import LinkButtonAtom from "../atoms/LinkButtonAtom";
 import { TiposDeCafeTemplates } from "../templates/TiposDeCafeTemplates";
 import TiposDeCafeOrganism from "./TiposDeCafeOrganism";
@@ -6,9 +7,21 @@ import Text4xlSemiboldAtom from "../atoms/Text4xlSemiboldAtom";
 import TextXlSemiboldAtom from "../atoms/TextXlSemiboldAtom";
 
 function DashboardContentOrganims() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+
+    // Si hay un usuario y un token en el localStorage, redirigir a la página de "Subcoffee"
+    if (storedUser && token) {
+      navigate("/subcoffee");
+    }
+  }, [navigate]);
+  
   return (
     <div className="bg-gray-200 pt-12">
-      <div className="flex items-center justify-center px-14">
+      <div className="flex items-center justify-center px-12">
         <span className="text-black text-4xl text-center">
           Bienvenido a Subcoffee una plataforma online donde te podras conectar
           con diferentes usuarios para subastar y pujar por café de alta calidad

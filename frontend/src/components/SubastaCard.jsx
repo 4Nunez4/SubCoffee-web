@@ -113,7 +113,7 @@ function SubastaCard() {
 
   return (
     <div
-      className="grid grid-cols-3 justify-center overflow-x-auto md:w-[980px] gap-x-4"
+      className="grid grid-cols-3 justify-center overflow-x-auto w-full gap-x-4"
       style={{  scrollbarWidth: "none" }}
     >
       {Subastas.map((subasta, i) => (

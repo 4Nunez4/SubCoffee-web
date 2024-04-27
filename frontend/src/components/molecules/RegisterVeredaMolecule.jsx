@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { icono } from "../atoms/IconsAtom";
 import { Button, Select, SelectItem } from "@nextui-org/react";
 
-const RegisterVeredaMolecule = ({ mode, initialData, handleSubmit, actionLabel }) => {
+const RegisterVeredaMolecule = ({ mode, handleSubmit, actionLabel }) => {
   const nombreVeredaRef = useRef(null);
   const [municipios, setMunicipios] = useState([]);
   const [municipiosRef, setMunicipiosRef] = useState("");

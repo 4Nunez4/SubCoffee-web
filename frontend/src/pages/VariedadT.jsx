@@ -89,7 +89,7 @@ export default function VariedadT() {
   };
   
   return (
-    <div className="w-full flex flex-col items-center px-10">
+    <div className="w-full bg-gray-100 flex flex-col items-center px-10">
         <FormVariedadUserOrganim
           open={modalOpen}
           onClose={() => setModalOpen(false)}
