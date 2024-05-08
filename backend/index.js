@@ -1,6 +1,5 @@
 import express from "express";
 import bodyParser from "body-parser";
-import ejs from "ejs";
 import rutNotificaciones from "./src/routes/notificaciones.routes.js";
 import routerChat from "./src/routes/chat.routes.js";
 import rutasSubastas from "./src/routes/subasta.routes.js";
@@ -19,13 +18,11 @@ import ofertasRoutes from "./src/routes/ofertas.routes.js";
 
 const app = express();
 app.use(cors());
-// app.use(cors());
+const PORT = 4000
 
 app.use(express.json());
-// app.use(bodyParser.urlencoded({extended:false}));Poder trabajar con el formato json
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 
 app.use("/auth", autenticacionRouter)
 app.use("/v1", routerUser);
@@ -33,13 +30,18 @@ app.use("/v1", routerDepart);
 app.use("/v1", routerVereda);
 app.use("/v1", routerMunicipio);
 app.use("/v1", routerFinca);
-app.use("/v1", routerVariedad);
 app.use("/v1", routertipovari);
-app.use("/subasta",rutasSubastas);
+app.use("/v1", routerVariedad);
+app.use("/v1",rutasSubastas);
 app.use("/user", routerChat);
 app.use("/v1", rutNotificaciones);
 app.use("/v1", postulantesRoutes);
 app.use("/v1", ofertasRoutes);
+
+app.get('/public/fincas/:imageName', (req, res) => {
+  const imageName = req.params.imageName;
+  res.sendFile(path.join(__dirname, 'fincas', imageName));
+});
 
 app.set("view engine", "ejs");
 
@@ -51,6 +53,6 @@ app.get("/documents", (req, res) => {
   res.render("documentacion.ejs");
 });
 
-app.listen(4000, () => {
-  console.log("Servidor se esta ejecutando en el puerto 4000");
+app.listen(PORT, () => {
+  console.log("Servidor se esta ejecutando en el puerto: ", PORT);
 }); 

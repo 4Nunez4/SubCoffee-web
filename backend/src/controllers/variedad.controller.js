@@ -130,9 +130,7 @@ export const activarVariedad = async (req, res) => {
 export const desactivarVariedad = async (req, res) => {
   const id = req.params.id;
   try {
-    const [result] = await pool.query(
-      `UPDATE variedad SET estado_vari = 2 WHERE pk_id_vari = ${id}`
-    );
+    const [result] = await pool.query( `UPDATE variedad SET estado_vari = 2 WHERE pk_id_vari = '${id}'`);
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Variedad desactivada exitosamente" });
     } else {

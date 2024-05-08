@@ -1,14 +1,14 @@
 import React from "react";
-export const PlusIcon = ({size = 24, width, height, ...props}) => (
+
+export const PlusIcon = () => (
   <svg
     aria-hidden="true"
     fill="none"
     focusable="false"
-    height={size || height}
+    height="24"
     role="presentation"
     viewBox="0 0 24 24"
-    width={size || width}
-    {...props}
+    width="24"
   >
     <g
       fill="none"

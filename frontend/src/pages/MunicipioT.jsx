@@ -3,12 +3,15 @@ import axiosClient from "../api/axios";
 import toast from "react-hot-toast";
 import MunicipioTable from "../components/Guard/MunicipioTable.jsx";
 import FormMunicipioOrganism from "../components/organisms/FormMunicipioOrganism.jsx";
+import ModalMessage from "../nextui/ModalMessage.jsx";
 
 export function MunicipioT() {
   const [modalOpen, setModalOpen] = useState(false);
   const [mode, setMode] = useState("create");
   const [initialData, setInitialData] = useState(null);
   const [results, setResults] = useState([]);
+  const [modalMessage, setModalMessage] = useState(false);
+  const [mensaje, setMensaje] = useState("");
 
   useEffect(() => {
     fetchList(); //  Lista los datos al cargar la página
@@ -23,23 +26,25 @@ export function MunicipioT() {
     }
   };
 
-  const peticionDesactivar = async (pk_codigo_muni) => {
+  const desactivarMunicipio = async (pk_codigo_muni) => {
     try {
-      const response = await axiosClient.put(`/v1/municipiosdes/${pk_codigo_muni}`);
+      const response = await axiosClient.put( `/v1/municipiosdes/${pk_codigo_muni}` );
       if (response.status === 200) {
-        toast.success(response.data.message);
+        setMensaje("¡Municipio desactivado con éxito! Ahora este no podrá ser utilizado los usuarios.");
+        setModalMessage(true);
         fetchList(); // Actualizar la lista de datos después de desactivar
       }
     } catch (error) {
       toast.error("Error en el sistema " + error);
     }
   };
-  
-  const peticionActivar = async (pk_codigo_muni) => {
+
+  const activarMunicipio = async (pk_codigo_muni) => {
     try {
-      const response = await axiosClient.put(`/v1/municipiosac/${pk_codigo_muni}`);
+      const response = await axiosClient.put( `/v1/municipiosac/${pk_codigo_muni}` );
       if (response.status === 200) {
-        toast.success(response.data.message);
+        setMensaje("¡Municipio activado con éxito! Ahora está listo para ser utilizado por los usuarios.");
+        setModalMessage(true);
         fetchList(); // Actualizar la lista de datos después de activar
       }
     } catch (error) {
@@ -55,15 +60,14 @@ export function MunicipioT() {
     { uid: "actions", name: "Acciones", sortable: false },
   ];
 
-const id =localStorage.getItem('id_muni')
-  
+  const id = localStorage.getItem("id_muni");
+
   const handleSubmit = async (data, e) => {
     e.preventDefault();
     try {
       const response = mode === "create"
-        ? await axiosClient.post("/v1/municipios", data)
-        : await axiosClient.put(`/v1/municipios/${initialData.pk_codigo_muni}`, data);
-
+          ? await axiosClient.post("/v1/municipios", data)
+          : await axiosClient.put(`/v1/municipios/${initialData.pk_codigo_muni}`, data );
       const message = response.data.message;
       if (response.status === 200) {
         toast.success(message);
@@ -86,6 +90,11 @@ const id =localStorage.getItem('id_muni')
 
   return (
     <div className="w-full flex flex-col items-center px-10">
+      <ModalMessage
+        isOpen={modalMessage}
+        onClose={() => setModalMessage(false)}
+        label={mensaje}
+      />
       <FormMunicipioOrganism
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -97,8 +106,8 @@ const id =localStorage.getItem('id_muni')
       <MunicipioTable
         actualizar={() => handleToggle("update", id)}
         registrar={() => handleToggle("create")}
-        desactivar={peticionDesactivar}
-        activar={peticionActivar}
+        desactivar={desactivarMunicipio}
+        activar={activarMunicipio}
         data={contenido}
         results={results}
       />

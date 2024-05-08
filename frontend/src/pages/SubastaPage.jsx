@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
 import SubastaCard from "../components/SubastaCard";
-import AbrirModalTemplate from "../components/templates/AbrirModalTemplate";
-import ButtonCerrarModalAtom from "../components/atoms/ButtonCerrarModalAtom";
-import RegisterFincaOrganism from "../components/organisms/RegisterFincaOrganism";
-import ButtonAtom from "../components/atoms/ButtonAtom";
-import VariedadPageOrganism from "../components/organisms/VariedadPageOrganism";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 function SubastaPage() {
@@ -77,27 +72,11 @@ function SubastaPage() {
             <FaChevronRight size={25} />
           </div>
         </div>
-
-        <p className="left-0 right-0 text-center text-negro transition duration-300">
-          ¡Tu finca tiene una historia que contar!
-        </p>
       </div>
       <div className="w-full">
         <h1 className="font-semibold py-5">Borbon</h1>
         <SubastaCard />
       </div>
-      {showModalFinca && (
-        <AbrirModalTemplate>
-          <RegisterFincaOrganism onClose={toggleAbrirModalFinca} />
-          <ButtonCerrarModalAtom onClose={toggleAbrirModalFinca} />
-        </AbrirModalTemplate>
-      )}
-      {showModalVari && (
-        <AbrirModalTemplate>
-          <VariedadPageOrganism onClose={toggleAbrirModalVari} />
-          <ButtonCerrarModalAtom onClose={toggleAbrirModalVari} />
-        </AbrirModalTemplate>
-      )}
     </div>
   );
 }

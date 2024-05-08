@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@nextui-org/date-picker": "^2.0.7",
     "@nextui-org/react": "^2.2.10",
     "axios": "^1.6.8",
     "formik": "^2.4.5",

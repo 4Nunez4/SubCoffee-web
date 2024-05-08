@@ -37,9 +37,11 @@ export const getFinca = async (req, res) => {
     const id = req.params.id;
     let sql = 
     `
-      SELECT f.*, v.* 
+      SELECT f.*, v.*, m.*, d.*
       FROM finca f
       INNER JOIN veredas v ON f.fk_vereda = v.pk_id_vere
+      INNER JOIN municipio m ON v.fk_municipio = m.pk_codigo_muni
+      INNER JOIN departamento d ON m.fk_departamento = d.pk_codigo_depar
       WHERE f.fk_id_usuario = '${id}';
     `;
     const [result] = await pool.query(sql);
@@ -130,7 +132,12 @@ export const desactivarFinca = async (req, res) => {
   try {
     const [result] = await pool.query(`UPDATE finca SET estado_fin = 2 WHERE pk_id_fin = ${id}`);
     if (result.affectedRows > 0) {
-      res.status(200).json({ message: "Finca desactivada exitosamente" });
+      const [resultVariedad] = await pool.query( `UPDATE variedad SET estado_vari = 2 WHERE fk_finca = ${id}`);
+      if (resultVariedad.affectedRows > 0) {
+        res.status(200).json({ message: "Finca y variedad desactivadas exitosamente" });
+      } else {
+        res.status(404).json({ message: `No se encontró ninguna variedad asociada a la Finca con el ID ${id}` });
+      }
     } else {
       res.status(404).json({ message: `No se encontró ninguna Finca con el ID ${id}` });
     }

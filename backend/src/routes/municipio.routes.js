@@ -7,7 +7,7 @@ const routerMunicipio = Router();
 
 routerMunicipio.get("/municipios", getMunicipios);
 routerMunicipio.get("/municipios/:id", verificarUserToken, getMunicipioById);
-routerMunicipio.get("/municipiosdep/:id",  getMuniForDepart);
+routerMunicipio.get("/municipiosdep/:id", verificarUserToken,  getMuniForDepart);
 routerMunicipio.post("/municipios", verificarUserToken, validationMunicipio, createMunicipio);
 routerMunicipio.put("/municipios/:id", verificarUserToken, validationMunicipio, updateMunicipio);
 routerMunicipio.delete("/municipios/:id", verificarUserToken, deleteMunicipio);

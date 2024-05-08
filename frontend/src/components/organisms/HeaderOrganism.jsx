@@ -1,62 +1,103 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import {
+  Modal,
+  User,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  DropdownTrigger,
+  useDisclosure,
+  Autocomplete,
+  AutocompleteItem,
+  Avatar,
+} from "@nextui-org/react";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { icono } from "../atoms/IconsAtom";
 import TextSubAtom from "../atoms/TextSubAtom";
 import AvatarAtom from "../atoms/AvatarAtom";
 import ButtonAtom from "../atoms/ButtonAtom";
-import SearchBarMolecule from "../molecules/SearchBarMolecule";
-import ModalCerrarSesion from "../molecules/ModalLogoutMolecule";
 import ModalMessaAndNoti from "../molecules/ModalMessaAndNoti";
-import IconHeaderAtom from "../atoms/IconHeaderAtom";
-import ButtonCerrarModalAtom from "../atoms/ButtonCerrarModalAtom";
-import AbrirModalTemplate from "../templates/AbrirModalTemplate";
-import LoginPageOrganism from "./LoginPageOrganism";
-import ModalBuscarMolecule from "../molecules/ModalBuscarMolecule";
-import { User } from "@nextui-org/react";
+import { SearchIcon } from "../../nextui/SearchIcon";
+import axios from "axios";
+import AuthContext from "../../context/AuthContext";
+import FormLoginOrganims from "./FormLoginOrganims";
+import axiosClient from "../../api/axios";
 
 function HeaderOrganism() {
-  const [abrirModalLogin, setAbrirModalLogin] = useState(false);
-  const isAuthenticated = window.localStorage.getItem("token");
-  const [abrirCerrarSesion, setAbrirCerrarSesion] = useState(false);
   const [abrirBell, setAbrirBell] = useState(false);
-  const [abrirBuscador, setAbrirBuscador] = useState(false);
   const [isMoonSelected, setIsMoonSelected] = useState(false);
-  //const { users } = useContext(AuthContext);
-  const storedUser = localStorage.getItem("user");
-  const users = storedUser ? JSON.parse(storedUser) : null;
+  const [modalOpen, setModalOpen] = useState(false);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [userslist, setUserslist] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
-  const toggleCerrarSesionModal = () => {
-    setAbrirCerrarSesion(!abrirCerrarSesion);
-    setAbrirBell(false);
-    setAbrirBuscador(false);
+  const isAuthenticated = window.localStorage.getItem("token");
+  const users = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+  const { setUsers } = useContext(AuthContext);
+  const URL = "http://localhost:4000/auth/login";
+
+  const login = async (data, e) => {
+    e.preventDefault();
+    await axios.post(URL, data).then((res) => {
+        if (res.status === 200) {
+          toast.success(res.data.message, { duration: 5000 });
+          const { token, user } = res.data;
+          localStorage.setItem("token", token);
+          localStorage.setItem("user", JSON.stringify(user));
+          navigate("/subcoffee");
+          setUsers(user);
+        } else if (res.status === 401) {
+          toast.error("Usuario no registrado");
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleSearch = async (value) => {
+    setSearchValue(""); 
+  };
+
+  const logoutt = () => {
+    localStorage.clear();
+    navigate("/");
+    toast.success("Cierre de sesión exitoso");
   };
 
   const toggleAbrirBell = () => {
     setAbrirBell(!abrirBell);
-    setAbrirCerrarSesion(false);
-    setAbrirBuscador(false);
-  };
-
-  const toggleAbrirModalBuscador = () => {
-    setAbrirBuscador(!abrirBuscador);
-    setAbrirCerrarSesion(false);
-    setAbrirBell(false);
-  };
-
-  const toggleAbrirModalLogin = () => {
-    setAbrirModalLogin(!abrirModalLogin);
   };
 
   const toggleTheme = () => {
     setIsMoonSelected((prevValue) => !prevValue);
   };
 
-  console.log(users);
+  useEffect(() => {
+    if (users) {
+      fetchUser();
+    }
+  }, []);
+
+  const fetchUser = async () => {
+    try {
+      const response = await axiosClient.get("/v1/users");
+      setUserslist(response.data.data);
+    } catch (error) {
+      toast.error("Error al listar a los usuarios" + error);
+    }
+  };
 
   return (
     <>
       {isAuthenticated ? (
-        <nav className="flex justify-between items-center bg-gray-300 w-full p-4 shadow-sm">
+        <nav className="flex justify-between items-center bg-gray-300 p-4 shadow-sm">
           <div className="flex flex-col">
             <TextSubAtom
               to="/subcoffee"
@@ -64,11 +105,89 @@ function HeaderOrganism() {
               text="Bienvenido"
             />
           </div>
-          <SearchBarMolecule onClick={() => setAbrirBuscador(true)} />
+          <div>
+            <Autocomplete
+              classNames={{
+                base: "w-96",
+                listboxWrapper: "max-h-[320px]",
+                selectorButton: "text-default-500",
+              }}
+              value={searchValue} // Asigna el estado local al valor del input
+              onChange={(value) => handleSearch(value)} // Función para manejar cambios en el input
+              defaultItems={userslist}
+              inputProps={{
+                classNames: {
+                  input: "ml-1",
+                  inputWrapper: "h-[48px]",
+                },
+              }}
+              listboxProps={{
+                hideSelectedIcon: true,
+                itemClasses: {
+                  base: [
+                    "rounded-medium",
+                    "text-default-500",
+                    "transition-opacity",
+                    "data-[hover=true]:text-foreground",
+                    "dark:data-[hover=true]:bg-default-50",
+                    "data-[pressed=true]:opacity-70",
+                    "data-[hover=true]:bg-default-200",
+                    "data-[selectable=true]:focus:bg-default-100",
+                    "data-[focus-visible=true]:ring-default-500",
+                  ],
+                },
+              }}
+              aria-label="Select an employee"
+              placeholder="Buscar usuario, subasta..."
+              popoverProps={{
+                offset: 10,
+                classNames: {
+                  base: "rounded-large",
+                  content: "p-1 border-small border-default-100 bg-background",
+                },
+              }}
+              startContent={
+                <SearchIcon
+                  className="text-default-400"
+                  strokeWidth={2.5}
+                  size={20}
+                />
+              }
+              radius="full"
+              variant="bordered"
+            >
+              {(user) => (
+                <AutocompleteItem
+                  key={user.pk_cedula_user}
+                  textValue={user.nombre_user}
+                >
+                  <Link to={`/profile/${user.pk_cedula_user}`}>
+                    <div className="flex justify-between items-center">
+                      <div className="flex gap-2 items-center">
+                        <Avatar
+                          alt={user.nombre_user}
+                          className="flex-shrink-0"
+                          size="sm"
+                          src={
+                            user.imagen_user && user.imagen_user.length > 0
+                              ? `../../public/${user.imagen_user}`
+                              : "../../imagen_de_usuario.webp"
+                          }
+                        />
+                        <div className="flex flex-col">
+                          <span className="text-small">{user.nombre_user}</span>
+                          <span className="text-tiny text-default-400">
+                            {user.email_user}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </AutocompleteItem>
+              )}
+            </Autocomplete>
+          </div>
           <div className="flex gap-x-3 items-center">
-            <IconHeaderAtom onClick={toggleAbrirBell}>
-              <icono.iconoCampana className="h-5 w-5" />
-            </IconHeaderAtom>
             {isMoonSelected ? (
               <icono.iconoLuna
                 onClick={toggleTheme}
@@ -80,28 +199,62 @@ function HeaderOrganism() {
                 className="text-blanco cursor-pointer"
               />
             )}
-            {users && (
-              <button
-                className="flex flex-col items-center h-8 -mt-3"
-                onClick={toggleCerrarSesionModal}
-              >
-              <User   
-                name={`${users.nombre_user}`}
-                description={`${users.rol_user}`}
-                avatarProps={{
-                  src: `./public/img/${users.imagen_user ? users.imagen_user :  "usernotfound.png"}`
-              }}
-                />
-              </button>
-            )}
-          </div>
-          {abrirCerrarSesion && (
-            <div className="absolute top-16 right-2 flex justify-center items-center z-20">
-              <div className="bg-blanco rounded-xl">
-                <ModalCerrarSesion onClose={toggleCerrarSesionModal} />
-              </div>
+            <div className="flex items-center gap-4">
+              <Dropdown placement="bottom-end">
+                <DropdownTrigger>
+                  <User
+                    as="button"
+                    avatarProps={{
+                      src: `${
+                        users.imagen_user && users.imagen_user.length > 0
+                          ? `../../public/${users.imagen_user}`
+                          : "../../imagen_de_usuario.webp"
+                      }`,
+                    }}
+                    className="transition-transform"
+                    description={`${users.rol_user}`}
+                    name={`${users.nombre_user}`}
+                  />
+                </DropdownTrigger>
+                <DropdownMenu aria-label="User Actions" variant="flat">
+                  <DropdownItem
+                    key="profile"
+                    onClick={() => navigate(`/profile/${users.pk_cedula_user}`)}
+                    className="text-center bg-gray-400 hover:bg-gray-200 border text-white py-2"
+                  >
+                    Perfil
+                  </DropdownItem>
+                  <DropdownItem
+                    key="logout"
+                    onPress={onOpen}
+                    className="text-center bg-red-600 border text-white py-2"
+                  >
+                    Cerrar sesión
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
             </div>
-          )}
+          </div>
+          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+            <ModalContent>
+              <ModalHeader className="flex justify-center">
+                <icono.iconoInterrogation className="text-red-600 w-32 h-32" />
+              </ModalHeader>
+              <ModalBody>
+                <p className="text-black font-semibold text-center">
+                  ¿Estás seguro de cerrar sesión?
+                </p>
+              </ModalBody>
+              <ModalFooter className="flex justify-center mb-4">
+                <Button
+                  className="bg-red-600 text-white hover:bg-red-500 w-40 rounded-lg"
+                  onClick={logoutt}
+                >
+                  Cerrar sesión
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
           {abrirBell && (
             <div className="absolute top-16 right-32 flex justify-center items-center">
               <div className="bg-blanco rounded-xl w-80">
@@ -109,43 +262,39 @@ function HeaderOrganism() {
               </div>
             </div>
           )}
-          {abrirBuscador && (
-            <div className="absolute top-16 left-[585px] flex justify-center items-center">
-              <div className="bg-blanco rounded-xl w-[300px]">
-                <ModalBuscarMolecule onClose={toggleAbrirModalBuscador} />
-              </div>
-            </div>
-          )}
         </nav>
       ) : (
-        <nav className="flex justify-between items-center bg-gray-300 fixed w-full m-0 top-0 p-4 shadow-sm">
-          <div className="flex items-center">
-            <AvatarAtom img="isotipo-SubCoffee.png" />
-            <TextSubAtom to="/" color="cafeClaroLogo" text="Sub" />
-            <TextSubAtom to="/" color="cafeOscuroLogo" text="Coffee" />
-          </div>
-          <div className="flex items-center gap-x-3">
-            <div className="cursor-pointer">
-              {isMoonSelected ? (
-                <icono.iconoLuna
-                  onClick={toggleTheme}
-                  className="text-blanco"
-                />
-              ) : (
-                <icono.iconoSol onClick={toggleTheme} className="text-blanco" />
-              )}
+        <>
+          <nav className="flex justify-between items-center bg-gray-300 fixed w-full m-0 top-0 p-4 shadow-sm z-20">
+            <div className="flex items-center">
+              <AvatarAtom img="isotipo-SubCoffee.png" />
+              <TextSubAtom to="/" color="gray-600" text="SubCoffee" />
             </div>
-            <ButtonAtom onClick={() => setAbrirModalLogin(true)}>
-              Iniciar sesión
-            </ButtonAtom>
-          </div>
-        </nav>
-      )}
-      {abrirModalLogin && (
-        <AbrirModalTemplate>
-          <LoginPageOrganism />
-          <ButtonCerrarModalAtom onClose={toggleAbrirModalLogin} />
-        </AbrirModalTemplate>
+            <div className="flex items-center gap-x-3">
+              <div className="cursor-pointer">
+                {isMoonSelected ? (
+                  <icono.iconoLuna
+                    onClick={toggleTheme}
+                    className="text-blanco"
+                  />
+                ) : (
+                  <icono.iconoSol
+                    onClick={toggleTheme}
+                    className="text-blanco"
+                  />
+                )}
+              </div>
+              <ButtonAtom onClick={() => setModalOpen(true)}>
+                Iniciar sesión
+              </ButtonAtom>
+            </div>
+          </nav>
+          <FormLoginOrganims
+            open={modalOpen}
+            onClose={() => setModalOpen(false)}
+            handleSubmit={login}
+          />
+        </>
       )}
     </>
   );

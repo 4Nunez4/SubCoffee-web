@@ -19,6 +19,9 @@ import { SearchIcon } from "../../nextui/SearchIcon";
 import { PlusIcon } from "../../nextui/PlusIcon.jsx";
 import { ChevronDownIcon } from "../../nextui/ChevronDownIcon";
 import { VerticalDotsIcon } from "../../nextui/VerticalDotsIcon.jsx";
+import { EditIcon } from "../../nextui/EditIcon.jsx";
+import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
+import ActivarIcon from "../../nextui/ActivarIcon.jsx";
 
 const statusColorMap = {
   activo: "success",
@@ -41,8 +44,8 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
   };
 
   const statusOptions = [
-    { name: "Inactivo", uid: "activo" },
-    { name: "Activo", uid: "inactivo" },
+    { name: "Inactivo", uid: "inactivo" },
+    { name: "Activo", uid: "activo" },
   ];
 
   const hasSearchFilter = Boolean(filterValue);
@@ -118,28 +121,19 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
         );
       case "actions":
         return (
-          <div className="relative flex justify-end items-center gap-2">
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size="lg" variant="light">
-                  <VerticalDotsIcon className="text-default-300" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Menu de acciones">
-                <DropdownItem onClick={() => handleUpdateUser(results.pk_id_vere)} >
-                  Editar
-                </DropdownItem>
-                {results.estado_vere === "activo" ? (
-                  <DropdownItem onClick={() => desactivar(results.pk_id_vere)} >
-                    Desactivar
-                  </DropdownItem>
-                ) : (
-                  <DropdownItem onClick={() => activar(results.pk_id_vere)} >
-                    Activar
-                  </DropdownItem>
-                )}
-              </DropdownMenu>
-            </Dropdown>
+          <div className="relative flex justify-center items-center gap-2">
+            <Button color="default" startContent={<EditIcon />} onClick={() => handleUpdateUser(results.pk_id_vere)}>
+              Editar
+            </Button>
+            {results.estado_vere === "activo" ? (
+              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivar(results.pk_id_vere)}>
+                Desactivar
+              </Button> 
+            ) : (
+              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activar(results.pk_id_vere)}>
+                Activar
+              </Button>
+            )}
           </div>
         );
       default:
@@ -184,7 +178,7 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
 
   const topContent = useMemo(() => {
     return (
-      <div className="flex flex-col gap-4 px-10 pt-10">
+      <div className="flex flex-col gap-4 pt-8">
         <div className="flex justify-between gap-3 items-end">
           <Input
             isClearable
@@ -218,7 +212,7 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button color="primary" endContent={<PlusIcon />} onClick={registrar} >
+            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={registrar} >
               Registrar
             </Button>
           </div>
@@ -243,6 +237,7 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
     );
   }, [
     filterValue,
+    statusFilter,
     onRowsPerPageChange,
     onSearchChange,
     onClear,
@@ -251,7 +246,7 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
 
   const bottomContent = useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center m-4">
+      <div className="flex justify-between items-center py-4">
         <Pagination
           isCompact
           showControls

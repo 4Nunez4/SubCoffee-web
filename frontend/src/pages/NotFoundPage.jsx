@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 const NotFoundPage = () => {
+
+  const users = JSON.parse(localStorage.getItem("user"));
+
   return (
     <section className="bg-blancoMedio1 flex h-screen items-center justify-center">
       <div className="flex flex-col md:flex-row justify-center items-center gap-5 md:gap-20">
@@ -13,7 +16,7 @@ const NotFoundPage = () => {
           <p className="text-grisOscuro text-xl mb-8">
             Pero no te vayas, vuelve e inténtalo de nuevo.
           </p>
-          <Link to="/" className="bg-grisMedio3 hover:bg-grisOscuro text-blanco font-semibold text-base py-3 px-6 rounded-lg transition duration-200 border">
+          <Link to={`${users ? '/subcoffee' : '/'}`} className="bg-gray-300 hover:bg-gray-600 hover:text-white font-semibold text-base py-3 px-6 rounded-lg transition duration-200">
             Volver al Inicio
           </Link> 
         </div>

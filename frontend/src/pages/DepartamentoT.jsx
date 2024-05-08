@@ -3,12 +3,15 @@ import axiosClient from "../api/axios";
 import toast from "react-hot-toast";
 import DepartamentoTable from "../components/Guard/DepartamentoTable.jsx";
 import FormDepartamentoOrganism from "../components/organisms/FormDepartamentoOrganism.jsx";
+import ModalMessage from "../nextui/ModalMessage.jsx";
 
 export function DepartamentoT() {
   const [modalOpen, setModalOpen] = useState(false);
   const [mode, setMode] = useState("create");
   const [initialData, setInitialData] = useState(null);
   const [results, setResults] = useState([]);
+  const [modalMessage, setModalMessage] = useState(false);
+  const [mensaje, setMensaje] = useState("");
 
   useEffect(() => {
     fetchDepartamentoList(); //  Lista los departamentos al cargar la página
@@ -23,23 +26,25 @@ export function DepartamentoT() {
     }
   };
 
-  const peticionDesactivar = async (pk_codigo_depar) => {
+  const desactivarDepartamento = async (pk_codigo_depar) => {
     try {
-      const response = await axiosClient.put(`/v1/departamentosdes/${pk_codigo_depar}`);
+      const response = await axiosClient.put( `/v1/departamentosdes/${pk_codigo_depar}` );
       if (response.status === 200) {
-        toast.success(response.data.message);
+        setMensaje("¡Departamento desactivado con éxito! Ahora este no podrá ser utilizado por los usuarios.");
+        setModalMessage(true);
         fetchDepartamentoList(); // Actualizar la lista de departamentos después de desactivar
       }
     } catch (error) {
       toast.error("Error en el sistema " + error);
     }
   };
-  
-  const peticionActivar = async (pk_codigo_depar) => {
+
+  const activarDepartamento = async (pk_codigo_depar) => {
     try {
-      const response = await axiosClient.put(`/v1/departamentosac/${pk_codigo_depar}`);
+      const response = await axiosClient.put( `/v1/departamentosac/${pk_codigo_depar}` );
       if (response.status === 200) {
-        toast.success(response.data.message);
+        setMensaje("¡Departamento activado con éxito! Ahora este listo para ser utilizado por los usuarios.");
+        setModalMessage(true);
         fetchDepartamentoList(); // Actualizar la lista de departamentos después de activar
       }
     } catch (error) {
@@ -54,15 +59,14 @@ export function DepartamentoT() {
     { uid: "actions", name: "Acciones", sortable: false },
   ];
 
-const id =localStorage.getItem('id_depar')
-  
+  const id = localStorage.getItem("id_depar");
+
   const handleSubmit = async (data, e) => {
     e.preventDefault();
     try {
       const response = mode === "create"
-        ? await axiosClient.post("/v1/departamentos", data)
-        : await axiosClient.put(`/v1/departamentos/${initialData.pk_codigo_depar}`, data);
-
+          ? await axiosClient.post("/v1/departamentos", data)
+          : await axiosClient.put(`/v1/departamentos/${initialData.pk_codigo_depar}`, data );
       const message = response.data.message;
       if (response.status === 200) {
         toast.success(message);
@@ -85,10 +89,15 @@ const id =localStorage.getItem('id_depar')
 
   return (
     <div className="w-full flex flex-col items-center px-10">
+      <ModalMessage
+        isOpen={modalMessage}
+        onClose={() => setModalMessage(false)}
+        label={mensaje}
+      />
       <FormDepartamentoOrganism
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={mode === "create" ? "Registrar Departamento" : "Actualizar Departamento"}
+        title={ mode === "create" ? "Registrar Departamento" : "Actualizar Departamento" }
         actionLabel={mode === "create" ? "Registrar" : "Actualizar"}
         initialData={initialData}
         handleSubmit={handleSubmit}
@@ -97,8 +106,8 @@ const id =localStorage.getItem('id_depar')
       <DepartamentoTable
         actualizar={() => handleToggle("update", id)}
         registrar={() => handleToggle("create")}
-        desactivar={peticionDesactivar}
-        activar={peticionActivar}
+        desactivar={desactivarDepartamento}
+        activar={activarDepartamento}
         data={contenido}
         results={results}
       />

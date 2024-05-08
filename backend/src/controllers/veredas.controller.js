@@ -43,6 +43,27 @@ export const getVereda = async (req, res) => {
   }
 };
 
+export const getVeredasForMunicipio = async (req, res) => {
+  const id = req.params.id; 
+  try {
+    const [result] = await pool.query(      
+      `
+        SELECT v.*
+        FROM veredas v
+        INNER JOIN municipio m ON v.fk_municipio = m.pk_codigo_muni
+        WHERE m.pk_codigo_muni = '${id}';
+      `
+    );
+    if (result.length > 0) {
+      res.status(200).json(result); 
+    } else {
+      res.status(404).json({ message: "No se encontraron veredas para este municipio" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error en el servidor" + error });
+  }
+}
+
 export const crearVereda = async (req, res) => {
   try {
     let errors = validationResult(req);

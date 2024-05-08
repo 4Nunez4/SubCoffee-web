@@ -3,16 +3,10 @@ import TitleForModal from "../atoms/TitleForModal";
 import toast from "react-hot-toast";
 import InputWithIconAtom from "../atoms/InputWithIconAtom";
 import { Button, Select, SelectItem } from "@nextui-org/react";
-import { SelectorIcon } from "../../nextui/SelectorIcon";
 import { icono } from "../atoms/IconsAtom";
 import axiosClient from "../../api/axios";
 
-const RegisterMunicipioMolecule = ({
-  mode,
-  initialData,
-  handleSubmit,
-  actionLabel,
-}) => {
+const RegisterMunicipioMolecule = ({ mode, initialData, handleSubmit, actionLabel }) => {
   const codigoMunicipioRef = useRef(null);
   const nombreMunicipioRef = useRef(null);
   const [departamentoIdRef, setDepartamentoIdRef] = useState("");
@@ -89,7 +83,7 @@ const RegisterMunicipioMolecule = ({
         value={departamentoIdRef}
         onChange={(e) => setDepartamentoIdRef(e.target.value)}
       >
-        {departamentos.map((departamento) => (
+        {departamentos.filter((departamento) => departamento.estado_depar === "activo").map((departamento) => (
           <SelectItem
           key={departamento.pk_codigo_depar}
           value={departamento.pk_codigo_depar}

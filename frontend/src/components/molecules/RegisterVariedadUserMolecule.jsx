@@ -89,6 +89,13 @@ const RegisterVariedadUserMolecule = ({ mode, initialData, handleSubmit, actionL
       <Select
         label="Finca"
         value={fincasRef}
+        variant="bordered"
+        popoverProps={{
+          classNames: {
+            base: "before:bg-default-200",
+            content: "p-0 border-small border-divider bg-background",
+          },
+        }}
         onChange={(e) => setFincasRef(e.target.value)}
       >
         {fincas.filter((finca) => finca.estado_fin === "activo").map((finca) => (
@@ -100,6 +107,13 @@ const RegisterVariedadUserMolecule = ({ mode, initialData, handleSubmit, actionL
       <Select
         label="Tipo Variedad"
         value={tipoVariRef}
+        variant="bordered"
+        popoverProps={{
+          classNames: {
+            base: "before:bg-default-200",
+            content: "p-0 border-small border-divider bg-background",
+          },
+        }}
         onChange={(e) => setTipoVariRef(e.target.value)}
       >
         {tipoVariedades.filter((tipo) => tipo.estado_tipo_vari === "activo").map((tipo) => (

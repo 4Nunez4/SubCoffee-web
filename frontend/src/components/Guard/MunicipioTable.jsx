@@ -18,7 +18,9 @@ import {
 import { SearchIcon } from "../../nextui/SearchIcon";
 import { PlusIcon } from "../../nextui/PlusIcon.jsx";
 import { ChevronDownIcon } from "../../nextui/ChevronDownIcon";
-import { VerticalDotsIcon } from "../../nextui/VerticalDotsIcon.jsx";
+import { EditIcon } from "../../nextui/EditIcon.jsx";
+import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
+import ActivarIcon from "../../nextui/ActivarIcon.jsx";
 
 const statusColorMap = {
   activo: "success",
@@ -41,8 +43,8 @@ export default function MunicipioTable({ registrar, data, results, actualizar, d
   };
 
   const statusOptions = [
-    { name: "Inactivo", uid: "activo" },
-    { name: "Activo", uid: "inactivo" },
+    { name: "Inactivo", uid: "inactivo" },
+    { name: "Activo", uid: "activo" },
   ];
 
   const hasSearchFilter = Boolean(filterValue);
@@ -119,28 +121,19 @@ export default function MunicipioTable({ registrar, data, results, actualizar, d
         );
       case "actions":
         return (
-          <div className="relative flex justify-end items-center gap-2">
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size="lg" variant="light">
-                  <VerticalDotsIcon className="text-default-300" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Menu de acciones">
-                <DropdownItem onClick={() => handleUpdateUser(results.pk_codigo_muni)} >
-                  Editar
-                </DropdownItem>
-                {results.estado_muni === "activo" ? (
-                  <DropdownItem onClick={() => desactivar(results.pk_codigo_muni)} >
-                    Desactivar
-                  </DropdownItem>
-                ) : (
-                  <DropdownItem onClick={() => activar(results.pk_codigo_muni)} >
-                    Activar
-                  </DropdownItem>
-                )}
-              </DropdownMenu>
-            </Dropdown>
+          <div className="relative flex justify-center items-center gap-2">
+            <Button color="default" startContent={<EditIcon />} onClick={() => handleUpdateUser(results.pk_codigo_muni)}>
+              Editar
+            </Button>
+            {results.estado_muni === "activo" ? (
+              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivar(results.pk_codigo_muni)}>
+                Desactivar
+              </Button>
+            ) : (
+              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activar(results.pk_codigo_muni)}>
+                Activar
+              </Button>
+            )}
           </div>
         );
       default:
@@ -185,7 +178,7 @@ export default function MunicipioTable({ registrar, data, results, actualizar, d
 
   const topContent = useMemo(() => {
     return (
-      <div className="flex flex-col gap-4 px-10 pt-10">
+      <div className="flex flex-col gap-4 pt-8">
         <div className="flex justify-between gap-3 items-end">
           <Input
             isClearable
@@ -219,7 +212,7 @@ export default function MunicipioTable({ registrar, data, results, actualizar, d
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button color="primary" endContent={<PlusIcon />} onClick={registrar} >
+            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={registrar} >
               Registrar
             </Button>
           </div>
@@ -244,6 +237,7 @@ export default function MunicipioTable({ registrar, data, results, actualizar, d
     );
   }, [
     filterValue,
+    statusFilter,
     onRowsPerPageChange,
     onSearchChange,
     onClear,
@@ -252,7 +246,7 @@ export default function MunicipioTable({ registrar, data, results, actualizar, d
 
   const bottomContent = useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center m-4">
+      <div className="flex justify-between items-center py-4">
         <Pagination
           isCompact
           showControls

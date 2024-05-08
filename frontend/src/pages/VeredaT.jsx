@@ -3,12 +3,15 @@ import axiosClient from "../api/axios";
 import toast from "react-hot-toast";
 import VeredaTable from "../components/Guard/VeredaTable.jsx";
 import FormVeredaMolecule from "../components/organisms/FormVeredaMolecule.jsx";
+import ModalMessage from "../nextui/ModalMessage.jsx";
 
 export function VeredaT() {
   const [modalOpen, setModalOpen] = useState(false);
   const [mode, setMode] = useState("create");
   const [initialData, setInitialData] = useState(null);
   const [results, setResults] = useState([]);
+  const [modalMessage, setModalMessage] = useState(false);
+  const [mensaje, setMensaje] = useState("");
 
   useEffect(() => {
     fetchList(); //  Lista los datos al cargar la página
@@ -23,23 +26,25 @@ export function VeredaT() {
     }
   };
 
-  const peticionDesactivar = async (pk_id_vere) => {
+  const desactivarVereda = async (pk_id_vere) => {
     try {
       const response = await axiosClient.put(`/v1/veredasdes/${pk_id_vere}`);
       if (response.status === 200) {
-        toast.success(response.data.message);
+        setMensaje("¡Vereda desactivada con éxito! Ahora esta no podrá ser utilizada por los usuarios.");
+        setModalMessage(true);
         fetchList(); // Actualizar la lista de datos después de desactivar
       }
     } catch (error) {
       toast.error("Error en el sistema " + error);
     }
   };
-  
+
   const peticionActivar = async (pk_id_vere) => {
     try {
       const response = await axiosClient.put(`/v1/veredasac/${pk_id_vere}`);
       if (response.status === 200) {
-        toast.success(response.data.message);
+        setMensaje("¡Vereda activada con éxito! Ahora está lista para ser utilizada por los usuarios.");
+        setModalMessage(true);
         fetchList(); // Actualizar la lista de datos después de activar
       }
     } catch (error) {
@@ -55,15 +60,14 @@ export function VeredaT() {
     { uid: "actions", name: "Acciones", sortable: false },
   ];
 
-const id =localStorage.getItem('id_vere')
-  
+  const id = localStorage.getItem("id_vere");
+
   const handleSubmit = async (data, e) => {
     e.preventDefault();
     try {
       const response = mode === "create"
-        ? await axiosClient.post("/v1/veredas", data)
-        : await axiosClient.put(`/v1/veredas/${initialData.pk_id_vere}`, data);
-
+          ? await axiosClient.post("/v1/veredas", data)
+          : await axiosClient.put( `/v1/veredas/${initialData.pk_id_vere}`, data );
       const message = response.data.message;
       if (response.status === 200) {
         toast.success(message);
@@ -86,6 +90,11 @@ const id =localStorage.getItem('id_vere')
 
   return (
     <div className="w-full flex flex-col items-center px-10">
+      <ModalMessage
+        isOpen={modalMessage}
+        onClose={() => setModalMessage(false)}
+        label={mensaje}
+      />
       <FormVeredaMolecule
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -97,7 +106,7 @@ const id =localStorage.getItem('id_vere')
       <VeredaTable
         actualizar={() => handleToggle("update", id)}
         registrar={() => handleToggle("create")}
-        desactivar={peticionDesactivar}
+        desactivar={desactivarVereda}
         activar={peticionActivar}
         data={contenido}
         results={results}

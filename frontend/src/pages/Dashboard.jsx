@@ -6,21 +6,20 @@ import FooterOrganism from "../components/organisms/FooterOrganism";
 import SidebarOrganims from  "../components/organisms/SidebarOrganims"
 
 const Dashboard = () => {
-  const auth = window.localStorage.getItem("token");
+  const auth = localStorage.getItem("token");
 
   return auth ? (
-    <div className="flex flex-auto h-auto">
+    <div className="flex flex-auto h-auto bg-gray-100">
       <SidebarOrganims />
       <div className="grow">
         <HeaderOrganism />
         <Outlet />
-        <FooterOrganism />
       </div>
     </div>
   ) : (
-    <div className="flex-auto h-screen">
+    <div className="flex-auto h-auto">
       <HeaderOrganism />
-      <main>
+      <main className="grow mt-16">
         <Outlet />
       </main>
       <FooterOrganism />

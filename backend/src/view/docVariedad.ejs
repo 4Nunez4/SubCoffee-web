@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <hr>
+    <h2>Requerimiento. Documentacion de Variedades</h2>
+    <hr>
+    <h3>Crear Variedad</h3>
+    <table>
+
+        <tr><td>Numero </td><td>1</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Guardar Variedad </td></tr>
+        <tr><td>URI</td><td>/variedad/variedad></tr>
+        <tr><td>Descripcion:</td><td>Permite guardar variedades en la base de datos</td></tr>
+        <tr><td>Verbo HTTP:</td><td>POST</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td> 
+        {
+            "tipo_vari": "Tipica",
+            "descripcion_vari": "cafe de la mejor calidad",
+            "puntuacion_vari": 17,
+            "estado_vari": "activo"
+        }</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+              message:"Variedad creada con exito"
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message:"Error al crear la variedad"
+            }
+            Error:
+            Status:500
+            body:{
+              message:'No se pudo crear la variedad" '+err
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
+    </table>
+
+    <hr>
+    <h3>Listar Variedades</h3>
+    <table>
+        <tr><td>Numero </td><td>2</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Listar Variedad </td></tr>
+        <tr><td>URI</td><td>/variedad/variedad</tr>
+        <tr><td>Descripcion:</td><td>Permite listar todas las variedades</td></tr>
+        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                
+                    "pk_id_vari": 1,
+                    "tipo_vari": "Borbon",
+                    "descripcion_vari": "cafe de la mejor calidad",
+                    "imagen_vari": null,
+                    "puntuacion_vari": 12,
+                    "estado_vari": "activo"
+                
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message:" 'Error no hay variedades"
+            }
+            Error:
+            Status:500
+            body:{
+              message:'No se pudo listar la variedad" '+err
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
+    </table>
+   
+    <hr>
+    <h3>Actualizar Variedad</h3>
+    <table>
+        <tr><td>Numero </td><td>3</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Actualizar Variedad </td></tr>
+        <tr><td>URI</td><td>/variedad/variedad/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite actualizar variedades en la base de datos por medio de su id       </td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>PETICION BODY</td><td> {
+
+            "tipo_vari": "Tipica",
+            "descripcion_vari": "cafe de la mejor calidaddsd",
+            "puntuacion_vari": 17,
+            "estado_vari":"activo"
+        }</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                
+                message: 'La variedad ha sido actualizada exitosamente'
+                
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: "El ID de la variedad es incorrecto"
+            }
+            Error:
+            Status:500
+            body:{
+                message:  'Error al actualizar la variedad' + '+err
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
+    </table>
+   
+    <hr>
+    <h3>Buscar Variedad</h3>
+    <table>
+        <tr><td>Numero </td><td>4</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Buscar Variedad a traves de su id</td></tr>
+        <tr><td>URI</td><td>/variedad/variedad/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite buscar variedades en la base de datos por medio de su ID</td></tr>
+        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                "status": 200,
+                "data": [
+                    {
+                        "pk_id_vari": 2,
+                        "tipo_vari": "Borbon",
+                        "descripcion_vari": "cafe de la mejor calidad",
+                        "imagen_vari": null,
+                        "puntuacion_vari": 17,
+                        "estado_vari":"activo"
+                    }
+                ]
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: 'Error ID variedad no encontrada'
+            }
+            Error:
+            Status:500
+            body:{
+                message: 'Error en el sistema' + '+err
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVlkvm</td>
+       </tr>
+    </table>
+
+    <hr>
+    <h3>Eliminar Variedad</h3>
+    <table>
+        <tr><td>Numero </td><td>5</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Eliminar Variedad</td></tr>
+        <tr><td>URI</td><td>/variedad/variedad/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite eliminar variedades en la base de datos por medio de su id</td></tr>
+        <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                "message": "Variedad eliminada exitosamente"    
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: 'La Variedad con el ID proporcionado no existe'
+            }
+            Error:
+            Status:500
+            body:{
+                message: 'Error en el sistema' + '+err
+            }
+           <tr>
+                 <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+            </tr>
+            <tr>
+                <td>Rama:</td><td>DEVlkvm</td>
+            </tr>
+            
+        </td></tr>
+    </table>
+
+
+
+
+    
+    <hr>
+    <h3>Desactivar Variedad</h3>
+    <table>
+
+        <tr><td>Numero </td><td>6</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Desactivar Variedad</td></tr>
+        <tr><td>URI</td><td>/variedad/desactivar/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite desactivar variedades en la base de datos por medio de su id</td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+              
+                    "message": "La variedad fue desactivada exitosamente"
+                
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: 'El id de la variedad es incorrecto' 
+            }
+            Error:
+            Status:500
+            body:{
+                message: 'Error al desactivar la variedad'
+            }
+           <tr>
+                 <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+            </tr>
+            <tr>
+                <td>Rama:</td><td>DEVlkvm</td>
+            </tr>
+            
+        </td></tr>
+    </table>
+
+
+    
+    
+    <hr>
+    <h3>Desactivar Variedad</h3>
+    <table>
+
+        <tr><td>Numero </td><td>7</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Activar Variedad</td></tr>
+        <tr><td>URI</td><td>/variedad/activar/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite activar variedades en la base de datos por medio de su id</td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuariod</td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+              
+                    "message": "La variedad fue activada exitosamente"
+                
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: 'El id de la variedad es incorrecto' 
+            }
+            Error:
+            Status:500
+            body:{
+                message: 'Error al activar la variedad'
+            }
+           <tr>
+                 <td>Desarrollador:</td><td>Laura Katalina Valderrama Muñoz</td>
+            </tr>
+            <tr>
+                <td>Rama:</td><td>DEVlkvm</td>
+            </tr>
+            
+        </td></tr>
+    </table>
+</body>
+</html>

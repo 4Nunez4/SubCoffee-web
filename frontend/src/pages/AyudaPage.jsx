@@ -1,51 +1,127 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FaRegArrowAltCircleDown } from "react-icons/fa";
+import React, { useRef, useState, useEffect } from "react";
+import ComoCrearSubasta from "./ComoCrearUnaSubasta";
+import InfoRolesA from "./InfoRolesA";
+import ComoPujarUnaSubasta from "./ComoPujarUnaSubasta";
+import { Button, ButtonGroup } from "@nextui-org/react";
+import FlechaArriba from "../nextui/FlechaArriba";
+import InputDudaWithIconAtom from "../components/atoms/InputDudaWithIconAtom";
+import toast from "react-hot-toast";
+import { icono } from "../components/atoms/IconsAtom";
 
 function AyudaPage() {
+  const comoCrearRef = useRef(null);
+  const comoPujarRef = useRef(null);
+  const infoRolesRef = useRef(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [texto, setTexto] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    toast.success("Gracias por tu mensaje!");
+    setTexto("");
+  };
+
+  const handleScroll = () => {
+    setIsScrolled(window.scrollY > 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollToSection = (section) => {
+    let ref;
+    switch (section) {
+      case "comoCrear":
+        ref = comoCrearRef;
+        break;
+      case "comoPujar":
+        ref = comoPujarRef;
+        break;
+      case "infoRoles":
+        ref = infoRolesRef;
+        break;
+      default:
+        return;
+    }
+    ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div className="p-8">
-      <h1 className="text-center text-3xl font-semibold mb-4">
-        ¿Cómo podemos ayudarte?
-      </h1>
-      <p className="mb-2 font-semibold">Explora por tema</p>
-      <div className="grid grid-cols-3 gap-x-5">
-        <Link
-          to={"/ayudacrearsubasta"}
-          className="flex items-center border rounded-lg p-4 bg-green-200 mb-4"
+    <div
+      className={`p-8 px-44 mx-auto flex flex-col justify-center ${
+        isScrolled ? "scrolled" : ""
+      }`}
+    >
+      <div className="flex justify-center w-auto items-center">
+        <ButtonGroup>
+          <Button
+            onClick={() => scrollToSection("comoCrear")}
+            className={`transition-opacity ${isScrolled ? "opacity-40" : ""}`}
+          >
+            Como crear una subasta
+          </Button>
+          <Button
+            onClick={() => scrollToSection("comoPujar")}
+            className={`transition-opacity ${isScrolled ? "opacity-40" : ""}`}
+          >
+            Como pujar una subasta
+          </Button>
+          <Button
+            onClick={() => scrollToSection("infoRoles")}
+            className={`transition-opacity ${isScrolled ? "opacity-40" : ""}`}
+          >
+            Información de Roles
+          </Button>
+        </ButtonGroup>
+        <Button
+          onClick={scrollToTop}
+          startContent={<FlechaArriba />}
+          className={`transition-opacity fixed bottom-8 right-8 ${
+            isScrolled ? "opacity-40" : "" }`}
         >
-          <FaRegArrowAltCircleDown className="text-3xl text-green-600 mr-4" />
-          <div>
-            <p className="font-semibold mb-1">Cómo crear una subasta</p>
-            <p className="text-sm">
-              Aprende el paso a paso que se debe seguir para crear una subasta.
+          Ir Arriba
+        </Button>
+      </div>
+      <div>
+        <div ref={comoCrearRef} data-section="comoCrear">
+          <ComoCrearSubasta />
+        </div>
+        <div ref={comoPujarRef} data-section="comoPujar">
+          <ComoPujarUnaSubasta />
+        </div>
+        <div ref={infoRolesRef} data-section="infoRoles">
+          <InfoRolesA />
+        </div>
+        <div>
+          <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
+            <p className="text-sm font-semibold text-gray-700 uppercase mb-2">
+              ¿Tienes alguna duda?
             </p>
+            <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
+              <InputDudaWithIconAtom
+                icon={icono.iconoGmail}
+                id="text"
+                name="text"
+                placeholder="Duda o sugerencia..."
+                required
+                type="text"
+                value={texto}
+                onChange={(e) => setTexto(e.target.value)}
+              />
+              <Button className="bg-gray-400 text-white hover:bg-gray-500 w-full rounded-lg">
+                Enviar duda
+              </Button>
+            </form>
           </div>
-        </Link>
-        <Link
-          to={"/ayudacrearsubasta"}
-          className="flex items-center border rounded-lg p-4 bg-green-200 mb-4"
-        >
-          <FaRegArrowAltCircleDown className="text-3xl text-green-600 mr-4" />
-          <div>
-            <p className="font-semibold mb-1">Cómo crear una subasta</p>
-            <p className="text-sm">
-              Aprende el paso a paso que se debe seguir para crear una subasta.
-            </p>
-          </div>
-        </Link>
-        <Link
-          to={"/ayudacrearsubasta"}
-          className="flex items-center border rounded-lg p-4 bg-green-200 mb-4"
-        >
-          <FaRegArrowAltCircleDown className="text-3xl text-green-600 mr-4" />
-          <div>
-            <p className="font-semibold mb-1">Cómo crear una subasta</p>
-            <p className="text-sm">
-              Aprende el paso a paso que se debe seguir para crear una subasta.
-            </p>
-          </div>
-        </Link>
+        </div>
       </div>
     </div>
   );

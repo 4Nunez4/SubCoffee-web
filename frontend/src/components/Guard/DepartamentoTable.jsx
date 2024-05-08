@@ -9,7 +9,6 @@ import {
   Input,
   Button,
   Chip,
-  User,
   Pagination,
   Dropdown,
   DropdownTrigger,
@@ -19,7 +18,9 @@ import {
 import { SearchIcon } from "../../nextui/SearchIcon";
 import { PlusIcon } from "../../nextui/PlusIcon.jsx";
 import { ChevronDownIcon } from "../../nextui/ChevronDownIcon";
-import { VerticalDotsIcon } from "../../nextui/VerticalDotsIcon.jsx";
+import { EditIcon } from "../../nextui/EditIcon";
+import ActivarIcon from "../../nextui/ActivarIcon.jsx";
+import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
 
 const statusColorMap = {
   activo: "success",
@@ -42,8 +43,8 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
   };
 
   const statusOptions = [
-    { name: "Inactivo", uid: "activo" },
-    { name: "Activo", uid: "inactivo" },
+    { name: "Inactivo", uid: "inactivo" },
+    { name: "Activo", uid: "activo" },
   ];
 
   const hasSearchFilter = Boolean(filterValue);
@@ -112,28 +113,19 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
         );
       case "actions":
         return (
-          <div className="relative flex justify-end items-center gap-2">
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size="lg" variant="light">
-                  <VerticalDotsIcon className="text-default-300" />
+          <div className="relative flex justify-center items-center gap-2">
+              <Button color="default" startContent={<EditIcon />} onClick={() => handleUpdateUser(results.pk_codigo_depar)}>
+                Editar
+              </Button>
+              {results.estado_depar === "activo" ? (
+                <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivar(results.pk_codigo_depar)}>
+                  Desactivar
                 </Button>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Menu de acciones">
-                <DropdownItem onClick={() => handleUpdateUser(results.pk_codigo_depar)} >
-                  Editar
-                </DropdownItem>
-                {results.estado_depar === "activo" ? (
-                  <DropdownItem onClick={() => desactivar(results.pk_codigo_depar)} >
-                    Desactivar
-                  </DropdownItem>
-                ) : (
-                  <DropdownItem onClick={() => activar(results.pk_codigo_depar)} >
-                    Activar
-                  </DropdownItem>
-                )}
-              </DropdownMenu>
-            </Dropdown>
+              ) : (              
+                <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activar(results.pk_codigo_depar)}>
+                  Activar
+                </Button>
+              )}
           </div>
         );
       default:
@@ -178,7 +170,7 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
 
   const topContent = useMemo(() => {
     return (
-      <div className="flex flex-col gap-4 px-10 pt-10">
+      <div className="flex flex-col gap-4 pt-8">
         <div className="flex justify-between gap-3 items-end">
           <Input
             isClearable
@@ -212,7 +204,7 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button color="primary" endContent={<PlusIcon />} onClick={registrar} >
+            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={registrar} >
               Registrar
             </Button>
           </div>
@@ -237,6 +229,7 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
     );
   }, [
     filterValue,
+    statusFilter,
     onRowsPerPageChange,
     onSearchChange,
     onClear,
@@ -245,7 +238,7 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
 
   const bottomContent = useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center m-4">
+      <div className="flex justify-between items-center py-4">
         <Pagination
           isCompact
           showControls

@@ -18,7 +18,7 @@ export const validarUser = async (req, res) => {
         const token = jwt.sign({ rows }, process.env.AUT_SECRET, {
             expiresIn: process.env.AUT_EXPIRET,
         });
-        res.status(200).json({ user, token });
+        res.status(200).json({ user, token, message:"Usuario validado con éxito" });
     } catch (error) {
         res.status(500).json({ message: "Error en el servidor" + error });
     }
