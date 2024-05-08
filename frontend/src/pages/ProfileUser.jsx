@@ -22,7 +22,7 @@ function ProfileUser() {
         setUser(res.data.data[0]);
       })
       .catch((err) => {
-        toast.error("Error al traer los datos del usuario" + error);
+        toast.error("Error al traer los datos del usuario" + err);
         console.error(err);
       });
   }, [id]);

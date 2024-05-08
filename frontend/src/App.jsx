@@ -16,6 +16,7 @@ import MiSubastaT from "./pages/MiSubastaT";
 import TipoVariedadT from "./pages/TipovariedadT"
 import QuienesSomosA from "./pages/QuienesSomosA";
 import PoliticasYCondicionesPageA from "./pages/PoliticasYCondicionesPageA";
+import SubastaUser from "./pages/SubastaUser";
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                 <Route element={<ProtectedRoute />}>
                   <Route path="/subcoffee" element={<SubastaPage />} />
                   <Route path="/profile/:id" element={<ProfileUser />} />
+                  <Route path="/subasta/:id" element={<SubastaUser />} />
                   <Route path="/ayudaaa" element={<AyudaPage />} />
                   {users && users.rol_user === "admin" && (
                     <>
