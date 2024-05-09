@@ -8,7 +8,7 @@ import TitleForModal from "../atoms/TitleForModal";
 import axiosClient from "../../api/axios";
 import { icono } from "../atoms/IconsAtom";
 
-const RegisterSubastaMolecule = ({ mode, initialData, handleSubmit, actionLabel }) => {
+const RegisterSubastaMolecule = ({ mode, title, initialData, handleSubmit, actionLabel }) => {
   const fechaInicialRef = useRef(null);
   const fechaFinalRef = useRef(null);
   const imagenRef = useRef(null);
@@ -80,7 +80,7 @@ const RegisterSubastaMolecule = ({ mode, initialData, handleSubmit, actionLabel 
   return (
     <form onSubmit={onSubmit} className="space-y-4 p-4">
       <TitleForModal>
-        {mode === "update" ? "Actualizar Subasta" : "Registrar Subasta"}
+        {title}
       </TitleForModal>
       <div className="grid grid-cols-2">
         <InputWithIconAtom
@@ -130,7 +130,6 @@ const RegisterSubastaMolecule = ({ mode, initialData, handleSubmit, actionLabel 
             ))}
         </Select>
       </div>
-
       <div className="grid grid-cols-2">
         <Select
           label="Unidad de peso"
@@ -180,7 +179,7 @@ const RegisterSubastaMolecule = ({ mode, initialData, handleSubmit, actionLabel 
         ref={descripcionRef}
       />
       <center>
-        <Button type="submit" color="primary">
+        <Button type="submit" className="bg-gray-600 text-white">
           {actionLabel}
         </Button>
       </center>

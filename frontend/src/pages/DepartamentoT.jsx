@@ -28,7 +28,9 @@ export function DepartamentoT() {
 
   const desactivarDepartamento = async (pk_codigo_depar) => {
     try {
-      const response = await axiosClient.put( `/v1/departamentosdes/${pk_codigo_depar}` );
+      const response = await axiosClient.put(
+        `/v1/departamentosdes/${pk_codigo_depar}`
+      );
       if (response.status === 200) {
         setMensaje("¡Departamento desactivado con éxito! Ahora este no podrá ser utilizado por los usuarios.");
         setModalMessage(true);
@@ -41,7 +43,9 @@ export function DepartamentoT() {
 
   const activarDepartamento = async (pk_codigo_depar) => {
     try {
-      const response = await axiosClient.put( `/v1/departamentosac/${pk_codigo_depar}` );
+      const response = await axiosClient.put(
+        `/v1/departamentosac/${pk_codigo_depar}`
+      );
       if (response.status === 200) {
         setMensaje("¡Departamento activado con éxito! Ahora este listo para ser utilizado por los usuarios.");
         setModalMessage(true);
@@ -61,30 +65,39 @@ export function DepartamentoT() {
 
   const id = localStorage.getItem("id_depar");
 
-  const handleSubmit = async (data, e) => {
-    e.preventDefault();
-    try {
-      const response = mode === "create"
-          ? await axiosClient.post("/v1/departamentos", data)
-          : await axiosClient.put(`/v1/departamentos/${initialData.pk_codigo_depar}`, data );
-      const message = response.data.message;
-      if (response.status === 200) {
-        toast.success(message);
-        setModalOpen(false);
-        fetchDepartamentoList(); // Actualizar la lista de departamentos después de crear o actualizar
-      } else {
-        toast.error(message);
-      }
-    } catch (error) {
-      console.error("Error en el servidor:", error);
-      toast.error("Error en el servidor");
-    }
-  };
-
   const handleToggle = (mode, initialData) => {
     setInitialData(initialData);
     setModalOpen(true);
     setMode(mode);
+  };
+
+  const handleSubmit = async (data, e) => {
+    e.preventDefault();
+    try {
+      if (mode === "create") {
+        await axiosClient.post("/v1/departamentos", data).then((response) => {
+          if (response.status === 200) {
+            toast.success(response.data.message);
+            setModalOpen(false);
+            fetchDepartamentoList();
+          } else {
+            toast.error("Error al registrar el departamento");
+          }
+        });
+      } else if (mode === "update") {
+        await axiosClient.put(`/v1/departamentos/${id}`, data).then((response) => {
+          if (response.status == 200) {
+            toast.success(response.data.message);
+            setModalOpen(false);
+            fetchDepartamentoList();
+          } else {
+            toast.error("Error al actualizar");
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Error en el servidor:", error);
+    }
   };
 
   return (
@@ -97,7 +110,7 @@ export function DepartamentoT() {
       <FormDepartamentoOrganism
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={ mode === "create" ? "Registrar Departamento" : "Actualizar Departamento" }
+        title={mode === "create"? "Registrar Departamento": "Actualizar Departamento"}
         actionLabel={mode === "create" ? "Registrar" : "Actualizar"}
         initialData={initialData}
         handleSubmit={handleSubmit}

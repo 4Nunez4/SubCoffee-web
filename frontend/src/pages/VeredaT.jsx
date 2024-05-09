@@ -67,7 +67,7 @@ export function VeredaT() {
     try {
       const response = mode === "create"
           ? await axiosClient.post("/v1/veredas", data)
-          : await axiosClient.put( `/v1/veredas/${initialData.pk_id_vere}`, data );
+          : await axiosClient.put( `/v1/veredas/${id}`, data );
       const message = response.data.message;
       if (response.status === 200) {
         toast.success(message);
@@ -98,6 +98,7 @@ export function VeredaT() {
       <FormVeredaMolecule
         open={modalOpen}
         onClose={() => setModalOpen(false)}
+        title={mode === 'create' ? 'Registrar Vereda' : 'Actualizar Vereda'}
         actionLabel={mode === "create" ? "Registrar" : "Actualizar"}
         initialData={initialData}
         handleSubmit={handleSubmit}

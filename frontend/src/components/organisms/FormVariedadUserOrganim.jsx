@@ -2,11 +2,11 @@ import React from "react";
 import { ModalForm } from "./ModalForm";
 import RegisterVariedadUserMolecule from "../molecules/RegisterVariedadUserMolecule"
 
-function FormVariedadUserOrganim ({ open, onClose, handleSubmit, actionLabel, initialData, mode }) {
+function FormVariedadUserOrganim ({ open, onClose, title, handleSubmit, actionLabel, initialData, mode }) {
   return (
     <>
       <ModalForm open={open} onClose={onClose}>
-        <RegisterVariedadUserMolecule initialData={initialData} mode={mode} handleSubmit={handleSubmit} actionLabel={actionLabel} />
+        <RegisterVariedadUserMolecule initialData={initialData} title={title} mode={mode} handleSubmit={handleSubmit} actionLabel={actionLabel} />
       </ModalForm>
     </>
   );

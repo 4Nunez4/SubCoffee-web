@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { icono } from "../atoms/IconsAtom";
 import { Button, Select, SelectItem } from "@nextui-org/react";
 
-const RegisterVeredaMolecule = ({ mode, handleSubmit, actionLabel }) => {
+const RegisterVeredaMolecule = ({ mode, title, initialData, handleSubmit, actionLabel }) => {
   const nombreVeredaRef = useRef(null);
   const [municipios, setMunicipios] = useState([]);
   const [municipiosRef, setMunicipiosRef] = useState("");
@@ -24,7 +24,16 @@ const RegisterVeredaMolecule = ({ mode, handleSubmit, actionLabel }) => {
       }
     };
     fetchDepar();
-  }, []);
+    if (mode === "update" && initialData) {
+      try {
+        nombreVeredaRef.current.value = initialData.nombreVeredaRef;
+        setMunicipiosRef(initialData.fk_departamento);
+      } catch (error) {
+        console.error("Error fetching departamento data:", error);
+        toast.error("Error al cargar datos del municipio");
+      }
+    }
+  }, [mode, initialData]);
 
   const fetchMunicipios = async (departamentos) => {
     try {
@@ -59,24 +68,15 @@ const RegisterVeredaMolecule = ({ mode, handleSubmit, actionLabel }) => {
   return (
     <form onSubmit={onSubmit} className="space-y-4 p-4">
       <TitleForModal>
-        {mode === "update" ? "Actualizar Vereda" : "Registrar Vereda"}
+        {title}
       </TitleForModal>
-      <InputWithIconAtom
-        icon={icono.iconoUser}
-        placeholder="Nombre de la Vereda"
-        required
-        ref={nombreVeredaRef}
-      />
       <Select
-        label="Departamento"
+        label=""
+        placeholder="Seleccionar Departamento"
         value={departamentosRef}
+        startContent={<icono.iconoDepar />}
         variant="bordered"
-        popoverProps={{
-          classNames: {
-            base: "before:bg-default-200",
-            content: "p-0 border-small border-divider bg-background",
-          },
-        }}
+        aria-label="Seleccionar Departamento"
         onChange={handleDepartamentoChange}
       >
         {departamentos.filter((departamento) => departamento.estado_depar === "activo").map((departamento) => (
@@ -89,15 +89,12 @@ const RegisterVeredaMolecule = ({ mode, handleSubmit, actionLabel }) => {
         ))}
       </Select>
       <Select
-        label="Municipio"
+        label=""
+        placeholder="Seleccionar Municipio"
         value={municipiosRef}
         variant="bordered"
-        popoverProps={{
-          classNames: {
-            base: "before:bg-default-200",
-            content: "p-0 border-small border-divider bg-background",
-          },
-        }}
+        startContent={<icono.iconoMuni />}
+        aria-label="Seleccionar Municipio"
         onChange={(e) => setMunicipiosRef(e.target.value)}
       >
         {municipios.filter((municipio) => municipio.estado_muni === "activo").map((municipio) => (
@@ -109,8 +106,14 @@ const RegisterVeredaMolecule = ({ mode, handleSubmit, actionLabel }) => {
           </SelectItem>
         ))}
       </Select>
+      <InputWithIconAtom
+        icon={icono.iconoReName}
+        placeholder="Nombre de la Vereda"
+        required
+        ref={nombreVeredaRef}
+      />
       <center>
-        <Button type="submit" color="primary">
+        <Button type="submit" className="bg-gray-600 text-white">
           {actionLabel}
         </Button>
       </center>

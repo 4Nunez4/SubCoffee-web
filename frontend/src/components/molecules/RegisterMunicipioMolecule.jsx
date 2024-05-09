@@ -6,9 +6,9 @@ import { Button, Select, SelectItem } from "@nextui-org/react";
 import { icono } from "../atoms/IconsAtom";
 import axiosClient from "../../api/axios";
 
-const RegisterMunicipioMolecule = ({ mode, initialData, handleSubmit, actionLabel }) => {
-  const codigoMunicipioRef = useRef(null);
-  const nombreMunicipioRef = useRef(null);
+const RegisterMunicipioMolecule = ({ mode, title, initialData, handleSubmit, actionLabel }) => {
+  const pk_codigo_muni = useRef(null);
+  const nombre_muni = useRef(null);
   const [departamentoIdRef, setDepartamentoIdRef] = useState("");
   const [departamentos, setDepartamentos] = useState([]);
 
@@ -26,9 +26,8 @@ const RegisterMunicipioMolecule = ({ mode, initialData, handleSubmit, actionLabe
     fetchDepartamentos();
     if (mode === "update" && initialData) {
       try {
-        console.log(initialData);
-        codigoMunicipioRef.current.value = initialData.pk_codigo_muni;
-        nombreMunicipioRef.current.value = initialData.nombre_muni;
+        pk_codigo_muni.current.value = initialData.pk_codigo_muni;
+        nombre_muni.current.value = initialData.nombre_muni;
         setDepartamentoIdRef(initialData.fk_departamento);
       } catch (error) {
         console.error("Error fetching departamento data:", error);
@@ -42,13 +41,13 @@ const RegisterMunicipioMolecule = ({ mode, initialData, handleSubmit, actionLabe
 
     try {
       const data = {
-        pk_codigo_muni: codigoMunicipioRef.current.value,
-        nombre_muni: nombreMunicipioRef.current.value,
+        pk_codigo_muni: pk_codigo_muni.current.value,
+        nombre_muni: nombre_muni.current.value,
         fk_departamento: departamentoIdRef,
       };
       handleSubmit(data, e);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error en el servidor:", error);
       toast.error("Error en el servidor " + error);
     }
   };
@@ -56,44 +55,41 @@ const RegisterMunicipioMolecule = ({ mode, initialData, handleSubmit, actionLabe
   return (
     <form onSubmit={onSubmit} className="space-y-4 p-4">
       <TitleForModal>
-        {mode === "update" ? "Actualizar Municipio" : "Registrar Municipio"}
+        {title}
       </TitleForModal>
       <InputWithIconAtom
-        icon={icono.iconoUser}
+        icon={icono.iconoNumber}
         placeholder="Codigo del Municipio"
         required
-        ref={codigoMunicipioRef}
+        ref={pk_codigo_muni}
       />
       <InputWithIconAtom
-        icon={icono.iconoUser}
+        icon={icono.iconoReName}
         placeholder="Nombre del Municipio"
         required
-        ref={nombreMunicipioRef}
+        ref={nombre_muni}
       />
       <Select
-        label="Departamento"
+        label=""
         className="max-w-sm"
         variant="bordered"
-        popoverProps={{
-          classNames: {
-            base: "before:bg-default-200",
-            content: "p-0 border-small border-divider bg-background",
-          },
-        }}
+        placeholder="Seleccionar Departamento"
+        startContent={<icono.iconoDepar />}
         value={departamentoIdRef}
         onChange={(e) => setDepartamentoIdRef(e.target.value)}
+        aria-label="Seleccionar Departamento"
       >
         {departamentos.filter((departamento) => departamento.estado_depar === "activo").map((departamento) => (
           <SelectItem
-          key={departamento.pk_codigo_depar}
-          value={departamento.pk_codigo_depar}
+            key={departamento.pk_codigo_depar}
+            value={departamento.pk_codigo_depar}
           >
             {departamento.nombre_depar}
           </SelectItem>
         ))}
       </Select>
       <center>
-        <Button type="submit" color="primary">
+        <Button type="submit" className="bg-gray-600 text-white">
           {actionLabel}
         </Button>
       </center>

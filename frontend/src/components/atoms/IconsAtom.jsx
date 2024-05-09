@@ -31,8 +31,18 @@ import { IoMdHelpCircleOutline } from "react-icons/io";
 import { MdOutlinePrivacyTip } from "react-icons/md";
 import { FcDataConfiguration } from "react-icons/fc";
 import { BiWorld } from "react-icons/bi";
+import { BiRename } from "react-icons/bi";
+import { SiNumpy } from "react-icons/si";
+import { GrMap } from "react-icons/gr";
+import { GrMapLocation } from "react-icons/gr";
+import { LiaMapMarkedAltSolid } from "react-icons/lia";
 
 export const icono = {
+  iconoVere: LiaMapMarkedAltSolid,
+  iconoDepar : GrMap,
+  iconoMuni: GrMapLocation,
+  iconoReName: BiRename,
+  iconoNumber : SiNumpy,
   iconoWorl : BiWorld,
   iconoConfiguracion : FcDataConfiguration,
   iconoPrivacidad : MdOutlinePrivacyTip,

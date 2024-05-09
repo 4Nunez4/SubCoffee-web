@@ -7,7 +7,7 @@ import TitleForModal from "../atoms/TitleForModal";
 import { icono } from "../atoms/IconsAtom";
 import { Button } from "@nextui-org/react";
 
-const RegisterFormMolecule = ({ mode, initialData, handleSubmit, actionLabel }) => {
+const RegisterUser = ({ mode, title, initialData, handleSubmit, actionLabel }) => {
   const cedula = useRef(null);
   const fullName = useRef(null);
   const email = useRef(null);
@@ -55,7 +55,7 @@ const RegisterFormMolecule = ({ mode, initialData, handleSubmit, actionLabel }) 
   return (
     <form onSubmit={onSubmit} className="space-y-4 p-4">
       <TitleForModal>
-        {mode === "update" ? "Actualizar Usuario" : "Registrar Usuario"}
+        {title}
       </TitleForModal>
       <InputWithIconAtom
         icon={icono.iconoUser}
@@ -109,7 +109,7 @@ const RegisterFormMolecule = ({ mode, initialData, handleSubmit, actionLabel }) 
         ref={password}
       />
       <center>
-        <Button type="submit" color="primary">
+        <Button type="submit" className="bg-gray-600 text-white">
           {actionLabel}
         </Button>
       </center>
@@ -117,4 +117,4 @@ const RegisterFormMolecule = ({ mode, initialData, handleSubmit, actionLabel }) 
   );
 };
 
-export default RegisterFormMolecule;
+export default RegisterUser;

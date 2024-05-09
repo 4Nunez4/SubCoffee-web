@@ -137,6 +137,7 @@ function SubastaT() {
       <FormSubastaOrganism
         open={modalOpen}
         onClose={() => setModalOpen(false)}
+        title={mode === 'create' ? 'Registrar Tipo variedad' : 'Actualizar Tipo variedad'}
         actionLabel={mode === "create" ? "Registrar" : "Actualizar"}
         initialData={initialData}
         handleSubmit={handleSubmit}

@@ -67,14 +67,13 @@ export function MunicipioT() {
     try {
       const response = mode === "create"
           ? await axiosClient.post("/v1/municipios", data)
-          : await axiosClient.put(`/v1/municipios/${initialData.pk_codigo_muni}`, data );
-      const message = response.data.message;
+          : await axiosClient.put(`/v1/municipios/${id}`, data);
       if (response.status === 200) {
-        toast.success(message);
+        toast.success(response.data.message);
         setModalOpen(false);
         fetchList(); // Actualizar la lista de datos después de crear o actualizar
       } else {
-        toast.error(message);
+        toast.error(response.data.message);
       }
     } catch (error) {
       console.error("Error en el servidor:", error);
@@ -98,6 +97,7 @@ export function MunicipioT() {
       <FormMunicipioOrganism
         open={modalOpen}
         onClose={() => setModalOpen(false)}
+        title={mode === 'create' ? 'Registrar Municipio' : 'Actualizar Municipio'}
         actionLabel={mode === "create" ? "Registrar" : "Actualizar"}
         initialData={initialData}
         handleSubmit={handleSubmit}

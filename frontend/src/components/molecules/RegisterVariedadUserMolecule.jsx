@@ -6,7 +6,7 @@ import { Button, Select, SelectItem } from "@nextui-org/react";
 import axiosClient from "../../api/axios";
 import toast from "react-hot-toast";
 
-const RegisterVariedadUserMolecule = ({ mode, initialData, handleSubmit, actionLabel }) => {
+const RegisterVariedadUserMolecule = ({ mode, title, initialData, handleSubmit, actionLabel }) => {
   const descripcionVariRef = useRef(null);
   const imagenVariRef = useRef(null);
 
@@ -69,9 +69,7 @@ const RegisterVariedadUserMolecule = ({ mode, initialData, handleSubmit, actionL
   return (
     <form onSubmit={onSubmit} className="space-y-4 p-4">
       <TitleForModal>
-        {mode === "update"
-          ? "Actualizar Tipo Variedad"
-          : "Registrar Tipo Variedad"}
+        {title}
       </TitleForModal>
       <InputWithIconAtom
         icon={icono.iconoDescript}
@@ -123,7 +121,7 @@ const RegisterVariedadUserMolecule = ({ mode, initialData, handleSubmit, actionL
         ))}
       </Select>
       <center>
-        <Button type="submit" color="primary">
+        <Button type="submit" className="bg-gray-600 text-white">
           {actionLabel}
         </Button>
       </center>

@@ -47,7 +47,7 @@ const LoginFormMolecule = ({ handleSubmit }) => {
       <LinkAtom to="/">¿Olvidaste tu contraseña?</LinkAtom>
       <br />
       <center>
-        <Button type="submit" color="primary">
+        <Button type="submit" className="bg-gray-600 text-white">
           Iniciar Sesión
         </Button>
       </center>

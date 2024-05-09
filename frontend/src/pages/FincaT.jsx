@@ -92,6 +92,7 @@ export default function FincaT() {
       <FormFincaOrganims
         open={modalOpen}
         onClose={() => setModalOpen(false)}
+        title={mode === 'create' ? 'Registrar Finca' : 'Actualizar Finca'}
         actionLabel={mode === "create" ? "Registrar" : "Actualizar"}
         initialData={initialData}
         handleSubmit={handleSubmit}

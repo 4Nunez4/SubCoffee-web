@@ -98,8 +98,7 @@ export default function SubastaTable({
           )}
         </Autocomplete>
         <Button
-          color="primary"
-          className="w-44"
+          className="bg-slate-400 text-white"
           endContent={<PlusIcon />}
           onClick={registrar}
         >

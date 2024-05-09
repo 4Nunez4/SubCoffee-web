@@ -7,12 +7,7 @@ import { Button, Select, SelectItem } from "@nextui-org/react";
 import TitleForModal from "../atoms/TitleForModal";
 import axiosClient from "../../api/axios";
 
-const RegisterFincaMolecule = ({
-  mode,
-  initialData,
-  handleSubmit,
-  actionLabel,
-}) => {
+const RegisterFincaMolecule = ({ mode, title, initialData, handleSubmit, actionLabel }) => {
   const nombreFincaRef = useRef(null);
   const imagenRef = useRef(null);
   const descripcionRef = useRef(null);
@@ -100,7 +95,7 @@ const RegisterFincaMolecule = ({
   return (
     <form onSubmit={onSubmit} className="space-y-4 p-4">
       <TitleForModal>
-        {mode === "update" ? "Actualizar Finca" : "Registrar Finca"}
+        {title}
       </TitleForModal>
       <InputWithIconAtom
         icon={icono.iconoNamePropiedad}
@@ -186,7 +181,7 @@ const RegisterFincaMolecule = ({
         ref={descripcionRef}
       ></TextTareaAtom>
       <center>
-        <Button type="submit" color="primary">
+        <Button type="submit" className="bg-gray-600 text-white">
           {actionLabel}
         </Button>
       </center>

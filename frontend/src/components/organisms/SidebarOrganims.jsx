@@ -12,35 +12,22 @@ const SidebarOrganims = () => {
   const Menus = [
     ...(auth && users && [
       { title: "Inicio", link: "/subcoffee", icon: icono.iconoHome },
-      ...(users && users.rol_user === "admin"
-        ? [
+      ...(users && users.rol_user === "admin" ? [
             { title: "Usuarios", link: "/users", icon: icono.iconoRol },
-            {
-              title: "Tipo Variedad",
-              link: "/tipo_variedad",
-              icon: icono.iconoFlor,
-            },
             { title: "Geografía", link: "/geografia", icon: icono.iconoWorl },
+            { title: "Tipo Variedad", link: "/tipo_variedad", icon: icono.iconoFlor },
           ]
         : []),
-      ...((users && users.rol_user === "vendedor") ||
-      (users && users.rol_user === "admin")
-        ? [
-            {
-              title: "Mis subastas",
-              link: "/mi_subasta",
-              icon: icono.iconoType,
-            },
+      ...((users && users.rol_user === "vendedor") || (users && users.rol_user === "admin") ? [
+            { title: "Mis subastas", link: "/mi_subasta", icon: icono.iconoType },
           ]
         : []),
-      { title: "Ayudaaa", link: "/ayudaaa", icon: icono.iconoAyuda, gap: true },
-      {
-        title: "Politicas privacidad",
-        link: "/privacy-policy",
-        icon: icono.iconoPrivacidad,
-      },
+      // { title: "Ayudas" },
+      { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda, gap: true },
+      { title: "Politicas privacidad", link: "/privacy-policy", icon: icono.iconoPrivacidad },
     ]),
   ];
+
   useEffect(() => {
     setOpen(true);
   }, []);
@@ -88,8 +75,7 @@ const SidebarOrganims = () => {
               >
                 <div>{React.createElement(Menu?.icon, { size: "20" })}</div>
                 <span
-                  className={`${!open && "hidden"}
-                         origin-left duration-200 overflow-hidden whitespace-nowrap`}
+                  className={`${!open && "hidden"} origin-left duration-200 overflow-hidden whitespace-nowrap`}
                   style={{ maxWidth: "calc(100% - 3rem)" }}
                   title={Menu.title}
                 >

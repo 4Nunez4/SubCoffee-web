@@ -1,17 +1,22 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
-import ModalProtectMolecule from "./components/molecules/ModalProtectMolecule";
-import AbrirModalTemplate from "./components/templates/AbrirModalTemplate";
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function ProtectedRoute() {
   const auth = window.localStorage.getItem("token");
+  
+  const handleLoginRedirect = () => {
+    Swal.fire({
+      text: "Tienes que iniciar sesión primero para poder ingresar a SubCoffee",
+      icon: "error"
+    });
+    return <Navigate to="/" />;
+  }
 
   return auth ? (
     <Outlet />
   ) : (
-    <AbrirModalTemplate>
-      <ModalProtectMolecule />
-    </AbrirModalTemplate>
+    handleLoginRedirect()
   );
 }
 

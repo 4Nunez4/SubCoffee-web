@@ -84,7 +84,7 @@ export const registrar = async (req, res) => {
 export const listar = async (req, res) => {
   try {
     const [resultado] = await pool.query(
-      "SELECT s.pk_id_sub, s.fecha_inicio_sub, s.fecha_fin_sub, s.imagen_sub, s.precio_inicial_sub, s.precio_final_sub,s.cantidad_sub, s.unidad_peso_sub,s.estado_sub,s.certificado_sub,s.descripcion_sub,s.fk_variedad, t.nombre_tipo_vari, v.descripcion_vari, v.imagen_vari, v.estado_vari, u.nombre_user, u.imagen_user, u.telefono_user, u.rol_user, f.nombre_fin, f.imagen_fin, f.descripcion_fin, e.nombre_vere, m.nombre_muni, d.nombre_depar FROM subasta s INNER JOIN variedad v ON s.fk_variedad = v.pk_id_vari INNER JOIN finca f ON v.fk_finca = f.pk_id_fin INNER JOIN veredas e ON f.fk_vereda = e.pk_id_vere INNER JOIN municipio m ON e.fk_municipio = m.pk_codigo_muni INNER JOIN departamento d ON m.fk_departamento = d.pk_codigo_depar INNER JOIN tipo_variedad t ON v.fk_tipo_variedad = t.pk_id_tipo_vari INNER JOIN usuarios u ON f.fk_id_usuario = u.pk_cedula_user"
+      "SELECT s.pk_id_sub, s.fecha_inicio_sub, s.fecha_fin_sub, s.imagen_sub, s.precio_inicial_sub, s.precio_final_sub,s.cantidad_sub, s.unidad_peso_sub,s.estado_sub,s.certificado_sub,s.descripcion_sub,s.fk_variedad, t.nombre_tipo_vari, v.descripcion_vari, v.imagen_vari, v.estado_vari, u.pk_cedula_user, u.email_user, u.nombre_user, u.imagen_user, u.telefono_user, u.rol_user, f.nombre_fin, f.imagen_fin, f.descripcion_fin, e.nombre_vere, m.nombre_muni, d.nombre_depar FROM subasta s INNER JOIN variedad v ON s.fk_variedad = v.pk_id_vari INNER JOIN finca f ON v.fk_finca = f.pk_id_fin INNER JOIN veredas e ON f.fk_vereda = e.pk_id_vere INNER JOIN municipio m ON e.fk_municipio = m.pk_codigo_muni INNER JOIN departamento d ON m.fk_departamento = d.pk_codigo_depar INNER JOIN tipo_variedad t ON v.fk_tipo_variedad = t.pk_id_tipo_vari INNER JOIN usuarios u ON f.fk_id_usuario = u.pk_cedula_user"
     );
 
     if (resultado.length > 0) {
@@ -187,7 +187,7 @@ export const buscar = async (req, res) => {
     }
 
     const [resultado] = await pool.query(
-      `SELECT s.*, t.nombre_tipo_vari, v.*, u.nombre_user, u.imagen_user, u.telefono_user, u.rol_user, f.   nombre_fin, f.imagen_fin, f.descripcion_fin, e.nombre_vere, m.nombre_muni, d.nombre_depar 
+      `SELECT s.*, t.nombre_tipo_vari, v.*, u.*, f.nombre_fin, f.imagen_fin, f.descripcion_fin, e.nombre_vere, m.nombre_muni, d.nombre_depar 
         FROM subasta s 
         INNER JOIN variedad v ON s.fk_variedad = v.pk_id_vari 
         INNER JOIN finca f ON v.fk_finca = f.pk_id_fin 

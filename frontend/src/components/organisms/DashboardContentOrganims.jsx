@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LinkButtonAtom from "../atoms/LinkButtonAtom";
-import { TiposDeCafeTemplates } from "../templates/TiposDeCafeTemplates";
 import TiposDeCafeOrganism from "./TiposDeCafeOrganism";
 import Text4xlSemiboldAtom from "../atoms/Text4xlSemiboldAtom";
 import TextXlSemiboldAtom from "../atoms/TextXlSemiboldAtom";
@@ -18,7 +17,7 @@ function DashboardContentOrganims() {
       navigate("/subcoffee");
     }
   }, [navigate]);
-  
+
   return (
     <div className="bg-gray-200">
       <div className="flex items-center justify-center px-12">
@@ -28,7 +27,7 @@ function DashboardContentOrganims() {
         </span>
         <img src="./src/assets/dashboard.png" />
       </div>
-      <TiposDeCafeTemplates>
+      <div className="w-full py-12">
         <Text4xlSemiboldAtom>
           Una plataforma de café perfecta para todos
         </Text4xlSemiboldAtom>
@@ -36,7 +35,7 @@ function DashboardContentOrganims() {
           Subasta o puja por el café de tu gusto.
         </TextXlSemiboldAtom>
         <TiposDeCafeOrganism />
-      </TiposDeCafeTemplates>
+      </div>
       <div className="w-full flex justify-center p-12 gap-x-20 items-center">
         <div className="px-12">
           <h2 className="text-3xl font-semibold my-4">Crear subasta</h2>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axiosClient from "../api/axios";
 import toast from "react-hot-toast";
-import TipoVariedadTable from "../components/Guard/TipoVaridadTable.jsx";
+import TipoVariedadTable from "../components/Guard/TipoVariedadTable.jsx";
 import FormTipovariedadOrganism from "../components/organisms/FormTipovariedadOrganism.jsx";
 import ModalMessage from "../nextui/ModalMessage.jsx";
 
@@ -61,14 +61,14 @@ export function TipoVariedadT() {
     { uid: "actions", name: "Acciones", sortable: false },
   ];
 
-  const id = localStorage.getItem("idUser");
+  const id = localStorage.getItem("id_tip_vari");
 
   const handleSubmit = async (data, e) => {
     e.preventDefault();
     try {
       const response = mode === "create"
           ? await axiosClient.post("/v1/tipo_vari", data)
-          : await axiosClient.put( `/v1/tipo_vari/${initialData.pk_id_tipo_vari}`, data );
+          : await axiosClient.put( `/v1/tipo_vari/${id}`, data );
       const message = response.data.message;
       if (response.status === 200) {
         toast.success(message);
@@ -99,7 +99,7 @@ export function TipoVariedadT() {
       <FormTipovariedadOrganism
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={ mode === "create" ? "Registrar Tipo Variedad" : "Actualizar Tipo Variedad" }
+        title={mode === 'create' ? 'Registrar Tipo variedad' : 'Actualizar Tipo variedad'}
         actionLabel={mode === "create" ? "Registrar" : "Actualizar"}
         initialData={initialData}
         handleSubmit={handleSubmit}

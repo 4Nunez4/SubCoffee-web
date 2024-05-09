@@ -1,23 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  Modal,
   User,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
   Dropdown,
   DropdownMenu,
   DropdownItem,
   DropdownTrigger,
-  useDisclosure,
   Autocomplete,
   AutocompleteItem,
   Avatar,
 } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 import { icono } from "../atoms/IconsAtom";
 import TextSubAtom from "../atoms/TextSubAtom";
@@ -34,41 +28,50 @@ function HeaderOrganism() {
   const [abrirBell, setAbrirBell] = useState(false);
   const [isMoonSelected, setIsMoonSelected] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [userslist, setUserslist] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
   const isAuthenticated = window.localStorage.getItem("token");
   const users = JSON.parse(localStorage.getItem("user"));
-  const navigate = useNavigate();
   const { setUsers } = useContext(AuthContext);
   const URL = "http://localhost:4000/auth/login";
 
   const login = async (data, e) => {
     e.preventDefault();
     await axios.post(URL, data).then((res) => {
-        if (res.status === 200) {
-          toast.success(res.data.message, { duration: 5000 });
-          const { token, user } = res.data;
-          localStorage.setItem("token", token);
-          localStorage.setItem("user", JSON.stringify(user));
-          navigate("/subcoffee");
-          setUsers(user);
-        } else if (res.status === 401) {
-          toast.error("Usuario no registrado");
-        }
-      })
-      .catch((error) => console.log(error));
+      if (res.status === 200) {
+        toast.success(res.data.message, { duration: 5000 });
+        const { token, user } = res.data;
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+        navigate("/subcoffee");
+        setUsers(user);
+      } else if (res.status === 401) {
+        toast.error("Usuario no registrado");
+      }
+    })
+    .catch((error) => console.log(error));
   };
 
   const handleSearch = async (value) => {
-    setSearchValue(""); 
+    setSearchValue("");
   };
 
-  const logoutt = () => {
-    localStorage.clear();
-    navigate("/");
-    toast.success("Cierre de sesión exitoso");
+  const handleLogout = () => {
+    Swal.fire({
+      text: "¿Estás seguro de cerrar sesión?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Sí",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.clear();
+        navigate("/");
+        toast.success("Cierre de sesión exitoso");
+      }
+    });
   };
 
   const toggleAbrirBell = () => {
@@ -170,7 +173,7 @@ function HeaderOrganism() {
                           size="sm"
                           src={
                             user.imagen_user && user.imagen_user.length > 0
-                              ? `../../public/${user.imagen_user}`
+                              ? `../../${user.imagen_user}`
                               : "../../imagen_de_usuario.webp"
                           }
                         />
@@ -207,7 +210,7 @@ function HeaderOrganism() {
                     avatarProps={{
                       src: `${
                         users.imagen_user && users.imagen_user.length > 0
-                          ? `../../public/${users.imagen_user}`
+                          ? `../../${users.imagen_user}`
                           : "../../imagen_de_usuario.webp"
                       }`,
                     }}
@@ -226,7 +229,7 @@ function HeaderOrganism() {
                   </DropdownItem>
                   <DropdownItem
                     key="logout"
-                    onPress={onOpen}
+                    onPress={handleLogout}
                     className="text-center bg-red-600 border text-white py-2"
                   >
                     Cerrar sesión
@@ -235,26 +238,6 @@ function HeaderOrganism() {
               </Dropdown>
             </div>
           </div>
-          <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-            <ModalContent>
-              <ModalHeader className="flex justify-center">
-                <icono.iconoInterrogation className="text-red-600 w-32 h-32" />
-              </ModalHeader>
-              <ModalBody>
-                <p className="text-black font-semibold text-center">
-                  ¿Estás seguro de cerrar sesión?
-                </p>
-              </ModalBody>
-              <ModalFooter className="flex justify-center mb-4">
-                <Button
-                  className="bg-red-600 text-white hover:bg-red-500 w-40 rounded-lg"
-                  onClick={logoutt}
-                >
-                  Cerrar sesión
-                </Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
           {abrirBell && (
             <div className="absolute top-16 right-32 flex justify-center items-center">
               <div className="bg-blanco rounded-xl w-80">

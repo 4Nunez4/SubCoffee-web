@@ -13,8 +13,8 @@ import DashboardContentOrganims from "./components/organisms/DashboardContentOrg
 import GeografiaFullPage from "./pages/GeografiaFullPage";
 import UsersT from "./pages/UsersT";
 import MiSubastaT from "./pages/MiSubastaT";
-import TipoVariedadT from "./pages/TipovariedadT"
 import QuienesSomosA from "./pages/QuienesSomosA";
+import TipoVariedadT from "./pages/TipovariedadT"
 import PoliticasYCondicionesPageA from "./pages/PoliticasYCondicionesPageA";
 import SubastaUser from "./pages/SubastaUser";
 
@@ -34,7 +34,6 @@ function App() {
                   <Route path="/subcoffee" element={<SubastaPage />} />
                   <Route path="/profile/:id" element={<ProfileUser />} />
                   <Route path="/subasta/:id" element={<SubastaUser />} />
-                  <Route path="/ayudaaa" element={<AyudaPage />} />
                   {users && users.rol_user === "admin" && (
                     <>
                       <Route path="/users" element={<UsersT />} />

@@ -5,7 +5,7 @@ import LoginFormMolecule from "../molecules/LoginFormMolecule";
 function FormLoginOrganims({ open, onClose, handleSubmit }) {
   return (
     <div>
-      <ModalForm open={open} onClose={onClose}>
+      <ModalForm open={open} onClose={onClose} >
         <LoginFormMolecule handleSubmit={handleSubmit} />
       </ModalForm>
     </div>

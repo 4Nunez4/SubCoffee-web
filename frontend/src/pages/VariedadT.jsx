@@ -92,6 +92,7 @@ export default function VariedadT() {
       <FormVariedadUserOrganim
         open={modalOpen}
         onClose={() => setModalOpen(false)}
+        title={mode === 'create' ? 'Registrar Variedad' : 'Actualizar Variedad'}
         actionLabel={mode === "create" ? "Registrar" : "Actualizar"}
         initialData={initialData}
         handleSubmit={handleSubmit}

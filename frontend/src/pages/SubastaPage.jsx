@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import SubastaCard from "../components/SubastaCard";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import axiosClient from "../api/axios";
 import {

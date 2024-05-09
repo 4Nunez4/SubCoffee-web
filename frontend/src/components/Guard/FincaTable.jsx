@@ -7,7 +7,6 @@ import {
   Button,
   Autocomplete,
   AutocompleteItem,
-  Avatar,
 } from "@nextui-org/react";
 
 import { EditIcon } from "../../nextui/EditIcon";

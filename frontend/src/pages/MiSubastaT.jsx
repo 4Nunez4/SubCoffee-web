@@ -57,6 +57,9 @@ export default function MiSubastaT() {
             >
               <Card>
                 <CardBody>
+                  <p className="text-center">
+                    Tu finca tiene una historia que contar
+                  </p>
                   <FincaT />
                 </CardBody>
               </Card>
