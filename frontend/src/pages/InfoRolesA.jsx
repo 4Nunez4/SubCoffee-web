@@ -9,7 +9,7 @@ function InfoRolesA() {
                 plataforma:
             </p>
             <div className="grid grid-cols-1 gap-y-3">
-                <div className="border rounded-lg p-4 bg-gray-200">
+                <div className="border rounded-lg p-4 bg-gray-300">
                     <h3 className="font-semibold">Rol: Administrador</h3>
                     <p>
                         El administrador tiene el control total sobre la plataforma. Sus
@@ -34,7 +34,7 @@ function InfoRolesA() {
                         </li>
                     </ul>
                 </div>
-                <div className="border rounded-lg p-4 bg-gray-200">
+                <div className="border rounded-lg p-4 bg-gray-300">
                     <h3 className="font-semibold">Rol: Vendedor</h3>
                     <p>
                         El vendedor es responsable de agregar productos a la subasta. Sus
@@ -59,7 +59,7 @@ function InfoRolesA() {
                         </li>
                     </ul>
                 </div>
-                <div className="border rounded-lg p-4 bg-gray-200">
+                <div className="border rounded-lg p-4 bg-gray-300">
                     <h3 className="font-semibold">Rol: Comprador</h3>
                     <p>
                         El comprador participa en las subastas realizando ofertas por los

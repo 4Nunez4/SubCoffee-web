@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axiosClient from "../api/axios";
 import VariedadUserTable from "../components/Guard/VariedadUserTable";
 import toast from "react-hot-toast";
-import FormVariedadUserOrganim from "../components/organisms/FormVariedadUserOrganim";
 import ModalMessage from "../nextui/ModalMessage";
+import FormVariedadUser from "../components/templates/FormVariedadUser";
 
 export default function VariedadT() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -89,7 +89,7 @@ export default function VariedadT() {
         onClose={() => setModalMessage(false)}
         label={mensaje}
       />
-      <FormVariedadUserOrganim
+      <FormVariedadUser
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         title={mode === 'create' ? 'Registrar Variedad' : 'Actualizar Variedad'}

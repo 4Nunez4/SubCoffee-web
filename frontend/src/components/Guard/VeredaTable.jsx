@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -22,13 +22,15 @@ import { VerticalDotsIcon } from "../../nextui/VerticalDotsIcon.jsx";
 import { EditIcon } from "../../nextui/EditIcon.jsx";
 import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
 import ActivarIcon from "../../nextui/ActivarIcon.jsx";
+import FormVereda from "../templates/FormVereda.jsx";
+import VeredaContext from "../../context/VeredaContext.jsx";
 
 const statusColorMap = {
   activo: "success",
   inactivo: "danger",
 };
 
-export default function VeredaTable({ registrar, data, results, actualizar, desactivar, activar}) {
+export default function VeredaTable() {
   const [filterValue, setFilterValue] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -38,14 +40,34 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
   });
   const [page, setPage] = useState(1);
 
-  const handleUpdateUser = (id) => {
-    localStorage.setItem("id_vere", id);
-    actualizar(id)
-  };
+  const { getVeres, veredas, setIdVereda, desactivarVeres, activarVeres } = useContext(VeredaContext)
 
   const statusOptions = [
     { name: "Inactivo", uid: "inactivo" },
     { name: "Activo", uid: "activo" },
+  ];
+
+  const [abrirModal, setAbrirModal] = useState(false);
+  const [mode, setMode] = useState("create");
+
+  const handleToggle = (mode) => {
+    setAbrirModal(true);
+    setMode(mode);
+  };
+
+  useEffect(() => {
+    getVeres(); 
+  }, []);
+
+  const results = veredas
+
+  const data = [
+    { uid: "pk_id_vere", name: "Codigo Vereda", sortable: true },
+    { uid: "nombre_vere", name: "Nombre Vereda", sortable: true },
+    { uid: "estado_vere", name: "Estado Vereda", sortable: true },
+    { uid: "nombre_muni", name: "Nombre Municipio", sortable: true },
+    { uid: "nombre_depar", name: "Nombre Departamento", sortable: true },
+    { uid: "actions", name: "Acciones", sortable: false },
   ];
 
   const hasSearchFilter = Boolean(filterValue);
@@ -113,6 +135,13 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
           <p className="text-bold text-sm capitalize text-default-400">{results.fk_municipio}</p>
         </div>
       );
+      case "nombre_depar" : 
+      return (
+        <div className="flex flex-col">
+          <p className="text-bold text-sm capitalize">{cellValue}</p>
+          <p className="text-bold text-sm capitalize text-default-400">{results.fk_departamento}</p>
+        </div>
+      );
       case "estado_vere":
         return (
           <Chip className="capitalize" color={statusColorMap[results.estado_vere]} size="sm" variant="flat">
@@ -122,15 +151,15 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
       case "actions":
         return (
           <div className="relative flex justify-center items-center gap-2">
-            <Button color="default" startContent={<EditIcon />} onClick={() => handleUpdateUser(results.pk_id_vere)}>
+            <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdVereda(results)}}>
               Editar
             </Button>
             {results.estado_vere === "activo" ? (
-              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivar(results.pk_id_vere)}>
+              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivarVeres(results.pk_id_vere)}>
                 Desactivar
               </Button> 
             ) : (
-              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activar(results.pk_id_vere)}>
+              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarVeres(results.pk_id_vere)}>
                 Activar
               </Button>
             )}
@@ -212,7 +241,7 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={registrar} >
+            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
@@ -270,6 +299,13 @@ export default function VeredaTable({ registrar, data, results, actualizar, desa
 
   return (
     <>
+      <FormVereda
+        open={abrirModal}
+        onClose={() => setAbrirModal(false)}
+        title={mode === 'create' ? 'Registrar Vereda' : 'Actualizar Vereda'}
+        titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
+        mode={mode}
+      />
       <Table
         aria-label="Example table with custom cells, pagination and sorting"
         isHeaderSticky

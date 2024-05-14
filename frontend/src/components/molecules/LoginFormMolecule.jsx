@@ -1,56 +1,82 @@
-import React, { useRef } from "react";
-
-import LinkAtom from "../atoms/LinkAtom";
-import InputWithToggleIconAtom from "../atoms/InputWithToggleIconAtom";
-import InputWithIconAtom from "../atoms/InputWithIconAtom";
-import { icono } from "../atoms/IconsAtom";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Button } from "@nextui-org/react";
-import TitleForModal from "../atoms/TitleForModal";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Input, ModalFooter } from "@nextui-org/react";
 
-const LoginFormMolecule = ({ handleSubmit }) => {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+import { EyeSlashFilledIcon } from "../../nextui/EyeSlashFilledIcon"
+import { EyeFilledIcon } from "../../nextui/EyeFilledIcon"
+import { icono } from "../atoms/IconsAtom";
+import AuthContext from "../../context/AuthContext";
+
+const LoginFormMolecule = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const toggleVisibility = () => setIsVisible(!isVisible);
+  const { loginUsers, isAuthenticated } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = {
-        correo: emailRef.current.value,
-        password: passwordRef.current.value,
+      const dataForm = {
+        correo: email,
+        password: password,
       };
-      handleSubmit(data, e)
+      loginUsers(dataForm);
     } catch (error) {
       toast.error("Error del sistema:", error);
     }
   };
 
+  useEffect(() => {
+    if (isAuthenticated) return navigate("/subcoffee")
+  }, [isAuthenticated])
+
   return (
-    <form onSubmit={onSubmit} className="space-y-4 p-4">
-      <TitleForModal>
-        Iniciar Sesión
-      </TitleForModal>
-      <InputWithIconAtom
-        icon={icono.iconoGmail}
-        placeholder="Correo electrónico"
-        required
+    <form onSubmit={onSubmit} className="space-y-4 px-4">
+      <Input
         type="email"
-        ref={emailRef}
+        name="email"
+        placeholder="Correo electrónico"
+        labelPlacement="outside"
+        startContent={<icono.iconoGmail />}
+        variant="bordered"
+        required={true}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
-      <InputWithToggleIconAtom
-        icon={icono.iconoContraseña}
+      <Input
+        label=""
+        aria-label="Contraseña"
+        variant="bordered"
         placeholder="Contraseña"
-        required
-        type="password"
-        ref={passwordRef}
+        startContent={<icono.iconoContraseña/>}
+        endContent={
+          <button
+            type="button"
+            onClick={toggleVisibility}
+          >
+            {isVisible ? (
+              <EyeSlashFilledIcon className="text-2xl text-default-400 " />
+            ) : (
+              <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+            )}
+          </button>
+        }
+        type={isVisible ? "text" : "password"}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
       />
-      <LinkAtom to="/">¿Olvidaste tu contraseña?</LinkAtom>
-      <br />
-      <center>
+      <Link to="/" className="text-xs text-left underline hover:text-naranjaSena text-grisMedio3" >
+        ¿Olvidaste tu contraseña?
+      </Link>
+      <ModalFooter className="flex justify-center">
         <Button type="submit" className="bg-gray-600 text-white">
           Iniciar Sesión
         </Button>
-      </center>
+      </ModalFooter>
     </form>
   );
 };

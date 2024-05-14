@@ -5,9 +5,11 @@ export const getVeredas = async (req, res) => {
   try {
     const [result] = await pool.query(
       `
-        SELECT v.*, m.nombre_muni 
+        SELECT v.*, m.*, d.*
         FROM veredas v
-        INNER JOIN municipio m
+        INNER JOIN municipio m 
+        INNER JOIN departamento d
+        ON d.pk_codigo_depar = m.fk_departamento
         ON v.fk_municipio = m.pk_codigo_muni
       `
     );
@@ -50,7 +52,8 @@ export const getVeredasForMunicipio = async (req, res) => {
       `
         SELECT v.*
         FROM veredas v
-        INNER JOIN municipio m ON v.fk_municipio = m.pk_codigo_muni
+        INNER JOIN municipio m 
+        ON v.fk_municipio = m.pk_codigo_muni
         WHERE m.pk_codigo_muni = '${id}';
       `
     );

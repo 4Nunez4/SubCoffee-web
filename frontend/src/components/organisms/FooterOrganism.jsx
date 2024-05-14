@@ -1,8 +1,8 @@
 import React from "react";
-import AvatarAtom from "../atoms/AvatarAtom";
+import { Button } from "@nextui-org/react";
+
 import FooterLinkAtom from "../atoms/FooterLinkAtom";
-import TextSubAtom from "../atoms/TextSubAtom";
-import { Button, Link } from "@nextui-org/react";
+import { Link } from "react-router-dom";
 import GmailIcon from "../../nextui/GmailIcon";
 import YoutubeIcon from "../../nextui/YoutubeIcon";
 
@@ -12,11 +12,9 @@ const FooterOrganism = () => {
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-8">
           <div className="sm:col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
-            <div className="flex items-center">
-              <AvatarAtom img="isotipo-SubCoffee.png" alt="Logo" />
-              <div className="ml-2">
-                <TextSubAtom to="/" color="gray-600" text="SubCoffee" />
-              </div>
+            <div className="flex items-center gap-x-1">
+              <Link to="/" className="cursor-pointer"><img src="./src/assets/isotipo-SubCoffee.png" alt="Logo SubCoffee" className="w-9"/></Link>
+              <Link to="/" className="text-gray-600 text-2xl cursor-pointer font-medium" >SubCoffee</Link>
             </div>
             <p className="text-sm lg:text-base text-gray-500 mt-2">
               Una plataforma innovadora diseñada para conectar a caficultores,
@@ -41,14 +39,13 @@ const FooterOrganism = () => {
                 <Button
                   href="mailto:info@subcoffee.com"
                   as={Link}
-                  className="bg-white"
-                  variant="solid"
+                  className="bg-gray-200"
                   startContent={<GmailIcon />}
                 ></Button>
                 <Button
                   href="https://www.youtube.com/channel/your-channel"
                   as={Link}
-                  className="bg-white"
+                  className="bg-gray-200"
                   startContent={<YoutubeIcon />}
                 ></Button>
               </div>

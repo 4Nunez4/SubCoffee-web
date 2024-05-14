@@ -7,8 +7,8 @@ const routerUser = Router();
 
 routerUser.get("/users", verificarUserToken, getUsers);
 routerUser.get("/users/:id", verificarUserToken, getUser);
-routerUser.post("/users", verificarUserToken, validationRegisterUser, createUser);
-routerUser.put("/users/:id", verificarUserToken, cargarImagen, validationUpdateUser, updateUser);
+routerUser.post("/users", verificarUserToken, cargarImagen, createUser);
+routerUser.put("/users/:id", verificarUserToken, cargarImagen, updateUser);
 routerUser.delete("/users/:id", verificarUserToken, deleteUser);
 routerUser.put("/usersac/:id", verificarUserToken, activarUsuario);
 routerUser.put("/usersdes/:id", verificarUserToken, desactivarUsuario);

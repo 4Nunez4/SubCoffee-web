@@ -3,9 +3,7 @@ import axiosClient from "../api/axios";
 import toast from "react-hot-toast";
 import ModalMessage from "../nextui/ModalMessage.jsx";
 import SubastaTable from "../components/Guard/SubastaTable.jsx";
-import FormSubastaOrganism from "../components/organisms/FormSubastaOrganism.jsx";
-import { Button } from "@nextui-org/react";
-import { PlusIcon } from "../nextui/PlusIcon.jsx";
+import FormSubasta from "../components/templates/FormSubasta.jsx";
 
 function SubastaT() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -134,7 +132,7 @@ function SubastaT() {
         onClose={() => setModalMessage(false)}
         label={mensaje}
       />
-      <FormSubastaOrganism
+      <FormSubasta
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         title={mode === 'create' ? 'Registrar Tipo variedad' : 'Actualizar Tipo variedad'}

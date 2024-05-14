@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Button, ButtonGroup, Input } from "@nextui-org/react";
+import toast from "react-hot-toast";
+
 import ComoCrearSubasta from "./ComoCrearUnaSubasta";
 import InfoRolesA from "./InfoRolesA";
-import ComoPujarUnaSubasta from "./ComoPujarUnaSubasta";
-import { Button, ButtonGroup } from "@nextui-org/react";
 import FlechaArriba from "../nextui/FlechaArriba";
-import InputDudaWithIconAtom from "../components/atoms/InputDudaWithIconAtom";
-import toast from "react-hot-toast";
+import ComoPujarUnaSubasta from "./ComoPujarUnaSubasta";
 import { icono } from "../components/atoms/IconsAtom";
 
 function AyudaPage() {
@@ -14,6 +14,8 @@ function AyudaPage() {
   const infoRolesRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [texto, setTexto] = useState("");
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,7 +58,7 @@ function AyudaPage() {
 
   return (
     <div
-      className={`p-8 px-44 mx-auto flex flex-col justify-center ${
+      className={`p-8 bg-slate-100 px-44 mx-auto flex flex-col justify-center ${
         isScrolled ? "scrolled" : ""
       }`}
     >
@@ -85,7 +87,8 @@ function AyudaPage() {
           onClick={scrollToTop}
           startContent={<FlechaArriba />}
           className={`transition-opacity fixed bottom-8 right-8 ${
-            isScrolled ? "opacity-40" : "" }`}
+            isScrolled ? "opacity-40" : ""
+          }`}
         >
           Ir Arriba
         </Button>
@@ -100,28 +103,34 @@ function AyudaPage() {
         <div ref={infoRolesRef} data-section="infoRoles">
           <InfoRolesA />
         </div>
-        <div>
-          <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
-            <p className="text-sm font-semibold text-gray-700 uppercase mb-2">
-              ¿Tienes alguna duda?
-            </p>
-            <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
-              <InputDudaWithIconAtom
-                icon={icono.iconoGmail}
-                id="text"
-                name="text"
-                placeholder="Duda o sugerencia..."
-                required
-                type="text"
-                value={texto}
-                onChange={(e) => setTexto(e.target.value)}
-              />
-              <Button className="bg-gray-400 text-white hover:bg-gray-500 w-full rounded-lg">
-                Enviar duda
-              </Button>
-            </form>
+        {user ? (
+          <div>
+            <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
+              <p className="text-sm font-semibold text-gray-700 uppercase mb-2">
+                ¿Tienes alguna duda?
+              </p>
+              <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
+                <Input
+                  startContent={<icono.iconoGmail />}
+                  name="text"
+                  variant="bordered"
+                  label=""
+                  aria-label="Duda o sugerencia..."
+                  placeholder="Duda o sugerencia..."
+                  required={true}
+                  type="text"
+                  value={texto}
+                  onChange={(e) => setTexto(e.target.value)}
+                />
+                <Button className="bg-gray-400 text-white hover:bg-gray-500 w-full rounded-lg">
+                  Enviar duda
+                </Button>
+              </form>
+            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

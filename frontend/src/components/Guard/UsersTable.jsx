@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -22,13 +22,15 @@ import { ChevronDownIcon } from "../../nextui/ChevronDownIcon";
 import { EditIcon } from "../../nextui/EditIcon.jsx";
 import ActivarIcon from "../../nextui/ActivarIcon.jsx";
 import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
+import FormUser from "../templates/FormUser.jsx";
+import AuthContext from "../../context/AuthContext.jsx";
 
 const statusColorMap = {
   activo: "success",
   inactivo: "danger",
 };
 
-export default function UsersTable({ registrarUser, data, results, actualizarUser, desactivarUser, activarUser }) {
+export default function UsersTable() {
   const [filterValue, setFilterValue] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -38,9 +40,35 @@ export default function UsersTable({ registrarUser, data, results, actualizarUse
   });
   const [page, setPage] = useState(1);
 
-  const handleUpdateUser = (id) => {
-    localStorage.setItem("idUser", id);
-    actualizarUser(id)
+  const { getUsers, users, updateUserActive, updateUserDesactive } = useContext(AuthContext)
+
+  const [abrirModal, setAbrirModal] = useState(false);
+  const [mode, setMode] = useState("create");
+  const [initialData, setInitialData] = useState(null);
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const handleCloseModal = () => {
+    setAbrirModal(false);
+  };
+
+  const data = [
+    { uid: "nombre_user", name: "Usuario", sortable: true },
+    { uid: "pk_cedula_user", name: "Cedula", sortable: true },
+    // { uid: "descripcion_user", name: "Descripción", sortable: true },
+    { uid: "telefono_user", name: "Telefono", sortable: true },
+    { uid: "fecha_nacimiento_user", name: "Fecha Nacimiento", sortable: true },
+    { uid: "rol_user", name: "Rol", sortable: true },
+    { uid: "estado_user", name: "Estado", sortable: true },
+    { uid: "actions", name: "Acciones", sortable: false },
+  ];
+
+  const handleToggle = (mode, initialData) => {
+    setInitialData(initialData);
+    setAbrirModal(true);
+    setMode(mode);
   };
 
   const statusOptions = [
@@ -51,34 +79,38 @@ export default function UsersTable({ registrarUser, data, results, actualizarUse
   const hasSearchFilter = Boolean(filterValue);
 
   const filteredItems = useMemo(() => {
-    let filteredResults = results;
+    let filteredResults = users;
 
     if (hasSearchFilter) {
-      filteredResults = filteredResults.filter((results) =>
-        String(results.pk_cedula_user).toLowerCase().includes(filterValue.toLowerCase()) ||
-        String(results.fecha_nacimiento_user).toLowerCase().includes(filterValue.toLowerCase()) ||
-        String(results.nombre_user).toLowerCase().includes(filterValue.toLowerCase()) ||
-        String(results.rol_user).toLowerCase().includes(filterValue.toLowerCase()) ||
-        String(results.telefono_user).toLowerCase().includes(filterValue.toLowerCase()) ||
-        String(results.email_user).toLowerCase().includes(filterValue.toLowerCase()) ||
-        String(results.estado_user).toLowerCase().includes(filterValue.toLowerCase())
+      filteredResults = filteredResults.filter((users) =>
+        String(users.pk_cedula_user).toLowerCase().includes(filterValue.toLowerCase()) ||
+        String(users.fecha_nacimiento_user).toLowerCase().includes(filterValue.toLowerCase()) ||
+        String(users.nombre_user).toLowerCase().includes(filterValue.toLowerCase()) ||
+        String(users.rol_user).toLowerCase().includes(filterValue.toLowerCase()) ||
+        String(users.telefono_user).toLowerCase().includes(filterValue.toLowerCase()) ||
+        String(users.email_user).toLowerCase().includes(filterValue.toLowerCase()) ||
+        String(users.estado_user).toLowerCase().includes(filterValue.toLowerCase())
       );
     }
 
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-      filteredResults = filteredResults.filter((results) =>
-        Array.from(statusFilter).includes(results.estado_user)
+      filteredResults = filteredResults.filter((users) =>
+        Array.from(statusFilter).includes(users.estado_user)
       );
     }
 
     return filteredResults;
-  }, [results, filterValue, statusFilter]);
+  }, [users, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
+
+    if (!Array.isArray(filteredItems)) {
+      return []; // Devolver un arreglo vacío si filteredItems no es un arreglo
+    }
 
     return filteredItems.slice(start, end);
   }, [page, filteredItems, rowsPerPage]);
@@ -93,29 +125,34 @@ export default function UsersTable({ registrarUser, data, results, actualizarUse
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = useCallback((results, columnKey) => {
-    const cellValue = results[columnKey];
+  const renderCell = useCallback((user, columnKey) => {
+    const cellValue = user[columnKey];
 
     switch (columnKey) {
       case "nombre_user":
         return (
           <User
-            avatarProps={{ radius: "lg", src: results.imagen_user }}
-            description={results.email_user}
+            avatarProps={{ radius: "full",                       
+            src: `${
+              user.imagen_user && user.imagen_user.length > 0
+                ? `http://localhost:4000/img/${user.imagen_user}`
+                : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}`, 
+            }}
+            description={user.email_user}
             name={cellValue}
           >
-            {results.email_user}
+            {user.email_user}
           </User>
         );
       case "fecha_nacimiento_user":
         return (
-          <p>{new Date(results.fecha_nacimiento_user).toLocaleDateString()}</p>
+          <p>{new Date(user.fecha_nacimiento_user).toLocaleDateString()}</p>
         );
       case "descripcion_user":
         return (
           <>
-            {results.descripcion_user && results.descripcion_user.length > 0 ? (
-              <span>{results.descripcion_user}</span>
+            {user.descripcion_user && user.descripcion_user.length > 0 ? (
+              <span>{user.descripcion_user}</span>
             ) : (
               <span className="text-rojo">No tiene descripción</span>
             )}
@@ -123,22 +160,22 @@ export default function UsersTable({ registrarUser, data, results, actualizarUse
         );
       case "estado_user":
         return (
-          <Chip className="capitalize" color={statusColorMap[results.estado_user]} size="sm" variant="flat">
+          <Chip className="capitalize" color={statusColorMap[user.estado_user]} size="sm" variant="flat">
             {cellValue}
           </Chip>
         );
       case "actions":
         return (
           <div className="relative flex justify-center items-center gap-2">
-            <Button color="default" startContent={<EditIcon />} onClick={() => handleUpdateUser(results.pk_cedula_user)}>
+            <Button color="default" startContent={<EditIcon />} onClick={() => handleToggle('update', user)}>
               Editar
             </Button>
-            {results.estado_user === "activo" ? (
-              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivarUser(results.pk_cedula_user)}>
+            {user.estado_user === "activo" ? (
+              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => updateUserDesactive(user.pk_cedula_user)}>
                 Desactivar
               </Button>
             ) : (
-              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarUser(results.pk_cedula_user)}>
+              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => updateUserActive(user.pk_cedula_user)}>
                 Activar
               </Button>
             )}
@@ -220,14 +257,14 @@ export default function UsersTable({ registrarUser, data, results, actualizarUse
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={registrarUser} >
+            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => setAbrirModal(true)} >
               Registrar
             </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-default-400 text-small">
-            Total {results && results.length} usuarios
+            Total {users && users.length} usuarios
           </span>
           <label className="flex items-center text-default-400 text-small">
             Columnas por páginas:
@@ -278,13 +315,22 @@ export default function UsersTable({ registrarUser, data, results, actualizarUse
 
   return (
     <>
+      <FormUser
+        open={abrirModal}
+        onClose={() => setAbrirModal(false)}
+        title={mode === 'create' ? 'Registrar Usuario' : 'Actualizar Usuario'}
+        titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
+        idUser={initialData}
+        mode={mode}
+        onCloseModal={handleCloseModal}
+      />
       <Table
         aria-label="Example table with custom cells, pagination and sorting"
         isHeaderSticky
         bottomContent={bottomContent}
         bottomContentPlacement="outside"
         classNames={{
-          wrapper: "max-h-[482px]",
+          wrapper: "max-h-[482px] ",
         }}
         sortDescriptor={sortDescriptor}
         topContent={topContent}

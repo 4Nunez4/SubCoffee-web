@@ -132,12 +132,7 @@ export const desactivarFinca = async (req, res) => {
   try {
     const [result] = await pool.query(`UPDATE finca SET estado_fin = 2 WHERE pk_id_fin = ${id}`);
     if (result.affectedRows > 0) {
-      const [resultVariedad] = await pool.query( `UPDATE variedad SET estado_vari = 2 WHERE fk_finca = ${id}`);
-      if (resultVariedad.affectedRows > 0) {
-        res.status(200).json({ message: "Finca y variedad desactivadas exitosamente" });
-      } else {
-        res.status(404).json({ message: `No se encontró ninguna variedad asociada a la Finca con el ID ${id}` });
-      }
+      res.status(200).json({ message: "Finca desactivada exitosamente" });
     } else {
       res.status(404).json({ message: `No se encontró ninguna Finca con el ID ${id}` });
     }

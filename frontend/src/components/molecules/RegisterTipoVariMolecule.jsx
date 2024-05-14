@@ -1,53 +1,69 @@
-import React, { useRef, useEffect } from "react";
-import InputWithIconAtom from "../atoms/InputWithIconAtom";
-import TitleForModal from "../atoms/TitleForModal";
-import toast from "react-hot-toast";
+import React, { useState, useEffect, useContext } from "react";
 import { icono } from "../atoms/IconsAtom";
-import { Button } from "@nextui-org/react";
+import { Button, Input, ModalFooter } from "@nextui-org/react";
+import TipoVariContext from "../../context/TipoVariContext";
 
-const RegisterTipoVariMolecule = ({ mode, title, initialData, handleSubmit, actionLabel }) => {
-  const nombre_tipo_vari = useRef(null);
+const RegisterTipoVariMolecule = ({ mode, onClose, titleBtn }) => {
+  const [formData, setFormData] = useState({
+    nombre_tipo_vari: "",
+  });
+
+  const { idTipoVariedad, createTipoVariedades, updateTipoVariedades } = useContext(TipoVariContext);
 
   useEffect(() => {
-    if (mode === "update" && initialData) {
+    if (mode === "update" && idTipoVariedad) {
       try {
-        nombre_tipo_vari.current.value = initialData.nombre_tipo_vari;
+        setFormData({
+          ...formData,
+          nombre_tipo_vari: idTipoVariedad.nombre_tipo_vari,
+        });
       } catch (error) {
         console.error("Error fetching Tipo de variedad data:", error);
       }
     }
-  }, [mode, initialData]);
+  }, [mode, idTipoVariedad]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = {
-        nombre_tipo_vari: nombre_tipo_vari.current.value,
-      };
-      handleSubmit(data, e);
+      if (mode === "update") {
+        updateTipoVariedades(idTipoVariedad.pk_id_tipo_vari, formData)
+      } else {
+        createTipoVariedades(formData)
+      }
+      onClose();
     } catch (error) {
       console.log(error);
-      toast.success("Error en el servidor " + error);
     }
   };
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 p-4">
-      <TitleForModal>
-        {title}
-      </TitleForModal>
-      <InputWithIconAtom
-        icon={icono.iconoReName}
+    <form onSubmit={onSubmit} className="space-y-4 px-4">
+      <Input
+        label=""
+        aria-label="Nombre de la Variedad"
+        startContent={<icono.iconoReName />}
         placeholder="Nombre de la Variedad"
-        required
+        variant="bordered"
+        isRequired
         type="text"
-        ref={nombre_tipo_vari}
+        value={formData.nombre_tipo_vari}
+        name="nombre_tipo_vari"
+        onChange={handleChange}
       />
-      <center>
+      <ModalFooter className="flex justify-center">
         <Button type="submit" className="bg-gray-600 text-white">
-          {actionLabel}
+          {titleBtn}
         </Button>
-      </center>
+      </ModalFooter>
     </form>
   );
 };

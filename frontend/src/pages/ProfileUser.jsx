@@ -68,8 +68,8 @@ function ProfileUser() {
             <Avatar
               src={
                 user.imagen_user && user.imagen_user.length > 0
-                  ? `../../public/${user.imagen_user}`
-                  : "../../imagen_de_usuario.webp"
+                  ? `http://localhost:4000/img/${user.imagen_user}`
+                  : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
               }
               className="w-56 h-56"
             />

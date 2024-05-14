@@ -8,21 +8,20 @@ import {
   Autocomplete,
   AutocompleteItem,
   Avatar,
+  Button,
 } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 import { icono } from "../atoms/IconsAtom";
-import TextSubAtom from "../atoms/TextSubAtom";
 import AvatarAtom from "../atoms/AvatarAtom";
-import ButtonAtom from "../atoms/ButtonAtom";
 import ModalMessaAndNoti from "../molecules/ModalMessaAndNoti";
 import { SearchIcon } from "../../nextui/SearchIcon";
 import axios from "axios";
 import AuthContext from "../../context/AuthContext";
-import FormLoginOrganims from "./FormLoginOrganims";
 import axiosClient from "../../api/axios";
+import FormLogin from "../templates/FormLogin";
 
 function HeaderOrganism() {
   const [abrirBell, setAbrirBell] = useState(false);
@@ -39,19 +38,20 @@ function HeaderOrganism() {
 
   const login = async (data, e) => {
     e.preventDefault();
-    await axios.post(URL, data).then((res) => {
-      if (res.status === 200) {
-        toast.success(res.data.message, { duration: 5000 });
-        const { token, user } = res.data;
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
-        navigate("/subcoffee");
-        setUsers(user);
-      } else if (res.status === 401) {
-        toast.error("Usuario no registrado");
-      }
-    })
-    .catch((error) => console.log(error));
+    await axios
+      .post(URL, data)
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success(res.data.message, { duration: 5000 });
+          const { token, user } = res.data;
+          localStorage.setItem("token", token);
+          localStorage.setItem("user", JSON.stringify(user));
+          navigate("/subcoffee");
+        } else if (res.status === 401) {
+          toast.error("Usuario no registrado");
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleSearch = async (value) => {
@@ -64,7 +64,7 @@ function HeaderOrganism() {
       icon: "question",
       showCancelButton: true,
       confirmButtonText: "Sí",
-      cancelButtonText: "Cancelar"
+      cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.clear();
@@ -102,11 +102,9 @@ function HeaderOrganism() {
       {isAuthenticated ? (
         <nav className="flex justify-between items-center bg-gray-300 p-4 shadow-sm">
           <div className="flex flex-col">
-            <TextSubAtom
-              to="/subcoffee"
-              color="cafeClaroLogo"
-              text="Bienvenido"
-            />
+            <Link to="/" className="text-gray-500 text-2xl font-semibold">
+              Bienvenido
+            </Link>
           </div>
           <div>
             <Autocomplete
@@ -173,8 +171,8 @@ function HeaderOrganism() {
                           size="sm"
                           src={
                             user.imagen_user && user.imagen_user.length > 0
-                              ? `../../${user.imagen_user}`
-                              : "../../imagen_de_usuario.webp"
+                              ? `http://localhost:4000/img/${user.imagen_user}`
+                              : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
                           }
                         />
                         <div className="flex flex-col">
@@ -210,8 +208,8 @@ function HeaderOrganism() {
                     avatarProps={{
                       src: `${
                         users.imagen_user && users.imagen_user.length > 0
-                          ? `../../${users.imagen_user}`
-                          : "../../imagen_de_usuario.webp"
+                        ? `http://localhost:4000/img/${users.imagen_user}`
+                        : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
                       }`,
                     }}
                     className="transition-transform"
@@ -251,7 +249,9 @@ function HeaderOrganism() {
           <nav className="flex justify-between items-center bg-gray-300 fixed w-full m-0 top-0 p-4 shadow-sm z-20">
             <div className="flex items-center">
               <AvatarAtom img="isotipo-SubCoffee.png" />
-              <TextSubAtom to="/" color="gray-600" text="SubCoffee" />
+              <Link to="/" className="text-gray-500 text-2xl font-semibold">
+                SubCoffee
+              </Link>
             </div>
             <div className="flex items-center gap-x-3">
               <div className="cursor-pointer">
@@ -267,13 +267,14 @@ function HeaderOrganism() {
                   />
                 )}
               </div>
-              <ButtonAtom onClick={() => setModalOpen(true)}>
+              <Button onClick={() => setModalOpen(true)} className="border border-gray-400 bg-gray-200 text-gray-500 rounded-md hover:bg-gray-400 duration-500 transition-all ease-in-out hover:text-gray-200">
                 Iniciar sesión
-              </ButtonAtom>
+              </Button>
             </div>
           </nav>
-          <FormLoginOrganims
+          <FormLogin
             open={modalOpen}
+            title="Iniciar sesión"
             onClose={() => setModalOpen(false)}
             handleSubmit={login}
           />

@@ -1,122 +1,128 @@
-import React, { useRef, useEffect, useState } from "react";
-import axiosClient from "../../api/axios";
-import InputWithIconAtom from "../atoms/InputWithIconAtom";
-import TitleForModal from "../atoms/TitleForModal";
-import toast from "react-hot-toast";
-import { icono } from "../atoms/IconsAtom";
-import { Button, Select, SelectItem } from "@nextui-org/react";
+import React, { useEffect, useContext, useState } from "react";
+import { Button, Input, ModalFooter } from "@nextui-org/react";
 
-const RegisterVeredaMolecule = ({ mode, title, initialData, handleSubmit, actionLabel }) => {
-  const nombreVeredaRef = useRef(null);
-  const [municipios, setMunicipios] = useState([]);
-  const [municipiosRef, setMunicipiosRef] = useState("");
-  const [departamentos, setDepartamentos] = useState([]);
-  const [departamentosRef, setDepartamentosRef] = useState('');
+import DeparContext from "../../context/DeparContext";
+import MunicipioContext from "../../context/MunicipioContext";
+import VeredaContext from "../../context/VeredaContext";
+import { icono } from "../atoms/IconsAtom";
+
+const RegisterVeredaMolecule = ({ mode, titleBtn, onClose }) => {
+  const [formData, setFormData] = useState({ 
+    nombre: "", 
+    departamento: "", 
+    municipio: "" 
+  });
+
+  const { departamentos, getDepartamentos } = useContext(DeparContext);
+  const { getMunisForDepar, municipiosForDepar, setMunicipiosForDepar } = useContext(MunicipioContext);
+  const { createVeres, updateVeres, idVereda } = useContext(VeredaContext);
 
   useEffect(() => {
-    const fetchDepar = async () => {
-      try {
-        const response = await axiosClient.get("/v1/departamentos");
-        setDepartamentos(response.data);
-      } catch (error) {
-        console.error("Error fetching departamentos:", error);
-        toast.error("Error al cargar la lista de departamentos");
-      }
-    };
-    fetchDepar();
-    if (mode === "update" && initialData) {
-      try {
-        nombreVeredaRef.current.value = initialData.nombreVeredaRef;
-        setMunicipiosRef(initialData.fk_departamento);
-      } catch (error) {
-        console.error("Error fetching departamento data:", error);
-        toast.error("Error al cargar datos del municipio");
-      }
-    }
-  }, [mode, initialData]);
+    getDepartamentos();
+  }, []);
 
-  const fetchMunicipios = async (departamentos) => {
-    try {
-      const response = await axiosClient.get(`/v1/municipiosdep/${departamentos}`);
-      setMunicipios(response.data);
-    } catch (error) {
-      console.error("Error fetching municipios:", error);
-      toast.error("Error al cargar la lista de municipios");
+  useEffect(() => {
+    if (mode === "update" && idVereda) {
+      setFormData({
+        nombre: idVereda.nombre_vere,
+        departamento: idVereda.fk_departamento,
+        municipio: idVereda.fk_municipio,
+      });
+      getMunisForDepar(idVereda.fk_departamento)
+    } else {
+      setMunicipiosForDepar([])
     }
+  }, [mode, idVereda]);
+
+  const handleDepartamentoChange = (departamento) => {
+    setFormData(prevData => ({ ...prevData, departamento, municipio: "" }));
+    getMunisForDepar(departamento);
   };
 
-  const handleDepartamentoChange = (e) => {
-    const selectedDepartamentoId = e.target.value;
-    setDepartamentosRef(selectedDepartamentoId);
-    fetchMunicipios(selectedDepartamentoId);
+  const handleMunicipioChange = (e) => {
+    const selectedMunicipio = e.target.value;
+    setFormData(prevData => ({ ...prevData, municipio: selectedMunicipio }));
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const data = { 
+      nombre_vere: formData.nombre, 
+      fk_municipio: formData.municipio 
+    };
     try {
-      const data = {
-        nombre_vere: nombreVeredaRef.current.value,
-        fk_municipio: municipiosRef,
-      };
-      handleSubmit(data, e);
+      mode === "update" 
+        ? updateVeres(idVereda.pk_id_vere, data) 
+        : createVeres(data);
+      onClose();
     } catch (error) {
       console.error("Error en el servidor:", error);
-      toast.error("Error en el servidor");
     }
   };
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 p-4">
-      <TitleForModal>
-        {title}
-      </TitleForModal>
-      <Select
+    <form onSubmit={onSubmit} className="space-y-4 px-4">
+      <div className="relative">
+        <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-800">
+          {<icono.iconoDepar />}
+        </span>
+        <select
+          name="departamentoRef"
+          value={formData.departamento}
+          onChange={(e) => handleDepartamentoChange(e.target.value)}
+          required={true}
+          className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+        >
+          <option value="" hidden className="text-gray-400">
+            Seleccionar Departamento
+          </option>
+          {departamentos.map(({ pk_codigo_depar, nombre_depar }) => (
+            <option key={pk_codigo_depar} value={pk_codigo_depar}>
+              {nombre_depar}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="relative">
+        <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-800">
+          {<icono.iconoMuni />}
+        </span>
+        <select
+          name="municipioRef"
+          value={formData.municipio}
+          onChange={handleMunicipioChange}
+          required={true}
+          className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+        >
+          <option value="" hidden className="text-gray-600">
+            Seleccionar Municipio
+          </option>
+          {municipiosForDepar.length > 0 ? municipiosForDepar.map(({ pk_codigo_muni, nombre_muni }) => (
+            <option key={pk_codigo_muni} value={pk_codigo_muni}>
+              {nombre_muni}
+            </option>
+          )):
+          <option value="" className="text-gray-600">
+            Por favor seleccionar un departemento
+          </option> 
+        }
+        </select>
+      </div>
+      <Input
         label=""
-        placeholder="Seleccionar Departamento"
-        value={departamentosRef}
-        startContent={<icono.iconoDepar />}
+        aria-label="Nombre de la vereda"
+        startContent={<icono.iconoReName />}
         variant="bordered"
-        aria-label="Seleccionar Departamento"
-        onChange={handleDepartamentoChange}
-      >
-        {departamentos.filter((departamento) => departamento.estado_depar === "activo").map((departamento) => (
-          <SelectItem
-            key={departamento.pk_codigo_depar}
-            value={departamento.pk_codigo_depar}
-          >
-            {departamento.nombre_depar}
-          </SelectItem>
-        ))}
-      </Select>
-      <Select
-        label=""
-        placeholder="Seleccionar Municipio"
-        value={municipiosRef}
-        variant="bordered"
-        startContent={<icono.iconoMuni />}
-        aria-label="Seleccionar Municipio"
-        onChange={(e) => setMunicipiosRef(e.target.value)}
-      >
-        {municipios.filter((municipio) => municipio.estado_muni === "activo").map((municipio) => (
-          <SelectItem
-            key={municipio.pk_codigo_muni}
-            value={municipio.pk_codigo_muni}
-          >
-            {municipio.nombre_muni}
-          </SelectItem>
-        ))}
-      </Select>
-      <InputWithIconAtom
-        icon={icono.iconoReName}
         placeholder="Nombre de la Vereda"
-        required
-        ref={nombreVeredaRef}
+        isRequired
+        value={formData.nombre}
+        onChange={(e) => setFormData(prevData => ({ ...prevData, nombre: e.target.value }))}
       />
-      <center>
+      <ModalFooter className="flex justify-center">
         <Button type="submit" className="bg-gray-600 text-white">
-          {actionLabel}
+          {titleBtn}
         </Button>
-      </center>
+      </ModalFooter>
     </form>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -21,13 +21,15 @@ import { ChevronDownIcon } from "../../nextui/ChevronDownIcon";
 import { EditIcon } from "../../nextui/EditIcon";
 import ActivarIcon from "../../nextui/ActivarIcon.jsx";
 import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
+import DeparContext from "../../context/DeparContext.jsx";
+import FormDepartamentoOrganism from "../templates/FormDepartamento.jsx";
 
 const statusColorMap = {
   activo: "success",
   inactivo: "danger",
 };
 
-export default function DepartamentoTable({ registrar, data, results, actualizar, desactivar, activar}) {
+export default function DepartamentoTable() {
   const [filterValue, setFilterValue] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -37,9 +39,25 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
   });
   const [page, setPage] = useState(1);
 
-  const handleUpdateUser = (id) => {
-    localStorage.setItem("id_depar", id);
-    actualizar(id)
+  const { getDepartamentos, setIdDepartamento, departamentos, desactivarDepartamento, activarDepartamento } = useContext(DeparContext);
+
+  useEffect(() => {
+    getDepartamentos();
+  }, []);
+  
+  const [abrirModal, setAbrirModal] = useState(false)
+  const [mode, setMode] = useState("create");
+
+  const data = [
+    { uid: "pk_codigo_depar", name: "Codigo Departamento", sortable: true },
+    { uid: "nombre_depar", name: "Nombre Departamento", sortable: true },
+    { uid: "estado_depar", name: "Estado Departamento", sortable: true },
+    { uid: "actions", name: "Acciones", sortable: false },
+  ];
+
+  const handleToggle = (mode) => {
+    setAbrirModal(true);
+    setMode(mode);
   };
 
   const statusOptions = [
@@ -50,24 +68,24 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
   const hasSearchFilter = Boolean(filterValue);
 
   const filteredItems = useMemo(() => {
-    let filteredResults = results;
+    let filteredResults = departamentos;
 
     if (hasSearchFilter) {
-      filteredResults = filteredResults.filter((results) =>
-          String(results.pk_codigo_depar).toLowerCase().includes(filterValue.toLowerCase()) ||
-          String(results.nombre_depar).toLowerCase().includes(filterValue.toLowerCase()) ||
-          String(results.estado_depar).toLowerCase().includes(filterValue.toLowerCase())
+      filteredResults = filteredResults.filter((departamentos) =>
+          String(departamentos.pk_codigo_depar).toLowerCase().includes(filterValue.toLowerCase()) ||
+          String(departamentos.nombre_depar).toLowerCase().includes(filterValue.toLowerCase()) ||
+          String(departamentos.estado_depar).toLowerCase().includes(filterValue.toLowerCase())
       );
     }
 
     if ( statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-      filteredResults = filteredResults.filter((results) =>
-        Array.from(statusFilter).includes(results.estado_depar)
+      filteredResults = filteredResults.filter((departamentos) =>
+        Array.from(statusFilter).includes(departamentos.estado_depar)
       );
     }
 
     return filteredResults;
-  }, [results, filterValue, statusFilter]);
+  }, [departamentos, filterValue, statusFilter]);
 
   const pages = useMemo(() => {
     if (!Array.isArray(filteredItems)) {
@@ -100,29 +118,29 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = useCallback((results, columnKey) => {
-    const cellValue = results[columnKey];
+  const renderCell = useCallback((departamento, columnKey) => {
+    const cellValue = departamento[columnKey];
 
     switch (columnKey) {
 
       case "estado_depar":
         return (
-          <Chip className="capitalize" color={statusColorMap[results.estado_depar]} size="sm" variant="flat">
+          <Chip className="capitalize" color={statusColorMap[departamento.estado_depar]} size="sm" variant="flat">
             {cellValue}
           </Chip>
         );
       case "actions":
         return (
           <div className="relative flex justify-center items-center gap-2">
-              <Button color="default" startContent={<EditIcon />} onClick={() => handleUpdateUser(results.pk_codigo_depar)}>
+              <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle('update'); setIdDepartamento(departamento)}}>
                 Editar
               </Button>
-              {results.estado_depar === "activo" ? (
-                <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivar(results.pk_codigo_depar)}>
+              {departamento.estado_depar === "activo" ? (
+                <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivarDepartamento(departamento.pk_codigo_depar)}>
                   Desactivar
                 </Button>
               ) : (              
-                <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activar(results.pk_codigo_depar)}>
+                <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarDepartamento(departamento.pk_codigo_depar)}>
                   Activar
                 </Button>
               )}
@@ -204,14 +222,14 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={registrar} >
+            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-default-400 text-small">
-            Total {results && results.length} departamentos
+            Total {departamentos && departamentos.length} departamentos
           </span>
           <label className="flex items-center text-default-400 text-small">
             Columnas por páginas:
@@ -261,7 +279,14 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
   }, [items.length, page, pages, hasSearchFilter]);
 
   return (
-    <>
+    <>        
+      <FormDepartamentoOrganism
+        open={abrirModal}
+        onClose={() => setAbrirModal(false)}
+        title={mode === "create" ? "Registrar Departamento": "Actualizar Departamento"}
+        titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
+        mode={mode}
+      />
       <Table
         aria-label="Example table with custom cells, pagination and sorting"
         isHeaderSticky
@@ -275,6 +300,7 @@ export default function DepartamentoTable({ registrar, data, results, actualizar
         topContentPlacement="outside"
         onSortChange={setSortDescriptor}
       >
+
         <TableHeader columns={data}>
           {(column) => (
             <TableColumn

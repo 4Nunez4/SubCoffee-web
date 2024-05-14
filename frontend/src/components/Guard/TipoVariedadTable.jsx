@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -21,13 +21,15 @@ import { ChevronDownIcon } from "../../nextui/ChevronDownIcon";
 import { EditIcon } from "../../nextui/EditIcon.jsx";
 import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
 import ActivarIcon from "../../nextui/ActivarIcon.jsx";
+import FormTipovariedad from "../templates/FormTipovariedad.jsx";
+import TipoVariContext from "../../context/TipoVariContext.jsx";
 
 const statusColorMap = {
   activo: "success",
   inactivo: "danger",
 };
 
-export default function TipoVariedadTable({ registrar, data, results, actualizar, desactivar, activar}) {
+export default function TipoVariedadTable() {
   const [filterValue, setFilterValue] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -37,9 +39,25 @@ export default function TipoVariedadTable({ registrar, data, results, actualizar
   });
   const [page, setPage] = useState(1);
 
-  const handleUpdateUser = (id) => {
-    localStorage.setItem("id_tipo_vari", id);
-    actualizar(id)
+  const { tipoVariedades, getTipoVariedades, desactivarTipoVariedades, activarTipoVariedades, setIdTipoVariedad } = useContext(TipoVariContext)
+
+  const [abrirModal, setAbrirModal] = useState(false);
+  const [mode, setMode] = useState("create");
+  
+  useEffect(() => {
+    getTipoVariedades();
+  }, []);
+
+  const data = [
+    { uid: "pk_id_tipo_vari", name: "Codigo Variedad", sortable: true },
+    { uid: "nombre_tipo_vari", name: "Nombre Variedad", sortable: true },
+    { uid: "estado_tipo_vari", name: "Estado variedad", sortable: true },
+    { uid: "actions", name: "Acciones", sortable: false },
+  ];
+
+  const handleToggle = (mode) => {
+    setAbrirModal(true);
+    setMode(mode);
   };
 
   const statusOptions = [
@@ -50,24 +68,24 @@ export default function TipoVariedadTable({ registrar, data, results, actualizar
   const hasSearchFilter = Boolean(filterValue);
 
   const filteredItems = useMemo(() => {
-    let filteredResults = results;
+    let filteredResults = tipoVariedades;
 
     if (hasSearchFilter) {
-      filteredResults = filteredResults.filter((results) =>
-          String(results.pk_id_tipo_vari).toLowerCase().includes(filterValue.toLowerCase()) ||
-          String(results.nombre_tipo_vari).toLowerCase().includes(filterValue.toLowerCase()) ||
-          String(results.estado_tipo_vari).toLowerCase().includes(filterValue.toLowerCase())
+      filteredResults = filteredResults.filter((tipoVariedades) =>
+          String(tipoVariedades.pk_id_tipo_vari).toLowerCase().includes(filterValue.toLowerCase()) ||
+          String(tipoVariedades.nombre_tipo_vari).toLowerCase().includes(filterValue.toLowerCase()) ||
+          String(tipoVariedades.estado_tipo_vari).toLowerCase().includes(filterValue.toLowerCase())
       );
     }
 
     if ( statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-      filteredResults = filteredResults.filter((results) =>
-        Array.from(statusFilter).includes(results.estado_tipo_vari)
+      filteredResults = filteredResults.filter((tipoVariedades) =>
+        Array.from(statusFilter).includes(tipoVariedades.estado_tipo_vari)
       );
     }
 
     return filteredResults;
-  }, [results, filterValue, statusFilter]);
+  }, [tipoVariedades, filterValue, statusFilter]);
 
   const pages = useMemo(() => {
     if (!Array.isArray(filteredItems)) {
@@ -100,29 +118,29 @@ export default function TipoVariedadTable({ registrar, data, results, actualizar
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = useCallback((results, columnKey) => {
-    const cellValue = results[columnKey];
+  const renderCell = useCallback((tipoVariedades, columnKey) => {
+    const cellValue = tipoVariedades[columnKey];
 
     switch (columnKey) {
 
       case "estado_tipo_vari":
         return (
-          <Chip className="capitalize" color={statusColorMap[results.estado_tipo_vari]} size="sm" variant="flat">
+          <Chip className="capitalize" color={statusColorMap[tipoVariedades.estado_tipo_vari]} size="sm" variant="flat">
             {cellValue}
           </Chip>
         );
       case "actions":
         return (
           <div className="relative flex justify-center items-center gap-2">
-            <Button color="default" startContent={<EditIcon />} onClick={() => handleUpdateUser(results.pk_id_tipo_vari)}>
+            <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdTipoVariedad(tipoVariedades)}}>
               Editar
             </Button>
-            {results.estado_tipo_vari === "activo" ? (
-              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivar(results.pk_id_tipo_vari)}>
+            {tipoVariedades.estado_tipo_vari === "activo" ? (
+              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivarTipoVariedades(tipoVariedades.pk_id_tipo_vari)}>
                 Desactivar
               </Button>
             ) : (
-              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activar(results.pk_id_tipo_vari)}>
+              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarTipoVariedades(tipoVariedades.pk_id_tipo_vari)}>
                 Activar
               </Button>
             )}
@@ -204,14 +222,14 @@ export default function TipoVariedadTable({ registrar, data, results, actualizar
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={registrar} >
+            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-default-400 text-small">
-            Total {results && results.length} Tipo de Variedades
+            Total {tipoVariedades && tipoVariedades.length} Tipo de Variedades
           </span>
           <label className="flex items-center text-default-400 text-small">
             Columnas por páginas:
@@ -262,6 +280,13 @@ export default function TipoVariedadTable({ registrar, data, results, actualizar
 
   return (
     <>
+      <FormTipovariedad
+        open={abrirModal}
+        onClose={() => setAbrirModal(false)}
+        title={mode === 'create' ? 'Registrar Tipo variedad' : 'Actualizar Tipo variedad'}
+        titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
+        mode={mode}
+      />
       <Table
         aria-label="Example table with custom cells, pagination and sorting"
         isHeaderSticky

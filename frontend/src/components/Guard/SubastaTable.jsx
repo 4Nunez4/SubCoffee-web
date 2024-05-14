@@ -114,7 +114,11 @@ export default function SubastaTable({
                   isBordered
                   radius="full"
                   size="md"
-                  src={subasta.imagen_user}
+                  src={
+                    subasta.imagen_user && subasta.imagen_user.length > 0
+                      ? `http://localhost:4000/img/${subasta.imagen_user}`
+                      : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
+                  }
                 />
                 <div className="flex flex-col gap-1 items-start justify-center">
                   <h4 className="text-small font-semibold leading-none text-default-600">
@@ -138,7 +142,7 @@ export default function SubastaTable({
             <CardBody className=" items-start">
               <span className="w-full text-center">
                 <b className="text-lg">
-                  {subasta.nombre_tipo_vari}-{subasta.nombre_fin}
+                  {subasta.nombre_tipo_vari} - {subasta.nombre_fin}
                 </b>
                 <p className="text-sm text-default-400">{subasta.estado_sub}</p>
               </span>
@@ -148,12 +152,12 @@ export default function SubastaTable({
                   radius="md"
                   alt={subasta.imagen_sub}
                   className="w-[380px] object-cover h-[200px]"
-                  src={subasta.imagen_sub}
+                  src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
                 />
                 <div className="flex flex-col gap-1 pt-4">
                   <div className="text-gray-400 text-sm flex justify-between">
                     <p>
-                      Cantidad: {subasta.cantidad_sub} -{" "}
+                      Cantidad: {subasta.cantidad_sub} -
                       {subasta.unidad_peso_sub}
                     </p>
                     <p>Precio inicial: {subasta.precio_inicial_sub}</p>

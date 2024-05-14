@@ -38,11 +38,6 @@ app.use("/v1", rutNotificaciones);
 app.use("/v1", postulantesRoutes);
 app.use("/v1", ofertasRoutes);
 
-app.get('/public/fincas/:imageName', (req, res) => {
-  const imageName = req.params.imageName;
-  res.sendFile(path.join(__dirname, 'fincas', imageName));
-});
-
 app.set("view engine", "ejs");
 
 app.set("views", "./view");

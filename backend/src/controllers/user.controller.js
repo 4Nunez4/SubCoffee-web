@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
   },
 });
 const uploat = multer({ storage: storage });
-export const cargarImagen = uploat.single("img");
+export const cargarImagen = uploat.single("imagen_user");
 
 export const getUsers = async (req, res) => {
   try {
@@ -35,10 +35,11 @@ export const createUser = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { cedula_user, nombre_user, email_user, password_user, telefono_user, fechanacimiento_user, rol_user } = req.body;
+    const { pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fechanacimiento_user, rol_user } = req.body;
     const bcryptPassword = bcrypt.hashSync(password_user, 12);
+    let imagen_user =  req.file.originalname
     
-    let sql = `INSERT INTO usuarios (pk_cedula_user, nombre_user, email_user, password_user, telefono_user, fecha_nacimiento_user, rol_user, estado_user) VALUES ('${cedula_user}', '${nombre_user}','${email_user}','${bcryptPassword}', '${telefono_user}', '${fechanacimiento_user}' ,'${rol_user}', 'activo')`;
+    let sql = `INSERT INTO usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, imagen_user, telefono_user, fecha_nacimiento_user, rol_user, estado_user) VALUES ('${pk_cedula_user}', '${nombre_user}','${email_user}','${bcryptPassword}', '${descripcion_user}', '${imagen_user}', '${telefono_user}', '${fechanacimiento_user}' ,'${rol_user}', 'activo')`;
     const [result] = await pool.query(sql);
     if (result.affectedRows > 0) {
       res.status(200).json({ status: 200, message: "Usuario creado exitosamente" });
@@ -58,11 +59,11 @@ export const updateUser = async (req, res) => {
     }
 
     const id = req.params.id;
-    const { cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fecha_nacimiento_user, rol_user } = req.body;
+    const { pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fechanacimiento_user, rol_user } = req.body;
     const bcryptPassword = bcrypt.hashSync(password_user, 12);
-    let img =  req.file.originalname
+    let imagen_user =  req.file.originalname
 
-    let sql = `UPDATE usuarios SET pk_cedula_user = '${cedula_user}', nombre_user = '${nombre_user}', email_user = '${email_user}', password_user = '${bcryptPassword}', descripcion_user = '${descripcion_user}', imagen_user = '${img}', telefono_user = '${telefono_user}', fecha_nacimiento_user = '${fecha_nacimiento_user}', rol_user = '${rol_user}' WHERE pk_cedula_user = '${id}'`;
+    let sql = `UPDATE usuarios SET pk_cedula_user = '${pk_cedula_user}', nombre_user = '${nombre_user}', email_user = '${email_user}', password_user = '${bcryptPassword}', descripcion_user = '${descripcion_user}', imagen_user = '${imagen_user}', telefono_user = '${telefono_user}', fecha_nacimiento_user = '${fechanacimiento_user}', rol_user = '${rol_user}' WHERE pk_cedula_user = '${id}'`;
     const [result] = await pool.query(sql);
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Usuario actualizado con exito" });

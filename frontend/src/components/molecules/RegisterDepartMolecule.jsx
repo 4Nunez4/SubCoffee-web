@@ -1,64 +1,77 @@
-import React, { useRef, useEffect } from "react";
-import InputWithIconAtom from "../atoms/InputWithIconAtom";
-import TitleForModal from "../atoms/TitleForModal";
+import React, { useState, useEffect, useContext } from "react";
 import toast from "react-hot-toast";
 import { icono } from "../atoms/IconsAtom";
-import { Button } from "@nextui-org/react";
+import { Button, Input, ModalFooter } from "@nextui-org/react";
+import DeparContext from "../../context/DeparContext";
 
-const RegisterDepartMolecule = ({ mode, title, initialData, handleSubmit, actionLabel }) => {
-  const pk_codigo_depar = useRef(null);
-  const nombre_depar = useRef(null);
+const RegisterDepartMolecule = ({ mode, titleBtn, onClose }) => {
+  const [formData, setFormData] = useState({
+    pk_codigo_depar: "",
+    nombre_depar: "",
+  });
+  const { idDepartamento, createDepartamento, updateDepartamento } = useContext(DeparContext);
 
   useEffect(() => {
-    if (mode === "update" && initialData) {
-      try {
-        console.log(initialData);
-        pk_codigo_depar.current.value = initialData.pk_codigo_depar;
-        nombre_depar.current.value = initialData.nombre_depar;
-      } catch (error) {
-        console.error("Error fetching departamento data:", error);
-      }
+    if (mode === "update" && idDepartamento) {
+      setFormData({
+        pk_codigo_depar: idDepartamento.pk_codigo_depar,
+        nombre_depar: idDepartamento.nombre_depar,
+      });
     }
-  }, [mode, initialData]);
+  }, [mode, idDepartamento]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = {
-        pk_codigo_depar: pk_codigo_depar.current.value,
-        nombre_depar: nombre_depar.current.value,
-      };
-      handleSubmit(data, e);
+      if (mode === "update") {
+        await updateDepartamento(idDepartamento.pk_codigo_depar, formData);
+      } else {
+        await createDepartamento(formData);
+      }
+      onClose()
     } catch (error) {
-      console.log(error);
-      toast.success("Error en el servidor " + error);
+      console.error(error);
+      toast.error("Error en el servidor: " + error.message);
     }
   };
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
-    <form onSubmit={onSubmit} className="space-y-4 p-4">
-      <TitleForModal>
-        {title}
-      </TitleForModal>
-      <InputWithIconAtom
-        icon={icono.iconoNumber}
+    <form onSubmit={onSubmit} className="space-y-4 px-4">
+      <Input
+        type="number"
+        name="pk_codigo_depar"
         placeholder="Código del Departamento"
-        required
-        type="text"
-        ref={pk_codigo_depar}
+        labelPlacement="outside"
+        startContent={<icono.iconoNumber />}
+        variant="bordered"
+        min={0}
+        required={true}
+        value={formData.pk_codigo_depar}
+        onChange={handleChange}
       />
-      <InputWithIconAtom
-        icon={icono.iconoReName}
+      <Input
+        name="nombre_depar"
+        labelPlacement="outside"
+        startContent={<icono.iconoDepar />}
+        variant="bordered"
+        required={true}
+        type="text"
         placeholder="Nombre del Departamento"
-        required
-        type="text"
-        ref={nombre_depar}
+        value={formData.nombre_depar}
+        onChange={handleChange}
       />
-      <center>
-       <Button type="submit" className="bg-gray-600 text-white">
-          {actionLabel}
+      <ModalFooter className="flex justify-center">
+        <Button type="submit" className="bg-gray-600 text-white">
+          {titleBtn}
         </Button>
-      </center>
+      </ModalFooter>
     </form>
   );
 };

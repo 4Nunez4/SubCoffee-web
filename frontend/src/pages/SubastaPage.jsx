@@ -107,7 +107,11 @@ function SubastaPage() {
                     isBordered
                     radius="full"
                     size="md"
-                    src={subasta.imagen_user}
+                    src={
+                      subasta.imagen_user && subasta.imagen_user.length > 0
+                        ? `http://localhost:4000/img/${subasta.imagen_user}`
+                        : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
+                    }
                   />
                   <div className="flex flex-col gap-1 items-start justify-center">
                     <h4 className="text-small font-semibold leading-none text-default-600">
@@ -145,7 +149,7 @@ function SubastaPage() {
                     radius="md"
                     alt={subasta.imagen_sub}
                     className="w-[250px] object-cover h-[200px]"
-                    src={subasta.imagen_sub}
+                    src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
                   />
                   <div className="flex flex-col gap-1 pt-4">
                     <div className="text-gray-400 text-sm justify-between">

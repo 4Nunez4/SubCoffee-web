@@ -3,14 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 import { icono } from "../atoms/IconsAtom";
 
 const users = JSON.parse(localStorage.getItem("user"));
-const auth = localStorage.getItem("token");
 
 const SidebarOrganims = () => {
   const [open, setOpen] = useState(true);
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
   const Menus = [
-    ...(auth && users && [
+    ...(users && [
       { title: "Inicio", link: "/subcoffee", icon: icono.iconoHome },
       ...(users && users.rol_user === "admin" ? [
             { title: "Usuarios", link: "/users", icon: icono.iconoRol },
