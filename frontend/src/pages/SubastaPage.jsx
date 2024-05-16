@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import React, { useState, useEffect, useContext } from "react";
 import axiosClient from "../api/axios";
 import {
   Avatar,
@@ -10,96 +9,25 @@ import {
   CardHeader,
   Image,
 } from "@nextui-org/react";
-import { EditIcon } from "../nextui/EditIcon";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ImageSlider from "../components/molecules/ImageSlider";
+import SubastaContext from "../context/SubastaContext";
 
 function SubastaPage() {
-  const slides = [
-    {
-      url: "https://www.semana.com/resizer/LgNm70jTor0z_IKrwZmx8bvlMEY=/arc-anglerfish-arc2-prod-semana/public/MGSRCROCY5GETHHQC2XBMM2CEQ.jpg",
-    },
-    {
-      url: "https://cdn-3.expansion.mx/dims4/default/3a43bc7/2147483647/strip/true/crop/5760x3840+0+0/resize/1800x1200!/format/webp/quality/80/?url=https%3A%2F%2Fcdn-3.expansion.mx%2Fd3%2Fa1%2Fca36469448dea0b9dde50db5451f%2Fbeneficios-cafe.jpg",
-    },
-    {
-      url: "https://www.solucionesparaladiabetes.com/magazine-diabetes/wp-content/uploads/cafe-696x464.jpeg",
-    },
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const prevSlide = () => {
-    const newIndex = (currentIndex - 1 + slides.length) % slides.length;
-    setCurrentIndex(newIndex);
-  };
-  const nextSlide = () => {
-    const newIndex = (currentIndex + 1) % slides.length;
-    setCurrentIndex(newIndex);
-  };
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    return () => clearInterval(intervalId);
-  }, [currentIndex]);
-
-  const [results, setResults] = useState([]);
-  const usuario = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate()
+  const { getSubs, subastas } = useContext(SubastaContext)
 
   useEffect(() => {
-    fetchList();
+    getSubs();
   }, []);
-
-  const fetchList = async () => {
-    try {
-      const response = await axiosClient.get(`/v1/listar`);
-      setResults(response.data);
-    } catch (error) {
-      console.error("Error fetching dates list:", error);
-    }
-  };
-
-  const handleUpdateSubasta = (id) => {
-    localStorage.setItem("id_sub", id);
-    handleUpdateSubasta(id);
-  };
 
   return (
     <div className="px-10 bg-gray-100">
-      <div className="max-w-[1600px] h-auto w-full m-auto pt-10 p-4">
-        <div
-          className="w-full h-96 rounded-2xl bg-center bg-cover duration-500"
-          style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        ></div>
-        <div className="flex justify-center">
-          <div
-            className="text-2xl text-bold rounded-full p-2 text-gray-700 cursor-pointer transition duration-300"
-            onClick={prevSlide}
-          >
-            <FaChevronLeft size={25} />
-          </div>
-          <div className="flex justify-center items-center my-4 transition duration-300">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`w-3 h-3 mx-2 rounded-full cursor-pointer ${
-                  index === currentIndex ? "bg-black" : "bg-gray-300"
-                }`}
-                onClick={() => setCurrentIndex(index)}
-              ></div>
-            ))}
-          </div>
-          <div
-            className="text-2xl text-bold rounded-full p-2 text-gray-700 cursor-pointer transition duration-300"
-            onClick={nextSlide}
-          >
-            <FaChevronRight size={25} />
-          </div>
-        </div>
-      </div>
+      <ImageSlider />
       <p className="pl-4 text-xl">Borbon</p>
       <div className="grid grid-cols-3 justify-center items-center gap-4 p-3">
-        {results &&
-          results.map((subasta) => (
+        {subastas &&
+          subastas.filter((subasta) => subasta.estado_sub === "abierta").map((subasta) => (
             <Card key={subasta.pk_id_sub} className="max-w-[500px] p-2">
               <CardHeader className="justify-between">
                 <div className="flex gap-3">
@@ -122,17 +50,15 @@ function SubastaPage() {
                     </h5>
                   </div>
                 </div>
-                <Link to={`/profile/${subasta.pk_cedula_user}`}>
-                  <Button
-                    className="bg-gray-100 text-foreground border-default-200"
-                    radius="md"
-                    variant="bordered"
-                    size="sm"
-                    onPress={() => handleUpdateSubasta(subasta.pk_id_sub)}
-                  >
-                    Visualizar perfil
-                  </Button>
-                </Link>
+                <Button
+                  className="bg-gray-100 text-foreground border-default-200"
+                  radius="md"
+                  variant="bordered"
+                  size="sm"
+                  onPress={() => navigate(`/profile/${subasta.pk_cedula_user}`)}
+                >
+                  Visualizar perfil
+                </Button>
               </CardHeader>
               <CardBody className="items-start">
                 <span className="w-full text-center">
@@ -193,29 +119,16 @@ function SubastaPage() {
                     </div>
                     <div>
                       <p className="text-gray-400 text-sm">
-                        {subasta.nombre_vere} - {subasta.nombre_muni} -{" "}
+                        {subasta.nombre_vere} - {subasta.nombre_muni} -
                         {subasta.nombre_depar}
                       </p>
                     </div>
                   </div>
                 </CardBody>
                 <CardFooter className="flex justify-center gap-x-4">
-                  <Link to={`/subasta/${subasta.pk_id_sub}`}>
-                    <Button className="bg-gray-400" radius="md" size="lg">
-                      Visualizar Subasta
-                    </Button>
-                  </Link>
-                  {subasta.pk_cedula_user === usuario.pk_cedula_user && (
-                    <Button
-                      className="bg-gray-400"
-                      radius="md"
-                      size="lg"
-                      startContent={<EditIcon />}
-                      onPress={() => handleUpdateSubasta(subasta.pk_id_sub)}
-                    >
-                      Editar Subasta
-                    </Button>
-                  )}
+                  <Button className="bg-gray-400" radius="md" size="lg" onPress={() => navigate(`/subasta/${subasta.pk_id_sub}`)}>
+                    Visualizar Subasta
+                  </Button>
                 </CardFooter>
               </CardBody>
             </Card>

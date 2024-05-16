@@ -32,7 +32,7 @@ app.use("/v1", routerMunicipio);
 app.use("/v1", routerFinca);
 app.use("/v1", routertipovari);
 app.use("/v1", routerVariedad);
-app.use("/v1",rutasSubastas);
+app.use("/v1", rutasSubastas);
 app.use("/user", routerChat);
 app.use("/v1", rutNotificaciones);
 app.use("/v1", postulantesRoutes);

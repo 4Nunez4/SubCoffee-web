@@ -1,13 +1,7 @@
-import React, { createContext, useState } from "react";
-import {
-  getMunicipios,
-  createMunicipios,
-  updateMunicipios,
-  UpdateMunicipioActivar,
-  UpdateMunicipioDesact,
-  getMuniForDepartamento,
-} from "../api/api.municipios";
+import React, { createContext, useEffect, useState } from "react";
+
 import ModalMessage from "../nextui/ModalMessage";
+import { createVariedad, getVariedad, updateVariedadActivar, updateVariedadDesact, updatevariedad } from "../api/api.variedad.user";
 
 const VariedadUserContext = createContext();
 
@@ -15,32 +9,23 @@ export const VariedadUserProvider = ({ children }) => {
   const [modalMessage, setModalMessage] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [errors, setErrors] = useState([]);
-  const [municipios, setMunicipios] = useState([]);
-  const [idMunicipio, setIdMunicipio] = useState(0);
-  const [municipiosForDepar, setMunicipiosForDepar] = useState([])
+  const [variedades, setVariedades] = useState([]);
+  const [idVariedad, setIdVariedad] = useState(0);
+  const [variedadForuser, setVariedadForUser] = useState([])
 
-  const getMunis = async () => {
+  const getVariForUser = async (user) => {
     try {
-      const res = await getMunicipios();
-      setMunicipios(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const getMunisForDepar = async (departamento) => {
-    try {
-      const response = await getMuniForDepartamento(departamento)
-      setMunicipiosForDepar(response.data)
+      const response = await getVariedad(user)
+      setVariedadForUser(response.data.data)
     } catch (error) {
       console.error(error);
     }
   }
 
-  const createMunis = async (data) => {
+  const createVaris = async (data, user) => {
     try {
-      const response = await createMunicipios(data);
-      getMunis();
+      const response = await createVariedad(data);
+      getVariForUser(user);
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {
@@ -48,10 +33,10 @@ export const VariedadUserProvider = ({ children }) => {
     }
   };
 
-  const updateMunis = async (id, data) => {
+  const updateVaris = async (id, data, user) => {
     try {
-      const response = await updateMunicipios(id, data);
-      getMunis();
+      const response = await updatevariedad(id, data);
+      getVariForUser(user);
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {
@@ -59,44 +44,52 @@ export const VariedadUserProvider = ({ children }) => {
     }
   };
 
-  const desactivarMunis = async (id) => {
+  const desactivarVaris = async (id, user) => {
     try {
-      const response = await UpdateMunicipioDesact(id);
-      getMunis();
+      const response = await updateVariedadDesact(id);
+      getVariForUser(user);
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {
-      setErrors(error.response.data);
+      setErrors([error.response.data.message]);
     }
   };
 
-  const activarMunis = async (id) => {
+  const activarVaris = async (id, user) => {
     try {
-      const response = await UpdateMunicipioActivar(id);
-      getMunis();
+      const response = await updateVariedadActivar(id);
+      getVariForUser(user);
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {
-      setErrors(error.response.data);
+      setErrors([error.response.data.message]);
     }
   };
+
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
 
   return (
     <VariedadUserContext.Provider
       value={{
         errors,
-        municipios,
-        idMunicipio,
-        municipiosForDepar, 
-        setMunicipiosForDepar,
-        setIdMunicipio,
-        setMunicipios,
-        getMunis,
-        getMunisForDepar,
-        createMunis,
-        updateMunis,
-        desactivarMunis,
-        activarMunis,
+        variedades,
+        idVariedad,
+        variedadForuser,
+        setVariedadForUser,
+        setIdVariedad,
+        setVariedades,
+        getVariForUser,
+        createVaris,
+        updateVaris,
+        desactivarVaris,
+        activarVaris,
       }}
     >
       <ModalMessage

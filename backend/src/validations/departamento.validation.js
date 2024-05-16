@@ -9,5 +9,5 @@ export const validationDepartamento = [
   check("nombre_depar", "El nombre del departamento es obligatorio")
     .not()
     .isEmpty()
-    .isLength({ max: 255 }),
+    .isLength({ max: 25 }),
 ];

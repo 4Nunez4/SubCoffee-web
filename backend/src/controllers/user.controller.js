@@ -35,11 +35,11 @@ export const createUser = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fechanacimiento_user, rol_user } = req.body;
+    const { pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, rol_user } = req.body;
     const bcryptPassword = bcrypt.hashSync(password_user, 12);
     let imagen_user =  req.file.originalname
     
-    let sql = `INSERT INTO usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, imagen_user, telefono_user, fecha_nacimiento_user, rol_user, estado_user) VALUES ('${pk_cedula_user}', '${nombre_user}','${email_user}','${bcryptPassword}', '${descripcion_user}', '${imagen_user}', '${telefono_user}', '${fechanacimiento_user}' ,'${rol_user}', 'activo')`;
+    let sql = `INSERT INTO usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, imagen_user, telefono_user, rol_user, estado_user) VALUES ('${pk_cedula_user}', '${nombre_user}','${email_user}','${bcryptPassword}', '${descripcion_user}', '${imagen_user}', '${telefono_user}', '${rol_user}', 'activo')`;
     const [result] = await pool.query(sql);
     if (result.affectedRows > 0) {
       res.status(200).json({ status: 200, message: "Usuario creado exitosamente" });
@@ -59,11 +59,10 @@ export const updateUser = async (req, res) => {
     }
 
     const id = req.params.id;
-    const { pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, fechanacimiento_user, rol_user } = req.body;
-    const bcryptPassword = bcrypt.hashSync(password_user, 12);
+    const { pk_cedula_user, nombre_user, email_user, descripcion_user, telefono_user, rol_user } = req.body;
     let imagen_user =  req.file.originalname
 
-    let sql = `UPDATE usuarios SET pk_cedula_user = '${pk_cedula_user}', nombre_user = '${nombre_user}', email_user = '${email_user}', password_user = '${bcryptPassword}', descripcion_user = '${descripcion_user}', imagen_user = '${imagen_user}', telefono_user = '${telefono_user}', fecha_nacimiento_user = '${fechanacimiento_user}', rol_user = '${rol_user}' WHERE pk_cedula_user = '${id}'`;
+    let sql = `UPDATE usuarios SET pk_cedula_user = '${pk_cedula_user}', nombre_user = '${nombre_user}', email_user = '${email_user}', descripcion_user = '${descripcion_user}', imagen_user = '${imagen_user}', telefono_user = '${telefono_user}', rol_user = '${rol_user}' WHERE pk_cedula_user = '${id}'`;
     const [result] = await pool.query(sql);
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Usuario actualizado con exito" });
@@ -89,6 +88,39 @@ export const getUser = async (req, res) => {
     res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
+
+export const updatePasswordUser = async (req, res) => {
+  try {
+    const id = req.params.id
+    const { oldPassword, newPassword, confirmPassword } = req.body
+
+    const [rows] = await pool.query(`SELECT * FROM usuarios WHERE pk_cedula_user = '${id}'`);
+    
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    const user = rows[0];
+    const validPassword = await bcrypt.compare(oldPassword, user.password_user);
+    if (!validPassword) {
+      return res.status(404).json({ message: "Contraseña incorrecta" });
+    }
+    if(newPassword !== confirmPassword){
+      res.status(404).json({ message: "La nueva contraseña no coincide con la de confirmar contraseña" });
+    }
+    const bcryptPassword = bcrypt.hashSync(newPassword, 12);
+
+    let sql = `UPDATE usuarios SET password_user = '${bcryptPassword}' WHERE pk_cedula_user = '${id}'`
+    const [result] = await pool.query(sql);
+    if (result.affectedRows > 0) {
+      res.status(200).json({ message: "Se registro la nueva contraseña con exito" });
+    } else {
+      res.status(404).json({ message: "Error con el ID del usuario al cambiar la contraseña" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error en el servidor" + error });
+  }
+}
 
 export const deleteUser = async (req, res) => {
   try {

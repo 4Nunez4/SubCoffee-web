@@ -10,11 +10,11 @@ import VeredaContext from "../../context/VeredaContext";
 const RegisterFincaMolecule = ({ mode, onClose, titleBtn }) => {
   const [formData, setFormData] = useState({
     nombre_fin: "",
-    imagen: null,
     descripcionFin: "",
     departamento: "",
     municipio: "",
     vereda: "",
+    imagen_fin: "",
   });
 
   const { idFinca, createFincas, updateFincas } = useContext(FincaContext);
@@ -32,7 +32,7 @@ const RegisterFincaMolecule = ({ mode, onClose, titleBtn }) => {
     if (mode === "update" && idFinca) {
       setFormData({
         nombre_fin: idFinca.nombre_fin,
-        imagen: idFinca.imagen_fin,
+        imagen_fin: idFinca.imagen_fin,
         descripcionFin: idFinca.descripcion_fin,
         departamento: idFinca.fk_departamento,
         municipio: idFinca.fk_municipio,
@@ -47,13 +47,13 @@ const RegisterFincaMolecule = ({ mode, onClose, titleBtn }) => {
   }, [mode, idFinca]);
 
   const handleDepartamentoChange = (departamento) => {
-    setFormData((prevData) => ({...prevData, departamento, municipio: "", vereda: "",}));
+    setFormData((prevData) => ({ ...prevData, departamento, municipio: "", vereda: "", }));
     getMunisForDepar(departamento);
   };
 
   const handleMunicipioChange = (e) => {
     const selectedMunicipio = e.target.value;
-    setFormData((prevData) => ({...prevData, municipio: selectedMunicipio, vereda: "",}));
+    setFormData((prevData) => ({ ...prevData, municipio: selectedMunicipio, vereda: "", }));
     getVeresForMuni(selectedMunicipio);
   };
 
@@ -70,7 +70,7 @@ const RegisterFincaMolecule = ({ mode, onClose, titleBtn }) => {
     try {
       const data = new FormData();
       data.append("nombre_fin", formData.nombre_fin);
-      data.append("imagen_fin", formData.imagen);
+      data.append("imagen_fin", formData.imagen_fin);
       data.append("descripcion_fin", formData.descripcionFin);
       data.append("fk_id_usuario", user.pk_cedula_user);
       data.append("fk_vereda", formData.vereda);
@@ -93,7 +93,7 @@ const RegisterFincaMolecule = ({ mode, onClose, titleBtn }) => {
           placeholder="Imagen de usuario"
           required
           type="file"
-          name="imagen"
+          name="imagen_fin"
           className="hidden"
           id="fileInput"
           onChange={handleChange}
@@ -102,12 +102,12 @@ const RegisterFincaMolecule = ({ mode, onClose, titleBtn }) => {
           htmlFor="fileInput"
           className="cursor-pointer items-center w-48 flex justify-center bg-blue-100 rounded-xl border"
         >
-          {formData.imagen ? (
+          {formData.imagen_fin ? (
             <div className="relative">
               <button
                 type="button"
                 className="absolute -top-3 -right-3 p-1 bg-gray-300 rounded-full"
-                onClick={() => setFormData({ ...formData, imagen: null })}
+                onClick={() => setFormData({ ...formData, imagen_fin: "" })}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -126,14 +126,14 @@ const RegisterFincaMolecule = ({ mode, onClose, titleBtn }) => {
               </button>
               {mode === "update" ? (
                 <img
-                  src={`http://localhost:4000/fincas/${formData.imagen}`}
-                  alt="user"
+                  src={typeof formData.imagen_fin === "string" ? `http://localhost:4000/fincas/${formData.imagen_fin}` : URL.createObjectURL(formData.imagen_fin)}
+                  alt="imagen_fin"
                   className="h-28 w-48 object-cover rounded-xl mx-auto"
                 />
               ) : (
                 <img
-                  src={URL.createObjectURL(formData.imagen)}
-                  alt="user"
+                  src={URL.createObjectURL(formData.imagen_fin)}
+                  alt="imagen_fin"
                   className="h-28 w-48 object-cover rounded-xl mx-auto"
                 />
               )}

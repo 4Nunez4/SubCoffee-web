@@ -58,7 +58,7 @@ function AyudaPage() {
 
   return (
     <div
-      className={`p-8 bg-slate-100 px-44 mx-auto flex flex-col justify-center ${
+      className={`p-8 px-44 mx-auto flex flex-col justify-center ${
         isScrolled ? "scrolled" : ""
       }`}
     >
@@ -66,19 +66,19 @@ function AyudaPage() {
         <ButtonGroup>
           <Button
             onClick={() => scrollToSection("comoCrear")}
-            className={`transition-opacity ${isScrolled ? "opacity-40" : ""}`}
+            className={`transition-opacity bg-[#e0e0e0] ${isScrolled ? "opacity-40" : ""}`}
           >
             Como crear una subasta
           </Button>
           <Button
             onClick={() => scrollToSection("comoPujar")}
-            className={`transition-opacity ${isScrolled ? "opacity-40" : ""}`}
+            className={`transition-opacity bg-[#e0e0e0] ${isScrolled ? "opacity-40" : ""}`}
           >
             Como pujar una subasta
           </Button>
           <Button
             onClick={() => scrollToSection("infoRoles")}
-            className={`transition-opacity ${isScrolled ? "opacity-40" : ""}`}
+            className={`transition-opacity bg-[#e0e0e0] ${isScrolled ? "opacity-40" : ""}`}
           >
             Información de Roles
           </Button>

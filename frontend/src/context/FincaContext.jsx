@@ -22,7 +22,7 @@ export const FincaProvider = ({ children }) => {
       const res = await getFincaForUser(user);
       setFincas(res.data.data);
     } catch (error) {
-      console.error(error);
+      console.error(error.response.data);
     }
   };
 

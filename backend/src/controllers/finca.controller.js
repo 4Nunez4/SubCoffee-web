@@ -48,7 +48,7 @@ export const getFinca = async (req, res) => {
     if (result.length > 0) {
       res.status(200).json({ message: "Finca encontrada", data: result });
     } else {
-      res.status(404).json({ message: "La finca con el ID no existe" });
+      res.status(204).json({ message: "No se encontraron fincas para el usuario" });
     }
   } catch (error) {
      res.status(500).json({ message: "Error en el servidor" + error });
@@ -62,9 +62,9 @@ export const createFinca = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { nombre_fin, descripcion_fin, fk_id_usuario, fk_vereda } = req.body;
+    const { nombre_fin, fk_id_usuario, fk_vereda } = req.body;
     let imagen_fin = req.file.originalname;
-    let sql = `INSERT INTO finca(nombre_fin, imagen_fin, descripcion_fin, estado_fin, fk_id_usuario, fk_vereda) VALUES ('${nombre_fin}', '${imagen_fin}', '${descripcion_fin}', 'activo', '${fk_id_usuario}', '${fk_vereda}')`;
+    let sql = `INSERT INTO finca(nombre_fin, imagen_fin, estado_fin, fk_id_usuario, fk_vereda) VALUES ('${nombre_fin}', '${imagen_fin}', 'activo', '${fk_id_usuario}', '${fk_vereda}')`;
     const [rows] = await pool.query(sql);
     if (rows.affectedRows > 0) {
       res.status(200).json({ message: "Finca creada con exito" });
@@ -84,9 +84,9 @@ export const updateFinca = async (req, res) => {
     }
 
     const id = req.params.id;
-    const { nombre_fin, descripcion_fin, fk_vereda } = req.body;
+    const { nombre_fin, fk_vereda } = req.body;
     let imagen_fin = req.file.originalname;
-    let sql = `UPDATE finca SET nombre_fin = '${nombre_fin}', imagen_fin = '${imagen_fin}', descripcion_fin = '${descripcion_fin}', fk_vereda = '${fk_vereda}' WHERE pk_id_fin = '${id}'`;
+    let sql = `UPDATE finca SET nombre_fin = '${nombre_fin}', imagen_fin = '${imagen_fin}', fk_vereda = '${fk_vereda}' WHERE pk_id_fin = '${id}'`;
     const [rows] = await pool.query(sql);
     if (rows.affectedRows > 0) {
       res.status(200).json({ message: "Finca actualizada con exito" });

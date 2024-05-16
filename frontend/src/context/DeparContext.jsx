@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import {
   getDeparts,
   createDeparts,
@@ -7,6 +7,7 @@ import {
   updateDeparts,
 } from "../api/api.departamentos";
 import ModalMessage from "../nextui/ModalMessage";
+import { Navigate } from "react-router-dom";
 
 const DeparContext = createContext();
 
@@ -26,11 +27,11 @@ export const DeparProvider = ({ children }) => {
     }
   };
 
-  const createDepartamento = async (data) => {
+  const createDepartamento = async (datos) => {
     try {
-      const response = await createDeparts(data);
+      const responsee = await createDeparts(datos);
       getDepartamentos();
-      setMensaje(response.data.message);
+      setMensaje(responsee.data.message);
       setModalMessage(true);
     } catch (error) {
       setErrors([error.response.data.message]);
@@ -69,6 +70,15 @@ export const DeparProvider = ({ children }) => {
       setErrors(error.response.data);
     }
   };
+
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
 
   return (
     <DeparContext.Provider

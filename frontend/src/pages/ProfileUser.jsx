@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Avatar, Button } from "@nextui-org/react";
 import { useParams } from "react-router-dom";
-import axiosClient from "../api/axios";
 
 import UserRol from "../nextui/UserRol";
 import GmailIcon from "../nextui/GmailIcon";
-import toast from "react-hot-toast";
-import DateIcon from "../nextui/DateIcon";
 import Phone from "../nextui/Phone";
+import FormUser from "../components/templates/FormUser";
+import AuthContext from "../context/AuthContext";
+import FormUserPassword from "../components/templates/FormUserPassword";
 
 function ProfileUser() {
   const { id } = useParams();
-  const [user, setUser] = useState({});
-  const [activeTab, setActiveTab] = useState("creadas");
+  const [ activeTab, setActiveTab ] = useState("creadas");
   const localUser = JSON.parse(localStorage.getItem("user"));
+  const [abrirModal, setAbrirModal] = useState(false);
+  const [abrirModalPassword, setAbrirModalPassword] = useState(false);
+  const [mode, setMode] = useState("create");
+  const { getUserID, user, setIdUser } = useContext(AuthContext)
 
   useEffect(() => {
-    axiosClient
-      .get(`/v1/users/${id}`)
-      .then((res) => {
-        setUser(res.data.data[0]);
-      })
-      .catch((err) => {
-        toast.error("Error al traer los datos del usuario" + err);
-        console.error(err);
-      });
+    getUserID(id)
   }, [id]);
+
+  const handleToggle = (mode) => {
+    setAbrirModal(true);
+    setMode(mode);
+  };
 
   useEffect(() => {
     if (user.rol_user === "comprador") {
@@ -33,7 +33,7 @@ function ProfileUser() {
     } else {
       setActiveTab("creadas");
     }
-  }, [user.rol_user]);
+  }, [user]);
 
   const SubastasCreadas = [
     { id: 1, titulo: "Subasta 1", descripcion: "Descripción de la subasta 1" },
@@ -61,10 +61,23 @@ function ProfileUser() {
   );
 
   return (
-    <div className="px-28 mb-9 bg-gray-100">
+    <div className="px-28 mb-9 ">
+      <FormUser
+        open={abrirModal}
+        onClose={() => setAbrirModal(false)}
+        title={mode === 'create' ? 'Registrar Usuario' : 'Actualizar Usuario'}
+        titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
+        mode={mode}
+      />
+      <FormUserPassword
+        open={abrirModalPassword}
+        onClose={() => setAbrirModalPassword(false)}
+        title={"Actualizar contraseña"}
+        titleBtn={"Actualizar"}
+      />
       <div className="flex">
         <div className="flex py-4 items-center gap-x-4">
-          <div>
+          <div className="flex flex-col justify-center">
             <Avatar
               src={
                 user.imagen_user && user.imagen_user.length > 0
@@ -74,8 +87,13 @@ function ProfileUser() {
               className="w-56 h-56"
             />
             {user.pk_cedula_user === localUser.pk_cedula_user && (
-              <Button className="bg-slate-400 text-white w-full mt-2">
+              <Button className="bg-[#e0e0e0] text-[#009100] w-full mt-2" onClick={() => {handleToggle("update"); setIdUser(user)}}>
                 Editar perfil
+              </Button>
+            )}
+            {user.pk_cedula_user === localUser.pk_cedula_user && (
+              <Button className="bg-[#e0e0e0] text-[#009100] w-full mt-2" onClick={() => {setAbrirModalPassword(true); setIdUser(user)}}>
+                Cambiar contraseña
               </Button>
             )}
           </div>
@@ -88,15 +106,6 @@ function ProfileUser() {
               <div>
                 <p className="text-sm text-gray-900">{user.telefono_user}</p>
                 <p className="text-xs text-gray-500">Teléfono</p>
-              </div>
-            </span>
-            <span className="text-sm text-gray-600 flex items-center">
-              <DateIcon />
-              <div>
-                <p className="text-sm text-gray-900">
-                  {new Date(user.fecha_nacimiento_user).toLocaleDateString()}
-                </p>
-                <p className="text-xs text-gray-500">Fecha de Nacimiento</p>
               </div>
             </span>
             <span className="text-sm text-gray-600 flex items-center">
@@ -114,7 +123,6 @@ function ProfileUser() {
               </div>
             </span>
             <span className="text-sm text-gray-600 py-2 flex">
-              {/* <DescriptionIcon /> */}
               {user.descripcion_user}
             </span>
           </div>

@@ -40,33 +40,26 @@ export default function UsersTable() {
   });
   const [page, setPage] = useState(1);
 
-  const { getUsers, users, updateUserActive, updateUserDesactive } = useContext(AuthContext)
+  const { getUsers, users, updateUserActive, updateUserDesactive, setIdUser } = useContext(AuthContext)
 
   const [abrirModal, setAbrirModal] = useState(false);
   const [mode, setMode] = useState("create");
-  const [initialData, setInitialData] = useState(null);
 
   useEffect(() => {
     getUsers();
   }, []);
-
-  const handleCloseModal = () => {
-    setAbrirModal(false);
-  };
-
+  
   const data = [
     { uid: "nombre_user", name: "Usuario", sortable: true },
     { uid: "pk_cedula_user", name: "Cedula", sortable: true },
     // { uid: "descripcion_user", name: "Descripción", sortable: true },
     { uid: "telefono_user", name: "Telefono", sortable: true },
-    { uid: "fecha_nacimiento_user", name: "Fecha Nacimiento", sortable: true },
     { uid: "rol_user", name: "Rol", sortable: true },
     { uid: "estado_user", name: "Estado", sortable: true },
     { uid: "actions", name: "Acciones", sortable: false },
   ];
 
-  const handleToggle = (mode, initialData) => {
-    setInitialData(initialData);
+  const handleToggle = (mode) => {
     setAbrirModal(true);
     setMode(mode);
   };
@@ -144,10 +137,6 @@ export default function UsersTable() {
             {user.email_user}
           </User>
         );
-      case "fecha_nacimiento_user":
-        return (
-          <p>{new Date(user.fecha_nacimiento_user).toLocaleDateString()}</p>
-        );
       case "descripcion_user":
         return (
           <>
@@ -167,7 +156,7 @@ export default function UsersTable() {
       case "actions":
         return (
           <div className="relative flex justify-center items-center gap-2">
-            <Button color="default" startContent={<EditIcon />} onClick={() => handleToggle('update', user)}>
+            <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle('update'); setIdUser(user)}}>
               Editar
             </Button>
             {user.estado_user === "activo" ? (
@@ -257,7 +246,7 @@ export default function UsersTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => setAbrirModal(true)} >
+            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
@@ -314,15 +303,13 @@ export default function UsersTable() {
   }, [items.length, page, pages, hasSearchFilter]);
 
   return (
-    <>
+    <div className="mx-40">
       <FormUser
         open={abrirModal}
         onClose={() => setAbrirModal(false)}
         title={mode === 'create' ? 'Registrar Usuario' : 'Actualizar Usuario'}
         titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
-        idUser={initialData}
         mode={mode}
-        onCloseModal={handleCloseModal}
       />
       <Table
         aria-label="Example table with custom cells, pagination and sorting"
@@ -330,7 +317,7 @@ export default function UsersTable() {
         bottomContent={bottomContent}
         bottomContentPlacement="outside"
         classNames={{
-          wrapper: "max-h-[482px] ",
+          wrapper: "max-h-[482px]",
         }}
         sortDescriptor={sortDescriptor}
         topContent={topContent}
@@ -358,6 +345,6 @@ export default function UsersTable() {
           )}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 }

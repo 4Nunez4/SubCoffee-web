@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import toast from "react-hot-toast";
-import { icono } from "../atoms/IconsAtom";
 import { Button, Input, ModalFooter } from "@nextui-org/react";
+
+import { icono } from "../atoms/IconsAtom";
 import DeparContext from "../../context/DeparContext";
 
 const RegisterDepartMolecule = ({ mode, titleBtn, onClose }) => {
@@ -9,7 +9,7 @@ const RegisterDepartMolecule = ({ mode, titleBtn, onClose }) => {
     pk_codigo_depar: "",
     nombre_depar: "",
   });
-  const { idDepartamento, createDepartamento, updateDepartamento } = useContext(DeparContext);
+  const { idDepartamento, createDepartamento, updateDepartamento, errors } = useContext(DeparContext);
 
   useEffect(() => {
     if (mode === "update" && idDepartamento) {
@@ -28,10 +28,9 @@ const RegisterDepartMolecule = ({ mode, titleBtn, onClose }) => {
       } else {
         await createDepartamento(formData);
       }
-      onClose()
+      // onClose()
     } catch (error) {
       console.error(error);
-      toast.error("Error en el servidor: " + error.message);
     }
   };
 
@@ -44,6 +43,13 @@ const RegisterDepartMolecule = ({ mode, titleBtn, onClose }) => {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4 px-4">
+      {
+        errors.map((error, i) => (
+          <div className='bg-red-500 p-2 text-white text-center my-2' key={i}>
+            {error}
+          </div>
+        ))
+      }
       <Input
         type="number"
         name="pk_codigo_depar"

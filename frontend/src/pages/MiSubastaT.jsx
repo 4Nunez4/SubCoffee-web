@@ -1,13 +1,12 @@
 import React from "react";
 import { Tabs, Tab, Chip, Card, CardBody } from "@nextui-org/react";
 
-import VariedadT from "./VariedadT";
-import SubastaT from "./SubastaT";
 import SubastaIcon from "../nextui/SubastaIcon";
 import VariedadIcon from "../nextui/VariedadIcon";
 import FincaIcon from "../nextui/FincaIcon";
 import FincaTable from "../components/Guard/FincaTable";
 import VariedadUserTable from "../components/Guard/VariedadUserTable";
+import SubastaTable from "../components/Guard/SubastaTable";
 
 export default function MiSubastaT() {
   return (
@@ -19,7 +18,7 @@ export default function MiSubastaT() {
         </div>
         <p className="text-center mt-3 text-black"> Para crear una subasta primero debes crear una finca. Luego, agregas las variedades que tienes en tu finca y ya por fin puedes agregar una subasta </p>
       </div>
-      <div className="flex flex-col justify-center gap-y-4">
+      <div className="w-2/3 flex flex-col justify-center gap-y-4">
         <div className="flex w-full flex-col">
           <Tabs
             aria-label="Options"
@@ -35,13 +34,11 @@ export default function MiSubastaT() {
             <Tab key="fincas" title={
               <div className="flex items-center space-x-2">
                 <FincaIcon />
-                <span>Fincas</span>
-                <Chip size="sm" variant="faded"> 9 </Chip>
+                <span>Fincas y variedades</span>
               </div>
             }>
               <Card>
                 <CardBody>
-                  <p className="text-center"> Tu finca tiene una historia que contar </p>
                   <FincaTable />
                 </CardBody>
               </Card>
@@ -50,13 +47,12 @@ export default function MiSubastaT() {
               <div className="flex items-center space-x-2">
                 <VariedadIcon />
                 <span>Variedades</span>
-                <Chip size="sm" variant="faded"> 3 </Chip>
               </div>
             }>
               <Card>
                 <CardBody>
                   <p className="text-center"> Registra todas las maravillosas variedades de café que tienes en tu finca </p>
-                  {/* <VariedadUserTable /> */}
+                  <VariedadUserTable />
                 </CardBody>
               </Card>
             </Tab>
@@ -64,13 +60,12 @@ export default function MiSubastaT() {
               <div className="flex items-center space-x-2">
                 <SubastaIcon />
                 <span>Subastas</span>
-                <Chip size="sm" variant="faded"> 1 </Chip>
               </div>
             }>
               <Card>
                 <CardBody>
                   <p className="text-center"> Registra una subasta con tu café de alta calidad </p>
-                  <SubastaT />
+                  <SubastaTable />
                 </CardBody>
               </Card>
             </Tab>

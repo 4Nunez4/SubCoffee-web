@@ -28,9 +28,6 @@ export const validationUpdateUser = [
     .isEmpty()
     .isNumeric()
     .isLength({ max: 11 }),
-  check("fecha_nacimiento_user", "La fecha de nacimiento es obligatoria")
-    .not()
-    .isEmpty(),
   check("rol_user", "El rol es obligatorio")
     .not()
     .isEmpty()
@@ -48,7 +45,7 @@ export const validationUpdateUser = [
 ];
 
 export const validationRegisterUser = [
-  check("cedula_user", "La cedula es obligatorio, max 11 caracteres")
+  check("pk_cedula_user", "La cedula es obligatorio, max 11 caracteres")
     .not()
     .isEmpty()
     .isLength({ max: 11 })
@@ -61,7 +58,7 @@ export const validationRegisterUser = [
   check("email_user", "El email es obligatorio, max 50 caracteres")
     .isEmail()
     .isLength({ max: 50 }),
-  check("password_user", "La contraseña es obligatoria, max 50 caracteres")
+  check("password_user", "La contraseña es obligatoria, min 6 caracteres")
     .not()
     .isEmpty()
     .isLength({ max: 50, min: 6 }),
@@ -71,9 +68,6 @@ export const validationRegisterUser = [
     .isEmpty()
     .isNumeric()
     .isLength({ max: 11 }),
-  check("fechanacimiento_user", "La fecha de nacimiento es obligatoria")
-    .not()
-    .isEmpty(),
   check("rol_user", "El rol es obligatorio")
     .not()
     .isEmpty()

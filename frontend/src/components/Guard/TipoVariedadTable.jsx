@@ -279,7 +279,7 @@ export default function TipoVariedadTable() {
   }, [items.length, page, pages, hasSearchFilter]);
 
   return (
-    <>
+    <div className="mx-40">
       <FormTipovariedad
         open={abrirModal}
         onClose={() => setAbrirModal(false)}
@@ -321,6 +321,6 @@ export default function TipoVariedadTable() {
           )}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 }

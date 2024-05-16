@@ -6,7 +6,7 @@ import VeredaTable from "../components/Guard/VeredaTable";
 
 function GeografiaFullPage() {
   return (
-    <div className="flex flex-col px-10 gap-x-4 pt-8 bg-gray-100">
+    <div className="flex flex-col px-10 gap-x-4 pt-8">
       <Tabs aria-label="Options" variant="bordered">
         <Tab key="departamentos" title="Departamentos">
           <Card>
