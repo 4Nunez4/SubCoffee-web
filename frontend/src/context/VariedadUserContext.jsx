@@ -1,7 +1,13 @@
 import React, { createContext, useEffect, useState } from "react";
 
 import ModalMessage from "../nextui/ModalMessage";
-import { createVariedad, getVariedad, updateVariedadActivar, updateVariedadDesact, updatevariedad } from "../api/api.variedad.user";
+import {
+  createVariedad,
+  getVariedad,
+  updateVariedadActivar,
+  updateVariedadDesact,
+  updatevariedad,
+} from "../api/api.variedad.user";
 
 const VariedadUserContext = createContext();
 
@@ -11,16 +17,16 @@ export const VariedadUserProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [variedades, setVariedades] = useState([]);
   const [idVariedad, setIdVariedad] = useState(0);
-  const [variedadForuser, setVariedadForUser] = useState([])
+  const [variedadForuser, setVariedadForUser] = useState([]);
 
-  const getVariForUser = async (user) => {
+  const getVariForUser = async (user, id_finca) => {
     try {
-      const response = await getVariedad(user)
-      setVariedadForUser(response.data.data)
+      const response = await getVariedad(user, id_finca);
+      setVariedadForUser(response.data.data);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const createVaris = async (data, user) => {
     try {

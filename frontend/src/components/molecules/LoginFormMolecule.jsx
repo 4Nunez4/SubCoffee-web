@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Input, ModalFooter } from "@nextui-org/react";
 
@@ -26,7 +25,7 @@ const LoginFormMolecule = () => {
       };
       loginUsers(dataForm);
     } catch (error) {
-      toast.error("Error del sistema:", error);
+      console.error("Error del sistema:", error);
     }
   };
 

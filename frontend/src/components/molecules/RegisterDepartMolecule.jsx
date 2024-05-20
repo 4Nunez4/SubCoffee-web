@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Input, ModalFooter } from "@nextui-org/react";
 
 import { icono } from "../atoms/IconsAtom";
-import DeparContext from "../../context/DeparContext";
+import { useDepartContext } from "../../context/DeparContext";
 
-const RegisterDepartMolecule = ({ mode, titleBtn, onClose }) => {
+const RegisterDepartMolecule = ({ mode, titleBtn }) => {
   const [formData, setFormData] = useState({
     pk_codigo_depar: "",
     nombre_depar: "",
   });
-  const { idDepartamento, createDepartamento, updateDepartamento, errors } = useContext(DeparContext);
+  const { idDepartamento, createDepartamento, updateDepartamento, errors } = useDepartContext();
 
   useEffect(() => {
     if (mode === "update" && idDepartamento) {
@@ -28,9 +28,8 @@ const RegisterDepartMolecule = ({ mode, titleBtn, onClose }) => {
       } else {
         await createDepartamento(formData);
       }
-      // onClose()
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
@@ -58,7 +57,7 @@ const RegisterDepartMolecule = ({ mode, titleBtn, onClose }) => {
         startContent={<icono.iconoNumber />}
         variant="bordered"
         min={0}
-        required={true}
+        isRequired
         value={formData.pk_codigo_depar}
         onChange={handleChange}
       />
@@ -67,7 +66,7 @@ const RegisterDepartMolecule = ({ mode, titleBtn, onClose }) => {
         labelPlacement="outside"
         startContent={<icono.iconoDepar />}
         variant="bordered"
-        required={true}
+        isRequired
         type="text"
         placeholder="Nombre del Departamento"
         value={formData.nombre_depar}

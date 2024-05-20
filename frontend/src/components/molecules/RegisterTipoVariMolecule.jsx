@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { icono } from "../atoms/IconsAtom";
 import { Button, Input, ModalFooter } from "@nextui-org/react";
-import TipoVariContext from "../../context/TipoVariContext";
+import { useTipoVariContext } from "../../context/TipoVariContext";
 
-const RegisterTipoVariMolecule = ({ mode, onClose, titleBtn }) => {
+const RegisterTipoVariMolecule = ({ mode, titleBtn }) => {
   const [formData, setFormData] = useState({
     nombre_tipo_vari: "",
   });
 
-  const { idTipoVariedad, createTipoVariedades, updateTipoVariedades } = useContext(TipoVariContext);
+  const { idTipoVariedad, createTipoVariedades, updateTipoVariedades, errors } = useTipoVariContext();
 
   useEffect(() => {
     if (mode === "update" && idTipoVariedad) {
@@ -39,7 +39,6 @@ const RegisterTipoVariMolecule = ({ mode, onClose, titleBtn }) => {
       } else {
         createTipoVariedades(formData)
       }
-      onClose();
     } catch (error) {
       console.log(error);
     }
@@ -47,6 +46,12 @@ const RegisterTipoVariMolecule = ({ mode, onClose, titleBtn }) => {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4 px-4">
+      {errors.map((error, i) => (
+          <div className='bg-red-500 p-2 text-white text-center my-2' key={i}>
+            {error}
+          </div>
+        ))
+      }  
       <Input
         label=""
         aria-label="Nombre de la Variedad"

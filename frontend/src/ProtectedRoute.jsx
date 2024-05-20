@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 import Swal from "sweetalert2";
 
 function ProtectedRoute() {
-  const auth = window.localStorage.getItem("token");
+  const auth = localStorage.getItem("token");
   
   const handleLoginRedirect = () => {
     Swal.fire({

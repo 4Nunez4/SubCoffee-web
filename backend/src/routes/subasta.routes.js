@@ -22,7 +22,7 @@ const router = Router();
 
 router.post("/subasta", subastaFiles,verificarUserToken, registrar);
 router.get("/subasta", verificarUserToken, listar);
-router.put("/subasta/:id",subastaFiles,verificarUserToken,validarActualizarSubasta,actualizar);
+router.put("/subasta/:id",subastaFiles,verificarUserToken, validarActualizarSubasta,actualizar);
 router.get("/buscar/:id", verificarUserToken, buscar); 
 router.get("/buscarsubforuser/:id", verificarUserToken, buscarSubastaForUser); 
 router.delete("/eliminar/:id", verificarUserToken, eliminar);

@@ -45,11 +45,11 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await loginUser(dataForm)
       const { token, user } = response.data;
-      localStorage.setItem("token", token);
+      setIsAuthenticated(true)
       localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", token);
       setMensaje(response.data.message)
       setModalMessage(true)
-      setIsAuthenticated(true)
     } catch (error) {
       setErrors([error.response.message]);
     }

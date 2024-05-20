@@ -11,15 +11,15 @@ import FormUserPassword from "../components/templates/FormUserPassword";
 
 function ProfileUser() {
   const { id } = useParams();
-  const [ activeTab, setActiveTab ] = useState("creadas");
+  const [activeTab, setActiveTab] = useState("creadas");
   const localUser = JSON.parse(localStorage.getItem("user"));
   const [abrirModal, setAbrirModal] = useState(false);
   const [abrirModalPassword, setAbrirModalPassword] = useState(false);
   const [mode, setMode] = useState("create");
-  const { getUserID, user, setIdUser } = useContext(AuthContext)
+  const { getUserID, user, setIdUser } = useContext(AuthContext);
 
   useEffect(() => {
-    getUserID(id)
+    getUserID(id);
   }, [id]);
 
   const handleToggle = (mode) => {
@@ -30,7 +30,7 @@ function ProfileUser() {
   useEffect(() => {
     if (user.rol_user === "comprador") {
       setActiveTab("ganadas");
-    } else {
+    } else if (user.rol_user !== "admin") {
       setActiveTab("creadas");
     }
   }, [user]);
@@ -128,49 +128,53 @@ function ProfileUser() {
           </div>
         </div>
       </div>
-      <div className="grow border-b border-gray-400 my-4"></div>
-      <div className="flex items-center w-full mb-4">
-        {user.rol_user !== "comprador" && (
-          <button
-            className={`text-lg font-semibold mr-4 focus:outline-none ${
-              activeTab === "creadas"
-                ? "text-gray-400 mb-3 transition delay-150 duration-500 ease-in-out"
-                : "text-gray-800"
-            }`}
-            onClick={() => setActiveTab("creadas")}
-          >
-            Subastas Creadas
-          </button>
-        )}
-        <button
-          className={`text-lg font-semibold focus:outline-none ${
-            activeTab === "ganadas"
-              ? "text-gray-400 mb-3 transition delay-150 duration-500 ease-in-out"
-              : "text-gray-800"
-          }`}
-          onClick={() => setActiveTab("ganadas")}
-        >
-          Subastas Ganadas
-        </button>
-      </div>
-      <div>
-        {user.rol_user !== "comprador" && activeTab === "creadas" && (
-          <div>
-            <h2 className="text-lg font-semibold mb-4 text-center">
-              Subastas Creadas
-            </h2>
-            {renderSubastas(SubastasCreadas)}
-          </div>
-        )}
-        {activeTab === "ganadas" && (
-          <div>
-            <h2 className="text-lg font-semibold mb-4 text-center">
+      {user.rol_user !== 'admin' && (
+        <>
+          <div className="grow border-b border-gray-400 my-4"></div>
+          <div className="flex items-center w-full mb-4">
+            {user.rol_user !== "comprador" && (
+              <button
+                className={`text-lg font-semibold mr-4 focus:outline-none ${
+                  activeTab === "creadas"
+                    ? "text-gray-400 mb-3 transition delay-150 duration-500 ease-in-out"
+                    : "text-gray-800"
+                }`}
+                onClick={() => setActiveTab("creadas")}
+              >
+                Subastas Creadas
+              </button>
+            )}
+            <button
+              className={`text-lg font-semibold focus:outline-none ${
+                activeTab === "ganadas"
+                  ? "text-gray-400 mb-3 transition delay-150 duration-500 ease-in-out"
+                  : "text-gray-800"
+              }`}
+              onClick={() => setActiveTab("ganadas")}
+            >
               Subastas Ganadas
-            </h2>
-            {renderSubastas(SubastasGanadas)}
+            </button>
           </div>
-        )}
-      </div>
+          <div>
+            {user.rol_user !== "comprador" && activeTab === "creadas" && (
+              <div>
+                <h2 className="text-lg font-semibold mb-4 text-center">
+                  Subastas Creadas
+                </h2>
+                {renderSubastas(SubastasCreadas)}
+              </div>
+            )}
+            {activeTab === "ganadas" && (
+              <div>
+                <h2 className="text-lg font-semibold mb-4 text-center">
+                  Subastas Ganadas
+                </h2>
+                {renderSubastas(SubastasGanadas)}
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -16,7 +16,7 @@ function DashboardContentOrganims() {
   }, [navigate]);
 
   return (
-    <div className="bg-gray-200">
+    <div>
       <div className="flex items-center justify-center px-12">
         <span className="text-black text-4xl text-center">
           Bienvenido a Subcoffee una plataforma online donde te podras conectar
@@ -33,7 +33,7 @@ function DashboardContentOrganims() {
         </p>
         <TiposDeCafeOrganism />
       </div>
-      <div className="w-full flex justify-center p-12 gap-x-4 items-center">
+      <div className="w-full grid grid-cols-2 justify-center p-12 gap-x-4 items-center">
         <div className="px-12">
           <h2 className="text-3xl font-semibold my-4">Crear subasta</h2>
           <p className="text-gray-700">
@@ -48,11 +48,11 @@ function DashboardContentOrganims() {
             <LinkButtonAtom to="/ayuda">Como subastar</LinkButtonAtom>
           </div>
         </div>
-        <div className="w-11/12">
+        <div className="w-10/12">
           <img src="./src/assets/crearsubasta.jpg" alt="" className="w-lvw mr-32 rounded-3xl" />
         </div>
       </div>
-      <div className="w-full flex justify-center p-12 gap-x-4 items-center">
+      <div className="w-full grid grid-cols-2 justify-center p-12 gap-x-4 items-center">
         <div className="w-11/12">
           <img src="./src/assets/comunidadfeliz.avif" alt="" className="mx-auto rounded-3xl" />
         </div>

@@ -1,8 +1,9 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 import ModalMessage from "../nextui/ModalMessage";
 import {
   createSubasta,
+  getSubasta,
   getSubastaForUser,
   getSubastas,
   updateSubasta,
@@ -12,6 +13,14 @@ import {
 
 const SubastaContext = createContext();
 
+export const useSubastaContext = () => {
+  const context = useContext(SubastaContext)
+  if (!context) {
+    throw new Error('Debes usar SubastaProvider en el App')
+  }
+  return context;
+}
+
 export const SubastaProvider = ({ children }) => {
   const [modalMessage, setModalMessage] = useState(false);
   const [mensaje, setMensaje] = useState("");
@@ -19,11 +28,21 @@ export const SubastaProvider = ({ children }) => {
   const [idSubasta, setIdSubasta] = useState(0);
   const [subastaForuser, setSubastaForUser] = useState([]);
   const [subastas, setSubastas] = useState([])
+  const [subasta, setSubasta] = useState([])
 
   const getSubs = async () => {
     try {
       const response = await getSubastas()
       setSubastas(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const getSub = async (id) => {
+    try {
+      const response = await getSubasta(id);
+      setSubasta(response.data.data)
     } catch (error) {
       console.error(error);
     }
@@ -95,6 +114,7 @@ export const SubastaProvider = ({ children }) => {
     <SubastaContext.Provider
       value={{
         errors,
+        subasta,
         subastas,
         idSubasta,
         subastaForuser,
@@ -102,6 +122,7 @@ export const SubastaProvider = ({ children }) => {
         setIdSubasta,
         getSubForUser,
         getSubs,
+        getSub,
         createSubs,
         updateSubs,
         desactivarSubs,
