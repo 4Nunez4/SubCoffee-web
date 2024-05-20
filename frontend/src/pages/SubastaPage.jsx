@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import axiosClient from "../api/axios";
 import {
   Avatar,
   Button,

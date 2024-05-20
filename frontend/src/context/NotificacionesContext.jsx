@@ -8,7 +8,7 @@ import {
     updateNotificaciones ,
 } from "../api/api.notificaciones";
 
-const SubastaContext = createContext();
+const NotificacionContext = createContext();
 
 export const NotificacionesProvider = ({ children }) => {
   const [modalMessage, setModalMessage] = useState(false);
@@ -20,13 +20,15 @@ export const NotificacionesProvider = ({ children }) => {
 
   const getNots = async () => {
     try {
-      const response = await getNotificaciones()
-      setNotificaciones(response.data)
+      const response = await getNotificaciones();
+      setNotificaciones(response.data.data); // Actualizar el estado Notificaciones
+      return response.data.data; // Devolver los datos directamente
     } catch (error) {
       console.error(error);
+      setNotificaciones([]); // Establecer un arreglo vacío en caso de error
+      return []; // Devolver un arreglo vacío en caso de error
     }
-  }
-
+  };
   const getNotForUser = async (user) => {
     try {
       const response = await getNotificacionesForUser(user);
@@ -58,7 +60,6 @@ export const NotificacionesProvider = ({ children }) => {
     }
   };
 
-
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -66,10 +67,10 @@ export const NotificacionesProvider = ({ children }) => {
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [errors]);
-
+  }, [errors, getNots]);
+  
   return (
-    <SubastaContext.Provider
+    <NotificacionContext.Provider
       value={{
         errors,
         Notificaciones,
@@ -90,8 +91,8 @@ export const NotificacionesProvider = ({ children }) => {
         label={mensaje}
       />
       {children}
-    </SubastaContext.Provider>
+    </NotificacionContext.Provider>
   );
 };
 
-export default SubastaContext;
+export default NotificacionContext;

@@ -1,7 +1,18 @@
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import axiosClient from "../../api/axios";
 const navigate = useNavigate()
 const { getSubs, subastas } = useContext(SubastaContext)
+
+
+
+const { getSubForUser, subastaForuser, desactivarSubs, activarSubs, setIdSubasta } = useContext(SubastaContext)
+const usuario = JSON.parse(localStorage.getItem("user"));
+
+useEffect(() => {
+  getSubForUser(usuario.pk_cedula_user)
+}, []);
+
 
 useEffect(() => {
     getSubs();

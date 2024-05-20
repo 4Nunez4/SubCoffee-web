@@ -22,6 +22,7 @@ const SidebarOrganims = () => {
             { title: "Mis subastas", link: "/mi_subasta", icon: icono.iconoType },
           ]
         : []),
+        { title: "Notificaciones", link: "/notificaciones", icon: icono.iconoCampana },
       { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda, gap: true },
       { title: "Politicas privacidad", link: "/privacy-policy", icon: icono.iconoPrivacidad },
     ]),
@@ -70,7 +71,7 @@ const SidebarOrganims = () => {
                 onClick={() => setActiveLink(Menu.link)}
                 className={`flex rounded-md p-2 cursor-pointer hover:bg-[#009100] hover:text-white text-[#009100] text-sm items-center gap-x-3 ${
                   Menu.gap ? "mt-9" : "mt-2"
-                } ${activeLink === Menu.link ? "bg-[#009100] text-white" : ""}`}
+                } ${activeLink === Menu.link ? "hover:bg-[#009100] text-white" : ""}`}
               >
                 <div>{React.createElement(Menu?.icon, { size: "20" })}</div>
                 <span

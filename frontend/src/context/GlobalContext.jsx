@@ -7,6 +7,7 @@ import { FincaProvider } from "./FincaContext";
 import { AuthProvider } from "./AuthContext";
 import { VariedadUserProvider } from "./VariedadUserContext";
 import { SubastaProvider } from "./SubastaContext";
+import { NotificacionesProvider } from "./NotificacionesContext";
 
 export const GlobalContext = createContext();
 
@@ -23,7 +24,9 @@ const GlobalProvider = ({ children }) => {
                 <FincaProvider>
                   <VariedadUserProvider> 
                     <SubastaProvider>
-                      {children}
+                      <NotificacionesProvider>
+                        {children}
+                      </NotificacionesProvider>
                     </SubastaProvider>
                   </VariedadUserProvider>
                 </FincaProvider>
