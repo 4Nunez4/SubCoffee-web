@@ -14,7 +14,7 @@ const TipoVariContext = createContext();
 export const useTipoVariContext = () => {
   const context = useContext(TipoVariContext)
   if (!context) {
-    throw new Error('Debes usar MunicipioProvider en el App')
+    throw new Error('Debes usar TipoVariProvider en el App')
   }
   return context;
 }
@@ -41,7 +41,7 @@ export const TipoVariProvider = ({ children }) => {
   const getTipoVariedadesActivas = async () => {
     try {
       const res = await getTipoVarisActivas();
-      setTipoVariedadsActivos(res.data.data);
+      setTipoVariedadsActivos(res.data);
     } catch (error) {
       console.error(error);
     }

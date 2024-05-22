@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Avatar,
   Button,
@@ -12,15 +12,18 @@ import { useNavigate } from "react-router-dom";
 import ImageSlider from "../components/molecules/ImageSlider";
 import { useSubastaContext } from "../context/SubastaContext";
 import ModalSubCoffee from "../components/templates/ModalSubCoffee";
+import { useAuthContext } from "../context/AuthContext";
 
 function SubastaPage() {
   const navigate = useNavigate();
   const { getSubs, subastas, setIdSubasta } = useSubastaContext();
-  const users = JSON.parse(localStorage.getItem("user"));
+  const { getUsers } = useAuthContext()
   const [abrirModal, setAbrirModal] = useState(false)
+  const users = JSON.parse(localStorage.getItem('user'))
 
   useEffect(() => {
-    getSubs();
+    getSubs()
+    getUsers()
   }, []);
 
   const handdleModaSub = (id) => {
@@ -34,7 +37,7 @@ function SubastaPage() {
         <>
           <ImageSlider />
           <p className="pl-4 text-xl">Subastas</p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 sm:grid-cols-1 justify-center items-center gap-4 p-3">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 sm:grid-cols-1 justify-center items-center gap-4 p-3">
             {subastas &&
               subastas.map((subasta) => (
                 <Card key={subasta.pk_id_sub} className="max-w-[500px] p-2">
@@ -75,23 +78,14 @@ function SubastaPage() {
                         {subasta.pk_id_sub} - {subasta.nombre_tipo_vari}
                       </b>
                       <div
-                        className={`w-auto rounded-lg ${
-                          subasta.estado_sub === "abierta"
-                            ? "bg-green-400"
-                            : "bg-red-400"
-                        } border ${
-                          subasta.estado_sub === "abierta"
-                            ? "border-green-600"
-                            : "border-red-600"
-                        }`}
+                        className={`w-auto rounded-lg border
+                          ${subasta.estado_sub === "abierta"? "bg-green-500 border-green-600 text-green-50": ""}
+                          ${subasta.estado_sub === "proceso"? "bg-orange-500 border-orange-600 text-orange-50": ""}
+                          ${subasta.estado_sub === "espera"? "bg-blue-500 border-blue-600 text-blue-50": ""}
+                          ${subasta.estado_sub === "cerrada"? "bg-red-400 border-red-600 text-red-50": ""} 
+                        `}
                       >
-                        <p
-                          className={`text-sm text-default-400 p-1 ${
-                            subasta.estado_sub === "abierta"
-                              ? "text-green-50"
-                              : "text-red-50"
-                          }`}
-                        >
+                        <p className="text-sm text-default-50 p-1">
                           {subasta.estado_sub}
                         </p>
                       </div>
@@ -104,33 +98,62 @@ function SubastaPage() {
                         className="w-[250px] object-cover h-[200px]"
                         src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
                       />
-                      <div className="flex flex-col gap-1 pt-4">
-                        <div className="text-gray-400 text-sm justify-between">
-                          <p>
-                            Cantidad: {subasta.cantidad_sub} - {subasta.cantidad_sub > 1 && subasta.unidad_peso_sub + "s"}
-                          </p>
-                          <p>Precio inicial: {subasta.precio_inicial_sub}</p>
-                        </div>
-                        <div>
-                          <p className="text-gray-400 text-sm">
-                            {"Fecha de inicio: "}
-                            {new Date(subasta.fecha_inicio_sub).toLocaleString(
-                              "es-ES",
-                              { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", }
-                            )}
-                          </p>
-                          <p className="text-gray-400 text-sm">
-                            {" Fecha fin: "}
-                            {new Date(subasta.fecha_fin_sub).toLocaleString(
-                              "es-ES",
-                              { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", }
-                            )}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-gray-400 text-sm">
-                            {subasta.nombre_vere} - {subasta.nombre_muni} - {subasta.nombre_depar}
-                          </p>
+                      <div className="grid gap-x-2 py-2 px-2 text-sm">
+                        <div className="flex flex-col">
+                          <div className="flex w-full gap-x-2">
+                            <p className="font-semibold">Apertura:</p>
+                            <p>
+                              {new Date(
+                                subasta.fecha_inicio_sub
+                              ).toLocaleString("es-ES", {
+                                year: "numeric",
+                                month: "numeric",
+                                day: "numeric",
+                                hour: "numeric",
+                                minute: "numeric",
+                                second: "numeric",
+                              })}
+                            </p>
+                          </div>
+                          <div className="flex w-full gap-x-2">
+                            <p className="font-semibold">Cierre:</p>
+                            <p>
+                              {new Date(subasta.fecha_fin_sub).toLocaleString(
+                                "es-ES",
+                                {
+                                  year: "numeric",
+                                  month: "numeric",
+                                  day: "numeric",
+                                  hour: "numeric",
+                                  minute: "numeric",
+                                  second: "numeric",
+                                }
+                              )}
+                            </p>
+                          </div>
+                          <div className="flex w-full gap-x-2">
+                            <p className="font-semibold">Ubicación:</p>
+                            <p>
+                              {subasta.nombre_vere} - {subasta.nombre_muni} -
+                              {subasta.nombre_depar}{" "}
+                            </p>
+                          </div>
+                          <div className="flex w-full gap-x-2">
+                            <p className="font-semibold">Cantidad:</p>
+                            <p>
+                              {subasta.cantidad_sub} {subasta.unidad_peso_sub}
+                            </p>
+                          </div>
+                          <div className="flex w-full gap-x-2">
+                            <p className="font-semibold">Tipo Variedad:</p>
+                            <p>{subasta.nombre_tipo_vari}</p>
+                          </div>
+                          <div className="flex w-full gap-x-2">
+                            <p className="font-semibold">Certificado:</p>
+                            <p className="underline cursor-pointer">
+                              {subasta.certificado_sub}
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </CardBody>

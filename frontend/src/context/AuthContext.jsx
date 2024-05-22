@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import {
   getUser,
   getUserForId,
@@ -8,10 +8,19 @@ import {
   desactivarUser,
   loginUser,
   updatePasswordUser,
+  createImagenUser,
 } from "../api/api.users";
 import ModalMessage from "../nextui/ModalMessage";
 
 const AuthContext = createContext();
+
+export const useAuthContext = () => {
+  const context = useContext(AuthContext)
+  if (!context) {
+    throw new Error('Debes usar AuthProvider en el App')
+  }
+  return context;
+}
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -51,13 +60,27 @@ export const AuthProvider = ({ children }) => {
       setMensaje(response.data.message)
       setModalMessage(true)
     } catch (error) {
-      setErrors([error.response.message]);
+      setErrors([error.response.data.message]);
     }
   }
 
   const createUsers = async (data) => {
     try {
       const response = await createUser(data)
+      getUsers()
+      setMensaje(response.data.message)
+      setModalMessage(true)
+      if(response.status === 200) {
+        setOnClose(true)
+      }
+    } catch (error) {
+      setErrors([error.response.data.message]);
+    }
+  }
+
+  const createImgUsers = async (data) => {
+    try {
+      const response = await createImagenUser(data)
       getUsers()
       setMensaje(response.data.message)
       setModalMessage(true)
@@ -151,6 +174,8 @@ export const AuthProvider = ({ children }) => {
         updateUserActive,
         updateUserDesactive,
         setUsers,
+
+        createImgUsers,
       }}
     >
       <ModalMessage

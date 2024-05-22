@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, ModalFooter, Input, Textarea } from "@nextui-org/react";
 
 import { EyeSlashFilledIcon } from "../../nextui/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "../../nextui/EyeFilledIcon";
 import { icono } from "../atoms/IconsAtom";
-import AuthContext from "../../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 
-const RegisterUser = ({ mode, titleBtn, onClose }) => {
+const RegisterUser = ({ mode, titleBtn }) => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
-  const { createUsers, updateUsers, idUser, errors, onClose :CerrarModal } = useContext(AuthContext);
+  const { createUsers, updateUsers, idUser, errors } = useAuthContext();
   const userAdmin = JSON.parse(localStorage.getItem("user"));
   const [formData, setFormData] = useState({
-    imagen: "",
     pk_cedula_user: "",
     nombre_user: "",
     email_user: "",
@@ -22,10 +21,10 @@ const RegisterUser = ({ mode, titleBtn, onClose }) => {
     descripcion_user: "",
   });
 
+
   useEffect(() => {
     if (mode === "update" && idUser) {
       setFormData({
-        imagen: idUser.imagen_user,
         pk_cedula_user: idUser.pk_cedula_user,
         nombre_user: idUser.nombre_user,
         email_user: idUser.email_user,
@@ -75,66 +74,6 @@ const RegisterUser = ({ mode, titleBtn, onClose }) => {
           </div>
         ))
       }
-      <div className="flex w-full justify-center rounded-full">
-        <input
-          placeholder="Imagen de usuario"
-          type="file"
-          name="imagen"
-          className="hidden"
-          id="fileInput"
-          onChange={handleChange}
-        />
-        <label
-          htmlFor="fileInput"
-          className="cursor-pointer items-center w-auto flex justify-center bg-blue-100 rounded-full border"
-        >
-          {formData.imagen ? (
-            <div className="relative">
-              <button
-                type="button"
-                className="absolute top-0 right-0 p-1 bg-gray-300 rounded-full"
-                onClick={() => setFormData({ ...formData, imagen: "" })}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-gray-600"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-              {mode === "update" ? (
-                <img
-                  src={typeof formData.imagen === "string" ? `http://localhost:4000/img/${formData.imagen}` : URL.createObjectURL(formData.imagen)}
-                  alt="user"
-                  className="h-28 w-28 object-cover rounded-full mx-auto"
-                />
-              ) : (
-                formData.imagen instanceof File && (
-                  <img
-                    src={URL.createObjectURL(formData.imagen)}
-                    alt="user"
-                    className="h-28 w-28 object-cover rounded-full mx-auto"
-                  />
-                )
-              )}
-            </div>
-          ) : (
-            <div className="flex items-center justify-center w-28 h-28 border border-gray-300 rounded-full hover:bg-gray-50 transition duration-300">
-              <span className="text-gray-500 text-center">
-                Seleccionar imagen
-              </span>
-            </div>
-          )}
-        </label>
-      </div>
       <Input
         placeholder="Nombre Completo"
         isRequired

@@ -13,7 +13,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-import AuthContext from "../../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 import { icono } from "../atoms/IconsAtom";
 import AvatarAtom from "../atoms/AvatarAtom";
@@ -28,7 +28,7 @@ function HeaderOrganism() {
   const navigate = useNavigate();
   const localUser = JSON.parse(localStorage.getItem("user"));
 
-  const { getUsers, isAuthenticated, logout, users } = useContext(AuthContext);
+  const { getUsers, isAuthenticated, logout, users } = useAuthContext();
 
   const handleLogout = () => {
     Swal.fire({
@@ -68,27 +68,9 @@ function HeaderOrganism() {
       {localUser ? (
         <nav className="flex justify-between items-center bg-[#009100] p-4 shadow-sm">
           <div className="flex flex-col">
-            {localUser.rol_user === "comprador" ? (
-              <Link className="text-gray-200 text-2xl font-semibold">
-                <div className="flex items-center">
-                  <img
-                    src="./src/assets/isotipo-SubCoffee.png"
-                    className="cursor-pointer duration-500 h-10 w-10"
-                    alt="Isotipo SubCoffee"
-                  />
-                  <div className="ml-2">
-                    <h1 className="text-[#e0e0e0] font-medium text-2xl -mb-4">
-                      Subcoffee
-                    </h1>
-                    <span className="text-xs text-[#e0e0e0] -mt-2">Bienvenido</span>
-                  </div>
-                </div>
-              </Link>
-            ): (
-              <Link to="/" className="text-gray-200 text-2xl font-semibold">
-                Bienvenido
-              </Link>
-            )}
+            <Link to="/" className="text-gray-200 text-2xl font-semibold">
+              Bienvenido
+            </Link>
           </div>
           <div>
             <Autocomplete
@@ -211,26 +193,6 @@ function HeaderOrganism() {
                   >
                     Perfil
                   </DropdownItem>
-                  {localUser.rol_user === "comprador" && (
-                    <DropdownItem
-                      key="/privacy-policy"
-                      onClick={() => navigate(`/privacy-policy`)}
-                      className="text-center border border-gray-400 hover:bg-gray-200 text-black"
-                      color="success"
-                    >
-                      Políticas de privacidad
-                    </DropdownItem>
-                  )}
-                  {localUser.rol_user === "comprador" && (
-                    <DropdownItem
-                      key="/ayuda"
-                      onClick={() => navigate(`/ayuda`)}
-                      className="text-center border border-gray-400 hover:bg-gray-200 text-black"
-                      color="success"
-                    >
-                      Ayuda
-                    </DropdownItem>
-                  )}
                   <DropdownItem
                     key="logout"
                     onPress={handleLogout}

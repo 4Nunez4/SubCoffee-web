@@ -49,7 +49,6 @@ export default function MiSubastaT() {
             }>
               <Card>
                 <CardBody>
-                  <p className="text-center"> Registra una subasta con tu café de alta calidad </p>
                   <SubastaTable />
                 </CardBody>
               </Card>

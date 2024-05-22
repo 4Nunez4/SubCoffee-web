@@ -1,49 +1,33 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardBody, Image, Button } from "@nextui-org/react";
 
-import FincaContext from "../../context/FincaContext.jsx";
+import { useFincaContext } from "../../context/FincaContext.jsx";
 import { EditIcon } from "../../nextui/EditIcon";
 import ActivarIcon from "../../nextui/ActivarIcon";
 import DesactivarIcon from "../../nextui/DesactivarIcon";
 import { PlusIcon } from "../../nextui/PlusIcon";
 import FormFinca from "../templates/FormFinca";
 import FormVariedadUser from "../templates/FormVariedadUser.jsx";
-import VariedadUserContext from "../../context/VariedadUserContext.jsx";
-import ModaVariedadUser from "../../pages/ModaVariedadUser.jsx"
 
 function FincaTable() {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const { getFinca, fincas, desactivarFincas, activarFincas, setIdFinca } =
-    useContext(FincaContext);
-  const { variedadForuser, getVariForUser } = useContext(VariedadUserContext);
+  const { getFincaUser, fincas, desactivarFincas, activarFincas, setIdFinca } = useFincaContext();
 
   const [abrirModalFinca, setAbrirModalFinca] = useState(false);
   const [abrirModalVariedad, setAbrirModalVariedad] = useState(false);
   const [mode, setMode] = useState("create");
-  const [pkFinca, setPkFinca] = useState(null);
+  const [pkFinca, setPkFinca] = useState(0);
 
   useEffect(() => {
-    getFinca(user.pk_cedula_user);
-  }, [user.pk_cedula_user, getFinca]);
-
-  useEffect(() => {
-    if (user.pk_cedula_user && pkFinca) {
-      getVariForUser(user.pk_cedula_user, pkFinca);
-    }
-  }, [user.pk_cedula_user, pkFinca, getVariForUser]);
+    getFincaUser(user.pk_cedula_user);
+  }, [user.pk_cedula_user, getFincaUser]);
 
   const handleToggleFinca = (mode) => {
     setAbrirModalFinca(true);
     setMode(mode);
   };
-
-  const handleToggleVariedad = (mode, fincaId) => {
-    setPkFinca(fincaId);
-    setAbrirModalVariedad(true);
-    setMode(mode);
-  };
-
+  
   return (
     <div className="w-full">
       <div className="flex justify-between py-4 gap-x-3 px-12 items-center">
@@ -64,11 +48,12 @@ function FincaTable() {
           titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
           mode={mode}
         />
-        <ModaVariedadUser
-          isOpen={abrirModalVariedad}
+        <FormVariedadUser
+          open={abrirModalVariedad}
+          title={"Variedades"}
           onClose={() => setAbrirModalVariedad(false)}
-          mode={mode}
-          fincaId={pkFinca}
+          titleBtn={"Registrar Variedad"}
+          pkFinca={pkFinca}
         />
       </div>
       <div className="flex justify-center items-center">
@@ -109,7 +94,7 @@ function FincaTable() {
                   />
                 </CardBody>
                 <div className="flex justify-center items-center gap-2 flex-col px-10">
-                  <Button className="w-full flex" onPress={() => handleToggleVariedad("create", result.pk_id_fin)}>
+                  <Button className="w-full flex" onPress={() => {setAbrirModalVariedad(true); setPkFinca(result.pk_id_fin)}}>
                     Ver variedades de la finca
                   </Button>
                   <Button

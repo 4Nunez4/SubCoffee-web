@@ -22,6 +22,11 @@ const SidebarOrganims = () => {
       { title: "Mis subastas", link: "/mi_subasta", icon: icono.iconoType },
       { title: "Políticas de privacidad", link: "/privacy-policy", icon: icono.iconoPrivacidad },
       { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda }
+    ] : []),
+    ...(user && token && user.rol_user === "comprador" ? [
+      { title: "Inicio", link: "/subcoffee", icon: icono.iconoHome },
+      { title: "Políticas de privacidad", link: "/privacy-policy", icon: icono.iconoPrivacidad },
+      { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda }
     ] : [])
   ];
 
@@ -45,10 +50,6 @@ const SidebarOrganims = () => {
   useEffect(() => {
     localStorage.setItem("sidebarOpen", JSON.stringify(open));
   }, [open]);
-
-  if (!user || user.rol_user === "comprador") {
-    return null;
-  }
 
   return (
     <div className="flex min-h-screen">

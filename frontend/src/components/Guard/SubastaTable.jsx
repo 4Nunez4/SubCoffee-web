@@ -1,16 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
-  Avatar,
   Button,
   Image,
 } from "@nextui-org/react";
 import { PlusIcon } from "../../nextui/PlusIcon";
 import { EditIcon } from "../../nextui/EditIcon";
-import SubastaContext from "../../context/SubastaContext";
+import { useSubastaContext } from "../../context/SubastaContext";
 import DesactivarIcon from "../../nextui/DesactivarIcon";
 import ActivarIcon from "../../nextui/ActivarIcon";
 import FormSubasta from "../templates/FormSubasta";
@@ -21,13 +19,7 @@ export default function SubastaTable() {
   const [abrirModal, setAbrirModal] = useState(false);
   const [mode, setMode] = useState("create");
 
-  const {
-    getSubForUser,
-    subastaForuser,
-    desactivarSubs,
-    activarSubs,
-    setIdSubasta,
-  } = useContext(SubastaContext);
+  const { getSubForUser, subastaForuser, desactivarSubs, activarSubs, setIdSubasta } = useSubastaContext();
   const usuario = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -41,13 +33,12 @@ export default function SubastaTable() {
 
   return (
     <div className="w-full">
-      <div className="flex py-4 gap-x-3 items-center">
+        <div className="flex justify-between py-4 gap-x-3 px-12 items-center">
+        <p className="text-center"> Registra una subasta con tu café de alta calidad </p>
         <Button
           className="bg-slate-400 text-white"
           endContent={<PlusIcon />}
-          onClick={() => {
-            handleToggle("create");
-          }}
+          onClick={() => handleToggle("create")}
         >
           Registrar Subasta
         </Button>
@@ -60,110 +51,87 @@ export default function SubastaTable() {
         mode={mode}
       />
       {subastaForuser ? (
-        <div className="grid grid-cols-2 justify-center items-center gap-4 p-3">
+        <div className="grid grid-cols-3 justify-center items-center gap-4 p-3">
           {subastaForuser.map((subasta) => (
-            <Card key={subasta.pk_id_sub} className="max-w-[500px] p-2">
-              <CardHeader className="justify-between">
-                <div className="flex gap-3">
-                  <Avatar
-                    isBordered
-                    radius="full"
-                    size="md"
-                    src={
-                      subasta.imagen_user
-                        ? `http://localhost:4000/img/${subasta.imagen_user}`
-                        : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
-                    }
-                  />
-                  <div className="flex flex-col gap-1 items-start justify-center">
-                    <h4 className="text-small font-semibold leading-none text-default-600">
-                      {subasta.nombre_user}
-                    </h4>
-                    <h5 className="text-small tracking-tight text-default-400">
-                      @{subasta.email_user}
-                    </h5>
+            <Card key={subasta.pk_id_sub} className="max-w-[410px]">
+              <CardBody className="items-center">
+                <span className="text-center flex items-center justify-center w-full gap-3">
+                  {subasta.pk_id_sub} - {subasta.nombre_tipo_vari}
+                  <div className={`w-auto rounded-lg border
+                      ${subasta.estado_sub === "abierta"? "bg-green-500 border-green-600 text-green-50": ""}
+                      ${subasta.estado_sub === "proceso"? "bg-orange-500 border-orange-600 text-orange-50": ""}
+                      ${subasta.estado_sub === "espera"? "bg-blue-500 border-blue-600 text-blue-50": ""}
+                      ${subasta.estado_sub === "cerrada"? "bg-red-400 border-red-600 text-red-50": ""} 
+                    `}
+                  >
+                    <p className="text-sm text-default-50 p-1">
+                      {subasta.estado_sub}
+                    </p>
                   </div>
-                </div>
-                <Button
-                  className="bg-gray-100 text-foreground border-default-200"
-                  radius="md"
-                  variant="bordered"
-                  size="sm"
-                  onPress={() => navigate(`/profile/${usuario.pk_cedula_user}`)}
-                >
-                  Visualizar perfil
-                </Button>
-              </CardHeader>
-              <CardBody className=" items-start">
-                <span className="w-full text-center">
-                  <b className="text-lg">
-                    {subasta.nombre_tipo_vari} - {subasta.nombre_fin}
-                  </b>
-                  <p className="text-sm text-default-400">
-                    {subasta.estado_sub}
-                  </p>
+                  {subasta.pk_cedula_user === usuario.pk_cedula_user && (
+                    <Button
+                      className="bg-gray-400"
+                      radius="md"
+                      startContent={<EditIcon />}
+                      onPress={() => {handleToggle(subasta); setIdSubasta(subasta)}}
+                    >
+                      Editar
+                    </Button>
+                  )}
                 </span>
                 <CardBody className="flex items-center">
-                  <Image
-                    shadow="sm"
-                    radius="md"
-                    alt={subasta.imagen_sub}
-                    className="w-[380px] object-cover h-[200px]"
-                    src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
-                  />
-                  <div className="flex flex-col gap-1 pt-4">
-                    <div className="text-gray-400 text-sm flex justify-between">
-                      <p>
-                        Cantidad: {subasta.cantidad_sub} -
-                        {subasta.unidad_peso_sub}
-                      </p>
-                      <p>Precio inicial: {subasta.precio_inicial_sub}</p>
-                    </div>
-                    <div className="flex">
-                      <p className="text-gray-400 text-sm">
-                        {"Fecha de inicio "}
-                        {new Date(subasta.fecha_inicio_sub).toLocaleString(
-                          "es-ES",
-                          {
-                            weekday: "long",
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                            hour: "numeric",
-                            minute: "numeric",
-                            second: "numeric",
-                          }
-                        )}
-                      </p>
-                      <p className="text-gray-400 text-sm">
-                        {" Fecha fin "}
-                        {new Date(subasta.fecha_fin_sub).toLocaleString(
-                          "es-ES",
-                          {
-                            weekday: "long",
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                            hour: "numeric",
-                            minute: "numeric",
-                            second: "numeric",
-                          }
-                        )}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-gray-400 text-sm">
-                        {subasta.nombre_vere} - {subasta.nombre_muni} -{" "}
-                        {subasta.nombre_depar}
-                      </p>
+                  <div className="w-64">
+                    <Image
+                      shadow="sm"
+                      radius="md"
+                      alt={subasta.imagen_sub}
+                      className="w-full object-cover h-[200px]"
+                      src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
+                      />
+                  </div>
+                  <div className="grid gap-x-2 py-2 px-2 text-sm">
+                    <div className="flex flex-col">
+                      <div className="flex w-full gap-x-2">
+                        <p className="font-semibold">Apertura:</p>
+                        <p>{new Date(subasta.fecha_inicio_sub).toLocaleString("es-ES", {year: "numeric",month: "numeric",day: "numeric",hour: "numeric",minute: "numeric",second: "numeric",})}</p>
+                      </div>
+                      <div className="flex w-full gap-x-2">
+                        <p className="font-semibold">Cierre:</p>
+                        <p>{new Date(subasta.fecha_fin_sub).toLocaleString("es-ES",{year: "numeric",month: "numeric",day: "numeric",hour: "numeric",minute: "numeric",second: "numeric",})}</p>
+                      </div>
+                      <div className="flex w-full gap-x-2">
+                        <p className="font-semibold">Ubicación:</p>
+                        <p>
+                          {subasta.nombre_vere} - {subasta.nombre_muni} - {subasta.nombre_depar}
+                        </p>
+                      </div>
+                      <div className="flex w-full gap-x-2">
+                        <p className="font-semibold">Cantidad:</p>
+                        <p>
+                          {subasta.cantidad_sub} {subasta.cantidad_sub > 1 ? subasta.unidad_peso_sub + "s" : subasta.unidad_peso_sub}
+                        </p>
+                      </div>
+                      <div className="flex w-full gap-x-2">
+                        <p className="font-semibold">Tipo Variedad:</p>
+                        <p>{subasta.nombre_tipo_vari}</p>
+                      </div>
+                      <div className="flex w-full gap-x-2">
+                        <p className="font-semibold">Certificado:</p>
+                        <p className="underline cursor-pointer">
+                          {subasta.certificado_sub}
+                        </p>
+                      </div>
+                      <div className="flex gap-x-2">
+                        <p className="font-semibold">Precio base:</p>
+                        <p>${Number(subasta.precio_inicial_sub).toLocaleString("es-ES")}</p>
+                      </div>
                     </div>
                   </div>
                 </CardBody>
-                <CardFooter className="flex justify-center gap-x-4">
+                <CardFooter className="flex justify-center gap-x-2 -mt-4">
                   <Button
                     className="bg-gray-400"
                     radius="md"
-                    size="lg"
                     onPress={() => navigate(`/subasta/${subasta.pk_id_sub}`)}
                   >
                     Visualizar
@@ -172,12 +140,7 @@ export default function SubastaTable() {
                     <Button
                       className="bg-red-600 text-white w-full"
                       startContent={<DesactivarIcon />}
-                      onClick={() =>
-                        desactivarSubs(
-                          subasta.pk_id_sub,
-                          usuario.pk_cedula_user
-                        )
-                      }
+                      onClick={() => desactivarSubs(subasta.pk_id_sub, usuario.pk_cedula_user) }
                     >
                       Desactivar Subasta
                     </Button>
@@ -185,25 +148,9 @@ export default function SubastaTable() {
                     <Button
                       className="bg-green-600 text-white px-[27px] w-full"
                       startContent={<ActivarIcon />}
-                      onClick={() =>
-                        activarSubs(subasta.pk_id_sub, usuario.pk_cedula_user)
-                      }
+                      onClick={() => activarSubs(subasta.pk_id_sub, usuario.pk_cedula_user) }
                     >
                       Activar Subasta
-                    </Button>
-                  )}
-                  {subasta.pk_cedula_user === usuario.pk_cedula_user && (
-                    <Button
-                      className="bg-gray-400"
-                      radius="md"
-                      size="lg"
-                      startContent={<EditIcon />}
-                      onPress={() => {
-                        handleToggle(subasta);
-                        setIdSubasta(subasta);
-                      }}
-                    >
-                      Editar
                     </Button>
                   )}
                 </CardFooter>

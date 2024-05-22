@@ -38,7 +38,7 @@ export const getVariedadUser = async (req, res) => {
     if (result.length > 0) {
       res.status(200).json({ message: "Variedades de usuario encontradas", data: result });
     } else {
-      res.status(404).json({ message: "Error al buscar la variedad con el ID del usuario" });
+      res.status(203).json({ message: "La finca no tiene variedades." });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
@@ -52,13 +52,13 @@ export const createVariedad = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { fk_finca, fk_tipo_variedad} = req.body
+    const { fk_finca, fk_tipo_variedad } = req.body
     let sql = `INSERT INTO variedad(estado_vari, fk_finca, fk_tipo_variedad) VALUES ('activo', '${fk_finca}', '${fk_tipo_variedad}')`
     const [result] = await pool.query(sql)
     if(result.affectedRows > 0){
-        res.status(200).json({message:"Variedad creada con exito"})
+      res.status(200).json({message:"Variedad creada con exito"})
     }else {
-        res.status(404).json({message:"Error al crear la variedad"})
+      res.status(404).json({message:"Error al crear la variedad"})
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });

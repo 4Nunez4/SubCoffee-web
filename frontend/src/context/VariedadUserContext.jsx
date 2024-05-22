@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 import ModalMessage from "../nextui/ModalMessage";
 import {
@@ -11,6 +11,14 @@ import {
 
 const VariedadUserContext = createContext();
 
+export const useVariedadUserContext = () => {
+  const context = useContext(VariedadUserContext)
+  if (!context) {
+    throw new Error('Debes usar VariedadUserProvider en el App')
+  }
+  return context;
+}
+
 export const VariedadUserProvider = ({ children }) => {
   const [modalMessage, setModalMessage] = useState(false);
   const [mensaje, setMensaje] = useState("");
@@ -19,20 +27,20 @@ export const VariedadUserProvider = ({ children }) => {
   const [idVariedad, setIdVariedad] = useState(0);
   const [variedadForuser, setVariedadForUser] = useState([]);
 
-  const getVariForUser = async (user, id_finca) => {
+  const getVariForUser = async (id, id_finca) => {
     try {
-      const response = await getVariedad(user, id_finca);
+      const response = await getVariedad(id, id_finca);
       setVariedadForUser(response.data.data);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const createVaris = async (data, user) => {
+  const createVaris = async (data, id, id_finca) => {
     try {
       const response = await createVariedad(data);
-      getVariForUser(user);
       setMensaje(response.data.message);
+      getVariForUser(id, id_finca)
       setModalMessage(true);
     } catch (error) {
       setErrors([error.response.data.message]);
@@ -50,10 +58,10 @@ export const VariedadUserProvider = ({ children }) => {
     }
   };
 
-  const desactivarVaris = async (id, user) => {
+  const desactivarVaris = async (id, user, id_finca) => {
     try {
       const response = await updateVariedadDesact(id);
-      getVariForUser(user);
+      getVariForUser(user, id_finca);
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {
@@ -61,10 +69,10 @@ export const VariedadUserProvider = ({ children }) => {
     }
   };
 
-  const activarVaris = async (id, user) => {
+  const activarVaris = async (id, user, id_finca) => {
     try {
       const response = await updateVariedadActivar(id);
-      getVariForUser(user);
+      getVariForUser(user, id_finca);
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {

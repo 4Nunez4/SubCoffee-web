@@ -64,7 +64,7 @@ function SubastaUser() {
   };
 
   return (
-    <div className="bg-gray-100 p-4">
+    <div className="p-4">
       <p className="font-bold p-1 text-xl items-center flex">
         {subasta.pk_id_sub} - {subasta.nombre_tipo_vari}
         <span className="text-xs mx-4 p-1 rounded-lg bg-[#009100] text-[#e0e0e0]">
@@ -74,7 +74,7 @@ function SubastaUser() {
       <div className="flex gap-3 w-full">
         <div className="bg-[#e0e0e0] rounded-xl w-full p-4">
           <div className="grid gap-1">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 justify-center items-center">
               <Image
                 radius="md"
                 shadow="sm"
@@ -194,14 +194,14 @@ function SubastaUser() {
               <EstrellaVacia />
             </div>
           </div>
-          <div className="mt-2 flex flex-col h-60 bg-[#e0e0e0] gap-y-2 rounded-lg">
+          <div className="mt-2 flex flex-col h-60 bg-[#e0e0e0] gap-y-1 rounded-lg">
             <h3 className="text-lg font-semibold text-center mt-3">Postulantes</h3>
             <div className="flex-grow overflow-y-auto flex flex-wrap gap-2 justify-center">
               {Array.isArray(postsActivos) && postsActivos.length > 0 ? (
                 postsActivos.map((postulante, i) => (
                   <div
                     key={i}
-                    className="bg-gray-100 rounded-xl w-52 h-10 flex justify-center items-center"
+                    className="bg-[#e0e0e0] rounded-xl w-52 gap-x-1 h-10 flex justify-center items-center"
                   >
                     <Avatar
                       src={

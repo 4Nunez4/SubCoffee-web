@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import {
   getFincaForUser,
   createFinca,
@@ -10,14 +10,23 @@ import ModalMessage from "../nextui/ModalMessage";
 
 const FincaContext = createContext();
 
+export const useFincaContext = () => {
+  const context = useContext(FincaContext)
+  if (!context) {
+    throw new Error('Debes usar MunicipioProvider en el App')
+  }
+  return context;
+}
+
 export const FincaProvider = ({ children }) => {
   const [modalMessage, setModalMessage] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [errors, setErrors] = useState([]);
   const [fincas, setFincas] = useState([]);
   const [idFinca, setIdFinca] = useState(0)
+  const [cerrarModal, serCerrarModal] = useState(false)
 
-  const getFinca = async (user) => {
+  const getFincaUser = async (user) => {
     try {
       const res = await getFincaForUser(user);
       setFincas(res.data.data);
@@ -29,9 +38,10 @@ export const FincaProvider = ({ children }) => {
   const createFincas = async (data, user) => {
     try {
       const response = await createFinca(data);
-      getFinca(user);
+      getFincaUser(user);
       setMensaje(response.data.message);
       setModalMessage(true);
+      serCerrarModal(true)
     } catch (error) {
       setErrors([error.response.data.message]);
     }
@@ -40,7 +50,8 @@ export const FincaProvider = ({ children }) => {
   const updateFincas = async (id, data, user) => {
     try {
       const response = await updateFinca(id, data);
-      getFinca(user);
+      getFincaUser(user);
+      serCerrarModal(true)
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {
@@ -51,7 +62,7 @@ export const FincaProvider = ({ children }) => {
   const desactivarFincas = async (id, user) => {
     try {
       const response = await updateFincaDesact(id);
-      getFinca(user);
+      getFincaUser(user);
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {
@@ -62,7 +73,7 @@ export const FincaProvider = ({ children }) => {
   const activarFincas = async (id, user) => {
     try {
       const response = await updateFincaActivar(id);
-      getFinca(user);
+      getFincaUser(user);
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {
@@ -78,11 +89,14 @@ export const FincaProvider = ({ children }) => {
         idFinca,
         setIdFinca,
         setFincas,
-        getFinca,
+        getFincaUser,
         createFincas,
         updateFincas,
         desactivarFincas,
         activarFincas,
+
+        cerrarModal,
+        serCerrarModal
       }}
     >
       <ModalMessage
