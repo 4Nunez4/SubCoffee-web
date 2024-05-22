@@ -30,6 +30,7 @@ export default function ListarNotificaciones() {
       message: "esta funcionando correctamente ",
       duration: 4000,
       native: true,
+      //onClick: ()=> window.location = "la url de donde quiere que lo redirija la notificacion "
    
     })
   }
