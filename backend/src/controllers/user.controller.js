@@ -37,14 +37,29 @@ export const createUser = async (req, res) => {
 
     const { pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, rol_user } = req.body;
     const bcryptPassword = bcrypt.hashSync(password_user, 12);
-    let imagen_user =  req.file.originalname
     
-    let sql = `INSERT INTO usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, imagen_user, telefono_user, rol_user, estado_user) VALUES ('${pk_cedula_user}', '${nombre_user}','${email_user}','${bcryptPassword}', '${descripcion_user}', '${imagen_user}', '${telefono_user}', '${rol_user}', 'activo')`;
+    let sql = `INSERT INTO usuarios (pk_cedula_user, nombre_user, email_user, password_user, descripcion_user, telefono_user, rol_user, estado_user) VALUES ('${pk_cedula_user}', '${nombre_user}','${email_user}','${bcryptPassword}', '${descripcion_user}', '${telefono_user}', '${rol_user}', 'activo')`;
     const [result] = await pool.query(sql);
     if (result.affectedRows > 0) {
       res.status(200).json({ status: 200, message: "Usuario creado exitosamente" });
     } else {
       res.status(404).json({ message: "No se pudo crear el usuario" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error en el servidor" + error });
+  }
+};
+
+export const createImagenUser = async (req, res) => {
+  try {
+    let imagen_user =  req.file.originalname
+    
+    let sql = `INSERT INTO usuarios (imagen_user) VALUES ('${imagen_user}')`;
+    const [result] = await pool.query(sql);
+    if (result.affectedRows > 0) {
+      res.status(200).json({ status: 200, message: "Imagen de usuario agregada exitosamente" });
+    } else {
+      res.status(404).json({ message: "No se pudo crear la imagen del usuario" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
@@ -60,9 +75,8 @@ export const updateUser = async (req, res) => {
 
     const id = req.params.id;
     const { pk_cedula_user, nombre_user, email_user, descripcion_user, telefono_user, rol_user } = req.body;
-    let imagen_user =  req.file.originalname
 
-    let sql = `UPDATE usuarios SET pk_cedula_user = '${pk_cedula_user}', nombre_user = '${nombre_user}', email_user = '${email_user}', descripcion_user = '${descripcion_user}', imagen_user = '${imagen_user}', telefono_user = '${telefono_user}', rol_user = '${rol_user}' WHERE pk_cedula_user = '${id}'`;
+    let sql = `UPDATE usuarios SET pk_cedula_user = '${pk_cedula_user}', nombre_user = '${nombre_user}', email_user = '${email_user}', descripcion_user = '${descripcion_user}', telefono_user = '${telefono_user}', rol_user = '${rol_user}' WHERE pk_cedula_user = '${id}'`;
     const [result] = await pool.query(sql);
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Usuario actualizado con exito" });

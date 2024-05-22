@@ -18,7 +18,7 @@ import {
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import { SearchIcon } from "../nextui/SearchIcon.jsx";
-import NotificacionContext from "../context/NotificacionesContext";
+import NotificacionContext from "../context/NotificacionesContext.jsx";
 
 export default function ListarNotificaciones() {
   const navigate = useNavigate()

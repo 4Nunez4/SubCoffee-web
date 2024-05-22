@@ -1,13 +1,13 @@
 import React from "react";
-import { ModalForm } from "../organisms/ModalForm";
-import RegisterVariedadUserMolecule from "../molecules/RegisterVariedadUserMolecule"
+import ModaVariedadUser from "../../pages/ModaVariedadUser";
+import { ModalFormXl } from "../organisms/ModalFormXl";
 
-function FormVariedadUser({ open, onClose, title, titleBtn, mode }) {
+function FormVariedadUser({ open, onClose, title, titleBtn, pkFinca }) {
   return (
     <>
-      <ModalForm open={open} onClose={onClose} title={title}>
-        <RegisterVariedadUserMolecule onClose={onClose} mode={mode} titleBtn={titleBtn} />
-      </ModalForm>
+      <ModalFormXl open={open} onClose={onClose} title={title}>
+        <ModaVariedadUser titleBtn={titleBtn} pkFinca={pkFinca} />
+      </ModalFormXl>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   getMunicipios,
   createMunicipios,
@@ -6,10 +6,19 @@ import {
   UpdateMunicipioActivar,
   UpdateMunicipioDesact,
   getMuniForDepartamento,
+  getMunicipiosActivos,
 } from "../api/api.municipios";
 import ModalMessage from "../nextui/ModalMessage";
 
 const MunicipioContext = createContext();
+
+export const useMunicipioContext = () => {
+  const context = useContext(MunicipioContext)
+  if (!context) {
+    throw new Error('Debes usar MunicipioProvider en el App')
+  }
+  return context;
+}
 
 export const MunicipioProvider = ({ children }) => {
   const [modalMessage, setModalMessage] = useState(false);
@@ -19,12 +28,24 @@ export const MunicipioProvider = ({ children }) => {
   const [idMunicipio, setIdMunicipio] = useState(0);
   const [municipiosForDepar, setMunicipiosForDepar] = useState([])
 
+  const [municipiosActivos, setMunicipiosActivos] = useState([]);
+  const [cerrarModal, serCerrarModal] = useState(false)
+
   const getMunis = async () => {
     try {
       const res = await getMunicipios();
       setMunicipios(res.data);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const getMunisForDeparActivos = async (departamento) => {
+    try {
+      const res = await getMunicipiosActivos(departamento);
+      setMunicipiosActivos(res.data);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -40,9 +61,12 @@ export const MunicipioProvider = ({ children }) => {
   const createMunis = async (data) => {
     try {
       const response = await createMunicipios(data);
-      getMunis();
-      setMensaje(response.data.message);
-      setModalMessage(true);
+      if(response.status === 200){
+        getMunis();
+        setMensaje(response.data.message);
+        setModalMessage(true);
+        serCerrarModal(true)
+      }
     } catch (error) {
       setErrors([error.response.data.message]);
     }
@@ -51,9 +75,12 @@ export const MunicipioProvider = ({ children }) => {
   const updateMunis = async (id, data) => {
     try {
       const response = await updateMunicipios(id, data);
-      getMunis();
-      setMensaje(response.data.message);
-      setModalMessage(true);
+      if(response.status === 200) {
+        getMunis();
+        setMensaje(response.data.message);
+        setModalMessage(true);
+        serCerrarModal(true)
+      }
     } catch (error) {
       setErrors([error.response.data.message]);
     }
@@ -66,7 +93,7 @@ export const MunicipioProvider = ({ children }) => {
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {
-      setErrors(error.response.data);
+      console.log(error);
     }
   };
 
@@ -77,9 +104,18 @@ export const MunicipioProvider = ({ children }) => {
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {
-      setErrors(error.response.data);
+      console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
 
   return (
     <MunicipioContext.Provider
@@ -97,6 +133,11 @@ export const MunicipioProvider = ({ children }) => {
         updateMunis,
         desactivarMunis,
         activarMunis,
+
+        getMunisForDeparActivos,
+        serCerrarModal,
+        cerrarModal,
+        municipiosActivos,
       }}
     >
       <ModalMessage

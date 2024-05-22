@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { activarTipoVariedad, createTipoVariedad, deleteTipoVariedad, desactivarTipoVariedad, getTipoVariedad, getTipoVariedades, updateTipoVariedad } from "../controllers/tipovari.controller.js";
+import { activarTipoVariedad, createTipoVariedad, deleteTipoVariedad, desactivarTipoVariedad, getTipoVariedad, getTipoVariedades, getTipoVariedadesActivas, updateTipoVariedad } from "../controllers/tipovari.controller.js";
 import { verificarUserToken } from "../controllers/autenticacionController.js";
 import { validationTipoVariedad } from "../validations/tipo_variedad.validation.js";
 const routertipovari = Router();
 
 routertipovari.get("/tipo_vari", verificarUserToken, getTipoVariedades);
+routertipovari.get("/tipo_vari_activas", verificarUserToken, getTipoVariedadesActivas);
 routertipovari.get("/tipo_vari/:id", verificarUserToken, getTipoVariedad);
 routertipovari.post("/tipo_vari", verificarUserToken, validationTipoVariedad, createTipoVariedad);
 routertipovari.put("/tipo_vari/:id", verificarUserToken, validationTipoVariedad, updateTipoVariedad);

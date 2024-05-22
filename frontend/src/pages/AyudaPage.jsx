@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Button, ButtonGroup, Input } from "@nextui-org/react";
-import toast from "react-hot-toast";
 
 import ComoCrearSubasta from "./ComoCrearUnaSubasta";
 import InfoRolesA from "./InfoRolesA";
@@ -19,7 +18,7 @@ function AyudaPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    toast.success("Gracias por tu mensaje!");
+    alert("Gracias por tu mensaje!");
     setTexto("");
   };
 

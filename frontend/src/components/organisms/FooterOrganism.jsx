@@ -8,7 +8,7 @@ import YoutubeIcon from "../../nextui/YoutubeIcon";
 
 const FooterOrganism = () => {
   return (
-    <footer className="py-8 pt-12 sm:pb-4 bg-gray-300">
+    <footer className="py-8 pt-12 sm:pb-4 bg-[#e0e0e0]">
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-8">
           <div className="sm:col-span-2 md:col-span-3 lg:col-span-2 lg:pr-8">
@@ -34,18 +34,18 @@ const FooterOrganism = () => {
 
           <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
             <div className="flex flex-col items-center justify-center ">
-              <p className="text-lg font-semibold mb-4">Contáctenos</p>
+              <p className="text-lg font-semibold mb-4">Visitanos</p>
               <div className="flex gap-2">
                 <Button
                   href="mailto:info@subcoffee.com"
                   as={Link}
-                  className="bg-gray-200"
+                  className="bg-[#e0e0e0]"
                   startContent={<GmailIcon />}
                 ></Button>
                 <Button
                   href="https://www.youtube.com/channel/your-channel"
                   as={Link}
-                  className="bg-gray-200"
+                  className="bg-[#e0e0e0]"
                   startContent={<YoutubeIcon />}
                 ></Button>
               </div>

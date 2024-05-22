@@ -6,7 +6,7 @@ function FormUser ({ open, onClose, title, titleBtn, mode }) {
   return (
     <>
       <ModalForm open={open} onClose={onClose} title={title}>
-        <RegisterUser onClose={onClose} mode={mode} titleBtn={titleBtn} />
+        <RegisterUser mode={mode} titleBtn={titleBtn} />
       </ModalForm>
     </>
   );

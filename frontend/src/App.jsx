@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 import { NextUIProvider } from "@nextui-org/react";
 
 import SubastaPage from "./pages/SubastaPage";
@@ -21,44 +20,44 @@ import ListarNotificaciones from "./pages/Notificaciones";
 
 function App() {
   const users = JSON.parse(localStorage.getItem("user"));
+  const isVendedor = users?.rol_user === "vendedor"
+  const isAdmin = users?.rol_user === "admin"
 
   return (
     <>
       <NextUIProvider>
-        <Toaster />
-          <GlobalProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route element={<Dashboard />}>
-                  <Route element={<ProtectedRoute />}>
-                    <Route path="/subcoffee" element={<SubastaPage />} />
-                    <Route path="/profile/:id" element={<ProfileUser />} />
-                    <Route path="/subasta/:id" element={<SubastaUser />} />
-                    <Route path="/notificaciones" element={<ListarNotificaciones />} />
-                    {users && users.rol_user === "admin" && (
-                      <>
-                        <Route path="/users" element={<UsersTable />} />
-                        <Route path="/geografia" element={<GeografiaFullPage />} />
-                        <Route path="/tipo_variedad" element={<TipoVariedadTable />} />
-                      </>
-                    )}
-                    {users && users.rol_user !== "comprador" && (
-                      <>
-                        <Route path="/mi_subasta" element={<MiSubastaT />} />
-                      </>
-                    )}
-                  </Route>
+        <GlobalProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Dashboard />}>
+                <Route index element={<DashboardContentOrganims />} />
+                <Route path="privacy-policy" element={<PoliticasYCondicionesPageA />} />
+                <Route path="somos" element={<QuienesSomosA />} />
+                <Route path="ayuda" element={<AyudaPage />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="subcoffee" element={<SubastaPage />} />
+                 
+                  <Route path="profile/:id" element={<ProfileUser />} />
+                  <Route path="subasta/:id" element={<SubastaUser />} />
+                  <Route path="notificaciones" element={<ListarNotificaciones />} />
+                  {isAdmin && (
+                    <>
+                      <Route path="users" element={<UsersTable />} />
+                      <Route path="geografia" element={<GeografiaFullPage />} />
+                      <Route path="tipo_variedad" element={<TipoVariedadTable />} />
+                    </>
+                  )}
+                  {isVendedor && (
+                    <Route path="mi_subasta" element={<MiSubastaT />} />
+                  )}
                 </Route>
-                <Route element={<Dashboard />}>
-                  <Route index element={<DashboardContentOrganims />} />
-                  <Route path="/privacy-policy" element={<PoliticasYCondicionesPageA />} />
-                  <Route path="/somos" element={<QuienesSomosA />} />
-                  <Route path="/ayuda" element={<AyudaPage />} />
-                </Route>
+              </Route>
+              <Route>
                 <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </BrowserRouter>
-          </GlobalProvider>
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </GlobalProvider>
       </NextUIProvider>
     </>
   );

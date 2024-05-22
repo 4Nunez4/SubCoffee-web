@@ -13,7 +13,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-import AuthContext from "../../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 import { icono } from "../atoms/IconsAtom";
 import AvatarAtom from "../atoms/AvatarAtom";
@@ -26,9 +26,9 @@ function HeaderOrganism() {
   const [isMoonSelected, setIsMoonSelected] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
-  const localUser = JSON.parse(localStorage.getItem("user"))
+  const localUser = JSON.parse(localStorage.getItem("user"));
 
-  const { getUsers, isAuthenticated, logout, users } = useContext(AuthContext);
+  const { getUsers, isAuthenticated, logout, users } = useAuthContext();
 
   const handleLogout = () => {
     Swal.fire({
@@ -39,12 +39,12 @@ function HeaderOrganism() {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        logout()
+        logout();
         navigate("/");
         Swal.fire({
           text: "Cierre de sesión éxitoso",
           icon: "success",
-        })
+        });
       }
     });
   };
@@ -103,7 +103,7 @@ function HeaderOrganism() {
                 },
               }}
               aria-label="Select an employee"
-              placeholder="Buscar usuario, subasta..."
+              placeholder="Buscar usuarios, subastas..."
               popoverProps={{
                 offset: 10,
                 classNames: {
@@ -165,15 +165,16 @@ function HeaderOrganism() {
               />
             )}
             <div className="flex items-center gap-4">
-              <Dropdown placement="bottom-end">
+              <Dropdown placement="bottom-end" className="bg-[#e0e0e0]">
                 <DropdownTrigger>
                   <User
                     as="button"
                     avatarProps={{
                       src: `${
-                        localUser.imagen_user && localUser.imagen_user.length > 0
-                        ? `http://localhost:4000/img/${localUser.imagen_user}`
-                        : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
+                        localUser.imagen_user &&
+                        localUser.imagen_user.length > 0
+                          ? `http://localhost:4000/img/${localUser.imagen_user}`
+                          : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
                       }`,
                     }}
                     className="transition-transform text-gray-200"
@@ -184,15 +185,19 @@ function HeaderOrganism() {
                 <DropdownMenu aria-label="User Actions" variant="flat">
                   <DropdownItem
                     key="profile"
-                    onClick={() => navigate(`/profile/${localUser.pk_cedula_user}`)}
-                    className="text-center bg-gray-400 hover:bg-gray-200 border text-white py-2"
+                    onClick={() =>
+                      navigate(`/profile/${localUser.pk_cedula_user}`)
+                    }
+                    className="text-center border border-gray-400 hover:bg-gray-200 text-black"
+                    color="success"
                   >
                     Perfil
                   </DropdownItem>
                   <DropdownItem
                     key="logout"
                     onPress={handleLogout}
-                    className="text-center bg-red-600 border text-white py-2"
+                    className="text-center bg-gray-400 text-black"
+                    color="danger"
                   >
                     Cerrar sesión
                   </DropdownItem>
@@ -210,10 +215,10 @@ function HeaderOrganism() {
         </nav>
       ) : (
         <>
-          <nav className="flex justify-between items-center bg-gray-300 fixed w-full m-0 top-0 p-4 shadow-sm z-20">
+          <nav className="flex justify-between items-center bg-[#009100] fixed w-full m-0 top-0 p-4 shadow-sm z-20">
             <div className="flex items-center">
               <AvatarAtom img="isotipo-SubCoffee.png" />
-              <Link to="/" className="text-gray-500 text-2xl font-semibold">
+              <Link to="/" className="text-gray-200 text-2xl font-semibold">
                 SubCoffee
               </Link>
             </div>
@@ -222,16 +227,19 @@ function HeaderOrganism() {
                 {isMoonSelected ? (
                   <icono.iconoLuna
                     onClick={toggleTheme}
-                    className="text-blanco"
+                    className="text-white"
                   />
                 ) : (
                   <icono.iconoSol
                     onClick={toggleTheme}
-                    className="text-blanco"
+                    className="text-white"
                   />
                 )}
               </div>
-              <Button onClick={() => setModalOpen(true)} className="border border-gray-400 bg-gray-200 text-gray-500 rounded-md hover:bg-gray-400 duration-500 transition-all ease-in-out hover:text-gray-200">
+              <Button
+                onClick={() => setModalOpen(true)}
+                className="border-2 border-[#009100] bg-gray-100 text-[#009100] font-bold rounded-lg shadow-lg hover:bg-[#f0fff0] hover:text-[#006600] hover:border-[#006600] hover:shadow-xl hover:scale-105 transform duration-300 transition-all ease-in-out"
+              >
                 Iniciar sesión
               </Button>
             </div>

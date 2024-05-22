@@ -8,6 +8,7 @@ import AuthContext from "../context/AuthContext";
 
 const Dashboard = () => {
   const auth = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
   const { isAuthenticated } = useContext(AuthContext)
   const navigate = useNavigate()
 
@@ -15,7 +16,7 @@ const Dashboard = () => {
     if (isAuthenticated) return navigate("/subcoffee")
   }, [isAuthenticated])
 
-  return auth ? (
+  return auth && user ? (
     <div className="flex flex-auto h-auto bg-gray-50">
       <SidebarOrganims />
       <div className="grow">
@@ -24,7 +25,7 @@ const Dashboard = () => {
       </div>
     </div>
   ) : (
-    <div className="flex-auto h-auto">
+    <div className="flex-auto h-auto bg-gray-50">
       <HeaderOrganism />
       <main className="grow mt-16">
         <Outlet />

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-import ImagenSliderOne from "../../../public/imageSliderOne.png";
-import ImagenSliderTwo from "../../../public/imageSliderTwo.png";
-import ImagenSliderThree from "../../../public/imageSliderThree.png";
+const ImagenSliderOne = "/imageSliderOne.png";
+const ImagenSliderTwo = "/imageSliderTwo.png";
+const ImagenSliderThree = "/imageSliderThree.png";
 
 function ImageSlider() {
   const slides = [
@@ -27,22 +27,29 @@ function ImageSlider() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       nextSlide();
-    }, 5000);
+    }, 10000);
     return () => clearInterval(intervalId);
   }, [currentIndex]);
 
   return (
     <div>
       <div className="max-w-[1600px] h-auto w-full m-auto pt-10 p-4">
-        <div
-          className="w-full h-96 rounded-2xl bg-center bg-cover duration-500"
-          style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        ></div>
-        <div className="flex justify-center">
-          {/* <div className="text-2xl text-bold rounded-full p-2 text-gray-700 cursor-pointer transition duration-300" onClick={prevSlide} >
-            <FaChevronLeft size={25} />
-          </div> */}
-          <div className="flex justify-center items-center my-4 transition duration-300">
+        <div className="relative w-full h-[450px] rounded-2xl overflow-hidden">
+          <div
+            className="w-full h-full bg-center bg-cover duration-500"
+            style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
+          ></div>
+        <div className="absolute inset-0 flex items-center justify-center text-center bg-black bg-opacity-50 p-8">
+          <div>
+            <h2 className="text-4xl font-bold text-white mb-4">¡Bienvenido a Subcoffee!</h2>
+            <p className="text-2xl text-white font-semibold leading-relaxed">
+              Descubre la mejor plataforma online para subastar por cafés especiales. ¡No pierdas la oportunidad de obtener un café de alta calidad!
+            </p>
+          </div>
+        </div>
+        </div>
+        <div className="flex justify-center mt-4">
+          <div className="flex justify-center items-center transition duration-300">
             {slides.map((slide, index) => (
               <div
                 key={index}
@@ -53,9 +60,6 @@ function ImageSlider() {
               ></div>
             ))}
           </div>
-          {/* <div className="text-2xl text-bold rounded-full p-2 text-gray-700 cursor-pointer transition duration-300" onClick={nextSlide} >
-            <FaChevronRight size={25} />
-          </div> */}
         </div>
       </div>
     </div>
