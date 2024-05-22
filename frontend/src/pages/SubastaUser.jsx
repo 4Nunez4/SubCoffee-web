@@ -6,8 +6,15 @@ import EstrellaLlena from "../nextui/EstrellaLlena";
 import EstrellaMediaLlena from "../nextui/EstrellaMediaLlena";
 import EstrellaVacia from "../nextui/EstrellaVacia";
 import { usePostulantesContext } from "../context/PostulantesContext";
+import SliderOferta from "../components/organisms/SliderOrganismo";
+import { createSubasta, updateSubasta } from "../api/api.subasta";
 
-function SubastaUser() {
+function SubastaUser({mode, onClose}) {
+  const [formDataOfer, serFormDataOfer] = useState({
+    fk_id_subasta: '',
+    fk_id_usuario: '',
+    oferta_ofer: ''
+  })
   const { id } = useParams();
   const [oferta, setOferta] = useState("");
   const [tiempoRestante, setTiempoRestante] = useState("");
@@ -60,6 +67,30 @@ function SubastaUser() {
       navigate(`/subcoffee`);
     } catch (error) {
       console.error("Error al desactivar la postulación:", error);
+    }
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      /* const data = new FormData();
+      data.append("fk_id_subasta", formDataOfer.fk_id_subasta);
+      data.append("fk_id_usuario", user.fk_id_usuario);
+      data.append("oferta_ofer", formDataOfer.oferta_ofer); */
+      const data = {
+        fk_usuario: user.pk_cedula_user,
+        fk_subasta: id,
+        oferta: oferta
+      }
+
+      if (mode === "update") {
+        updateSubasta(data);
+      } else {
+        createSubasta(formDataOfer);
+      }
+      onClose();
+    } catch (error) {
+      console.error("Error del sistema:", error);
     }
   };
 
@@ -161,14 +192,20 @@ function SubastaUser() {
               <p>Juan - 80000</p>
             </div>
           </div>
-          <div className="flex items-center gap-x-2 bg-[#e0e0e0] rounded-xl p-4 mt-2">
-            <Input
-              type="number"
-              value={oferta}
-              onChange={(e) => setOferta(e.target.value)}
-              placeholder="Ingrese su oferta"
-            />
-            <Button onClick={handleSubmitOferta}>Realizar Oferta</Button>
+          <div className="bg-[#e0e0e0] rounded-xl p-4 mt-2">
+            <p className="text-left m-2 mr-8 text-xl font-bold">Precio actual ${subasta.precio_inicial_sub }</p>
+            <div >
+              <form onSubmit={onSubmit} className="flex items-center gap-x-2">
+
+              <SliderOferta
+                type="number"
+                value={oferta}
+                onChange={(e) => setOferta(e.target.value)}
+                placeholder="Ingrese su oferta"
+                />
+              <Button onClick={handleSubmitOferta}>Realizar Oferta</Button>
+                </form>
+            </div>
           </div>
         </div>
         <div className="grid">
