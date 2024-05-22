@@ -19,6 +19,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { SearchIcon } from "../nextui/SearchIcon.jsx";
 import NotificacionContext from "../context/NotificacionesContext.jsx";
+import ModalSubCoffee from "../components/templates/ModalSubCoffee.jsx";
 
 export default function ListarNotificaciones() {
   const navigate = useNavigate()
@@ -29,7 +30,13 @@ export default function ListarNotificaciones() {
     direction: "descending",
   });
   const [page, setPage] = useState(1);
- 
+
+  const [abrirModal, setAbrirModal] = useState(false)
+  const handdleModaSub = (id) => {
+    setAbrirModal(true)
+    setIdSubasta(id)
+  }
+
   const { getNots, Notificaciones } = useContext(NotificacionContext);
 
   useEffect(() => {
@@ -39,6 +46,7 @@ export default function ListarNotificaciones() {
   }, []);
 
   const data = [
+    { uid: "fk_id_subasta", name: "id", sortable: true },
     { uid: "nombre_user", name: "Usuario", sortable: true },
     { uid: "tipo_not", name: "Tipo", sortable: true },
     { uid: "fecha_not", name: "Fecha", sortable: true },
@@ -61,7 +69,7 @@ export default function ListarNotificaciones() {
             .toLowerCase()
             .includes(filterValue.toLowerCase()) ||
           String(notificacion.fk_id_subasta).includes(filterValue) ||
-          String(notificacion.fk_id_usuario).includes(filterValue)||
+          String(notificacion.fk_id_usuario).includes(filterValue) ||
           String(notificacion.nombre_user).includes(filterValue)
       );
     }
@@ -94,7 +102,7 @@ export default function ListarNotificaciones() {
 
   const renderCell = useCallback((notificacion, columnKey) => {
     const cellValue = notificacion[columnKey];
-  
+
     switch (columnKey) {
       case "fecha_not":
         return new Date(cellValue).toLocaleString("es-ES", {
@@ -102,25 +110,25 @@ export default function ListarNotificaciones() {
         });
       case "actions": // Agregar este caso
         return (
-          
-    <div className="flex gap-2"> {/* Agregar un contenedor flexible para los botones */}
-          <Button
-            className="bg-gray-200 text-green-600  hover:bg-green-600 hover:text-gray-200" /* Ajustar estilos del primer botón */
-            radius="md"
-            size="sm"
-            onPress={() => navigate(`/profile/${notificacion.fk_id_usuario}`)}
-          >
-            Visualizar perfil
-          </Button>
-          <Button
-            className="bg-green-600 text-white hover:bg-gray-200 hover:text-green-600 " /* Ajustar estilos del segundo botón */
-            radius="md"
-            size="sm" /* Cambiar el tamaño del botón */
-            onPress={() => navigate(`/subasta/${notificacion.fk_id_subasta}`)}
-          >
-            Visualizar Subasta
-          </Button>
-        </div>
+
+          <div className="flex gap-2"> {/* Agregar un contenedor flexible para los botones */}
+            <Button
+              className="bg-gray-200 text-green-600  hover:bg-green-600 hover:text-gray-200" /* Ajustar estilos del primer botón */
+              radius="md"
+              size="sm"
+              onPress={() => navigate(`/profile/${notificacion.fk_id_usuario}`)}
+            >
+              Visualizar perfil
+            </Button>
+            <Button
+              className="bg-gray-200 text-green-600  hover:bg-green-600 hover:text-gray-200"
+              radius="md"
+              size="sm"
+              onClick={() => handdleModaSub(notificacion.pk_id_sub)}
+            >
+              Visualizar Subasta
+            </Button>
+          </div>
         );
       default:
         return cellValue;
@@ -226,6 +234,10 @@ export default function ListarNotificaciones() {
 
   return (
     <div className="mx-40">
+      <ModalSubCoffee
+        open={abrirModal}
+        onClose={() => setAbrirModal(false)}
+      />
       <Table
         aria-label="Example table with custom cells, pagination and sorting"
         isHeaderSticky
@@ -263,6 +275,12 @@ export default function ListarNotificaciones() {
           )}
         </TableBody>
       </Table>
+
+
+      <Button>
+        usa este boton
+      </Button>
+
     </div>
   );
 }
