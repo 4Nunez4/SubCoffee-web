@@ -3,7 +3,7 @@ import { pool } from "../databases/conexion.js";
 
 export const getNotifications = async (req, res) => {
   try {
-    const [rows] = await pool.query("SELECT n.pk_id_not, n.tipo_not, n.fecha_not, n.texto_not, n.fk_id_subasta, n.fk_id_usuario, u.nombre_user FROM notificaciones n INNER JOIN usuarios u ON n.fk_id_usuario = u.pk_cedula_user");
+    const [rows] = await pool.query("SELECT n.*,u.* FROM notificaciones n INNER JOIN usuarios u ON n.fk_id_usuario = u.pk_cedula_user");
     if (rows.length > 0) {
       res.status(200).json({
         status: 200,

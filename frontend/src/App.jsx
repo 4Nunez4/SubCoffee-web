@@ -16,6 +16,7 @@ import SubastaUser from "./pages/SubastaUser";
 import UsersTable from "./components/Guard/UsersTable";
 import TipoVariedadTable from "./components/Guard/TipoVariedadTable";
 import GlobalProvider from "./context/GlobalContext";
+import ListarNotificaciones from "./pages/Notificaciones";
 
 function App() {
   const users = JSON.parse(localStorage.getItem("user"));
@@ -35,8 +36,10 @@ function App() {
                 <Route path="ayuda" element={<AyudaPage />} />
                 <Route element={<ProtectedRoute />}>
                   <Route path="subcoffee" element={<SubastaPage />} />
+                 
                   <Route path="profile/:id" element={<ProfileUser />} />
                   <Route path="subasta/:id" element={<SubastaUser />} />
+                  <Route path="notificaciones" element={<ListarNotificaciones />} />
                   {isAdmin && (
                     <>
                       <Route path="users" element={<UsersTable />} />
