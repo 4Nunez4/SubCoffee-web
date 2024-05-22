@@ -7,7 +7,7 @@ import EstrellaMediaLlena from "../nextui/EstrellaMediaLlena";
 import EstrellaVacia from "../nextui/EstrellaVacia";
 import { usePostulantesContext } from "../context/PostulantesContext";
 import SliderOferta from "../components/organisms/SliderOrganismo";
-import { createSubasta, updateSubasta } from "../api/api.subasta";
+import { useOfertasContext } from "../context/OfertasContext";
 
 function SubastaUser({mode, onClose}) {
   const [formDataOfer, serFormDataOfer] = useState({
@@ -20,6 +20,7 @@ function SubastaUser({mode, onClose}) {
   const [tiempoRestante, setTiempoRestante] = useState("");
   const { getSub, subasta } = useSubastaContext();
   const { getPostsActivos, postsActivos, desactivarPosts } = usePostulantesContext();
+/*   const { createOfertas, updateOfertas, getOfertasData, ofertas } = useOfertasContext(); */
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
@@ -35,7 +36,8 @@ function SubastaUser({mode, onClose}) {
   useEffect(() => {
     getSub(id);
     getPostsActivos(id);
-  }, []);
+    /* getOfertasData(); */
+  }, [id, getSub, getPostsActivos, /*    */]);
 
   const calcularDiferencia = (fechaFin) => {
     const fin = new Date(fechaFin);
@@ -84,9 +86,9 @@ function SubastaUser({mode, onClose}) {
       }
 
       if (mode === "update") {
-        updateSubasta(data);
+        updateOfertas(data);
       } else {
-        createSubasta(formDataOfer);
+        createOfertas(data);
       }
       onClose();
     } catch (error) {
@@ -190,21 +192,23 @@ function SubastaUser({mode, onClose}) {
             <h3 className="text-lg font-semibold text-center">Ofertas</h3>
             <div>
               <p>Juan - 80000</p>
+              {/* {ofertas.map((ofer, index) => (
+                <p key={index}>{ofer.nombre_usuario} - {ofer.monto_oferta}</p>
+              ))} */}
             </div>
           </div>
           <div className="bg-[#e0e0e0] rounded-xl p-4 mt-2">
             <p className="text-left m-2 mr-8 text-xl font-bold">Precio actual ${subasta.precio_inicial_sub }</p>
-            <div >
+            <div>
               <form onSubmit={onSubmit} className="flex items-center gap-x-2">
-
-              <SliderOferta
-                type="number"
-                value={oferta}
-                onChange={(e) => setOferta(e.target.value)}
-                placeholder="Ingrese su oferta"
-                />
-              <Button onClick={handleSubmitOferta}>Realizar Oferta</Button>
-                </form>
+                <SliderOferta
+                  type="number"
+                  value={oferta}
+                  onChange={(e) => setOferta(e.target.value)}
+                  placeholder="Ingrese su oferta"
+                  />
+                <Button onClick={handleSubmitOferta}>Realizar Oferta</Button>
+              </form>
             </div>
           </div>
         </div>
