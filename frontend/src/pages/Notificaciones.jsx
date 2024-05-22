@@ -20,9 +20,65 @@ import { useNavigate } from "react-router-dom";
 import { SearchIcon } from "../nextui/SearchIcon.jsx";
 import NotificacionContext from "../context/NotificacionesContext.jsx";
 import ModalSubCoffee from "../components/templates/ModalSubCoffee.jsx";
+import addNotification from "react-push-notification"
+import { useSubastaContext } from "../context/SubastaContext.jsx";
 
 export default function ListarNotificaciones() {
+  const clickNot = ()=>{
+    addNotification({
+      title: "hola putitos ",
+      message: "esta funcionando correctamente ",
+      duration: 4000,
+      native: true,
+   
+    })
+  }
+// revisar las notificaciones y aplicar esos cambios al crer una subasta 
+// mport React from 'react';
+
+// function InsertNotificationButton() {
+//     const handleClick = async () => {
+//         const notificationType = 'oferta'; // Cambia esto según lo que necesites
+//         const notificationText = 'Texto de la notificación';
+//         const subastaId = 123; // Ejemplo de ID de subasta
+//         const userId = 456; // Ejemplo de ID de usuario
+
+//         try {
+//             const response = await fetch('http://localhost:3000/insertNotification', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify({
+//                     tipo_not: notificationType,
+//                     texto_not: notificationText,
+//                     fk_id_subasta: subastaId,
+//                     fk_id_usuario: userId
+//                 })
+//             });
+
+//             if (!response.ok) {
+//                 throw new Error('Error al insertar notificación');
+//             }
+
+//             const result = await response.json();
+//             alert(result.message); // Mostrar mensaje de éxito
+//         } catch (error) {
+//             console.error(error);
+//             alert('Hubo un error al intentar insertar la notificación.');
+//         }
+//     };
+
+//     return (
+//         <button onClick={handleClick}>Insertar Notificación</button>
+//     );
+// }
+
+// export default InsertNotificationButton;
+//--------------------------------------------------------------------
+
   const navigate = useNavigate()
+  const { getSubs, subastas, setIdSubasta } = useSubastaContext();
   const [filterValue, setFilterValue] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState({
@@ -32,6 +88,7 @@ export default function ListarNotificaciones() {
   const [page, setPage] = useState(1);
 
   const [abrirModal, setAbrirModal] = useState(false)
+
   const handdleModaSub = (id) => {
     setAbrirModal(true)
     setIdSubasta(id)
@@ -40,8 +97,12 @@ export default function ListarNotificaciones() {
   const { getNots, Notificaciones } = useContext(NotificacionContext);
 
   useEffect(() => {
+    getSubs()
+  }, [])
+
+  useEffect(() => {
     getNots().then((data) => {
-      setNotificaciones(data);
+      (data);
     });
   }, []);
 
@@ -124,7 +185,7 @@ export default function ListarNotificaciones() {
               className="bg-gray-200 text-green-600  hover:bg-green-600 hover:text-gray-200"
               radius="md"
               size="sm"
-              onClick={() => handdleModaSub(notificacion.pk_id_sub)}
+              onClick={() => handdleModaSub(notificacion.fk_id_subasta)}
             >
               Visualizar Subasta
             </Button>
@@ -275,13 +336,15 @@ export default function ListarNotificaciones() {
           )}
         </TableBody>
       </Table>
+      
 
 
-      <Button>
+      <Button onClick={clickNot}>
         usa este boton
       </Button>
 
     </div>
   );
+
 }
 
