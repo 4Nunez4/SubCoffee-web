@@ -27,7 +27,7 @@ export default function ListarNotificaciones() {
   const clickNot = ()=>{
     addNotification({
       title: "hola putitos ",
-      message: "esta funcionando correctamente ",
+      message: "esta funcionando correctament",
       duration: 4000,
       native: true,
       //onClick: ()=> window.location = "la url de donde quiere que lo redirija la notificacion "
