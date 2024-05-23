@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   User,
   Dropdown,
@@ -17,12 +17,10 @@ import { useAuthContext } from "../../context/AuthContext";
 
 import { icono } from "../atoms/IconsAtom";
 import AvatarAtom from "../atoms/AvatarAtom";
-import ModalMessaAndNoti from "../molecules/ModalMessaAndNoti";
 import { SearchIcon } from "../../nextui/SearchIcon";
 import FormLogin from "../templates/FormLogin";
 
 function HeaderOrganism() {
-  const [abrirBell, setAbrirBell] = useState(false);
   const [isMoonSelected, setIsMoonSelected] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -47,10 +45,6 @@ function HeaderOrganism() {
         });
       }
     });
-  };
-
-  const toggleAbrirBell = () => {
-    setAbrirBell(!abrirBell);
   };
 
   const toggleTheme = () => {
@@ -205,13 +199,6 @@ function HeaderOrganism() {
               </Dropdown>
             </div>
           </div>
-          {abrirBell && (
-            <div className="absolute top-16 right-32 flex justify-center items-center">
-              <div className="bg-blanco rounded-xl w-80">
-                <ModalMessaAndNoti onClose={toggleAbrirBell} />
-              </div>
-            </div>
-          )}
         </nav>
       ) : (
         <>

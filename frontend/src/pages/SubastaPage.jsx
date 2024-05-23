@@ -33,8 +33,6 @@ function SubastaPage() {
 
   return (
     <div className="px-10">
-      {users.rol_user !== "admin" ? (
-        <>
           <ImageSlider />
           <p className="pl-4 text-xl">Subastas</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 sm:grid-cols-1 justify-center items-center gap-4 p-3">
@@ -175,23 +173,6 @@ function SubastaPage() {
             open={abrirModal}
             onClose={() => setAbrirModal(false)}
           />
-        </>
-      ) : (
-      <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-center mt-14 gap-y-4 px-4">
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold text-center md:text-left">
-            Gestiona usuarios, ubicaciones y variedades de café
-          </h1>
-        </div>
-        <div>
-          <img
-            src="./image.png"
-            alt="Imagen descriptiva"
-            className="mx-auto md:mx-0"
-          />
-        </div>
-      </div>
-      )}
     </div>
   );
 }

@@ -21,8 +21,8 @@ function ProfileUser() {
   const { getSubForUser, subastaForuser } = useSubastaContext()
 
   useEffect(() => {
-    getSubForUser(localUser.pk_cedula_user);
-  }, []);
+    getSubForUser(id);
+  }, [id]);
 
   useEffect(() => {
     getUserID(id);
@@ -40,13 +40,6 @@ function ProfileUser() {
       setActiveTab("creadas");
     }
   }, [user]);
-
-  const SubastasCreadas = [
-    { id: 1, titulo: "Subasta 1", descripcion: "Descripción de la subasta 1" },
-    { id: 2, titulo: "Subasta 2", descripcion: "Descripción de la subasta 2" },
-    { id: 3, titulo: "Subasta 1", descripcion: "Descripción de la subasta 1" },
-    { id: 4, titulo: "Subasta 2", descripcion: "Descripción de la subasta 2" },
-  ];
 
   const SubastasGanadas = [
     { id: 1, titulo: "Subasta 3", descripcion: "Descripción de la subasta 3" },

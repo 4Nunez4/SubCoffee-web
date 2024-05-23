@@ -60,7 +60,7 @@ export const AuthProvider = ({ children }) => {
       setMensaje(response.data.message)
       setModalMessage(true)
     } catch (error) {
-      setErrors([error.response.data.message]);
+      setErrors([error.response.message]);
     }
   }
 

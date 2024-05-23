@@ -84,9 +84,9 @@ export default function ModaVariedadUser({ titleBtn, pkFinca }) {
       </div>
       <form onSubmit={onSubmit} className="space-y-4 px-4">
         <div className="relative">
-          <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-800">
-            {icono.iconoDepar}
-          </span>
+        <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-800">
+          <icono.iconoDepar />
+        </span>
           <select
             name="fk_tipo_variedad"
             value={formData.fk_tipo_variedad}

@@ -35,11 +35,10 @@ function App() {
                 <Route path="somos" element={<QuienesSomosA />} />
                 <Route path="ayuda" element={<AyudaPage />} />
                 <Route element={<ProtectedRoute />}>
+                  <Route path="notificaciones" element={<ListarNotificaciones />} />
                   <Route path="subcoffee" element={<SubastaPage />} />
-                 
                   <Route path="profile/:id" element={<ProfileUser />} />
                   <Route path="subasta/:id" element={<SubastaUser />} />
-                  <Route path="notificaciones" element={<ListarNotificaciones />} />
                   {isAdmin && (
                     <>
                       <Route path="users" element={<UsersTable />} />
