@@ -12,7 +12,6 @@ const SidebarOrganims = () => {
 
   const Menus = [
     ...(user && token && user.rol_user === "admin" ? [
-      { title: "Inicio", link: "/subcoffee", icon: icono.iconoHome },
       { title: "Usuarios", link: "/users", icon: icono.iconoRol },
       { title: "Geografía", link: "/geografia", icon: icono.iconoWorl },
       { title: "Tipo Variedad", link: "/tipo_variedad", icon: icono.iconoFlor }
