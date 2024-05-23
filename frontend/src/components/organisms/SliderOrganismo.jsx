@@ -1,13 +1,15 @@
 import React from "react";
 import {Slider} from "@nextui-org/react";
 
-export default function SliderOferta() {
+export default function SliderOferta({value,onChange}) {
   return (
     <Slider 
       label="Aumentar puja"
       step={50000} 
       maxValue={1000000} 
       minValue={0} 
+      value={value}
+      onChange={onChange}
       defaultValue={60}
       showSteps={true}
       showTooltip={true}

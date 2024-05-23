@@ -16,13 +16,13 @@ export const OfertasProvider = ({ children }) => {
   const [modalMessage, setModalMessage] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [errors, setErrors] = useState([]);
-  const [ofertas, setOfertas] = useState([]); // Rename 'fincas' to 'ofertas'
-  const [idOferta, setIdOferta] = useState(0); // Rename 'idFinca' to 'idOferta'
-  const [cerrarModal, setCerrarModal] = useState(false); // Rename 'serCerrarModal' to 'setCerrarModal'
+  const [ofertas, setOfertas] = useState([]);
+  const [idOferta, setIdOferta] = useState(0); 
+  const [cerrarModal, setCerrarModal] = useState(false);
 
   const getOfertasData = async () => {
     try {
-      const res = await getOfertas(); // Use the correct API function for fetching ofertas
+      const res = await getOfertas();
       setOfertas(res.data.data);
     } catch (error) {
       console.error(error.response.data);
@@ -57,15 +57,15 @@ export const OfertasProvider = ({ children }) => {
     <OfertasContext.Provider
       value={{
         errors,
-        ofertas, // Rename 'fincas' to 'ofertas'
-        idOferta, // Rename 'idFinca' to 'idOferta'
-        setIdOferta, // Rename 'setIdFinca' to 'setIdOferta'
-        getOfertasData, // Rename 'getFincaUser' to 'getOfertasData'
-        createOfertas, // Rename 'createFincas' to 'createOfertas'
-        updateOfertas, // Rename 'updateFincas' to 'updateOfertas'
+        ofertas,
+        idOferta,
+        setIdOferta,
+        getOfertasData,
+        createOfertas,
+        updateOfertas,
 
-        cerrarModal, // Rename 'cerrarModal' to 'setCerrarModal'
-        setCerrarModal, // Rename 'serCerrarModal' to 'setCerrarModal'
+        cerrarModal,
+        setCerrarModal,
       }}
     >
       <ModalMessage

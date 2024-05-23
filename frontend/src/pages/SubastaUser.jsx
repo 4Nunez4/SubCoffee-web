@@ -7,7 +7,7 @@ import EstrellaMediaLlena from "../nextui/EstrellaMediaLlena";
 import EstrellaVacia from "../nextui/EstrellaVacia";
 import { usePostulantesContext } from "../context/PostulantesContext";
 import SliderOferta from "../components/organisms/SliderOrganismo";
-import { useOfertasContext } from "../context/OfertasContext";
+/* import { useOfertasContext } from "../context/OfertasContext"; */
 
 function SubastaUser({mode, onClose}) {
   const [formDataOfer, serFormDataOfer] = useState({
@@ -20,7 +20,7 @@ function SubastaUser({mode, onClose}) {
   const [tiempoRestante, setTiempoRestante] = useState("");
   const { getSub, subasta } = useSubastaContext();
   const { getPostsActivos, postsActivos, desactivarPosts } = usePostulantesContext();
-/*   const { createOfertas, updateOfertas, getOfertasData, ofertas } = useOfertasContext(); */
+  /* const { createOfertas, updateOfertas, getOfertasData, ofertas } = useOfertasContext(); */
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ function SubastaUser({mode, onClose}) {
     getSub(id);
     getPostsActivos(id);
     /* getOfertasData(); */
-  }, [id, getSub, getPostsActivos, /*    */]);
+  }, [id, getSub, getPostsActivos, /* getOfertasData */]);
 
   const calcularDiferencia = (fechaFin) => {
     const fin = new Date(fechaFin);
@@ -74,6 +74,7 @@ function SubastaUser({mode, onClose}) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const nuevaOferta = subasta.precio_inicial_sub + oferta;
     try {
       /* const data = new FormData();
       data.append("fk_id_subasta", formDataOfer.fk_id_subasta);
@@ -82,11 +83,11 @@ function SubastaUser({mode, onClose}) {
       const data = {
         fk_usuario: user.pk_cedula_user,
         fk_subasta: id,
-        oferta: oferta
+        oferta: nuevaOferta
       }
 
       if (mode === "update") {
-        updateOfertas(data);
+        updateOfertas(id, data);
       } else {
         createOfertas(data);
       }
@@ -194,7 +195,7 @@ function SubastaUser({mode, onClose}) {
               <p>Juan - 80000</p>
               {/* {ofertas.map((ofer, index) => (
                 <p key={index}>{ofer.nombre_usuario} - {ofer.monto_oferta}</p>
-              ))} */}
+              ))}  */}
             </div>
           </div>
           <div className="bg-[#e0e0e0] rounded-xl p-4 mt-2">
@@ -202,10 +203,8 @@ function SubastaUser({mode, onClose}) {
             <div>
               <form onSubmit={onSubmit} className="flex items-center gap-x-2">
                 <SliderOferta
-                  type="number"
                   value={oferta}
-                  onChange={(e) => setOferta(e.target.value)}
-                  placeholder="Ingrese su oferta"
+                  onChange={setOferta}
                   />
                 <Button onClick={handleSubmitOferta}>Realizar Oferta</Button>
               </form>
