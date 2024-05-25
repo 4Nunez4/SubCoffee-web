@@ -73,7 +73,7 @@ export default function SubastaTable() {
                       className="bg-gray-400"
                       radius="md"
                       startContent={<EditIcon />}
-                      onPress={() => {handleToggle(subasta); setIdSubasta(subasta)}}
+                      onPress={() => {handleToggle("update"); setIdSubasta(subasta)}}
                     >
                       Editar
                     </Button>

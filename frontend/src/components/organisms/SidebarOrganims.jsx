@@ -12,7 +12,6 @@ const SidebarOrganims = () => {
 
   const Menus = [
     ...(user && token && user.rol_user === "admin" ? [
-      { title: "Inicio", link: "/subcoffee", icon: icono.iconoHome },
       { title: "Usuarios", link: "/users", icon: icono.iconoRol },
       { title: "Geografía", link: "/geografia", icon: icono.iconoWorl },
       { title: "Tipo Variedad", link: "/tipo_variedad", icon: icono.iconoFlor }
@@ -20,14 +19,14 @@ const SidebarOrganims = () => {
     ...(user && token && user.rol_user === "vendedor" ? [
       { title: "Inicio", link: "/subcoffee", icon: icono.iconoHome },
       { title: "Mis subastas", link: "/mi_subasta", icon: icono.iconoType },
-      { title: "Notificaciones", link: "/notificaciones", icon: icono.iconoCampana },
+      { title: "Notificaciones", link: "/notificaciones", icon: icono.iconoWorl },
       { title: "Políticas de privacidad", link: "/privacy-policy", icon: icono.iconoPrivacidad },
       { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda }
     ] : []),
     ...(user && token && user.rol_user === "comprador" ? [
       { title: "Inicio", link: "/subcoffee", icon: icono.iconoHome },
-      { title: "Notificaciones", link: "/notificaciones", icon: icono.iconoCampana },
       { title: "Políticas de privacidad", link: "/privacy-policy", icon: icono.iconoPrivacidad },
+      { title: "Notificaciones", link: "/notificaciones", icon: icono.iconoHome },
       { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda }
     ] : [])
   ];

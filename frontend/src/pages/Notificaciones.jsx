@@ -19,9 +19,67 @@ import {
 import { useNavigate } from "react-router-dom";
 import { SearchIcon } from "../nextui/SearchIcon.jsx";
 import NotificacionContext from "../context/NotificacionesContext.jsx";
+import ModalSubCoffee from "../components/templates/ModalSubCoffee.jsx";
+import addNotification from "react-push-notification"
+import { useSubastaContext } from "../context/SubastaContext.jsx";
 
 export default function ListarNotificaciones() {
+  const clickNot = ()=>{
+    addNotification({
+      title: "hola putitos ",
+      message: "esta funcionando correctamente ",
+      duration: 4000,
+      native: true,
+      //onClick: ()=> window.location = "la url de donde quiere que lo redirija la notificacion "
+   
+    })
+  }
+// revisar las notificaciones y aplicar esos cambios al crer una subasta 
+// mport React from 'react';
+
+// function InsertNotificationButton() {
+//     const handleClick = async () => {
+//         const notificationType = 'oferta'; // Cambia esto según lo que necesites
+//         const notificationText = 'Texto de la notificación';
+//         const subastaId = 123; // Ejemplo de ID de subasta
+//         const userId = 456; // Ejemplo de ID de usuario
+
+//         try {
+//             const response = await fetch('http://localhost:3000/insertNotification', {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 },
+//                 body: JSON.stringify({
+//                     tipo_not: notificationType,
+//                     texto_not: notificationText,
+//                     fk_id_subasta: subastaId,
+//                     fk_id_usuario: userId
+//                 })
+//             });
+
+//             if (!response.ok) {
+//                 throw new Error('Error al insertar notificación');
+//             }
+
+//             const result = await response.json();
+//             alert(result.message); // Mostrar mensaje de éxito
+//         } catch (error) {
+//             console.error(error);
+//             alert('Hubo un error al intentar insertar la notificación.');
+//         }
+//     };
+
+//     return (
+//         <button onClick={handleClick}>Insertar Notificación</button>
+//     );
+// }
+
+// export default InsertNotificationButton;
+//--------------------------------------------------------------------
+
   const navigate = useNavigate()
+  const { getSubs, subastas, setIdSubasta } = useSubastaContext();
   const [filterValue, setFilterValue] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState({
@@ -29,16 +87,28 @@ export default function ListarNotificaciones() {
     direction: "descending",
   });
   const [page, setPage] = useState(1);
- 
+
+  const [abrirModal, setAbrirModal] = useState(false)
+
+  const handdleModaSub = (id) => {
+    setAbrirModal(true)
+    setIdSubasta(id)
+  }
+
   const { getNots, Notificaciones } = useContext(NotificacionContext);
 
   useEffect(() => {
+    getSubs()
+  }, [])
+
+  useEffect(() => {
     getNots().then((data) => {
-      setNotificaciones(data);
+      (data);
     });
   }, []);
 
   const data = [
+    { uid: "fk_id_subasta", name: "id", sortable: true },
     { uid: "nombre_user", name: "Usuario", sortable: true },
     { uid: "tipo_not", name: "Tipo", sortable: true },
     { uid: "fecha_not", name: "Fecha", sortable: true },
@@ -61,7 +131,7 @@ export default function ListarNotificaciones() {
             .toLowerCase()
             .includes(filterValue.toLowerCase()) ||
           String(notificacion.fk_id_subasta).includes(filterValue) ||
-          String(notificacion.fk_id_usuario).includes(filterValue)||
+          String(notificacion.fk_id_usuario).includes(filterValue) ||
           String(notificacion.nombre_user).includes(filterValue)
       );
     }
@@ -94,7 +164,7 @@ export default function ListarNotificaciones() {
 
   const renderCell = useCallback((notificacion, columnKey) => {
     const cellValue = notificacion[columnKey];
-  
+
     switch (columnKey) {
       case "fecha_not":
         return new Date(cellValue).toLocaleString("es-ES", {
@@ -102,25 +172,25 @@ export default function ListarNotificaciones() {
         });
       case "actions": // Agregar este caso
         return (
-          
-    <div className="flex gap-2"> {/* Agregar un contenedor flexible para los botones */}
-          <Button
-            className="bg-gray-200 text-green-600  hover:bg-green-600 hover:text-gray-200" /* Ajustar estilos del primer botón */
-            radius="md"
-            size="sm"
-            onPress={() => navigate(`/profile/${notificacion.fk_id_usuario}`)}
-          >
-            Visualizar perfil
-          </Button>
-          <Button
-            className="bg-green-600 text-white hover:bg-gray-200 hover:text-green-600 " /* Ajustar estilos del segundo botón */
-            radius="md"
-            size="sm" /* Cambiar el tamaño del botón */
-            onPress={() => navigate(`/subasta/${notificacion.fk_id_subasta}`)}
-          >
-            Visualizar Subasta
-          </Button>
-        </div>
+
+          <div className="flex gap-2"> {/* Agregar un contenedor flexible para los botones */}
+            <Button
+              className="bg-gray-200 text-green-600  hover:bg-green-600 hover:text-gray-200" /* Ajustar estilos del primer botón */
+              radius="md"
+              size="sm"
+              onPress={() => navigate(`/profile/${notificacion.fk_id_usuario}`)}
+            >
+              Visualizar perfil
+            </Button>
+            <Button
+              className="bg-gray-200 text-green-600  hover:bg-green-600 hover:text-gray-200"
+              radius="md"
+              size="sm"
+              onClick={() => handdleModaSub(notificacion.fk_id_subasta)}
+            >
+              Visualizar Subasta
+            </Button>
+          </div>
         );
       default:
         return cellValue;
@@ -226,6 +296,10 @@ export default function ListarNotificaciones() {
 
   return (
     <div className="mx-40">
+      <ModalSubCoffee
+        open={abrirModal}
+        onClose={() => setAbrirModal(false)}
+      />
       <Table
         aria-label="Example table with custom cells, pagination and sorting"
         isHeaderSticky
@@ -263,7 +337,15 @@ export default function ListarNotificaciones() {
           )}
         </TableBody>
       </Table>
+      
+
+
+      <Button onClick={clickNot}>
+        usa este boton
+      </Button>
+
     </div>
   );
+
 }
 
