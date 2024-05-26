@@ -1,9 +1,14 @@
 import { validationResult } from "express-validator";
 import { pool } from "../databases/conexion.js";
 
+
+
+
+
+
 export const getNotifications = async (req, res) => {
   try {
-    const [rows] = await pool.query("SELECT n.pk_id_not, n.tipo_not, n.fecha_not, n.texto_not, n.fk_id_subasta, n.fk_id_usuario, u.nombre_user FROM notificaciones n INNER JOIN usuarios u ON n.fk_id_usuario = u.pk_cedula_user");
+    const [rows] = await pool.query("SELECT n.*,u.* FROM notificaciones n INNER JOIN usuarios u ON n.fk_id_usuario = u.pk_cedula_user");
     if (rows.length > 0) {
       res.status(200).json({
         status: 200,
@@ -19,27 +24,24 @@ export const getNotifications = async (req, res) => {
     res.status(500).json({ status: 500, message: "Error en el sistema." });
   }
 };
-
 export const getNotification = async (req, res) => {
   try {
+    const id = req.params.id;
     const [rows] = await pool.query(
-      "SELECT n.pk_id_not, n.tipo_not, n.fecha_not, n.texto_not, n.fk_id_subasta, n.fk_id_usuario, u.nombre_user FROM notificaciones n INNER JOIN usuarios u ON n.fk_id_usuario = u.pk_cedula_user WHERE pk_id_not = ?",
-      [req.params.id]
+      `
+        SELECT n.*, u.*
+        FROM notificaciones n
+        INNER JOIN usuarios u ON n.fk_id_usuario = u.pk_cedula_user
+        WHERE n.fk_id_usuario = '${id}'
+      `,
     );
     if (rows.length > 0) {
-      res.status(200).json({
-        status: 200,
-        message: "notificación encontrada exitosamente.",
-        data: rows,
-      });
+      res.status(200).json({ data: rows });
     } else {
-      res.status(404).json({
-        status: 404,
-        message: "Error con ID de Notificación, no encontrado.",
-      });
+      res.status(404).json({ message: "Error ID notificaciones no encontrada" });
     }
-  } catch (error) {
-    res.status(500).json({ status: 500, message: "Error en el sistema." });
+  } catch (e) {
+    res.status(500).json({ message: "Error al obtener las notificaciones", e });
   }
 };
 

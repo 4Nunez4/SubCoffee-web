@@ -4,6 +4,8 @@ import { useVariedadUserContext } from "../../context/VariedadUserContext";
 import { useSubastaContext } from "../../context/SubastaContext";
 import { icono } from "../atoms/IconsAtom";
 import { useFincaContext } from "../../context/FincaContext";
+//import NotificacionContext from "../../context/NotificacionesContext";
+//import addNotification from "react-push-notification"
 
 const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
   const [formData, setFormData] = useState({
@@ -15,13 +17,18 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
     imagen_sub: "",
     descripcion_sub: "",
     certificado_sub: "",
-    variedad: "",
-    finca: ""
+    variedad: "",                       
+    finca: "",
+    //notificaciones--
+    // tipo_not: "mensaje",
+    // texto_not: "la suasta a iniciado empieza a subastar",
+    // fk_id_subasta: pk_id_sub,
+    // fk_id_usuario: pk_cedula_user,
   });
-
+ //const {createNots }= NotificacionContext();
   const { idSubasta, createSubs, updateSubs } = useSubastaContext();
-  const { getFincaUser, fincas = [] } = useFincaContext();  // Inicializar fincas como un array vacío
-  const { variedadForuser = [], getVariForUser } = useVariedadUserContext();  // Inicializar variedadForuser como un array vacío
+  const { getFincaUser, fincas = [] } = useFincaContext();  
+  const { variedadForuser = [], getVariForUser } = useVariedadUserContext();  
   const usuario = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -54,7 +61,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
           finca: idSubasta.fk_finca, 
           certificado_sub: idSubasta.certificado_sub || "",
         });
-        // Cargar variedades correspondientes a la finca
+       
         getVariForUser(usuario.pk_cedula_user, idSubasta.fk_finca);
       } catch (error) {
         console.error("Error en el sistema:", error);
@@ -65,6 +72,14 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    // addNotification({
+    //   title: "hola putitos ",
+    //   message: "esta funcionando correctamente ",
+    //   duration: 4000,
+    //   native: true,
+    //   onClick: ()=> window.location = "la url de donde quiere que lo redirija la notificacion "
+   
+    // })
     try {
       const data = new FormData();
       data.append("fecha_inicio_sub", formData.fecha_inicio);
@@ -77,9 +92,16 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
       data.append("descripcion_sub", formData.descripcion_sub);
       data.append("fk_variedad", formData.variedad);
       data.append("fk_finca", formData.finca); // Asegúrate de enviar la finca seleccionada
+      //notificaciones
+      // data.append("tipo_not", formData.tipo_not);
+      // data.append("texto_not", formData.texto_not);
+      // data.append("fk_id_subasta", formData.tipo_not);
+      // data.append("fk_id_usuario", formData.pk_cedula_user);
 
       if (mode === "create") {
         createSubs(data, usuario.pk_cedula_user);
+       // createNots(data, usuario.pk_cedula_user);
+
       } else if (mode === "update") {
         updateSubs(data, idSubasta.pk_id_sub, usuario.pk_cedula_user);
       }
