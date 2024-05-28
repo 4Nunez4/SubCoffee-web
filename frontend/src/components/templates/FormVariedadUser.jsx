@@ -1,5 +1,5 @@
 import React from "react";
-import ModaVariedadUser from "../../pages/ModaVariedadUser";
+import ModaVariedadUser from "../Guard/VariedadUserTable";
 import { ModalFormXl } from "../organisms/ModalFormXl";
 
 function FormVariedadUser({ open, onClose, title, titleBtn, pkFinca }) {

@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
 import SubastaIcon from "../nextui/SubastaIcon";
 import FincaIcon from "../nextui/FincaIcon";
 import FincaTable from "../components/Guard/FincaTable";
 import SubastaTable from "../components/Guard/SubastaTable";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function MiSubastaT() {
+  const { getUsers } = useAuthContext()
+  useEffect(() => {
+      getUsers()
+    }, []);
+    
   return (
-    <div className="w-full flex bg-gray-100 flex-col items-center px-8">
+    <div className="w-full flex flex-col items-center px-8">
       <div className="pb-2">
         <div className="flex justify-center pt-8 pb-2">
           <img src="./src/assets/cafe_mi_subasta.png" alt="Cafe_imagen" className="rounded-s-2xl transition-width duration-300 md:max-w-[25%] lg:max-w-[33.33%] xl:max-w-[50%] w-full lg:w-auto xl:w-auto" />

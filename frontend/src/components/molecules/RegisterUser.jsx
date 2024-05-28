@@ -19,8 +19,8 @@ const RegisterUser = ({ mode, titleBtn }) => {
     telefono_user: "",
     rol_user: "",
     descripcion_user: "",
+    imagen_user: "",
   });
-
 
   useEffect(() => {
     if (mode === "update" && idUser) {
@@ -28,6 +28,7 @@ const RegisterUser = ({ mode, titleBtn }) => {
         pk_cedula_user: idUser.pk_cedula_user,
         nombre_user: idUser.nombre_user,
         email_user: idUser.email_user,
+        imagen_user: idUser.imagen_user,
         telefono_user: idUser.telefono_user,
         rol_user: idUser.rol_user,
         descripcion_user: idUser.descripcion_user,
@@ -46,15 +47,15 @@ const RegisterUser = ({ mode, titleBtn }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const datosAEnviar = new FormData();
-    datosAEnviar.append("imagen_user", formData.imagen);
     datosAEnviar.append("pk_cedula_user", formData.pk_cedula_user);
     datosAEnviar.append("nombre_user", formData.nombre_user);
     datosAEnviar.append("email_user", formData.email_user);
     datosAEnviar.append("telefono_user", formData.telefono_user);
     datosAEnviar.append("rol_user", formData.rol_user);
+    datosAEnviar.append("descripcion_user", formData.descripcion_user);
+    datosAEnviar.append("imagen_user", formData.imagen_user);
     try {
       if (mode === "update") {
-        datosAEnviar.append("descripcion_user", formData.descripcion_user);
         await updateUsers(idUser.pk_cedula_user, datosAEnviar);
       } else {
         datosAEnviar.append("password_user", formData.password_user);
@@ -67,13 +68,75 @@ const RegisterUser = ({ mode, titleBtn }) => {
 
   return (
     <form onSubmit={onSubmit} className="space-y-2 px-4">
-      {
-        errors.map((error, i) => (
-          <div className='bg-red-500 p-2 text-white text-center my-2' key={i}>
-            {error}
-          </div>
-        ))
-      }
+      {errors.map((error, i) => (
+        <div className="bg-red-500 p-2 text-white text-center my-2" key={i}>
+          {error}
+        </div>
+      ))}
+      <div className="flex w-full justify-center rounded-full">
+        <input
+          placeholder="Imagen de usuario"
+          type="file"
+          name="imagen_user"
+          className="hidden"
+          id="fileInput"
+          onChange={handleChange}
+        />
+        <label
+          htmlFor="fileInput"
+          className="cursor-pointer items-center w-auto flex justify-center bg-blue-100 rounded-full border"
+        >
+          {formData.imagen_user ? (
+            <div className="relative">
+              <button
+                type="button"
+                className="absolute top-0 right-0 p-1 bg-gray-300 rounded-full"
+                onClick={() => setFormData({ ...formData, imagen_user: "" })}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-gray-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+              {mode === "update" ? (
+                <img
+                  src={
+                    typeof formData.imagen_user === "string"
+                      ? `http://localhost:4000/img/${formData.imagen_user}`
+                      : URL.createObjectURL(formData.imagen_user)
+                  }
+                  alt="user"
+                  className="h-28 w-28 object-cover rounded-full mx-auto"
+                />
+              ) : (
+                formData.imagen_user instanceof File && (
+                  <img
+                    src={URL.createObjectURL(formData.imagen_user)}
+                    alt="user"
+                    className="h-28 w-28 object-cover rounded-full mx-auto"
+                  />
+                )
+              )}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center w-28 h-28 border border-gray-300 rounded-full hover:bg-gray-50 transition duration-300">
+              <span className="text-gray-500 text-center">
+                Seleccionar imagen
+              </span>
+            </div>
+          )}
+        </label>
+      </div>
       <Input
         placeholder="Nombre Completo"
         isRequired
@@ -85,15 +148,15 @@ const RegisterUser = ({ mode, titleBtn }) => {
         startContent={<icono.iconoUser />}
       />
       <Input
-          placeholder="Correo"
-          isRequired
-          type="email"
-          variant="bordered"
-          name="email_user"
-          value={formData.email_user}
-          onChange={handleChange}
-          startContent={<icono.iconoGmail />}
-        />
+        placeholder="Correo"
+        isRequired
+        type="email"
+        variant="bordered"
+        name="email_user"
+        value={formData.email_user}
+        onChange={handleChange}
+        startContent={<icono.iconoGmail />}
+      />
       <div className="grid grid-cols-2 items-center gap-x-2">
         <Input
           placeholder="Cédula"
@@ -118,7 +181,11 @@ const RegisterUser = ({ mode, titleBtn }) => {
           startContent={<icono.iconoCelular />}
         />
       </div>
-      <div className={`grid ${mode !== "update" ? "grid-cols-2" : "grid-cols-1"} items-center gap-x-2`}>
+      <div
+        className={`grid ${
+          mode !== "update" ? "grid-cols-2" : "grid-cols-1"
+        } items-center gap-x-2`}
+      >
         <div className="relative">
           <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-800">
             {<icono.iconoRol />}
@@ -167,24 +234,20 @@ const RegisterUser = ({ mode, titleBtn }) => {
           />
         )}
       </div>
-      {
-        mode === "update" && (
-          <Textarea
-            label=""
-            aria-label="Descripción de usuario"
-            startContent={<icono.iconoDescript />}
-            variant="bordered"
-            placeholder="Ingresa la descripción de usuario"
-            classNames={{
-              base: "w-full",
-              input: "resize-y min-h-[40px]",
-            }}
-            value={formData.descripcion_user || ''}
-            onChange={handleChange}
-            name="descripcion_user"
-          />
-        )
-      }
+      <Textarea
+        label=""
+        aria-label="Descripción de usuario"
+        startContent={<icono.iconoDescript />}
+        variant="bordered"
+        placeholder="Ingresa la descripción de usuario"
+        classNames={{
+          base: "w-full",
+          input: "resize-y min-h-[40px]",
+        }}
+        value={formData.descripcion_user || ""}
+        onChange={handleChange}
+        name="descripcion_user"
+      />
       <ModalFooter className="flex justify-center">
         <Button type="submit" className="bg-gray-600 text-white">
           {titleBtn}

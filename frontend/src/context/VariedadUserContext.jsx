@@ -8,6 +8,7 @@ import {
   updateVariedadDesact,
   updatevariedad,
 } from "../api/api.variedad.user";
+import { useTipoVariContext } from "./TipoVariContext";
 
 const VariedadUserContext = createContext();
 
@@ -20,6 +21,7 @@ export const useVariedadUserContext = () => {
 }
 
 export const VariedadUserProvider = ({ children }) => {
+  const { getTipoVariedadesActivas } = useTipoVariContext()
   const [modalMessage, setModalMessage] = useState(false);
   const [mensaje, setMensaje] = useState("");
   const [errors, setErrors] = useState([]);
@@ -40,6 +42,7 @@ export const VariedadUserProvider = ({ children }) => {
     try {
       const response = await createVariedad(data);
       setMensaje(response.data.message);
+      getTipoVariedadesActivas(id, id_finca)
       getVariForUser(id, id_finca)
       setModalMessage(true);
     } catch (error) {

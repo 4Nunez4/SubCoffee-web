@@ -8,7 +8,7 @@ import {
   desactivarUser,
   loginUser,
   updatePasswordUser,
-  createImagenUser,
+  updatePasswordUserLogin,
 } from "../api/api.users";
 import ModalMessage from "../nextui/ModalMessage";
 
@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [idUser, setIdUser] = useState([])
   const [onClose, setOnClose] = useState(false)
+  const [cerrarModal, setCerrarModal] = useState(false)
 
   const getUsers = async () => {
     try {
@@ -67,37 +68,29 @@ export const AuthProvider = ({ children }) => {
   const createUsers = async (data) => {
     try {
       const response = await createUser(data)
-      getUsers()
-      setMensaje(response.data.message)
-      setModalMessage(true)
       if(response.status === 200) {
+        getUsers()
+        setMensaje(response.data.message)
+        setModalMessage(true)
         setOnClose(true)
+        setCerrarModal(true)
       }
     } catch (error) {
       setErrors([error.response.data.message]);
     }
   }
 
-  const createImgUsers = async (data) => {
-    try {
-      const response = await createImagenUser(data)
-      getUsers()
-      setMensaje(response.data.message)
-      setModalMessage(true)
-      if(response.status === 200) {
-        setOnClose(true)
-      }
-    } catch (error) {
-      setErrors([error.response.data.message]);
-    }
-  };
-
   const updateUsers = async (id, data) => {
     try {
       const response = await updateUser(id, data)
-      getUsers()
-      setMensaje(response.data.message)
-      setModalMessage(true)
+      if(response.status === 200) {
+        getUsers()
+        setMensaje(response.data.message)
+        setModalMessage(true)
+        getUserID(id)
+        setOnClose(true)
+        setCerrarModal(true)
+      }
     } catch (error) {
       setErrors([error.response.data.message])
     }
@@ -106,8 +99,29 @@ export const AuthProvider = ({ children }) => {
   const updatePassword = async (id, data) => {
     try {
       const response = await updatePasswordUser(id, data)
-      setMensaje(response.data.message)
-      setModalMessage(true)
+      if(response.status === 200) {
+        getUsers()
+        setMensaje(response.data.message)
+        getUserID(id)
+        setModalMessage(true)
+        setOnClose(true)
+        setCerrarModal(true)
+      }
+    } catch (error) {
+      setErrors([error.response.data.message])
+    }
+  }
+
+  const updatePasswordLogin = async (data) => {
+    try {
+      const response = await updatePasswordUserLogin(data)
+      if(response.status === 200) {
+        getUsers()
+        setMensaje(response.data.message)
+        setModalMessage(true)
+        setOnClose(true)
+        setCerrarModal(true)
+      }
     } catch (error) {
       setErrors([error.response.data.message])
     }
@@ -123,6 +137,7 @@ export const AuthProvider = ({ children }) => {
       setErrors([error.response.data.message])
     }
   }
+
   const updateUserDesactive = async (id) => {
     try {
       const response = await desactivarUser(id)
@@ -174,8 +189,9 @@ export const AuthProvider = ({ children }) => {
         updateUserActive,
         updateUserDesactive,
         setUsers,
-
-        createImgUsers,
+        cerrarModal,
+        setCerrarModal,
+        updatePasswordLogin
       }}
     >
       <ModalMessage

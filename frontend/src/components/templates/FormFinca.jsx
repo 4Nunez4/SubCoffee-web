@@ -5,19 +5,19 @@ import { useFincaContext } from "../../context/FincaContext";
 
 function FormFinca ({ open, onClose, title, titleBtn, mode }) {
 
-  const { cerrarModal, serCerrarModal } = useFincaContext()
+  const { cerrarModal, setCerrarModal } = useFincaContext()
 
   useEffect(() => {
     if (cerrarModal) {
       onClose();
-      serCerrarModal(false);
+      setCerrarModal(false);
     }
-  }, [cerrarModal, onClose, serCerrarModal]);
+  }, [cerrarModal, onClose, setCerrarModal]);
 
   return (
     <>
       <ModalForm open={open} onClose={onClose} title={title}>
-        <RegisterFincaMolecule onClose={onClose} mode={mode} titleBtn={titleBtn} />
+        <RegisterFincaMolecule mode={mode} titleBtn={titleBtn} />
       </ModalForm>
     </>
   );

@@ -69,8 +69,8 @@ function HeaderOrganism() {
           <div>
             <Autocomplete
               classNames={{
-                base: "w-96",
-                listboxWrapper: "max-h-[320px]",
+                base: "w-80",
+                listboxWrapper: "max-h-[280px]",
                 selectorButton: "text-default-500",
               }}
               defaultItems={users}
@@ -182,16 +182,16 @@ function HeaderOrganism() {
                     onClick={() =>
                       navigate(`/profile/${localUser.pk_cedula_user}`)
                     }
-                    className="text-center border border-gray-400 hover:bg-gray-200 text-black"
-                    color="success"
+                    className="text-center text-[#009100] hover:bg-[#009100] hover:text-white"
+                    color="bg-[#009100]"
                   >
                     Perfil
                   </DropdownItem>
                   <DropdownItem
                     key="logout"
                     onPress={handleLogout}
-                    className="text-center bg-gray-400 text-black"
-                    color="danger"
+                    className="text-center text-red-600 hover:bg-[#da3939] hover:text-white"
+                    color="bg-[#da3939]"
                   >
                     Cerrar sesión
                   </DropdownItem>

@@ -15,6 +15,7 @@ import routerFinca from "./src/routes/finca.routes.js"
 import routerVariedad from "./src/routes/variedad.routes.js"
 import routertipovari from "./src/routes/tipovariedad.routes.js"
 import ofertasRoutes from "./src/routes/ofertas.routes.js";
+import routesCalificaciones from "./src/routes/calificaciones.routes.js";
 
 const app = express();
 app.use(cors());
@@ -37,6 +38,7 @@ app.use("/user", routerChat);
 app.use("/v1", rutNotificaciones);
 app.use("/v1", postulantesRoutes);
 app.use("/v1", ofertasRoutes);
+app.use("/v1", routesCalificaciones);
 
 app.set("view engine", "ejs");
 

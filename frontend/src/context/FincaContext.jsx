@@ -1,10 +1,11 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   getFincaForUser,
   createFinca,
   updateFinca,
   updateFincaActivar,
   updateFincaDesact,
+  getFincaForUserActivas,
 } from "../api/api.finca";
 import ModalMessage from "../nextui/ModalMessage";
 
@@ -23,8 +24,9 @@ export const FincaProvider = ({ children }) => {
   const [mensaje, setMensaje] = useState("");
   const [errors, setErrors] = useState([]);
   const [fincas, setFincas] = useState([]);
+  const [fincasActivas, setFincasActivas] = useState([]);
   const [idFinca, setIdFinca] = useState(0)
-  const [cerrarModal, serCerrarModal] = useState(false)
+  const [cerrarModal, setCerrarModal] = useState(false)
 
   const getFincaUser = async (user) => {
     try {
@@ -35,13 +37,23 @@ export const FincaProvider = ({ children }) => {
     }
   };
 
+  const getFincaUserActivas = async (user) => {
+    try {
+      const res = await getFincaForUserActivas(user);
+      setFincasActivas(res.data.data);
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  };
+
   const createFincas = async (data, user) => {
     try {
       const response = await createFinca(data);
-      getFincaUser(user);
-      setMensaje(response.data.message);
-      setModalMessage(true);
-      serCerrarModal(true)
+      if(response.status === 200) {
+        getFincaUser(user);
+        setMensaje(response.data.message);
+        setModalMessage(true);
+      }
     } catch (error) {
       setErrors([error.response.data.message]);
     }
@@ -50,10 +62,12 @@ export const FincaProvider = ({ children }) => {
   const updateFincas = async (id, data, user) => {
     try {
       const response = await updateFinca(id, data);
-      getFincaUser(user);
-      serCerrarModal(true)
-      setMensaje(response.data.message);
-      setModalMessage(true);
+      if(response.status === 200) {
+        getFincaUser(user);
+        setCerrarModal(true)
+        setMensaje(response.data.message);
+        setModalMessage(true);
+      }
     } catch (error) {
       setErrors([error.response.data.message]);
     }
@@ -81,6 +95,15 @@ export const FincaProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
+
   return (
     <FincaContext.Provider
       value={{
@@ -94,9 +117,10 @@ export const FincaProvider = ({ children }) => {
         updateFincas,
         desactivarFincas,
         activarFincas,
-
+        getFincaUserActivas,
+        fincasActivas,
         cerrarModal,
-        serCerrarModal
+        setCerrarModal
       }}
     >
       <ModalMessage

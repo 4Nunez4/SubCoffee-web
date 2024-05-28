@@ -13,10 +13,12 @@ import DesactivarIcon from "../../nextui/DesactivarIcon";
 import ActivarIcon from "../../nextui/ActivarIcon";
 import FormSubasta from "../templates/FormSubasta";
 import { useNavigate } from "react-router-dom";
+import ModalSubCoffee from "../templates/ModalSubCoffee";
 
 export default function SubastaTable() {
   const navigate = useNavigate();
   const [abrirModal, setAbrirModal] = useState(false);
+  const [abrirModalSub, setAbrirModalSub] = useState(false)
   const [mode, setMode] = useState("create");
 
   const { getSubForUser, subastaForuser, desactivarSubs, activarSubs, setIdSubasta } = useSubastaContext();
@@ -30,6 +32,11 @@ export default function SubastaTable() {
     setAbrirModal(true);
     setMode(mode);
   };
+
+  const handdleModaSub = (id) => {
+    setAbrirModalSub(true)
+    setIdSubasta(id)
+  }
 
   return (
     <div className="w-full">
@@ -50,6 +57,10 @@ export default function SubastaTable() {
         titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
         mode={mode}
       />
+      <ModalSubCoffee
+        open={abrirModalSub}
+        onClose={() => setAbrirModalSub(false)}
+      />
       {subastaForuser ? (
         <div className="grid grid-cols-3 justify-center items-center gap-4 p-3">
           {subastaForuser.map((subasta) => (
@@ -64,9 +75,7 @@ export default function SubastaTable() {
                       ${subasta.estado_sub === "cerrada"? "bg-red-400 border-red-600 text-red-50": ""} 
                     `}
                   >
-                    <p className="text-sm text-default-50 p-1">
-                      {subasta.estado_sub}
-                    </p>
+                    <p className="text-sm text-default-50 p-1">{subasta.estado_sub}</p>
                   </div>
                   {subasta.pk_cedula_user === usuario.pk_cedula_user && (
                     <Button
@@ -85,7 +94,7 @@ export default function SubastaTable() {
                       shadow="sm"
                       radius="md"
                       alt={subasta.imagen_sub}
-                      className="w-full object-cover h-[200px]"
+                      className="w-[253px] object-cover h-[200px]"
                       src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
                       />
                   </div>
@@ -101,15 +110,11 @@ export default function SubastaTable() {
                       </div>
                       <div className="flex w-full gap-x-2">
                         <p className="font-semibold">Ubicación:</p>
-                        <p>
-                          {subasta.nombre_vere} - {subasta.nombre_muni} - {subasta.nombre_depar}
-                        </p>
+                        <p>{subasta.nombre_vere} - {subasta.nombre_muni} - {subasta.nombre_depar}</p>
                       </div>
                       <div className="flex w-full gap-x-2">
                         <p className="font-semibold">Cantidad:</p>
-                        <p>
-                          {subasta.cantidad_sub} {subasta.cantidad_sub > 1 ? subasta.unidad_peso_sub + "s" : subasta.unidad_peso_sub}
-                        </p>
+                        <p>{subasta.cantidad_sub} {subasta.cantidad_sub > 1 ? subasta.unidad_peso_sub + "s" : subasta.unidad_peso_sub}</p>
                       </div>
                       <div className="flex w-full gap-x-2">
                         <p className="font-semibold">Tipo Variedad:</p>
@@ -117,9 +122,7 @@ export default function SubastaTable() {
                       </div>
                       <div className="flex w-full gap-x-2">
                         <p className="font-semibold">Certificado:</p>
-                        <p className="underline cursor-pointer">
-                          {subasta.certificado_sub}
-                        </p>
+                        <p className="underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]">{subasta.certificado_sub}</p>
                       </div>
                       <div className="flex gap-x-2">
                         <p className="font-semibold">Precio base:</p>
@@ -132,7 +135,7 @@ export default function SubastaTable() {
                   <Button
                     className="bg-gray-400"
                     radius="md"
-                    onPress={() => navigate(`/subasta/${subasta.pk_id_sub}`)}
+                    onClick={() => handdleModaSub(subasta.pk_id_sub)}
                   >
                     Visualizar
                   </Button>

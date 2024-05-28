@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -23,7 +23,7 @@ import { EditIcon } from "../../nextui/EditIcon.jsx";
 import ActivarIcon from "../../nextui/ActivarIcon.jsx";
 import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
 import FormUser from "../templates/FormUser.jsx";
-import AuthContext from "../../context/AuthContext.jsx";
+import { useAuthContext } from "../../context/AuthContext.jsx";
 
 const statusColorMap = {
   activo: "success",
@@ -40,7 +40,7 @@ export default function UsersTable() {
   });
   const [page, setPage] = useState(1);
 
-  const { getUsers, users, updateUserActive, updateUserDesactive, setIdUser } = useContext(AuthContext)
+  const { getUsers, users, updateUserActive, updateUserDesactive, setIdUser } = useAuthContext()
 
   const [abrirModal, setAbrirModal] = useState(false);
   const [mode, setMode] = useState("create");

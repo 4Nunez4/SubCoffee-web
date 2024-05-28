@@ -1,30 +1,46 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Button, Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import React, { useEffect, useState } from "react";
+import { Avatar, Button, Card, CardBody, Image } from "@nextui-org/react";
 import { useParams } from "react-router-dom";
 
 import UserRol from "../nextui/UserRol";
 import GmailIcon from "../nextui/GmailIcon";
 import Phone from "../nextui/Phone";
 import FormUser from "../components/templates/FormUser";
-import AuthContext from "../context/AuthContext";
+import { useAuthContext } from "../context/AuthContext";
 import FormUserPassword from "../components/templates/FormUserPassword";
 import { useSubastaContext } from "../context/SubastaContext";
+import FormCalificaion from "../components/templates/FormCalificaion";
+import { useCalificacionesContext } from "../context/CalificacionesContext";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { ChevronDownIcon } from "../nextui/ChevronDownIcon";
+
+const colors = {
+  orange: "#FFBA5A",
+  grey: "#a9a9a9",
+};
 
 function ProfileUser() {
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState("creadas");
   const localUser = JSON.parse(localStorage.getItem("user"));
   const [abrirModal, setAbrirModal] = useState(false);
+  const [abrirModalCalificacion, setAbrirModalCalificacion] = useState(false);
   const [abrirModalPassword, setAbrirModalPassword] = useState(false);
   const [mode, setMode] = useState("create");
-  const { getUserID, user, setIdUser } = useContext(AuthContext);
-  const { getSubForUser, subastaForuser } = useSubastaContext()
+  const { getUserID, user, setIdUser, getUsers } = useAuthContext();
+  const { getSubForUser, subastaForuser } = useSubastaContext();
+  const { getCalificacionesUser, stats } = useCalificacionesContext();
+
+  useEffect(() => {
+    getCalificacionesUser(id);
+  }, [id, getCalificacionesUser]);
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   useEffect(() => {
     getSubForUser(id);
-  }, [id]);
-
-  useEffect(() => {
     getUserID(id);
   }, [id]);
 
@@ -59,12 +75,43 @@ function ProfileUser() {
     </div>
   );
 
+  const renderAverageStars = (average) => {
+    const fullStars = Math.floor(average);
+    const hasHalfStar = average % 1 !== 0;
+    return (
+      <div className="flex items-center">
+        {Array.from({ length: fullStars }, (_, index) => (
+          <FaStar
+            key={index}
+            size={14}
+            color={colors.orange}
+            className="mr-1"
+          />
+        ))}
+        {hasHalfStar && (
+          <FaStarHalfAlt size={24} color={colors.orange} className="mr-1" />
+        )}
+        {Array.from(
+          { length: 5 - fullStars - (hasHalfStar ? 1 : 0) },
+          (_, index) => (
+            <FaStar
+              key={index + fullStars + 1}
+              size={12}
+              color={colors.grey}
+              className="mr-1"
+            />
+          )
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="px-16 mb-9 ">
       <FormUser
         open={abrirModal}
         onClose={() => setAbrirModal(false)}
-        title={mode === 'create' ? 'Registrar Usuario' : 'Actualizar Usuario'}
+        title={mode === "create" ? "Registrar Usuario" : "Actualizar Usuario"}
         titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
         mode={mode}
       />
@@ -86,12 +133,24 @@ function ProfileUser() {
               className="w-56 h-56"
             />
             {user.pk_cedula_user === localUser.pk_cedula_user && (
-              <Button className="bg-[#e0e0e0] text-[#009100] w-full mt-2" onClick={() => {handleToggle("update"); setIdUser(user)}}>
+              <Button
+                className="bg-[#e0e0e0] text-[#009100] w-full mt-2"
+                onClick={() => {
+                  handleToggle("update");
+                  setIdUser(user);
+                }}
+              >
                 Editar perfil
               </Button>
             )}
             {user.pk_cedula_user === localUser.pk_cedula_user && (
-              <Button className="bg-[#e0e0e0] text-[#009100] w-full mt-2" onClick={() => {setAbrirModalPassword(true); setIdUser(user)}}>
+              <Button
+                className="bg-[#e0e0e0] text-[#009100] w-full mt-2"
+                onClick={() => {
+                  setAbrirModalPassword(true);
+                  setIdUser(user);
+                }}
+              >
                 Cambiar contraseña
               </Button>
             )}
@@ -115,19 +174,42 @@ function ProfileUser() {
               </div>
             </span>
             <span className="text-sm text-gray-600 flex items-center">
-              <UserRol />
+              <UserRol />,
               <div>
                 <p className="text-sm text-gray-900">{user.rol_user}</p>
                 <p className="text-xs text-gray-500">Rol de Usuario</p>
               </div>
             </span>
-            <span className="text-sm text-gray-600 py-2 flex">
-              {user.descripcion_user}
-            </span>
+            {user.rol_user !== "admin" && (
+              <>
+                <div className="w-full flex items-center gap-x-2 mb-2">
+                  <div className="flex flex-col items-start">
+                    {stats && stats.promedio != null && !isNaN(stats.promedio) ? (
+                      <div className="flex gap-x-2">
+                        <div className="text-2xl font-bold">{parseFloat(stats.promedio).toFixed(1)}</div>
+                        {renderAverageStars(stats.promedio)}
+                      </div>
+                    ) : (
+                      "Usuario sin calificaciones"
+                    )}
+                  </div>
+                </div>
+                <Button className="bg-transparent p-0 m-0 hover:underline -mt-2" onClick={() => setAbrirModalCalificacion(true)} endContent={<ChevronDownIcon/>}>
+                  Calificaciones y opiniones
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>
-      {user.rol_user !== 'admin' && (
+      <FormCalificaion
+        open={abrirModalCalificacion}
+        onClose={() => setAbrirModalCalificacion(false)}
+        fk_user={user.pk_cedula_user}
+        title={"Calificaciones de usuario"}
+        titleBtn={"Registrar calificación"}
+      />
+      {user.rol_user !== "admin" && (
         <>
           <div className="grow border-b border-gray-400 my-4"></div>
           <div className="flex items-center w-full mb-4">
@@ -160,16 +242,20 @@ function ProfileUser() {
                 <h2 className="text-lg font-semibold mb-4 text-center">
                   Subastas Creadas
                 </h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 sm:grid-cols-1 justify-center items-center">
-                  {subastaForuser &&
+                <div className={`grid ${ subastaForuser ? "md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 sm:grid-cols-1" : "" } justify-center items-center`} >
+                  {subastaForuser ? (
                     subastaForuser.map((subasta) => (
-                      <Card key={subasta.pk_id_sub} className="max-w-[320px] p-2">
+                      <Card
+                        key={subasta.pk_id_sub}
+                        className="max-w-[320px] p-2"
+                      >
                         <CardBody className="items-center w-full">
                           <span className="text-center flex justify-center items-center gap-x-3">
                             <b className="text-lg">
                               {subasta.pk_id_sub} - {subasta.nombre_tipo_vari}
                             </b>
-                            <div className={`w-auto rounded-lg border
+                            <div
+                              className={`w-auto rounded-lg border
                                 ${subasta.estado_sub === "abierta"? "bg-green-500 border-green-600 text-green-50": ""}
                                 ${subasta.estado_sub === "proceso"? "bg-orange-500 border-orange-600 text-orange-50": ""}
                                 ${subasta.estado_sub === "espera"? "bg-blue-500 border-blue-600 text-blue-50": ""}
@@ -193,22 +279,24 @@ function ProfileUser() {
                               <div className="flex flex-col">
                                 <div className="flex w-full gap-x-2">
                                   <p className="font-semibold">Apertura:</p>
-                                  <p>{new Date(subasta.fecha_inicio_sub).toLocaleString( "es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", } )}</p>
+                                  <p>{new Date( subasta.fecha_inicio_sub).toLocaleString("es-ES", {year: "numeric",month: "numeric",day: "numeric",hour: "numeric",minute: "numeric",second: "numeric",})}</p>
                                 </div>
                                 <div className="flex w-full gap-x-2">
                                   <p className="font-semibold">Cierre:</p>
-                                  <p>{new Date(subasta.fecha_fin_sub).toLocaleString( "es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", } )}</p>
+                                  <p>{new Date( subasta.fecha_fin_sub).toLocaleString("es-ES", {year: "numeric",month: "numeric",day: "numeric",hour: "numeric",minute: "numeric",second: "numeric",})}</p>
                                 </div>
                                 <div className="flex w-full gap-x-2">
                                   <p className="font-semibold">Ubicación:</p>
-                                  <p>{subasta.nombre_vere} - {subasta.nombre_muni} -{subasta.nombre_depar} </p>
+                                  <p>{subasta.nombre_vere} -{" "}{subasta.nombre_muni} -{subasta.nombre_depar}{" "}</p>
                                 </div>
                                 <div className="flex w-full gap-x-2">
                                   <p className="font-semibold">Cantidad:</p>
-                                  <p>{subasta.cantidad_sub} {subasta.cantidad_sub > 0 ? (subasta.unidad_peso_sub + "s") : subasta.unidad_peso_sub}</p>
+                                  <p>{subasta.cantidad_sub}{" "}{subasta.cantidad_sub > 0? subasta.unidad_peso_sub + "s": subasta.unidad_peso_sub}</p>
                                 </div>
                                 <div className="flex w-full gap-x-2">
-                                  <p className="font-semibold">Tipo Variedad:</p>
+                                  <p className="font-semibold">
+                                    Tipo Variedad:
+                                  </p>
                                   <p>{subasta.nombre_tipo_vari}</p>
                                 </div>
                                 <div className="flex w-full gap-x-2">
@@ -221,34 +309,36 @@ function ProfileUser() {
                                 </div>
                                 <div className="flex gap-x-2">
                                   <p className="font-semibold">Precio base:</p>
-                                  <p>${Number(subasta.precio_inicial_sub).toLocaleString("es-ES")}</p>
+                                  <p>${Number( subasta.precio_inicial_sub ).toLocaleString("es-ES")}</p>
                                 </div>
                                 {subasta.estado_sub === "cerrada" ? (
                                   <div className="flex gap-x-2">
                                     <p className="font-semibold text-[#a1653d]">Precio Final:</p>
                                     <p className="text-[#009100] font-semibold">${Number(subasta.precio_final_sub).toLocaleString("es-ES")}</p>
                                   </div>
-                                  ) : (
-                                    <div className="flex gap-x-2">
-                                      <p className="font-semibold text-[#a1653d]">Precio Final:</p>
-                                      <p className="text-[#009100] font-semibold">Desconocido</p>
-                                    </div>
-                                  )
-                                }
+                                ) : (
+                                  <div className="flex gap-x-2">
+                                    <p className="font-semibold text-[#a1653d]">Precio Final:</p>
+                                    <p className="text-[#009100] font-semibold">Desconocido</p>
+                                  </div>
+                                )}
                               </div>
                             </div>
                           </CardBody>
                         </CardBody>
                       </Card>
-                    ))}
+                    ))
+                  ) : (
+                    <div className="flex">
+                      <p className="w-full">No tiene ninguna subasta creada</p>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
             {activeTab === "ganadas" && (
               <div>
-                <h2 className="text-lg font-semibold mb-4 text-center">
-                  Subastas Ganadas
-                </h2>
+                <h2 className="text-lg font-semibold mb-4 text-center">Subastas Ganadas</h2>
                 {renderSubastas(SubastasGanadas)}
               </div>
             )}

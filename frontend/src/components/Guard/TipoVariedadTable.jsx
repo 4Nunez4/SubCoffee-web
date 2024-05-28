@@ -23,6 +23,7 @@ import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
 import ActivarIcon from "../../nextui/ActivarIcon.jsx";
 import FormTipovariedad from "../templates/FormTipovariedad.jsx";
 import TipoVariContext from "../../context/TipoVariContext.jsx";
+import { useAuthContext } from "../../context/AuthContext.jsx";
 
 const statusColorMap = {
   activo: "success",
@@ -37,13 +38,18 @@ export default function TipoVariedadTable() {
     column: "pk_id_tipo_vari",
     direction: "ascending",
   });
+  const { getUsers } = useAuthContext()
   const [page, setPage] = useState(1);
-
+  
   const { tipoVariedades, getTipoVariedades, desactivarTipoVariedades, activarTipoVariedades, setIdTipoVariedad } = useContext(TipoVariContext)
-
+  
   const [abrirModal, setAbrirModal] = useState(false);
   const [mode, setMode] = useState("create");
   
+  useEffect(() => {
+      getUsers()
+    }, []);
+    
   useEffect(() => {
     getTipoVariedades();
   }, []);

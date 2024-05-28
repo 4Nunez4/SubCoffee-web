@@ -1,17 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Input, ModalFooter } from "@nextui-org/react";
 
-import { EyeSlashFilledIcon } from "../../nextui/EyeSlashFilledIcon"
-import { EyeFilledIcon } from "../../nextui/EyeFilledIcon"
+import { EyeSlashFilledIcon } from "../../nextui/EyeSlashFilledIcon";
+import { EyeFilledIcon } from "../../nextui/EyeFilledIcon";
 import { icono } from "../atoms/IconsAtom";
-import AuthContext from "../../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
+import FormRecuperarPassword from "../templates/FormRecuperarPassword";
 
 const LoginFormMolecule = () => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
-  const { loginUsers, isAuthenticated } = useContext(AuthContext)
-  const navigate = useNavigate()
+  const { loginUsers, isAuthenticated, errors } = useAuthContext();
+  const [abrirModalPassword, setAbrirModalPassword] = useState(false);
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,11 +32,17 @@ const LoginFormMolecule = () => {
   };
 
   useEffect(() => {
-    if (isAuthenticated) return navigate("/subcoffee")
-  }, [isAuthenticated])
+    if (isAuthenticated) return navigate("/subcoffee");
+  }, [isAuthenticated]);
 
   return (
     <form onSubmit={onSubmit} className="space-y-4 px-4">
+      <FormRecuperarPassword
+        open={abrirModalPassword}
+        onClose={() => setAbrirModalPassword(false)}
+        title={"Recuperar contraseña"}
+        titleBtn={"Recuperar"}
+      />
       <Input
         type="email"
         name="email"
@@ -51,12 +59,9 @@ const LoginFormMolecule = () => {
         aria-label="Contraseña"
         variant="bordered"
         placeholder="Contraseña"
-        startContent={<icono.iconoContraseña/>}
+        startContent={<icono.iconoContraseña />}
         endContent={
-          <button
-            type="button"
-            onClick={toggleVisibility}
-          >
+          <button type="button" onClick={toggleVisibility}>
             {isVisible ? (
               <EyeSlashFilledIcon className="text-2xl text-default-400 " />
             ) : (
@@ -68,11 +73,15 @@ const LoginFormMolecule = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Link to="/" className="text-xs text-left underline hover:text-naranjaSena text-grisMedio3" >
+      <a
+        href="#RecuperarPassword"
+        onClick={() => setAbrirModalPassword(true)}
+        className={`cursor-pointer text-xs underline hover:text-[#009100] text-black`}
+      >
         ¿Olvidaste tu contraseña?
-      </Link>
+      </a>
       <ModalFooter className="flex justify-center">
-        <Button type="submit" className="bg-gray-600 text-white">
+        <Button type="submit" className="bg-gray-600 text-white"> 
           Iniciar Sesión
         </Button>
       </ModalFooter>

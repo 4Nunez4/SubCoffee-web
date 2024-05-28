@@ -17,6 +17,7 @@ export const validationRegisterUser = [
   check("password_user", "La contraseña es obligatoria, min 6 caracteres")
     .not()
     .isEmpty()
+    .optional()
     .isLength({ max: 50, min: 6 }),
   check("telefono_user", "El Telefono es obligatorio, max 10 caracteres")
     .not()
