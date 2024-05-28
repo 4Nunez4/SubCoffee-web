@@ -5,7 +5,7 @@ import { validationTipoVariedad } from "../validations/tipo_variedad.validation.
 const routertipovari = Router();
 
 routertipovari.get("/tipo_vari", verificarUserToken, getTipoVariedades);
-routertipovari.get("/tipo_vari_activas", verificarUserToken, getTipoVariedadesActivas);
+routertipovari.get("/tipo_vari_activas/:id/:finca", verificarUserToken, getTipoVariedadesActivas);
 routertipovari.get("/tipo_vari/:id", verificarUserToken, getTipoVariedad);
 routertipovari.post("/tipo_vari", verificarUserToken, validationTipoVariedad, createTipoVariedad);
 routertipovari.put("/tipo_vari/:id", verificarUserToken, validationTipoVariedad, updateTipoVariedad);

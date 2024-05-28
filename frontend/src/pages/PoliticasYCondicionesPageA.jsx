@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAuthContext } from '../context/AuthContext';
 
 function PoliticasYCondicionesPageA() {
+    const { getUsers } = useAuthContext()
+    useEffect(() => {
+        getUsers()
+      }, []);
+
     return (
         <div className="px-44 py-8">
             <h1 className="text-3xl font-bold text-center mb-8">Política de Privacidad y Uso de Datos</h1>

@@ -17,8 +17,21 @@ export const getTipoVariedades = async (req, res) => {
 
 export const getTipoVariedadesActivas = async (req, res) => {
   try {
-    let sql = `SELECT * FROM tipo_variedad WHERE estado_tipo_vari = 'activo'`;
-    const [result] = await pool.query(sql);
+    const { id, finca } = req.params
+    const sql = `
+    SELECT tv.*
+    FROM tipo_variedad tv
+    LEFT JOIN (
+      SELECT v.fk_tipo_variedad
+      FROM variedad v
+      INNER JOIN finca f ON v.fk_finca = f.pk_id_fin
+      INNER JOIN usuarios u ON f.fk_id_usuario = u.pk_cedula_user
+      WHERE u.pk_cedula_user = ? AND f.pk_id_fin = ?
+    ) AS subquery ON tv.pk_id_tipo_vari = subquery.fk_tipo_variedad
+    WHERE tv.estado_tipo_vari = 'activo' AND subquery.fk_tipo_variedad IS NULL;
+  `;
+  
+    const [result] = await pool.query(sql, [id, finca]);
     if (result.length > 0) {
       res.status(200).json({ message: "Tipos de variedades encontradas", data: result });
     } else {

@@ -55,6 +55,29 @@ export const getFinca = async (req, res) => {
   }
 };
 
+export const getFincasActivas = async (req, res) => {
+  try {
+    const id = req.params.id;
+    let sql = 
+    `
+      SELECT f.*, v.*, m.*, d.*
+      FROM finca f
+      INNER JOIN veredas v ON f.fk_vereda = v.pk_id_vere
+      INNER JOIN municipio m ON v.fk_municipio = m.pk_codigo_muni
+      INNER JOIN departamento d ON m.fk_departamento = d.pk_codigo_depar
+      WHERE f.fk_id_usuario = '${id}' AND estado_fin = 'activo';
+    `;
+    const [result] = await pool.query(sql);
+    if (result.length > 0) {
+      res.status(200).json({ message: "Finca encontrada", data: result });
+    } else {
+      res.status(204).json({ message: "No se encontraron fincas para el usuario" });
+    }
+  } catch (error) {
+     res.status(500).json({ message: "Error en el servidor" + error });
+  }
+};
+
 export const createFinca = async (req, res) => {
   try {
     let errors = validationResult(req);
@@ -63,13 +86,21 @@ export const createFinca = async (req, res) => {
     }
 
     const { nombre_fin, fk_id_usuario, fk_vereda } = req.body;
-    let imagen_fin = req.file.originalname;
-    let sql = `INSERT INTO finca(nombre_fin, imagen_fin, estado_fin, fk_id_usuario, fk_vereda) VALUES ('${nombre_fin}', '${imagen_fin}', 'activo', '${fk_id_usuario}', '${fk_vereda}')`;
-    const [rows] = await pool.query(sql);
-    if (rows.affectedRows > 0) {
-      res.status(200).json({ message: "Finca creada con exito" });
+    let imagen_fin = req.file ? req.file.originalname : "";
+
+    const existingSQL = 'SELECT * FROM finca WHERE nombre_fin = ? AND fk_id_usuario = ? AND fk_vereda = ?';
+    const [existing] = await pool.query(existingSQL, [nombre_fin, fk_id_usuario, fk_vereda]);
+    
+    if (existing.length > 0) {
+      return res.status(400).json({ message: "Ya existe una finca con ese nombre y esa vereda" });
     } else {
-      res.status(404).json({ message: "No se pudo crear la finca" });
+      let sql = `INSERT INTO finca(nombre_fin, imagen_fin, estado_fin, fk_id_usuario, fk_vereda) VALUES ('${nombre_fin}', '${imagen_fin}', 'activo', '${fk_id_usuario}', '${fk_vereda}')`;
+      const [rows] = await pool.query(sql);
+      if (rows.affectedRows > 0) {
+        res.status(200).json({ message: "Finca creada con exito" });
+      } else {
+        res.status(404).json({ message: "No se pudo crear la finca" });
+      }
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
@@ -83,11 +114,22 @@ export const updateFinca = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const id = req.params.id;
+    const { id } = req.params;
     const { nombre_fin, fk_vereda } = req.body;
-    let imagen_fin = req.file.originalname;
-    let sql = `UPDATE finca SET nombre_fin = '${nombre_fin}', imagen_fin = '${imagen_fin}', fk_vereda = '${fk_vereda}' WHERE pk_id_fin = '${id}'`;
-    const [rows] = await pool.query(sql);
+    const imagen_fin = req.file ? req.file.originalname : "";
+
+    let sql = `UPDATE finca SET nombre_fin = IFNULL(?, nombre_fin), fk_vereda = IFNULL(?, fk_vereda)`;
+    const params = [nombre_fin, fk_vereda]
+
+    if(imagen_fin){
+      sql += `, imagen_fin = ?`
+      params.push(imagen_fin)
+    }
+
+    sql += ` WHERE pk_id_fin = ?`
+    params.push(id)
+
+    const [rows] = await pool.query(sql, params);
     if (rows.affectedRows > 0) {
       res.status(200).json({ message: "Finca actualizada con exito" });
     } else {

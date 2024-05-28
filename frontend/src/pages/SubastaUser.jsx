@@ -7,18 +7,19 @@ import EstrellaMediaLlena from "../nextui/EstrellaMediaLlena";
 import EstrellaVacia from "../nextui/EstrellaVacia";
 import { usePostulantesContext } from "../context/PostulantesContext";
 import { useOfertasContext } from "../context/OfertasContext";
+import { useAuthContext } from "../context/AuthContext";
 
 function SubastaUser() {
   const { id } = useParams();
   const [oferta, setOferta] = useState(0);
   const [tiempoRestante, setTiempoRestante] = useState("");
   const { getSub, subasta } = useSubastaContext();
-  const { getPostsActivos, postsActivos, desactivarPosts } =
-    usePostulantesContext();
+  const { getPostsActivos, postsActivos, desactivarPosts } = usePostulantesContext();
   const { createOfert, ofertas, getOfertForSub } = useOfertasContext();
+  const { getUsers } = useAuthContext()
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     const intervalId = setInterval(() => {
       const diferencia = calcularDiferencia(subasta.fecha_fin_sub);
@@ -27,6 +28,10 @@ function SubastaUser() {
 
     return () => clearInterval(intervalId);
   }, [subasta.fecha_fin_sub]);
+
+  useEffect(() => {
+    getUsers()
+  }, []);
 
   useEffect(() => {
     getOfertForSub(id);
@@ -64,6 +69,7 @@ function SubastaUser() {
       };
       await createOfert(data, id);
       setOferta("");
+      console.log("Oferta enviada:", data);
     } catch (error) {
       console.error("Error al enviar la oferta:", error);
     }

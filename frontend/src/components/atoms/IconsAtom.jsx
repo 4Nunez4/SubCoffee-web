@@ -36,6 +36,7 @@ import { SiNumpy } from "react-icons/si";
 import { GrMap } from "react-icons/gr";
 import { GrMapLocation } from "react-icons/gr";
 import { LiaMapMarkedAltSolid } from "react-icons/lia";
+import { FaExchangeAlt } from "react-icons/fa";
 
 export const icono = {
   iconoVere: LiaMapMarkedAltSolid,
@@ -78,4 +79,5 @@ export const icono = {
   iconoType: FaSwatchbook,
   iconoValor: Md18UpRating,
   iconoQuantity: MdProductionQuantityLimits,
+  iconoCambiar: FaExchangeAlt,
 };

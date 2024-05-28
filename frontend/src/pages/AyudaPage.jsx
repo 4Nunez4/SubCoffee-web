@@ -6,6 +6,7 @@ import InfoRolesA from "./InfoRolesA";
 import FlechaArriba from "../nextui/FlechaArriba";
 import ComoPujarUnaSubasta from "./ComoPujarUnaSubasta";
 import { icono } from "../components/atoms/IconsAtom";
+import { useAuthContext } from "../context/AuthContext";
 
 function AyudaPage() {
   const comoCrearRef = useRef(null);
@@ -13,6 +14,11 @@ function AyudaPage() {
   const infoRolesRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [texto, setTexto] = useState("");
+  
+  const { getUsers } = useAuthContext()
+  useEffect(() => {
+      getUsers()
+    }, []);
 
   const user = JSON.parse(localStorage.getItem("user"));
 

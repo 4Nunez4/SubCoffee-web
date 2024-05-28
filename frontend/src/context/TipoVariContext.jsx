@@ -38,10 +38,10 @@ export const TipoVariProvider = ({ children }) => {
     }
   };
 
-  const getTipoVariedadesActivas = async () => {
+  const getTipoVariedadesActivas = async (id, finca) => {
     try {
-      const res = await getTipoVarisActivas();
-      setTipoVariedadsActivos(res.data);
+      const res = await getTipoVarisActivas(id, finca);
+      setTipoVariedadsActivos(res.data.data);
     } catch (error) {
       console.error(error);
     }

@@ -34,7 +34,6 @@ export const verificarUserToken = async (req, res, next) => {
                 if (err) {
                     res.status(401).json({ message: "Token no valido" });
                 } else {
-                    console.log(decoded);
                     next();
                 }
             });

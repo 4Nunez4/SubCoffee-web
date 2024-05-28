@@ -95,10 +95,9 @@ export const SubastaProvider = ({ children }) => {
     }
   };
 
-  const updateSubs = async (id, data, user) => {
+  const updateSubs = async (id, data) => {
     try {
       const response = await updateSubasta(id, data);
-      getSubForUser(user);
       setMensaje(response.data.message);
       serCerrarModal(true)
       setModalMessage(true);

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 import DepartamentoTable from "../components/Guard/DepartamentoTable";
 import MunicipioTable from "../components/Guard/MunicipioTable";
 import VeredaTable from "../components/Guard/VeredaTable";
+import { useAuthContext } from "../context/AuthContext";
 
 function GeografiaFullPage() {
+  const { getUsers } = useAuthContext()
+  useEffect(() => {
+      getUsers()
+    }, []);
+    
   return (
     <div className="flex flex-col px-10 gap-x-4 pt-8">
       <Tabs aria-label="Options" variant="bordered">

@@ -1,10 +1,10 @@
 import { Button, Input, ModalFooter } from "@nextui-org/react";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
 import { icono } from "../atoms/IconsAtom";
 import { EyeSlashFilledIcon } from "../../nextui/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "../../nextui/EyeFilledIcon";
-import AuthContext from "../../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 function UpdateUserPasswordMolecule({ titleBtn, onClose }) {
   const [isVisibleOld, setIsVisibleOld] = useState(false);
@@ -15,7 +15,7 @@ function UpdateUserPasswordMolecule({ titleBtn, onClose }) {
   const toggleVisibilityNew = () => setIsVisibleNew(!isVisibleNew);
   const toggleVisibilityConfirm = () => setIsVisibleConfirm(!isVisibleConfirm);
 
-  const { updatePassword, idUser } = useContext(AuthContext);
+  const { updatePassword, idUser, errors } = useAuthContext();
 
   const [formData, setFormData] = useState({
     oldPassword: "",
@@ -46,6 +46,12 @@ function UpdateUserPasswordMolecule({ titleBtn, onClose }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-2 px-4">
+      {errors.map((error, i) => (
+          <div className='bg-red-500 p-2 text-white text-center my-2' key={i}>
+            {error}
+          </div>
+        ))
+      }  
       <Input
         label=""
         aria-label="Contraseña anterior"

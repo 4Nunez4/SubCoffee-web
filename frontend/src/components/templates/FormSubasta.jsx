@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
-import { ModalForm } from "../organisms/ModalForm";
 import RegisterSubastaMolecule from "../molecules/RegisterSubastaMolecule";
 import { useSubastaContext } from "../../context/SubastaContext";
+import { ModalFormXl } from "../organisms/ModalFormXl";
 
 function FormSubasta ({ open, onClose, title, titleBtn, mode }) {
-
   const { cerrarModal, serCerrarModal } = useSubastaContext()
-
   useEffect(() => {
     if (cerrarModal) {
       onClose();
@@ -16,9 +14,9 @@ function FormSubasta ({ open, onClose, title, titleBtn, mode }) {
 
   return (
     <>
-      <ModalForm open={open} onClose={onClose} title={title}>
+      <ModalFormXl open={open} onClose={onClose} title={title}>
         <RegisterSubastaMolecule onClose={onClose} mode={mode} titleBtn={titleBtn} />
-      </ModalForm>
+      </ModalFormXl>
     </>
   );
 };

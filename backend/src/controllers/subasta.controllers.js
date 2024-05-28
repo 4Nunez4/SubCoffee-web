@@ -25,7 +25,7 @@ export const registrar = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, unidad_peso_sub, cantidad_sub, descripcion_sub, fk_variedad, } = req.body;
+    const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, unidad_peso_sub, cantidad_sub, descripcion_sub, fk_variedad } = req.body;
 
     let imagen_sub = req.files && req.files["imagen_sub"] ? req.files["imagen_sub"][0].originalname : null;
     let certificado_sub = req.files && req.files["certificado_sub"] ? req.files["certificado_sub"][0].originalname : null;
@@ -98,7 +98,7 @@ export const actualizarFechaFin = async() => {
   try {
     const { id } = req.params;
     const { fecha_fin_sub } = req.body
-    const [resultado] = await pool.query(`UPDATE subasta SET fecha_fin_sub = COALESCE( ?,'${fecha_fin_sub}') WHERE  pk_id_sub = ?`, [id]);
+    const [resultado] = await pool.query(`UPDATE subasta SET fecha_fin_sub = IFNULL( ?,'${fecha_fin_sub}') WHERE  pk_id_sub = ?`, [id]);
     if (resultado.length > 0) {
       res.status(200).json({message:"Fecha actualizada con exito"})
     } else {
@@ -121,12 +121,8 @@ export const actualizar = async (req, res) => {
     const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad_sub, estado_sub, descripcion_sub, fk_variedad, } = req.body;
 
     // Verificar si los archivos se subieron correctamente
-    let imagen_sub =
-      req.files && req.files["imagen_sub"] && req.files["imagen_sub"][0] ? req.files["imagen_sub"][0].originalname : null;
-    let certificado_sub =
-      req.files &&
-      req.files["certificado_sub"] &&
-      req.files["certificado_sub"][0] ? req.files["certificado_sub"][0].originalname : null;
+    let imagen_sub = req.files && req.files["imagen_sub"] ? req.files["imagen_sub"][0].originalname : "";
+    let certificado_sub = req.files && req.files["certificado_sub"] ? req.files["certificado_sub"][0].originalname : "";
 
     const values = [
       fecha_inicio_sub,
@@ -143,7 +139,7 @@ export const actualizar = async (req, res) => {
       id, 
     ];
 
-    const [resultado] = await pool.query("UPDATE subasta SET fecha_inicio_sub=COALESCE(?, fecha_inicio_sub), fecha_fin_sub=COALESCE(?, fecha_fin_sub), imagen_sub=COALESCE(?, imagen_sub), precio_inicial_sub=COALESCE(?, precio_inicial_sub), precio_final_sub=COALESCE(?, precio_final_sub), unidad_peso_sub=COALESCE(?, unidad_peso_sub), cantidad_sub=COALESCE(?, cantidad_sub), estado_sub=COALESCE(?, estado_sub), certificado_sub=COALESCE(?, certificado_sub), descripcion_sub=COALESCE(?, descripcion_sub), fk_variedad=COALESCE(?, fk_variedad) WHERE pk_id_sub=?",values);
+    const [resultado] = await pool.query("UPDATE subasta SET fecha_inicio_sub=IFNULL(?, fecha_inicio_sub), fecha_fin_sub=IFNULL(?, fecha_fin_sub), imagen_sub=IFNULL(?, imagen_sub), precio_inicial_sub=IFNULL(?, precio_inicial_sub), precio_final_sub=IFNULL(?, precio_final_sub), unidad_peso_sub=IFNULL(?, unidad_peso_sub), cantidad_sub=IFNULL(?, cantidad_sub), estado_sub=IFNULL(?, estado_sub), certificado_sub=IFNULL(?, certificado_sub), descripcion_sub=IFNULL(?, descripcion_sub), fk_variedad=IFNULL(?, fk_variedad) WHERE pk_id_sub=?",values);
 
     if (resultado.affectedRows > 0) {
       res.status(200).json({message: "La subasta ha sido actualizada exitosamente",});
