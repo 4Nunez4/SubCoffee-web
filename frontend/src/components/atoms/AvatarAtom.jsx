@@ -2,11 +2,11 @@ import React from "react";
 
 const AvatarAtom = ({ img, className }) => {
   return (
-    <div>
+    <div className="cursor-pointer">
       <img
         src={`./src/assets/${img}`}
         alt="Photo"
-        className={`h-10 w-12 mr-2 rounded-full ${className} cursor-pointer duration-500`}
+        className={`h-14 w-14 mr-2 rounded-full  ${className}`}
       />
     </div>
   );

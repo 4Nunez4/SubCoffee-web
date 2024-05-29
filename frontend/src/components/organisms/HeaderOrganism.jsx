@@ -202,30 +202,18 @@ function HeaderOrganism() {
         </nav>
       ) : (
         <>
-          <nav className="flex justify-between items-center bg-[#009100] fixed w-full m-0 top-0 p-4 shadow-sm z-20">
+          <nav className="flex justify-between items-center bg-[#297707] fixed w-full  h-20 m-0 top-0 p-4 shadow-sm z-20">
             <div className="flex items-center">
               <AvatarAtom img="isotipo-SubCoffee.png" />
-              <Link to="/" className="text-gray-200 text-2xl font-semibold">
+              <Link to="/" className="text-gray-200 text-2xl font-bold">
                 SubCoffee
               </Link>
             </div>
             <div className="flex items-center gap-x-3">
-              <div className="cursor-pointer">
-                {isMoonSelected ? (
-                  <icono.iconoLuna
-                    onClick={toggleTheme}
-                    className="text-white"
-                  />
-                ) : (
-                  <icono.iconoSol
-                    onClick={toggleTheme}
-                    className="text-white"
-                  />
-                )}
-              </div>
               <Button
+                variant="ghost"
                 onClick={() => setModalOpen(true)}
-                className="border-2 border-[#009100] bg-gray-100 text-[#009100] font-bold rounded-lg shadow-lg hover:bg-[#f0fff0] hover:text-[#006600] hover:border-[#006600] hover:shadow-xl hover:scale-105 transform duration-300 transition-all ease-in-out"
+                className=" text-white font-bold rounded-lg shadow-lg hover:text-[#297707] "
               >
                 Iniciar sesión
               </Button>
@@ -233,6 +221,7 @@ function HeaderOrganism() {
           </nav>
           <FormLogin
             open={modalOpen}
+            
             title="Iniciar sesión"
             onClose={() => setModalOpen(false)}
           />

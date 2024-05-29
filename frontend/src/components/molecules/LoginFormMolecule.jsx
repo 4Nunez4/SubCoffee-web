@@ -81,7 +81,7 @@ const LoginFormMolecule = () => {
         ¿Olvidaste tu contraseña?
       </a>
       <ModalFooter className="flex justify-center">
-        <Button type="submit" className="bg-gray-600 text-white"> 
+        <Button type="submit" color="#297707 " variant="ghost" className=" font-bold rounded-lg shadow-lg text-[#297707] "> 
           Iniciar Sesión
         </Button>
       </ModalFooter>
