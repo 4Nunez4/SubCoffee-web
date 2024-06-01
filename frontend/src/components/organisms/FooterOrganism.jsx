@@ -39,13 +39,13 @@ const FooterOrganism = () => {
                 <Button
                   href="mailto:info@subcoffee.com"
                   as={Link}
-                  className="bg-[#e0e0e0]"
+                  className="bg-[#ffffff]"
                   startContent={<GmailIcon />}
                 ></Button>
                 <Button
                   href="https://www.youtube.com/channel/your-channel"
                   as={Link}
-                  className="bg-[#e0e0e0]"
+                  className="bg-[#ffffff]"
                   startContent={<YoutubeIcon />}
                 ></Button>
               </div>

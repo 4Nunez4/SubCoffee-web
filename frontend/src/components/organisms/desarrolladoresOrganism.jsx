@@ -1,12 +1,11 @@
 import React from "react";
 import DesarrolladorAtom from "../atoms/desarrollador";
-import { button } from "@nextui-org/theme";
 
 const DesarrolladoresOrganism = () => {
   const datos = [
     {
-      title: "",
-      img: "cafeseco.jpeg",
+      title: "Jorge Enrique Nuñez Molina",
+      img: "jorge.png",
       description: (
         <button className="bg-[#e0e0e0] text-[#009100] px-4 py-2 rounded-md hover:bg-[#009100] hover:text-white">
           contactame
@@ -14,8 +13,8 @@ const DesarrolladoresOrganism = () => {
       ),
     },
     {
-      title: "Tipo mojado",
-      img: "cafe_mojado.png",
+      title: "Juan Camilo Realpe Ceron",
+      img: "juan.png",
       description: (
         <button className="bg-[#e0e0e0] text-[#009100] px-4 py-2 rounded-md hover:bg-[#009100] hover:text-white">
           contactame
@@ -23,8 +22,8 @@ const DesarrolladoresOrganism = () => {
       ),
     },
     {
-      title: "Tipo Molido",
-      img: "cafe_molido.png",
+      title: "Laura Katalina Muñoz Valderrama",
+      img: "katalina.png",
       description: (
         <button className="bg-[#e0e0e0] text-[#009100] px-4 py-2 rounded-md hover:bg-[#009100] hover:text-white">
           contactame
@@ -32,8 +31,8 @@ const DesarrolladoresOrganism = () => {
       ),
     },
     {
-      title: "Tipo Molido Grueso",
-      img: "cafe_molido_grueso.png",
+      title: "Valentima Diaz Lerma",
+      img: "valentina.png",
       description: (
         <button className="bg-[#e0e0e0] text-[#009100] px-4 py-2 rounded-md hover:bg-[#009100] hover:text-white">
           contactame
@@ -41,8 +40,8 @@ const DesarrolladoresOrganism = () => {
       ),
     },
     {
-      title: "Tipo Molido Delgado",
-      img: "cafe_molido_delgado.png",
+      title: "Jose Alejandro Velez",
+      img: "jose.png",
       description: (
         <button className="bg-[#e0e0e0] text-[#009100] px-4 py-2 rounded-md hover:bg-[#009100] hover:text-white">
           contactame
@@ -50,8 +49,8 @@ const DesarrolladoresOrganism = () => {
       ),
     },
     {
-      title: "Tipo Molido Delgado",
-      img: "cafe_molido_delgado.png",
+      title: "James Alfaro ",
+      img: "james.png",
       description: (
         <button className="bg-[#e0e0e0] text-[#009100] px-4 py-2 rounded-md hover:bg-[#009100] hover:text-white">
           contactame

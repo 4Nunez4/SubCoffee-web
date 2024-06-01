@@ -19,7 +19,7 @@ const DesarrolladorAtom = ({ title, img, description }) => {
     <div
       className="relative bg-gray-300 text-gray-500 rounded-lg p-4 w-60 h-40 transition-all duration-1000 hover:scale-105 cursor-pointer flex flex-col items-center"
       style={{
-        backgroundImage: `url(./src/assets/${img})`,
+        backgroundImage: `url(./src/assets/desarrolladores/${img})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
