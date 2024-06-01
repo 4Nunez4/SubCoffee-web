@@ -1,9 +1,0 @@
-import axiosClient from "./axios"
-
-export const getDeparts = () => axiosClient.get("/v1/departamentos")
-export const getDepart = (id) => axiosClient.get(`/v1/departamentos/${id}`)
-export const getDepartsActivos = () => axiosClient.get(`/v1/departamentos_activos`)
-export const createDeparts = (data) => axiosClient.post("/v1/departamentos", data)
-export const updateDeparts = (id, data) => axiosClient.put(`/v1/departamentos/${id}`, data)
-export const UpdateDepartDesact = (id) => axiosClient.put(`/v1/departamentosdes/${id}`)
-export const UpdateDepartActivar = (id) => axiosClient.put(`/v1/departamentosac/${id}`)
