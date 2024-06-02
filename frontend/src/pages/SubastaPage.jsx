@@ -36,16 +36,16 @@ function SubastaPage() {
   }, [users, navigate]);
 
   return (
-    <div className="px-auto pb-8">
+    <div className="px-auto pb-8 bg-[#00684a]">
       <ImageSlider />
       {
         users.rol_user !== "admin" && (
           <div className="px-16">
-            <p className="pl-4 text-xl">Subastas</p>
+            <p className="pl-4 pb-4 text-white text-2xl font-semibold md:text-2xl  mb-4">Subastas</p>
             <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 sm:grid-cols-1 justify-center items-center gap-4">
               {subastas &&
                 subastas.map((subasta) => (
-                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[560px] p-2">
+                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[560px] p-2 bg-gray-300">
                     <CardHeader className="justify-between">
                       <div className="flex gap-x-3">
                         <Avatar
@@ -64,7 +64,7 @@ function SubastaPage() {
                         </div>
                       </div>
                       <Button
-                        className="bg-gray-100 text-foreground border-default-200"
+                        className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"
                         radius="md"
                         variant="bordered"
                         size="sm"
@@ -73,7 +73,7 @@ function SubastaPage() {
                         Visualizar perfil
                       </Button>
                     </CardHeader>
-                    <CardBody className="items-start w-full">
+                    <CardBody className="items-start w-full ">
                       <span className="flex justify-center items-center gap-x-3">
                         <b className="ml-5"> {subasta.pk_id_sub} - {subasta.nombre_tipo_vari} </b>
                         <div className={`rounded-lg border
@@ -123,14 +123,14 @@ function SubastaPage() {
                         </div>
                       </CardBody>
                       <CardFooter className="flex justify-center gap-x-4">
-                        <Button
-                          className="bg-gray-400"
+                        <button
+                          className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500"
                           radius="md"
                           size="lg"
                           onClick={() => handdleModaSub(subasta.pk_id_sub)}
                         >
                           Visualizar Subasta
-                        </Button>
+                        </button>
                       </CardFooter>
                     </CardBody>
                   </Card>

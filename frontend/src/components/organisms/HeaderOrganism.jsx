@@ -59,7 +59,7 @@ function HeaderOrganism() {
   return (
     <>
       {localUser ? (
-        <nav className="flex justify-between items-center bg-[#00684a] p-4 shadow-sm">
+        <nav className="flex justify-between items-center bg-[#061621] p-4 shadow-sm">
           <div className="flex flex-col">
             <Link to="/" className="text-gray-200 text-2xl font-semibold">
               Bienvenido

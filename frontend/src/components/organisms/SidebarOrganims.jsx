@@ -51,10 +51,10 @@ const SidebarOrganims = () => {
   }, [open]);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen ">
       {sidebar ? (
         <div
-          className={`${open ? "w-60" : "w-20"} bg-[#e0e0e0] max-h-full p-5 pt-5 relative duration-300`}
+          className={`${open ? "w-60" : "w-20"} bg-[#061621] max-h-full p-5 pt-5 relative duration-300`}
         >
         <img
           src="./src/assets/control.png"
@@ -68,7 +68,7 @@ const SidebarOrganims = () => {
             className={`cursor-pointer duration-500 h-10 w-10 ${open ? "rotate-[360deg]" : ""}`}
           />
           <h1
-            className={`text-[#a1653d] origin-left ml-2 font-medium text-2xl duration-200 overflow-hidden whitespace-nowrap ${
+            className={`text-white origin-left ml-2 font-medium text-2xl duration-200 overflow-hidden whitespace-nowrap ${
               !open && "scale-0"
             }`}
             style={{ maxWidth: "calc(100% - 4rem)" }}
@@ -83,9 +83,9 @@ const SidebarOrganims = () => {
                 to={Menu.link}
                 key={index}
                 onClick={() => setActiveLink(Menu.link)}
-                className={`flex rounded-md p-2 cursor-pointer hover:bg-[#e9ff99] hover:text-white text-[#009100] text-sm items-center gap-x-3 ${
+                className={`flex rounded-md p-2 cursor-pointer hover:bg-[#00ed64] hover:text-[#061621] text-white text-sm items-center gap-x-3 ${
                   Menu.gap ? "mt-9" : "mt-2"
-                } ${activeLink === Menu.link ? "hover:bg-[#e9ff99] text-white" : ""}`}
+                } ${activeLink === Menu.link ? "hover:bg-[#00ed64] text-white" : ""}`}
               >
                 <div>{React.createElement(Menu.icon, { size: "20" })}</div>
                 <span
