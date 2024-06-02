@@ -17,7 +17,7 @@ const Dashboard = () => {
   }, [isAuthenticated])
 
   return auth && user ? (
-    <div className="flex flex-auto h-auto bg-gray-50">
+    <div className="flex flex-auto h-auto">
       <SidebarOrganims />
       <div className="grow">
         <HeaderOrganism />
@@ -25,9 +25,9 @@ const Dashboard = () => {
       </div>
     </div>
   ) : (
-    <div className="flex-auto h-auto bg-gray-50">
+    <div className="flex-auto h-auto">
       <HeaderOrganism />
-      <main className="grow mt-16">
+      <main className="grow mt-16 ">
         <Outlet />
       </main>
       <FooterOrganism />

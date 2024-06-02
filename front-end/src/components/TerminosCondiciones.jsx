@@ -1,8 +1,7 @@
 // TerminosyCondiciones.js
 import React, { useState } from 'react';
 import Checkbox from './atomos/dashboard/CheckBox';
-import Button from './moleculas/ButtonLogin';
-import Text from './moleculas/TextLogin';
+
 import logo from '../assets/logosubcoffe.png';
 import ButtonRI from './atomos/dashboard/ButtonRI';
 

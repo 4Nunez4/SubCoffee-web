@@ -1,61 +1,185 @@
-import React, { useEffect } from 'react';
-import { useAuthContext } from '../context/AuthContext';
-
+import React, { useEffect } from "react";
+import { useAuthContext } from "../context/AuthContext";
+import logo from "../assets/isotipo-SubCoffee.png";
+import FooterOrganism from "../components/organisms/FooterOrganism";
 function PoliticasYCondicionesPageA() {
-    const { getUsers } = useAuthContext()
-    useEffect(() => {
-        getUsers()
-      }, []);
+  const { getUsers } = useAuthContext();
+  useEffect(() => {
+    getUsers();
+  }, []);
 
-    return (
-        <div className="px-44 py-8">
-            <h1 className="text-3xl font-bold text-center mb-8">Política de Privacidad y Uso de Datos</h1>
-            <p className="mb-4">Bienvenido/a a la plataforma de subastas de café en línea. En esta página, nos preocupamos profundamente por la privacidad y seguridad de nuestros usuarios. Por ello, hemos desarrollado esta política detallada que explica cómo recopilamos, usamos, compartimos y protegemos la información personal que usted nos proporciona. Al utilizar nuestros servicios, usted acepta los términos descritos a continuación.</p>
+  return (
+    <div className=" flex flex-col items-center justify-center bg-[#00684a] text-white">
+      <h1 className="text-3xl font-semibold text-center mb-8 mt-4">
+        Políticas de privacidad
+      </h1>
 
-            <h3 className="text-xl font-bold mb-2">Información que Recopilamos</h3>
-            <p className="mb-4">Recopilamos varios tipos de información para mejorar su experiencia de usuario y ofrecer un servicio de calidad:</p>
-            <ul className="list-disc list-inside mb-4">
-                <li>Información Personal: Cuando se registra en nuestro sitio web, le solicitamos cierta información personal, como su nombre, dirección de correo electrónico, dirección postal y número de teléfono. Esta información es necesaria para crear su cuenta y facilitar nuestras transacciones.</li>
-                <li>Información de Pago: Si realiza una compra en nuestra plataforma, necesitaremos información de pago, como detalles de tarjetas de crédito o cuentas bancarias, para procesar sus transacciones.</li>
-                <li>Información de Uso: Recopilamos datos sobre cómo interactúa con nuestra plataforma, como sus patrones de navegación, páginas visitadas, consultas de búsqueda y artículos vistos.</li>
-                <li>Información de Comunicación: Si se comunica con nuestro equipo de soporte o envía mensajes a otros usuarios a través de nuestra plataforma, almacenaremos esos mensajes para resolver problemas o mejorar nuestros servicios.</li>
-            </ul>
+      <div className=" py-6 w-full b overflow-y-auto  px-44 ">
+        <section id="primera">
+          <div className="flex-grow">
+            <p className="text-2xl font-semibold mb-4">
+              <h2>Fecha de efectividad</h2> 2024
+            </p>
+            <p className="text-lg">
+              Bienvenido a SubCoffe, la plataforma de subasta en línea enfocada
+              en el café pergamino de calidad directamente de los campesinos del
+              Huila, Colombia. Al utilizar nuestro sitio web ubicado en
+              [Ingresar URL del Sitio Web] (en adelante, el "Sitio Web"), usted
+              acepta estar vinculado por estos Términos y Condiciones de Uso (en
+              adelante, los "Términos"), que rigen su acceso y uso del Sitio Web
+              y de los servicios ofrecidos por SubCoffe (en adelante, los
+              "Servicios").
+            </p>
 
-            <h3 className="text-xl font-bold mb-2">Uso de la Información</h3>
-            <p className="mb-4">Utilizamos la información recopilada para los siguientes propósitos:</p>
-            <ul className="list-disc list-inside mb-4">
-                <li>Proporcionar Servicios Personalizados: Utilizamos su información para ofrecer servicios personalizados, como sugerencias de café basadas en sus preferencias.</li>
-                <li>Procesar Transacciones: Utilizamos sus datos de pago para procesar sus compras y subastas de café.</li>
-                <li>Mejorar Nuestros Servicios: Analizamos la información para comprender mejor las necesidades y preferencias de nuestros usuarios y así mejorar continuamente nuestra plataforma.</li>
-                <li>Comunicación: Utilizamos su información de contacto para enviarle actualizaciones sobre subastas, promociones especiales y cambios en nuestras políticas.</li>
-            </ul>
+            <p className="text-lg">
+              Por favor, lea estos Términos cuidadosamente antes de acceder o
+              utilizar nuestro Sitio Web. Si no está de acuerdo con todos los
+              términos y condiciones de este acuerdo, entonces no puede acceder
+              al Sitio Web ni utilizar ninguno de los servicios. Al acceder o
+              usar cualquier parte del sitio, usted acepta estar sujeto a estos
+              Términos.
+            </p>
 
-            <h3 className="text-xl font-bold mb-2">Compartir Información</h3>
-            <p className="mb-4">Respetamos su privacidad y solo compartimos su información en las siguientes circunstancias:</p>
-            <ul className="list-disc list-inside mb-4">
-                <li>Proveedores de Servicios: Compartimos información con terceros que nos ayudan a proporcionar servicios, como procesadores de pagos y servicios de envío.</li>
-                <li>Cumplimiento Legal: Podemos divulgar información cuando sea requerido por ley, como en respuesta a una orden judicial o solicitud gubernamental.</li>
-                <li>Consentimiento: Compartiremos su información con su consentimiento explícito, como cuando elija compartir su actividad en nuestras redes sociales.</li>
-            </ul>
+            <div className="flex flex-col md:flex-row items-start mb-6">
+              <img
+                src={logo}
+                alt="Logo de SubCoffe"
+                className="w-32 h-auto mb-6 md:mr-8 max-w-full md:max-w-none"
+              />
+              <div>
+                <h2 className="text-2xl font-semibold mb-4">Descripción del Servicio</h2>
+                <p className="text-lg">
+                  SubCoffe proporciona una plataforma de subasta en línea que
+                  permite a los campesinos del Huila, Colombia, subastar su café
+                  pergamino de calidad. Los usuarios registrados pueden
+                  participar en las subastas para adquirir café directamente de
+                  los productores. SubCoffe actúa como intermediario entre los
+                  vendedores (campesinos) y los compradores, pero no participa
+                  en el proceso de pago entre las partes.
+                </p>
+              </div>
+            </div>
 
-            <h3 className="text-xl font-bold mb-2">Seguridad de la Información</h3>
-            <p className="mb-4">Implementamos medidas de seguridad físicas, técnicas y administrativas para proteger su información contra el acceso no autorizado, pérdida o alteración.</p>
-
-            <h3 className="text-xl font-bold mb-2">Cookies y Tecnologías Similares</h3>
-            <p className="mb-4">Utilizamos cookies y tecnologías similares para mejorar su experiencia en línea. Puede ajustar la configuración de su navegador para rechazar cookies, pero esto puede afectar la funcionalidad de nuestro sitio.</p>
-
-            <h3 className="text-xl font-bold mb-2">Privacidad de Menores</h3>
-            <p className="mb-4">Nuestros servicios no están dirigidos a menores de 18 años. No recopilamos intencionalmente información personal de menores sin el consentimiento de los padres o tutores.</p>
-
-            <h3 className="text-xl font-bold mb-2">Cambios en la Política de Privacidad</h3>
-            <p className="mb-4">Nos reservamos el derecho de actualizar esta política en cualquier momento. Le notificaremos sobre cambios significativos mediante un aviso en nuestro sitio web o por correo electrónico.</p>
-
-            <h3 className="text-xl font-bold mb-2">Contacto</h3>
-            <p className="mb-4">Si tiene alguna pregunta sobre nuestra política de privacidad o desea acceder, corregir o eliminar su información personal, contáctenos a través de [subcoffee@gmail.com] o nuestra dirección postal.</p>
-
-            <p>Al utilizar nuestra plataforma, usted acepta esta política de privacidad. Le agradecemos por confiar en nosotros con su información personal y nos comprometemos a proteger su privacidad en todo momento.</p>
-        </div>
-    );
+            
+          </div>
+        </section>
+        <section>
+            <h2 className="text-2xl font-semibold mb-4"> Registro de Usuarios</h2>
+            <p className="text-lg ">
+              Para acceder a ciertas funciones del Sitio Web, incluyendo la
+              participación en subastas, deberá registrarse y crear una cuenta
+              de usuario. Al registrarse, se compromete a proporcionar
+              información verdadera, precisa, actualizada y completa sobre
+              usted, según lo solicitado por el formulario de registro. SubCoffe
+              se reserva el derecho de suspender o terminar su cuenta si se
+              descubre que cualquier información proporcionada es falsa,
+              inexacta, desactualizada o incompleta.
+            </p>
+        </section>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Privacidad y Protección de Datos</h2>
+          <p className="text-lg">
+            SubCoffe toma seriamente la privacidad de sus usuarios. Recopilamos
+            y utilizamos sus datos personales de acuerdo con nuestra Política de
+            Privacidad, la cual se encuentra disponible en [Ingresar URL de la
+            Política de Privacidad]. Al utilizar nuestros Servicios, usted
+            consiente la recopilación, uso y compartición de sus datos
+            personales según lo establecido en nuestra Política de Privacidad.
+          </p>
+        </section>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4"> Cookies y Tecnologías de Seguimiento</h2>
+          <p className="text-lg">
+            El Sitio Web utiliza cookies y otras tecnologías de seguimiento para
+            mejorar su experiencia de usuario y recopilar datos sobre cómo
+            utiliza el sitio. Al usar nuestro Sitio Web, usted acepta el uso de
+            estas tecnologías, según se describe en nuestra Política de
+            Privacidad.
+          </p>
+        </section>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Uso de los Servicios</h2>
+          <p className="text-lg">
+            Al utilizar los Servicios de SubCoffe, usted se compromete a:
+          </p>
+          <ul className="mb-6 ml-8 list-disc text-lg">
+            <li>
+              No utilizar los Servicios para fines ilegales o no autorizados.
+            </li>
+            <li>
+              No recopilar información de otros usuarios sin su consentimiento.
+            </li>
+            <li>
+              Mantener la confidencialidad de su contraseña y otros datos de
+              acceso a su cuenta.
+            </li>
+            <li>
+              No publicar contenido falso, inexacto, engañoso, difamatorio o de
+              naturaleza ofensiva.
+            </li>
+            <li>
+              Cumplir con todas las leyes locales, nacionales e internacionales
+              aplicables.
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">
+         Derechos de Propiedad Intelectual
+          </h2>
+          <p className="text-lg">
+            Todo el contenido incluido en el Sitio Web, como textos, gráficos,
+            logos, imágenes, así como la compilación de dicho contenido, es
+            propiedad de SubCoffe o de sus licenciantes y está protegido por las
+            leyes de derechos de autor de Colombia y leyes internacionales de
+            derechos de autor. Usted se compromete a no reproducir, duplicar,
+            copiar, vender, revender o explotar cualquier parte del Servicio,
+            uso del Servicio, o acceso al Servicio sin el permiso expreso por
+            escrito de SubCoffe.
+          </p>
+        </section>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">
+             Modificación de los Términos
+          </h2>
+          <p className="text-lg ">
+            SubCoffe se reserva el derecho, a su sola discreción, de modificar o
+            reemplazar estos Términos en cualquier momento. Si las revisiones
+            son significativas, haremos lo posible por notificarle al menos 30
+            días antes de que los nuevos términos entren en vigencia. Lo que
+            constituye un cambio significativo será determinado a nuestra
+            discreción.
+          </p>
+        </section>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">
+            Limitación de Responsabilidad
+          </h2>
+          <p className="text-lg">
+            SubCoffe no será responsable por daños indirectos, incidentales,
+            especiales, consecuenciales o ejemplares, incluidos, pero no
+            limitados a, daños por pérdida de beneficios, buena voluntad, uso,
+            datos u otras pérdidas intangibles, resultantes de su acceso o uso o
+            la imposibilidad de acceder o usar el Servicio.
+          </p>
+        </section>
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">
+             Jurisdicción y Ley Aplicable
+          </h2>
+          <p className="text-lg">
+            Estos Términos se regirán e interpretarán de acuerdo con las leyes
+            de Colombia, sin dar efecto a ningún principio de conflictos de
+            leyes. Cualquier disputa relacionada con estos Términos o el
+            Servicio será resuelta en los tribunales competentes ubicados en
+            Colombia.
+          </p>
+        </section>
+       
+      </div>
+         <FooterOrganism />
+    </div>
+  );
 }
 
 export default PoliticasYCondicionesPageA;

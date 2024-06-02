@@ -26,7 +26,7 @@ import { useSubastaContext } from "../context/SubastaContext.jsx";
 export default function ListarNotificaciones() {
   const clickNot = ()=>{
     addNotification({
-      title: "hola putitos ",
+      title: "para  todos los usuarios",
       message: "esta funcionando correctamente ",
       duration: 4000,
       native: true,
@@ -108,7 +108,7 @@ export default function ListarNotificaciones() {
   }, []);
 
   const data = [
-    { uid: "fk_id_subasta", name: "id", sortable: true },
+    { uid: "fk_id_subasta", name: "Sala", sortable: true },
     { uid: "nombre_user", name: "Usuario", sortable: true },
     { uid: "tipo_not", name: "Tipo", sortable: true },
     { uid: "fecha_not", name: "Fecha", sortable: true },
@@ -173,9 +173,9 @@ export default function ListarNotificaciones() {
       case "actions": // Agregar este caso
         return (
 
-          <div className="flex gap-2"> {/* Agregar un contenedor flexible para los botones */}
+          <div className="flex gap-2 "> {/* Agregar un contenedor flexible para los botones */}
             <Button
-              className="bg-gray-200 text-green-600  hover:bg-green-600 hover:text-gray-200" /* Ajustar estilos del primer botón */
+              className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500" /* Ajustar estilos del primer botón */
               radius="md"
               size="sm"
               onPress={() => navigate(`/profile/${notificacion.fk_id_usuario}`)}
@@ -183,7 +183,7 @@ export default function ListarNotificaciones() {
               Visualizar perfil
             </Button>
             <Button
-              className="bg-gray-200 text-green-600  hover:bg-green-600 hover:text-gray-200"
+              className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"
               radius="md"
               size="sm"
               onClick={() => handdleModaSub(notificacion.fk_id_subasta)}
@@ -230,7 +230,7 @@ export default function ListarNotificaciones() {
 
   const topContent = useMemo(() => {
     return (
-      <div className="flex flex-col gap-4 px-10 pt-10">
+      <div className="flex flex-col gap-4 px-10 pt-10 ">
         <div className="flex justify-between gap-3 items-end">
           <Input
             isClearable
@@ -243,7 +243,7 @@ export default function ListarNotificaciones() {
           />
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">
+          <span className="text-white text-sm">
             Total {Notificaciones && Notificaciones.length} Notificaciones
           </span>
 
@@ -260,7 +260,7 @@ export default function ListarNotificaciones() {
 
   const bottomContent = useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center m-4">
+      <div className="py-2 px-2 flex justify-between items-center m-4 ">
         <Pagination
           isCompact
           showControls
@@ -270,7 +270,7 @@ export default function ListarNotificaciones() {
           total={pages}
           onChange={setPage}
         />
-        <div className="hidden sm:flex w-[30%] justify-end gap-2">
+        <div className="hidden sm:flex w-[30%] justify-end gap-2 ">
           <Button
             isDisabled={pages === 1}
             size="sm"
@@ -295,7 +295,8 @@ export default function ListarNotificaciones() {
   }, [items.length, page, pages, hasSearchFilter]);
 
   return (
-    <div className="mx-40">
+    <div className=" w-full bg-[#00684a]">
+         <div className="w-full h-auto px-8 ">
       <ModalSubCoffee
         open={abrirModal}
         onClose={() => setAbrirModal(false)}
@@ -306,7 +307,7 @@ export default function ListarNotificaciones() {
         bottomContent={bottomContent}
         bottomContentPlacement="outside"
         classNames={{
-          wrapper: "max-h-[482px]",
+          wrapper: " bg-[#061621] px-9 text-white drop-shadow-md md:drop-shadow-xl",
         }}
         sortDescriptor={sortDescriptor}
         topContent={topContent}
@@ -319,6 +320,7 @@ export default function ListarNotificaciones() {
               key={column.uid}
               align={column.uid === "actions" ? "center" : "start"}
               allowsSorting={column.sortable}
+              className="bg-[#00684a] text-white text-sm  drop-shadow-md md:drop-shadow-xl"
             >
               {column.name}
             </TableColumn>
@@ -345,6 +347,8 @@ export default function ListarNotificaciones() {
       </Button>
 
     </div>
+    </div>
+ 
   );
 
 }
