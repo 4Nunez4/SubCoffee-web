@@ -59,7 +59,7 @@ function SubastaPage() {
                           }
                         />
                         <div className="flex flex-col gap-1 items-start justify-center">
-                          <h4 className="text-small font-semibold leading-none text-default-600"> {subasta.nombre_user} </h4>
+                          <h4 className="text-small font-semibold leading-none text-white"> {subasta.nombre_user} </h4>
                           <h5 className="text-small -mt-1 tracking-tight text-default-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-[120px]"> @{subasta.email_user} </h5>
                         </div>
                       </div>

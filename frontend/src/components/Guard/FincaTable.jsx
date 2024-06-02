@@ -29,11 +29,11 @@ function FincaTable() {
   };
   
   return (
-    <div className="w-full">
-      <div className="flex justify-between py-4 gap-x-3 px-12 items-center">
-        <p className="text-center"> Tu finca tiene una historia que contar </p>
+    <div className="w-full ">
+      <div className="flex justify-between py-4 gap-x-3 px-12 items-center ">
+        <p className="text-center  text-lg"> Tu finca tiene una historia que contar </p>
         <Button
-          className="bg-slate-400 text-white"
+          className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"
           endContent={<PlusIcon />}
           onClick={() => handleToggleFinca("create")}
         >
@@ -56,11 +56,11 @@ function FincaTable() {
           pkFinca={pkFinca}
         />
       </div>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center  ">
         {fincas ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
             {fincas.map((result) => (
-              <Card key={result.pk_id_fin} className="py-4 w-80">
+              <Card key={result.pk_id_fin} className="py-4 w-80 bg-[#001e2b] text-white">
                 <CardHeader className="pb-0 px-8 flex-col items-start">
                   <div className="flex justify-between items-center gap-x-2">
                     <p className="uppercase font-bold text-xl">
@@ -94,12 +94,12 @@ function FincaTable() {
                   />
                 </CardBody>
                 <div className="flex justify-center items-center gap-2 flex-col px-10">
-                  <Button className="w-full flex" onPress={() => {setAbrirModalVariedad(true); setPkFinca(result.pk_id_fin)}}>
+                  <Button className="w-full  inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500" onPress={() => {setAbrirModalVariedad(true); setPkFinca(result.pk_id_fin)}}>
                     Ver variedades de la finca
                   </Button>
                   <Button
                     color="default"
-                    className="w-full"
+                    className="w-full border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500 "
                     startContent={<EditIcon />}
                     onClick={() => {
                       handleToggleFinca("update");
@@ -110,7 +110,7 @@ function FincaTable() {
                   </Button>
                   {result.estado_fin === "activo" ? (
                     <Button
-                      className="bg-red-600 text-white w-full"
+                      className="bg-red-600 text-white w-full py-2 px-4  font-semibold rounded-md "
                       startContent={<DesactivarIcon />}
                       onClick={() => {
                         desactivarFincas(result.pk_id_fin, user.pk_cedula_user);
