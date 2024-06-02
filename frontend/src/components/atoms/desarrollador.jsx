@@ -17,7 +17,7 @@ const DesarrolladorAtom = ({ title, img, description }) => {
 
   return (
     <div
-      className="relative bg-gray-300 text-gray-500 rounded-lg p-4 w-60 h-40 transition-all duration-1000 hover:scale-105 cursor-pointer flex flex-col items-center"
+      className="relative bg-gray-300 text-gray-500 rounded-lg p-4 w-70 h-52 transition-all duration-1000 hover:scale-105 cursor-pointer flex flex-col items-center"
       style={{
         backgroundImage: `url(./src/assets/desarrolladores/${img})`,
         backgroundSize: "cover",
@@ -33,7 +33,7 @@ const DesarrolladorAtom = ({ title, img, description }) => {
         </p>
       </div>
       {showDescription && (
-        <div className="absolute inset-0 bg-black bg-opacity-50 text-white flex items-center justify-center   rounded-lg ">
+        <div className="absolute inset-0 bg-[#001e2b] bg-opacity-80 text-white flex items-center justify-center   rounded-lg ">
           <p className="text-center">{description}</p>
           
         </div>

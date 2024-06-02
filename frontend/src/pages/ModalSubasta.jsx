@@ -114,7 +114,7 @@ function ModalSubasta({ onClose }) {
             />
           </div>
           <div className="shadow text-sm rounded-lg w-80">
-            <div className="bg-[#009100] p-2 rounded-t-lg">
+            <div className="bg-[#e9ff99] p-2 rounded-t-lg">
               <p className="text-xl text-white font-semibold text-center"> Datos de la subasta </p>
             </div>
             <div className="flex flex-col items-center">

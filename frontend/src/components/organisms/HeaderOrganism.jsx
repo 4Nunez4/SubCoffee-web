@@ -8,7 +8,6 @@ import {
   Autocomplete,
   AutocompleteItem,
   Avatar,
-  Button,
 } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -60,7 +59,7 @@ function HeaderOrganism() {
   return (
     <>
       {localUser ? (
-        <nav className="flex justify-between items-center bg-[#009100] p-4 shadow-sm">
+        <nav className="flex justify-between items-center bg-[#00684a] p-4 shadow-sm">
           <div className="flex flex-col">
             <Link to="/" className="text-gray-200 text-2xl font-semibold">
               Bienvenido
@@ -182,8 +181,8 @@ function HeaderOrganism() {
                     onClick={() =>
                       navigate(`/profile/${localUser.pk_cedula_user}`)
                     }
-                    className="text-center text-[#009100] hover:bg-[#009100] hover:text-white"
-                    color="bg-[#009100]"
+                    className="text-center text-[#009100] hover:bg-[#00684a] hover:text-white"
+                    color="bg-[#00684a]"
                   >
                     Perfil
                   </DropdownItem>
@@ -202,7 +201,7 @@ function HeaderOrganism() {
         </nav>
       ) : (
         <>
-          <nav className="flex justify-between items-center bg-[#297707] fixed w-full  h-20 m-0 top-0 p-4 shadow-sm z-20">
+          <nav className="flex justify-between items-center bg-[#00684a] fixed w-full  h-20 m-0 top-0 p-4 shadow-sm z-20">
             <div className="flex items-center">
               <AvatarAtom img="isotipo-SubCoffee.png" />
               <Link to="/" className="text-gray-200 text-2xl font-bold">
@@ -210,18 +209,16 @@ function HeaderOrganism() {
               </Link>
             </div>
             <div className="flex items-center gap-x-3">
-              <Button
-                variant="ghost"
+              <button
                 onClick={() => setModalOpen(true)}
-                className=" text-white font-bold rounded-lg shadow-lg hover:text-[#297707] "
+                className=" border-[#001e2b] inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"
               >
                 Iniciar sesión
-              </Button>
+              </button>
             </div>
           </nav>
           <FormLogin
             open={modalOpen}
-            
             title="Iniciar sesión"
             onClose={() => setModalOpen(false)}
           />

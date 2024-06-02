@@ -81,9 +81,9 @@ const LoginFormMolecule = () => {
         ¿Olvidaste tu contraseña?
       </a>
       <ModalFooter className="flex justify-center">
-        <Button type="submit" color="#297707 " variant="ghost" className=" font-bold rounded-lg shadow-lg text-[#297707] "> 
+        <button type="submit"   className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"> 
           Iniciar Sesión
-        </Button>
+        </button>
       </ModalFooter>
     </form>
   );

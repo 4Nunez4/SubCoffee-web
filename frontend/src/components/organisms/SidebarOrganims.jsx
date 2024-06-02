@@ -83,9 +83,9 @@ const SidebarOrganims = () => {
                 to={Menu.link}
                 key={index}
                 onClick={() => setActiveLink(Menu.link)}
-                className={`flex rounded-md p-2 cursor-pointer hover:bg-[#009100] hover:text-white text-[#009100] text-sm items-center gap-x-3 ${
+                className={`flex rounded-md p-2 cursor-pointer hover:bg-[#e9ff99] hover:text-white text-[#009100] text-sm items-center gap-x-3 ${
                   Menu.gap ? "mt-9" : "mt-2"
-                } ${activeLink === Menu.link ? "hover:bg-[#009100] text-white" : ""}`}
+                } ${activeLink === Menu.link ? "hover:bg-[#e9ff99] text-white" : ""}`}
               >
                 <div>{React.createElement(Menu.icon, { size: "20" })}</div>
                 <span

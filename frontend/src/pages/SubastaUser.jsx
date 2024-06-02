@@ -106,7 +106,7 @@ function SubastaUser() {
     <div className="p-4">
       <p className="font-bold p-1 text-xl items-center flex">
         {subasta.pk_id_sub} - {subasta.nombre_tipo_vari}
-        <span className="text-xs mx-4 p-1 rounded-lg bg-[#009100] text-[#e0e0e0]">
+        <span className="text-xs mx-4 p-1 rounded-lg bg-[#e9ff99] text-[#e0e0e0]">
           {subasta.estado_sub}
         </span>
       </p>
@@ -123,7 +123,7 @@ function SubastaUser() {
               />
             </div>
             <div className="shadow text-sm rounded-lg py-1">
-              <div className="bg-[#009100] p-2 rounded-t-lg">
+              <div className="bg-[#e9ff99] p-2 rounded-t-lg">
                 <p className="text-xl text-white font-semibold text-center">
                   Datos de la subasta
                 </p>

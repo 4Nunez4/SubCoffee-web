@@ -54,7 +54,7 @@ function ImageSlider() {
               <div
                 key={index}
                 className={`w-3 h-3 mx-2 rounded-full cursor-pointer ${
-                  index === currentIndex ? "bg-[#009100]" : "bg-gray-300"
+                  index === currentIndex ? "bg-[#e9ff99]" : "bg-gray-300"
                 }`}
                 onClick={() => setCurrentIndex(index)}
               ></div>
