@@ -45,7 +45,7 @@ function SubastaPage() {
             <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 sm:grid-cols-1 justify-center items-center gap-4">
               {subastas &&
                 subastas.map((subasta) => (
-                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[560px] p-2 bg-gray-300">
+                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[560px] p-2 bg-[#061621] text-white  ">
                     <CardHeader className="justify-between">
                       <div className="flex gap-x-3">
                         <Avatar
