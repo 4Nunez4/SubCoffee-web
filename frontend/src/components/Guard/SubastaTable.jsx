@@ -39,9 +39,9 @@ export default function SubastaTable() {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-gray-200 rounded-lg">
         <div className="flex justify-between py-4 gap-x-3 px-12 items-center">
-        <p className="text-center  text-lg"> Registra una subasta con tu café de alta calidad </p>
+        <p className="text-center font-semibold	text-[#00684a]  text-lg"> Registra una subasta con tu café de alta calidad </p>
         <Button
           className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"
           endContent={<PlusIcon />}
@@ -64,7 +64,7 @@ export default function SubastaTable() {
       {subastaForuser ? (
         <div className="grid grid-cols-3 justify-center items-center gap-4 p-3">
           {subastaForuser.map((subasta) => (
-            <Card key={subasta.pk_id_sub} className="max-w-[410px] bg-[#001e2b] text-white">
+            <Card key={subasta.pk_id_sub} className="max-w-[410px] bg-[#00684a] text-white">
               <CardBody className="items-center">
                 <span className="text-center flex items-center justify-center w-full gap-3">
                   {subasta.pk_id_sub} - {subasta.nombre_tipo_vari}

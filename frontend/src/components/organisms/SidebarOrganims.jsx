@@ -57,7 +57,7 @@ const SidebarOrganims = () => {
     <div className="flex min-h-screen ">
       {sidebar ? (
         <div
-          className={`${open ? "w-60" : "w-20"} bg-[#061621] max-h-full p-5 pt-5 relative duration-300`}
+          className={`${open ? "w-60" : "w-20"} bg-[#00684a] max-h-full p-5 pt-5 relative duration-300`}
         >
         <img
           src="./src/assets/control.png"
@@ -86,9 +86,9 @@ const SidebarOrganims = () => {
                 to={Menu.link}
                 key={index}
                 onClick={() => setActiveLink(Menu.link)}
-                className={`flex rounded-md p-2 cursor-pointer hover:bg-[#00ed64] hover:text-[#061621] text-white text-sm items-center gap-x-3 ${
-                  Menu.gap ? "mt-9" : "mt-2"
-                } ${activeLink === Menu.link ? "hover:bg-[#00ed64] text-white" : ""}`}
+                className={`flex rounded-md p-2 cursor-pointer text-white text-sm items-center gap-x-3 ${
+                  activeLink === Menu.link? "bg-[#061621] text-[#00684a]" : "hover:bg-[#061621] hover:text-[#00684a]"
+                } ${Menu.gap? "mt-9" : "mt-2"}`}
               >
                 <div>{React.createElement(Menu.icon, { size: "20" })}</div>
                 <span

@@ -29,9 +29,9 @@ function FincaTable() {
   };
   
   return (
-    <div className="w-full ">
+    <div className="w-full bg-gray-200 rounded-lg">
       <div className="flex justify-between py-4 gap-x-3 px-12 items-center ">
-        <p className="text-center  text-lg"> Tu finca tiene una historia que contar </p>
+        <p className="text-center text-[#00684a] text-xl	font-bold"> Tu finca tiene una historia que contar </p>
         <Button
           className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"
           endContent={<PlusIcon />}
@@ -60,7 +60,7 @@ function FincaTable() {
         {fincas ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
             {fincas.map((result) => (
-              <Card key={result.pk_id_fin} className="py-4 w-80 bg-[#001e2b] text-white">
+              <Card key={result.pk_id_fin} className="py-4 w-80 bg-[#00684a] text-white">
                 <CardHeader className="pb-0 px-8 flex-col items-start">
                   <div className="flex justify-between items-center gap-x-2">
                     <p className="uppercase font-bold text-xl">
@@ -97,7 +97,7 @@ function FincaTable() {
                   <Button className="w-full  inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500" onPress={() => {setAbrirModalVariedad(true); setPkFinca(result.pk_id_fin)}}>
                     Ver variedades de la finca
                   </Button>
-                  <Button
+                  <button
                     color="default"
                     className="w-full border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500 "
                     startContent={<EditIcon />}
@@ -107,7 +107,7 @@ function FincaTable() {
                     }}
                   >
                     Editar finca
-                  </Button>
+                  </button>
                   {result.estado_fin === "activo" ? (
                     <Button
                       className="bg-red-600 text-white w-full py-2 px-4  font-semibold rounded-md "

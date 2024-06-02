@@ -9,15 +9,15 @@ function PoliticasYCondicionesPageA() {
   }, []);
 
   return (
-    <div className=" flex flex-col items-center justify-center bg-[#00684a] text-white">
-      <h1 className="text-3xl font-semibold text-center mb-8 mt-4">
+    <div className=" flex flex-col items-center justify-center bg-gray-300 text-gray-700">
+      <h1 className="text-3xl font-semibold text-center mb-8 mt-4 text-[#00684a] ">
         Políticas de privacidad
       </h1>
 
       <div className=" py-6 w-full b overflow-y-auto  px-44 ">
         <section id="primera">
           <div className="flex-grow">
-            <p className="text-2xl font-semibold mb-4">
+            <p className="text-2xl font-semibold mb-4 text-[#00684a] ">
               <h2>Fecha de efectividad</h2> 2024
             </p>
             <p className="text-lg">
@@ -47,7 +47,7 @@ function PoliticasYCondicionesPageA() {
                 className="w-32 h-auto mb-6 md:mr-8 max-w-full md:max-w-none"
               />
               <div>
-                <h2 className="text-2xl font-semibold mb-4">Descripción del Servicio</h2>
+                <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">Descripción del Servicio</h2>
                 <p className="text-lg">
                   SubCoffe proporciona una plataforma de subasta en línea que
                   permite a los campesinos del Huila, Colombia, subastar su café
@@ -64,7 +64,7 @@ function PoliticasYCondicionesPageA() {
           </div>
         </section>
         <section>
-            <h2 className="text-2xl font-semibold mb-4"> Registro de Usuarios</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-[#00684a] "> Registro de Usuarios</h2>
             <p className="text-lg ">
               Para acceder a ciertas funciones del Sitio Web, incluyendo la
               participación en subastas, deberá registrarse y crear una cuenta
@@ -77,7 +77,7 @@ function PoliticasYCondicionesPageA() {
             </p>
         </section>
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Privacidad y Protección de Datos</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">Privacidad y Protección de Datos</h2>
           <p className="text-lg">
             SubCoffe toma seriamente la privacidad de sus usuarios. Recopilamos
             y utilizamos sus datos personales de acuerdo con nuestra Política de
@@ -88,7 +88,7 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="text-2xl font-semibold mb-4"> Cookies y Tecnologías de Seguimiento</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] "> Cookies y Tecnologías de Seguimiento</h2>
           <p className="text-lg">
             El Sitio Web utiliza cookies y otras tecnologías de seguimiento para
             mejorar su experiencia de usuario y recopilar datos sobre cómo
@@ -98,7 +98,7 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="text-2xl font-semibold mb-4">Uso de los Servicios</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">Uso de los Servicios</h2>
           <p className="text-lg">
             Al utilizar los Servicios de SubCoffe, usted se compromete a:
           </p>
@@ -124,7 +124,7 @@ function PoliticasYCondicionesPageA() {
           </ul>
         </section>
         <section>
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
          Derechos de Propiedad Intelectual
           </h2>
           <p className="text-lg">
@@ -139,7 +139,7 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
              Modificación de los Términos
           </h2>
           <p className="text-lg ">
@@ -152,7 +152,7 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
             Limitación de Responsabilidad
           </h2>
           <p className="text-lg">
@@ -164,7 +164,7 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
              Jurisdicción y Ley Aplicable
           </h2>
           <p className="text-lg">

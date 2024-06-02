@@ -36,16 +36,16 @@ function SubastaPage() {
   }, [users, navigate]);
 
   return (
-    <div className="px-auto pb-8 bg-[#00684a]">
+    <div className="px-auto pb-8 bg-gray-300">
       <ImageSlider />
       {
         users.rol_user !== "admin" && (
           <div className="px-16">
-            <p className="pl-4 pb-4 text-white text-2xl font-semibold md:text-2xl  mb-4">Subastas</p>
+            <p className="pl-4 pb-4 text-[#00684a]  text-2xl font-semibold md:text-2xl  mb-4">Subastas</p>
             <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 sm:grid-cols-1 justify-center items-center gap-4">
               {subastas &&
                 subastas.map((subasta) => (
-                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[560px] p-2 bg-[#061621] text-white  ">
+                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[560px] p-2 bg-[#00684a] text-white  ">
                     <CardHeader className="justify-between">
                       <div className="flex gap-x-3">
                         <Avatar

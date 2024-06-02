@@ -243,7 +243,7 @@ export default function ListarNotificaciones() {
           />
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-white text-sm">
+          <span className="text-[#00684a] text-xl	font-bold">
             Total {Notificaciones && Notificaciones.length} Notificaciones
           </span>
 
@@ -295,7 +295,7 @@ export default function ListarNotificaciones() {
   }, [items.length, page, pages, hasSearchFilter]);
 
   return (
-    <div className=" w-full bg-[#00684a]">
+    <div className=" w-full bg-gray-300">
          <div className="w-full h-auto px-8 ">
       <ModalSubCoffee
         open={abrirModal}
@@ -307,7 +307,7 @@ export default function ListarNotificaciones() {
         bottomContent={bottomContent}
         bottomContentPlacement="outside"
         classNames={{
-          wrapper: " bg-[#061621] px-9 text-white drop-shadow-md md:drop-shadow-xl",
+          wrapper: " bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base",
         }}
         sortDescriptor={sortDescriptor}
         topContent={topContent}
@@ -320,7 +320,7 @@ export default function ListarNotificaciones() {
               key={column.uid}
               align={column.uid === "actions" ? "center" : "start"}
               allowsSorting={column.sortable}
-              className="bg-[#00684a] text-white text-sm  drop-shadow-md md:drop-shadow-xl"
+              className="bg-[#001e2b] text-white text-sm  drop-shadow-md md:drop-shadow-xl"
             >
               {column.name}
             </TableColumn>
