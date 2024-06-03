@@ -43,7 +43,7 @@ export const VariedadUserProvider = ({ children }) => {
       const response = await createVariedad(data);
       setMensaje(response.data.message);
       getTipoVariedadesActivas(id, id_finca)
-      getVariForUser(id, id_finca)
+      getVariForUser(id_finca)
       setModalMessage(true);
     } catch (error) {
       setErrors([error.response.data.message]);
@@ -61,10 +61,10 @@ export const VariedadUserProvider = ({ children }) => {
     }
   };
 
-  const desactivarVaris = async (id, user, id_finca) => {
+  const desactivarVaris = async (id, id_finca) => {
     try {
       const response = await updateVariedadDesact(id);
-      getVariForUser(user, id_finca);
+      getVariForUser(id_finca);
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {
@@ -72,10 +72,10 @@ export const VariedadUserProvider = ({ children }) => {
     }
   };
 
-  const activarVaris = async (id, user, id_finca) => {
+  const activarVaris = async (id, id_finca) => {
     try {
       const response = await updateVariedadActivar(id);
-      getVariForUser(user, id_finca);
+      getVariForUser(id_finca);
       setMensaje(response.data.message);
       setModalMessage(true);
     } catch (error) {

@@ -297,8 +297,6 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
         startContent={<icono.iconoDescript />}
         variant="bordered"
         placeholder="Ingresa la descripción de la subasta"
-        disableAnimation
-        disableAutosize
         classNames={{
           base: "w-full",
           input: "resize-y min-h-[40px]",
