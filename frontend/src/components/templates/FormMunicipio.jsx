@@ -4,14 +4,13 @@ import RegisterMunicipioMolecule from "../molecules/RegisterMunicipioMolecule";
 import { useMunicipioContext } from "../../context/MunicipioContext";
 
 function FormMunicipio ({ open, onClose, title, titleBtn, mode }) {
-  const { cerrarModal, serCerrarModal } = useMunicipioContext();
-
+  const { cerrarModal, setCerrarModal } = useMunicipioContext();
   useEffect(() => {
     if (cerrarModal) {
       onClose();
-      serCerrarModal(false);
+      setCerrarModal(false);
     }
-  }, [cerrarModal, onClose, serCerrarModal]);
+  }, [cerrarModal, onClose, setCerrarModal]);
 
   return (
     <>

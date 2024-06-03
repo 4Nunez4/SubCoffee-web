@@ -29,9 +29,9 @@ export const VariedadUserProvider = ({ children }) => {
   const [idVariedad, setIdVariedad] = useState(0);
   const [variedadForuser, setVariedadForUser] = useState([]);
 
-  const getVariForUser = async (id, id_finca) => {
+  const getVariForUser = async (id_finca) => {
     try {
-      const response = await getVariedad(id, id_finca);
+      const response = await getVariedad(id_finca);
       setVariedadForUser(response.data.data);
     } catch (error) {
       console.error(error);

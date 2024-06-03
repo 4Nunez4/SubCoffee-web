@@ -4,9 +4,7 @@ import RegisterFincaMolecule from "../molecules/RegisterFincaMolecule";
 import { useFincaContext } from "../../context/FincaContext";
 
 function FormFinca ({ open, onClose, title, titleBtn, mode }) {
-
   const { cerrarModal, setCerrarModal } = useFincaContext()
-
   useEffect(() => {
     if (cerrarModal) {
       onClose();

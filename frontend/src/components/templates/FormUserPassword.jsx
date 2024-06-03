@@ -5,13 +5,13 @@ import { useAuthContext } from "../../context/AuthContext";
 
 function FormUserPassword ({ open, onClose, title, titleBtn }) {
   const { cerrarModal, setCerrarModal } = useAuthContext();
-
   useEffect(() => {
     if (cerrarModal) {
       onClose();
       setCerrarModal(false);
     }
   }, [cerrarModal, onClose, setCerrarModal]);
+  
   return (
     <>
       <ModalForm open={open} onClose={onClose} title={title}>

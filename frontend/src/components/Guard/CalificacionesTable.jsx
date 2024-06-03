@@ -122,15 +122,15 @@ function CalificacionesTable({ titleBtn, fk_user }) {
         onClose={() => setAbrirModalCalificacion(false)}
         fk_user={fk_user}
         mode={mode}
-        title={"Calificar"}
-        titleBtn={titleBtn}
+        title={mode === "create" ? "Registrar Calificación": "Actualizar Calificación"}
+        titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
       />
       <div className="mt-4 w-full">
         {stats?.promedio == null || isNaN(stats.promedio) || stats.length === 0 ? (
           ""
         ) : (
           calificaciones.map((calificacion) => (
-            <div key={calificacion.pk_id_cali} className="shadow-small p-2 rounded-xl">
+            <div key={calificacion.pk_id_cali} className="shadow-small p-2 rounded-xl mb-2">
               <div className="flex gap-x-2 justify-between">
                 <div className="flex items-center gap-x-2">
                   <Avatar
@@ -156,7 +156,7 @@ function CalificacionesTable({ titleBtn, fk_user }) {
                 </div>
                 <div>
                   {calificacion.id_usuario_cali === userlocal.pk_cedula_user && (
-                    <Button className="bg-[#e0e0e0] text-[#009100]" onClick={() => { handleCalif("update"); setIdCalificacion(calificacion.pk_id_cali); }}>
+                    <Button className="bg-[#e0e0e0] text-[#009100]" onClick={() => { handleCalif("update"); setIdCalificacion(calificacion); }}>
                       Editar
                     </Button>
                   )}

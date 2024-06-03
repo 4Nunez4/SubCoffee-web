@@ -21,8 +21,8 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
   }, []);
 
   useEffect(() => {
-    if (user.pk_cedula_user && pkFinca) {
-      getVariForUser(user.pk_cedula_user, pkFinca);
+    if (pkFinca) {
+      getVariForUser(pkFinca);
     }
   }, []);
 

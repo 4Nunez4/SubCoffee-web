@@ -28,7 +28,7 @@ export const DeparProvider = ({ children }) => {
   const [idDepartamento, setIdDepartamento] = useState(0)
   
   const [departamentosActivos, setDepartamentosActivos] = useState([]);
-  const [cerrarModal, serCerrarModal] = useState(false)
+  const [cerrarModal, setCerrarModal] = useState(false)
 
   const getDepartamentos = async () => {
     try {
@@ -64,7 +64,7 @@ export const DeparProvider = ({ children }) => {
         getDepartamentos();
         setMensaje(responsee.data.message);
         setModalMessage(true);
-        serCerrarModal(true);
+        setCerrarModal(true);
       }
     } catch (error) {
       setErrors([error.response.data.message]);
@@ -78,7 +78,7 @@ export const DeparProvider = ({ children }) => {
         getDepartamentos();
         setMensaje(response.data.message);
         setModalMessage(true);
-        serCerrarModal(true);
+        setCerrarModal(true);
       }
     } catch (error) {
       setErrors([error.response.data.message]);
@@ -134,7 +134,7 @@ export const DeparProvider = ({ children }) => {
         getDepartamentosActivos,
         departamentosActivos,
         cerrarModal, 
-        serCerrarModal,
+        setCerrarModal,
       }}
     >
       <ModalMessage

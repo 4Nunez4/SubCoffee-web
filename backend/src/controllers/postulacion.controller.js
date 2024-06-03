@@ -47,7 +47,7 @@ export const createPostulacion = async (req, res) => {
 export const updatePostulacion = async (req, res) => {
     try {
         const id = req.params.id
-        let sql = `UPDATE postulacion SET oferta_pos = COALESCE('{oferta_pos}',), estado_pos = COALESCE('{estado_pos}' WHERE pk_id_pos = '${id}')`
+        let sql = `UPDATE postulacion SET oferta_pos = COALESCE('{oferta_pos}'), estado_pos = COALESCE('{estado_pos}' WHERE pk_id_pos = '${id}')`
         const result = await pool.query(sql)
         if(result.affectedRows > 0){
             res.status(200).json({message:"Postulacion actualizada con exito", data:result})

@@ -4,8 +4,6 @@ import { useVariedadUserContext } from "../../context/VariedadUserContext";
 import { useSubastaContext } from "../../context/SubastaContext";
 import { icono } from "../atoms/IconsAtom";
 import { useFincaContext } from "../../context/FincaContext";
-//import NotificacionContext from "../../context/NotificacionesContext";
-//import addNotification from "react-push-notification"
 
 const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
   const [formData, setFormData] = useState({
@@ -17,19 +15,13 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
     imagen_sub: "",
     descripcion_sub: "",
     certificado_sub: "",
-    variedad: "",                       
-    nombre_fin: "",
-    //notificaciones--
-    // tipo_not: "mensaje",
-    // texto_not: "la suasta a iniciado empieza a subastar",
-    // fk_id_subasta: pk_id_sub,
-    // fk_id_usuario: pk_cedula_user,
-    
+    variedad: "",
+    finca: "",
   });
- //const {createNots }= NotificacionContext();
+
   const { idSubasta, createSubs, updateSubs } = useSubastaContext();
-  const { getFincaUserActivas, fincasActivas = [] } = useFincaContext();
-  const { variedadForuser = [], getVariForUser } = useVariedadUserContext();
+  const { getFincaUserActivas, fincasActivas } = useFincaContext();
+  const { variedadForuser, getVariForUser } = useVariedadUserContext();
   const usuario = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
@@ -48,43 +40,28 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
           imagen_sub: idSubasta.imagen_sub,
           descripcion_sub: idSubasta.descripcion_sub,
           variedad: idSubasta.fk_variedad,
-          nombre_fin: idSubasta.fk_finca,
+          finca: idSubasta.fk_finca,
           certificado_sub: idSubasta.certificado_sub || "",
         });
-       
-        getVariForUser(usuario.pk_cedula_user, idSubasta.fk_finca);
+        getVariForUser(idSubasta.fk_finca);
       } catch (error) {
         console.error("Error en el sistema:", error);
       }
     }
   }, [mode, idSubasta]);
 
-  const handleFincaChange = (e) => {
-    const selectedFincaId = e.target.value;
-    const selectedFinca = fincasActivas.find(finca => finca.pk_id_fin === selectedFincaId);
-    const nombre_fin = selectedFinca ? selectedFinca.nombre_fin : '';
-    setFormData((prevData) => ({ ...prevData, nombre_fin, variedad: "" }));
-    if (nombre_fin) {
-      getVariForUser(usuario.pk_cedula_user, nombre_fin);
-    }
+  const handleFincaChange = async (finca) => {
+    setFormData(prevData => ({ ...prevData, finca, variedad: "" }));
+    getVariForUser(finca);
   };
 
   const handleVariedadChange = (e) => {
     const selectedVariedad = e.target.value;
-    setFormData((prevData) => ({ ...prevData, variedad: selectedVariedad }));
+    setFormData(prevData => ({ ...prevData, variedad: selectedVariedad }));
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    // addNotification({
-    //   title: "hola putitos ",
-    //   message: "esta funcionando correctamente ",
-    //   duration: 4000,
-    //   native: true,
-    //   onClick: ()=> window.location = "la url de donde quiere que lo redirija la notificacion "
-   
-    // })
     try {
       const data = new FormData();
       data.append("fecha_inicio_sub", formData.fecha_inicio);
@@ -96,19 +73,11 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
       data.append("certificado_sub", formData.certificado_sub);
       data.append("descripcion_sub", formData.descripcion_sub);
       data.append("fk_variedad", formData.variedad);
-      data.append("fk_finca", formData.finca); // Asegúrate de enviar la finca seleccionada
-      //notificaciones
-      // data.append("tipo_not", formData.tipo_not);
-      // data.append("texto_not", formData.texto_not);
-      // data.append("fk_id_subasta", formData.tipo_not);
-      // data.append("fk_id_usuario", formData.pk_cedula_user);
-
+      data.append("fk_finca", formData.finca);
       if (mode === "create") {
         createSubs(data, usuario.pk_cedula_user);
-       // createNots(data, usuario.pk_cedula_user);
-
       } else if (mode === "update") {
-        updateSubs(usuario.pk_cedula_user, data, idSubasta.pk_id_sub);
+        updateSubs(idSubasta.pk_id_sub, data, usuario.pk_cedula_user);
       }
     } catch (error) {
       console.error("Error en el sistema: " + error.message);
@@ -124,7 +93,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
   };
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 px-4">
+    <form onSubmit={onSubmit} className="space-y-4 px-4 -mt-4">
       <div className="grid">
         <div className="flex w-full justify-center rounded-full">
           <input
@@ -224,7 +193,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
             className="cursor-pointer items-center w-[345px] flex bg-transparent border-2 rounded-xl border-gray-200"
           >
             <div className="flex items-center h-5 transition duration-300">
-              <span className="text-gray-500 w-full ml-2">
+              <span className="text-gray-500 w-full ml-2 overflow-hidden text-ellipsis whitespace-nowrap max-w-[210px]">
                 {formData.certificado_sub ? (
                   typeof formData.certificado_sub === "string" ? (
                     formData.certificado_sub
@@ -245,25 +214,20 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
             {<icono.iconoFlor />}
           </span>
           <select
-            name="nombre_fin"
-            value={formData.nombre_fin}
-            onChange={handleFincaChange}
+            name="finca"
+            value={formData.finca}
+            onChange={(e) => handleFincaChange(e.target.value)}
             className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
           >
             <option value="" hidden>
               Seleccionar Finca
             </option>
-            {fincasActivas.length > 0 ? (
-              fincasActivas.map((finca) => (
-                <option value={finca.pk_id_fin} key={finca.pk_id_fin}>
-                  {finca.nombre_fin}
+            {fincasActivas.map(({pk_id_fin, nombre_fin}) => (
+                <option value={pk_id_fin} key={pk_id_fin}>
+                  {nombre_fin}
                 </option>
               ))
-            ) : (
-              <option value="" className="text-gray-600">
-                No has registrado ninguna finca
-              </option>
-            )}
+            }
           </select>
         </div>
         <div className="relative">
@@ -271,23 +235,21 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
             {<icono.iconoQuantity />}
           </span>
           <select
-            name="variedad"
+            name="variedadRef"
             value={formData.variedad}
             onChange={handleVariedadChange}
-            required
+            required={true}
             className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
           >
             <option value="" hidden>
               Seleccionar variedad
             </option>
-            {variedadForuser.length > 0 ? (
-              variedadForuser
-                .filter((variedad) => variedad.estado_vari === "activo")
-                .map((variedad) => (
-                  <option value={variedad.pk_id_vari} key={variedad.pk_id_vari}>
-                    {variedad.nombre_tipo_vari}
-                  </option>
-                ))
+            {variedadForuser ? (
+              variedadForuser.map(({pk_id_vari, nombre_tipo_vari}) => (
+                <option value={pk_id_vari} key={pk_id_vari}>
+                  {nombre_tipo_vari}
+                </option>
+              ))
             ) : (
               <option value="" className="text-gray-600">
                 Seleccionar finca.
@@ -346,7 +308,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
         name="descripcion_sub"
       />
       <ModalFooter className="flex justify-center">
-        <Button type="submit" className="bg-gray-600 text-white">
+        <Button type="submit" className="bg-gray-600 -mt-6 text-white">
           {titleBtn}
         </Button>
       </ModalFooter>

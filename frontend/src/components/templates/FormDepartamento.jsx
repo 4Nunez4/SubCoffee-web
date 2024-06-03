@@ -4,14 +4,14 @@ import RegisterDepartMolecule from "../molecules/RegisterDepartMolecule";
 import { useDepartContext } from "../../context/DeparContext";
 
 function FormDepartamento ({ open, onClose, title, titleBtn, mode }) {
-  const { cerrarModal, serCerrarModal } = useDepartContext();
+  const { cerrarModal, setCerrarModal } = useDepartContext();
 
   useEffect(() => {
     if (cerrarModal) {
       onClose();
-      serCerrarModal(false);
+      setCerrarModal(false);
     }
-  }, [cerrarModal, onClose, serCerrarModal]);
+  }, [cerrarModal, onClose, setCerrarModal]);
   
   return (
     <>

@@ -29,7 +29,7 @@ export const MunicipioProvider = ({ children }) => {
   const [municipiosForDepar, setMunicipiosForDepar] = useState([])
 
   const [municipiosActivos, setMunicipiosActivos] = useState([]);
-  const [cerrarModal, serCerrarModal] = useState(false)
+  const [cerrarModal, setCerrarModal] = useState(false)
 
   const getMunis = async () => {
     try {
@@ -65,7 +65,7 @@ export const MunicipioProvider = ({ children }) => {
         getMunis();
         setMensaje(response.data.message);
         setModalMessage(true);
-        serCerrarModal(true)
+        setCerrarModal(true)
       }
     } catch (error) {
       setErrors([error.response.data.message]);
@@ -79,7 +79,7 @@ export const MunicipioProvider = ({ children }) => {
         getMunis();
         setMensaje(response.data.message);
         setModalMessage(true);
-        serCerrarModal(true)
+        setCerrarModal(true)
       }
     } catch (error) {
       setErrors([error.response.data.message]);
@@ -135,7 +135,7 @@ export const MunicipioProvider = ({ children }) => {
         activarMunis,
 
         getMunisForDeparActivos,
-        serCerrarModal,
+        setCerrarModal,
         cerrarModal,
         municipiosActivos,
       }}

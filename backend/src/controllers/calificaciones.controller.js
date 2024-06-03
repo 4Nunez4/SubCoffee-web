@@ -89,20 +89,12 @@ export const updateCalificacion = async (req, res) => {
     const id = req.params.id;
     const { idUsuario, estrellas, opiniones, fk_usuario } = req.body;
     const result = await pool.query(
-      "UPDATE calificaciones SET id_usuario_cali = ?, estrellas_cali = ?, opiniones_cali = ?, fk_usuario = ? WHERE pk_id_cali = ? RETURNING *",
-      [idUsuario, estrellas, opiniones, fk_usuario, id]
-    );
+      "UPDATE calificaciones SET id_usuario_cali = ?, estrellas_cali = ?, opiniones_cali = ?, fk_usuario = ? WHERE pk_id_cali = ? ", [idUsuario, estrellas, opiniones, fk_usuario, id]);
 
-    if (result.rowCount === 0) {
+    if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Calificación no encontrada" });
     }
-
-    res
-      .status(200)
-      .json({
-        message: "Calificación actualizada",
-        calificacion: result.rows[0],
-      });
+    res.status(200).json({  message: "Calificación actualizada",});
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
   }
