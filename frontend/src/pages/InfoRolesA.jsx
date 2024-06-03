@@ -3,19 +3,19 @@ import React from 'react';
 function InfoRolesA() {
     return (
         <div className="py-6">
-            <h2 className="text-2xl font-semibold mb-4">Información de Roles</h2>
-            <p className="mb-4">
+            <h2 className="text-3xl font-semibold text-center mb-8 mt-4 text-[#00684a]">Información de Roles</h2>
+            <p className=" text-lg  text-center mb-8 mt-4">
                 Aquí tienes información sobre los roles disponibles en nuestra
                 plataforma:
             </p>
             <div className="grid grid-cols-1 gap-y-3">
-                <div className="border rounded-lg p-4 bg-gray-300">
-                    <h3 className="font-semibold">Rol: Administrador</h3>
-                    <p>
+                <div className="border rounded-lg p-4 bg-[#00684a] text-white">
+                    <h3 className="text-2xl font-semibold mb-4  text-[#ceb733] text-center">Administrador</h3>
+                    <p className='mb-4 text-lg '>
                         El administrador tiene el control total sobre la plataforma. Sus
                         funciones incluyen:
                     </p>
-                    <ul className="list-disc list-inside">
+                    <ul className="list-disc list-inside mb-4 text-lg ">
                         <li>Crear y gestionar la información de localización.</li>
                         <li>
                             Definir y gestionar los tipos de variedades de café disponibles
@@ -34,13 +34,13 @@ function InfoRolesA() {
                         </li>
                     </ul>
                 </div>
-                <div className="border rounded-lg p-4 bg-gray-300">
-                    <h3 className="font-semibold">Rol: Vendedor</h3>
-                    <p>
+                <div className="border rounded-lg p-4 bg-[#00684a] text-white">
+                    <h3 className="text-2xl font-semibold mb-4 text-[#ceb733] text-center">Vendedor</h3>
+                    <p className='mb-4 text-lg '>
                         El vendedor es responsable de agregar productos a la subasta. Sus
                         funciones incluyen:
                     </p>
-                    <ul className="list-disc list-inside">
+                    <ul className="list-disc list-inside mb-4 text-lg ">
                         <li>Registrar una finca en la plataforma.</li>
                         <li>
                             Registrar las variedades de café disponibles para la subasta.
@@ -59,9 +59,9 @@ function InfoRolesA() {
                         </li>
                     </ul>
                 </div>
-                <div className="border rounded-lg p-4 bg-gray-300">
-                    <h3 className="font-semibold">Rol: Comprador</h3>
-                    <p>
+                <div className="border rounded-lg p-4 bg-[#00684a] text-white">
+                    <h3 className="text-2xl font-semibold mb-4 text-[#ceb733] text-center">Comprador</h3>
+                    <p className='mb-4 text-lg '>
                         El comprador participa en las subastas realizando ofertas por los
                         productos disponibles. Sus funciones incluyen:
                     </p>

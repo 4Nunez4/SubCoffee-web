@@ -8,6 +8,7 @@ import ComoPujarUnaSubasta from "./ComoPujarUnaSubasta";
 import { icono } from "../components/atoms/IconsAtom";
 import { useAuthContext } from "../context/AuthContext";
 
+
 function AyudaPage() {
   const comoCrearRef = useRef(null);
   const comoPujarRef = useRef(null);
@@ -63,27 +64,27 @@ function AyudaPage() {
 
   return (
     <div
-      className={`p-8 px-44 mx-auto flex flex-col justify-center ${
+      className={`p-8 px-44 mx-auto flex flex-col justify-center bg-gray-300 ${
         isScrolled ? "scrolled" : ""
       }`}
     >
-      <div className="flex justify-center w-auto items-center">
+      <div className="flex justify-center w-auto items-center ">
         <ButtonGroup>
           <Button
             onClick={() => scrollToSection("comoCrear")}
-            className={`transition-opacity bg-[#e0e0e0] ${isScrolled ? "opacity-40" : ""}`}
+            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${isScrolled ? "opacity-40" : ""}`}
           >
             Como crear una subasta
           </Button>
           <Button
             onClick={() => scrollToSection("comoPujar")}
-            className={`transition-opacity bg-[#e0e0e0] ${isScrolled ? "opacity-40" : ""}`}
+            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${isScrolled ? "opacity-40" : ""}`}
           >
             Como pujar una subasta
           </Button>
           <Button
             onClick={() => scrollToSection("infoRoles")}
-            className={`transition-opacity bg-[#e0e0e0] ${isScrolled ? "opacity-40" : ""}`}
+            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${isScrolled ? "opacity-40" : ""}`}
           >
             Información de Roles
           </Button>
@@ -91,7 +92,7 @@ function AyudaPage() {
         <Button
           onClick={scrollToTop}
           startContent={<FlechaArriba />}
-          className={`transition-opacity fixed bottom-8 right-8 ${
+          className={`transition-opacity fixed bottom-8 right-8 inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] ${
             isScrolled ? "opacity-40" : ""
           }`}
         >
@@ -111,7 +112,7 @@ function AyudaPage() {
         {user ? (
           <div>
             <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
-              <p className="text-sm font-semibold text-gray-700 uppercase mb-2">
+              <p className="text-sm font-semibold text-[#00684a] uppercase mb-2">
                 ¿Tienes alguna duda?
               </p>
               <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
@@ -127,7 +128,7 @@ function AyudaPage() {
                   value={texto}
                   onChange={(e) => setTexto(e.target.value)}
                 />
-                <Button className="bg-gray-400 text-white hover:bg-gray-500 w-full rounded-lg">
+                <Button className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500 w-full ">
                   Enviar duda
                 </Button>
               </form>
@@ -137,6 +138,7 @@ function AyudaPage() {
           ""
         )}
       </div>
+
     </div>
   );
 }
