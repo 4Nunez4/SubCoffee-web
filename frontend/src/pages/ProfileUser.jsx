@@ -107,7 +107,7 @@ function ProfileUser() {
   };
 
   return (
-    <div className="px-16 mb-9 ">
+    <div className="px-16 mb-9 bg-gray-300">
       <FormUser
         open={abrirModal}
         onClose={() => setAbrirModal(false)}
@@ -134,7 +134,7 @@ function ProfileUser() {
             />
             {user.pk_cedula_user === localUser.pk_cedula_user && (
               <Button
-                className="bg-[#e0e0e0] text-[#009100] w-full mt-2"
+                className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500"
                 onClick={() => {
                   handleToggle("update");
                   setIdUser(user);
@@ -145,7 +145,7 @@ function ProfileUser() {
             )}
             {user.pk_cedula_user === localUser.pk_cedula_user && (
               <Button
-                className="bg-[#e0e0e0] text-[#009100] w-full mt-2"
+                className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500bg-[#e0e0e0] w-full mt-2"
                 onClick={() => {
                   setAbrirModalPassword(true);
                   setIdUser(user);
@@ -236,20 +236,20 @@ function ProfileUser() {
               Subastas Ganadas
             </button>
           </div>
-          <div>
+          <div className="">
             {user.rol_user !== "comprador" && activeTab === "creadas" && (
               <div>
                 <h2 className="text-lg font-semibold mb-4 text-center">
                   Subastas Creadas
-                </h2>
+                </h2 >
                 <div className={`grid ${ subastaForuser ? "md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 sm:grid-cols-1" : "" } justify-center items-center`} >
                   {subastaForuser ? (
                     subastaForuser.map((subasta) => (
                       <Card
                         key={subasta.pk_id_sub}
-                        className="max-w-[320px] p-2"
+                        className="max-w-[320px] m-2 bg-[#00684a] text-white"
                       >
-                        <CardBody className="items-center w-full">
+                        <CardBody className="items-center w-full ">
                           <span className="text-center flex justify-center items-center gap-x-3">
                             <b className="text-lg">
                               {subasta.pk_id_sub} - {subasta.nombre_tipo_vari}
@@ -312,14 +312,14 @@ function ProfileUser() {
                                   <p>${Number( subasta.precio_inicial_sub ).toLocaleString("es-ES")}</p>
                                 </div>
                                 {subasta.estado_sub === "cerrada" ? (
-                                  <div className="flex gap-x-2">
-                                    <p className="font-semibold text-[#a1653d]">Precio Final:</p>
-                                    <p className="text-[#009100] font-semibold">${Number(subasta.precio_final_sub).toLocaleString("es-ES")}</p>
+                                  <div className="">
+                                    <p className="font-bold text-lg text-center  text-[#ffffff]">Precio Final:</p>
+                                    <p className="text-[#001e2b] text-center text-lg font-bold">${Number(subasta.precio_final_sub).toLocaleString("es-ES")}</p>
                                   </div>
                                 ) : (
-                                  <div className="flex gap-x-2">
-                                    <p className="font-semibold text-[#a1653d]">Precio Final:</p>
-                                    <p className="text-[#009100] font-semibold">Desconocido</p>
+                                  <div className=" ">
+                                    <p className=" font-bold text-lg text-center text-[#ffffff]">Precio Final:</p>
+                                    <p className="text-[#001e2b] text-lg text-center font-semibold">Desconocido</p>
                                   </div>
                                 )}
                               </div>

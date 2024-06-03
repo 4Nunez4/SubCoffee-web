@@ -218,6 +218,7 @@ function HeaderOrganism() {
             </div>
           </nav>
           <FormLogin
+            className="bg-[#00684a] text-white"
             open={modalOpen}
             title="Iniciar sesión"
             onClose={() => setModalOpen(false)}

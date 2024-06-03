@@ -36,12 +36,13 @@ const LoginFormMolecule = () => {
   }, [isAuthenticated]);
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 px-4">
+    <form onSubmit={onSubmit} className="space-y-4 px-4 ">
       <FormRecuperarPassword
         open={abrirModalPassword}
         onClose={() => setAbrirModalPassword(false)}
         title={"Recuperar contraseña"}
         titleBtn={"Recuperar"}
+       
       />
       <Input
         type="email"
@@ -76,11 +77,11 @@ const LoginFormMolecule = () => {
       <a
         href="#RecuperarPassword"
         onClick={() => setAbrirModalPassword(true)}
-        className={`cursor-pointer text-xs underline hover:text-[#009100] text-black`}
+        className={`cursor-pointer text-xs underline hover:text-[#00ed64] text-white`}
       >
         ¿Olvidaste tu contraseña?
       </a>
-      <ModalFooter className="flex justify-center">
+      <ModalFooter className="flex justify-center ">
         <button type="submit"   className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"> 
           Iniciar Sesión
         </button>
