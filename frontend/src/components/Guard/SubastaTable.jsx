@@ -141,10 +141,10 @@ useEffect(() => {
                   </div>
                   {subasta.pk_cedula_user === usuario.pk_cedula_user && (
                     <Button
-                      className="bg-gray-400"
                       isDisabled={subasta.estado_sub === "abierta"? !subastaTerminada: subastaTerminada}
-                      startContent={<EditIcon />}
+                    className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] h-9 mt-2"
                       radius="md"
+                      startContent={<EditIcon />}  
                       onPress={() => {
                         handleToggle("update");
                         setIdSubasta(subasta);
@@ -214,7 +214,7 @@ useEffect(() => {
                 </CardBody>
                 <CardFooter className="flex justify-center gap-x-2 -mt-4">
                   <Button
-                    className="bg-gray-400"
+                    className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500"
                     radius="md"
                     isDisabled={subasta.estado_sub === "abierta" ||subasta.estado_sub === "proceso" ||subasta.estado_sub === "espera"? !subastaTerminada: subastaTerminada}
                     onClick={() => handdleModaSub(subasta.pk_id_sub)}
