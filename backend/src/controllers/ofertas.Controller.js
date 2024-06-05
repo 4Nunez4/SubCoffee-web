@@ -80,8 +80,10 @@ export const buscarOferta = async (req, res) => {
 
 export const eliminarOferta = async (req, res) => {
   try {
-    const [result] = await pool.query("DELETE FROM ofertas WHERE pk_id_ofer = ?", [
-      req.params.id,
+    const {id, user} = req.params
+
+    const [result] = await pool.query("DELETE FROM ofertas WHERE fk_id_subasta = ? AND fk_id_usuario = ?", [
+      id, user
     ]);
     if (result.affectedRows > 0) {
       res.status(200).json({ status: 200, message: "oferta eliminada con éxito." });

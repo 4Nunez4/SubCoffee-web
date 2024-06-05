@@ -60,6 +60,7 @@ export default function SubastaTable() {
 
 useEffect(() => {
   const intervalId = setInterval(() => {
+    if (subastaForuser) {
     subastaForuser.forEach((subasta) => {
       const { pk_id_sub } = subasta; 
       const { pk_cedula_user } = usuario; 
@@ -71,7 +72,7 @@ useEffect(() => {
 
       if (tiempo.includes("Subasta terminada")) {
         setSubastaTerminada(true);
-        desactivarSubs(pk_id_sub, pk_cedula_user);
+        EsperaSubs(pk_id_sub, pk_cedula_user);
         clearInterval(intervalId);
       }else if (tiempo.includes("A la subasta le quedan")) {
         setSubastaTerminada(true);
@@ -86,6 +87,7 @@ useEffect(() => {
         setSubastaTerminada(false);
       }
     });
+  }
   }, 1000);
   return () => clearInterval(intervalId);
 }, [subastaForuser, usuario]);

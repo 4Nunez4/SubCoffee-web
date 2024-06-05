@@ -8,6 +8,7 @@ import { usePostulantesContext } from "../context/PostulantesContext";
 import { useOfertasContext } from "../context/OfertasContext";
 import { useAuthContext } from "../context/AuthContext";
 import { useCalificacionesContext } from "../context/CalificacionesContext";
+import Swal from "sweetalert2";
 
 const colors = {
   orange: "#FFBA5A",
@@ -18,22 +19,13 @@ function SubastaUser() {
   const { id } = useParams();
   const [oferta, setOferta] = useState(0);
   const [tiempoRestante, setTiempoRestante] = useState("");
-  const { getSub, subasta } = useSubastaContext();
+  const { getSub, subasta, EsperaSubs, desactivarSubs } = useSubastaContext();
   const { getPostsActivos, postsActivos, desactivarPosts } = usePostulantesContext();
-  const { createOfert, ofertas, getOfertForSub } = useOfertasContext();
+  const { createOfert, ofertas, getOfertForSub, eliminarOfertas } = useOfertasContext();
   const { getCalificacionesUser, stats } = useCalificacionesContext();
   const { getUsers } = useAuthContext()
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const diferencia = calcularDiferencia(subasta.fecha_fin_sub);
-      setTiempoRestante(diferencia);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [subasta.fecha_fin_sub]);
 
   useEffect(() => {
     getUsers()
@@ -48,22 +40,74 @@ function SubastaUser() {
     getPostsActivos(id);
   }, [id, getSub, getPostsActivos]);
 
-  const calcularDiferencia = (fechaFin) => {
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (Array.isArray(subasta)) {
+        for (const subasta of subasta) {
+          const { pk_id_sub } = subasta;
+          const { pk_cedula_user } = user;
+  
+          const tiempo = calcularDiferencia(subasta.fecha_inicio_sub, subasta.fecha_fin_sub);
+          if (tiempo.includes("A la subasta le quedan")) {
+            Swal.fire({
+              text: "Comunícate con: Pepito Pérez",
+              icon: "question",
+              showCancelButton: true,
+              confirmButtonText: "Sí",
+              cancelButtonText: "Cancelar",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                const data = {
+                  fk_id_usuario: user.pk_cedula_user,
+                  fk_id_subasta: subasta.pk_id_sub,
+                };
+                desactivarPosts(data, id);
+                desactivarSubs(id, user.pk_cedula_user);
+                navigate(`/subcoffee`);
+              }
+            });
+          } else if (tiempo.includes("La subasta terminará en")) {
+            EsperaSubs(pk_id_sub, pk_cedula_user);
+          }          
+        }
+      }
+    }, 1000);
+    return () => clearInterval(intervalId);
+  }, [subasta, user]);
+  
+  const calcularDiferencia = (fechaInicio, fechaFin) => {
+    const inicio = new Date(fechaInicio);
     const fin = new Date(fechaFin);
     const ahora = new Date();
 
-    const diferenciaMs = fin - ahora;
-    if (diferenciaMs <= 0) return "Subasta terminada";
+    if (ahora < inicio) {
+      return `La subasta empezará dentro de ${calcularTiempoRestante(ahora, inicio)}`;
+    } else if (ahora > fin) {
+      return "Subasta terminada";
+    } else {
+      const diferenciaMs = fin - ahora;
+      const segundos = Math.floor((diferenciaMs / 1000) % 60);
+      const minutos = Math.floor((diferenciaMs / 1000 / 60) % 60);
+      const horas = Math.floor((diferenciaMs / 1000 / 60 / 60) % 24);
+      const dias = Math.floor(diferenciaMs / 1000 / 60 / 60 / 24);
 
-    const dias = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24));
-    const horas = Math.floor(
-      (diferenciaMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutos = Math.floor((diferenciaMs % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((diferenciaMs % (1000 * 60)) / 1000);
+      if (dias === 0 && horas === 0 && minutos < 43) {
+        return `A la subasta le quedan ${minutos} minutos y ${segundos} segundos`;
+      } else {
+        return `La subasta terminará en: ${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
+      }
+    }
+  };
 
+  const calcularTiempoRestante = (inicio, fin) => {
+    const diferenciaMs = fin - inicio;
+    const segundos = Math.floor((diferenciaMs / 1000) % 60);
+    const minutos = Math.floor((diferenciaMs / 1000 / 60) % 60);
+    const horas = Math.floor((diferenciaMs / 1000 / 60 / 60) % 24);
+    const dias = Math.floor(diferenciaMs / 1000 / 60 / 60 / 24);
     return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
   };
+
   const [precioActual, setPrecioActual] = useState(0);
 
   const handleSubmitOferta = async (e) => {
@@ -77,7 +121,6 @@ function SubastaUser() {
       };
       await createOfert(data, id);
       setOferta(0);
-      console.log("Oferta enviada:", data);
     } catch (error) {
       console.error("Error al enviar la oferta:", error);
     }
@@ -92,8 +135,23 @@ function SubastaUser() {
       if(user.pk_cedula_user === subasta.pk_cedula_user) {
         navigate(`/subcoffee`);
       } else {
-        await desactivarPosts(data, id);
-        navigate(`/subcoffee`);
+        Swal.fire({
+          text: "¿Estás seguro de salir de la subasta ? Si es asi se eliminaran las ofertas que hayas creado",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonText: "Sí",
+          cancelButtonText: "Cancelar",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            desactivarPosts(data, id);
+            eliminarOfertas(id, user.pk_cedula_user)
+            navigate(`/subcoffee`);
+            Swal.fire({
+              text: "Salida de subasta éxitoso!",
+              icon: "success",
+            });
+          }
+        });
       }
     } catch (error) {
       console.error("Error al desactivar la postulación:", error);
@@ -103,7 +161,7 @@ function SubastaUser() {
 
   useEffect(() => {
     const nuevoPrecioActual =
-    // Number(subasta.precio_inicial_sub) +
+    Number(subasta.precio_inicial_sub) +
       (Array.isArray(ofertas) && ofertas.length > 0
         ? Math.max(...ofertas.map((oferta) => oferta.oferta_ofer), 0)
         : 0);
@@ -174,7 +232,7 @@ function SubastaUser() {
               </div>
               <div className="flex flex-col items-center">
                 <p className="font-semibold text-[#a1653d]">Fecha fin de la subasta:</p>
-                <p className="text-[#00684a] font-semibold text-[16px] -mt-1">{tiempoRestante}</p>
+                <p className="text-[#00684a] font-semibold text-[16px] -mt-1">{calcularDiferencia(subasta.fecha_inicio_sub,subasta.fecha_fin_sub)}</p>
               </div>
               <div className="grid grid-cols-2 gap-x-2 py-2 px-2">
                 <div className="items-end flex flex-col">
@@ -224,7 +282,7 @@ function SubastaUser() {
                           />
                           <div>
                             <p className="font-semibold -mb-2">{oferta.nombre_user}</p>
-                            <p>$ {oferta.oferta_ofer}</p>
+                            <p>$ {oferta.oferta_ofer.toLocaleString()}</p>
                             <p className="text-xs -mt-1">{new Date(oferta.fecha_ofer).toLocaleString()}</p>
                           </div>
                         </div>
@@ -234,7 +292,7 @@ function SubastaUser() {
                         <div className="flex items-center bg-slate-100 py-1 pl-12 rounded-2xl">
                           <div className="flex text-end flex-col">
                             <p className="font-semibold -mb-2">{oferta.nombre_user}</p>
-                            <p>$ {oferta.oferta_ofer}</p>
+                            <p>$ {oferta.oferta_ofer.toLocaleString()}</p>
                             <p className="text-xs -mt-1">{new Date(oferta.fecha_ofer).toLocaleString()}</p>
                           </div>
                           <img
@@ -254,7 +312,7 @@ function SubastaUser() {
           </div>
           {subasta.pk_cedula_user !== user.pk_cedula_user && (
             <div className="bg-[#e0e0e0] rounded-xl p-4 mt-2 w-full">
-              <p className="text-center">Precio actual: ${precioActual}</p>
+              <p className="text-center">Precio actual: ${precioActual.toLocaleString()}</p>
               <form onSubmit={handleSubmitOferta} className="w-full flex flex-col items-center">
               <Slider
                 label="Añadir Puja"

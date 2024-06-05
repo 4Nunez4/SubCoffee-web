@@ -10,7 +10,7 @@ import { useAuthContext } from "../context/AuthContext";
 
 function SubastaPage() {
   const navigate = useNavigate();
-  const { getSubsMenoCerradas, subastasActivas, setIdSubasta, desactivarSubs, activarSubs, ProcesoSubs, EsperaSubs } = useSubastaContext();
+  const { getSubsMenoCerradas, subastasActivas, setIdSubasta, activarSubs, ProcesoSubs, EsperaSubs } = useSubastaContext();
   const { getUsers } = useAuthContext();
   const [abrirModal, setAbrirModal] = useState(false);
   const [subastas, setSubastas] = useState([]);
@@ -60,7 +60,7 @@ function SubastaPage() {
           const tiempo = calcularDiferencia(subasta.fecha_inicio_sub, subasta.fecha_fin_sub);
   
           if (tiempo.includes("Subasta terminada")) {
-            await desactivarSubs(pk_id_sub, pk_cedula_user);
+            await EsperaSubs(pk_id_sub, pk_cedula_user);
           } else if (tiempo.includes("A la subasta le quedan")) {
             await EsperaSubs(pk_id_sub, pk_cedula_user);
           } else if (tiempo.includes("La subasta terminará en")) {
@@ -107,7 +107,7 @@ function SubastaPage() {
   }, [users, navigate]);
 
   return (
-    <div className="px-auto pb-8 bg-gray-300">
+    <div className="px-auto pb-8">
       <ImageSlider />
       {users.rol_user !== "admin" && (
         <div className="px-16">

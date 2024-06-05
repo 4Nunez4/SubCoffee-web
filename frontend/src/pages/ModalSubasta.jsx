@@ -52,7 +52,7 @@ function ModalSubasta({ onClose }) {
         setSubastaTerminada(false);
         return `La subasta empezará dentro de ${calcularTiempoRestante(ahora, inicio)}`;
       } else if (ahora > fin) {
-        setSubastaIniciada(false);
+        setSubastaIniciada(true);
         setSubastaTerminada(true);
         return "Subasta terminada";
       } else {
