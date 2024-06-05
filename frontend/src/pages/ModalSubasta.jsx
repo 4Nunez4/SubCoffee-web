@@ -26,17 +26,8 @@ function ModalSubasta({ onClose }) {
         fk_id_usuario: user.pk_cedula_user,
         fk_id_subasta: subasta.pk_id_sub,
       };
-
-      const usuarioPostulado = posts.find(
-        (post) => post.fk_id_usuario === user.pk_cedula_user
-      );
-
-      if (usuarioPostulado && usuarioPostulado.estado_post === "activo") {
-        navigate(`/subasta/${subasta.pk_id_sub}`);
-      } else {
-        await createPosts(data, idSubasta);
-        navigate(`/subasta/${subasta.pk_id_sub}`);
-      }
+      await createPosts(data, idSubasta);
+      navigate(`/subasta/${subasta.pk_id_sub}`);
     } catch (error) {
       console.error("Error al registrar el postulante:", error);
     }
@@ -166,9 +157,9 @@ function ModalSubasta({ onClose }) {
               onClick={handleIniciarPuja}
               isDisabled={!subastaIniciada} 
             >
-              {posts.length === 0
-                ? "Postularme a la subasta" : posts.some( (post) => post.fk_id_usuario === user.pk_cedula_user && post.estado_post === "activo" )
-                ? "Ingresar a pujar" : "Postularme a la subasta"}
+            {posts && posts.length > 0 && posts.some(post => post.fk_id_usuario === user.pk_cedula_user && post.estado_post === "activo")
+              ? "Ingresar a pujar"
+              : "Postularme a la subasta"}
             </Button>
           )
         }

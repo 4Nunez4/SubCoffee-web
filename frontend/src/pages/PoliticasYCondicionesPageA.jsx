@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
-import { useAuthContext } from "../context/AuthContext";
+import React from "react";
 import logo from "../assets/isotipo-SubCoffee.png";
 import FooterOrganism from "../components/organisms/FooterOrganism";
+
 function PoliticasYCondicionesPageA() {
-  const { getUsers } = useAuthContext();
-  useEffect(() => {
-    getUsers();
-  }, []);
 
   return (
     <div className=" flex flex-col items-center justify-center bg-gray-300 text-gray-700">
@@ -17,9 +13,7 @@ function PoliticasYCondicionesPageA() {
       <div className=" py-6 w-full b overflow-y-auto  px-44 ">
         <section id="primera">
           <div className="flex-grow">
-            <p className="text-2xl font-semibold mb-4 text-[#00684a] ">
-              <h2>Fecha de efectividad</h2> 2024
-            </p>
+            <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">Fecha de efectividad</h2> 2024
             <p className="text-lg">
               Bienvenido a SubCoffe, la plataforma de subasta en línea enfocada
               en el café pergamino de calidad directamente de los campesinos del

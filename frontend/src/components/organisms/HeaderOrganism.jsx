@@ -25,7 +25,7 @@ function HeaderOrganism() {
   const navigate = useNavigate();
   const localUser = JSON.parse(localStorage.getItem("user"));
 
-  const { getUsers, isAuthenticated, logout, users } = useAuthContext();
+  const { getUsers, logout, users } = useAuthContext();
 
   const handleLogout = () => {
     Swal.fire({
@@ -51,7 +51,7 @@ function HeaderOrganism() {
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (localUser) {
       getUsers();
     }
   }, []);
@@ -164,8 +164,7 @@ function HeaderOrganism() {
                     as="button"
                     avatarProps={{
                       src: `${
-                        localUser.imagen_user &&
-                        localUser.imagen_user.length > 0
+                        localUser
                           ? `http://localhost:4000/img/${localUser.imagen_user}`
                           : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
                       }`,

@@ -68,18 +68,22 @@ function SubastaUser() {
   const handleSubmitOferta = async (e) => {
     e.preventDefault();
     try {
+      const precioActual = Number(subasta.precio_inicial_sub) + (Array.isArray(ofertas) && ofertas.length > 0 ? Math.max(...ofertas.map((oferta) => oferta.oferta_ofer), 0) : 0);
+      const totalOferta = precioActual;
+  
       const data = {
-        oferta_ofer: oferta,
+        oferta_ofer: totalOferta, 
         fk_id_usuario: user.pk_cedula_user,
         fk_id_subasta: id,
       };
       await createOfert(data, id);
-      setOferta("");
+      setOferta(0);
       console.log("Oferta enviada:", data);
     } catch (error) {
       console.error("Error al enviar la oferta:", error);
     }
   };
+  
 
   const handlePostulantesClick = async () => {
     try {
@@ -87,21 +91,22 @@ function SubastaUser() {
         fk_id_usuario: user.pk_cedula_user,
         fk_id_subasta: subasta.pk_id_sub,
       };
-      await desactivarPosts(data, id);
-      console.log("Postulante desactivado");
-      navigate(`/subcoffee`);
+      if(user.pk_cedula_user === subasta.pk_cedula_user) {
+        navigate(`/subcoffee`);
+      } else {
+        await desactivarPosts(data, id);
+        navigate(`/subcoffee`);
+      }
     } catch (error) {
       console.error("Error al desactivar la postulación:", error);
     }
   };
 
-  const [precioActual, setPrecioActual] = useState(
-    Number(subasta.precio_inicial_sub)
-  );
+  const [precioActual, setPrecioActual] = useState(0);
 
   useEffect(() => {
     const nuevoPrecioActual =
-      Number(subasta.precio_inicial_sub) +
+    Number(subasta.precio_inicial_sub) +
       (Array.isArray(ofertas) && ofertas.length > 0
         ? Math.max(...ofertas.map((oferta) => oferta.oferta_ofer), 0)
         : 0);
@@ -252,25 +257,58 @@ function SubastaUser() {
           </div>
           {subasta.pk_cedula_user !== user.pk_cedula_user && (
             <div className="bg-[#e0e0e0] rounded-xl p-4 mt-2 w-full">
-              <p className="text-center">Precio actual: ${precioActual}</p>
+              <p className="text-center">Precio actual: ${precioActual.length > 0 ? precioActual : subasta.precio_inicial_sub}</p>
               <form onSubmit={handleSubmitOferta} className="w-full flex flex-col items-center">
-                <Slider
-                  label="Añadir Puja"
-                  step={100}
-                  value={oferta}
-                  onChange={(value) => setOferta(value)}
-                  maxValue={1000}
-                  minValue={0}
-                  showSteps={true}
-                  showTooltip={true}
-                  showOutline={true}
-                  disableThumbScale={true}
-                  formatOptions={{ style: "currency", currency: "USD" }}
-                  tooltipValueFormatOptions={{style: "currency",currency: "USD",maximumFractionDigits: 0,}}
-                  classNames={{base: "w-full",filler: "bg-gradient-to-r from-primary-500 to-secondary-400",labelWrapper: "mb-2",label: "font-medium text-default-700 text-medium",value: "font-medium text-default-500 text-small",thumb: ["transition-size","bg-gradient-to-r from-secondary-400 to-primary-500","data-[dragging=true]:shadow-lg data-[dragging=true]:shadow-black/20","data-[dragging=true]:w-7 data-[dragging=true]:h-7 data-[dragging=true]:after:h-6 data-[dragging=true]:after:w-6",],step: "data-[in-range=true]:bg-black/30 dark:data-[in-range=true]:bg-white/50",}}
-                  tooltipProps={{ offset: 10, placement: "bottom", classNames: { base: ["before:bg-gradient-to-r before:from-secondary-400 before:to-primary-500"], content: ["py-2 shadow-xl text-white bg-gradient-to-r from-secondary-400 to-primary-500"], }, }} />
-                <Button type="submit">Realizar Oferta</Button>
-              </form>
+              <Slider
+                label="Añadir Puja"
+                step={20000}
+                value={oferta}
+                onChange={(value) => setOferta(value)}
+                maxValue={500000} 
+                minValue={0}
+                showSteps={true}
+                showTooltip={true}
+                showOutline={true}
+                disableThumbScale={true}
+                formatOptions={{
+                  style: "currency",
+                  currency: "COP",
+                  currencyDisplay: "symbol",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }}
+                tooltipValueFormatOptions={{
+                  style: "currency",
+                  currency: "COP",
+                  currencyDisplay: "symbol",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }}
+                classNames={{
+                  base: "w-full",
+                  filler: "bg-gradient-to-r from-primary-500 to-secondary-400",
+                  labelWrapper: "mb-2",
+                  label: "font-medium text-default-700 text-medium",
+                  value: "font-medium text-default-500 text-small",
+                  thumb: [
+                    "transition-size",
+                    "bg-gradient-to-r from-secondary-400 to-primary-500",
+                    "data-[dragging=true]:shadow-lg data-[dragging=true]:shadow-black/20",
+                    "data-[dragging=true]:w-7 data-[dragging=true]:h-7 data-[dragging=true]:after:h-6 data-[dragging=true]:after:w-6",
+                  ],
+                  step: "data-[in-range=true]:bg-black/30 dark:data-[in-range=true]:bg-white/50",
+                }}
+                tooltipProps={{
+                  offset: 10,
+                  placement: "bottom",
+                  classNames: {
+                    base: ["before:bg-gradient-to-r before:from-secondary-400 before:to-primary-500"],
+                    content: ["py-2 shadow-xl text-white bg-gradient-to-r from-secondary-400 to-primary-500"],
+                  },
+                }}
+              />
+              <Button type="submit">Realizar Oferta</Button>
+            </form>
             </div>
           )}
         </div>

@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Image,
-} from "@nextui-org/react";
+import { Avatar, Button, Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
 import ImageSlider from "../components/molecules/ImageSlider";
@@ -19,8 +12,8 @@ function SubastaPage() {
   const navigate = useNavigate();
   const { getSubsMenoCerradas, subastasActivas, setIdSubasta, desactivarSubs, activarSubs, ProcesoSubs, EsperaSubs } = useSubastaContext();
   const { getUsers } = useAuthContext();
-  const [ abrirModal, setAbrirModal ] = useState(false);
-  const [ subastas, setSubastas ] = useState([]);
+  const [abrirModal, setAbrirModal] = useState(false);
+  const [subastas, setSubastas] = useState([]);
 
   const users = JSON.parse(localStorage.getItem('user'));
 
@@ -59,31 +52,31 @@ function SubastaPage() {
 
   useEffect(() => {
     const actualizarEstadosSubastas = async () => {
-      for (const subasta of subastasActivas) {
-        const { pk_id_sub } = subasta;
-        const { pk_cedula_user } = users;
-
-        const tiempo = calcularDiferencia(
-          subasta.fecha_inicio_sub,
-          subasta.fecha_fin_sub
-        );
-
-        if (tiempo.includes("Subasta terminada")) {
-          await desactivarSubs(pk_id_sub, pk_cedula_user);
-        } else if (tiempo.includes("A la subasta le quedan")) {
-          await EsperaSubs(pk_id_sub, pk_cedula_user);
-        } else if (tiempo.includes("La subasta terminará en")) {
-          await ProcesoSubs(pk_id_sub, pk_cedula_user);
-        } else if (tiempo.includes("La subasta empezará dentro de")) {
-          await activarSubs(pk_id_sub, pk_cedula_user);
+      if (Array.isArray(subastasActivas)) {
+        for (const subasta of subastasActivas) {
+          const { pk_id_sub } = subasta;
+          const { pk_cedula_user } = users;
+  
+          const tiempo = calcularDiferencia(subasta.fecha_inicio_sub, subasta.fecha_fin_sub);
+  
+          if (tiempo.includes("Subasta terminada")) {
+            await desactivarSubs(pk_id_sub, pk_cedula_user);
+          } else if (tiempo.includes("A la subasta le quedan")) {
+            await EsperaSubs(pk_id_sub, pk_cedula_user);
+          } else if (tiempo.includes("La subasta terminará en")) {
+            await ProcesoSubs(pk_id_sub, pk_cedula_user);
+          } else if (tiempo.includes("La subasta empezará dentro de")) {
+            await activarSubs(pk_id_sub, pk_cedula_user);
+          }
         }
+        getSubsMenoCerradas();  // Sirve para refrescar las subastas activas
       }
-      getSubsMenoCerradas();  // Sirve para refrescar las subastas activas
     };
     const intervalId = setInterval(actualizarEstadosSubastas, 1000);
-
+  
     return () => clearInterval(intervalId);
   }, [subastasActivas, users]);
+  
 
   useEffect(() => {
     getSubsMenoCerradas();
@@ -91,7 +84,7 @@ function SubastaPage() {
   }, []);
 
   useEffect(() => {
-    if (subastasActivas) {
+    if (Array.isArray(subastasActivas)) {
       setSubastas(subastasActivas);
     }
   }, [subastasActivas]);
@@ -101,13 +94,13 @@ function SubastaPage() {
     setIdSubasta(id);
   };
 
-  const groupedSubastas = subastas.reduce((acculatorAgrupator, subasta) => {
-    if (!acculatorAgrupator[subasta.nombre_tipo_vari]) {
-      acculatorAgrupator[subasta.nombre_tipo_vari] = [];
+  const groupedSubastas = Array.isArray(subastas) ? subastas.reduce((acc, subasta) => {
+    if (!acc[subasta.nombre_tipo_vari]) {
+      acc[subasta.nombre_tipo_vari] = [];
     }
-    acculatorAgrupator[subasta.nombre_tipo_vari].push(subasta);
-    return acculatorAgrupator;
-  }, {});
+    acc[subasta.nombre_tipo_vari].push(subasta);
+    return acc;
+  }, {}) : {};
 
   useEffect(() => {
     if (users.rol_user === "admin") navigate('/users');
@@ -119,26 +112,24 @@ function SubastaPage() {
       {users.rol_user !== "admin" && (
         <div className="px-16">
           <p className="pl-4 pb-4 text-[#00684a] text-2xl font-semibold md:text-2xl">Subastas</p>
-          {Object.entries(groupedSubastas).map(([tipoVari, subastas]) => (
+          {Object.keys(subastas).length > 0 ? Object.entries(groupedSubastas).map(([tipoVari, subastas]) => (
             <div key={tipoVari}>
               <p className="pl-4 text-xl my-2">{tipoVari}</p>
                 {subastas.map((subasta) => (
-                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[535px] p-2 bg-[#00684a] text-white  ">
+                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[535px] p-2 bg-[#00684a] text-white">
                     <CardHeader className="justify-between">
                       <div className="flex gap-x-3">
                         <Avatar
                           isBordered
                           radius="full"
                           size="md"
-                          src={
-                            subasta.imagen_user && subasta.imagen_user.length > 0
-                              ? `http://localhost:4000/img/${subasta.imagen_user}`
-                              : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
-                          }
+                          src={subasta.imagen_user && subasta.imagen_user.length > 0
+                            ? `http://localhost:4000/img/${subasta.imagen_user}`
+                            : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
                         />
                         <div className="flex flex-col gap-1 items-start justify-center">
-                          <h4 className="text-small font-semibold leading-none text-white"> {subasta.nombre_user} </h4>
-                          <h5 className="text-small -mt-1 tracking-tight text-default-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-[120px]"> @{subasta.email_user} </h5>
+                          <h4 className="text-small font-semibold leading-none text-white">{subasta.nombre_user}</h4>
+                          <h5 className="text-small -mt-1 tracking-tight text-default-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-[120px]">@{subasta.email_user}</h5>
                         </div>
                       </div>
                       <Button
@@ -214,7 +205,9 @@ function SubastaPage() {
                   </Card>
                 ))}
             </div>
-          ))}
+          )): (
+            <p className="pl-4 text-xl my-2 text-gray-500">No hay subastas disponibles en este momento.</p>
+          )}
           <ModalSubCoffee open={abrirModal} onClose={() => setAbrirModal(false)} />
         </div>
       )}
