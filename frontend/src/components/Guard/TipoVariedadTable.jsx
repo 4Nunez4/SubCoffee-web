@@ -138,7 +138,7 @@ export default function TipoVariedadTable() {
       case "actions":
         return (
           <div className="relative flex justify-center items-center gap-2">
-            <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdTipoVariedad(tipoVariedades)}}>
+            <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdTipoVariedad(tipoVariedades)}} className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b]">
               Editar
             </Button>
             {tipoVariedades.estado_tipo_vari === "activo" ? (
@@ -198,7 +198,7 @@ export default function TipoVariedadTable() {
         <div className="flex justify-between gap-3 items-end">
           <Input
             isClearable
-            className="w-full sm:max-w-[44%] border rounded-xl border-grisMedio"
+            className="w-full border rounded-xl border-grisMedio"
             placeholder="Buscar..."
             startContent={<SearchIcon />}
             value={filterValue}
@@ -208,7 +208,8 @@ export default function TipoVariedadTable() {
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat" >
+                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat" 
+                className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64]">
                   Estado
                 </Button>
               </DropdownTrigger>
@@ -228,19 +229,19 @@ export default function TipoVariedadTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
+            <Button className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] " endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">
+          <span className="text-lg text-[#00684a] font-bold">
             Total {tipoVariedades && tipoVariedades.length} Tipo de Variedades
           </span>
-          <label className="flex items-center text-default-400 text-small">
+          <label className="flex items-center text-lg text-[#00684a] font-bold">
             Columnas por páginas:
             <select
-              className="bg-transparent outline-none text-default-400 text-small"
+              className="bg-transparent outline-none text-lg text-[#00684a] font-bold"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
@@ -262,21 +263,21 @@ export default function TipoVariedadTable() {
 
   const bottomContent = useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center m-4">
+      <div className="flex justify-between items-center py-4">
         <Pagination
           isCompact
           showControls
           showShadow
-          color="primary"
+          color="success"
           page={page}
           total={pages}
           onChange={setPage}
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
+          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage} className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b]">
             Anterior
           </Button>
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
+          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage} className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500">
             Siguiente
           </Button>
         </div>
@@ -285,7 +286,8 @@ export default function TipoVariedadTable() {
   }, [items.length, page, pages, hasSearchFilter]);
 
   return (
-    <div className="mx-32">
+  <div className="w-full bg-gray-300 h-screen">
+        <div className="  mx-20 ">
       <FormTipovariedad
         open={abrirModal}
         onClose={() => setAbrirModal(false)}
@@ -299,7 +301,7 @@ export default function TipoVariedadTable() {
         bottomContent={bottomContent}
         bottomContentPlacement="outside"
         classNames={{
-          wrapper: "max-h-[482px]",
+          wrapper: "max-h-[482px]  bg-[#00684a] text-white text-center",
         }}
         sortDescriptor={sortDescriptor}
         topContent={topContent}
@@ -312,6 +314,7 @@ export default function TipoVariedadTable() {
               key={column.uid}
               align={column.uid === "actions" ? "center" : "start"}
               allowsSorting={column.sortable}
+              className="bg-[#001e2b] text-white text-sm text-center"
             >
               {column.name}
             </TableColumn>
@@ -328,5 +331,7 @@ export default function TipoVariedadTable() {
         </TableBody>
       </Table>
     </div>
+  </div>
+
   );
 }
