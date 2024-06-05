@@ -1,11 +1,6 @@
 import { validationResult } from "express-validator";
 import { pool } from "../databases/conexion.js";
 
-
-
-
-
-
 export const getNotifications = async (req, res) => {
   try {
     const [rows] = await pool.query("SELECT n.*,u.* FROM notificaciones n INNER JOIN usuarios u ON n.fk_id_usuario = u.pk_cedula_user");

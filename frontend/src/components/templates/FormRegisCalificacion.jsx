@@ -5,7 +5,6 @@ import { useCalificacionesContext } from "../../context/CalificacionesContext";
 
 function FormRegisCalificacion ({ open, onClose, title, titleBtn, fk_user, mode }) {
   const { cerrarModal, setCerrarModal } = useCalificacionesContext();
-
   useEffect(() => {
     if (cerrarModal) {
       onClose();

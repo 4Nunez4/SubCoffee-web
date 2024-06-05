@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { createOferta, getOfertas, getOfertasForSub } from "../api/api.ofertas";
+import { createOferta, deleteOfertasForSub, getOfertas, getOfertasForSub } from "../api/api.ofertas";
 import ModalMessage from "../nextui/ModalMessage";
 
 const OfertasContext = createContext();
@@ -47,13 +47,23 @@ export const OfertaProvider = ({ children }) => {
     }
   }
 
+  const eliminarOfertas = async (id, user) => {
+    try {
+      await deleteOfertasForSub(id, user)
+      getOfertForSub(id)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <OfertasContext.Provider
       value={{
         ofertas,
         getOferts,
         createOfert,
-        getOfertForSub
+        getOfertForSub,
+        eliminarOfertas
       }}
     >
       <ModalMessage

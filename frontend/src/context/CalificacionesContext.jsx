@@ -65,9 +65,9 @@ export const CalifiProvider = ({ children }) => {
     try {
       const response = await updateCalificaciones(id, data);
       if (response.status === 200) {
-        setCalificaciones(response.data);
         setMensaje(response.data.message);
         setModalMessage(true);
+        setCerrarModal(true);
       }
     } catch (error) {
       setErrors([error.response.data.message]);

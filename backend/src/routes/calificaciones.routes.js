@@ -7,6 +7,6 @@ const routesCalificaciones = Router()
 routesCalificaciones.get('/calificaciones/:id', verificarUserToken, getCalificaciones)
 routesCalificaciones.get('/calificacionForId/:id', verificarUserToken, getCalificacionUser)
 routesCalificaciones.post('/calificaciones', verificarUserToken, createCalificacion)
-routesCalificaciones.put('/calificaciones', verificarUserToken, updateCalificacion)
+routesCalificaciones.put('/calificaciones/:id', verificarUserToken, updateCalificacion)
 
 export default routesCalificaciones

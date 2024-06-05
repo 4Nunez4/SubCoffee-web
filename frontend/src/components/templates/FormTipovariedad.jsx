@@ -5,7 +5,6 @@ import { useTipoVariContext } from "../../context/TipoVariContext";
 
 function FormTipovariedad ({ open, onClose, title, titleBtn, mode }) {
   const { cerrarModal, setCerrarModal } = useTipoVariContext();
-
   useEffect(() => {
     if (cerrarModal) {
       onClose();

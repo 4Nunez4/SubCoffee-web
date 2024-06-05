@@ -9,37 +9,47 @@ const colors = {
 };
 
 function RegisterCalificacion({ titleBtn, fk_user, mode }) {
-  const [currentValue, setCurrentValue] = useState(0);
-  const [comentario, setComentario] = useState("");
+  const [formData, setFormData] = useState({
+    estrellas: 0,
+    opiniones: "",
+  });
+
   const userlocal = JSON.parse(localStorage.getItem("user"));
-  const [hoverValue, setHoverValue] = useState(undefined);
   const { createCalificacion, updateCalificacion, getCalificacionesUser, idCalificacion } = useCalificacionesContext();
-  const stars = Array(5).fill(0);
 
   useEffect(() => {
     if (mode === "update" && idCalificacion) {
-      setComentario(idCalificacion.opiniones_cali);
+      setFormData({
+        estrellas: idCalificacion.estrellas_cali || 0,
+        opiniones: idCalificacion.opiniones_cali || ""
+      });
     }
   }, [mode, idCalificacion]);
-  
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "opiniones" && value.length > 100) {
+      return;
+    }
+    
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
 
   const handleClick = (value) => {
-    setCurrentValue(value);
-  };
-
-  const handleMouseOver = (newHoverValue) => {
-    setHoverValue(newHoverValue);
-  };
-
-  const handleMouseLeave = () => {
-    setHoverValue(undefined);
+    setFormData({
+      ...formData,
+      estrellas: value
+    });
   };
 
   const handleSubmit = async () => {
     const data = {
       idUsuario: userlocal.pk_cedula_user,
-      estrellas: currentValue,
-      opiniones: comentario,
+      estrellas: formData.estrellas,
+      opiniones: formData.opiniones,
       fk_usuario: fk_user,
     };
 
@@ -49,13 +59,18 @@ function RegisterCalificacion({ titleBtn, fk_user, mode }) {
       } else {
         await createCalificacion(data);
       }
-      setCurrentValue(0);
-      setComentario("");
+      setFormData({
+        estrellas: 0,
+        opiniones: ""
+      });
       getCalificacionesUser(fk_user);
     } catch (error) {
       alert("Error en el servidor: " + error.message);
     }
   };
+
+  const stars = Array(5).fill(0);
+  const { estrellas, opiniones } = formData;
 
   return (
     <div className="flex flex-col items-center pb-3">
@@ -65,25 +80,26 @@ function RegisterCalificacion({ titleBtn, fk_user, mode }) {
             key={index}
             size={24}
             onClick={() => handleClick(index + 1)}
-            onMouseOver={() => handleMouseOver(index + 1)}
-            onMouseLeave={handleMouseLeave}
             color={
-              (hoverValue || currentValue) > index ? colors.orange : colors.grey
+              (estrellas > index) ? colors.orange : colors.grey
             }
             className="mr-2 cursor-pointer"
           />
         ))}
         <p className="text-lg font-semibold text-gray-700">
-          {currentValue > 0 ? `${currentValue}` : ""}
+          {estrellas > 0 ? `${estrellas}` : ""}
         </p>
       </div>
       <Textarea
         label="Opinión"
+        max={5}
+        minLength={10}
         variant="bordered"
         placeholder="Escribe tu opinión"
         className="max-w-96 mb-4"
-        value={comentario || ""}
-        onChange={(e) => setComentario(e.target.value)}
+        name="opiniones"
+        value={opiniones}
+        onChange={handleChange}
       />
       <Button onClick={handleSubmit}>{titleBtn}</Button>
     </div>

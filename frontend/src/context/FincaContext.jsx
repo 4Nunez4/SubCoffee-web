@@ -53,6 +53,7 @@ export const FincaProvider = ({ children }) => {
         getFincaUser(user);
         setMensaje(response.data.message);
         setModalMessage(true);
+        setCerrarModal(true)
       }
     } catch (error) {
       setErrors([error.response.data.message]);

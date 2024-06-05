@@ -5,7 +5,6 @@ import { useVeredaContext } from "../../context/VeredaContext";
 
 function FormVereda ({ open, onClose, title, titleBtn, mode }) {
   const { cerrarModal, setCerrarModal } = useVeredaContext();
-
   useEffect(() => {
     if (cerrarModal) {
       onClose();

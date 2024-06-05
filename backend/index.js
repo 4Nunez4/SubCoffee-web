@@ -1,11 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
+import cors from 'cors';
+
 import rutNotificaciones from "./src/routes/notificaciones.routes.js";
 import routerChat from "./src/routes/chat.routes.js";
 import rutasSubastas from "./src/routes/subasta.routes.js";
 import postulantesRoutes from "./src/routes/postulantes.routes.js";
 import autenticacionRouter from "./src/routes/autenticacion.routes.js";
-import cors from 'cors';
 
 import routerUser from "./src/routes/user.routes.js";
 import routerVereda from "./src/routes/veredas.routes.js";
@@ -34,7 +35,7 @@ app.use("/v1", routerFinca);
 app.use("/v1", routertipovari);
 app.use("/v1", routerVariedad);
 app.use("/v1", rutasSubastas);
-app.use("/user", routerChat);
+app.use("/v1", routerChat);
 app.use("/v1", rutNotificaciones);
 app.use("/v1", postulantesRoutes);
 app.use("/v1", ofertasRoutes);

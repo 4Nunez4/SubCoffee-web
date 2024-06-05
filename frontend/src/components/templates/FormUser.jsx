@@ -5,7 +5,6 @@ import { useAuthContext } from "../../context/AuthContext";
 
 function FormUser ({ open, onClose, title, titleBtn, mode }) {
   const { cerrarModal, setCerrarModal } = useAuthContext();
-
   useEffect(() => {
     if (cerrarModal) {
       onClose();
