@@ -64,13 +64,12 @@ function SubastaUser() {
 
     return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
   };
+  const [precioActual, setPrecioActual] = useState(0);
 
   const handleSubmitOferta = async (e) => {
     e.preventDefault();
     try {
-      const precioActual = Number(subasta.precio_inicial_sub) + (Array.isArray(ofertas) && ofertas.length > 0 ? Math.max(...ofertas.map((oferta) => oferta.oferta_ofer), 0) : 0);
-      const totalOferta = precioActual;
-  
+      const totalOferta = precioActual + oferta;
       const data = {
         oferta_ofer: totalOferta, 
         fk_id_usuario: user.pk_cedula_user,
@@ -83,7 +82,6 @@ function SubastaUser() {
       console.error("Error al enviar la oferta:", error);
     }
   };
-  
 
   const handlePostulantesClick = async () => {
     try {
@@ -102,11 +100,10 @@ function SubastaUser() {
     }
   };
 
-  const [precioActual, setPrecioActual] = useState(0);
 
   useEffect(() => {
     const nuevoPrecioActual =
-    Number(subasta.precio_inicial_sub) +
+    // Number(subasta.precio_inicial_sub) +
       (Array.isArray(ofertas) && ofertas.length > 0
         ? Math.max(...ofertas.map((oferta) => oferta.oferta_ofer), 0)
         : 0);
@@ -257,7 +254,7 @@ function SubastaUser() {
           </div>
           {subasta.pk_cedula_user !== user.pk_cedula_user && (
             <div className="bg-[#e0e0e0] rounded-xl p-4 mt-2 w-full">
-              <p className="text-center">Precio actual: ${precioActual.length > 0 ? precioActual : subasta.precio_inicial_sub}</p>
+              <p className="text-center">Precio actual: ${precioActual}</p>
               <form onSubmit={handleSubmitOferta} className="w-full flex flex-col items-center">
               <Slider
                 label="Añadir Puja"
