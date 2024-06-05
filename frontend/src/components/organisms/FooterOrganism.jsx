@@ -56,12 +56,12 @@ const FooterOrganism = () => {
       <div className="flex items-center justify-center py-3">
         <div className="grow border-b border-gray-100"></div>
         <span className="px-2 font-semibold text-lg text-gray-100">
-          Subcoffee
+          SubCoffee
         </span>
         <div className="grow border-b border-gray-100"></div>
       </div>
       <p className="text-center text-sm font-medium text-gray-100 pb-3">
-        © Subcoffee, todos los derechos reservados
+        © SubCoffee, todos los derechos reservados
       </p>
     </footer>
   );
