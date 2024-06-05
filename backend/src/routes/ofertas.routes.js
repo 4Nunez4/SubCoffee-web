@@ -9,6 +9,6 @@ ofertasRoutes.post('/oferta', verificarUserToken, validarRegistrarOfertas, guard
 ofertasRoutes.get('/oferta', verificarUserToken, listarOfertas);
 ofertasRoutes.put('/oferta/:id', verificarUserToken, atualizarOfertas);
 ofertasRoutes.get('/oferta/:id', verificarUserToken, buscarOferta);
-ofertasRoutes.delete('/oferta/:id', verificarUserToken, eliminarOferta);
+ofertasRoutes.delete('/oferta/:id/:user', verificarUserToken, eliminarOferta);
 
 export default ofertasRoutes;

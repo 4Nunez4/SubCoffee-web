@@ -1,17 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
 import SubastaIcon from "../nextui/SubastaIcon";
 import FincaIcon from "../nextui/FincaIcon";
 import FincaTable from "../components/Guard/FincaTable";
 import SubastaTable from "../components/Guard/SubastaTable";
-import { useAuthContext } from "../context/AuthContext";
 
 export default function MiSubastaT() {
-  const { getUsers } = useAuthContext()
-  useEffect(() => {
-      getUsers()
-    }, []);
     
   return (
     <div className="w-full flex flex-col items-center px-8 bg-gray-300">
@@ -50,7 +45,7 @@ export default function MiSubastaT() {
             <Tab key="videos" title={
               <div className="text-[#00684a]  flex items-center space-x-2 text-lg font-semibold	">
                 <SubastaIcon />
-                <span classname="">Subastas</span>
+                <span className="">Subastas</span>
               </div>
             }>
               <Card>

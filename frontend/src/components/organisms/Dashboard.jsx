@@ -1,15 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 import HeaderOrganism from "./HeaderOrganism";
 import FooterOrganism from "./FooterOrganism";
 import SidebarOrganims from  "./SidebarOrganims"
-import AuthContext from "../../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 const Dashboard = () => {
   const auth = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
-  const { isAuthenticated } = useContext(AuthContext)
+  const { isAuthenticated } = useAuthContext()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Dashboard = () => {
   return auth && user ? (
     <div className="flex flex-auto h-auto bg-gray-50">
       <SidebarOrganims />
-      <div className="grow ">
+      <div className="grow">
         <HeaderOrganism />
         <Outlet />
       </div>
@@ -27,9 +27,9 @@ const Dashboard = () => {
   ) : (
     <div className="flex-auto h-auto bg-gray-50">
       <HeaderOrganism />
-      <main className="">
+      <div>
         <Outlet />
-      </main>
+      </div>
       <FooterOrganism />
     </div>
   );

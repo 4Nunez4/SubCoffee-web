@@ -61,7 +61,7 @@ export const getPostulantes = async (req, res) => {
     if (result.length > 0) {
       res.status(200).json({ data:result });
     } else {
-      res.status(404).send({ message: "Por el momento no hay postulantes" }); 
+      res.status(204).send({ message: "Por el momento no hay postulantes" }); 
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor " + error }); 
@@ -83,7 +83,7 @@ export const getPostulanteesActivos = async (req, res) => {
     if (rows.length > 0) {
       res.status(200).json({ data: rows });
     } else {
-      res.status(404).json({ message: "Error ID postulantes no encontrada" });
+      res.status(204).json({ message: "Error ID postulantes no encontrada" });
     }
   } catch (e) {
     res.status(500).json({ message: "Error al obtener las postulantes", e });

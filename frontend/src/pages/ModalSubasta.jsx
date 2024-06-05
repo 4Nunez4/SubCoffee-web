@@ -26,17 +26,8 @@ function ModalSubasta({ onClose }) {
         fk_id_usuario: user.pk_cedula_user,
         fk_id_subasta: subasta.pk_id_sub,
       };
-
-      const usuarioPostulado = posts.find(
-        (post) => post.fk_id_usuario === user.pk_cedula_user
-      );
-
-      if (usuarioPostulado && usuarioPostulado.estado_post === "activo") {
-        navigate(`/subasta/${subasta.pk_id_sub}`);
-      } else {
-        await createPosts(data, idSubasta);
-        navigate(`/subasta/${subasta.pk_id_sub}`);
-      }
+      await createPosts(data, idSubasta);
+      navigate(`/subasta/${subasta.pk_id_sub}`);
     } catch (error) {
       console.error("Error al registrar el postulante:", error);
     }
@@ -61,7 +52,7 @@ function ModalSubasta({ onClose }) {
         setSubastaTerminada(false);
         return `La subasta empezará dentro de ${calcularTiempoRestante(ahora, inicio)}`;
       } else if (ahora > fin) {
-        setSubastaIniciada(false);
+        setSubastaIniciada(true);
         setSubastaTerminada(true);
         return "Subasta terminada";
       } else {
@@ -148,23 +139,30 @@ function ModalSubasta({ onClose }) {
         </div>
       </ModalBody>
       <ModalFooter className="flex justify-center">
-        <Button onClick={() => onClose()} className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500">Salir</Button>
-          <Button
-            type="submit"
-            className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"
-            onClick={handleIniciarPuja}
-            isDisabled={!subastaIniciada} 
-          >
-            {posts.length === 0
-              ? "Postularme a la subasta"
-              : posts.some(
-                  (post) =>
-                    post.fk_id_usuario === user.pk_cedula_user &&
-                    post.estado_post === "activo"
-                )
+        <Button onClick={() => onClose()}>Salir</Button>
+        {subasta.pk_cedula_user === user.pk_cedula_user ? 
+          (
+            <Button
+              type="submit"
+              className="bg-gray-600 text-white"
+              onClick={() => navigate(`/subasta/${subasta.pk_id_sub}`)}
+              isDisabled={!subastaIniciada}
+            >
+              Ingresar a pujar
+          </Button>
+          ) : (
+            <Button
+              type="submit"
+              className="bg-gray-600 text-white"
+              onClick={handleIniciarPuja}
+              isDisabled={!subastaIniciada} 
+            >
+            {posts && posts.length > 0 && posts.some(post => post.fk_id_usuario === user.pk_cedula_user && post.estado_post === "activo")
               ? "Ingresar a pujar"
               : "Postularme a la subasta"}
-          </Button>
+            </Button>
+          )
+        }
       </ModalFooter>
     </div>
   );

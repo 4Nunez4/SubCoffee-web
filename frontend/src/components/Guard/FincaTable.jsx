@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardBody, Image, Button } from "@nextui-org/react";
 
 import { useFincaContext } from "../../context/FincaContext.jsx";
-import { EditIcon } from "../../nextui/EditIcon";
 import ActivarIcon from "../../nextui/ActivarIcon";
 import DesactivarIcon from "../../nextui/DesactivarIcon";
 import { PlusIcon } from "../../nextui/PlusIcon";
 import FormFinca from "../templates/FormFinca";
 import FormVariedadUser from "../templates/FormVariedadUser.jsx";
+import { EditIcon } from "../../nextui/EditIcon.jsx";
 
 function FincaTable() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -97,9 +97,9 @@ function FincaTable() {
                   <Button className="w-full  inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500" onPress={() => {setAbrirModalVariedad(true); setPkFinca(result.pk_id_fin)}}>
                     Ver variedades de la finca
                   </Button>
-                  <button
+                  <Button
                     color="default"
-                    className="w-full border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500 "
+                    className="w-full border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-black  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500 "
                     startContent={<EditIcon />}
                     onClick={() => {
                       handleToggleFinca("update");
@@ -107,7 +107,7 @@ function FincaTable() {
                     }}
                   >
                     Editar finca
-                  </button>
+                  </Button>
                   {result.estado_fin === "activo" ? (
                     <Button
                       className="bg-red-600 text-white w-full py-2 px-4  font-semibold rounded-md "
