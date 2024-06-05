@@ -139,12 +139,12 @@ function ModalSubasta({ onClose }) {
         </div>
       </ModalBody>
       <ModalFooter className="flex justify-center">
-        <Button onClick={() => onClose()}>Salir</Button>
+        <Button onClick={() => onClose()} className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] ">Salir</Button>
         {subasta.pk_cedula_user === user.pk_cedula_user ? 
           (
             <Button
               type="submit"
-              className="bg-gray-600 text-white"
+              className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b]"
               onClick={() => navigate(`/subasta/${subasta.pk_id_sub}`)}
               isDisabled={!subastaIniciada}
             >
@@ -153,7 +153,7 @@ function ModalSubasta({ onClose }) {
           ) : (
             <Button
               type="submit"
-              className="bg-gray-600 text-white"
+              className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b]"
               onClick={handleIniciarPuja}
               isDisabled={!subastaIniciada} 
             >

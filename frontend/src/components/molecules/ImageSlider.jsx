@@ -33,7 +33,7 @@ function ImageSlider() {
 
   return (
     <div>
-      <div className="max-w-[1600px] h-auto w-full m-auto pt-10 p-4">
+      <div className="max-w-[1600px] h-auto w-full m-auto pt-10 p-4 bg-slate-300">
         <div className="relative w-full h-[450px] rounded-2xl overflow-hidden">
           <div
             className="w-full h-full bg-center bg-cover duration-500"
@@ -48,8 +48,8 @@ function ImageSlider() {
           </div>
         </div>
         </div>
-        <div className="flex justify-center mt-4">
-          <div className="flex justify-center items-center transition duration-300">
+        <div className="flex justify-center mt-4 ">
+          <div className="flex justify-center items-center transition duration-300 ">
             {slides.map((slide, index) => (
               <div
                 key={index}
