@@ -92,7 +92,7 @@ function ProfileUser() {
   };
 
   return (
-    <div className="px-16 bg-gray-300 h-screen">
+    <div className="px-16 bg-gray-300">
       <FormUser
         open={abrirModal}
         onClose={() => setAbrirModal(false)}
