@@ -69,12 +69,12 @@ function SubastaUser() {
     if (!subasta || subasta.length === 0) return;
 
     const intervalId = setInterval(() => {
-      subasta.forEach((sub) => {
-        const { pk_id_sub } = sub;
+      subasta.forEach((subasta) => {
+        const { pk_id_sub } = subasta;
         const { pk_cedula_user } = user;
-        const tiempo = calcularDiferencia(sub.fecha_inicio_sub, sub.fecha_fin_sub);
+        const tiempo = calcularDiferencia(subasta.fecha_inicio_sub, subasta.fecha_fin_sub);
 
-        if (tiempo.includes("A la subasta le quedan")) {
+        if (tiempo.includes("La subasta terminará en")) {
           Swal.fire({
             text: "A la subasta le quedan menos de 18 minutos para finalizar.",
             icon: "info",
@@ -395,7 +395,7 @@ function SubastaUser() {
                 <p>No hay postulantes activos.</p>
               )}
             </div>
-            <div className="flex justify-center mb-3 mt-3">
+            <div className="flex justify-center mb-3 mt-3 gap-x-1">
               <Button
                 onClick={handlePostulantesClick}
                 className="bg-red-600 text-white rounded-xl"
@@ -406,7 +406,7 @@ function SubastaUser() {
                 Contactar
               </Button>
             </div>
-            <ModalContact isOpen={isModalOpen} onCloseModal={() => setIsModalOpen(false)} id={id} />
+            <ModalContact open={isModalOpen} onClose={() => setIsModalOpen(false)} id={id} />
           </div>
         </div>
       </div>

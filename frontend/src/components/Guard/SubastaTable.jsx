@@ -102,7 +102,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="w-full bg-gray-200 rounded-lg">
+    <div className="w-full rounded-lg">
       <div className="flex justify-between py-4 gap-x-3 px-12 items-center">
         <p className="text-center text-[#00684a] font-semibold text-lg">Registra una subasta con tu café de alta calidad</p>
         <Button

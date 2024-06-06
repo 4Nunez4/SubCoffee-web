@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import { createOferta, deleteOfertasForSub, getOfertas, getOfertasForSub, getOfertaMayor } from "../api/api.ofertas";
 import ModalMessage from "../nextui/ModalMessage";
 
@@ -36,7 +36,7 @@ export const OfertaProvider = ({ children }) => {
     }
   }
 
-  const getOfertMayor = async (id) => {
+  const getOfertMayor = useCallback(async(id) => {
     try {
       getOfertaMayor(id).then((response) => {
         setOfertaMayor(response.data.data)
@@ -44,7 +44,7 @@ export const OfertaProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  }, [])
 
   const createOfert = async (data, id) => {
     try {

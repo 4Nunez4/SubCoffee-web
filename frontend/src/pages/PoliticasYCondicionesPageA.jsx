@@ -5,7 +5,7 @@ import FooterOrganism from "../components/organisms/FooterOrganism";
 function PoliticasYCondicionesPageA() {
 
   return (
-    <div className=" flex flex-col items-center justify-center bg-gray-300 text-gray-700">
+    <div className=" flex flex-col items-center justify-center text-gray-700">
       <h1 className="text-3xl font-semibold text-center mb-8 mt-4 text-[#00684a] ">
         Políticas de privacidad
       </h1>
