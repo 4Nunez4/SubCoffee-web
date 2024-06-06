@@ -9,7 +9,7 @@ import SubastaTable from "../components/Guard/SubastaTable";
 export default function MiSubastaT() {
     
   return (
-    <div className="w-full flex flex-col items-center px-8 bg-gray-300">
+    <div className="w-full flex flex-col items-center px-8 bg-gray-50">
       <div className="pb-2">
         <div className="flex justify-center pt-8 pb-2">
           <img src="./src/assets/cafe_mi_subasta.png" alt="Cafe_imagen" className="rounded-s-2xl transition-width duration-300 md:max-w-[25%] lg:max-w-[33.33%] xl:max-w-[50%] w-full lg:w-auto xl:w-auto" />

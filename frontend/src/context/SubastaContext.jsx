@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 
 import ModalMessage from "../nextui/ModalMessage";
 import {
@@ -67,14 +67,14 @@ export const SubastaProvider = ({ children }) => {
     }
   }
 
-  const getSub = async (id) => {
+  const getSub = useCallback(async (id) => {
     try {
       const response = await getSubasta(id);
       setSubasta(response.data.data)
     } catch (error) {
       console.error(error);
     }
-  }
+  }, [])
 
   const getSubForUser = async (user) => {
     try {

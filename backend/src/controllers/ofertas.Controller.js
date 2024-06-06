@@ -78,6 +78,29 @@ export const buscarOferta = async (req, res) => {
   }
 };
 
+export const buscarOfertaMayor = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const [rows] = await pool.query(
+      `
+      SELECT o.*, u.nombre_user, u.imagen_user, u.telefono_user, u.email_user
+      FROM ofertas o
+      INNER JOIN usuarios u ON o.fk_id_usuario = u.pk_cedula_user
+      WHERE o.fk_id_subasta = '${id}'
+      ORDER BY o.oferta_ofer DESC
+      LIMIT 1
+      `
+    );
+    if (rows.length > 0) {
+      res.status(200).json({ data: rows[0] }); // Solo devolvemos la primera fila, que contiene la mayor oferta
+    } else {
+      res.status(204).json({ message: "No se encontraron ofertas para esta subasta" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener la mayor oferta", error });
+  }
+};
+
 export const eliminarOferta = async (req, res) => {
   try {
     const {id, user} = req.params
