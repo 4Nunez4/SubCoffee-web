@@ -22,13 +22,15 @@ import NotificacionContext from "../context/NotificacionesContext.jsx";
 import ModalSubCoffee from "../components/templates/ModalSubCoffee.jsx";
 import addNotification from "react-push-notification"
 import { useSubastaContext } from "../context/SubastaContext.jsx";
+import logo from "../assets/isotipo-SubCoffee.png";
 
 export default function ListarNotificaciones() {
   const clickNot = ()=>{
     addNotification({
       title: "para  todos los usuarios",
       message: "esta funcionando correctamente ",
-      duration: 4000,
+      icon: logo,
+      duration: 40000,
       native: true,
       //onClick: ()=> window.location = "la url de donde quiere que lo redirija la notificacion "
    
