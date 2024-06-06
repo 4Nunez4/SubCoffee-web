@@ -110,7 +110,7 @@ function SubastaPage() {
     <div className="px-auto pb-8">
       <ImageSlider />
       {users.rol_user !== "admin" && (
-        <div className="px-16 bg-slate-300 ">
+        <div className="px-16">
           <p className="pl-4 pb-4 text-[#00684a] text-2xl font-semibold md:text-2xl">Subastas</p>
           {Object.keys(subastas).length > 0 ? Object.entries(groupedSubastas).map(([tipoVari, subastas]) => (
             <div key={tipoVari} >

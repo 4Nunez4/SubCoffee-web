@@ -90,7 +90,7 @@ function ModalSubasta({ onClose }) {
 
   return (
     <div>
-      <ModalHeader className="flex justify-center ">
+      <ModalHeader className="flex justify-center">
         <h1 className="text-center text-3xl font-bold"> {subasta.pk_id_sub} - {subasta.nombre_tipo_vari} </h1>
       </ModalHeader>
       <ModalBody>
@@ -100,19 +100,19 @@ function ModalSubasta({ onClose }) {
               radius="md"
               shadow="sm"
               alt={subasta.imagen_sub}
-              className="object-cover w-[400px] h-[350px]"
+              className="object-cover w-[400px] h-[280px]"
               src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
             />
           </div>
-          <div className="shadow text-sm rounded-lg w-80">
-            <div className="bg-[#001e2b] p-2 rounded-t-lg">
+          <div className="shadow text-sm rounded-lg w-80 max-h-[300px]">
+            <div className="bg-[#009100] p-2 rounded-t-lg">
               <p className="text-xl text-white font-semibold text-center"> Datos de la subasta </p>
             </div>
             <div className="flex flex-col items-center">
-              <p className="font-semibold text-white text-center"> {subastaTerminada ? "Subasta terminada" : tiempoRestante} </p>
+              <p className="font-semibold text-[#a1653d] text-center"> {subastaTerminada ? "Subasta terminada" : tiempoRestante} </p>
             </div>
-            <div className="grid grid-cols-2 py-2 px-2 gap-2">
-              <div className=" flex flex-col gap-2">
+            <div className="grid grid-cols-2 gap-x-2 py-2 px-2">
+              <div className="items-end flex flex-col ">
                 <p className="font-semibold">Apertura:</p>
                 <p className="font-semibold">Cierre:</p>
                 <p className="font-semibold">Ubicación:</p>
@@ -121,7 +121,7 @@ function ModalSubasta({ onClose }) {
                 <p className="font-semibold">Certificado:</p>
                 <p className="font-semibold text-center">Descripción:</p>
               </div>
-              <div className="grid grid-cols-subgrid gap-2 ">
+              <div>
                 <p> {new Date(subasta.fecha_inicio_sub).toLocaleString("es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", })} </p>
                 <p> {new Date(subasta.fecha_fin_sub).toLocaleString("es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", })} </p> 
                 <p> {subasta.nombre_vere} - {subasta.nombre_muni} - {subasta.nombre_depar} </p>
@@ -132,19 +132,19 @@ function ModalSubasta({ onClose }) {
               </div>
             </div>
             <div className="flex flex-col items-center">
-              <p className="font-semibold text-white mb-2">PRECIO BASE:</p>
-              <p className="text-[#001e2b] font-semibold text-lg -mt-2 "> ${Number(subasta.precio_inicial_sub).toLocaleString("es-ES")} </p>
+              <p className="font-semibold text-[#a1653d]">PRECIO BASE:</p>
+              <p className="text-[#009100] font-semibold text-lg -mt-2"> ${Number(subasta.precio_inicial_sub).toLocaleString("es-ES")} </p>
             </div>
           </div>
         </div>
       </ModalBody>
       <ModalFooter className="flex justify-center">
-        <Button onClick={() => onClose()} className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] ">Salir</Button>
+        <Button onClick={() => onClose()}>Salir</Button>
         {subasta.pk_cedula_user === user.pk_cedula_user ? 
           (
             <Button
               type="submit"
-              className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b]"
+              className="bg-gray-600 text-white"
               onClick={() => navigate(`/subasta/${subasta.pk_id_sub}`)}
               isDisabled={!subastaIniciada}
             >
@@ -153,13 +153,13 @@ function ModalSubasta({ onClose }) {
           ) : (
             <Button
               type="submit"
-              className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b]"
+              className="bg-gray-600 text-white"
               onClick={handleIniciarPuja}
               isDisabled={!subastaIniciada} 
             >
-            {posts && posts.length > 0 && posts.some(post => post.fk_id_usuario === user.pk_cedula_user && post.estado_post === "activo")
-              ? "Ingresar a pujar"
-              : "Postularme a la subasta"}
+              {posts.length === 0
+                ? "Postularme a la subasta" : posts.some( (post) => post.fk_id_usuario === user.pk_cedula_user && post.estado_post === "activo" )
+                ? "Ingresar a pujar" : "Postularme a la subasta"}
             </Button>
           )
         }

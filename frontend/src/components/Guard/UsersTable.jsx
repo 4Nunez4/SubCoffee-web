@@ -304,7 +304,7 @@ export default function UsersTable() {
   }, [items.length, page, pages, hasSearchFilter]);
 
   return (
-    <div className=" w-full bg-gray-300">
+    <div className=" w-full">
           <div className="mx-20 text-white">
       <FormUser
         open={abrirModal}

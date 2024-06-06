@@ -188,9 +188,8 @@ function SubastaUser() {
   };
 
   return (
-    <div className="h-auto bg-slate-300">
-          <div className="px-16 pt-4 text-white ">
-      <div className="font-bold p-1 text-xl items-center flex text-[#00684a] ">{subasta.pk_id_sub} - {subasta.nombre_tipo_vari}                         
+    <div className="px-16 pt-4 mb-10">
+      <div className="font-bold p-1 text-xl items-center flex">{subasta.pk_id_sub} - {subasta.nombre_tipo_vari}                         
       <div className={`rounded-lg border ml-2
         ${subasta.estado_sub === "abierta" ? "bg-green-500 border-green-600 text-green-50" : ""}
         ${subasta.estado_sub === "proceso" ? "bg-orange-500 border-orange-600 text-orange-50" : ""}
@@ -200,7 +199,7 @@ function SubastaUser() {
         <p className="text-sm text-default-50 p-0 px-1">{subasta.estado_sub}</p>
       </div></div>
       <div className="flex gap-3 w-full">
-        <div className="bg-[#00684a] rounded-xl w-full p-4 h-full">
+        <div className="bg-[#e0e0e0] rounded-xl w-full p-4 h-full">
           <div className="grid gap-1">
             <div className="flex flex-col gap-2 justify-center items-center">
               <Image
@@ -212,15 +211,15 @@ function SubastaUser() {
               />
             </div>
             <div className="shadow text-sm rounded-lg py-1">
-              <div className="bg-[#001e2b] p-2 rounded-t-lg">
+              <div className="bg-[#00684a] p-2 rounded-t-lg">
                 <p className="text-xl text-white font-semibold text-center">Datos de la subasta</p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="font-bold text-white ">Fecha fin de la subasta:</p>
-                <p className="text-[#001e2b] font-semibold text-[16px] text-center -mt-1">{calcularDiferencia(subasta.fecha_inicio_sub,subasta.fecha_fin_sub)}</p>
+                <p className="font-semibold text-[#a1653d]">Fecha fin de la subasta:</p>
+                <p className="text-[#00684a] font-semibold text-[16px] -mt-1">{calcularDiferencia(subasta.fecha_inicio_sub,subasta.fecha_fin_sub)}</p>
               </div>
-              <div className="grid grid-cols-2 gap-x-2 py-2 px-2 ">
-                <div className="flex flex-col">
+              <div className="grid grid-cols-2 gap-x-2 py-2 px-2">
+                <div className="items-end flex flex-col">
                   <p className="font-semibold">Apertura:</p>
                   <p className="font-semibold">Cierre:</p>
                   <p className="font-semibold">Ubicación:</p>
@@ -240,14 +239,14 @@ function SubastaUser() {
                 </div>
               </div>
               <div className="flex flex-col items-center">
-                <p className="font-bold text-white">PRECIO BASE:</p>
-                <p className="text-[#001e2b] font-semibold text-lg -mt-2">${Number(subasta.precio_inicial_sub).toLocaleString("es-ES")}</p>
+                <p className="font-semibold text-[#a1653d]">PRECIO BASE:</p>
+                <p className="text-[#00684a] font-semibold text-lg -mt-2">${Number(subasta.precio_inicial_sub).toLocaleString("es-ES")}</p>
               </div>
             </div>
           </div>
         </div>
         <div className="w-full flex flex-col h-auto">
-          <div className="flex-grow bg-[#001e2b] rounded-xl p-4 overflow-y-auto  ">
+          <div className="flex-grow bg-[#e0e0e0] rounded-xl p-4 overflow-y-auto">
             <h3 className="text-lg font-semibold text-center">Ofertas</h3>
             <div className={`overflow-y-auto  ${subasta.pk_cedula_user !== user.pk_cedula_user ? "max-h-[350px]" : "max-full" }`}>
               {Array.isArray(ofertas) && ofertas.length > 0 ? (
@@ -259,7 +258,7 @@ function SubastaUser() {
                     { oferta.fk_id_usuario === user.pk_cedula_user
                       ? (                    
                       <div className="flex items-center justify-start">
-                        <div className="flex items-center bg-[#00684a] w-full py-1 pr-12 rounded-2xl">
+                        <div className="flex items-center bg-gray-100 py-1 pr-12 rounded-2xl">
                           <img
                             src={`http://localhost:4000/img/${oferta.imagen_user}`}
                             alt="User Avatar"
@@ -291,12 +290,12 @@ function SubastaUser() {
                   </div>
                 ))
               ) : (
-                <p className="text-center">Aún no hay ofertas</p>
+                <p>Aún no hay ofertas</p>
               )}
             </div>
           </div>
           {subasta.pk_cedula_user !== user.pk_cedula_user && (
-            <div className="bg-[#001e2b] rounded-xl p-4 mt-2 w-full">
+            <div className="bg-[#e0e0e0] rounded-xl p-4 mt-2 w-full">
               <p className="text-center">Precio actual: ${precioActual.toLocaleString()}</p>
               <form onSubmit={handleSubmitOferta} className="w-full flex flex-col items-center">
               <Slider
@@ -328,8 +327,8 @@ function SubastaUser() {
                   base: "w-full",
                   filler: "bg-gradient-to-r from-primary-500 to-secondary-400",
                   labelWrapper: "mb-2",
-                  label: "font-medium text-default-100 text-medium",
-                  value: "font-medium text-default-100 text-small",
+                  label: "font-medium text-default-700 text-medium",
+                  value: "font-medium text-default-500 text-small",
                   thumb: [
                     "transition-size",
                     "bg-gradient-to-r from-secondary-400 to-primary-500",
@@ -347,14 +346,14 @@ function SubastaUser() {
                   },
                 }}
               />
-              <Button type="submit" className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b]  m-4">Realizar Oferta</Button>
+              <Button type="submit">Realizar Oferta</Button>
             </form>
             </div>
           )}
         </div>
         <div className="grid grid-rows-2 gap-y-2">
-          <div className="bg-[#00684a] w-64 rounded-xl p-2 items-center flex flex-col">
-            <h3 className="text-lg font-semibold text-white">Vendedor</h3>
+          <div className="bg-[#e0e0e0] w-64 rounded-xl p-2 items-center flex flex-col">
+            <h3 className="text-lg font-semibold text-[#a1653d]">Vendedor</h3>
             <Avatar
               src={subasta.imagen_user && subasta.imagen_user.length > 0? `http://localhost:4000/img/${subasta.imagen_user}`: "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
               className="w-28 h-28"
@@ -364,11 +363,11 @@ function SubastaUser() {
             </div>
             <p className="text-center">{subasta.email_user}</p>
             <p className="text-center">{subasta.telefono_user}</p>
-            <p className="text-[#001e2b] font-bold">Calificación del usuario</p>
+            <p className="text-[#a1653d]">Calificación del usuario</p>
             <div className="flex flex-col items-start">
               {stats && stats.promedio != null && !isNaN(stats.promedio) ? (
                 <div className="flex gap-x-2">
-                  <div className="text-xl font-bold">{parseFloat(stats.promedio).toFixed(1)}</div>
+                  <div className="text-2xl font-bold">{parseFloat(stats.promedio).toFixed(1)}</div>
                   {renderAverageStars(stats.promedio)}
                 </div>
               ) : (
@@ -376,12 +375,12 @@ function SubastaUser() {
               )}
             </div>
           </div>
-          <div className="overflow-x-auto bg-[#00684a] rounded-xl flex flex-col h-full">
+          <div className="overflow-x-auto bg-[#e0e0e0] rounded-xl flex flex-col h-full">
             <h3 className="text-lg font-semibold text-center mt-2">Postulantes</h3>
             <div className="flex-grow overflow-y-auto flex flex-col gap-1 items-center mt-1">
               {Array.isArray(postsActivos) && postsActivos.length > 0 ? (
                 postsActivos.map((postulante, i) => (
-                  <div key={i} className="rounded-xl w-52 gap-x-1 h-10 flex px-2 items-center overflow-y-auto bg-[#001e2b]  ">
+                  <div key={i} className="rounded-xl w-52 gap-x-1 h-10 flex px-2 items-center overflow-y-auto">
                     <Avatar
                       src={postulante.imagen_user && postulante.imagen_user.length > 0 ? `http://localhost:4000/img/${postulante.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
                       className="w-8 h-8"
@@ -412,8 +411,6 @@ function SubastaUser() {
         </div>
       </div>
     </div>
-    </div>
-
   );
 }
 

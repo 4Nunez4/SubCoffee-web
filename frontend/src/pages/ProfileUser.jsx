@@ -92,7 +92,7 @@ function ProfileUser() {
   };
 
   return (
-    <div className="px-16 bg-gray-300">
+    <div className="px-16 ">
       <FormUser
         open={abrirModal}
         onClose={() => setAbrirModal(false)}
@@ -115,7 +115,7 @@ function ProfileUser() {
             />
             {user.pk_cedula_user === localUser.pk_cedula_user && (
               <Button
-                className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500"
+                className="border-[#00ed64] mt-2 inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500"
                 onClick={() => {
                   handleToggle("update");
                   setIdUser(user);
@@ -190,7 +190,8 @@ function ProfileUser() {
       />
       {user.rol_user !== "admin" && (
         <>
-          <div className="grow border-b border-gray-400 my-4"></div>
+        <div className="grow border-b border-gray-400 my-4"></div>
+        <div className="flex w-full flex-col items-center">
           <div className="flex items-center w-full mb-4">
             {user.rol_user !== "comprador" && (
               <button className={`text-lg font-semibold mr-4 focus:outline-none ${ activeTab === "creadas" ? "text-gray-400 mb-3 transition delay-150 duration-500 ease-in-out" : "text-gray-800" }`} onClick={() => setActiveTab("creadas")} >
@@ -201,7 +202,7 @@ function ProfileUser() {
               Subastas Ganadas
             </button>
           </div>
-          <div className="">
+          <div className="w-[1030px] flex flex-col items-center">
             {user.rol_user !== "comprador" && activeTab === "creadas" && (
               <div>
                 <h2 className="text-lg font-semibold mb-4 text-center">
@@ -214,7 +215,7 @@ function ProfileUser() {
                         key={subasta.pk_id_sub}
                         className="max-w-[320px] m-2 bg-[#00684a] text-white"
                       >
-                        <CardBody className="items-center w-full ">
+                        <CardBody className="items-center w-full h-[485px]">
                           <span className="text-center flex justify-center items-center gap-x-3">
                             <b className="text-lg">{subasta.pk_id_sub} - {subasta.nombre_tipo_vari}</b>
                             <div
@@ -272,12 +273,12 @@ function ProfileUser() {
                                 </div>
                                 {subasta.estado_sub === "cerrada" ? (
                                   <div className="flex gap-x-2">
-                                    <p className="font-semibold text-[#a1653d]">Precio Final:</p>
+                                    <p className="font-semibold text-[#c29b81]">Precio Final:</p>
                                     <p className="text-[#009100] font-semibold">${Number(subasta.precio_final_sub).toLocaleString("es-ES")}</p>
                                   </div>
                                 ) : (
                                   <div className="flex gap-x-2">
-                                    <p className="font-semibold text-[#a1653d]">Precio Final:</p>
+                                    <p className="font-semibold text-[#c29b81]">Precio Final:</p>
                                     <p className="text-[#009100] font-semibold">Desconocido</p>
                                   </div>
                                 )}
@@ -289,7 +290,7 @@ function ProfileUser() {
                     ))
                   ) : (
                     <div className="flex">
-                      <p className="w-full">No tiene ninguna subasta creada</p>
+                      <p className="pl-4 text-xl my-2 text-gray-500">No tiene ninguna subasta creada</p>
                     </div>
                   )}
                 </div>
@@ -359,11 +360,11 @@ function ProfileUser() {
                             {ganador.estado_sub === "cerrada" && (
                               <>
                                 <div className="flex gap-x-2">
-                                  <p className="font-semibold text-[#a1653d]">Precio Final:</p>
+                                  <p className="font-semibold text-[#c29b81]">Precio Final:</p>
                                   <p className="text-[#009100] font-semibold">${Number(ganador.precio_final_sub).toLocaleString("es-ES")}</p>
                                 </div>
                                 <div className="flex gap-x-2">
-                                  <p className="font-semibold text-[#a1653d]">Vendedor:</p>
+                                  <p className="font-semibold text-[#c29b81]">Vendedor:</p>
                                   <p className="text-[#009100] font-semibold">{ganador.propietario_nombre ? ganador.propietario_nombre : "Desconocido"}</p>
                                 </div>
                               </>
@@ -375,12 +376,13 @@ function ProfileUser() {
                   </Card>
                 )): (
                   <div className="flex">
-                    <p className="w-full">No tiene ninguna subasta ganada</p>
+                    <p className="pl-4 text-xl my-2 text-gray-500">No tiene ninguna subasta ganada.</p>
                   </div>
                 )}
               </div>
             )}
           </div>
+        </div>
         </>
       )}
     </div>
