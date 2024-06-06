@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Avatar, Image, Button, Slider } from "@nextui-org/react";
+import { Avatar, Button, Image, Modal, ModalBody, ModalContent, Slider } from "@nextui-org/react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-
 import { useSubastaContext } from "../context/SubastaContext";
 import { usePostulantesContext } from "../context/PostulantesContext";
 import { useOfertasContext } from "../context/OfertasContext";
 import { useAuthContext } from "../context/AuthContext";
 import { useCalificacionesContext } from "../context/CalificacionesContext";
 import Swal from "sweetalert2";
+import ModalContact from "./ModalContact";
 
 const colors = {
   orange: "#FFBA5A",
@@ -18,18 +18,19 @@ const colors = {
 function SubastaUser() {
   const { id } = useParams();
   const [oferta, setOferta] = useState(0);
-  const [tiempoRestante, setTiempoRestante] = useState("");
-  const { getSub, subasta, EsperaSubs, desactivarSubs } = useSubastaContext();
+  const { getSub, subasta, EsperaSubs } = useSubastaContext();
   const { getPostsActivos, postsActivos, desactivarPosts } = usePostulantesContext();
   const { createOfert, ofertas, getOfertForSub, eliminarOfertas } = useOfertasContext();
   const { getCalificacionesUser, stats } = useCalificacionesContext();
-  const { getUsers } = useAuthContext()
+  const { getUsers } = useAuthContext();
+  const [precioActual, setPrecioActual] = useState(0);
   const user = JSON.parse(localStorage.getItem("user"));
+  const [isModalOpen, setIsModalOpen] = useState(false); 
   const navigate = useNavigate();
 
   useEffect(() => {
-    getUsers()
-  }, []);
+    getUsers();
+  }, [getUsers]);
 
   useEffect(() => {
     getOfertForSub(id);
@@ -40,41 +41,6 @@ function SubastaUser() {
     getPostsActivos(id);
   }, [id, getSub, getPostsActivos]);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (Array.isArray(subasta)) {
-        for (const subasta of subasta) {
-          const { pk_id_sub } = subasta;
-          const { pk_cedula_user } = user;
-  
-          const tiempo = calcularDiferencia(subasta.fecha_inicio_sub, subasta.fecha_fin_sub);
-          if (tiempo.includes("A la subasta le quedan")) {
-            Swal.fire({
-              text: "Comunícate con: Pepito Pérez",
-              icon: "question",
-              showCancelButton: true,
-              confirmButtonText: "Sí",
-              cancelButtonText: "Cancelar",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                const data = {
-                  fk_id_usuario: user.pk_cedula_user,
-                  fk_id_subasta: subasta.pk_id_sub,
-                };
-                desactivarPosts(data, id);
-                desactivarSubs(id, user.pk_cedula_user);
-                navigate(`/subcoffee`);
-              }
-            });
-          } else if (tiempo.includes("La subasta terminará en")) {
-            EsperaSubs(pk_id_sub, pk_cedula_user);
-          }          
-        }
-      }
-    }, 1000);
-    return () => clearInterval(intervalId);
-  }, [subasta, user]);
-  
   const calcularDiferencia = (fechaInicio, fechaFin) => {
     const inicio = new Date(fechaInicio);
     const fin = new Date(fechaFin);
@@ -91,13 +57,36 @@ function SubastaUser() {
       const horas = Math.floor((diferenciaMs / 1000 / 60 / 60) % 24);
       const dias = Math.floor(diferenciaMs / 1000 / 60 / 60 / 24);
 
-      if (dias === 0 && horas === 0 && minutos < 43) {
-        return `A la subasta le quedan ${minutos} minutos y ${segundos} segundos`;
+      if (dias === 0 && horas === 1 && minutos < 8) {
+        return `A la subasta le quedan, ${horas} horas, ${minutos} minutos y ${segundos} segundos`;
       } else {
         return `La subasta terminará en: ${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
       }
     }
   };
+
+  useEffect(() => {
+    if (!subasta || subasta.length === 0) return;
+
+    const intervalId = setInterval(() => {
+      subasta.forEach((subasta) => {
+        const { pk_id_sub } = subasta;
+        const { pk_cedula_user } = user;
+        const tiempo = calcularDiferencia(subasta.fecha_inicio_sub, subasta.fecha_fin_sub);
+
+        if (tiempo.includes("La subasta terminará en")) {
+          Swal.fire({
+            text: "A la subasta le quedan menos de 18 minutos para finalizar.",
+            icon: "info",
+          });
+        } else if (tiempo.includes("La subasta empezará dentro de")) {
+          EsperaSubs(pk_id_sub, pk_cedula_user);
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [subasta, user, EsperaSubs]);
 
   const calcularTiempoRestante = (inicio, fin) => {
     const diferenciaMs = fin - inicio;
@@ -108,14 +97,19 @@ function SubastaUser() {
     return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
   };
 
-  const [precioActual, setPrecioActual] = useState(0);
-
   const handleSubmitOferta = async (e) => {
     e.preventDefault();
+    const totalOferta = precioActual + oferta;
+    if (totalOferta === precioActual) {
+      Swal.fire({
+        text: "La oferta debe ser mayor a 0.",
+        icon: "warning",
+      });
+      return;
+    }
     try {
-      const totalOferta = precioActual + oferta;
       const data = {
-        oferta_ofer: totalOferta, 
+        oferta_ofer: totalOferta,
         fk_id_usuario: user.pk_cedula_user,
         fk_id_subasta: id,
       };
@@ -132,11 +126,11 @@ function SubastaUser() {
         fk_id_usuario: user.pk_cedula_user,
         fk_id_subasta: subasta.pk_id_sub,
       };
-      if(user.pk_cedula_user === subasta.pk_cedula_user) {
+      if (user.pk_cedula_user === subasta.pk_cedula_user) {
         navigate(`/subcoffee`);
       } else {
         Swal.fire({
-          text: "¿Estás seguro de salir de la subasta ? Si es asi se eliminaran las ofertas que hayas creado",
+          text: "¿Estás seguro de salir de la subasta? Si es así, se eliminarán las ofertas que hayas creado.",
           icon: "question",
           showCancelButton: true,
           confirmButtonText: "Sí",
@@ -144,10 +138,10 @@ function SubastaUser() {
         }).then((result) => {
           if (result.isConfirmed) {
             desactivarPosts(data, id);
-            eliminarOfertas(id, user.pk_cedula_user)
+            eliminarOfertas(id, user.pk_cedula_user);
             navigate(`/subcoffee`);
             Swal.fire({
-              text: "Salida de subasta éxitoso!",
+              text: "¡Salida de subasta exitosa!",
               icon: "success",
             });
           }
@@ -158,18 +152,18 @@ function SubastaUser() {
     }
   };
 
-
   useEffect(() => {
     const nuevoPrecioActual =
-    Number(subasta.precio_inicial_sub) +
-      (Array.isArray(ofertas) && ofertas.length > 0
+      Array.isArray(ofertas) && ofertas.length > 0
         ? Math.max(...ofertas.map((oferta) => oferta.oferta_ofer), 0)
-        : 0);
+        : Number(subasta.precio_inicial_sub);
     setPrecioActual(nuevoPrecioActual);
   }, [subasta.precio_inicial_sub, ofertas]);
 
   useEffect(() => {
-    getCalificacionesUser(subasta.pk_cedula_user);
+    if (subasta && subasta.pk_cedula_user) {
+      getCalificacionesUser(subasta.pk_cedula_user);
+    }
   }, [subasta.pk_cedula_user, getCalificacionesUser]);
 
   const renderAverageStars = (average) => {
@@ -178,12 +172,7 @@ function SubastaUser() {
     return (
       <div className="flex items-center">
         {Array.from({ length: fullStars }, (_, index) => (
-          <FaStar
-            key={index}
-            size={14}
-            color={colors.orange}
-            className="mr-1"
-          />
+          <FaStar key={index} size={14} color={colors.orange} className="mr-1" />
         ))}
         {hasHalfStar && (
           <FaStarHalfAlt size={24} color={colors.orange} className="mr-1" />
@@ -191,12 +180,7 @@ function SubastaUser() {
         {Array.from(
           { length: 5 - fullStars - (hasHalfStar ? 1 : 0) },
           (_, index) => (
-            <FaStar
-              key={index + fullStars + 1}
-              size={12}
-              color={colors.grey}
-              className="mr-1"
-            />
+            <FaStar key={index + fullStars + 1} size={12} color={colors.grey} className="mr-1" />
           )
         )}
       </div>
@@ -249,7 +233,7 @@ function SubastaUser() {
                   <p> {new Date(subasta.fecha_inicio_sub).toLocaleString( "es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", } )} </p>
                   <p> {new Date(subasta.fecha_fin_sub).toLocaleString("es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", })}</p>
                   <p> {subasta.nombre_vere} - {subasta.nombre_muni} - {subasta.nombre_depar}</p>
-                  <p> {subasta.cantidad_sub} {subasta.unidad_peso_sub > 1 ? subasta.unidad_peso_sub + "s" : subasta.unidad_peso_sub} </p>
+                  <p> {subasta.cantidad_sub} {subasta.cantidad_sub > 1 ? subasta.unidad_peso_sub + "s" : subasta.unidad_peso_sub} </p>
                   <p>{subasta.nombre_tipo_vari}</p>
                   <p className="underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap max-w-auto"> {subasta.certificado_sub} </p>
                   <p className="overflow-hidden text-ellipsis whitespace-nowrap max-w-auto">{subasta.descripcion_sub}</p>
@@ -412,14 +396,18 @@ function SubastaUser() {
                 <p>No hay postulantes activos.</p>
               )}
             </div>
-            <div className="flex justify-center mb-3 mt-3">
+            <div className="flex justify-center mb-3 mt-3 gap-x-1">
               <Button
                 onClick={handlePostulantesClick}
                 className="bg-red-600 text-white rounded-xl"
               >
                 Salir de la subasta
               </Button>
+              <Button auto color="primary" onClick={() => setIsModalOpen(true)}>
+                Contactar
+              </Button>
             </div>
+            <ModalContact open={isModalOpen} onClose={() => setIsModalOpen(false)} id={id} />
           </div>
         </div>
       </div>

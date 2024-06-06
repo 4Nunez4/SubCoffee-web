@@ -64,7 +64,7 @@ function AyudaPage() {
 
   return (
     <div
-      className={`p-8 px-44 mx-auto flex flex-col justify-center bg-gray-300 ${
+      className={`p-8 px-44 mx-auto flex flex-col justify-center  ${
         isScrolled ? "scrolled" : ""
       }`}
     >
@@ -80,7 +80,7 @@ function AyudaPage() {
             onClick={() => scrollToSection("comoPujar")}
             className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${isScrolled ? "opacity-40" : ""}`}
           >
-            Como pujar una subasta
+            Como puja una subasta
           </Button>
           <Button
             onClick={() => scrollToSection("infoRoles")}

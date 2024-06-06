@@ -29,7 +29,7 @@ function FincaTable() {
   };
   
   return (
-    <div className="w-full bg-gray-200 rounded-lg">
+    <div className="w-full rounded-lg px-4">
       <div className="flex justify-between py-4 gap-x-3 px-12 items-center ">
         <p className="text-center text-[#00684a] text-xl	font-bold"> Tu finca tiene una historia que contar </p>
         <Button

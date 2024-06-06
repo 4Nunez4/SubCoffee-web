@@ -297,7 +297,7 @@ export default function ListarNotificaciones() {
   }, [items.length, page, pages, hasSearchFilter]);
 
   return (
-    <div className=" w-full bg-gray-300">
+    <div className=" w-full ">
          <div className="w-full h-auto px-8 ">
       <ModalSubCoffee
         open={abrirModal}
