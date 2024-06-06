@@ -125,14 +125,13 @@ useEffect(() => {
         onClose={() => setAbrirModalSub(false)}
       />
       {subastaForuser && subastaForuser.length > 0 ? (
-        <div className="grid grid-cols-3 justify-center items-center gap-4 p-3">
+        <div className="grid grid-cols-5 justify-center gap-4 p-3">
           {subastaForuser.map((subasta) => (
-            <Card key={subasta.pk_id_sub} className="max-w-[410px] h-[540px] bg-[#00684a] text-white">
-              <CardBody className="items-center">
+            <Card key={subasta.pk_id_sub} className="w-[310px] h-[538px]">
+              <CardBody>
                 <span className="text-center flex items-center justify-center w-full gap-3">
                   {subasta.pk_id_sub} - {subasta.nombre_tipo_vari}
-                  <div
-                    className={`w-auto rounded-lg border
+                  <div className={`w-auto rounded-lg border
                     ${subasta.estado_sub === "abierta"? "bg-green-500 border-green-600 text-green-50": ""}
                     ${subasta.estado_sub === "proceso"? "bg-orange-500 border-orange-600 text-orange-50": ""}
                     ${subasta.estado_sub === "espera"? "bg-blue-500 border-blue-600 text-blue-50": ""}
@@ -144,7 +143,6 @@ useEffect(() => {
                   {subasta.pk_cedula_user === usuario.pk_cedula_user && (
                     <Button
                       isDisabled={subasta.estado_sub === "abierta"? !subastaTerminada: subastaTerminada}
-                    className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] h-9 mt-2"
                       radius="md"
                       startContent={<EditIcon />}  
                       onPress={() => {
@@ -169,7 +167,7 @@ useEffect(() => {
                   <div className="grid gap-x-2 py-2 px-2 text-sm max-h-[300px] overflow-y-auto">
                     <div className="flex flex-col">
                       <div className="flex flex-col items-center mb-1">
-                        <p className="font-semibold text-[#e0e0e0] text-center">{calcularDiferencia(subasta.fecha_inicio_sub,subasta.fecha_fin_sub)}</p>
+                        <p className="text-[#a1653d]">{calcularDiferencia(subasta.fecha_inicio_sub,subasta.fecha_fin_sub)}</p>
                       </div>
                       <div className="flex w-full gap-x-2">
                         <p className="font-semibold">Apertura:</p>

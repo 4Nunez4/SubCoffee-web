@@ -77,7 +77,7 @@ const LoginFormMolecule = () => {
       <a
         href="#RecuperarPassword"
         onClick={() => setAbrirModalPassword(true)}
-        className={`cursor-pointer text-xs underline hover:text-[#00ed64] text-white`}
+        className={`cursor-pointer text-xs underline hover:text-gray-600`}
       >
         ¿Olvidaste tu contraseña?
       </a>

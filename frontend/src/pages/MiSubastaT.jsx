@@ -9,15 +9,11 @@ import SubastaTable from "../components/Guard/SubastaTable";
 export default function MiSubastaT() {
     
   return (
-    <div className="w-full flex flex-col items-center px-8 bg-gray-50">
+    <div className="w-full flex flex-col px-8 bg-gray-50">
       <div className="pb-2">
-        <div className="flex justify-center pt-8 pb-2">
-          <img src="./src/assets/cafe_mi_subasta.png" alt="Cafe_imagen" className="rounded-s-2xl transition-width duration-300 md:max-w-[25%] lg:max-w-[33.33%] xl:max-w-[50%] w-full lg:w-auto xl:w-auto" />
-          <img src="./src/assets/carrofinca_mi_subasta.png" alt="Finca_imagen" className="rounded-e-2xl transition-width duration-300 md:max-w-[25%] lg:max-w-[33.33%] xl:max-w-[50%] w-full lg:w-auto xl:w-auto" />
-        </div>
-        <p className="text-center mt-3 text-[#00684a] text-xl	font-bold	"> Para crear una subasta primero debes crear una finca. Luego, agregas las variedades que tienes en tu finca y ya por fin puedes agregar una subasta </p>
+         <p className="pl-4 text-xl my-2 text-gray-500 mt-8"> Para crear una subasta primero debes crear una finca. Luego, agregas las variedades que tienes en tu finca y ya por fin puedes agregar una subasta </p>
       </div>
-      <div className="w-[1030px] flex flex-col justify-center gap-y-4">
+      <div className="flex flex-col  gap-y-4">
         <div className="flex w-full flex-col">
           <Tabs
             aria-label="Options"

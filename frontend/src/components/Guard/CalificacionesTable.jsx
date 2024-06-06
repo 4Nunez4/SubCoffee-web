@@ -122,8 +122,8 @@ function CalificacionesTable({ titleBtn, fk_user }) {
         onClose={() => setAbrirModalCalificacion(false)}
         fk_user={fk_user}
         mode={mode}
-        title={mode === "create" ? "Registrar Calificación": "Actualizar Calificación"}
-        titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
+        title={"Calificar"}
+        titleBtn={titleBtn}
       />
       <div className="mt-4 w-full">
         {stats?.promedio == null || isNaN(stats.promedio) || stats.length === 0 ? (

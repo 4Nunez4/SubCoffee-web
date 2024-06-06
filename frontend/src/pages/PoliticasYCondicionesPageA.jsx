@@ -9,11 +9,10 @@ function PoliticasYCondicionesPageA() {
       <h1 className="text-3xl font-semibold text-center mb-8 mt-4 text-[#00684a] ">
         Políticas de privacidad
       </h1>
-
       <div className=" py-6 w-full b overflow-y-auto  px-44 ">
         <section id="primera">
           <div className="flex-grow">
-            <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">Fecha de efectividad</h2> 2024
+            <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">Fecha de efectividad</h2> 
             <p className="text-lg">
               Bienvenido a SubCoffe, la plataforma de subasta en línea enfocada
               en el café pergamino de calidad directamente de los campesinos del

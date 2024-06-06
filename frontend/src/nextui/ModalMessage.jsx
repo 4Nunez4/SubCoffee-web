@@ -10,7 +10,7 @@ import {
 export default function ModalMessage({ label, isOpen, onClose }) {
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} placement="top-center " className="bg-[#00684a] text-white">
+      <Modal isOpen={isOpen} onClose={onClose} placement="top-center ">
         <ModalContent className="p-4">
           <ModalBody>
             <label> {label} </label>

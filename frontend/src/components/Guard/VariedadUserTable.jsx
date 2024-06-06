@@ -47,10 +47,10 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
           variedadForuser.map((varis, i) => (
             <div
               key={i}
-              className="text-white bg-[#001e2b] rounded-md p-4 mx-3 flex mb-2 items-center justify-between shadow-md"
+              className="bg-gray-100 rounded-md p-4 mx-3 flex mb-2 items-center justify-between shadow-md"
             >
               <div className="flex-1">
-                <p className="font-semibold truncate">
+                <p className="text-gray-800 font-semibold truncate">
                   {varis.nombre_tipo_vari}
                 </p>
               </div>
@@ -68,7 +68,7 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
                   <Button
                     className="bg-red-600 text-white w-44"
                     startContent={<DesactivarIcon />}
-                    onClick={() => desactivarVaris(varis.pk_id_vari, user.pk_cedula_user, pkFinca)}
+                    onClick={() => desactivarVaris(varis.pk_id_vari, pkFinca)}
                   >
                     Desactivar Variedad
                   </Button>
@@ -76,7 +76,7 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
                   <Button
                     className="bg-green-600 text-white w-44"
                     startContent={<ActivarIcon />}
-                    onClick={() => activarVaris(varis.pk_id_vari, user.pk_cedula_user, pkFinca)}
+                    onClick={() => activarVaris(varis.pk_id_vari, pkFinca)}
                   >
                     Activar Variedad
                   </Button>
@@ -118,7 +118,7 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
           </select>
         </div>
         <ModalFooter className="flex justify-center">
-          <Button type="submit" className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500bg-[#e0e0e0] w-full mt-2">
+          <Button type="submit" className="bg-gray-600 text-white">
             {titleBtn}
           </Button>
         </ModalFooter>

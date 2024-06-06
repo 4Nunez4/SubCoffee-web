@@ -92,7 +92,7 @@ function ProfileUser() {
   };
 
   return (
-    <div className="px-16 ">
+    <div className="px-16">
       <FormUser
         open={abrirModal}
         onClose={() => setAbrirModal(false)}
@@ -202,18 +202,15 @@ function ProfileUser() {
               Subastas Ganadas
             </button>
           </div>
-          <div className="w-[1030px] flex flex-col items-center">
+          <div className="flex w-full flex-col items-center">
             {user.rol_user !== "comprador" && activeTab === "creadas" && (
               <div>
-                <h2 className="text-lg font-semibold mb-4 text-center">
-                  Subastas Creadas
-                </h2 >
-                <div className={`grid ${ subastaForuser ? "md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-x-2 sm:grid-cols-1" : "" } justify-center items-center`} >
+                <div className={`grid ${ subastaForuser ? "md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-x-2 sm:grid-cols-1" : "" } justify-center`} >
                   {subastaForuser ? (
                     subastaForuser.map((subasta) => (
                       <Card
                         key={subasta.pk_id_sub}
-                        className="max-w-[320px] m-2 bg-[#00684a] text-white"
+                        className="max-w-[320px] m-2"
                       >
                         <CardBody className="items-center w-full h-[485px]">
                           <span className="text-center flex justify-center items-center gap-x-3">
@@ -261,7 +258,7 @@ function ProfileUser() {
                                 </div>
                                 <div className="flex w-full gap-x-2">
                                   <p className="font-semibold">Certificado:</p>
-                                  <p className="underline cursor-pointer">{subasta.certificado_sub}</p>
+                                  <p className="underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]">{subasta.certificado_sub}</p>
                                 </div>
                                 <div className="flex gap-x-2">
                                   <p className="font-semibold">Descripción:</p>
@@ -271,16 +268,17 @@ function ProfileUser() {
                                   <p className="font-semibold">Precio base:</p>
                                   <p>${Number( subasta.precio_inicial_sub ).toLocaleString("es-ES")}</p>
                                 </div>
-                                {subasta.estado_sub === "cerrada" ? (
-                                  <div className="flex gap-x-2">
-                                    <p className="font-semibold text-[#c29b81]">Precio Final:</p>
-                                    <p className="text-[#009100] font-semibold">${Number(subasta.precio_final_sub).toLocaleString("es-ES")}</p>
-                                  </div>
-                                ) : (
-                                  <div className="flex gap-x-2">
-                                    <p className="font-semibold text-[#c29b81]">Precio Final:</p>
-                                    <p className="text-[#009100] font-semibold">Desconocido</p>
-                                  </div>
+                                {subasta.estado_sub === "cerrada" && (
+                                  <>
+                                    <div className="flex gap-x-2">
+                                      <p className="font-semibold text-[#c29b81]">Precio Final:</p>
+                                      <p className="text-[#009100] font-semibold">${Number(subasta.precio_final_sub).toLocaleString("es-ES")}</p>
+                                    </div>
+                                    <div className="flex gap-x-2">
+                                      <p className="font-semibold text-[#c29b81]">Vendedor:</p>
+                                      <p className="text-[#009100] font-semibold">{subasta.ganador_sub ? subasta.ganador_sub : "Desconocido"}</p>
+                                    </div>
+                                  </>
                                 )}
                               </div>
                             </div>
@@ -297,12 +295,11 @@ function ProfileUser() {
               </div>
             )}
             {activeTab === "ganadas" && (
-              <div>
-                <h2 className="text-lg font-semibold mb-4 text-center">Subastas Ganadas</h2>
+              <div className="flex w-full">
                 {subastaGanador.length > 0 ? subastaGanador.map((ganador) => (
-                  <Card key={ganador.pk_id_sub} className="max-w-[370px] max-h-[520px] p-2" >
-                    <CardBody className="items-center w-full">
-                      <span className="text-center flex justify-center items-center gap-x-3">
+                  <Card key={ganador.pk_id_sub} className="max-w-[340px] max-h-[520px] p-2" >
+                    <CardBody className="w-full">
+                      <span className="text-center flex justify-center items-end gap-x-3">
                         <b className="text-lg">{ganador.pk_id_sub} - {ganador.nombre_tipo_vari}</b>
                         <div
                           className={`w-auto rounded-lg border
@@ -347,7 +344,7 @@ function ProfileUser() {
                             </div>
                             <div className="flex w-full gap-x-2">
                               <p className="font-semibold">Certificado:</p>
-                              <p className="underline cursor-pointer">{ganador.certificado_sub}</p>
+                              <p className="underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]">{ganador.certificado_sub}</p>
                             </div>
                             <div className="flex gap-x-2">
                               <p className="font-semibold">Descripción:</p>
