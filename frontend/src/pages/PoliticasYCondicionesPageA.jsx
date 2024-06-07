@@ -1,18 +1,18 @@
 import React from "react";
 import logo from "../assets/isotipo-SubCoffee.png";
-import FooterOrganism from "../components/organisms/FooterOrganism";
 
 function PoliticasYCondicionesPageA() {
-
   return (
-    <div className=" flex flex-col items-center justify-center text-gray-700">
+    <div className="flex flex-col items-center justify-center text-gray-700">
       <h1 className="text-3xl font-semibold text-center mb-8 mt-4 text-[#00684a] ">
         Políticas de privacidad
       </h1>
-      <div className=" py-6 w-full b overflow-y-auto  px-44 ">
+      <div className=" py-6 w-full b overflow-y-auto max-w-7xl px-12">
         <section id="primera">
           <div className="flex-grow">
-            <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">Fecha de efectividad</h2> 
+            <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
+              Fecha de efectividad
+            </h2>
             <p className="text-lg">
               Bienvenido a SubCoffe, la plataforma de subasta en línea enfocada
               en el café pergamino de calidad directamente de los campesinos del
@@ -40,7 +40,9 @@ function PoliticasYCondicionesPageA() {
                 className="w-32 h-auto mb-6 md:mr-8 max-w-full md:max-w-none"
               />
               <div>
-                <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">Descripción del Servicio</h2>
+                <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
+                  Descripción del Servicio
+                </h2>
                 <p className="text-lg">
                   SubCoffe proporciona una plataforma de subasta en línea que
                   permite a los campesinos del Huila, Colombia, subastar su café
@@ -52,25 +54,27 @@ function PoliticasYCondicionesPageA() {
                 </p>
               </div>
             </div>
-
-            
           </div>
         </section>
         <section>
-            <h2 className="text-2xl font-semibold mb-4 text-[#00684a] "> Registro de Usuarios</h2>
-            <p className="text-lg ">
-              Para acceder a ciertas funciones del Sitio Web, incluyendo la
-              participación en subastas, deberá registrarse y crear una cuenta
-              de usuario. Al registrarse, se compromete a proporcionar
-              información verdadera, precisa, actualizada y completa sobre
-              usted, según lo solicitado por el formulario de registro. SubCoffe
-              se reserva el derecho de suspender o terminar su cuenta si se
-              descubre que cualquier información proporcionada es falsa,
-              inexacta, desactualizada o incompleta.
-            </p>
+          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
+            Registro de Usuarios
+          </h2>
+          <p className="text-lg ">
+            Para acceder a ciertas funciones del Sitio Web, incluyendo la
+            participación en subastas, deberá registrarse y crear una cuenta de
+            usuario. Al registrarse, se compromete a proporcionar información
+            verdadera, precisa, actualizada y completa sobre usted, según lo
+            solicitado por el formulario de registro. SubCoffe se reserva el
+            derecho de suspender o terminar su cuenta si se descubre que
+            cualquier información proporcionada es falsa, inexacta,
+            desactualizada o incompleta.
+          </p>
         </section>
         <section>
-          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">Privacidad y Protección de Datos</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
+            Privacidad y Protección de Datos
+          </h2>
           <p className="text-lg">
             SubCoffe toma seriamente la privacidad de sus usuarios. Recopilamos
             y utilizamos sus datos personales de acuerdo con nuestra Política de
@@ -81,7 +85,9 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] "> Cookies y Tecnologías de Seguimiento</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
+            Cookies y Tecnologías de Seguimiento
+          </h2>
           <p className="text-lg">
             El Sitio Web utiliza cookies y otras tecnologías de seguimiento para
             mejorar su experiencia de usuario y recopilar datos sobre cómo
@@ -91,7 +97,9 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">Uso de los Servicios</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
+            Uso de los Servicios
+          </h2>
           <p className="text-lg">
             Al utilizar los Servicios de SubCoffe, usted se compromete a:
           </p>
@@ -118,7 +126,7 @@ function PoliticasYCondicionesPageA() {
         </section>
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
-         Derechos de Propiedad Intelectual
+            Derechos de Propiedad Intelectual
           </h2>
           <p className="text-lg">
             Todo el contenido incluido en el Sitio Web, como textos, gráficos,
@@ -133,7 +141,7 @@ function PoliticasYCondicionesPageA() {
         </section>
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
-             Modificación de los Términos
+            Modificación de los Términos
           </h2>
           <p className="text-lg ">
             SubCoffe se reserva el derecho, a su sola discreción, de modificar o
@@ -158,7 +166,7 @@ function PoliticasYCondicionesPageA() {
         </section>
         <section>
           <h2 className="text-2xl font-semibold mb-4 text-[#00684a] ">
-             Jurisdicción y Ley Aplicable
+            Jurisdicción y Ley Aplicable
           </h2>
           <p className="text-lg">
             Estos Términos se regirán e interpretarán de acuerdo con las leyes
@@ -168,9 +176,7 @@ function PoliticasYCondicionesPageA() {
             Colombia.
           </p>
         </section>
-       
       </div>
-         <FooterOrganism />
     </div>
   );
 }

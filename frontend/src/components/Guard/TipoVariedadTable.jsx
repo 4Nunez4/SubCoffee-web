@@ -228,15 +228,12 @@ export default function TipoVariedadTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
+            <Button className="bg-[#00684a] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">
-            Total {tipoVariedades && tipoVariedades.length} Tipo de Variedades
-          </span>
+        <div className="flex justify-center items-center">
           <label className="flex items-center text-default-400 text-small">
             Columnas por páginas:
             <select
@@ -263,6 +260,11 @@ export default function TipoVariedadTable() {
   const bottomContent = useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center m-4">
+        <span>
+          {`Total ${
+            filteredItems.length
+          } Tipos de Variedades`}
+        </span>
         <Pagination
           isCompact
           showControls

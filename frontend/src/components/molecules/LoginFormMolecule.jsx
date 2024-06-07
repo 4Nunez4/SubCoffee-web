@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Input, ModalFooter } from "@nextui-org/react";
-
 import { EyeSlashFilledIcon } from "../../nextui/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "../../nextui/EyeFilledIcon";
 import { icono } from "../atoms/IconsAtom";
@@ -17,6 +16,12 @@ const LoginFormMolecule = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const validateEmail = (email) => email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
+  const isInvalid = useMemo(() => {
+    if (email === "") return false;
+    return validateEmail(email) ? false : true;
+  }, [email]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -42,23 +47,25 @@ const LoginFormMolecule = () => {
         onClose={() => setAbrirModalPassword(false)}
         title={"Recuperar contraseña"}
         titleBtn={"Recuperar"}
-       
       />
       <Input
         type="email"
         name="email"
+        value={email}
+        required
+        isInvalid={isInvalid}
         placeholder="Correo electrónico"
         labelPlacement="outside"
+        color={isInvalid ? "danger" : "default"}
         startContent={<icono.iconoGmail />}
         variant="bordered"
-        required={true}
-        value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <Input
         label=""
         aria-label="Contraseña"
         variant="bordered"
+        required
         placeholder="Contraseña"
         startContent={<icono.iconoContraseña />}
         endContent={
@@ -82,7 +89,7 @@ const LoginFormMolecule = () => {
         ¿Olvidaste tu contraseña?
       </a>
       <ModalFooter className="flex justify-center">
-        <Button type="submit" className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"> 
+        <Button type="submit" className="py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md"> 
           Iniciar Sesión
         </Button>
       </ModalFooter>

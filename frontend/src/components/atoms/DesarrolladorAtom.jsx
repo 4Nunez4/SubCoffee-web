@@ -35,7 +35,6 @@ const DesarrolladorAtom = ({ title, img, description }) => {
       {showDescription && (
         <div className="absolute inset-0 bg-[#001e2b] bg-opacity-80 text-white flex items-center justify-center   rounded-lg ">
           <p className="text-center">{description}</p>
-          
         </div>
       )}
     </div>

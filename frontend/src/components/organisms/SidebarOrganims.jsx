@@ -68,7 +68,7 @@ const SidebarOrganims = () => {
         <div className="flex items-center">
           <img
             src="/src/assets/isotipo-SubCoffee.png"
-            className={`cursor-pointer duration-500 h-10 w-10 ${open ? "rotate-[360deg]" : ""}`}
+            className={`duration-500 h-10 w-10 ${open ? "rotate-[360deg]" : ""}`}
           />
           <h1
             className={`text-white origin-left ml-2 font-medium text-2xl duration-200 overflow-hidden whitespace-nowrap ${
@@ -87,7 +87,7 @@ const SidebarOrganims = () => {
                 key={index}
                 onClick={() => setActiveLink(Menu.link)}
                 className={`flex rounded-md p-2 cursor-pointer text-white text-sm items-center gap-x-3 ${
-                  activeLink === Menu.link? "bg-[#061621] text-[#00684a]" : "hover:bg-[#061621] hover:text-[#00684a]"
+                  activeLink === Menu.link? "bg-[#061621] text-[#00684a]" : "hover:bg-[#061621] hover:text-[#00684b]"
                 } ${Menu.gap? "mt-9" : "mt-2"}`}
               >
                 <div>{React.createElement(Menu.icon, { size: "20" })}</div>

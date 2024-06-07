@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LinkButtonAtom from "../components/atoms/LinkButtonAtom";
 import TiposDeCafeOrganism from "../components/organisms/TiposDeCafeOrganism";
-import DesarrolladoresOrganism from "../components/organisms/desarrolladoresOrganism";
+import DesarrolladoresOrganism from "../components/organisms/DesarrolladoresOrganism";
 
 function DashboardContentOrganims() {
   const navigate = useNavigate();
@@ -18,29 +18,29 @@ function DashboardContentOrganims() {
 
   return (
     <>
-        <section id="inicio" className="min-h-screen bg-cream-50 flex items-center justify-center">
-          <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center">
-            <div className="md:w-1/2 mb-8 md:mb-0 text-center md:text-left">
-              <div>
-                <span className="text-[#00684a] text-4xl md:text-5xl font-bold mb-4">
-                  Bienvenido a SubCoffee
-                </span>
-                <p className="bg-cream-100 text-lg md:text-xl text-[#3d4f58] px-4 py-2 rounded-full mb-8 md:mb-0">
-                  Una plataforma online donde te podrás conectar con diferentes usuarios para subastar y pujar por café de alta calidad. Solicita tu registro a esta gran familia ya
-                </p>
-              </div>
-            </div>
-            <div className="md:w-1/2">
-              <img
-                src="./src/assets/dashboard.png"
-                alt="Dashboard"
-                className=""
-              />
+      <section id="inicio" className="min-h-screen bg-cream-50 flex items-center justify-center">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center">
+          <div className="md:w-1/2 mb-8 md:mb-0 text-center md:text-left">
+            <div>
+              <span className="text-[#00684a] text-4xl md:text-5xl font-bold mb-4">
+                Bienvenido a SubCoffee
+              </span>
+              <p className="bg-cream-100 text-lg md:text-xl text-[#3d4f58] px-4 py-2 rounded-full mb-8 md:mb-0">
+                Una plataforma online donde te podrás conectar con diferentes usuarios para subastar y pujar por café de alta calidad. Solicita tu registro a esta gran familia ya
+              </p>
             </div>
           </div>
-        </section>
+          <div className="md:w-1/2">
+            <img
+              src="./src/assets/dashboard.png"
+              alt="Dashboard"
+              className=""
+            />
+          </div>
+        </div>
+      </section>
 
-      <div className="min-h-screen w-full py-16 bg-[#e9ff99]">
+      <div className="min-h-screen w-full py-16">
         <section className="max-w-4xl mx-auto px-4">
           <h1 className="text-center text-4xl font-bold text-[#00684a] mb-8">
             Una plataforma de café perfecta para todos

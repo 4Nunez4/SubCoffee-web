@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -22,7 +22,7 @@ import { EditIcon } from "../../nextui/EditIcon.jsx";
 import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
 import ActivarIcon from "../../nextui/ActivarIcon.jsx";
 import FormMunicipio from "../templates/FormMunicipio.jsx";
-import MunicipioContext from "../../context/MunicipioContext.jsx";
+import { useMunicipioContext } from "../../context/MunicipioContext.jsx";
 
 const statusColorMap = {
   activo: "success",
@@ -42,7 +42,7 @@ export default function MunicipioTable() {
   const [abrirModal, setAbrirModal] = useState(false);
   const [mode, setMode] = useState("create");
 
-  const { municipios, setIdMunicipio, getMunis, desactivarMunis, activarMunis } = useContext(MunicipioContext)
+  const { municipios, setIdMunicipio, getMunis, desactivarMunis, activarMunis } = useMunicipioContext()
 
   useEffect(() => {
     getMunis(); //  Lista los datos al cargar la página
@@ -231,15 +231,12 @@ export default function MunicipioTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
+            <Button className="bg-[#00684a] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">
-            Total {municipios && municipios.length} municipios
-          </span>
+        <div className="flex justify-center items-center">
           <label className="flex items-center text-default-400 text-small">
             Columnas por páginas:
             <select
@@ -266,6 +263,11 @@ export default function MunicipioTable() {
   const bottomContent = useMemo(() => {
     return (
       <div className="flex justify-between items-center py-4">
+        <span>
+          {`Total ${
+            filteredItems.length
+          } Municipios`}
+        </span>
         <Pagination
           isCompact
           showControls

@@ -8,18 +8,17 @@ import ComoPujarUnaSubasta from "./ComoPujarUnaSubasta";
 import { icono } from "../components/atoms/IconsAtom";
 import { useAuthContext } from "../context/AuthContext";
 
-
 function AyudaPage() {
   const comoCrearRef = useRef(null);
   const comoPujarRef = useRef(null);
   const infoRolesRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [texto, setTexto] = useState("");
-  
-  const { getUsers } = useAuthContext()
+
+  const { getUsers } = useAuthContext();
   useEffect(() => {
-      getUsers()
-    }, []);
+    getUsers();
+  }, []);
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -63,28 +62,32 @@ function AyudaPage() {
   };
 
   return (
-    <div
-      className={`p-8 px-44 mx-auto flex flex-col justify-center  ${
-        isScrolled ? "scrolled" : ""
-      }`}
-    >
-      <div className="flex justify-center w-auto items-center ">
+    <div className="mt-20 flex justify-center mb-8">
+      <div className="flex flex-col items-center max-w-7xl px-12">
+        <div className={`flex flex-col ${isScrolled ? "scrolled" : ""}`}>
+          {/* <div className="flex justify-center items-center ">
         <ButtonGroup>
           <Button
             onClick={() => scrollToSection("comoCrear")}
-            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${isScrolled ? "opacity-40" : ""}`}
+            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${
+              isScrolled ? "opacity-40" : ""
+            }`}
           >
             Como crear una subasta
           </Button>
           <Button
             onClick={() => scrollToSection("comoPujar")}
-            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${isScrolled ? "opacity-40" : ""}`}
+            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${
+              isScrolled ? "opacity-40" : ""
+            }`}
           >
             Como puja una subasta
           </Button>
           <Button
             onClick={() => scrollToSection("infoRoles")}
-            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${isScrolled ? "opacity-40" : ""}`}
+            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${
+              isScrolled ? "opacity-40" : ""
+            }`}
           >
             Información de Roles
           </Button>
@@ -92,53 +95,57 @@ function AyudaPage() {
         <Button
           onClick={scrollToTop}
           startContent={<FlechaArriba />}
-          className={`transition-opacity fixed bottom-8 right-8 inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] ${
+          className={`transition-opacity fixed bottom-8 right-8 inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md ${
             isScrolled ? "opacity-40" : ""
           }`}
         >
           Ir Arriba
         </Button>
-      </div>
-      <div>
-        <div ref={comoCrearRef} data-section="comoCrear">
-          <ComoCrearSubasta />
-        </div>
-        <div ref={comoPujarRef} data-section="comoPujar">
-          <ComoPujarUnaSubasta />
-        </div>
-        <div ref={infoRolesRef} data-section="infoRoles">
-          <InfoRolesA />
-        </div>
-        {user ? (
+      </div> */}
           <div>
-            <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
-              <p className="text-sm font-semibold text-[#00684a] uppercase mb-2">
-                ¿Tienes alguna duda?
-              </p>
-              <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
-                <Input
-                  startContent={<icono.iconoGmail />}
-                  name="text"
-                  variant="bordered"
-                  label=""
-                  aria-label="Duda o sugerencia..."
-                  placeholder="Duda o sugerencia..."
-                  required={true}
-                  type="text"
-                  value={texto}
-                  onChange={(e) => setTexto(e.target.value)}
-                />
-                <Button className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500 w-full ">
-                  Enviar duda
-                </Button>
-              </form>
+            <div ref={comoCrearRef} data-section="comoCrear">
+              <ComoCrearSubasta />
             </div>
+            <div ref={comoPujarRef} data-section="comoPujar">
+              <ComoPujarUnaSubasta />
+            </div>
+            <div ref={infoRolesRef} data-section="infoRoles">
+              <InfoRolesA />
+            </div>
+            {user ? (
+              <div>
+                <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
+                  <p className="text-sm font-semibold text-[#00684a] uppercase mb-2">
+                    ¿Tienes alguna duda?
+                  </p>
+                  <form
+                    onSubmit={handleSubmit}
+                    className="flex flex-col space-y-2"
+                  >
+                    <Input
+                      startContent={<icono.iconoGmail />}
+                      name="text"
+                      variant="bordered"
+                      label=""
+                      aria-label="Duda o sugerencia..."
+                      placeholder="Duda o sugerencia..."
+                      required={true}
+                      type="text"
+                      value={texto}
+                      onChange={(e) => setTexto(e.target.value)}
+                    />
+                    <Button className="py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md">
+                      Enviar duda
+                    </Button>
+                  </form>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
-        ) : (
-          ""
-        )}
+        </div>
       </div>
-
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import DesarrolladorAtom from "../atoms/desarrollador";
+import DesarrolladorAtom from "../atoms/DesarrolladorAtom";
 
 const DesarrolladoresOrganism = () => {
   const datos = [
@@ -7,7 +7,7 @@ const DesarrolladoresOrganism = () => {
       title: "Jorge Enrique Nuñez Molina",
       img: "jorge.png",
       description: (
-        <button    className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500">
+        <button className="py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00684a] border-2 hover:border-[#00684a] hover:text-[#e0e0e0] transition-all ease-in-out duration-500">
           contactame
         </button>
       ),
@@ -16,7 +16,7 @@ const DesarrolladoresOrganism = () => {
       title: "Juan Camilo Realpe Ceron",
       img: "juan.png",
       description: (
-        <button    className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500">
+        <button className="py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00684a] border-2 hover:border-[#00684a] hover:text-[#e0e0e0] transition-all ease-in-out duration-500">
           contactame
         </button>
       ),
@@ -25,7 +25,7 @@ const DesarrolladoresOrganism = () => {
       title: "Laura Katalina Muñoz Valderrama",
       img: "katalina.png",
       description: (
-        <button    className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500">
+        <button className="py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00684a] border-2 hover:border-[#00684a] hover:text-[#e0e0e0] transition-all ease-in-out duration-500">
           contactame
         </button>
       ),
@@ -34,7 +34,7 @@ const DesarrolladoresOrganism = () => {
       title: "Valentima Diaz Lerma",
       img: "valentina.png",
       description: (
-        <button    className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500">
+        <button className="py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00684a] border-2 hover:border-[#00684a] hover:text-[#e0e0e0] transition-all ease-in-out duration-500">
           contactame
         </button>
       ),
@@ -43,7 +43,7 @@ const DesarrolladoresOrganism = () => {
       title: "Jose Alejandro Velez",
       img: "jose.png",
       description: (
-        <button    className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500">
+        <button className="py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00684a] border-2 hover:border-[#00684a] hover:text-[#e0e0e0] transition-all ease-in-out duration-500">
           contactame
         </button>
       ),
@@ -52,7 +52,7 @@ const DesarrolladoresOrganism = () => {
       title: "James Alfaro ",
       img: "james.png",
       description: (
-        <button    className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500">
+        <button className="py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00684a] border-2 hover:border-[#00684a] hover:text-[#e0e0e0] transition-all ease-in-out duration-500">
           contactame
         </button>
       ),
@@ -60,7 +60,7 @@ const DesarrolladoresOrganism = () => {
   ];
 
   return (
-    <div className="grid grid-cols-3 grid-rows-2 gap-6">
+    <div className="grid gap-6 mx-6 sm:grid-cols-3 lg:grid-cols-3">
       {datos.map((dato, i) => (
         <DesarrolladorAtom
           key={i}

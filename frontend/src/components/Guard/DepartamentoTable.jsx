@@ -39,7 +39,7 @@ export default function DepartamentoTable() {
   });
   const [page, setPage] = useState(1);
 
-  const { getDepartamentos, setIdDepartamento, departamentos, desactivarDepartamento, activarDepartamento } = useContext(DeparContext);
+  const { getDepartamentos, setIdDepartamento, departamentos, desactivarDepartamento, activarDepartamento, totalDeparts } = useContext(DeparContext);
 
   useEffect(() => {
     getDepartamentos();
@@ -222,15 +222,12 @@ export default function DepartamentoTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
+            <Button className="bg-[#00684a] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">
-            Total {departamentos && departamentos.length} departamentos
-          </span>
+        <div className="flex justify-center items-center">
           <label className="flex items-center text-default-400 text-small">
             Columnas por páginas:
             <select
@@ -257,6 +254,11 @@ export default function DepartamentoTable() {
   const bottomContent = useMemo(() => {
     return (
       <div className="flex justify-between items-center py-4">
+        <span>
+          {`Total ${
+            filteredItems.length
+          } Departamentos`}
+        </span>
         <Pagination
           isCompact
           showControls

@@ -27,7 +27,7 @@ const Dashboard = () => {
   ) : (
     <div className="flex-auto h-auto bg-gray-50">
       <HeaderOrganism />
-      <div>
+      <div className="grow">
         <Outlet />
       </div>
       <FooterOrganism />

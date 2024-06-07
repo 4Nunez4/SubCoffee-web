@@ -39,7 +39,7 @@ function ImageSlider() {
             className="w-full h-full bg-center bg-cover duration-500"
             style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
           ></div>
-        <div className="absolute inset-0 flex items-center justify-center text-center bg-[#061621] bg-opacity-70 p-8">
+        <div className="absolute inset-0 flex items-center justify-center text-center bg-[#061621] bg-opacity-60 p-8">
           <div>
             <h2 className="text-4xl font-bold text-white mb-4">¡Bienvenido a Subcoffee!</h2>
             <p className="text-2xl text-white font-semibold leading-relaxed">
@@ -54,7 +54,7 @@ function ImageSlider() {
               <div
                 key={index}
                 className={`w-3 h-3 mx-2 rounded-full cursor-pointer ${
-                  index === currentIndex ? "bg-[#00ed64]" : "bg-[#061621]"
+                  index === currentIndex ? "bg-[#00684a]" : "bg-gray-300"
                 }`}
                 onClick={() => setCurrentIndex(index)}
               ></div>

@@ -52,7 +52,6 @@ export default function UsersTable() {
   const data = [
     { uid: "nombre_user", name: "Usuario", sortable: true },
     { uid: "pk_cedula_user", name: "Cedula", sortable: true },
-    // { uid: "descripcion_user", name: "Descripción", sortable: true },
     { uid: "telefono_user", name: "Telefono", sortable: true },
     { uid: "rol_user", name: "Rol", sortable: true },
     { uid: "estado_user", name: "Estado", sortable: true },
@@ -246,15 +245,12 @@ export default function UsersTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
+            <Button className="bg-[#00684a] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">
-            Total {users && users.length} usuarios
-          </span>
+        <div className="flex justify-center items-center">
           <label className="flex items-center text-default-400 text-small">
             Columnas por páginas:
             <select
@@ -281,6 +277,11 @@ export default function UsersTable() {
   const bottomContent = useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center m-4">
+        <span>
+          {`Total ${
+            filteredItems.length
+          } Usuarios`}
+        </span>
         <Pagination
           isCompact
           showControls

@@ -241,15 +241,12 @@ export default function VeredaTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-slate-400 text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
+            <Button className="bg-[#00684a] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">
-            Total {results && results.length} veredas
-          </span>
+        <div className="flex justify-center items-center">
           <label className="flex items-center text-default-400 text-small">
             Columnas por páginas:
             <select
@@ -276,6 +273,11 @@ export default function VeredaTable() {
   const bottomContent = useMemo(() => {
     return (
       <div className="flex justify-between items-center py-4">
+        <span>
+          {`Total ${
+            filteredItems.length
+          } Veredas`}
+        </span>
         <Pagination
           isCompact
           showControls

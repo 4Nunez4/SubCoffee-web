@@ -115,7 +115,7 @@ function ProfileUser() {
             />
             {user.pk_cedula_user === localUser.pk_cedula_user && (
               <Button
-                className="border-[#00ed64] mt-2 inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500"
+                className="mt-2 py-2 px-4 bg-[#00684a] text-white font-semibold rounded-md"
                 onClick={() => {
                   handleToggle("update");
                   setIdUser(user);
@@ -126,7 +126,7 @@ function ProfileUser() {
             )}
             {user.pk_cedula_user === localUser.pk_cedula_user && (
               <Button
-                className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500bg-[#e0e0e0] w-full mt-2"
+                className="py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md mt-2"
                 onClick={() => {
                   setAbrirModalPassword(true);
                   setIdUser(user);
