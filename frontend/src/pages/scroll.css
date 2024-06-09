@@ -1,0 +1,22 @@
+.scroll-container {
+    width: 156px; 
+    overflow: hidden;
+  }
+  
+  .scroll-text {
+    white-space: nowrap;
+  }
+  
+  .scroll-active {
+    animation: scroll 8s linear infinite; 
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  

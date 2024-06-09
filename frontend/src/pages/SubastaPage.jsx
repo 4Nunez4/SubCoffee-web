@@ -19,6 +19,7 @@ function SubastaPage() {
   const { getSubsMenoCerradas, subastasActivas, setIdSubasta } = useSubastaContext();
   const { getUsers } = useAuthContext();
   const [abrirModal, setAbrirModal] = useState(false);
+  const [startIndex, setStartIndex] = useState(0); // Índice de la primera subasta visible
   const users = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
@@ -30,39 +31,30 @@ function SubastaPage() {
     setAbrirModal(true);
     setIdSubasta(id);
   };
-  
+
   useEffect(() => {
     if (users.rol_user === "admin") navigate('/users');
   }, [users, navigate]);
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prevSlide = () => {
-    const newIndex = (currentIndex - 1 + slides.length) % slides.length;
-    setCurrentIndex(newIndex);
+  const showNextSubastas = () => {
+    setStartIndex(startIndex + 1);
   };
 
-  const nextSlide = () => {
-    const newIndex = (currentIndex - 1 + slides.length) % slides.length;
-    setCurrentIndex(newIndex);
+  const showPrevSubastas = () => {
+    setStartIndex(startIndex - 1);
   };
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      nextSlide();
-    }, 10000);
-    return () => clearInterval(intervalId);
-  }, [currentIndex]);
 
   return (
-    <div className="px-auto pb-8">
+    <div className="pb-8">
       <ImageSlider />
       {users.rol_user !== "admin" && (
-        <div className="px-16">
+        <div className="pl-6">
           <p className="pl-4 text-2xl text-[#a1653d] text-center">Subastas</p>
-              <div className="flex overflow-x-auto p-6 max-w-[1530px] overflow-hidden">
-                {subastasActivas.map((subasta) => (
-                  <Card key={subasta.pk_id_sub} className="max-w-[380px] h-[540px] p-2 mr-4 shrink-0 shadow-small">
+          <div className="flex flex-col overflow-x-auto py-6 overflow-hidden">
+            {subastasActivas.length > 0 ? (
+              <div className="flex flex-wrap">
+                {subastasActivas.slice(startIndex, startIndex + 3).map((subasta) => (
+                  <Card key={subasta.pk_id_sub} className="max-w-[380px] h-[540px] p-2 mr-4 mb-4 shadow-small">
                     <CardHeader className="justify-between">
                       <div className="flex gap-x-3">
                         <Avatar
@@ -71,7 +63,7 @@ function SubastaPage() {
                           size="md"
                           src={
                             subasta.imagen_user && subasta.imagen_user.length > 0
-                              ? `http://localhost:4000/img/${subasta.imagen_user}`
+                              ? `http://localhost:4000/usuarios/${subasta.imagen_user}`
                               : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
                           }
                         />
@@ -108,7 +100,7 @@ function SubastaPage() {
                           radius="md"
                           alt={subasta.imagen_sub}
                           className="w-[300px] object-cover h-[200px]"
-                          src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
+                          src={`http://localhost:4000/subastas/${subasta.imagen_sub}`}
                         />
                         <div className="grid gap-x-2 py-2 px-2 text-sm">
                           <div className="flex flex-col">
@@ -134,18 +126,19 @@ function SubastaPage() {
                             </div>
                             <div className="flex w-full gap-x-2">
                               <p className="font-semibold">Certificado:</p>
-                              <p className="underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]"> {subasta.certificado_sub} </p>
+                              <a href={`http://localhost:4000/subastas/${subasta.certificado_sub}`} download={subasta.certificado_sub} className="underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap w-52">
+                                {subasta.certificado_sub}
+                              </a>
                             </div>
                           </div>
                         </div>
                         <div className="flex justify-center mt-2">
                           <Button
-                            className="bg-gray-400"
-                            radius="md"
+                            className="py-2 px-4 bg-[#00684a] text-white font-semibold rounded-lg"
                             size="lg"
                             onClick={() => handdleModaSub(subasta.pk_id_sub)}
                           >
-                            Visualizar Subasta
+                            Ver subasta
                           </Button>
                         </div>
                       </CardBody>
@@ -153,6 +146,24 @@ function SubastaPage() {
                   </Card>
                 ))}
               </div>
+            ) : (
+              <div className="flex">
+                <p className="pl-4 text-xl my-2 text-gray-500 font-semibold">No hay subastas disponibles.</p>
+              </div>
+            )}
+            <div className="flex justify-between mt-4">
+              {startIndex > 0 && (
+                <button className="bg-gray-300 px-3 py-1 mr-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-400" onClick={showPrevSubastas}>
+                  Anterior
+                </button>
+              )}
+              {(startIndex + 4) < subastasActivas.length && (
+                <button className="bg-gray-300 px-3 py-1 ml-2 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-400" onClick={showNextSubastas}>
+                  Siguiente
+                </button>
+              )}
+            </div>
+          </div>
           <ModalSubCoffee
             open={abrirModal}
             onClose={() => setAbrirModal(false)}
@@ -161,6 +172,8 @@ function SubastaPage() {
       )}
     </div>
   );
+  
 }
+
 
 export default SubastaPage;

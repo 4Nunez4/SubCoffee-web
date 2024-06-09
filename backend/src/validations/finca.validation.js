@@ -6,8 +6,6 @@ export const validationCreateFinca = [
     .isEmpty()
     .isLength({ max: 50 }),
   check("imagen_fin", "La imagen de la finca es obligatoria")
-    .not()
-    .isEmpty()
     .optional(),
   check("fk_id_usuario", "El ID de usuario es obligatorio")
     .not()

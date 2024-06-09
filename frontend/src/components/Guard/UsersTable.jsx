@@ -127,7 +127,7 @@ export default function UsersTable() {
             avatarProps={{ radius: "full",                       
             src: `${
               user.imagen_user && user.imagen_user.length > 0
-                ? `http://localhost:4000/img/${user.imagen_user}`
+                ? `http://localhost:4000/usuarios/${user.imagen_user}`
                 : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}`, 
             }}
             description={user.email_user}

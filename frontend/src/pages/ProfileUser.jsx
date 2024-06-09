@@ -288,14 +288,14 @@ function ProfileUser() {
                     ))
                   ) : (
                     <div className="flex">
-                      <p className="pl-4 text-xl my-2 text-gray-500">No tiene ninguna subasta creada</p>
+                      <p className="pl-4 text-xl my-2 text-gray-400 font-semibold">No tiene ninguna subasta creada.</p>
                     </div>
                   )}
                 </div>
               </div>
             )}
             {activeTab === "ganadas" && (
-              <div className="flex w-full">
+              <div className="flex w-full flex-col items-center">
                 {subastaGanador.length > 0 ? subastaGanador.map((ganador) => (
                   <Card key={ganador.pk_id_sub} className="max-w-[340px] max-h-[520px] p-2" >
                     <CardBody className="w-full">
@@ -373,7 +373,7 @@ function ProfileUser() {
                   </Card>
                 )): (
                   <div className="flex">
-                    <p className="pl-4 text-xl my-2 text-gray-500">No tiene ninguna subasta ganada.</p>
+                    <p className="pl-4 text-xl my-2 text-gray-400 font-semibold">No tiene ninguna subasta ganada.</p>
                   </div>
                 )}
               </div>

@@ -92,7 +92,8 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4 px-4">
-      {errors.map((error, i) => (
+      {
+        errors.map((error, i) => (
           <div className='bg-red-500 p-2 text-white text-center my-2' key={i}>
             {error}
           </div>
@@ -155,7 +156,7 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
         startContent={<icono.iconoNamePropiedad />}
         placeholder="Nombre de la Finca"
         variant="bordered"
-        isRequired
+        required
         type="text"
         name="nombre_fin"
         value={formData.nombre_fin}
@@ -169,7 +170,7 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
           name="departamento"
           value={formData.departamento}
           onChange={(e) => handleDepartamentoChange(e.target.value)}
-          required={true}
+          required
           className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
         >
           <option value="" hidden className="text-gray-400">
@@ -190,7 +191,7 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
           name="municipio"
           value={formData.municipio}
           onChange={handleMunicipioChange}
-          required={true}
+          required
           className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
         >
           <option value="" hidden className="text-gray-600">
@@ -217,7 +218,7 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
           name="vereda"
           value={formData.vereda}
           onChange={handleChange}
-          required={true}
+          required
           className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
         >
           <option value="" hidden className="text-gray-600">
@@ -237,7 +238,10 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
         </select>
       </div>
       <ModalFooter className="flex justify-center">
-        <Button type="submit" className="bg-gray-600 text-white">
+        <Button
+          type="submit"
+          className="px-4 bg-[#001e2b] text-white font-semibold rounded-md"
+        >
           {titleBtn}
         </Button>
       </ModalFooter>

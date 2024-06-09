@@ -57,7 +57,7 @@ const RegisterDepartMolecule = ({ mode, titleBtn }) => {
         startContent={<icono.iconoNumber />}
         variant="bordered"
         min={0}
-        isRequired
+        required
         value={formData.pk_codigo_depar}
         onChange={handleChange}
       />
@@ -66,14 +66,17 @@ const RegisterDepartMolecule = ({ mode, titleBtn }) => {
         labelPlacement="outside"
         startContent={<icono.iconoDepar />}
         variant="bordered"
-        isRequired
+        required
         type="text"
         placeholder="Nombre del Departamento"
         value={formData.nombre_depar}
         onChange={handleChange}
       />
       <ModalFooter className="flex justify-center">
-        <Button type="submit" className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b]">
+        <Button
+            type="submit"
+            className="px-4 bg-[#001e2b] text-white font-semibold rounded-md"
+        >
           {titleBtn}
         </Button>
       </ModalFooter>

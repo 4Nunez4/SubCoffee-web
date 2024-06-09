@@ -62,46 +62,46 @@ function AyudaPage() {
   };
 
   return (
-    <div className="mt-20 flex justify-center mb-8">
+    <div className="flex justify-center mb-8">
       <div className="flex flex-col items-center max-w-7xl px-12">
         <div className={`flex flex-col ${isScrolled ? "scrolled" : ""}`}>
           {/* <div className="flex justify-center items-center ">
-        <ButtonGroup>
-          <Button
-            onClick={() => scrollToSection("comoCrear")}
-            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${
-              isScrolled ? "opacity-40" : ""
-            }`}
-          >
-            Como crear una subasta
-          </Button>
-          <Button
-            onClick={() => scrollToSection("comoPujar")}
-            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${
-              isScrolled ? "opacity-40" : ""
-            }`}
-          >
-            Como puja una subasta
-          </Button>
-          <Button
-            onClick={() => scrollToSection("infoRoles")}
-            className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${
-              isScrolled ? "opacity-40" : ""
-            }`}
-          >
-            Información de Roles
-          </Button>
-        </ButtonGroup>
-        <Button
-          onClick={scrollToTop}
-          startContent={<FlechaArriba />}
-          className={`transition-opacity fixed bottom-8 right-8 inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md ${
-            isScrolled ? "opacity-40" : ""
-          }`}
-        >
-          Ir Arriba
-        </Button>
-      </div> */}
+            <ButtonGroup>
+              <Button
+                onClick={() => scrollToSection("comoCrear")}
+                className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${
+                  isScrolled ? "opacity-40" : ""
+                }`}
+              >
+                Como crear una subasta
+              </Button>
+              <Button
+                onClick={() => scrollToSection("comoPujar")}
+                className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${
+                  isScrolled ? "opacity-40" : ""
+                }`}
+              >
+                Como puja una subasta
+              </Button>
+              <Button
+                onClick={() => scrollToSection("infoRoles")}
+                className={`transition-opacity bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base ${
+                  isScrolled ? "opacity-40" : ""
+                }`}
+              >
+                Información de Roles
+              </Button>
+            </ButtonGroup>
+            <Button
+              onClick={scrollToTop}
+              startContent={<FlechaArriba />}
+              className={`transition-opacity fixed bottom-8 right-8 inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md ${
+                isScrolled ? "opacity-40" : ""
+              }`}
+            >
+              Ir Arriba
+            </Button>
+          </div> */}
           <div>
             <div ref={comoCrearRef} data-section="comoCrear">
               <ComoCrearSubasta />

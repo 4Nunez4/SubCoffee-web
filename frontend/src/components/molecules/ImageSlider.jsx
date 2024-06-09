@@ -33,8 +33,8 @@ function ImageSlider() {
 
   return (
     <div>
-      <div className="max-w-[1600px] h-auto w-full m-auto pt-10 p-4">
-        <div className="relative w-full h-[450px] rounded-2xl overflow-hidden">
+      <div className="h-auto w-full m-auto pt-10 p-4">
+        <div className="relative lg:w-full h-[450px] rounded-2xl overflow-hidden">
           <div
             className="w-full h-full bg-center bg-cover duration-500"
             style={{ backgroundImage: `url(${slides[currentIndex].url})` }}

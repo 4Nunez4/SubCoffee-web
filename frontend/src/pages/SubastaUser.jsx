@@ -207,7 +207,7 @@ function SubastaUser() {
                 shadow="sm"
                 alt={subasta.imagen_sub}
                 className="object-cover w-[400px] h-[258px]"
-                src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
+                src={`http://localhost:4000/subastas/${subasta.imagen_sub}`}
               />
             </div>
             <div className="shadow text-sm rounded-lg py-1">
@@ -231,10 +231,12 @@ function SubastaUser() {
                 <div>
                   <p> {new Date(subasta.fecha_inicio_sub).toLocaleString( "es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", } )} </p>
                   <p> {new Date(subasta.fecha_fin_sub).toLocaleString("es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", })}</p>
-                  <p> {subasta.nombre_vere} - {subasta.nombre_muni} - {subasta.nombre_depar}</p>
+                  <p className="flex overflow-hidden text-ellipsis whitespace-nowrap w-44"> {subasta.nombre_vere} - {subasta.nombre_muni} - {subasta.nombre_depar}</p>
                   <p> {subasta.cantidad_sub} {subasta.cantidad_sub > 1 ? subasta.unidad_peso_sub + "s" : subasta.unidad_peso_sub} </p>
                   <p>{subasta.nombre_tipo_vari}</p>
-                  <p className="underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap max-w-auto"> {subasta.certificado_sub} </p>
+                  <a href={`http://localhost:4000/subastas/${subasta.certificado_sub}`} download={subasta.certificado_sub} className="flex underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap w-44">
+                    {subasta.certificado_sub}
+                  </a>
                   <p className="overflow-hidden text-ellipsis whitespace-nowrap max-w-auto">{subasta.descripcion_sub}</p>
                 </div>
               </div>

@@ -42,6 +42,13 @@ const LoginFormMolecule = () => {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4 px-4 ">
+      {
+        errors.map((error, i) => (
+          <div className='bg-red-500 p-2 text-white text-center my-2' key={i}>
+            {error}
+          </div>
+        ))
+      }
       <FormRecuperarPassword
         open={abrirModalPassword}
         onClose={() => setAbrirModalPassword(false)}

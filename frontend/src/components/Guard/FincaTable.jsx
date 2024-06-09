@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardBody, Image, Button } from "@nextui-org/react";
-
 import { useFincaContext } from "../../context/FincaContext.jsx";
 import { EditIcon } from "../../nextui/EditIcon";
 import ActivarIcon from "../../nextui/ActivarIcon";
@@ -30,10 +29,10 @@ function FincaTable() {
   
   return (
     <div className="w-full">
-      <div className="flex justify-between py-4 gap-x-3 px-12 items-center">
-        <p className="text-center"> Tu finca tiene una historia que contar </p>
+      <div className="grid lg:grid-cols-2 py-4 gap-3 px-4 items-center">
+        <p className="text-center font-bold text-lg">Tu finca tiene una historia que contar</p>
         <Button
-          className="bg-slate-400 text-white"
+          className="bg-[#00684a] text-white mx-auto"
           endContent={<PlusIcon />}
           onClick={() => handleToggleFinca("create")}
         >
@@ -56,45 +55,44 @@ function FincaTable() {
           pkFinca={pkFinca}
         />
       </div>
-      <div className="flex">
+      <div className="flex justify-center items-center">
         {fincas ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 ml-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 p-4 gap-y-3">
             {fincas.map((result) => (
-              <Card key={result.pk_id_fin} className="py-4 w-80">
-                <CardHeader className="pb-0 px-8 flex-col items-start">
-                  <div className="flex justify-between items-center gap-x-2">
-                    <p className="uppercase font-bold text-xl">
-                      {result.nombre_fin}
-                    </p>
+              <Card key={result.pk_id_fin} className="py-4 max-w-80 mx-auto border shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardHeader className="pb-0 px-4 flex-col items-start">
+                  <div className="flex justify-between items-center gap-4">
+                    <p className="font-bold text-xl">{result.nombre_fin}</p>
                     <p
-                      className={`rounded-lg px-2 text-white ${
+                      className={`rounded-lg py-1 ${
                         result.estado_fin === "activo"
-                          ? "bg-green-500"
-                          : "bg-red-500"
-                      } text-center`}
+                          ? "bg-[#d1f4e0] text-[#14a150] px-[10px]"
+                          : "bg-[#fdd0df] text-[#f31263] px-[4px]"
+                      }`}
                     >
                       {result.estado_fin === "activo" ? "Activa" : "Inactiva"}
                     </p>
                   </div>
                   <div className="flex">
-                    <p className="text-xs gap-x-4 text-gray-500">
-                      {result.nombre_depar} - {result.nombre_muni} -{" "}
-                      {result.nombre_vere}
+                    <p className="text-xs text-gray-500">
+                      {result.nombre_depar} - {result.nombre_muni} - {result.nombre_vere}
                     </p>
                   </div>
                 </CardHeader>
-                <CardBody className="overflow-visible py-2 flex items-center">
+                <CardBody className="py-2 flex justify-center items-center">
                   <Image
                     alt={result.imagen_fin}
                     shadow="sm"
-                    radius="md"
-                    width="100%"
-                    className="rounded-xl w-60 h-[170px]"
+                    radius="lg"
+                    className="rounded-xl w-56 h-48 object-cover"
                     src={`http://localhost:4000/fincas/${result.imagen_fin}`}
                   />
                 </CardBody>
-                <div className="flex justify-center items-center gap-2 flex-col px-10">
-                  <Button className="w-full flex" onPress={() => {setAbrirModalVariedad(true); setPkFinca(result.pk_id_fin)}}>
+                <div className="flex justify-center items-center gap-2 flex-col px-4">
+                  <Button
+                    className="w-full"
+                    onPress={() => {setAbrirModalVariedad(true); setPkFinca(result.pk_id_fin)}}
+                  >
                     Ver variedades de la finca
                   </Button>
                   <Button
@@ -120,7 +118,7 @@ function FincaTable() {
                     </Button>
                   ) : (
                     <Button
-                      className="bg-green-600 text-white px-[27px] w-full mx-4"
+                      className="bg-green-600 text-white w-full"
                       startContent={<ActivarIcon />}
                       onClick={() => {
                         activarFincas(result.pk_id_fin, user.pk_cedula_user);
@@ -134,7 +132,9 @@ function FincaTable() {
             ))}
           </div>
         ) : (
-          ""
+          <div className="flex">
+            <p className="pl-4 text-xl my-2 text-gray-400 font-semibold">No tienes ninguna finca creada.</p>
+          </div>
         )}
       </div>
     </div>
