@@ -200,17 +200,37 @@ function HeaderOrganism() {
         </nav>
       ) : (
         <>
-          <nav className="flex justify-between items-center bg-[#00684a] fixed w-full  h-20 m-0 top-0 p-4 shadow-sm z-20">
+          <nav className="flex justify-between items-center  fixed w-full h-30 m-0 top-0 p-4 shadow-sm z-20 bg-[#FDFBF6] px-20">
             <div className="flex items-center">
               <AvatarAtom img="isotipo-SubCoffee.png" />
-              <Link to="/" className="text-gray-200 text-2xl font-bold">
-                SubCoffee
+              <Link to="/" className="text-[#323232] text-2xl font-bold">
+                Sub<span className=" text-[#39A800]">Coffee</span>
               </Link>
             </div>
-            <div className="flex items-center gap-x-3">
+            <div className="flex items-center gap-x-3 font-medium text-base">
+              <div class="flex justify-between items-center p-6 ">
+                <div class="flex space-x-12 text-[#323232]">
+                  <a href="#inicio" class=" hover:text-[#39A800]">
+                    Inicio
+                  </a>
+                  <a href="#quienessomos" class=" hover:text-[#39A800]">
+                    Quienes Somos
+                  </a>
+                  <a href="#quequeremos" class=" hover:text-[#39A800]">
+                    Que queremos
+                  </a>
+                  <a href="#beneficios" class=" hover:text-[#39A800]">
+                    Beneficios
+                  </a>
+                  <a href="#contacto" class=" hover:text-[#39A800]">
+                    Contacto
+                  </a>
+                </div>
+              </div>
+
               <button
                 onClick={() => setModalOpen(true)}
-                className=" border-[#001e2b] inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"
+                className="text-white bg-[#39A800] h-10 w-32 rounded-lg"
               >
                 Iniciar sesión
               </button>
