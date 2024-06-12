@@ -36,7 +36,7 @@ export const OfertaProvider = ({ children }) => {
     }
   }
 
-  const getOfertMayor = useCallback(async(id) => {
+  const getOfertMayor = async(id) => {
     try {
       getOfertaMayor(id).then((response) => {
         setOfertaMayor(response.data.data)
@@ -44,7 +44,7 @@ export const OfertaProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }, [])
+  }
 
   const createOfert = async (data, id) => {
     try {

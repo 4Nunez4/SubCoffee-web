@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <hr>
+    <h2>Requerimiento. Documentacion de finca</h2>
+    <hr>
+    <h3>Crear finca</h3>
+    <table>
+        <tr><td>Numero 1</td><td>1</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Crear finca </td></tr>
+        <tr><td>URI</td><td>/finca/registrar</tr>
+        <tr><td>Descripcion:</td><td>Permite registrar fincas en la base de datos</td></tr>
+        <tr><td>Verbo HTTP:</td><td>POST</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td> 
+            {
+                "nombre_fin": "Napoles",
+                "ubicacion_fin": "Vereda Belén con Longitud: 5.10822578 (W)\r\nLatitud: 41.92771566",
+                "imagen_fin": "NULL",
+                "descripcion_fin": "A tan solo 5 minutos del casco urbano ",
+                "departamento_fin": "Huila",
+                "municipio_fin": "Pitalito",
+                "fk_id_usuario": 1084251889
+            }
+    </td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+              message:"Finca registrada con exito"
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message:"Error al registrar la finca"
+            }
+            Error:
+            Status:500
+            body:{
+              message:"Fallo el sistema : "+a
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Jorge Enrique Nuñez Molina</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVjenm</td>
+       </tr>
+    </table>
+
+    <hr>
+    <h3>Listar fincas</h3>
+    <table>
+        <tr><td>Numero </td><td>2</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Listar fincas </td></tr>
+        <tr><td>URI</td><td>/finca/listar</tr>
+        <tr><td>Descripcion:</td><td>Permite listar todas las fincas registradas</td></tr>
+        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>Administrador, Usuario</td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            [
+            {
+                "pk_id_fin": 1,
+                "nombre_fin": "Napoles",
+                "ubicacion_fin": "Vereda Belén con Longitud: 5.10822578 (W)\r\nLatitud: 41.92771566",
+                "imagen_fin": {
+                    "type": "Buffer",
+                    "data": []
+                },
+                "descripcion_fin": "A tan solo 5 minutos del casco urbano ",
+                "departamento_fin": "Huila",
+                "municipio_fin": "Pitalito",
+                "fk_id_usuario": 1084251889
+            },
+            {
+                "pk_id_fin": 2,
+                "nombre_fin": "La guajira",
+                "ubicacion_fin": "Vereda Guacas con Longitud: 9.10822578 (W)\r\nLatitud: 26.92771566\r\n",
+                "imagen_fin": {
+                    "type": "Buffer",
+                    "data": []
+                },
+                "descripcion_fin": "A tan solo 5 minutos del casco urbano",
+                "departamento_fin": "Huila",
+                "municipio_fin": "Isnos",
+                "fk_id_usuario": 108000700
+            }
+        ]
+            Incorrecto:
+            Status:404
+            body:{
+                message:" 'No hay ninguna finca registrada"
+            }
+            Error:
+            Status:500
+            body:{
+              message:"algo fallo",err
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Jorge Enrique Nuñez Molina</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVjenm</td>
+       </tr>
+    </table>
+   
+    <hr>
+    <h3>Actualizar finca</h3>
+    <table>
+        <tr><td>Numero </td><td>3</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Actualizar finca </td></tr>
+        <tr><td>URI</td><td>/finca/actualizar/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite actualizar fincas en la base de datos por medio de su id       </td></tr>
+        <tr><td>Verbo HTTP:</td><td>PUT</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td> 
+            {
+                "nombre_fin": "Hacienda Napoles"
+            }
+    </td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                
+                message: 'Se ha actualizado correctamente'
+                
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: 'No se han realizado cambios'
+            }
+            Error:
+            Status:500
+            body:{
+                message:  "Ocurrio un error en el servidor", err
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Jorge Enrique Nuñez Molina</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVjenm</td>
+       </tr>
+    </table>
+   
+    <hr>
+    <h3>Buscar finca</h3>
+    <table>
+        <tr><td>Numero </td><td>4</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Buscar fincas registradas </td></tr>
+        <tr><td>URI</td><td>/finca/buscar/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite buscar fincas en la base de datos por medio de su ID</td></tr>
+        <tr><td>Verbo HTTP:</td><td>GET</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                "status": 200,
+                "data": [
+                    {
+                        "pk_id_fin": 1,
+                        "nombre_fin": "Napoles",
+                        "ubicacion_fin": "Vereda Belén con Longitud: 5.10822578 (W)\r\nLatitud: 41.92771566",
+                        "imagen_fin": {
+                            "type": "Buffer",
+                            "data": []
+                        },
+                        "descripcion_fin": "A tan solo 5 minutos del casco urbano ",
+                        "departamento_fin": "Huila",
+                        "municipio_fin": "Pitalito",
+                        "fk_id_usuario": 1084251889
+                    }
+                ]
+            
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: 'id de finca no encontrado'
+            }
+            Error:
+            Status:500
+            body:{
+                message: "Ocurrio un error en el servidor", err
+            }
+        </td></tr>
+        <tr>
+            <td>Desarrollador:</td><td>Jorge Enrique Nuñez Molina</td>
+       </tr>
+       <tr>
+           <td>Rama:</td><td>DEVjenm</td>
+       </tr>
+    </table>
+
+    <hr>
+    <h3>Eliminar finca</h3>
+    <table>
+        <tr><td>Numero </td><td>5</td></tr>
+        <tr><td>Nombre del Servicio </td><td>Eliminar finca</td></tr>
+        <tr><td>URI</td><td>/finca/eliminar/:id</tr>
+        <tr><td>Descripcion:</td><td>Permite eliminar finca en la base de datos por medio de su id</td></tr>
+        <tr><td>Verbo HTTP:</td><td>DELETE</td></tr>
+        <tr><td>HEADER:</td><td>token: token</td></tr>
+        <tr><td>Usuarios:</td><td>ADMINISTRADOR, USUARIO</td></tr>
+        <tr><td>PETICION BODY</td><td> NULL</td></tr>
+        <tr><td>RESPUESTA JSON</td><td>
+            Correcto:
+            Status:200
+            JSON:
+            {
+                "message": "finca eliminada de manera exitosa"    
+            }
+            Incorrecto:
+            Status:404
+            body:{
+                message: 'id de finca no encontrado'
+            }
+            Error:
+            Status:500
+            body:{
+                message: "Ocurrio un error en el servidor", err
+            }
+           <tr>
+                 <td>Desarrollador:</td><td>Jorge Enrique Nuñez Molina</td>
+            </tr>
+            <tr>
+                <td>Rama:</td><td>DEVjenm</td>
+            </tr>
+            
+        </td></tr>
+    </table>
+    
+    <h3>DESACTIVAR finca</h3>
+    <table>
+        <tr>
+            <td>NUMERO</td>
+            <td>6</td>
+        </tr>
+
+        <tr>
+            <td>NOMBRE DEL ENDPOINT</td>
+            <td>DESACTIVAR finca</td>
+        </tr>
+
+        <tr>
+            <td>URI</td>
+            <td>/finca/desactivar/id</td>
+        </tr>
+
+        <tr>
+            <td>DESCRIPCION</td>
+            <td>Permite desactivar finca</td>
+        </tr>
+
+        <tr>
+            <td>VERBO</td>
+            <td>PUT</td>
+        </tr>
+
+        <tr>
+            <td>HEADER</td>
+            <td>token: token</td>
+        </tr>
+
+        <tr>
+            <td>USUARIOS</td>
+            <td>ADMINISTRADOR</td>
+        </tr>
+
+        <tr>
+            <td>PETICION</td>
+            <td>NULL</td>
+        </tr>
+
+        <tr>
+            <td>RESPUESTA JSON</td>
+            <td>
+                
+                CORRECTO: 
+                STATUS:200 
+                MESSAGE: 'Se desativo la finca exitosamente' 
+
+                INCORRECTO 
+                STATUS: 404 
+                BODY :{
+                    STATUS: 404
+                    MESSAGE: 'Error, no se pudo desactivar la finca'
+                }
+
+                ERROR: 
+                STATUS: 500 
+                BODY : JSON{
+                    STATUS:500,
+                    MESSAGE: "ERROR EN EL SERVIDOR"
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>DESARROLADOR</td>
+            <td>Jorge Enrique Nuñez Molina</td>
+        </tr>
+
+        <tr>
+            <td>RAMA</td>
+            <td>DEVjenm</td>
+        </tr>
+    </table>
+
+
+    <h3>ACTIVAR finca</h3>
+    <table>
+        <tr>
+            <td>NUMERO</td>
+            <td>7</td>
+        </tr>
+
+        <tr>
+            <td>NOMBRE DEL ENDPOINT</td>
+            <td>ACTIVAR finca</td>
+        </tr>
+
+        <tr>
+            <td>URI</td>
+            <td>/finca/activar/id</td>
+        </tr>
+
+        <tr>
+            <td>DESCRIPCION</td>
+            <td>Permite activar finca</td>
+        </tr>
+
+        <tr>
+            <td>VERBO</td>
+            <td>PUT</td>
+        </tr>
+
+        <tr>
+            <td>HEADER</td>
+            <td>token: token</td>
+        </tr>
+
+        <tr>
+            <td>USUARIOS</td>
+            <td>ADMINISTRADOR</td>
+        </tr>
+
+        <tr>
+            <td>PETICION</td>
+            <td>NULL</td>
+        </tr>
+
+        <tr>
+            <td>RESPUESTA JSON</td>
+            <td>
+                
+                CORRECTO: 
+                STATUS:200 
+                MESSAGE: 'Se activo la finca de manera exitosa' 
+
+                INCORRECTO 
+                STATUS: 404 
+                BODY :{
+                    STATUS: 404
+                    MESSAGE: 'Error, no se pudo activar la finca'
+                }
+
+                ERROR: 
+                STATUS: 500 
+                BODY : JSON{
+                    STATUS:500,
+                    MESSAGE: "ERROR EN EL SERVIDOR"
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>DESARROLADOR</td>
+            <td>Jorge Enrique Nuñez Molina</td>
+        </tr>
+
+        <tr>
+            <td>RAMA</td>
+            <td>DEVjenm</td>
+        </tr>
+    </table>
+
+</body>
+</html>
