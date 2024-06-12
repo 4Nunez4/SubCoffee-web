@@ -14,7 +14,7 @@ import Swal from "sweetalert2";
 
 import { useAuthContext } from "../../context/AuthContext";
 
-import { icono } from "../atoms/IconsAtom";
+
 import AvatarAtom from "../atoms/AvatarAtom";
 import { SearchIcon } from "../../nextui/SearchIcon";
 import FormLogin from "../templates/FormLogin";
@@ -59,23 +59,18 @@ function HeaderOrganism() {
   return (
     <>
       {localUser ? (
-        <nav className="flex justify-between items-center bg-[#00684a] p-4 shadow-sm ">
-          <div className="flex flex-col">
-            <Link to="/" className="text-gray-200 text-2xl font-semibold">
-              Bienvenido
-            </Link>
-          </div>
-          <div>
+        <nav className="grid grid-cols-6 gap-5 bg-[#4A9F1F] p-4 shadow-sm ">
+          <div className="col-span-4">
             <Autocomplete
               classNames={{
-                base: "w-80",
+                base: " rounded-lg col-span-3",
                 listboxWrapper: "max-h-[280px]",
                 selectorButton: "text-default-500",
               }}
               defaultItems={users}
               inputProps={{
                 classNames: {
-                  input: "ml-1",
+                  input: "ml-1 col-span-3",
                   inputWrapper: "h-[48px]",
                 },
               }}
@@ -83,7 +78,9 @@ function HeaderOrganism() {
                 hideSelectedIcon: true,
                 itemClasses: {
                   base: [
-                    "rounded-medium",
+                    "col-span-3",
+                    "w-11/12",
+                    "rounded-lg",
                     "text-default-500",
                     "transition-opacity",
                     "data-[hover=true]:text-foreground",
@@ -96,11 +93,11 @@ function HeaderOrganism() {
                 },
               }}
               aria-label="Select an employee"
-              placeholder="Buscar usuarios, subastas..."
+              placeholder="Buscar usuarios ..."
               popoverProps={{
                 offset: 10,
                 classNames: {
-                  base: "rounded-large",
+                  base: "rounded-lg w-11/12 col-span-3",
                   content: "p-1 border-small border-default-100 bg-background",
                 },
               }}
@@ -145,23 +142,14 @@ function HeaderOrganism() {
               )}
             </Autocomplete>
           </div>
-          <div className="flex gap-x-3 items-center">
-            {isMoonSelected ? (
-              <icono.iconoLuna
-                onClick={toggleTheme}
-                className="text-white cursor-pointer"
-              />
-            ) : (
-              <icono.iconoSol
-                onClick={toggleTheme}
-                className="text-white cursor-pointer"
-              />
-            )}
+          <div className="flex justify-end col-span-2">
+         
             <div className="flex items-center gap-4">
               <Dropdown placement="bottom-end" className="bg-[#e0e0e0]">
                 <DropdownTrigger>
                   <User
                     as="button"
+                    
                     avatarProps={{
                       src: `${
                         localUser

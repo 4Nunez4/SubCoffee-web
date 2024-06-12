@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const FooterOrganism = () => {
   return (
-    <footer id="contacto" className=" px-20 py-10 bg-[#39A800] ">
+    <footer id="contacto" className=" px-20 py-10 bg-[#4A9F1F] ">
       <div className="">
         <div className="grid grid-cols-3">
           {/* ///---------------------------------------------------------------------------/// */}

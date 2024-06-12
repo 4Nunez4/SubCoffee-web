@@ -91,7 +91,7 @@ function DashboardContentOrganims() {
         </div>
 
         {/* ///---------------------------------------------------------------------------/// */}
-        <div class="   bg-[#FDFBF6]">
+        <div class="bg-[#FDFBF6]">
           <section
             id="quequeremos"
             class="h-screen relative flex flex-col items-center justify-center "

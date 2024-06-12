@@ -66,7 +66,7 @@ const LoginFormMolecule = () => {
             {isVisible ? (
               <EyeSlashFilledIcon className="text-2xl text-default-400 " />
             ) : (
-              <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+              <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none " />
             )}
           </button>
         }
@@ -77,12 +77,12 @@ const LoginFormMolecule = () => {
       <a
         href="#RecuperarPassword"
         onClick={() => setAbrirModalPassword(true)}
-        className={`cursor-pointer text-xs underline hover:text-[#00ed64] text-white`}
+        className={`cursor-pointer text-sm underline hover:text-[#39A800]`}
       >
         ¿Olvidaste tu contraseña?
       </a>
       <ModalFooter className="flex justify-center">
-        <Button type="submit" className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"> 
+        <Button type="submit" class="text-[#FDFBF6] bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center border-[#FDFBF6]"> 
           Iniciar Sesión
         </Button>
       </ModalFooter>

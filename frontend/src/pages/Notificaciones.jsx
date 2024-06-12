@@ -25,7 +25,21 @@ import { useSubastaContext } from "../context/SubastaContext.jsx";
 import logo from "../assets/isotipo-SubCoffee.png";
 
 export default function ListarNotificaciones() {
-  const clickNot = ()=>{
+      const [formData, setFormData] = useState({
+    tipo_not:"",
+    texto_not:"",
+    fk_id_subasta:"",
+    fk_id_usuario:""
+    });
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    };
+  const clickNot = (e)=>{
     addNotification({
       title: "para  todos los usuarios",
       message: "esta funcionando correctamente ",
@@ -35,53 +49,21 @@ export default function ListarNotificaciones() {
       //onClick: ()=> window.location = "la url de donde quiere que lo redirija la notificacion "
    
     })
+    e.preventDefault();
+    try {
+      const data = new FormData();
+      data.append(" tipo_not", formData.tipo_not);
+      data.append("texto_not", formData.texto_not);
+      data.append("fk_id_subasta", formData.fk_id_subasta);
+      data.append("fk_id_usuario", formData.fk_id_usuario);
+    } catch (error) {
+      console.error("Error en el sistema: " + error.message);
+    }
+
   }
-// revisar las notificaciones y aplicar esos cambios al crer una subasta 
-// mport React from 'react';
-
-// function InsertNotificationButton() {
-//     const handleClick = async () => {
-//         const notificationType = 'oferta'; // Cambia esto según lo que necesites
-//         const notificationText = 'Texto de la notificación';
-//         const subastaId = 123; // Ejemplo de ID de subasta
-//         const userId = 456; // Ejemplo de ID de usuario
-
-//         try {
-//             const response = await fetch('http://localhost:3000/insertNotification', {
-//                 method: 'POST',
-//                 headers: {
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body: JSON.stringify({
-//                     tipo_not: notificationType,
-//                     texto_not: notificationText,
-//                     fk_id_subasta: subastaId,
-//                     fk_id_usuario: userId
-//                 })
-//             });
-
-//             if (!response.ok) {
-//                 throw new Error('Error al insertar notificación');
-//             }
-
-//             const result = await response.json();
-//             alert(result.message); // Mostrar mensaje de éxito
-//         } catch (error) {
-//             console.error(error);
-//             alert('Hubo un error al intentar insertar la notificación.');
-//         }
-//     };
-
-//     return (
-//         <button onClick={handleClick}>Insertar Notificación</button>
-//     );
-// }
-
-// export default InsertNotificationButton;
-//--------------------------------------------------------------------
 
   const navigate = useNavigate()
-  const { getSubs, subastas, setIdSubasta } = useSubastaContext();
+  const { getSubs, setIdSubasta } = useSubastaContext();
   const [filterValue, setFilterValue] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sortDescriptor, setSortDescriptor] = useState({
@@ -97,7 +79,7 @@ export default function ListarNotificaciones() {
     setIdSubasta(id)
   }
 
-  const { getNots, Notificaciones } = useContext(NotificacionContext);
+  const { getNots, Notificaciones,createNots  } = useContext(NotificacionContext);
 
   useEffect(() => {
     getSubs()
@@ -342,16 +324,77 @@ export default function ListarNotificaciones() {
         </TableBody>
       </Table>
       
-
-
-      <Button onClick={clickNot}>
+<div>
+  <div>
+    <h1>registro de notificaciones de practica </h1>
+  </div>
+  <div>
+    <div>
+    <span>campos para registar la notificacion</span>
+    </div>
+    <div>
+      <form onSubmit={clickNot}>
+        <div>
+          <label htmlFor="tipo_not">Tipo:</label>
+          <input
+            type="text"
+            id="tipo_not"
+            name="tipo_not"
+            value={formData.tipo_not}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="texto_not">texto:</label>
+          <input
+            type="text"
+            id="texto_not"
+            name="texto_not"
+            value={formData.texto_not}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="fk_id_subasta">subasta:</label>
+          <input
+            type="number"
+            id="fk_id_subasta"
+            name="fk_id_subasta"
+            value={formData.fk_id_subasta}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="fk_id_usuario">usuario:</label>
+          <input
+            type="number"
+            id="fk_id_usuario"
+            name="fk_id_usuario"
+            value={formData.fk_id_usuario}
+            onChange={handleChange}
+          />
+        </div>
+          <div>
+    <Button  type="submit">
         usa este boton
       </Button>
+  </div>
+      </form>
+    </div>
+  </div>
+
+  
+</div>
+
+      
 
     </div>
     </div>
  
   );
+
+
+
 
 }
 
