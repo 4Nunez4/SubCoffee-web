@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -22,7 +22,7 @@ import { EditIcon } from "../../nextui/EditIcon.jsx";
 import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
 import ActivarIcon from "../../nextui/ActivarIcon.jsx";
 import FormMunicipio from "../templates/FormMunicipio.jsx";
-import MunicipioContext from "../../context/MunicipioContext.jsx";
+import { useMunicipioContext } from "../../context/MunicipioContext.jsx";
 
 const statusColorMap = {
   activo: "success",
@@ -42,7 +42,7 @@ export default function MunicipioTable() {
   const [abrirModal, setAbrirModal] = useState(false);
   const [mode, setMode] = useState("create");
 
-  const { municipios, setIdMunicipio, getMunis, desactivarMunis, activarMunis } = useContext(MunicipioContext)
+  const { municipios, setIdMunicipio, getMunis, desactivarMunis, activarMunis } = useMunicipioContext()
 
   useEffect(() => {
     getMunis(); //  Lista los datos al cargar la página
@@ -141,7 +141,7 @@ export default function MunicipioTable() {
       case "actions":
         return (
           <div className="relative flex justify-center items-center gap-2">
-            <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdMunicipio(municipios)}} className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b]">
+            <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdMunicipio(municipios)}}>
               Editar
             </Button>
             {municipios.estado_muni === "activo" ? (
@@ -201,7 +201,7 @@ export default function MunicipioTable() {
         <div className="flex justify-between gap-3 items-end">
           <Input
             isClearable
-            className="w-full border rounded-xl border-grisMedio"
+            className="w-full sm:max-w-[44%] border rounded-xl border-grisMedio"
             placeholder="Buscar municipio..."
             startContent={<SearchIcon />}
             value={filterValue}
@@ -211,7 +211,7 @@ export default function MunicipioTable() {
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat" className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64]" >
+                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat" >
                   Estado
                 </Button>
               </DropdownTrigger>
@@ -231,19 +231,16 @@ export default function MunicipioTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] " endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
+            <Button className="bg-[#00684a] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-lg text-[#00684a] font-bold">
-            Total {municipios && municipios.length} municipios
-          </span>
-          <label className="flex items-center text-lg text-[#00684a] font-bold">
+        <div className="flex justify-center items-center">
+          <label className="flex items-center text-default-400 text-small">
             Columnas por páginas:
             <select
-              className="bg-transparent outline-none text-lg text-[#00684a] font-bold"
+              className="bg-transparent outline-none text-default-400 text-small"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
@@ -266,20 +263,25 @@ export default function MunicipioTable() {
   const bottomContent = useMemo(() => {
     return (
       <div className="flex justify-between items-center py-4">
+        <span>
+          {`Total ${
+            filteredItems.length
+          } Municipios`}
+        </span>
         <Pagination
           isCompact
           showControls
           showShadow
-          color="success"
+          color="default"
           page={page}
           total={pages}
           onChange={setPage}
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}  className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b]">
+          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
             Anterior
           </Button>
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage} className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500">
+          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
             Siguiente
           </Button>
         </div>
@@ -289,8 +291,7 @@ export default function MunicipioTable() {
 
   return (
     <>
-    <div>
-            <FormMunicipio
+      <FormMunicipio
         open={abrirModal}
         onClose={() => setAbrirModal(false)}
         title={mode === 'create' ? 'Registrar Municipio' : 'Actualizar Municipio'}
@@ -303,7 +304,7 @@ export default function MunicipioTable() {
         bottomContent={bottomContent}
         bottomContentPlacement="outside"
         classNames={{
-          wrapper: "max-h-[482px] bg-[#00684a] text-white text-center",
+          wrapper: "max-h-[482px]",
         }}
         sortDescriptor={sortDescriptor}
         topContent={topContent}
@@ -316,7 +317,6 @@ export default function MunicipioTable() {
               key={column.uid}
               align={column.uid === "actions" ? "center" : "start"}
               allowsSorting={column.sortable}
-              className="bg-[#001e2b] text-white text-sm text-center"
             >
               {column.name}
             </TableColumn>
@@ -332,8 +332,6 @@ export default function MunicipioTable() {
           )}
         </TableBody>
       </Table>
-    </div>
-
     </>
   );
 }

@@ -6,7 +6,7 @@ const AvatarAtom = ({ img, className }) => {
       <img
         src={`./src/assets/${img}`}
         alt="Photo"
-        className={`h-14 w-14 mr-2 rounded-full  ${className}`}
+        className={`h-11 w-11 mr-2 rounded-full  ${className}`}
       />
     </div>
   );

@@ -12,17 +12,17 @@ const TiposDeCafeOrganism = () => {
   ];
 
   return (
-    <div className="grid grid-cols-3 grid-rows-2 gap-6">
-    {datos.map((dato, i) => (
-      <CafeCardAtom
-        key={i}
-        title={dato.title}
-        img={dato.img}
-        description={dato.description}
-        className="shadow-lg rounded-lg p-4 w-full transition-transform duration-300 hover:scale-110"
-      />
-    ))}
-  </div>
+    <div className="grid gap-6 mx-6 sm:grid-cols-3 lg:grid-cols-3">
+      {datos.map((dato, i) => (
+        <CafeCardAtom
+          key={i}
+          title={dato.title}
+          img={dato.img}
+          description={dato.description}
+          className="shadow-lg rounded-lg p-4 w-full transition-transform duration-300 hover:scale-110"
+        />
+      ))}
+    </div>
   );
 };
 

@@ -68,7 +68,7 @@ const RegisterMunicipioMolecule = ({ mode, titleBtn }) => {
           name="departamentoIdRef"
           value={departamentoIdRef}
           onChange={(e) => setDepartamentoIdRef(e.target.value)}
-          required={true}
+          required
           className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
         >
           <option value="" hidden className="text-gray-400">
@@ -87,7 +87,7 @@ const RegisterMunicipioMolecule = ({ mode, titleBtn }) => {
         variant="bordered"
         startContent={<icono.iconoNumber />}
         placeholder="Codigo del Municipio"
-        isRequired
+        required
         value={pkCodigoMuni}
         onChange={(e) => setPkCodigoMuni(e.target.value)}
       />
@@ -97,13 +97,16 @@ const RegisterMunicipioMolecule = ({ mode, titleBtn }) => {
         variant="bordered"
         startContent={<icono.iconoReName />}
         placeholder="Nombre del Municipio"
-        isRequired
+        required
         value={nombreMuni}
         onChange={(e) => setNombreMuni(e.target.value)}
       />
 
       <ModalFooter className="flex justify-center">
-        <Button type="submit" className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b]">
+        <Button
+          type="submit"
+          className="px-4 bg-[#001e2b] text-white font-semibold rounded-md"
+        >
           {titleBtn}
         </Button>
       </ModalFooter>

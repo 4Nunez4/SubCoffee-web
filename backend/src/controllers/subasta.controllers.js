@@ -4,7 +4,7 @@ import { validationResult } from "express-validator";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/img/subasta");
+    cb(null, "public/subastas");
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -109,7 +109,7 @@ export const listarSubsActivas = async (req, res) => {
       INNER JOIN tipo_variedad t ON v.fk_tipo_variedad = t.pk_id_tipo_vari 
       INNER JOIN usuarios u ON f.fk_id_usuario = u.pk_cedula_user
       WHERE s.estado_sub IN ('abierta', 'proceso', 'espera')
-      ORDER BY t.nombre_tipo_vari
+      ORDER BY s.pk_id_sub
     `);
 
     if (resultado.length > 0) {
@@ -137,6 +137,24 @@ export const actualizarFechaFin = async() => {
   }
 }
 
+export const updateSubGanador = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { precio_final_sub, ganador_sub } = req.body;
+
+    const sql = "UPDATE subasta SET precio_final_sub = IFNULL(?, precio_final_sub), ganador_sub = IFNULL(?, ganador_sub) WHERE pk_id_sub = ?";
+    const [result] = await pool.query(sql, [precio_final_sub, ganador_sub, id]);
+
+    if (result.affectedRows > 0) {
+      res.status(200).json({ message: "Se estableció el ganador con éxito" });
+    } else {
+      res.status(404).json({ message: "Error al establecer el ganador de la subasta" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
+};
+
 export const actualizar = async (req, res) => {
   try {
     const errors = validationResult(req);
@@ -145,7 +163,7 @@ export const actualizar = async (req, res) => {
     }
 
     const { id } = req.params;
-    const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad_sub, descripcion_sub, fk_variedad, } = req.body;
+    const { fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, unidad_peso_sub, cantidad_sub, descripcion_sub, fk_variedad, } = req.body;
 
     const imagen_sub = req.files && req.files.imagen_sub ? req.files.imagen_sub[0].originalname : null;
     const certificado_sub = req.files && req.files.certificado_sub ? req.files.certificado_sub[0].originalname : null;
@@ -155,13 +173,12 @@ export const actualizar = async (req, res) => {
       fecha_inicio_sub = IFNULL(?, fecha_inicio_sub),
       fecha_fin_sub = IFNULL(?, fecha_fin_sub),
       precio_inicial_sub = IFNULL(?, precio_inicial_sub),
-      precio_final_sub = IFNULL(?, precio_final_sub),
       unidad_peso_sub = IFNULL(?, unidad_peso_sub),
       cantidad_sub = IFNULL(?, cantidad_sub),
       descripcion_sub = IFNULL(?, descripcion_sub),
       fk_variedad = IFNULL(?, fk_variedad)
     `;
-    const params = [ fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, precio_final_sub, unidad_peso_sub, cantidad_sub, descripcion_sub, fk_variedad, ];
+    const params = [ fecha_inicio_sub, fecha_fin_sub, precio_inicial_sub, unidad_peso_sub, cantidad_sub, descripcion_sub, fk_variedad, ];
 
     if (imagen_sub) {
       sql += `, imagen_sub = ?`;
@@ -184,7 +201,6 @@ export const actualizar = async (req, res) => {
       res.status(404).json({ message: "No se encontró ninguna subasta con el id proporcionado" });
     }
   } catch (error) {
-    console.error("Error en el sistema:", error); // Agrega un log del error para debug
     res.status(500).json({ message: "Error interno del servidor" });
   }
 };
@@ -256,8 +272,6 @@ export const buscarSubastaForUser = async (req, res) => {
   }
 };
 
-
-// elimina una subasta
 export const eliminar = async (req, res) => {
   try {
     const id = req.params.id;
@@ -267,6 +281,21 @@ export const eliminar = async (req, res) => {
       res.status(200).json({ message: "Subasta eliminada exitosamente." });
     } else {
       res.status(404).json({ message: "No se encontró una subasta con el id proporcionado." });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
+};
+
+export const designarDatos = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const [resultado] = await pool.query("UPDATE subasta SET precio_final_sub = NULL, ganador_sub = NULL WHERE pk_id_sub = ?", [id]);
+
+    if (resultado.affectedRows > 0) {
+      res.status(200).json({ message: "Datos de subasta cambiados exitosamente." });
+    } else {
+      res.status(404).json({ message: "No se encontró una subasta con el ID proporcionado." });
     }
   } catch (error) {
     res.status(500).json({ message: "Error interno del servidor" });

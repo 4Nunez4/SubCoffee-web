@@ -12,24 +12,24 @@ function GeografiaFullPage() {
     }, []);
     
   return (
-    <div className="flex flex-col px-10 gap-x-4 pt-8 w-full bg-gray-300">
+    <div className="flex flex-col px-10 gap-x-4 pt-8 w-full ">
       <Tabs aria-label="Options" variant="bordered" >
         <Tab key="departamentos" title="Departamentos">
-          <Card className=" bg-slate-300">
+          <Card className=" ">
             <CardBody>
               <DepartamentoTable />
             </CardBody>
           </Card>
         </Tab>
         <Tab key="municipios" title="Municipios">
-          <Card className=" bg-slate-300">
+          <Card className=" ">
             <CardBody>
               <MunicipioTable />
             </CardBody>
           </Card>
         </Tab>
         <Tab key="veredas" title="Veredas">
-          <Card className=" bg-slate-300">
+          <Card className=" ">
             <CardBody>
               <VeredaTable />
             </CardBody>

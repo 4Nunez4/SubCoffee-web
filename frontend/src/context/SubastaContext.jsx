@@ -14,6 +14,8 @@ import {
   updateSubastafecha,
   getSubastasActivasMenosCerradas,
   getSubastaGanador,
+  subastaGanadorAsingar,
+  subastaGanadorDesingar
 } from "../api/api.subasta";
 
 const SubastaContext = createContext();
@@ -38,7 +40,6 @@ export const SubastaProvider = ({ children }) => {
   const [subastaGanador, setSubastaGanador] = useState([])
   const [cerrarModal, serCerrarModal] = useState(false)
 
-
   const getSubs = async () => {
     try {
       const response = await getSubastas()
@@ -62,6 +63,34 @@ export const SubastaProvider = ({ children }) => {
       const response = updateSubastafecha(id, data)
       getSubs()
       console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const establecerGanador = async(id, data) => {
+    try {
+      await subastaGanadorAsingar(id, data).then((response) => {
+        getSub(id)
+        getSubs()
+        getSubsMenoCerradas()
+        setMensaje(response.data.message);
+        serCerrarModal(true)
+        setModalMessage(true);
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const destablecerGanador = async(id, user) => {
+    try {
+      await subastaGanadorDesingar(id).then((response) => {
+        activarSubs(id, user)
+        setMensaje(response.data.message);
+        serCerrarModal(true)
+        setModalMessage(true);
+      })
     } catch (error) {
       console.error(error);
     }
@@ -187,9 +216,10 @@ export const SubastaProvider = ({ children }) => {
         getSubsMenoCerradas,
         cerrarModal, 
         serCerrarModal,
-
+        establecerGanador,
         getSubGanador,
         subastaGanador,
+        destablecerGanador
       }}
     >
       <ModalMessage

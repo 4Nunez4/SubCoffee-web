@@ -1,30 +1,78 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Button, Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import {
+  Avatar,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Image,
+} from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-
 import ImageSlider from "../components/molecules/ImageSlider";
-import ModalSubCoffee from "../components/templates/ModalSubCoffee";
-
 import { useSubastaContext } from "../context/SubastaContext";
+import ModalSubCoffee from "../components/templates/ModalSubCoffee";
 import { useAuthContext } from "../context/AuthContext";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 function SubastaPage() {
   const navigate = useNavigate();
-  const { getSubsMenoCerradas, subastasActivas, setIdSubasta, activarSubs, ProcesoSubs, EsperaSubs } = useSubastaContext();
+  const { getSubsMenoCerradas, subastasActivas = [], setIdSubasta, EsperaSubs, activarSubs, desactivarSubs, ProcesoSubs } = useSubastaContext();
   const { getUsers } = useAuthContext();
   const [abrirModal, setAbrirModal] = useState(false);
-  const [subastas, setSubastas] = useState([]);
-
+  const [startIndex, setStartIndex] = useState(0); // Índice de la primera subasta visible
   const users = JSON.parse(localStorage.getItem('user'));
 
-  const calcularTiempoRestante = (inicio, fin) => {
-    const diferenciaMs = fin - inicio;
-    const segundos = Math.floor((diferenciaMs / 1000) % 60);
-    const minutos = Math.floor((diferenciaMs / 1000 / 60) % 60);
-    const horas = Math.floor((diferenciaMs / 1000 / 60 / 60) % 24);
-    const dias = Math.floor(diferenciaMs / 1000 / 60 / 60 / 24);
-    return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
+  useEffect(() => {
+    getSubsMenoCerradas();
+    getUsers();
+  }, []);
+
+  const handdleModaSub = (id) => {
+    setAbrirModal(true);
+    setIdSubasta(id);
   };
+
+  useEffect(() => {
+    if (users.rol_user === "admin") navigate('/users');
+  }, [users, navigate]);
+
+  const showNextSubastas = () => {
+    setStartIndex(startIndex + 1);
+  };
+
+  const showPrevSubastas = () => {
+    setStartIndex(startIndex - 1);
+  };
+
+  useEffect(() => {
+    if (!subastasActivas) return;
+  
+    const handleSubastaState = (subasta) => {
+      const { pk_id_sub, precio_final_sub, ganador_sub, fecha_inicio_sub, fecha_fin_sub, estado_sub } = subasta;
+      const tiempo = calcularDiferencia(fecha_inicio_sub, fecha_fin_sub);
+  
+      if (tiempo.includes("Subasta terminada") && !ganador_sub) {
+        EsperaSubs(pk_id_sub, users.pk_cedula_user);
+      } else if (tiempo.includes("La subasta terminará en: ")) {
+        ProcesoSubs(pk_id_sub, users.pk_cedula_user);
+      } else if (tiempo.includes("La subasta empezará dentro de") && estado_sub !== "cerrada") {
+        activarSubs(pk_id_sub, users.pk_cedula_user);
+      } else if (tiempo.includes("A la subasta le quedan ")) {
+        EsperaSubs(pk_id_sub, users.pk_cedula_user);
+      } else if (tiempo.includes("Subasta terminada") && precio_final_sub !== null && ganador_sub !== null) {
+        desactivarSubs(pk_id_sub, users.pk_cedula_user);
+      }
+    };
+    if(subastasActivas.length > 0) {
+      subastasActivas.forEach(handleSubastaState);
+    }
+  
+    const intervalId = setInterval(() => {
+      subastasActivas.forEach(handleSubastaState);
+    }, 1000);
+  
+    return () => clearInterval(intervalId);
+  }, [subastasActivas, users]);
 
   const calcularDiferencia = (fechaInicio, fechaFin) => {
     const inicio = new Date(fechaInicio);
@@ -50,91 +98,45 @@ function SubastaPage() {
     }
   };
 
-  useEffect(() => {
-    const actualizarEstadosSubastas = async () => {
-      if (Array.isArray(subastasActivas)) {
-        for (const subasta of subastasActivas) {
-          const { pk_id_sub } = subasta;
-          const { pk_cedula_user } = users;
-  
-          const tiempo = calcularDiferencia(subasta.fecha_inicio_sub, subasta.fecha_fin_sub);
-  
-          if (tiempo.includes("Subasta terminada")) {
-            await EsperaSubs(pk_id_sub, pk_cedula_user);
-          } else if (tiempo.includes("A la subasta le quedan")) {
-            await EsperaSubs(pk_id_sub, pk_cedula_user);
-          } else if (tiempo.includes("La subasta terminará en")) {
-            await ProcesoSubs(pk_id_sub, pk_cedula_user);
-          } else if (tiempo.includes("La subasta empezará dentro de")) {
-            await activarSubs(pk_id_sub, pk_cedula_user);
-          }
-        }
-        getSubsMenoCerradas();  // Sirve para refrescar las subastas activas
-      }
-    };
-    const intervalId = setInterval(actualizarEstadosSubastas, 1000);
-  
-    return () => clearInterval(intervalId);
-  }, [subastasActivas, users]);
-  
-
-  useEffect(() => {
-    getSubsMenoCerradas();
-    getUsers();
-  }, []);
-
-  useEffect(() => {
-    if (Array.isArray(subastasActivas)) {
-      setSubastas(subastasActivas);
-    }
-  }, [subastasActivas]);
-
-  const handdleModaSub = (id) => {
-    setAbrirModal(true);
-    setIdSubasta(id);
+  const calcularTiempoRestante = (inicio, fin) => {
+    const diferenciaMs = fin - inicio;
+    const segundos = Math.floor((diferenciaMs / 1000) % 60);
+    const minutos = Math.floor((diferenciaMs / 1000 / 60) % 60);
+    const horas = Math.floor((diferenciaMs / 1000 / 60 / 60) % 24);
+    const dias = Math.floor(diferenciaMs / 1000 / 60 / 60 / 24);
+    return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
   };
 
-  const groupedSubastas = Array.isArray(subastas) ? subastas.reduce((acc, subasta) => {
-    if (!acc[subasta.nombre_tipo_vari]) {
-      acc[subasta.nombre_tipo_vari] = [];
-    }
-    acc[subasta.nombre_tipo_vari].push(subasta);
-    return acc;
-  }, {}) : {};
-
-  useEffect(() => {
-    if (users.rol_user === "admin") navigate('/users');
-  }, [users, navigate]);
-
   return (
-    <div className="px-auto pb-8">
+    <div className="pb-8">
       <ImageSlider />
       {users.rol_user !== "admin" && (
-        <div className="px-16 bg-slate-300 ">
-          <p className="pl-4 pb-4 text-[#00684a] text-2xl font-semibold md:text-2xl">Subastas</p>
-          {Object.keys(subastas).length > 0 ? Object.entries(groupedSubastas).map(([tipoVari, subastas]) => (
-            <div key={tipoVari} >
-              <p className="pl-4 text-xl my-2 text-[#00684a] font-medium">{tipoVari}</p>
-              <div className="flex gap-x-4 my-4">
-                {subastas.map((subasta) => (
-                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[535px] p-2 bg-[#00684a] text-white">
+        <div className="pl-6">
+          <p className="pl-4 text-2xl text-[#a1653d] text-center">Subastas</p>
+          <div className="flex flex-col overflow-x-auto py-6 overflow-hidden">
+            {subastasActivas && subastasActivas.length > 0 ? (
+              <div className="flex flex-wrap ml-6 gap-x-7">
+                {subastasActivas.slice(startIndex, startIndex + 3).map((subasta) => (
+                  <Card key={subasta.pk_id_sub} className="max-w-[380px] h-[560px] p-2 mb-4 shadow-small">
                     <CardHeader className="justify-between">
                       <div className="flex gap-x-3">
                         <Avatar
                           isBordered
                           radius="full"
                           size="md"
-                          src={subasta.imagen_user && subasta.imagen_user.length > 0
-                            ? `http://localhost:4000/img/${subasta.imagen_user}`
-                            : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
+                          src={
+                            subasta.imagen_user && subasta.imagen_user.length > 0
+                              ? `http://localhost:4000/usuarios/${subasta.imagen_user}`
+                              : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
+                          }
                         />
                         <div className="flex flex-col gap-1 items-start justify-center">
-                          <h4 className="text-small font-semibold leading-none text-white">{subasta.nombre_user}</h4>
-                          <h5 className="text-small -mt-1 tracking-tight text-default-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-[120px]">@{subasta.email_user}</h5>
+                          <h4 className="text-small font-semibold leading-none text-default-600"> {subasta.nombre_user} </h4>
+                          <h5 className="text-small -mt-1 tracking-tight text-default-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-auto"> @{subasta.email_user} </h5>
                         </div>
                       </div>
                       <Button
-                        className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"
+                        className="bg-gray-100 text-foreground border-default-200"
                         radius="md"
                         variant="bordered"
                         size="sm"
@@ -145,15 +147,15 @@ function SubastaPage() {
                     </CardHeader>
                     <CardBody className="items-start w-full -mt-3">
                       <span className="flex justify-center items-center gap-x-3">
-                        <b className="ml-5">{subasta.pk_id_sub} - {subasta.nombre_tipo_vari}</b>
-                        <div className={`rounded-lg border
-                          ${subasta.estado_sub === "abierta" ? "bg-green-500 border-green-600 text-green-50" : ""}
-                          ${subasta.estado_sub === "proceso" ? "bg-orange-500 border-orange-600 text-orange-50" : ""}
-                          ${subasta.estado_sub === "espera" ? "bg-blue-500 border-blue-600 text-blue-50" : ""}
-                          ${subasta.estado_sub === "cerrada" ? "bg-red-400 border-red-600 text-red-50" : ""}`}
-                        >
-                          <p className="text-sm text-default-50 p-0 px-1">{subasta.estado_sub}</p>
-                        </div>
+                        <b className="ml-5"> {subasta.pk_id_sub} - {subasta.nombre_tipo_vari} </b>
+                        <p className={`text-sm py-1 rounded-lg px-2 capitalize 
+                          ${subasta.estado_sub === "abierta"? "bg-[#d1f4e0] text-[#14a150]": ""}
+                          ${subasta.estado_sub === "proceso"? "bg-orange-100 text-orange-500": ""}
+                          ${subasta.estado_sub === "espera"? "bg-blue-100 text-blue-500": ""}
+                          ${subasta.estado_sub === "cerrada"? "bg-[#fdd0df] text-[#f31263]": ""} 
+                        `}>
+                          {subasta.estado_sub}
+                        </p>
                       </span>
                       <CardBody className="flex">
                         <Image
@@ -161,10 +163,13 @@ function SubastaPage() {
                           radius="md"
                           alt={subasta.imagen_sub}
                           className="w-[300px] object-cover h-[200px]"
-                          src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
+                          src={`http://localhost:4000/subastas/${subasta.imagen_sub}`}
                         />
-                        <div className="grid gap-x-2 py-2 px-1 text-sm max-h-[400px] overflow-y-auto">
+                        <div className="grid gap-x-2 py-2 px-2 text-sm">
                           <div className="flex flex-col">
+                            <div className="flex flex-col items-center mb-1">
+                              <p className="text-[#a1653d]">{calcularDiferencia(subasta.fecha_inicio_sub,subasta.fecha_fin_sub)}</p>
+                            </div>
                             <div className="flex w-full gap-x-2">
                               <p className="font-semibold">Apertura:</p>
                               <p> {new Date( subasta.fecha_inicio_sub ).toLocaleString("es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", })} </p>
@@ -187,18 +192,17 @@ function SubastaPage() {
                             </div>
                             <div className="flex w-full gap-x-2">
                               <p className="font-semibold">Certificado:</p>
-                              <p className="underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]"> {subasta.certificado_sub} </p>
+                              <a href={`http://localhost:4000/subastas/${subasta.certificado_sub}`} download={subasta.certificado_sub} className="underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap w-52">{subasta.certificado_sub}</a>
                             </div>
                           </div>
                         </div>
                         <div className="flex justify-center mt-2">
                           <Button
-                            className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500"
-                            radius="md"
+                            className="py-2 px-4 bg-[#00684a] text-white font-semibold rounded-lg"
                             size="lg"
                             onClick={() => handdleModaSub(subasta.pk_id_sub)}
                           >
-                            Ver Detalles
+                            Ver subasta
                           </Button>
                         </div>
                       </CardBody>
@@ -206,15 +210,32 @@ function SubastaPage() {
                   </Card>
                 ))}
               </div>
-            </div>
-          )): (
-            <p className="pl-4 text-xl my-2 text-gray-500">No hay subastas disponibles en este momento.</p>
-          )}
-          <ModalSubCoffee open={abrirModal} onClose={() => setAbrirModal(false)} />
+            ) : (
+              <div className="flex">
+                <p className="pl-4 text-xl my-2 text-gray-500 font-semibold">No hay subastas disponibles.</p>
+              </div>
+            )}
+            {
+              subastasActivas.length > 0 && (
+                <div className="flex justify-between mt-4">
+                  <Button auto className="mr-2" onClick={showPrevSubastas} startContent={<FaChevronLeft/>} isDisabled={startIndex <= 0} >
+                    Anterior
+                  </Button>
+                  <Button auto className="ml-2" onClick={showNextSubastas} endContent={<FaChevronRight/>} isDisabled={(startIndex + 3) >= subastasActivas.length} >
+                    Siguiente
+                  </Button>
+                </div>
+              )
+            }
+          </div>
+          <ModalSubCoffee
+            open={abrirModal}
+            onClose={() => setAbrirModal(false)}
+          />
         </div>
       )}
     </div>
-  );
+  ); 
 }
 
 export default SubastaPage;

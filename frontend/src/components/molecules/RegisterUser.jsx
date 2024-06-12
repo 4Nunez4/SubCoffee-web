@@ -51,13 +51,13 @@ const RegisterUser = ({ mode, titleBtn }) => {
     datosAEnviar.append("nombre_user", formData.nombre_user);
     datosAEnviar.append("email_user", formData.email_user);
     datosAEnviar.append("telefono_user", formData.telefono_user);
-    datosAEnviar.append("rol_user", formData.rol_user);
     datosAEnviar.append("descripcion_user", formData.descripcion_user);
     datosAEnviar.append("imagen_user", formData.imagen_user);
     try {
       if (mode === "update") {
         await updateUsers(idUser.pk_cedula_user, datosAEnviar);
-      } else {
+        } else {
+        datosAEnviar.append("rol_user", formData.rol_user);
         datosAEnviar.append("password_user", formData.password_user);
         await createUsers(datosAEnviar);
       }
@@ -139,7 +139,7 @@ const RegisterUser = ({ mode, titleBtn }) => {
       </div>
       <Input
         placeholder="Nombre Completo"
-        isRequired
+        required
         type="text"
         name="nombre_user"
         variant="bordered"
@@ -149,7 +149,7 @@ const RegisterUser = ({ mode, titleBtn }) => {
       />
       <Input
         placeholder="Correo"
-        isRequired
+        required
         type="email"
         variant="bordered"
         name="email_user"
@@ -160,7 +160,7 @@ const RegisterUser = ({ mode, titleBtn }) => {
       <div className="grid grid-cols-2 items-center gap-x-2">
         <Input
           placeholder="Cédula"
-          isRequired
+          required
           type="number"
           variant="bordered"
           min={0}
@@ -171,7 +171,7 @@ const RegisterUser = ({ mode, titleBtn }) => {
         />
         <Input
           placeholder="Teléfono"
-          isRequired
+          required
           type="number"
           variant="bordered"
           min={0}
@@ -181,37 +181,38 @@ const RegisterUser = ({ mode, titleBtn }) => {
           startContent={<icono.iconoCelular />}
         />
       </div>
-      <div
-        className={`grid ${
-          mode !== "update" ? "grid-cols-2" : "grid-cols-1"
-        } items-center gap-x-2`}
-      >
-        <div className="relative">
-          <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-800">
-            {<icono.iconoRol />}
-          </span>
-          <select
-            name="rol_user"
-            value={formData.rol_user}
-            onChange={handleChange}
-            required
-            className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
-          >
-            <option value="" hidden>
-              Seleccionar Rol
-            </option>
-            {userAdmin.rol_user === "admin" && (
-              <option value="admin">Administrador</option>
-            )}
-            <option value="comprador">Comprador</option>
-            <option value="vendedor">Vendedor</option>
-          </select>
-        </div>
-        {mode !== "update" && (
+      {mode !== "update" && (
+        <div
+          className={`grid ${
+            mode !== "update" ? "grid-cols-2" : "grid-cols-1"
+          } items-center gap-x-2`}
+        >
+          <div className="relative">
+            <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-800">
+              {<icono.iconoRol />}
+            </span>
+            <select
+              name="rol_user"
+              value={formData.rol_user}
+              onChange={handleChange}
+              required
+              className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+            >
+              <option value="" hidden>
+                Seleccionar Rol
+              </option>
+              {userAdmin.rol_user === "admin" && (
+                <option value="admin">Administrador</option>
+              )}
+              <option value="comprador">Comprador</option>
+              <option value="vendedor">Vendedor</option>
+            </select>
+          </div>
           <Input
             label=""
             aria-label="Contraseña"
             variant="bordered"
+            required
             placeholder="Contraseña"
             startContent={<icono.iconoContraseña />}
             endContent={
@@ -232,8 +233,8 @@ const RegisterUser = ({ mode, titleBtn }) => {
             name="password_user"
             onChange={handleChange}
           />
-        )}
-      </div>
+        </div>
+      )}
       <Textarea
         label=""
         aria-label="Descripción de usuario"
@@ -249,7 +250,10 @@ const RegisterUser = ({ mode, titleBtn }) => {
         name="descripcion_user"
       />
       <ModalFooter className="flex justify-center">
-        <Button type="submit"  className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500bg-[#e0e0e0] w-full mt-2">
+        <Button
+          type="submit"
+          className="px-4 bg-[#001e2b] text-white font-semibold rounded-md"
+        >
           {titleBtn}
         </Button>
       </ModalFooter>

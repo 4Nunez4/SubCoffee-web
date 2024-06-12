@@ -19,7 +19,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
     finca: "",
   });
 
-  const { idSubasta, createSubs, updateSubs } = useSubastaContext();
+  const { idSubasta, createSubs, updateSubs, errors } = useSubastaContext();
   const { getFincaUserActivas, fincasActivas } = useFincaContext();
   const { variedadForuser, getVariForUser } = useVariedadUserContext();
   const usuario = JSON.parse(localStorage.getItem("user"));
@@ -94,6 +94,13 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
 
   return (
     <form onSubmit={onSubmit} className="space-y-4 px-4 -mt-4">
+      {
+        errors.map((error, i) => (
+          <div className='bg-red-500 p-2 text-white text-center my-2' key={i}>
+            {error}
+          </div>
+        ))
+      }
       <div className="grid">
         <div className="flex w-full justify-center rounded-full">
           <input
@@ -146,7 +153,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
       <div className="grid grid-cols-2 gap-x-2">
         <Input
           placeholder="Fecha de Inicio"
-          isRequired
+          required
           label="Fecha de Inicio"
           variant="bordered"
           type="datetime-local"
@@ -157,7 +164,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
         />
         <Input
           placeholder="Fecha Fin"
-          isRequired
+          required
           label="Fecha final"
           variant="bordered"
           type="datetime-local"
@@ -174,6 +181,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
           startContent={<icono.iconoPrice />}
           placeholder="Precio Inicial"
           variant="bordered"
+          required
           type="number"
           name="precioInicial"
           value={formData.precioInicial}
@@ -216,6 +224,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
           <select
             name="finca"
             value={formData.finca}
+            required={true}
             onChange={(e) => handleFincaChange(e.target.value)}
             className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
           >
@@ -267,7 +276,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
             name="unidadPeso"
             value={formData.unidadPeso}
             onChange={handleChange}
-            required
+            required={true}
             className="pl-8 pr-4 py-2 w-full text-sm border-2 rounded-xl border-gray-200 hover:border-gray-400 shadow-sm text-gray-500 focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
           >
             <option value="" hidden>
@@ -281,6 +290,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
         </div>
         <Input
           label=""
+          required
           aria-label="Cantidad"
           variant="bordered"
           startContent={<icono.iconoQuantity />}
@@ -293,6 +303,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
       </div>
       <Textarea
         label=""
+        required
         aria-label="Descripción de la subasta"
         startContent={<icono.iconoDescript />}
         variant="bordered"
@@ -306,7 +317,10 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
         name="descripcion_sub"
       />
       <ModalFooter className="flex justify-center">
-        <Button type="submit"  className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500bg-[#e0e0e0] w-full mt-2">
+        <Button
+          type="submit"
+          className="px-4 bg-[#001e2b] text-white font-semibold rounded-md"
+        >
           {titleBtn}
         </Button>
       </ModalFooter>

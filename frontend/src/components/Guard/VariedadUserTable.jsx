@@ -45,19 +45,18 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
       <div className="overflow-y-auto max-h-64 px-4">
         {variedadForuser ? (
           variedadForuser.map((varis, i) => (
-            <div
-              key={i}
-              className="text-white bg-[#001e2b] rounded-md p-4 mx-3 flex mb-2 items-center justify-between shadow-md"
-            >
+            <div key={i} className="bg-gray-100 rounded-md p-4 mx-3 flex mb-2 items-center justify-between shadow-md" >
               <div className="flex-1">
-                <p className="font-semibold truncate">
+                <p className="text-gray-800 font-semibold truncate">
                   {varis.nombre_tipo_vari}
                 </p>
               </div>
               <div className="ml-4">
                 <p
-                  className={`rounded-lg px-2 py-1 text-white ${
-                    varis.estado_vari === "activo" ? "bg-green-500" : "bg-red-500"
+                  className={`rounded-lg px-2 py-1 ${
+                    varis.estado_vari === "activo"
+                      ? "bg-[#d1f4e0] text-[#14a150]"
+                      : "bg-[#fdd0df] text-[#f31263]"
                   } text-center`}
                 >
                   {varis.estado_vari === "activo" ? "Activa" : "Inactiva"}
@@ -68,7 +67,7 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
                   <Button
                     className="bg-red-600 text-white w-44"
                     startContent={<DesactivarIcon />}
-                    onClick={() => desactivarVaris(varis.pk_id_vari, user.pk_cedula_user, pkFinca)}
+                    onClick={() => desactivarVaris(varis.pk_id_vari, pkFinca)}
                   >
                     Desactivar Variedad
                   </Button>
@@ -76,7 +75,7 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
                   <Button
                     className="bg-green-600 text-white w-44"
                     startContent={<ActivarIcon />}
-                    onClick={() => activarVaris(varis.pk_id_vari, user.pk_cedula_user, pkFinca)}
+                    onClick={() => activarVaris(varis.pk_id_vari, pkFinca)}
                   >
                     Activar Variedad
                   </Button>
@@ -85,7 +84,9 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
             </div>
           ))
         ) : (
-          "No tienes variedades por el momento."
+          <div className="flex">
+            <p className="pl-4 text-xl text-gray-400 font-semibold">No tienes ninguna variedad creada.</p>
+          </div>
         )}
       </div>
       <form onSubmit={onSubmit} className="space-y-4 px-4">
@@ -118,7 +119,10 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
           </select>
         </div>
         <ModalFooter className="flex justify-center">
-          <Button type="submit" className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500bg-[#e0e0e0] w-full mt-2">
+          <Button
+            type="submit"
+            className="px-4 bg-[#00684a] text-white font-semibold rounded-md"
+          >
             {titleBtn}
           </Button>
         </ModalFooter>

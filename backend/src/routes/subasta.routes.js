@@ -14,6 +14,8 @@ import {
   actualizarFechaFin,
   listarSubsActivas,
   getSubGanador,
+  updateSubGanador,
+  designarDatos,
 } from "../controllers/subasta.controllers.js";
 import { validarSubasta, } from "../validations/subasta.validation.js";
 import { verificarUserToken } from "../controllers/autenticacionController.js";
@@ -27,8 +29,10 @@ router.get("/subastasActivasMenosCerradas", verificarUserToken, listarSubsActiva
 router.put("/subasta/:id", verificarUserToken, subastaFiles, actualizar);
 router.get("/buscar/:id", verificarUserToken, buscar); 
 router.get("/buscarsubforuser/:id", verificarUserToken, buscarSubastaForUser); 
+router.put("/eliminardatos/:id", verificarUserToken, designarDatos);
 router.delete("/eliminar/:id", verificarUserToken, eliminar);
 
+router.put("/subastaganador/:id", verificarUserToken, updateSubGanador);
 router.put("/subastaac/:id", verificarUserToken, SubastaAbierta);
 router.put("/subastafecha/:id", verificarUserToken, actualizarFechaFin);
 router.put("/subastades/:id", verificarUserToken, SubastaCerrada);

@@ -33,7 +33,7 @@ const CafeCardAtom = ({ title, img, description }) => {
         </p>
       </div>
       {showDescription && (
-        <div className="absolute inset-0 bg-[#001e2b] bg-opacity-80 text-white flex items-center justify-center   rounded-lg ">
+        <div className="absolute inset-0 bg-[#001e2b] bg-opacity-80 text-white flex items-center justify-center rounded-lg ">
           <p className="text-center">{description}</p>
         </div>
       )}

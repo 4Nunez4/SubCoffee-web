@@ -11,5 +11,7 @@ export const updateSubastaDesact = (id) => axiosClient.put(`/v1/subastades/${id}
 export const updateSubastaActivar = (id) => axiosClient.put(`/v1/subastaac/${id}`)
 export const updateSubastafecha = (id, data) => axiosClient.put(`/v1/subastafecha/${id}`, data)
 
+export const subastaGanadorDesingar = (id) => axiosClient.put(`/v1/eliminardatos/${id}`)
+export const subastaGanadorAsingar = (id, data) => axiosClient.put(`/v1/subastaganador/${id}`, data)
 export const updateSubastaEspera = (id) => axiosClient.put(`/v1/espera/${id}`)
 export const updateSubastaProceso = (id) => axiosClient.put(`/v1/proceso/${id}`)

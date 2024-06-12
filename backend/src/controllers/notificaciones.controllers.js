@@ -5,20 +5,15 @@ export const getNotifications = async (req, res) => {
   try {
     const [rows] = await pool.query("SELECT n.*,u.* FROM notificaciones n INNER JOIN usuarios u ON n.fk_id_usuario = u.pk_cedula_user");
     if (rows.length > 0) {
-      res.status(200).json({
-        status: 200,
-        message: "Notificaciones encontradas con éxito.",
-        data: rows,
-      });
+      res.status(200).json({ status: 200, message: "Notificaciones encontradas con éxito.", data: rows, });
     } else {
-      res
-        .status(404)
-        .json({ status: 404, message: "No se encontraron notificaciones." });
+      res.status(404).json({ status: 404, message: "No se encontraron notificaciones." });
     }
   } catch (error) {
     res.status(500).json({ status: 500, message: "Error en el sistema." });
   }
 };
+
 export const getNotification = async (req, res) => {
   try {
     const id = req.params.id;
@@ -53,14 +48,8 @@ export const createNotification = async (req, res) => {
       [tipo_not, texto_not, fk_id_subasta, fk_id_usuario]
     );
     if (rows.affectedRows) {
-      res
-        .status(200)
-        .json({ status: 200, message: "Notificación creada exitosamente." });
-    } else {
-      res
-        .status(404)
-        .json({ status: 404, message: "Error al crear la notificación." });
-    }
+      res.status(200).json({ status: 200, message: "Notificación creada exitosamente." });} else {
+      res.status(404).json({ status: 404, message: "Error al crear la notificación." });}
   } catch (error) {
     res.status(500).json({ status: 500, message: "Error en el sistema." });
   }
@@ -79,15 +68,9 @@ export const updateNotification = async (req, res) => {
       [tipo_not, texto_not, id]
     );
     if (result.affectedRows > 0) {
-      res.status(200).json({
-        status: 200,
-        message: "Notificación actualizada exitosamente.",
-      });
+      res.status(200).json({ status: 200, message: "Notificación actualizada exitosamente.", });
     } else {
-      res
-        .status(404)
-        .json({ status: 404, message: "El ID proporcionado no existe." });
-    }
+      res.status(404).json({ status: 404, message: "El ID proporcionado no existe." });}
   } catch (error) {
     res.status(500).json({ status: 500, message: "Error en el sistema." });
   }
@@ -100,15 +83,9 @@ export const deleteNotification = async (req, res) => {
       [req.params.id]
     );
     if (result.affectedRows > 0) {
-      res
-        .status(200)
-        .json({ status: 200, message: "Notificación eliminada exitosamente." });
+      res.status(200).json({ status: 200, message: "Notificación eliminada exitosamente." })
     } else {
-      res.status(404).json({
-        status: 404,
-        message: "La notificación con el ID proporcionado no existe.",
-      });
-    }
+      res.status(404).json({ status: 404, message: "La notificación con el ID proporcionado no existe.", }); }
   } catch (error) {
     res.status(500).json({ status: 500, message: "Error en el sistema." });
   }

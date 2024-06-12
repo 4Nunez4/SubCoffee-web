@@ -62,7 +62,7 @@ export const buscarOferta = async (req, res) => {
     const id = req.params.id;
     const [rows] = await pool.query(
       `
-        SELECT o.*, u.nombre_user, u.imagen_user
+        SELECT o.*, u.pk_cedula_user, u.nombre_user, u.imagen_user
         FROM ofertas o
         INNER JOIN usuarios u ON o.fk_id_usuario = u.pk_cedula_user
         WHERE o.fk_id_subasta = '${id}'
@@ -83,16 +83,16 @@ export const buscarOfertaMayor = async (req, res) => {
     const id = req.params.id;
     const [rows] = await pool.query(
       `
-      SELECT o.*, u.nombre_user, u.imagen_user, u.telefono_user, u.email_user
-      FROM ofertas o
-      INNER JOIN usuarios u ON o.fk_id_usuario = u.pk_cedula_user
-      WHERE o.fk_id_subasta = '${id}'
-      ORDER BY o.oferta_ofer DESC
-      LIMIT 1
+        SELECT o.*, u.pk_cedula_user, u.nombre_user, u.imagen_user, u.telefono_user, u.email_user
+        FROM ofertas o
+        INNER JOIN usuarios u ON o.fk_id_usuario = u.pk_cedula_user
+        WHERE o.fk_id_subasta = '${id}'
+        ORDER BY o.oferta_ofer DESC
+        LIMIT 1
       `
     );
     if (rows.length > 0) {
-      res.status(200).json({ data: rows[0] }); // Solo devolvemos la primera fila, que contiene la mayor oferta
+      res.status(200).json({ data: rows[0] });
     } else {
       res.status(204).json({ message: "No se encontraron ofertas para esta subasta" });
     }

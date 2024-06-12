@@ -88,9 +88,9 @@ function CalificacionesTable({ titleBtn, fk_user }) {
     <div className="flex flex-col items-center px-4 pb-4">
       <div className="w-full flex items-center gap-x-2 -mt-5">
         {stats.promedio == null || isNaN(stats.promedio) ? (
-          <p className="text-center w-full text-red-600 -mt-1">
-            Usuario sin calificaciones
-          </p>
+          <div className="flex w-full justify-center">
+            <p className="pl-4 text-xl my-2 text-gray-400 font-semibold">Usuario sin calificaciones.</p>
+          </div>
         ) : (
           <>
             <div className="flex flex-col items-start">
@@ -122,8 +122,8 @@ function CalificacionesTable({ titleBtn, fk_user }) {
         onClose={() => setAbrirModalCalificacion(false)}
         fk_user={fk_user}
         mode={mode}
-        title={mode === "create" ? "Registrar Calificación": "Actualizar Calificación"}
-        titleBtn={mode === "create" ? "Registrar" : "Actualizar"}
+        title={"Calificar"}
+        titleBtn={titleBtn}
       />
       <div className="mt-4 w-full">
         {stats?.promedio == null || isNaN(stats.promedio) || stats.length === 0 ? (
