@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LinkButtonAtom from "../components/atoms/LinkButtonAtom";
+
 import TiposDeCafeOrganism from "../components/organisms/TiposDeCafeOrganism";
-import DesarrolladoresOrganism from "../components/organisms/DesarrolladoresOrganism";
+
 
 function DashboardContentOrganims() {
   const navigate = useNavigate();
@@ -106,7 +106,7 @@ function DashboardContentOrganims() {
           <p className="text-center text-lg font-medium text-[#3d4f58] mb-10">
             Orgullosos de presentarte esta gran comunidad para cafeteros y compradores de cafe con los mas altos estandares de calidad
           </p>
-          <DesarrolladoresOrganism />
+       
         </section>
       </div>
     </>
