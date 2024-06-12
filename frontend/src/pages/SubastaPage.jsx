@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Button, Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import {
+  Avatar,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Image,
+} from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
 import ImageSlider from "../components/molecules/ImageSlider";
@@ -12,12 +19,19 @@ import { FaRegCircleUser } from "react-icons/fa6";
 
 function SubastaPage() {
   const navigate = useNavigate();
-  const { getSubsMenoCerradas, subastasActivas, setIdSubasta, activarSubs, ProcesoSubs, EsperaSubs } = useSubastaContext();
+  const {
+    getSubsMenoCerradas,
+    subastasActivas,
+    setIdSubasta,
+    activarSubs,
+    ProcesoSubs,
+    EsperaSubs,
+  } = useSubastaContext();
   const { getUsers } = useAuthContext();
   const [abrirModal, setAbrirModal] = useState(false);
   const [subastas, setSubastas] = useState([]);
 
-  const users = JSON.parse(localStorage.getItem('user'));
+  const users = JSON.parse(localStorage.getItem("user"));
 
   const calcularTiempoRestante = (inicio, fin) => {
     const diferenciaMs = fin - inicio;
@@ -34,7 +48,10 @@ function SubastaPage() {
     const ahora = new Date();
 
     if (ahora < inicio) {
-      return `La subasta empezará dentro de ${calcularTiempoRestante(ahora, inicio)}`;
+      return `La subasta empezará dentro de ${calcularTiempoRestante(
+        ahora,
+        inicio
+      )}`;
     } else if (ahora > fin) {
       return "Subasta terminada";
     } else {
@@ -59,7 +76,10 @@ function SubastaPage() {
           const { pk_id_sub } = subasta;
           const { pk_cedula_user } = users;
 
-          const tiempo = calcularDiferencia(subasta.fecha_inicio_sub, subasta.fecha_fin_sub);
+          const tiempo = calcularDiferencia(
+            subasta.fecha_inicio_sub,
+            subasta.fecha_fin_sub
+          );
 
           if (tiempo.includes("Subasta terminada")) {
             await EsperaSubs(pk_id_sub, pk_cedula_user);
@@ -71,14 +91,13 @@ function SubastaPage() {
             await activarSubs(pk_id_sub, pk_cedula_user);
           }
         }
-        getSubsMenoCerradas();  // Sirve para refrescar las subastas activas
+        getSubsMenoCerradas(); // Sirve para refrescar las subastas activas
       }
     };
     const intervalId = setInterval(actualizarEstadosSubastas, 1000);
 
     return () => clearInterval(intervalId);
   }, [subastasActivas, users]);
-
 
   useEffect(() => {
     getSubsMenoCerradas();
@@ -96,16 +115,18 @@ function SubastaPage() {
     setIdSubasta(id);
   };
 
-  const groupedSubastas = Array.isArray(subastas) ? subastas.reduce((acc, subasta) => {
-    if (!acc[subasta.nombre_tipo_vari]) {
-      acc[subasta.nombre_tipo_vari] = [];
-    }
-    acc[subasta.nombre_tipo_vari].push(subasta);
-    return acc;
-  }, {}) : {};
+  const groupedSubastas = Array.isArray(subastas)
+    ? subastas.reduce((acc, subasta) => {
+        if (!acc[subasta.nombre_tipo_vari]) {
+          acc[subasta.nombre_tipo_vari] = [];
+        }
+        acc[subasta.nombre_tipo_vari].push(subasta);
+        return acc;
+      }, {})
+    : {};
 
   useEffect(() => {
-    if (users.rol_user === "admin") navigate('/users');
+    if (users.rol_user === "admin") navigate("/users");
   }, [users, navigate]);
 
   return (
@@ -113,121 +134,178 @@ function SubastaPage() {
       <ImageSlider />
       {users.rol_user !== "admin" && (
         <div className="px-16 bg-[#FDFBF6]">
-
-          {Object.keys(subastas).length > 0 ? Object.entries(groupedSubastas).map(([tipoVari, subastas]) => (
-            <div key={tipoVari} >
-
-              <div className="flex gap-x-4 my-4">
-                {subastas.map((subasta) => (
-                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[535px] p-2 bg-[#ffffff] text-[#919190]">
-                    <CardHeader className="justify-between">
-                      <div className="flex gap-x-3">
-                        <Avatar
-                          isBordered
-                          radius="full"
-                          size="md"
-                          src={subasta.imagen_user && subasta.imagen_user.length > 0
-                            ? `http://localhost:4000/img/${subasta.imagen_user}`
-                            : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
-                        />
-                        <div className="flex flex-col gap-1 items-start justify-center">
-                          <h4 className="text-small font-semibold leading-none text-[#323232]">{subasta.nombre_user}</h4>
-                          <h5 className="text-small -mt-1 tracking-tight text-default-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-full">@{subasta.email_user}</h5>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardBody className="items-start w-full -mt-3">
-
-                      <CardBody className="flex">
-                        <div className="relative w-auto h-[200px] bg-center bg-no-repeat bg-cover rounded bg-[#181818] bg-opacity-70 inset-0">
-                          <img
-                            src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
-                            alt=""
-                            className="w-full h-full object-cover rounded"
+          {Object.keys(subastas).length > 0 ? (
+            Object.entries(groupedSubastas).map(([tipoVari, subastas]) => (
+              <div key={tipoVari}>
+                <div className="flex gap-x-4 my-4">
+                  {subastas.map((subasta) => (
+                    <Card
+                      key={subasta.pk_id_sub}
+                      className="max-w-[320px] h-[470px] p-2 bg-[#ffffff] text-[#919190]"
+                    >
+                      <CardHeader className="flex justify-center items-center">
+                        <div className="flex gap-x-3 ">
+                          <Avatar
+                            isBordered
+                            radius="full"
+                            size="md"
+                            src={
+                              subasta.imagen_user &&
+                              subasta.imagen_user.length > 0
+                                ? `http://localhost:4000/img/${subasta.imagen_user}`
+                                : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
+                            }
                           />
-                          <div className="absolute inset-0 bg-black opacity-30">
+                          <div className="flex flex-col gap-1 items-start justify-center">
+                            <h4 className="text-small font-semibold leading-none text-[#323232]">
+                              {subasta.nombre_user}
+                            </h4>
+                            <h5 className="text-small -mt-1 tracking-tight text-default-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-full">
+                              @{subasta.email_user}
+                            </h5>
+                          </div>
+                        </div>
+                      </CardHeader>
+                      <CardBody className="items-start w-full -mt-3">
+                        <CardBody className="">
+                          <div className="relative w-auto h-[200px] bg-center bg-no-repeat bg-cover rounded-lg bg-[#181818] bg-opacity-70 inset-0">
+                            <img
+                              src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
+                              alt=""
+                              className="w-full h-full object-cover rounded-lg"
+                            />
+                            <div className="absolute inset-0 bg-black opacity-30 rounded-lg"></div>
 
+                            <div className="absolute inset-0 w-11/12 grid grid-cols-2 h-7">
+                              <b className="ml-5 text-[#ffffff]">
+                                {subasta.pk_id_sub} - {subasta.nombre_tipo_vari}
+                              </b>
 
-                            
+                              <span className=" flex justify-end items-center ">
+                                <div
+                                  className={`rounded-full w-4 h-4 flex justify-center items-center 
+        ${
+          subasta.estado_sub === "abierta"
+            ? "  border-double border-8 border-green-500"
+            : ""
+        }
+        ${
+          subasta.estado_sub === "proceso"
+            ? " border-double border-8 border-orange-500"
+            : ""
+        }
+        ${
+          subasta.estado_sub === "espera"
+            ? " border-double border-8 border-blue-500"
+            : ""
+        }
+        ${
+          subasta.estado_sub === "cerrada"
+            ? " border-double border-8 border-red-500"
+            : ""
+        }
+    `}
+                                >
+                                  {/* Ocultamos el texto del estado */}
+                                </div>
+                              </span>
+                            </div>
                           </div>
 
-
-                          <div className="absolute inset-0 w-11/12 grid grid-cols-2 h-7">
-                            <b className="ml-5 text-[#ffffff]">{subasta.pk_id_sub} - {subasta.nombre_tipo_vari}</b>
-
-
-                            <span className=" flex justify-end items-center ">
-                              <div className={`rounded-full w-4 h-4 flex justify-center items-center 
-        ${subasta.estado_sub === "abierta" ? "  border-double border-8 border-green-500" : ""}
-        ${subasta.estado_sub === "proceso" ? " border-double border-8 border-orange-500" : ""}
-        ${subasta.estado_sub === "espera" ? " border-double border-8 border-blue-500" : ""}
-        ${subasta.estado_sub === "cerrada" ? " border-double border-8 border-red-500" : ""}
-    `}>
-                                {/* Ocultamos el texto del estado */}
+                          <div className="grid gap-x-2 py-2 px-1 text-sm max-h-[400px] overflow-y-auto">
+                            <div className="flex flex-col">
+                              <div className="flex w-full gap-x-2">
+                                <p className="font-semibold">Apertura:</p>
+                                <p>
+                                  {" "}
+                                  {new Date(
+                                    subasta.fecha_inicio_sub
+                                  ).toLocaleString("es-ES", {
+                                    year: "numeric",
+                                    month: "numeric",
+                                    day: "numeric",
+                                    hour: "numeric",
+                                    minute: "numeric",
+                                    second: "numeric",
+                                  })}{" "}
+                                </p>
                               </div>
-                            </span>
+                              <div className="flex w-full gap-x-2">
+                                <p className="font-semibold">Cierre:</p>
+                                <p>
+                                  {" "}
+                                  {new Date(
+                                    subasta.fecha_fin_sub
+                                  ).toLocaleString("es-ES", {
+                                    year: "numeric",
+                                    month: "numeric",
+                                    day: "numeric",
+                                    hour: "numeric",
+                                    minute: "numeric",
+                                    second: "numeric",
+                                  })}{" "}
+                                </p>
+                              </div>
+                              <div className="flex w-full gap-x-2">
+                                <p className="font-semibold">Cantidad:</p>
+                                <p>
+                                  {" "}
+                                  {subasta.cantidad_sub}{" "}
+                                  {subasta.cantidad_sub > 1
+                                    ? subasta.unidad_peso_sub + "s"
+                                    : subasta.unidad_peso_sub}{" "}
+                                </p>
+                              </div>
+                  
+                              <div className="flex w-full gap-x-2">
+                                <p className="font-semibold">Certificado:</p>
+                                <p className="underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]">
+                                  {" "}
+                                  {subasta.certificado_sub}{" "}
+                                </p>
+                              </div>
+                            </div>
                           </div>
-
-
-                        </div>
-
-
-                        <div className="grid gap-x-2 py-2 px-1 text-sm max-h-[400px] overflow-y-auto">
-                          <div className="flex flex-col">
-                            <div className="flex w-full gap-x-2">
-                              <p className="font-semibold">Apertura:</p>
-                              <p> {new Date(subasta.fecha_inicio_sub).toLocaleString("es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", })} </p>
+                          <div className=" grid grid-cols-5 ">
+                            <div className=" col-span-3">
+                              {" "}
+                              <Button
+                                className="text-white bg-[#39A800] h-10 w-40 rounded-lg font-bold"
+                                onClick={() =>
+                                  handdleModaSub(subasta.pk_id_sub)
+                                }
+                              >
+                                Ver Detalles
+                              </Button>
                             </div>
-                            <div className="flex w-full gap-x-2">
-                              <p className="font-semibold">Cierre:</p>
-                              <p> {new Date(subasta.fecha_fin_sub).toLocaleString("es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", })} </p>
-                            </div>
-                            <div className="flex w-full gap-x-2">
-                              <p className="font-semibold">Ubicación:</p>
-                              <p> {subasta.nombre_vere} - {subasta.nombre_muni} - {subasta.nombre_depar} </p>
-                            </div>
-                            <div className="flex w-full gap-x-2">
-                              <p className="font-semibold">Cantidad:</p>
-                              <p> {subasta.cantidad_sub} {subasta.cantidad_sub > 1 ? subasta.unidad_peso_sub + "s" : subasta.unidad_peso_sub} </p>
-                            </div>
-                            <div className="flex w-full gap-x-2">
-                              <p className="font-semibold">Tipo Variedad:</p>
-                              <p>{subasta.nombre_tipo_vari}</p>
-                            </div>
-                            <div className="flex w-full gap-x-2">
-                              <p className="font-semibold">Certificado:</p>
-                              <p className="underline cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap max-w-[150px]"> {subasta.certificado_sub} </p>
+                            <div className=" col-span-2 flex justify-center">
+                              {" "}
+                              <Button
+                                className="text-white bg-[#39A800] h-10 w-4  rounded-lg font-bold "
+                                onPress={() =>
+                                  navigate(`/profile/${subasta.pk_cedula_user}`)
+                                }
+                              >
+                                <FaRegCircleUser className="text-2xl" />
+                              </Button>
                             </div>
                           </div>
-                        </div>
-                        <div className="grid grid-cols-4">
-                          <div className="flex justify-center items-center  col-span-3"> <Button
-                            className="text-white bg-[#39A800] h-10 w-44 rounded-lg font-bold flex justify-center items-center"
-                         
-                            onClick={() => handdleModaSub(subasta.pk_id_sub)}
-                          >
-                            Ver Detalles
-                          </Button></div>
-                          <div className="flex justify-center items-center">   <Button
-                            className="text-white bg-[#39A800] h-10 w-5 rounded-lg font-bold flex justify-center items-center "
-                            onPress={() => navigate(`/profile/${subasta.pk_cedula_user}`)}
-                          >
-                            <FaRegCircleUser />
-                          </Button></div>
-                         
-                       
-
-                        </div>
+                        </CardBody>
                       </CardBody>
-                    </CardBody>
-                  </Card>
-                ))}
+                    </Card>
+                  ))}
+                </div>
               </div>
-            </div>
-          )) : (
-            <p className="pl-4 text-xl my-2 text-gray-500">No hay subastas disponibles en este momento.</p>
+            ))
+          ) : (
+            <p className="pl-4 text-xl my-2 text-gray-500">
+              No hay subastas disponibles en este momento.
+            </p>
           )}
-          <ModalSubCoffee open={abrirModal} onClose={() => setAbrirModal(false)} />
+          <ModalSubCoffee
+            open={abrirModal}
+            onClose={() => setAbrirModal(false)}
+          />
         </div>
       )}
     </div>
