@@ -8,6 +8,8 @@ import ModalSubCoffee from "../components/templates/ModalSubCoffee";
 import { useSubastaContext } from "../context/SubastaContext";
 import { useAuthContext } from "../context/AuthContext";
 
+import { FaRegCircleUser } from "react-icons/fa6";
+
 function SubastaPage() {
   const navigate = useNavigate();
   const { getSubsMenoCerradas, subastasActivas, setIdSubasta, activarSubs, ProcesoSubs, EsperaSubs } = useSubastaContext();
@@ -56,9 +58,9 @@ function SubastaPage() {
         for (const subasta of subastasActivas) {
           const { pk_id_sub } = subasta;
           const { pk_cedula_user } = users;
-  
+
           const tiempo = calcularDiferencia(subasta.fecha_inicio_sub, subasta.fecha_fin_sub);
-  
+
           if (tiempo.includes("Subasta terminada")) {
             await EsperaSubs(pk_id_sub, pk_cedula_user);
           } else if (tiempo.includes("A la subasta le quedan")) {
@@ -73,10 +75,10 @@ function SubastaPage() {
       }
     };
     const intervalId = setInterval(actualizarEstadosSubastas, 1000);
-  
+
     return () => clearInterval(intervalId);
   }, [subastasActivas, users]);
-  
+
 
   useEffect(() => {
     getSubsMenoCerradas();
@@ -107,17 +109,17 @@ function SubastaPage() {
   }, [users, navigate]);
 
   return (
-    <div className="px-auto pb-8">
+    <div className="px-auto pb-8 bg-[#FDFBF6]">
       <ImageSlider />
       {users.rol_user !== "admin" && (
-        <div className="px-16 bg-slate-300 ">
-          <p className="pl-4 pb-4 text-[#00684a] text-2xl font-semibold md:text-2xl">Subastas</p>
+        <div className="px-16 bg-[#FDFBF6]">
+
           {Object.keys(subastas).length > 0 ? Object.entries(groupedSubastas).map(([tipoVari, subastas]) => (
             <div key={tipoVari} >
-              <p className="pl-4 text-xl my-2 text-[#00684a] font-medium">{tipoVari}</p>
+
               <div className="flex gap-x-4 my-4">
                 {subastas.map((subasta) => (
-                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[535px] p-2 bg-[#00684a] text-white">
+                  <Card key={subasta.pk_id_sub} className="max-w-[320px] h-[535px] p-2 bg-[#ffffff] text-[#919190]">
                     <CardHeader className="justify-between">
                       <div className="flex gap-x-3">
                         <Avatar
@@ -129,49 +131,56 @@ function SubastaPage() {
                             : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
                         />
                         <div className="flex flex-col gap-1 items-start justify-center">
-                          <h4 className="text-small font-semibold leading-none text-white">{subasta.nombre_user}</h4>
-                          <h5 className="text-small -mt-1 tracking-tight text-default-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-[120px]">@{subasta.email_user}</h5>
+                          <h4 className="text-small font-semibold leading-none text-[#323232]">{subasta.nombre_user}</h4>
+                          <h5 className="text-small -mt-1 tracking-tight text-default-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-full">@{subasta.email_user}</h5>
                         </div>
                       </div>
-                      <Button
-                        className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"
-                        radius="md"
-                        variant="bordered"
-                        size="sm"
-                        onPress={() => navigate(`/profile/${subasta.pk_cedula_user}`)}
-                      >
-                        Visualizar perfil
-                      </Button>
                     </CardHeader>
                     <CardBody className="items-start w-full -mt-3">
-                      <span className="flex justify-center items-center gap-x-3">
-                        <b className="ml-5">{subasta.pk_id_sub} - {subasta.nombre_tipo_vari}</b>
-                        <div className={`rounded-lg border
-                          ${subasta.estado_sub === "abierta" ? "bg-green-500 border-green-600 text-green-50" : ""}
-                          ${subasta.estado_sub === "proceso" ? "bg-orange-500 border-orange-600 text-orange-50" : ""}
-                          ${subasta.estado_sub === "espera" ? "bg-blue-500 border-blue-600 text-blue-50" : ""}
-                          ${subasta.estado_sub === "cerrada" ? "bg-red-400 border-red-600 text-red-50" : ""}`}
-                        >
-                          <p className="text-sm text-default-50 p-0 px-1">{subasta.estado_sub}</p>
-                        </div>
-                      </span>
+
                       <CardBody className="flex">
-                        <Image
-                          shadow="sm"
-                          radius="md"
-                          alt={subasta.imagen_sub}
-                          className="w-[300px] object-cover h-[200px]"
-                          src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
-                        />
+                        <div className="relative w-auto h-[200px] bg-center bg-no-repeat bg-cover rounded bg-[#181818] bg-opacity-70 inset-0">
+                          <img
+                            src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
+                            alt=""
+                            className="w-full h-full object-cover rounded"
+                          />
+                          <div className="absolute inset-0 bg-black opacity-30">
+
+
+                            
+                          </div>
+
+
+                          <div className="absolute inset-0 w-11/12 grid grid-cols-2 h-7">
+                            <b className="ml-5 text-[#ffffff]">{subasta.pk_id_sub} - {subasta.nombre_tipo_vari}</b>
+
+
+                            <span className=" flex justify-end items-center ">
+                              <div className={`rounded-full w-4 h-4 flex justify-center items-center 
+        ${subasta.estado_sub === "abierta" ? "  border-double border-8 border-green-500" : ""}
+        ${subasta.estado_sub === "proceso" ? " border-double border-8 border-orange-500" : ""}
+        ${subasta.estado_sub === "espera" ? " border-double border-8 border-blue-500" : ""}
+        ${subasta.estado_sub === "cerrada" ? " border-double border-8 border-red-500" : ""}
+    `}>
+                                {/* Ocultamos el texto del estado */}
+                              </div>
+                            </span>
+                          </div>
+
+
+                        </div>
+
+
                         <div className="grid gap-x-2 py-2 px-1 text-sm max-h-[400px] overflow-y-auto">
                           <div className="flex flex-col">
                             <div className="flex w-full gap-x-2">
                               <p className="font-semibold">Apertura:</p>
-                              <p> {new Date( subasta.fecha_inicio_sub ).toLocaleString("es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", })} </p>
+                              <p> {new Date(subasta.fecha_inicio_sub).toLocaleString("es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", })} </p>
                             </div>
                             <div className="flex w-full gap-x-2">
                               <p className="font-semibold">Cierre:</p>
-                              <p> {new Date(subasta.fecha_fin_sub).toLocaleString( "es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", } )} </p>
+                              <p> {new Date(subasta.fecha_fin_sub).toLocaleString("es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", })} </p>
                             </div>
                             <div className="flex w-full gap-x-2">
                               <p className="font-semibold">Ubicación:</p>
@@ -191,15 +200,23 @@ function SubastaPage() {
                             </div>
                           </div>
                         </div>
-                        <div className="flex justify-center mt-2">
-                          <Button
-                            className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500"
-                            radius="md"
-                            size="lg"
+                        <div className="grid grid-cols-4">
+                          <div className="flex justify-center items-center  col-span-3"> <Button
+                            className="text-white bg-[#39A800] h-10 w-44 rounded-lg font-bold flex justify-center items-center"
+                         
                             onClick={() => handdleModaSub(subasta.pk_id_sub)}
                           >
                             Ver Detalles
-                          </Button>
+                          </Button></div>
+                          <div className="flex justify-center items-center">   <Button
+                            className="text-white bg-[#39A800] h-10 w-5 rounded-lg font-bold flex justify-center items-center "
+                            onPress={() => navigate(`/profile/${subasta.pk_cedula_user}`)}
+                          >
+                            <FaRegCircleUser />
+                          </Button></div>
+                         
+                       
+
                         </div>
                       </CardBody>
                     </CardBody>
@@ -207,7 +224,7 @@ function SubastaPage() {
                 ))}
               </div>
             </div>
-          )): (
+          )) : (
             <p className="pl-4 text-xl my-2 text-gray-500">No hay subastas disponibles en este momento.</p>
           )}
           <ModalSubCoffee open={abrirModal} onClose={() => setAbrirModal(false)} />

@@ -33,16 +33,16 @@ function ImageSlider() {
 
   return (
     <div>
-      <div className="max-w-[1600px] h-auto w-full m-auto pt-10 p-4 bg-[#FDFBF6]">
-        <div className="relative w-full h-[450px] rounded-2xl overflow-hidden">
+      <div className="max-w-[1600px] h-[350px]  w-full m-auto pt-10 p-4 bg-[#FDFBF6]">
+        <div className="relative w-full h-[270px] rounded-lg overflow-hidden">
           <div
-            className="w-full h-full bg-center bg-cover duration-500"
+            className="w-full h-4/5 bg-center bg-cover duration-500"
             style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
           ></div>
-        <div className="absolute inset-0 flex items-center justify-center text-center bg-[#061621] bg-opacity-70 ">
+        <div className="absolute inset-0 flex items-center h-4/5 rounded-lg justify-center text-center bg-[#181818] bg-opacity-70 ">
 
         <div className=" flex flex-col items-center justify-center">
-              <div className="bg-[#82828286] h-4/5 w-4/5 rounded-lg flex justify-center items-center text-lg font-medium ">
+              <div className="bg-[#82828286] h-5/6 w-4/5 rounded-lg flex justify-center items-center text-lg font-medium ">
                 <div className=" w-3/4 h-auto ">
                   <div className="text-center text-[#FDFBF6] ">
                     <h1 className="text-5xl font-bold mb-4">
@@ -52,7 +52,7 @@ function ImageSlider() {
                     <p className=" py-4">
                       Una plataforma online donde te podrás conectar con
                       diferentes usuarios para subastar y pujar por café de alta
-                      calidad. Solicita tu registro a esta gran familia ya
+                      calidad. Empieza a subastar ya
                     </p>
                   </div>
                 </div>
@@ -60,13 +60,13 @@ function ImageSlider() {
             </div>
         </div>
         </div>
-        <div className="flex justify-center mt-4 ">
+        <div className="">
           <div className="flex justify-center items-center transition duration-300 ">
             {slides.map((slide, index) => (
               <div
                 key={index}
-                className={`w-3 h-3 mx-2 rounded-full cursor-pointer ${
-                  index === currentIndex ? "bg-[#00ed64]" : "bg-[#061621]"
+                className={`w-2 h-2 mx-2 rounded-full cursor-pointer ${
+                  index === currentIndex ? "bg-[#39A800]" : "bg-[#A6D290]"
                 }`}
                 onClick={() => setCurrentIndex(index)}
               ></div>
