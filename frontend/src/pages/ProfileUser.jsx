@@ -136,7 +136,6 @@ function ProfileUser() {
         titleBtn={"Actualizar"}
       />
       <div className="grid grid-cols-3 gap-1 mt-5 bg-white shadow-md rounded-lg overflow-hidden p-10">
-
         <div className="flex justify-center items-center col-span-1 ">
           {" "}
           <Avatar
@@ -156,53 +155,47 @@ function ProfileUser() {
               {user.nombre_user}
             </span>
             <span className="text-sm text-gray-600 flex items-center mb-2">
-         
               <div>
                 <p className="text-sm text-gray-900">{user.rol_user}</p>
                 <p className="text-xs text-gray-500">Rol de Usuario</p>
               </div>
             </span>
             <span className="text-sm text-gray-600 flex items-center mb-2">
-           
               <div>
                 <p className="text-sm text-gray-900">{user.email_user}</p>
                 <p className="text-xs text-gray-500">Correo Electrónico</p>
               </div>
             </span>
             <span className="text-sm text-[#919190] flex items-center mb-2">
-        
               <div>
                 <p className="text-sm text-gray-900">{user.telefono_user}</p>
                 <p className="text-xs text-gray-500">Teléfono</p>
               </div>
             </span>
-        
-         
           </div>
         </div>
         <div className="grid grid-rows-3">
           {" "}
           {user.rol_user !== "admin" && (
             <>
-<div className="w-full flex flex-col justify-end items-center gap-x-2">
-  <div className="flex flex-col items-center">
-    {stats && stats.promedio!= null &&!isNaN(stats.promedio)? (
-      <div className="flex gap-x-2">
-        <div className="text-2xl font-bold m-2">
-          {parseFloat(stats.promedio).toFixed(1)}
-        </div>
-        {renderAverageStars(stats.promedio)}
-      </div>
-    ) : (
-      <div className="flex w-full justify-center">
-        <p className="text-xl my-2 text-gray-400 font-semibold">
-          Usuario sin calificaciones.
-        </p>
-      </div>
-    )}
-  </div>
-</div>
-
+              <div className="w-full flex flex-col justify-end items-center gap-x-2">
+                <div className="flex flex-col items-center">
+                  {stats && stats.promedio != null && !isNaN(stats.promedio) ? (
+                    <div className="flex gap-x-2">
+                      <div className="text-2xl font-bold m-2">
+                        {parseFloat(stats.promedio).toFixed(1)}
+                      </div>
+                      {renderAverageStars(stats.promedio)}
+                    </div>
+                  ) : (
+                    <div className="flex w-full justify-center">
+                      <p className="text-xl my-2 text-gray-400 font-semibold">
+                        Usuario sin calificaciones.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
 
               <Link
                 onClick={() => setAbrirModalCalificacion(true)}
@@ -214,30 +207,29 @@ function ProfileUser() {
             </>
           )}
           <div className=" grid grid-cols-2 gap-2 ">
-                      {user.pk_cedula_user === localUser.pk_cedula_user && (
-            <Button
-              className="mt-2 py-2 bg-[#39A800] text-white font-semibold rounded-md"
-              onClick={() => {
-                handleToggle("update");
-                setIdUser(user);
-              }}
-            >
-              Editar perfil
-            </Button>
-          )}
-          {user.pk_cedula_user === localUser.pk_cedula_user && (
-            <Button
-              className="py-2 px-4 bg-[#39A800] text-white font-semibold rounded-md mt-2"
-              onClick={() => {
-                setAbrirModalPassword(true);
-                setIdUser(user);
-              }}
-            >
-              Cambiar contraseña
-            </Button>
-          )}
+            {user.pk_cedula_user === localUser.pk_cedula_user && (
+              <Button
+                className="mt-2 py-2 bg-[#39A800] text-white font-semibold rounded-md"
+                onClick={() => {
+                  handleToggle("update");
+                  setIdUser(user);
+                }}
+              >
+                Editar perfil
+              </Button>
+            )}
+            {user.pk_cedula_user === localUser.pk_cedula_user && (
+              <Button
+                className="py-2 px-4 bg-[#39A800] text-white font-semibold rounded-md mt-2"
+                onClick={() => {
+                  setAbrirModalPassword(true);
+                  setIdUser(user);
+                }}
+              >
+                Cambiar contraseña
+              </Button>
+            )}
           </div>
-
         </div>
       </div>
       <FormCalificaion
@@ -499,7 +491,7 @@ function ProfileUser() {
                                     </>
                                   ) : (
                                     <Button
-                                      className="py-2 mt-2 px-4 bg-[#00684a] text-white font-semibold rounded-lg"
+                                      className="flex rounded-md p-2 cursor-pointer text-[#39A800] border-solid border-2 border-[#39A800]  text-sm items-center gap-x-3 hover:bg-[#39A800] hover:text-[#FDFBF6] bg-white"
                                       size="lg"
                                       onClick={() =>
                                         handdleModaSub(subasta.pk_id_sub)
