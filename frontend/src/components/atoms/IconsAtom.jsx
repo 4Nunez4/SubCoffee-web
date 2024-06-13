@@ -1,9 +1,6 @@
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { HiOutlineMail } from "react-icons/hi";
-import { TbPasswordFingerprint } from "react-icons/tb";
 import { FaAddressCard } from "react-icons/fa";
 import { FaPhoneVolume } from "react-icons/fa6";
-import { FaUserEdit } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { CiCalendarDate } from "react-icons/ci";
 import { IoCloseOutline } from "react-icons/io5";
@@ -22,21 +19,26 @@ import { GoRepoPush } from "react-icons/go";
 import { TbFileDescription } from "react-icons/tb";
 import { BsCalendar2Date } from "react-icons/bs";
 import { GiPriceTag } from "react-icons/gi";
-import { FaSwatchbook } from "react-icons/fa";
 import { Md18UpRating } from "react-icons/md";
 import { MdProductionQuantityLimits } from "react-icons/md";
-import { FaHome } from "react-icons/fa";
 import { MdLocalFlorist } from "react-icons/md";
 import { IoMdHelpCircleOutline } from "react-icons/io";
 import { MdOutlinePrivacyTip } from "react-icons/md";
 import { FcDataConfiguration } from "react-icons/fc";
-import { BiWorld } from "react-icons/bi";
 import { BiRename } from "react-icons/bi";
 import { SiNumpy } from "react-icons/si";
 import { GrMap } from "react-icons/gr";
 import { GrMapLocation } from "react-icons/gr";
 import { LiaMapMarkedAltSolid } from "react-icons/lia";
 import { FaExchangeAlt } from "react-icons/fa";
+import { RxLockClosed } from "react-icons/rx";
+import { IoMailOutline } from "react-icons/io5";
+import { GoHome } from "react-icons/go";
+import { BsCollection } from "react-icons/bs";
+import { LiaUserEditSolid } from "react-icons/lia";
+import { TfiWorld } from "react-icons/tfi";
+import { CiCoffeeBean } from "react-icons/ci";
+
 
 export const icono = {
   iconoVere: LiaMapMarkedAltSolid,
@@ -44,19 +46,19 @@ export const icono = {
   iconoMuni: GrMapLocation,
   iconoReName: BiRename,
   iconoNumber : SiNumpy,
-  iconoWorl : BiWorld,
+  iconoWorl : TfiWorld,
   iconoConfiguracion : FcDataConfiguration,
   iconoPrivacidad : MdOutlinePrivacyTip,
   iconoAyuda : IoMdHelpCircleOutline,
-  iconoFlor : MdLocalFlorist,
-  iconoHome: FaHome,
-  iconoGmail: HiOutlineMail,
+  iconoFlor : CiCoffeeBean,
+  iconoHome: GoHome,
+  iconoGmail: IoMailOutline,
   iconoConOjo: HiEye,
   iconoConOjoCerrado: HiEyeOff,
-  iconoContraseña: TbPasswordFingerprint,
+  iconoContraseña: RxLockClosed,
   iconoCedula: FaAddressCard,
   iconoCelular: FaPhoneVolume,
-  iconoRol: FaUserEdit,
+  iconoRol: LiaUserEditSolid,
   iconoUser: FaUserAlt,
   iconoFecha: CiCalendarDate,
   iconoequis: IoCloseOutline,
@@ -76,7 +78,7 @@ export const icono = {
   iconoDescript: TbFileDescription, 
   iconoDateDay: BsCalendar2Date,
   iconoPrice: GiPriceTag,
-  iconoType: FaSwatchbook,
+  iconoType: BsCollection,
   iconoValor: Md18UpRating,
   iconoQuantity: MdProductionQuantityLimits,
   iconoCambiar: FaExchangeAlt,
