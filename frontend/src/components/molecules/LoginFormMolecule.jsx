@@ -91,12 +91,12 @@ const LoginFormMolecule = () => {
       <a
         href="#RecuperarPassword"
         onClick={() => setAbrirModalPassword(true)}
-        className={`cursor-pointer text-xs underline hover:text-gray-600`}
+        className={`cursor-pointer text-sm underline hover:text-[#39A800]`}
       >
         ¿Olvidaste tu contraseña?
       </a>
       <ModalFooter className="flex justify-center">
-        <Button type="submit" className="py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md"> 
+        <Button type="submit" className="text-[#FDFBF6] bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center border-[#FDFBF6]"> 
           Iniciar Sesión
         </Button>
       </ModalFooter>
