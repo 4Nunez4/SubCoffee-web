@@ -177,21 +177,21 @@ export default function ListarNotificaciones() {
 
           <div className="flex gap-2 "> {/* Agregar un contenedor flexible para los botones */}
             <Button
-              className="border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500" /* Ajustar estilos del primer botón */
+              className="text-white bg-[#39A800] h-10 w-40 rounded-lg font-bold" /* Ajustar estilos del primer botón */
               radius="md"
               size="sm"
               onPress={() => navigate(`/profile/${notificacion.fk_id_usuario}`)}
             >
               Visualizar perfil
             </Button>
-            <Button
-              className="inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500"
+            <button
+              className=" h-10 w-40 rounded-lg font-bold hover:bg-[#39A800] hover:text-[#FDFBF6] flex p-2 cursor-pointer text-[#39A800] border-solid border-2 border-[#39A800]  text-sm items-center gap-x-3 "
               radius="md"
               size="sm"
               onClick={() => handdleModaSub(notificacion.fk_id_subasta)}
             >
               Visualizar Subasta
-            </Button>
+            </button>
           </div>
         );
       default:
@@ -309,7 +309,7 @@ export default function ListarNotificaciones() {
         bottomContent={bottomContent}
         bottomContentPlacement="outside"
         classNames={{
-          wrapper: " bg-[#00684a] px-9 text-white drop-shadow-md md:drop-shadow-xl text-base",
+          wrapper: " bg-[#FDFBF6] px-9 text-[#323232] drop-shadow-md md:drop-shadow-xl text-base",
         }}
         sortDescriptor={sortDescriptor}
         topContent={topContent}
@@ -322,7 +322,7 @@ export default function ListarNotificaciones() {
               key={column.uid}
               align={column.uid === "actions" ? "center" : "start"}
               allowsSorting={column.sortable}
-              className="bg-[#001e2b] text-white text-sm  drop-shadow-md md:drop-shadow-xl"
+              className="bg-[#38a800c7] text-white text-sm  drop-shadow-md md:drop-shadow-xl"
             >
               {column.name}
             </TableColumn>
