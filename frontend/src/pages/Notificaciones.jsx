@@ -20,22 +20,20 @@ import { useNavigate } from "react-router-dom";
 import { SearchIcon } from "../nextui/SearchIcon.jsx";
 import NotificacionContext from "../context/NotificacionesContext.jsx";
 import ModalSubCoffee from "../components/templates/ModalSubCoffee.jsx";
-import addNotification from "react-push-notification"
 import { useSubastaContext } from "../context/SubastaContext.jsx";
-import logo from "../assets/isotipo-SubCoffee.png";
 
-export default function ListarNotificaciones() {
-  const clickNot = ()=>{
-    addNotification({
-      title: "para  todos los usuarios",
-      message: "esta funcionando correctamente ",
-      icon: logo,
-      duration: 40000,
-      native: true,
-      //onClick: ()=> window.location = "la url de donde quiere que lo redirija la notificacion "
+ export default function ListarNotificaciones() {
+//   const clickNot = ()=>{
+//     addNotification({
+//       title: "para  todos los usuarios",
+//       message: "esta funcionando correctamente ",
+//       icon: logo,
+//       duration: 40000,
+//       native: true,
+//      onClick: ()=> window.location = "la url de donde quiere que lo redirija la notificacion "
    
-    })
-  }
+//     })
+//   }
 // revisar las notificaciones y aplicar esos cambios al crer una subasta 
 // mport React from 'react';
 
@@ -344,9 +342,9 @@ export default function ListarNotificaciones() {
       
 
 
-      <Button onClick={clickNot}>
+      {/* <Button onClick={clickNot}>
         usa este boton
-      </Button>
+      </Button> */}
 
     </div>
     </div>
