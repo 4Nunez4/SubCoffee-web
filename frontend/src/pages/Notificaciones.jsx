@@ -21,6 +21,8 @@ import { SearchIcon } from "../nextui/SearchIcon.jsx";
 import NotificacionContext from "../context/NotificacionesContext.jsx";
 import ModalSubCoffee from "../components/templates/ModalSubCoffee.jsx";
 import { useSubastaContext } from "../context/SubastaContext.jsx";
+import { FaRegCircleUser } from "react-icons/fa6";
+import { RiEyeLine } from "react-icons/ri";
 
  export default function ListarNotificaciones() {
 //   const clickNot = ()=>{
@@ -175,21 +177,21 @@ import { useSubastaContext } from "../context/SubastaContext.jsx";
 
           <div className="flex gap-2 "> {/* Agregar un contenedor flexible para los botones */}
             <Button
-              className="text-white bg-[#39A800] h-10 w-40 rounded-lg font-bold" /* Ajustar estilos del primer botón */
+               className="text-white bg-[#39A800] h-10 w-4  rounded-lg font-bold "
               radius="md"
               size="sm"
               onPress={() => navigate(`/profile/${notificacion.fk_id_usuario}`)}
             >
-              Visualizar perfil
+              <FaRegCircleUser className="text-2xl" />
             </Button>
-            <button
-              className=" h-10 w-40 rounded-lg font-bold hover:bg-[#39A800] hover:text-[#FDFBF6] flex p-2 cursor-pointer text-[#39A800] border-solid border-2 border-[#39A800]  text-sm items-center gap-x-3 "
+            <Button
+              className=" h-10 w-4  rounded-lg font-bold   bg-gray-200 text-[#39A800]   hover:bg-[#39A800]  hover:text-gray-200"
               radius="md"
               size="sm"
               onClick={() => handdleModaSub(notificacion.fk_id_subasta)}
             >
-              Visualizar Subasta
-            </button>
+              <RiEyeLine className="text-2xl" />
+            </Button>
           </div>
         );
       default:
@@ -242,12 +244,6 @@ import { useSubastaContext } from "../context/SubastaContext.jsx";
             onValueChange={onSearchChange}
           />
         </div>
-        <div className="flex justify-between items-center">
-          <span className="text-[#00684a] text-xl	font-bold">
-            Total {Notificaciones && Notificaciones.length} Notificaciones
-          </span>
-
-        </div>
       </div>
     );
   }, [
@@ -265,10 +261,11 @@ import { useSubastaContext } from "../context/SubastaContext.jsx";
           isCompact
           showControls
           showShadow
-          color="success"
+          color="default"
           page={page}
           total={pages}
           onChange={setPage}
+          
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2 ">
           <Button
@@ -276,7 +273,7 @@ import { useSubastaContext } from "../context/SubastaContext.jsx";
             size="sm"
             variant="flat"
             onPress={onPreviousPage}
-            className="w-1/2 bg-gray-200 text-green-600  hover:bg-green-600 hover:text-gray-200"
+            className="w-1/2 bg-gray-200 text-[#39A800]   hover:bg-[#39A800]  hover:text-gray-200"
           >
             Anterior
           </Button>
@@ -285,7 +282,7 @@ import { useSubastaContext } from "../context/SubastaContext.jsx";
             size="sm"
             variant="flat"
             onPress={onNextPage}
-            className="w-1/2 bg-green-600 text-white hover:bg-gray-200 hover:text-green-600 "
+            className="w-1/2 bg-[#39A800]  text-white hover:bg-gray-200 hover:text-[#39A800]  "
           >
             Siguiente
           </Button>

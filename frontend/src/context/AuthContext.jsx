@@ -10,7 +10,6 @@ import {
   updatePasswordUser,
   updatePasswordUserLogin,
 } from "../api/api.users";
-import ModalMessage from "../nextui/ModalMessage";
 
 const AuthContext = createContext();
 
@@ -194,11 +193,7 @@ export const AuthProvider = ({ children }) => {
         updatePasswordLogin
       }}
     >
-      <ModalMessage
-        isOpen={modalMessage}
-        onClose={() => setModalMessage(false)}
-        label={mensaje}
-      />
+   
       {children}
     </AuthContext.Provider>
   );
