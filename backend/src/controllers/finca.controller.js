@@ -68,7 +68,7 @@ export const getFincaOne = async (req, res) => {
     if (result.length > 0) {
       res.status(200).json({ message: "Finca encontrada", data: result });
     } else {
-      res.status(204).json({ message: "No se encontraro la finca con ese ID" });
+      res.status(204).json({ message: "No se encontro la finca con ese ID" });
     }
   } catch (error) {
      res.status(500).json({ message: "Error en el servidor" + error });

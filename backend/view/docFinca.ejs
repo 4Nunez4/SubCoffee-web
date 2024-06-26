@@ -253,7 +253,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/v1/finca/:id</td>
+        <td>/v1/fincaone/:id</td>
       </tr>
       <tr>
         <td>Descripción:</td>
@@ -271,7 +271,7 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>ADMINISTRADOR, VENDEDOR</td>
+        <td>VENDEDOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
@@ -284,30 +284,19 @@
           <pre><code>{ 
   "message": "Finca encontrada",
   "data": [
-    {
-      "pk_id_fin": 37,
-      "nombre_fin": "Mi Primera finca",
-      "imagen_fin": "finca1.jpeg",
-      "estado_fin": "activo",
-      "fk_id_usuario": 1,
-      "fk_vereda": 1,
-      "pk_id_vere": 1,
-      "nombre_vere": "San Adolfo",
-      "estado_vere": "activo",
-      "fk_municipio": 41357,
-      "pk_codigo_muni": 41357,
-      "nombre_muni": "Isnos",
-      "estado_muni": "activo",
-      "fk_departamento": 41,
-      "pk_codigo_depar": 41,
-      "nombre_depar": "Huila",
-      "estado_depar": "activo"
-    }
+      {
+          "pk_id_fin": 40,
+          "nombre_fin": "Mi finca",
+          "imagen_fin": "mos-design-ZzxivGdFVSY-unsplash.jpg",
+          "estado_fin": "activo",
+          "fk_id_usuario": 1,
+          "fk_vereda": 9
+      }
   ]
 }</code></pre>
           <strong>Incorrecto:</strong> Status: 404
           <pre><code>{ 
-  "message": "No se encontraro la finca con ese ID"
+  "message": "No se encontro la finca con ese ID"
 }</code></pre>
           <strong>Error:</strong> Status: 500
           <pre><code>{ 
@@ -598,5 +587,6 @@
         <td>DEVjcrc</td>
       </tr>
     </table>
+
   </body>
 </html>
