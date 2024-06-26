@@ -7,6 +7,10 @@
     <link href="/public/style.css" rel="stylesheet" type="text/css" />
     <title>Documentación de API</title>
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -20,6 +24,12 @@
         h1 {
             color: #333;
             text-align: center;
+        }
+        h2 {
+            padding: 20px 30px;
+        }
+        h3 {
+            padding: 15px 0;
         }
         table {
             width: 80%;
@@ -47,7 +57,6 @@
             margin-bottom: 10px;
         }
     </style>  
-    </style>
     </head>
   <body>
     <h1>Documentación de API</h1>
@@ -58,11 +67,10 @@
     <%- include('./docFinca.ejs') %> 
     <%- include('./docTipoVariedad.ejs') %> 
     <%- include('./docVariedad.ejs') %> 
-    
-    <%- include('./docChat.ejs') %>
     <%- include('./docNotificaciones.ejs') %>
     <%- include('./docOfertas.ejs') %>
     <%- include('./docPostulantes.ejs') %>
     <%- include('./docSubasta.ejs') %> 
+    <%- include('./docCalificacion.ejs') %> 
   </body>
 </html>

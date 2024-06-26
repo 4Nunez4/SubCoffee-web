@@ -146,7 +146,7 @@ export default function TipoVariedadTable() {
                 Desactivar
               </Button>
             ) : (
-              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarTipoVariedades(tipoVariedades.pk_id_tipo_vari)}>
+              <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarTipoVariedades(tipoVariedades.pk_id_tipo_vari)}>
                 Activar
               </Button>
             )}
@@ -228,7 +228,7 @@ export default function TipoVariedadTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-[#00684a] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
+            <Button className="bg-[#39A800] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
@@ -287,7 +287,7 @@ export default function TipoVariedadTable() {
   }, [items.length, page, pages, hasSearchFilter]);
 
   return (
-    <div className="mx-32">
+    <div className="px-32 bg-[#FDFBF6]">
       <FormTipovariedad
         open={abrirModal}
         onClose={() => setAbrirModal(false)}

@@ -7,7 +7,7 @@ export const getDepartamentos = async (req, res) => {
     if (result.length > 0) {
       res.status(200).json(result);
     } else {
-      res.status(404).json({ message: "No hay departamentos registrados" });
+      res.status(404).json({ message: "No hay departamentos creados por el momento" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
@@ -20,7 +20,7 @@ export const getDepartamentosActivos = async (req, res) => {
     if (result.length > 0) {
       res.status(200).json(result);
     } else {
-      res.status(404).json({ message: "No hay departamentos registrados" });
+      res.status(404).json({ message: "No hay departamentos creados por el momento" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
@@ -34,7 +34,7 @@ export const getDepartamentoById = async (req, res) => {
     if (result.length > 0) {
       res.status(200).json(result[0]);
     } else {
-      res.status(404).json({ message: "Departamento no encontrado" });
+      res.status(404).json({ message: "Error al encontrar el departamento con ese ID" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
@@ -52,7 +52,7 @@ export const createDepartamento = async (req, res) => {
 
     const [existing] = await pool.query('SELECT * FROM departamento WHERE pk_codigo_depar = ?', [pk_codigo_depar]);
     if (existing.length > 0) {
-      return res.status(400).json({ message: "El código de departamento ya existe" });
+      return res.status(400).json({ message: "El código del departamento ya existe" });
     }
 
     const [result] = await pool.query(`INSERT INTO departamento (pk_codigo_depar, nombre_depar, estado_depar) VALUES ('${pk_codigo_depar}' ,'${nombre_depar}', 'activo')`);
@@ -85,7 +85,7 @@ export const updateDepartamento = async (req, res) => {
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Departamento actualizado exitosamente" });
     } else {
-      res.status(404).json({ message: "Departamento no encontrado" });
+      res.status(404).json({ message: "Error con el ID al actualizar el departamento" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor: " + error });
@@ -99,7 +99,7 @@ export const deleteDepartamento = async (req, res) => {
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Departamento eliminado exitosamente" });
     } else {
-      res.status(404).json({ message: "Departamento no encontrado" });
+      res.status(404).json({ message: "Error con el ID al eliminar el departamento" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
@@ -113,7 +113,7 @@ export const activarDepartamento = async (req, res) => {
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Departamento activado exitosamente, ahora este podrá ser utilizado por los usuarios" });
     } else {
-      res.status(404).json({ message: "Departamento no encontrado" });
+      res.status(404).json({ message: "No se encontró ningún departamento con el ID" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
@@ -127,7 +127,7 @@ export const desactivarDepartamento = async (req, res) => {
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Departamento desactivado exitosamente, ahora este no podrá ser utilizado por los usuarios" });
     } else {
-      res.status(404).json({ message: "Departamento no encontrado" });
+      res.status(404).json({ message: "No se encontró ningún departamento con el ID" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });

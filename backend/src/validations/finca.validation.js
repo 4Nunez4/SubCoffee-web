@@ -1,6 +1,6 @@
 import { check } from "express-validator";
 
-export const validationCreateFinca = [
+export const validationFinca = [
   check("nombre_fin", "El nombre de la finca es obligatorio")
     .not()
     .isEmpty()

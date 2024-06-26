@@ -87,7 +87,7 @@ export const DeparProvider = ({ children }) => {
 
   const desactivarDepartamento = async (id) => {
     try {
-      await UpdateDepartDesact(id);
+      const response = await UpdateDepartDesact(id);
       getDepartamentos();
       setMensaje(response.data.message);
       setModalMessage(true);
@@ -98,7 +98,7 @@ export const DeparProvider = ({ children }) => {
 
   const activarDepartamento = async (id) => {
     try {
-      await UpdateDepartActivar(id);
+      const response = await UpdateDepartActivar(id);
       getDepartamentos();
       setMensaje(response.data.message);
       setModalMessage(true);

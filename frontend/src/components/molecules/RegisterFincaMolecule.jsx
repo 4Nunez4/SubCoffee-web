@@ -18,7 +18,7 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
 
   const { idFinca, createFincas, updateFincas, errors } = useFincaContext();
   const { departamentos, getDepartamentos } = useDepartContext();
-  const { getMunisForDepar, municipiosForDepar, setMunicipiosForDepar } = useMunicipioContext();
+  const { getMunisForDeparActivos, municipiosActivos, setMunicipiosActivos } = useMunicipioContext();
   const { getVeresForMuni, veredasForMuni, setVeredasForMuni } = useVeredaContext();
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -36,10 +36,10 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
         municipio: idFinca.fk_municipio,
         vereda: idFinca.fk_vereda,
       });
-      getMunisForDepar(idFinca.fk_departamento);
+      getMunisForDeparActivos(idFinca.fk_departamento);
       getVeresForMuni(idFinca.fk_municipio);
     } else {
-      setMunicipiosForDepar([]);
+      setMunicipiosActivos([]);
       setVeredasForMuni([]);
     }
   }, [mode, idFinca]);
@@ -51,7 +51,7 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
       municipio: "",
       vereda: "",
     }));
-    getMunisForDepar(departamento);
+    getMunisForDeparActivos(departamento);
   };
 
   const handleMunicipioChange = (e) => {
@@ -197,8 +197,8 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
           <option value="" hidden className="text-gray-600">
             Seleccionar Municipio
           </option>
-          {municipiosForDepar.length > 0 ? (
-            municipiosForDepar.map(({ pk_codigo_muni, nombre_muni }) => (
+          {municipiosActivos.length > 0 ? (
+            municipiosActivos.map(({ pk_codigo_muni, nombre_muni }) => (
               <option key={pk_codigo_muni} value={pk_codigo_muni}>
                 {nombre_muni}
               </option>

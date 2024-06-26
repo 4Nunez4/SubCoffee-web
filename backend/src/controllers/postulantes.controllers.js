@@ -23,12 +23,12 @@ export const guardarPostulantes = async (req, res) => {
             [pk_id_post]
           );
           if (updateResult.affectedRows > 0) {
-            res.status(200).json({ message: "Postulación reactivada exitosamente" });
+            res.status(200).json({ message: "Postulante reactivado exitosamente" });
           } else {
-            res.status(500).json({ message: "Error al reactivar la postulación" });
+            res.status(404).json({ message: "Error al reactivar el postulante" });
           }
         } else {
-          res.status(400).json({ message: "El usuario ya está postulado activamente para esta subasta" });
+          res.status(400).json({ message: "El usuario ya está postulado para esta subasta" });
         }
       } else {
         const [insertResult] = await pool.query(
@@ -36,13 +36,13 @@ export const guardarPostulantes = async (req, res) => {
           [fk_id_usuario, fk_id_subasta]
         );
         if (insertResult.affectedRows > 0) {
-          res.status(201).json({ message: "Postulación creada exitosamente" });
+          res.status(200).json({ message: "Postulante creado exitosamente" });
         } else {
-          res.status(500).json({ message: "Error al crear la postulación" });
+          res.status(404).json({ message: "Error al crear el postulante" });
         }
       }
   } catch (error) {
-    res.status(500).json({ message: "Error servidor " + error });
+    res.status(500).json({ message: "Error en el servidor " + error });
   }
 };
 
@@ -61,7 +61,7 @@ export const getPostulantes = async (req, res) => {
     if (result.length > 0) {
       res.status(200).json({ data:result });
     } else {
-      res.status(204).send({ message: "Por el momento no hay postulantes" }); 
+      res.status(204).send({ message: "Por el momento no hay postulantes." }); 
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor " + error }); 
@@ -83,10 +83,10 @@ export const getPostulanteesActivos = async (req, res) => {
     if (rows.length > 0) {
       res.status(200).json({ data: rows });
     } else {
-      res.status(204).json({ message: "Error ID postulantes no encontrada" });
+      res.status(204).json({ message: "Error, postulantes no encontrados para el ID subasta" });
     }
-  } catch (e) {
-    res.status(500).json({ message: "Error al obtener las postulantes", e });
+  } catch (error) {
+    res.status(500).json({ message: "Error en el servidor " + error });
   }
 };
 
@@ -99,10 +99,10 @@ export const deletePostulante = async (req, res) => {
     if (result.affectedRows === 0) {
       res.status(404).json({ message: "El postulante con el ID proporcionado no existe",});
     } else {
-      res.status(200).json({ message: "Postulante es eliminado exitosamente" });
+      res.status(200).json({ message: "Postulante eliminado exitosamente" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error al eliminar la postulacion",error,});
+    res.status(500).json({ message: "Error en el servidor " + error });
   }
 };
 
@@ -113,12 +113,12 @@ export const postulacionActiva = async (req, res) => {
       `UPDATE postulantes SET estado_post = 1 WHERE pk_id_post = '${id}'`
     );
     if (result.affectedRows > 0) {
-      res.status(200).json({ message: "postulacion Activa " });
+      res.status(200).json({ message: "Postulante activado exitosamente" });
     } else {
-      res.status(404).json({ message: `No se encontró ninguna postulacion con el ID ${id}`,});
+      res.status(404).json({ message: `No se encontró ningun postulante con el ID`,});
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error: error.message });
+    res.status(500).json({ message: "Error en el servidor " + error });
   }
 };
 
@@ -131,11 +131,11 @@ export const postulacionInactiva = async (req, res) => {
       [fk_id_usuario, fk_id_subasta]
     );
     if (result.affectedRows > 0) {
-      res.status(200).json({ message: "Postulación desactivada exitosamente" });
+      res.status(200).json({ message: "Postulante desactivado exitosamente" });
     } else {
-      res.status(404).json({ message: `No se encontró ninguna postulación para el usuario con ID ${userId} en la subasta con ID ${subastaId}` });
+      res.status(404).json({ message: `No se encontró ningun postulante con el ID` });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema", error: error.message });
+    res.status(500).json({ message: "Error en el servidor " + error });
   }
 };

@@ -3,14 +3,12 @@ import { pool } from "../databases/conexion.js";
 
 export const getMunicipios = async (req, res) => {
   try {
-    const [result] = await pool.query(
-      `
-        SELECT m.*, d.nombre_depar
-        FROM municipio m
-        INNER JOIN departamento d 
-        ON m.fk_departamento = d.pk_codigo_depar
-      `
-    );
+    const [result] = await pool.query(`
+      SELECT m.*, d.nombre_depar
+      FROM municipio m
+      INNER JOIN departamento d 
+      ON m.fk_departamento = d.pk_codigo_depar
+    `);
     if (result.length > 0) {
       res.status(200).json(result);
     } else {
@@ -24,15 +22,13 @@ export const getMunicipios = async (req, res) => {
 export const getMunicipioById = async (req, res) => {
   try {
     const id = req.params.id;
-    const [result] = await pool.query(      
-      `
-        SELECT m.*, d.*
-        FROM municipio m
-        INNER JOIN departamento d 
-        ON m.fk_departamento = d.pk_codigo_depar
-        WHERE m.pk_codigo_muni = '${id}'
-      `
-    );
+    const [result] = await pool.query(`
+      SELECT m.*, d.*
+      FROM municipio m
+      INNER JOIN departamento d 
+      ON m.fk_departamento = d.pk_codigo_depar
+      WHERE m.pk_codigo_muni = '${id}'
+    `);
     if (result.length > 0) {
       res.status(200).json(result[0]);
     } else {
@@ -43,38 +39,15 @@ export const getMunicipioById = async (req, res) => {
   }
 };
 
-export const getMuniForDepart = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const [result] = await pool.query(      
-      `
-        SELECT m.*, d.*
-        FROM municipio m
-        INNER JOIN departamento d ON m.fk_departamento = d.pk_codigo_depar
-        WHERE d.pk_codigo_depar = '${id}';
-      `
-    );
-    if (result.length > 0) {
-      res.status(200).json(result);
-    } else {
-      res.status(404).json({ message: "Departamento no encontrado" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: "Error en el servidor" + error });
-  }
-}
-
 export const getMuniForDepartActivos = async (req, res) => {
   try {
     const id = req.params.id;
-    const [result] = await pool.query(      
-      `
-        SELECT m.*, d.*
-        FROM municipio m
-        INNER JOIN departamento d ON m.fk_departamento = d.pk_codigo_depar
-        WHERE d.pk_codigo_depar = '${id}' AND m.estado_muni = 'activo';
-      `
-    );
+    const [result] = await pool.query(`
+      SELECT m.*, d.*
+      FROM municipio m
+      INNER JOIN departamento d ON m.fk_departamento = d.pk_codigo_depar
+      WHERE d.pk_codigo_depar = '${id}' AND m.estado_muni = 'activo';
+    `);
     if (result.length > 0) {
       res.status(200).json(result);
     } else {
@@ -99,7 +72,7 @@ export const createMunicipio = async (req, res) => {
     const [existingDepar] = await pool.query('SELECT * FROM municipio WHERE fk_departamento = ?', [fk_departamento]);
 
     if (existingName.length > 0 & existingCode.length > 0 & existingDepar.length > 0) {
-      return res.status(400).json({ message: "El municipio que quieres registrar ya existe" });
+      return res.status(400).json({ message: "El municipio que quieres crear ya existe" });
     }
 
     if (existingCode.length > 0) {
@@ -132,7 +105,7 @@ export const updateMunicipio = async (req, res) => {
     const [existingDepar] = await pool.query('SELECT * FROM municipio WHERE fk_departamento = ? AND pk_codigo_muni != ?', [fk_departamento, id]);
 
     if (existingName.length > 0 && existingCode.length > 0 && existingDepar.length > 0) {
-      return res.status(400).json({ message: "El municipio que quieres registrar ya existe" });
+      return res.status(400).json({ message: "El municipio que quieres crear ya existe" });
     }
 
     if (existingCode.length > 0) {

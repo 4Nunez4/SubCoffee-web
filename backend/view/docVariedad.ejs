@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Documentación de Variedades</title>
   </head>
   <body>
     <hr />
     <h2>Requerimiento. Documentación de Variedades</h2>
+    
     <hr />
     <h3>Crear Variedad</h3>
     <table>
@@ -37,26 +38,32 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>ADMINISTRADOR, VENDEDOR</td>
+        <td>VENDEDOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
         <td>
-          { 
-            "fk_tipo_variedad": "1", 
-            "descripcion_vari": "Un café amargo y rico", 
-            "fk_finca": 9, 
-            "img":"variedad.jpg"
-          }
+          <pre><code>{
+  "fk_tipo_variedad": "1",
+  "fk_finca": 9,
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: { message:"Variedad creada con exito" }
-          Incorrecto: Status:404 body:{ message:"Error al crear la variedad" }
-          Error: Status:500 body:{ message:'Error en el servidor' + error
-          }
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Variedad creada con exito"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre>{
+  "message": "Error al crear la variedad"
+}</pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
         </td>
       </tr>
       <tr>
@@ -86,7 +93,7 @@
       </tr>
       <tr>
         <td>Descripcion:</td>
-        <td>Permite listar todas las variedades</td>
+        <td>Permite listar todas las variedades creadas en la base de datos</td>
       </tr>
       <tr>
         <td>Verbo HTTP:</td>
@@ -98,7 +105,7 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>ADMINISTRADOR, VENDEDOR</td>
+        <td>VENDEDOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
@@ -107,21 +114,36 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: {
-            "message": "Variedades encontradas",
-            "data": [
-                {
-                    "pk_id_vari": 7,
-                    "descripcion_vari": "Borbon",
-                    "imagen_vari": null,
-                    "estado_vari": "activo",
-                    "fk_tipo_variedad": 1,
-                    "fk_finca": 10,
-                    "nombre_finca": "Casa blanca Diamont",
-                    "nombre_tipo_variedad": "Tipica"
-                },] }  <br>
-          Incorrecto: Status:404 body:{ message:" 'Error al buscar las variedades" } <br>
-          Error: Status:500 body:{ message:'Error en el servidor'+ error }
+          <strong>Correcto:</strong> Status: 200 
+          <pre>{
+  "message": "Variedades encontradas", 
+  "data": [ 
+    {
+      "pk_id_vari": 26,
+      "estado_vari": "activo",
+      "fk_tipo_variedad": 1,
+      "fk_finca": 38,
+      "nombre_finca": "Mi Segunda Finca",
+      "nombre_tipo_variedad": "Typica"
+    },
+    {
+      "pk_id_vari": 27,
+      "estado_vari": "activo",
+      "fk_tipo_variedad": 19,
+      "fk_finca": 39,
+      "nombre_finca": "Mi primer finca",
+      "nombre_tipo_variedad": "Obatá"
+    },
+  ]
+}</pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre>{ 
+  message: 'Error al buscar las variedades' 
+}</pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
         </td>
       </tr>
       <tr>
@@ -151,9 +173,7 @@
       </tr>
       <tr>
         <td>Descripcion:</td>
-        <td>
-          Permite actualizar variedades en la base de datos por medio de su id
-        </td>
+        <td>Permite actualizar las variedades creadas en la base de datos por medio de su ID</td>
       </tr>
       <tr>
         <td>Verbo HTTP:</td>
@@ -165,25 +185,31 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>ADMINISTRADOR, VENDEDOR</td>
+        <td>VENDEDOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
         <td>
-            { 
-                "fk_tipo_variedad": "1", 
-                "descripcion_vari": "Un café amargo y rico", 
-                "fk_finca": 9, 
-                "img":"variedad.jpg"
-            }
+          <pre><code>{
+  "fk_tipo_variedad": "3",
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: { message: 'Variedad actualizada con exito' } <br> 
-          Incorrecto: Status:404 body:{ message: "Error al actualizar la variedad con ese ID" } <br> 
-          Error: Status:500 body:{ message: "Error en el servidor" + error }
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Variedad actualizada con exito"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre>{ 
+  message: "Error al actualizar la variedad con ese ID" 
+}</pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
         </td>
       </tr>
       <tr>
@@ -197,7 +223,7 @@
     </table>
 
     <hr />
-    <h3>Buscar Variedad</h3>
+    <h3>Buscar Variedades Por finca</h3>
     <table>
       <tr>
         <td>Numero</td>
@@ -205,17 +231,15 @@
       </tr>
       <tr>
         <td>Nombre del Servicio</td>
-        <td>Buscar Variedad a traves de su id</td>
+        <td>Buscar Variedad de una finca</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>/v1/variedad/:id</td>
+        <td>/v1/variedaduser/:id_finca</td>
       </tr>
       <tr>
         <td>Descripcion:</td>
-        <td>
-          Permite buscar variedades en la base de datos por medio de su ID
-        </td>
+        <td>Permite buscar todas las variedades creadas en la base de datos por medio de el ID de una finca</td>
       </tr>
       <tr>
         <td>Verbo HTTP:</td>
@@ -227,7 +251,7 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>ADMINISTRADOR, VENDEDOR</td>
+        <td>VENDEDOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
@@ -236,23 +260,38 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: {
-            "message": "Variedades encontradas",
-            "data": [
-                {
-                    "pk_id_vari": 11,
-                    "descripcion_vari": "Un café amargo y rico",
-                    "imagen_vari": "variedad.jpg",
-                    "estado_vari": "activo",
-                    "fk_tipo_variedad": 1,
-                    "fk_finca": 9,
-                    "nombre_finca": "Casa blanca Diamonte",
-                    "nombre_tipo_variedad": "Tipica"
-                }
-            ]
-        } <br> 
-        Incorrecto: Status:404 body:{ message: 'Error al buscar la variedad con ese ID' } <br> 
-        Error: Status:500 body:{ message: "Error en el servidor" + error }
+          <strong>Correcto:</strong> Status: 200 
+          <pre>{
+  "message": "Variedades de la finca encontradas", 
+  "data": [ 
+    {
+      "pk_id_vari": 26,
+      "estado_vari": "activo",
+      "fk_tipo_variedad": 1,
+      "fk_finca": 38,
+      "nombre_finca": "Mi Segunda Finca",
+      "nombre_tipo_variedad": "Typica"
+    },
+    {
+      "pk_id_vari": 27,
+      "estado_vari": "activo",
+      "fk_tipo_variedad": 1,
+      "fk_finca": 38,
+      "nombre_finca": "Mi Segunda Finca",
+      "nombre_tipo_variedad": "Robusta"
+    },
+    ...
+  ]
+}</pre>
+          <strong>Incorrecto:</strong>
+          Status: 404
+          <pre>{ 
+  message: 'La finca no tiene variedades.' 
+}</pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
         </td>
       </tr>
       <tr>
@@ -282,9 +321,7 @@
       </tr>
       <tr>
         <td>Descripcion:</td>
-        <td>
-          Permite eliminar variedades en la base de datos por medio de su id
-        </td>
+        <td>Permite eliminar variedades creadas en la base de datos por medio de su ID</td>
       </tr>
       <tr>
         <td>Verbo HTTP:</td>
@@ -296,7 +333,7 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>ADMINISTRADOR, USUARIO</td>
+        <td>VENDEDOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
@@ -305,9 +342,18 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: { message: "Variedad eliminada con exito" } <br> 
-          Incorrecto: Status:404 body:{ message: 'Error al eliminar la variedad con ese ID' } <br> 
-          Error: Status:500 body:{ message: "Error en el servidor" + error }
+          <strong>Correcto:</strong> Status: 200
+          <pre>{ 
+  message: 'Variedad eliminada con exito' 
+}</pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre>{ 
+  message: 'Error al eliminar la variedad con ese ID' 
+}</pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
           <tr>
             <td>Desarrollador:</td>
             <td>Juan Camilo Realpe Ceron</td>
@@ -337,9 +383,7 @@
       </tr>
       <tr>
         <td>Descripcion:</td>
-        <td>
-          Permite desactivar variedades en la base de datos por medio de su id
-        </td>
+        <td>Permite desactivar variedades creadas en la base de datos por medio de su ID</td>
       </tr>
       <tr>
         <td>Verbo HTTP:</td>
@@ -351,7 +395,7 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>ADMINISTRADOR, VENDEDOR</td>
+        <td>VENDEDOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
@@ -360,9 +404,18 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: { message: "Variedad desactivada exitosamente" } <br> 
-          Incorrecto: Status:404 body:{ message: 'No se encontró ninguna Variedad con el ID ${id}' } <br> 
-          Error: Status:500 body:{ message: "Error en el servidor" + error }
+          <strong>Correcto:</strong> Status: 200 
+          <pre>{ 
+  message: 'Variedad desactivada exitosamente' 
+}</pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre>{ 
+  message: 'No se encontró ninguna Variedad con el ID' 
+}</pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
           <tr>
             <td>Desarrollador:</td>
             <td>Juan Camilo Realpe Ceron</td>
@@ -393,7 +446,7 @@
       <tr>
         <td>Descripcion:</td>
         <td>
-          Permite activar variedades en la base de datos por medio de su id
+          Permite activar variedades creadas en la base de datos por medio de su ID
         </td>
       </tr>
       <tr>
@@ -406,7 +459,7 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>ADMINISTRADOR, VENDEDOR</td>
+        <td>VENDEDOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
@@ -415,9 +468,18 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: { message: "Variedad activada exitosamente" } <br> 
-          Incorrecto: Status:404 body:{ message: 'No se encontró ninguna Variedad con el ID ${id}' } <br> 
-          Error: Status:500 body:{ message: "Error en el servidor" + error }
+          <strong>Correcto:</strong> Status: 200
+          <pre>{ 
+  message: 'Variedad activada exitosamente' 
+}</pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre>{ 
+  message: 'No se encontró ninguna Variedad con el ID' 
+}</pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
           <tr>
             <td>Desarrollador:</td>
             <td>Juan Camilo Realpe Ceron</td>
@@ -429,5 +491,6 @@
         </td>
       </tr>
     </table>
+
   </body>
 </html>

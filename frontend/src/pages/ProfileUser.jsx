@@ -135,54 +135,52 @@ function ProfileUser() {
         title={"Actualizar contraseña"}
         titleBtn={"Actualizar"}
       />
-      <div className="grid grid-cols-3 gap-1 mt-5 bg-white shadow-md rounded-lg overflow-hidden p-10">
-        <div className="flex justify-center items-center col-span-1 ">
-          {" "}
-          <Avatar
-            src={
-              user.imagen_user && user.imagen_user.length > 0
-                ? `http://localhost:4000/usuarios/${user.imagen_user}`
-                : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
-            }
-            className="w-56 h-56"
-          />
-        </div>
-
-        <div className="flex justify-start items-center col-span-1">
-          {" "}
-          <div className="flex flex-col">
-            <span className="text-2xl font-semibold my-2 text-[#323232]">
-              {user.nombre_user}
-            </span>
-            <span className="text-sm text-gray-600 flex items-center mb-2">
-              <div>
-                <p className="text-sm text-gray-900">{user.rol_user}</p>
-                <p className="text-xs text-gray-500">Rol de Usuario</p>
-              </div>
-            </span>
-            <span className="text-sm text-gray-600 flex items-center mb-2">
-              <div>
-                <p className="text-sm text-gray-900">{user.email_user}</p>
-                <p className="text-xs text-gray-500">Correo Electrónico</p>
-              </div>
-            </span>
-            <span className="text-sm text-[#919190] flex items-center mb-2">
-              <div>
-                <p className="text-sm text-gray-900">{user.telefono_user}</p>
-                <p className="text-xs text-gray-500">Teléfono</p>
-              </div>
-            </span>
+      <div className="grid grid-cols-2 gap-1 mt-5 bg-white shadow-md rounded-lg overflow-hidden p-10">
+        <div className="flex">
+          <div className="flex justify-center items-center col-span-1">
+            <Avatar
+              src={
+                user.imagen_user && user.imagen_user.length > 0
+                  ? `http://localhost:4000/usuarios/${user.imagen_user}`
+                  : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
+              }
+              className="w-56 h-56"
+            />
+          </div>
+          <div className="flex justify-start items-center col-span-1 ml-4">
+            <div className="flex flex-col">
+              <span className="text-2xl font-semibold my-2 text-[#323232]">
+                {user.nombre_user}
+              </span>
+              <span className="text-sm text-gray-600 flex items-center mb-2">
+                <div>
+                  <p className="text-sm text-gray-900">{user.rol_user}</p>
+                  <p className="text-xs text-gray-500">Rol de Usuario</p>
+                </div>
+              </span>
+              <span className="text-sm text-gray-600 flex items-center mb-2">
+                <div>
+                  <p className="text-sm text-gray-900">{user.email_user}</p>
+                  <p className="text-xs text-gray-500">Correo Electrónico</p>
+                </div>
+              </span>
+              <span className="text-sm text-[#919190] flex items-center mb-2">
+                <div>
+                  <p className="text-sm text-gray-900">{user.telefono_user}</p>
+                  <p className="text-xs text-gray-500">Teléfono</p>
+                </div>
+              </span>
+            </div>
           </div>
         </div>
         <div className="grid grid-rows-3">
-          {" "}
           {user.rol_user !== "admin" && (
             <>
-              <div className="w-full flex flex-col justify-end items-center gap-x-2">
+              <div className="w-full flex flex-col justify-end items-center -mb-4">
                 <div className="flex flex-col items-center">
                   {stats && stats.promedio != null && !isNaN(stats.promedio) ? (
-                    <div className="flex gap-x-2">
-                      <div className="text-2xl font-bold m-2">
+                    <div className="flex gap-x-2 flex-col items-center">
+                      <div className="text-6xl font-bold mx-2">
                         {parseFloat(stats.promedio).toFixed(1)}
                       </div>
                       {renderAverageStars(stats.promedio)}
@@ -196,7 +194,6 @@ function ProfileUser() {
                   )}
                 </div>
               </div>
-
               <Link
                 onClick={() => setAbrirModalCalificacion(true)}
                 showAnchorIcon

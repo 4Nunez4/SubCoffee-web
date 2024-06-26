@@ -149,7 +149,7 @@ export default function MunicipioTable() {
                 Desactivar
               </Button>
             ) : (
-              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarMunis(municipios.pk_codigo_muni)}>
+              <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarMunis(municipios.pk_codigo_muni)}>
                 Activar
               </Button>
             )}
@@ -231,7 +231,7 @@ export default function MunicipioTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-[#00684a] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
+            <Button className="bg-[#39A800] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>

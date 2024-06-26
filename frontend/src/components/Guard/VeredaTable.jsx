@@ -159,7 +159,7 @@ export default function VeredaTable() {
                 Desactivar
               </Button> 
             ) : (
-              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarVeres(results.pk_id_vere)}>
+              <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarVeres(results.pk_id_vere)}>
                 Activar
               </Button>
             )}
@@ -241,7 +241,7 @@ export default function VeredaTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-[#00684a] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
+            <Button className="bg-[#39A800] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>

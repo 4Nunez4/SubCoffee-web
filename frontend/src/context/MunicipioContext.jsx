@@ -133,7 +133,7 @@ export const MunicipioProvider = ({ children }) => {
         updateMunis,
         desactivarMunis,
         activarMunis,
-
+        setMunicipiosActivos,
         getMunisForDeparActivos,
         setCerrarModal,
         cerrarModal,

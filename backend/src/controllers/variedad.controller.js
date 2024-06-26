@@ -35,7 +35,7 @@ export const getVariedadUser = async (req, res) => {
     `;
     const [result] = await pool.query(sql);
     if (result.length > 0) {
-      res.status(200).json({ message: "Variedades de usuario encontradas", data: result });
+      res.status(200).json({ message: "Variedades de la finca encontradas", data: result });
     } else {
       res.status(203).json({ message: "La finca no tiene variedades." });
     }
@@ -107,7 +107,7 @@ export const activarVariedad = async (req, res) => {
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Variedad activada exitosamente" });
     } else {
-      res.status(404).json({ message: `No se encontró ninguna Variedad con el ID ${id}` });
+      res.status(404).json({ message: `No se encontró ninguna Variedad con el ID` });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
@@ -121,7 +121,7 @@ export const desactivarVariedad = async (req, res) => {
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Variedad desactivada exitosamente" });
     } else {
-      res.status(404).json({ message: `No se encontró ninguna Variedad con el ID ${id}` });
+      res.status(404).json({ message: `No se encontró ninguna Variedad con el ID` });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });

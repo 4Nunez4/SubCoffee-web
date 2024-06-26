@@ -17,17 +17,17 @@ export default function MiSubastaT() {
         <div className="flex w-full flex-col">
           <Tabs
             aria-label="Options"
-            color="[#00ed64]"
+            color="[#39A800]"
             variant="underlined"
             classNames={{
               tabList: "gap-6 w-full relative rounded-none p-0 border-b border-divider",
-              cursor: "w-full bg-[#00ed64]",
+              cursor: "w-full bg-[#39A800]",
               tab: "max-w-fit px-0 h-12",
-              tabContent: "group-data-[selected=true]:text-[#00ed64]",
+              tabContent: "group-data-[selected=true]:text-[#39A800]",
             }}
           >
             <Tab key="fincas" title={
-              <div className="text-[#00684a] flex items-center space-x-2 text-lg font-semibold">
+              <div className="text-[#39A800] flex items-center space-x-2 text-lg font-semibold">
                 <FincaIcon/>
                 <span>Fincas y variedades</span>
               </div>
@@ -39,7 +39,7 @@ export default function MiSubastaT() {
               </Card>
             </Tab>
             <Tab key="videos" title={
-              <div className="text-[#00684a] flex items-center space-x-2 text-lg font-semibold">
+              <div className="text-[#39A800] flex items-center space-x-2 text-lg font-semibold">
                 <SubastaIcon />
                 <span>Subastas</span>
               </div>

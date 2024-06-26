@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { validarGuardarPostulante } from "../validations/postulantes.validation.js";
+import { validarPostulante } from "../validations/postulantes.validation.js";
 import { verificarUserToken } from "../controllers/autenticacionController.js";
 import {
   deletePostulante,
@@ -10,14 +10,14 @@ import {
   postulacionInactiva,
 } from "../controllers/postulantes.controllers.js";
 
-const postulantesRoutes = Router();
+const routerPostulantes = Router();
 
-postulantesRoutes.get("/postulantes_sub/:id", verificarUserToken, getPostulantes);
-postulantesRoutes.post("/postulantes", verificarUserToken, validarGuardarPostulante, guardarPostulantes);
-postulantesRoutes.get("/postulantes_activos/:id", verificarUserToken, getPostulanteesActivos);
-postulantesRoutes.delete("/postulantes/:id",verificarUserToken, deletePostulante);
+routerPostulantes.get("/postulantes_sub/:id", verificarUserToken, getPostulantes);
+routerPostulantes.post("/postulantes", verificarUserToken, validarPostulante, guardarPostulantes);
+routerPostulantes.get("/postulantes_activos/:id", verificarUserToken, getPostulanteesActivos);
+routerPostulantes.delete("/postulantes/:id",verificarUserToken, deletePostulante);
 
-postulantesRoutes.put("/postulantesactivo/:id",verificarUserToken, postulacionActiva);
-postulantesRoutes.put("/postulantesinactivo",verificarUserToken, postulacionInactiva);
+routerPostulantes.put("/postulantesactivo/:id",verificarUserToken, postulacionActiva);
+routerPostulantes.put("/postulantesinactivo",verificarUserToken, postulacionInactiva);
 
-export default postulantesRoutes;
+export default routerPostulantes;

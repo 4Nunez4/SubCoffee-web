@@ -3,16 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Documentación de Veredas</title>
   </head>
   <body>
     <hr />
     <h2>Requerimiento. Documentación de vereda</h2>
     <hr />
+
     <h3>Crear vereda</h3>
     <table>
       <tr>
-        <td>Numero 1</td>
+        <td>Número</td>
         <td>1</td>
       </tr>
       <tr>
@@ -24,44 +25,61 @@
         <td>/v1/veredas</td>
       </tr>
       <tr>
-        <td>Descripcion:</td>
-        <td>Permite registrar veredas en la base de datos</td>
+        <td>Descripción</td>
+        <td>Permite crear veredas en la base de datos</td>
       </tr>
       <tr>
-        <td>Verbo HTTP:</td>
+        <td>Verbo HTTP</td>
         <td>POST</td>
       </tr>
       <tr>
-        <td>HEADER:</td>
+        <td>HEADER</td>
         <td>token: token</td>
       </tr>
       <tr>
-        <td>Usuarios:</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR</td>
       </tr>
       <tr>
-        <td>PETICION BODY</td>
+        <td>PETICIÓN BODY</td>
         <td>
-            {
-                "nombre_vere": "Prueba",
-                "fk_municipio": 41357
-            }
+          <pre><code>{
+  "nombre_vere": "Prueba",
+  "fk_municipio": 41357
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: { message: "vereda creado exitosamente" } <br>
-          Incorrecto: Status:404 body:{ message:"Error al crear el vereda" } <br>
-          Error: Status:500 body:{ message:"Error en el servidor :" + error }
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Vereda creada exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 400 (Código existente)
+          <pre><code>{
+"message": "El código de La vereda que quieres crear ya existe"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 400 (Vereda existente)
+          <pre><code>{
+  "message": "La vereda que quieres crear ya existe"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error al crear la vereda"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>Desarrollador:</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>Rama:</td>
+        <td>Rama</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
@@ -70,7 +88,7 @@
     <h3>Listar veredas</h3>
     <table>
       <tr>
-        <td>Numero</td>
+        <td>Número</td>
         <td>2</td>
       </tr>
       <tr>
@@ -82,55 +100,135 @@
         <td>/v1/veredas</td>
       </tr>
       <tr>
-        <td>Descripcion:</td>
-        <td>Permite listar todas las veredas registradas</td>
+        <td>Descripción</td>
+        <td>Permite listar todas las veredas creadas en la base de datos</td>
       </tr>
       <tr>
-        <td>Verbo HTTP:</td>
+        <td>Verbo HTTP</td>
         <td>GET</td>
       </tr>
       <tr>
-        <td>HEADER:</td>
+        <td>HEADER</td>
         <td>token: token</td>
       </tr>
       <tr>
-        <td>Usuarios:</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR</td>
       </tr>
       <tr>
-        <td>PETICION BODY</td>
+        <td>PETICIÓN BODY</td>
         <td>NULL</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: {
-            message: "Veredas encontradas exitosamente",
-            "data": [
-                {
-                    "pk_id_vere": 1,
-                    "nombre_vere": "El Carmen",
-                    "estado_vere": "activo",
-                    "fk_municipio": 41357,
-                    "nombre_muni": "Isnos"
-                },
-                {
-                    "pk_id_vere": 2,
-                    "nombre_vere": "Remolinos",
-                    "estado_vere": "activo",
-                    "fk_municipio": 41357,
-                    "nombre_muni": "Isnos"
-                },] } <br> 
-          Incorrecto: Status:404 body:{ message:" 'No se encontraron veredas" } <br> 
-          Error: Status:500 body:{ message:"Error en el servidor: " + error }
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Veredas encontradas exitosamente",
+  "data": [
+    {
+      "pk_id_vere": 1,
+      "nombre_vere": "San Adolfo",
+      "estado_vere": "activo",
+      "fk_municipio": 41357
+    },
+    {
+      "pk_id_vere": 2,
+      "nombre_vere": "Remolinos",
+      "estado_vere": "activo",
+      "fk_municipio": 41357
+    },
+  ]
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se encontraron veredas"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>Desarrollador:</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>Rama:</td>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Buscar veredas</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Buscar veredas</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/veredas/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>
+          Permite buscar veredas creadas en la base de datos por medio de su ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Vereda encontrada",
+  "data": [
+    {
+      "pk_id_vere": 2,
+      "nombre_vere": "Remolinos",
+      "estado_vere": "activo",
+      "fk_municipio": 41357,
+      "nombre_muni": "Isnos"
+    }
+  ]
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se encontró ninguna vereda con el ID"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
@@ -139,8 +237,8 @@
     <h3>Actualizar vereda</h3>
     <table>
       <tr>
-        <td>Numero</td>
-        <td>3</td>
+        <td>Número</td>
+        <td>4</td>
       </tr>
       <tr>
         <td>Nombre del Servicio</td>
@@ -151,110 +249,64 @@
         <td>/v1/veredas/:id</td>
       </tr>
       <tr>
-        <td>Descripcion:</td>
+        <td>Descripción</td>
         <td>
-          Permite actualizar veredas en la base de datos por medio de su id
+          Permite actualizar las veredas creadas en la base de datos por medio
+          de su ID
         </td>
       </tr>
       <tr>
-        <td>Verbo HTTP:</td>
+        <td>Verbo HTTP</td>
         <td>PUT</td>
       </tr>
       <tr>
-        <td>HEADER:</td>
+        <td>HEADER</td>
         <td>token: token</td>
       </tr>
       <tr>
-        <td>Usuarios:</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR</td>
       </tr>
       <tr>
-        <td>PETICION BODY</td>
+        <td>PETICIÓN BODY</td>
         <td>
-            {
-                "nombre_vere": "prueba vereda",
-                "fk_municipio": 41357
-            }
+          <pre><code>{
+  "nombre_vere": "prueba vereda",
+  "fk_municipio": 41357
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: { message: 'Vereda actualizado exitosamente' } <br>
-          Incorrecto: Status:404 body:{ message: 'No se pudo actualizar el vereda con el IDs' } <br> 
-          Error: Status:500 body:{ message: "Error en el servidor" + error }
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Vereda actualizada exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 400 (Código existente)
+          <pre><code>{
+"message": "El código de La vereda que quieres crear ya existe"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 400 (Vereda existente)
+          <pre><code>{
+"message": "La vereda que quieres crear ya existe"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+"message": "No se encontró ninguna vereda con el ID"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+"message": "Error en el servidor" + error
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>Desarrollador:</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>Rama:</td>
-        <td>DEVjcrc</td>
-      </tr>
-    </table>
-
-    <hr />
-    <h3>Buscar veredas</h3>
-    <table>
-      <tr>
-        <td>Numero</td>
-        <td>4</td>
-      </tr>
-      <tr>
-        <td>Nombre del Servicio</td>
-        <td>Buscar veredas registradas</td>
-      </tr>
-      <tr>
-        <td>URI</td>
-        <td>/v1/veredas/:id</td>
-      </tr>
-      <tr>
-        <td>Descripcion:</td>
-        <td>Permite buscar veredas en la base de datos por medio de su ID</td>
-      </tr>
-      <tr>
-        <td>Verbo HTTP:</td>
-        <td>GET</td>
-      </tr>
-      <tr>
-        <td>HEADER:</td>
-        <td>token: token</td>
-      </tr>
-      <tr>
-        <td>Usuarios:</td>
-        <td>ADMINISTRADOR</td>
-      </tr>
-      <tr>
-        <td>PETICION BODY</td>
-        <td>NULL</td>
-      </tr>
-      <tr>
-        <td>RESPUESTA JSON</td>
-        <td>
-          Correcto: Status:200 json: {
-            message: "Vereda encontrada",
-            data: [
-                {
-                    "pk_id_vere": 2,
-                    "nombre_vere": "Remolinos",
-                    "estado_vere": "activo",
-                    "fk_municipio": 41357,
-                    "nombre_muni": "Isnos"
-                }
-            ]
-        } <br>
-          Incorrecto: Status:404 body:{ message: 'id de vereda no encontrado' } <br>
-          Error: Status:500 body:{ message: "Error en el servidor" + error }
-        </td>
-      </tr>
-      <tr>
-        <td>Desarrollador:</td>
-        <td>Juan Camilo Realpe Ceron</td>
-      </tr>
-      <tr>
-        <td>Rama:</td>
+        <td>Rama</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
@@ -263,7 +315,7 @@
     <h3>Eliminar vereda</h3>
     <table>
       <tr>
-        <td>Numero</td>
+        <td>Número</td>
         <td>5</td>
       </tr>
       <tr>
@@ -275,63 +327,144 @@
         <td>/v1/veredas/:id</td>
       </tr>
       <tr>
-        <td>Descripcion:</td>
-        <td>Permite eliminar vereda en la base de datos por medio de su id</td>
+        <td>Descripción</td>
+        <td>
+          Permite eliminar las veredas creadas en la base de datos por medio de
+          su ID
+        </td>
       </tr>
       <tr>
-        <td>Verbo HTTP:</td>
+        <td>Verbo HTTP</td>
         <td>DELETE</td>
       </tr>
       <tr>
-        <td>HEADER:</td>
+        <td>HEADER</td>
         <td>token: token</td>
       </tr>
       <tr>
-        <td>Usuarios:</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR</td>
       </tr>
       <tr>
-        <td>PETICION BODY</td>
+        <td>PETICIÓN BODY</td>
         <td>NULL</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: { message: "vereda eliminado con exito" } <br>
-          Incorrecto: Status:404 body:{ message: 'No se encontró ninguna vereda con el ID ${id}' } <br> 
-          Error: Status:500 body:{ message: "Error en el servidor" + error }
-          <tr>
-            <td>Desarrollador:</td>
-            <td>Juan Camilo Realpe Ceron</td>
-          </tr>
-          <tr>
-            <td>Rama:</td>
-            <td>DEVjcrc</td>
-          </tr>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+"message": "Vereda eliminada correctamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+"message": "No se encontró ninguna vereda con el ID"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+"message": "Error en el servidor" + error
+}</code></pre>
         </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
       </tr>
     </table>
 
-    <h3>DESACTIVAR vereda</h3>
+    <hr />
+    <h3>Activar vereda</h3>
     <table>
       <tr>
-        <td>NUMERO</td>
+        <td>Número</td>
         <td>6</td>
       </tr>
       <tr>
         <td>Nombre del Servicio</td>
-        <td>DESACTIVAR vereda</td>
+        <td>Activar vereda</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/veredasac/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>
+          Permite activar una vereda creada en la base de datos por medio de su
+          ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+"message": "Vereda activada exitosamente, ahora esta podrá ser utilizada por los usuarios"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+"message": "No se encontró ninguna vereda con el ID"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+"message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Desactivar vereda</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Desactivar vereda</td>
       </tr>
       <tr>
         <td>URI</td>
         <td>/v1/veredasdes/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCION</td>
-        <td>Permite desactivar vereda</td>
+        <td>Descripción</td>
+        <td>
+          Permite desactivar una vereda creada en la base de datos por medio de
+          su ID
+        </td>
       </tr>
       <tr>
-        <td>VERBO</td>
+        <td>Verbo HTTP</td>
         <td>PUT</td>
       </tr>
       <tr>
@@ -339,23 +472,32 @@
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
+        <td>Usuarios</td>
         <td>ADMINISTRADOR</td>
       </tr>
       <tr>
-        <td>PETICION</td>
+        <td>PETICIÓN BODY</td>
         <td>NULL</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-            Correcto: Status:200 json: { message: "vereda desactivada exitosamente" } <br>
-            Incorrecto: Status:404 body:{ message: 'No se encontró ninguna vereda con el ID ${id}' } <br> 
-            Error: Status:500 body:{ message: "Error en el servidor" + error }
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+"message": "Vereda desactivada exitosamente, ahora esta no podrá ser utilizada por los usuarios"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+"message": "No se encontró ninguna vereda con el ID"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+"message": "Error en el servidor" + error
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLADOR</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
@@ -364,50 +506,77 @@
       </tr>
     </table>
 
-    <h3>ACTIVAR vereda</h3>
+    <hr />
+    <h3>Listar Veredas activas por Municipio</h3>
     <table>
       <tr>
-        <td>NUMERO</td>
-        <td>7</td>
+        <td>Número</td>
+        <td>8</td>
       </tr>
       <tr>
         <td>Nombre del Servicio</td>
-        <td>ACTIVAR vereda</td>
+        <td>Listar Veredas por Municipio</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>/v1/veredaac/:id</td>
+        <td>/v1/veredasmun/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCION</td>
-        <td>Permite activar vereda</td>
+        <td>Descripción</td>
+        <td>
+          Listas todas las veredas activas creadas para un municipio en la base
+          de datos.
+        </td>
       </tr>
       <tr>
-        <td>VERBO</td>
-        <td>PUT</td>
+        <td>Verbo HTTP</td>
+        <td>GET</td>
       </tr>
       <tr>
         <td>HEADER</td>
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
-        <td>ADMINISTRADOR</td>
+        <td>Usuarios</td>
+        <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
-        <td>PETICION</td>
+        <td>PETICIÓN BODY</td>
         <td>NULL</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-            Correcto: Status:200 json: { message: "vereda activada exitosamente" } <br>
-            Incorrecto: Status:404 body:{ message: 'No se encontró ninguna vereda con el ID ${id}' } <br> 
-            Error: Status:500 body:{ message: "Error en el servidor" + error }
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Veredas encontradas para este municipio",
+  "data": [
+    {
+      "pk_id_vere": 1,
+      "nombre_vere": "San Adolfo",
+      "estado_vere": "activo",
+      "fk_municipio": 41357
+    },
+    {
+      "pk_id_vere": 2,
+      "nombre_vere": "Remolinos",
+      "estado_vere": "activo",
+      "fk_municipio": 41357
+    },
+  ]
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se encontraron veredas para este municipio"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLADOR</td>
+        <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
@@ -415,5 +584,6 @@
         <td>DEVjcrc</td>
       </tr>
     </table>
+
   </body>
 </html>

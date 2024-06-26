@@ -117,7 +117,7 @@ export const updateUser = async (req, res) => {
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Usuario actualizado con éxito" });
     } else {
-      res.status(404).json({ message: "No se pudo actualizar el usuario, usuario no encontrado" });
+      res.status(404).json({ message: "Error con el ID al actualizar el usuario" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error del servidor al actualizar el usuario" });
@@ -132,7 +132,7 @@ export const getUser = async (req, res) => {
     if (user.length > 0) {
       res.status(200).json({ message: "Usuario encontrado con exito", data: user });
     } else {
-      res.status(404).json({ message: "Error al encontrar el usuario" });
+      res.status(404).json({ message: "Error al encontrar el usuario con ese ID" });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
@@ -222,7 +222,7 @@ export const desactivarUsuario = async (req, res) => {
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Usuario desactivado exitosamente" });
     } else {
-      res.status(404).json({ message: `No se encontró ningun usuario con el ID ${id}` });
+      res.status(404).json({ message: `No se encontró ningun usuario con el ID` });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
@@ -236,10 +236,9 @@ export const activarUsuario = async (req, res) => {
     if (result.affectedRows > 0) {
       res.status(200).json({ message: "Usuario activado exitosamente" });
     } else {
-      res.status(404).json({ message: `No se encontró ningun usuario con el ID ${id}` });
+      res.status(404).json({ message: `No se encontró ningun usuario con el ID` });
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
-

@@ -12,7 +12,7 @@ function GeografiaFullPage() {
     }, []);
     
   return (
-    <div className="flex flex-col px-10 gap-x-4 pt-8 w-full ">
+    <div className="flex flex-col px-10 gap-x-4 pt-8 w-full bg-[#FDFBF6]">
       <Tabs aria-label="Options" variant="bordered" >
         <Tab key="departamentos" title="Departamentos">
           <Card className=" ">

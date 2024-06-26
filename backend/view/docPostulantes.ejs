@@ -7,26 +7,26 @@
   </head>
   <body>
     <hr />
-    <h2>Requerimiento. Documentacion de Postulacion</h2>
-    <hr />
+    <h2>Requerimiento. Documentacion de Postulante</h2>
 
-    <h3>Crear Postulacion</h3>
+    <hr />
+    <h3>Crear postulante</h3>
     <table>
       <tr>
-        <td>Numero</td>
+        <td>Número</td>
         <td>1</td>
       </tr>
       <tr>
         <td>Nombre del Servicio</td>
-        <td>Crear Postulacion</td>
+        <td>Crear postulante</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/postulantes</td>
+        <td>/v1/postulantes</td>
       </tr>
       <tr>
-        <td>Descripcion:</td>
-        <td>Permite guardar una nueva postulacion en la base de datos</td>
+        <td>Descripción:</td>
+        <td>Permite crear un postulante en la base de datos</td>
       </tr>
       <tr>
         <td>Verbo HTTP:</td>
@@ -38,53 +38,75 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>Administrador</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
         <td>
-            {
-                "fk_id_usuario": 10000,
-                "fk_id_subasta": 11,
-                "estado_post": "inactivo"
-            }
+          <pre><code>{
+  "fk_id_usuario": 10000,
+  "fk_id_subasta": 11,
+  "estado_post": "activo"
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 JSON: { "status": 200, "message": "Se registro con exito el postulantes." } 
-          Incorrecto: Status:401 body:{ "status": 401,"message":  "Error al registrar el postulantes." } 
-          Error: Status:505 body:{"status": 505, "message": "Error servidor " }
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Postulante creado exitosamente"
+}</code></pre>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Postulante reactivado exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 400
+          <pre><code>{
+  "message": "El usuario ya está postulado para esta subasta"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error al reactivar el postulante"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error al crear el postulante"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>Desarrollador:</td>
-        <td>Jorge Enrique Nuñez Molina</td>
+        <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
         <td>Rama:</td>
-        <td>DEVjenm</td>
+        <td>DEVjcrc</td>
       </tr>
     </table>
 
-    <h3>Listar Postulaciones</h3>
+    <hr />
+    <h3>Listar postulantes</h3>
     <table>
       <tr>
-        <td>Numero</td>
+        <td>Número</td>
         <td>2</td>
       </tr>
       <tr>
         <td>Nombre del Servicio</td>
-        <td>Listar Postulaciones</td>
+        <td>Listar postulantes</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/postulantes</td>
+        <td>/v1/postulantes_sub/:id</td>
       </tr>
       <tr>
-        <td>Descripcion:</td>
-        <td>Permite listar todas las postulaciones creadas</td>
+        <td>Descripción:</td>
+        <td>Permite listar todos los postulantes creados en la base de datos según una subasta</td>
       </tr>
       <tr>
         <td>Verbo HTTP:</td>
@@ -96,7 +118,7 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>Administrador, Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
@@ -105,95 +127,146 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 JSON: { result } 
-          Incorrecto:Status:404 body:{ "status": 404, '"Error no hay postulantes" } 
-          Error: Status:500 body:{ "status": 500, "message":"Error en el servidor" }
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>[
+  {
+    "pk_id_post": 14,
+    "fk_id_usuario": 3,
+    "fk_id_subasta": 32,
+    "estado_post": "activo",
+    "nombre_user": "vendedor",
+    "email_user": "vendedor@gmail.com",
+    "imagen_user": "imagen_perfil2.jpg"
+  },
+  {
+    "pk_id_post": 15, 
+    "fk_id_usuario": 2,
+    "fk_id_subasta": 30,
+    "estado_post": "activo",
+    "nombre_user": "comprador",
+    "email_user": "comprador@gmail.com",
+    "imagen_user": "imagen_perfil.jpg"
+  },
+  ...
+]</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Por el momento no hay postulantes."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>Desarrollador:</td>
-        <td>Jorge Enrique Nuñez Molina</td>
+        <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
         <td>Rama:</td>
-        <td>DEVjenm</td>
+        <td>DEVjcrc</td>
       </tr>
     </table>
 
-    
     <hr />
-    <h3>Buscar Postulacion</h3>
+    <h3>Listar postulantes activos</h3>
     <table>
       <tr>
-        <td>Numero</td>
+        <td>Número</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Listar postulantes activos</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/postulantes_activos/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción:</td>
+        <td>Permite listar todos los postulantes activos creados en la base de datos según una subasta</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>[
+  {
+    "pk_id_post": 15,
+    "fk_id_usuario": 2,
+    "fk_id_subasta": 30,
+    "estado_post": "activo",
+    "nombre_user": "comprador",
+    "email_user": "comprador@gmail.com",
+    "imagen_user": "imagen_perfil.jpg"
+  },
+  {
+    "pk_id_post": 16,
+    "fk_id_usuario": 3,
+    "fk_id_subasta": 30,
+    "estado_post": "activo",
+    "nombre_user": "vendedor",
+    "email_user": "vendedor@gmail.com",
+    "imagen_user": "imagen_perfil2.jpg"
+  },
+  ...
+]</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error, postulantes no encontrados para el ID subasta"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Eliminar postulante</h3>
+    <table>
+      <tr>
+        <td>Número</td>
         <td>4</td>
       </tr>
       <tr>
         <td>Nombre del Servicio</td>
-        <td>Buscar Postulacion por el ID del usuario</td>
+        <td>Eliminar postulante</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/postulantes/1</td>
+        <td>/v1/postulantes/:id</td>
       </tr>
       <tr>
-        <td>Descripcion:</td>
-        <td>
-          Permite listar las postulaciones hechas por un usuario en especifico
-        </td>
-      </tr>
-      <tr>
-        <td>Verbo HTTP:</td>
-        <td>GET</td>
-      </tr>
-      <tr>
-        <td>HEADER:</td>
-        <td>token: token</td>
-      </tr>
-      <tr>
-        <td>Usuarios:</td>
-        <td>Administrador, Usuarios</td>
-      </tr>
-      <tr>
-        <td>PETICION BODY</td>
-        <td>NULL</td>
-      </tr>
-      <tr>
-        <td>RESPUESTA JSON</td>
-        <td>
-          Correcto: Status:200 JSON: {  data: rows } 
-          Incorrecto: Status:404 body:{ status:505 message: "Error ID postulantes no encontrada" } 
-          Error: Status:505 body:{ message:"Error al obtener las postulantes" }
-        </td>
-      </tr>
-      <tr>
-        <td>Desarrollador:</td>
-        <td>Jorge Enrique Nuñez Molina</td>
-      </tr>
-      <tr>
-        <td>Rama:</td>
-        <td>DEVjenm</td>
-      </tr>
-    </table>
-    <hr />
-
-    <h3>Eliminar Postulacion</h3>
-    <table>
-      <tr>
-        <td>Numero</td>
-        <td>5</td>
-      </tr>
-      <tr>
-        <td>Nombre del Servicio</td>
-        <td>Eliminar Postulacion</td>
-      </tr>
-      <tr>
-        <td>URI</td>
-        <td>http://localhost:4000/v1/postulantes/1</td>
-      </tr>
-      <tr>
-        <td>Descripcion:</td>
-        <td>Permite eliminar una postulacion a traves de su ID</td>
+        <td>Descripción:</td>
+        <td>Permite eliminar un postulante creado en la base de datos por medio de su ID</td>
       </tr>
       <tr>
         <td>Verbo HTTP:</td>
@@ -205,7 +278,7 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>Administrador, Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
@@ -214,39 +287,110 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON: { Status:200 message: "Postulante es eliminado exitosamente" } 
-          Incorrecto: Status:404 body:{ status:404 message:" "El postulante con el ID proporcionado no existe" } 
-          Error: Status:500 body:{  message: "Error al eliminar la postulacion" }
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Postulante eliminado exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "El postulante con el ID proporcionado no existe"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>Desarrollador:</td>
-        <td>Jorge Enrique Nuñez Molina</td>
+        <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
         <td>Rama:</td>
-        <td>DEVjenm</td>
+        <td>DEVjcrc</td>
       </tr>
     </table>
 
     <hr />
-    <h3>Desactivar Postulacion</h3>
+    <h3>Desactivar postulante</h3>
     <table>
       <tr>
-        <td>Numero</td>
+        <td>Número</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Desactivar postulante</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/postulantesinactivo/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción:</td>
+        <td>Permite desactivar un postulante creado en la base de datos por medio de su ID</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Postulante desactivado exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se encontró ningun postulante con el ID"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Activar postulante</h3>
+    <table>
+      <tr>
+        <td>Número</td>
         <td>6</td>
       </tr>
       <tr>
         <td>Nombre del Servicio</td>
-        <td>Desactivar Postulacion</td>
+        <td>Activar postulante</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/postulantesinactivo/9</td>
+        <td>/v1/postulantesactivo/:id</td>
       </tr>
       <tr>
-        <td>Descripcion:</td>
-        <td>Permite desactivar una postulacion a traves de su ID</td>
+        <td>Descripción:</td>
+        <td>Permite activar un postulante creado en la base de datos por medio de su ID</td>
       </tr>
       <tr>
         <td>Verbo HTTP:</td>
@@ -258,7 +402,7 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>Administrador, Usuario</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
@@ -267,72 +411,29 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON: { Status:200 message: "postulacion Inactiva" } 
-          Incorrecto: Status:404 body:{ status:404 message: `No se encontró ninguna postulacion con el ID ${id}` } 
-          Error: Status:500 body:{ message: "Error en el sistema" }
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Postulante activado exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se encontró ningun postulante con el ID"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>Desarrollador:</td>
-        <td>Jorge Enrique Nuñez Molina</td>
+        <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
         <td>Rama:</td>
-        <td>DEVjenm</td>
+        <td>DEVjcrc</td>
       </tr>
     </table>
 
-    <hr />
-    <h3>Activar Postulacion</h3>
-    <table>
-      <tr>
-        <td>Numero</td>
-        <td>7</td>
-      </tr>
-      <tr>
-        <td>Nombre del Servicio</td>
-        <td>Activar Postulacion</td>
-      </tr>
-      <tr>
-        <td>URI</td>
-        <td>http://localhost:4000/v1/postulantesactivo/9</td>
-      </tr>
-      <tr>
-        <td>Descripcion:</td>
-        <td>Permite activar una postulacion a traves de su ID</td>
-      </tr>
-      <tr>
-        <td>Verbo HTTP:</td>
-        <td>PUT</td>
-      </tr>
-      <tr>
-        <td>HEADER:</td>
-        <td>token: token</td>
-      </tr>
-      <tr>
-        <td>Usuarios:</td>
-        <td>Administrador, Usuario</td>
-      </tr>
-      <tr>
-        <td>PETICION BODY</td>
-        <td>NULL</td>
-      </tr>
-      <tr>
-        <td>RESPUESTA JSON</td>
-        <td>
-          Correcto: JSON: { Status:200 message: "postulacion Activa " } 
-          Incorrecto: Status:404 body:{ status:404 message: `No se encontró ninguna postulacion con el ID ${id}`} 
-          Error: Status:500 body:{ message: "Error en el sistema" }
-        </td>
-      </tr>
-      <tr>
-        <td>Desarrollador:</td>
-        <td>Jorge Enrique Nuñez Molina</td>
-      </tr>
-      <tr>
-        <td>Rama:</td>
-        <td>DEVjenm</td>
-      </tr>
-    </table>
   </body>
 </html>

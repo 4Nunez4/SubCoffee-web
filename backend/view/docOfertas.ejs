@@ -6,29 +6,30 @@
     <title>Ofertas</title>
   </head>
   <body>
-    <hr>
+    <hr />
     <h2>Requerimiento. Documentación de ofertas</h2>
-    <hr>
 
+    <hr />
     <h3>Crear oferta</h3>
     <table>
-        <td>NUMERO</td>
+      <tr>
+        <td>Numero</td>
         <td>1</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL SERVICIO</td>
+        <td>Nombre del servicio</td>
         <td>Crear oferta</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/oferta</td>
+        <td>/v1/oferta</td>
       </tr>
       <tr>
-        <td>DESCRIPCIÓN</td>
+        <td>Descripción</td>
         <td>Permite crear ofertas en la base de datos</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>POST</td>
       </tr>
       <tr>
@@ -37,56 +38,67 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>Administrador, Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
-        <td>PETICIÓN body</td>
+        <td>PETICIÓN BODY</td>
         <td>
-            {
-                "oferta_ofer": 2000,
-                "fk_id_usuario": 1084252915,
-                "fk_id_subasta": 11
-                }
+          <pre><code>{
+  "oferta_ofer": 2000,
+  "fk_id_usuario": 1084252915,
+  "fk_id_subasta": 11,
+  "fecha_ofer": "2024-06-10T22:56:46.000Z"
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: "Se registro con exito la oferta."}
-          Incorrecto: JSON:{status: 404, message: "Error al registrar la oferta."}
-          Error: JSON:{status: 500, message: "Error servidor "}
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Se creo con exito la oferta."
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error al crear la oferta."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLLADOR</td>
-        <td>Jorge Enrique Nuñez Molina</td>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA:</td>
-        <td>DEVjenm</td>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
       </tr>
     </table>
-    <hr>
 
-    <h3>listar ofertas</h3>
+    <hr />
+    <h3>Listar ofertas</h3>
     <table>
-        <td>NUMERO</td>
-        <td>1</td>
+      <tr>
+        <td>Numero</td>
+        <td>2</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>listar ofertas</td>
+        <td>Nombre del servicio</td>
+        <td>Listar ofertas</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/oferta</td>
+        <td>/v1/oferta</td>
       </tr>
       <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>Permite listar ofertas de la base de datos</td>
+        <td>Descripción</td>
+        <td>Permite listar todas las ofertas creadas de la base de datos</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>GET</td>
       </tr>
       <tr>
@@ -95,50 +107,73 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>Administrador, Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
-        <td>PETICIÓN body</td>
-        <td>Null</td>
+        <td>PETICIÓN BODY</td>
+        <td>NULL</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, .json(result)}
-          Incorrecto: JSON:{status: 404, message: "no hay ofertas"}
-          Error: JSON:{status: 500, message: "Error en el servidor "}
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "status": 200,
+  "data": [
+    {
+      "pk_id_ofer": 74,
+      "fecha_ofer": "2024-06-10T22:56:46.000Z",
+      "oferta_ofer": 199000,
+      "fk_id_usuario": 2,
+      "fk_id_subasta": 30,
+      "pk_cedula_user": 2,
+      "nombre_user": "comprador",
+      "imagen_user": "imagen_perfil.jpg"
+    },
+    ...
+  ]
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No hay ofertas creadas por el momento"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLLADOR</td>
-        <td>Jorge Enrique Nuñez Molina</td>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA:</td>
-        <td>DEVjenm</td>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
       </tr>
     </table>
-    <hr>
 
-    <h3>actualizar oferta</h3>
+    <hr />
+    <h3>Actualizar oferta</h3>
     <table>
-        <td>NUMERO</td>
-        <td>1</td>
+      <tr>
+        <td>Numero</td>
+        <td>3</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>actualizar oferta</td>
+        <td>Nombre del servicio</td>
+        <td>Actualizar oferta</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/oferta/14</td>
+        <td>/v1/oferta/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>Permite actualizar ofertas de la base de datos</td>
+        <td>Descripción</td>
+        <td>Permite actualizar ofertas creadas en la base de datos por medio de su ID</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>PUT</td>
       </tr>
       <tr>
@@ -147,55 +182,64 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>Administrador, Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
-        <td>PETICIÓN body</td>
+        <td>PETICIÓN BODY</td>
         <td>
-            {
-                "oferta_ofer": 8000
-            }
+          <pre><code>{
+  "oferta_ofer": 8000
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: "oferta actualizada exitosamente"}
-          Incorrecto: JSON:{status: 404, message: "El ID de la oferta es incorrecto"}
-          Error: JSON:{status: 500, message: "Error en el sistema"}
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Oferta actualizada exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "El ID de la oferta es incorrecto"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLLADOR</td>
-        <td>Jorge Enrique Nuñez Molina</td>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA:</td>
-        <td>DEVjenm</td>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
       </tr>
     </table>
-    <hr>
 
-    
-    <h3>listar una oferta</h3>
+    <hr />
+    <h3>Buscar oferta</h3>
     <table>
-        <td>NUMERO</td>
-        <td>1</td>
+      <tr>
+        <td>Numero</td>
+        <td>4</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>listar una oferta</td>
+        <td>Nombre del servicio</td>
+        <td>Buscar oferta</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/oferta/14</td>
+        <td>/v1/oferta/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>Permite listar una oferta de la base de datos</td>
+        <td>Descripción</td>
+        <td>Permite buscar una oferta creada en la base de datos por medio de su ID</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>GET</td>
       </tr>
       <tr>
@@ -204,51 +248,67 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>Administrador, Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
-        <td>PETICIÓN body</td>
-        <td>Null</td>
+        <td>PETICIÓN BODY</td>
+        <td>NULL</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, data: rows }
-          Incorrecto: JSON:{status: 404, message: "Error ID ofertas no encontrada"}
-          Error: JSON:{status: 500, message: "Error al obtener la oferta"}
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "pk_id_ofer": 74,
+  "fecha_ofer": "2024-06-10T22:56:46.000Z",
+  "oferta_ofer": 199000,
+  "fk_id_usuario": 2,
+  "fk_id_subasta": 30,
+  "pk_cedula_user": 2,
+  "nombre_user": "comprador",
+  "imagen_user": "imagen_perfil.jpg"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error ID de oferta no encontrada"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLLADOR</td>
-        <td>Jorge Enrique Nuñez Molina</td>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA:</td>
-        <td>DEVjenm</td>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
       </tr>
     </table>
-    <hr>
 
-
-    <h3>eliminar una oferta</h3>
+    <hr />
+    <h3>Eliminar oferta</h3>
     <table>
-        <td>NUMERO</td>
-        <td>1</td>
+      <tr>
+        <td>Numero</td>
+        <td>5</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>eliminar una oferta</td>
+        <td>Nombre del servicio</td>
+        <td>Eliminar oferta</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/oferta/14</td>
+        <td>/v1/oferta/:id/:user</td>
       </tr>
       <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>Permite eliminar una oferta de la base de datos</td>
+        <td>Descripción</td>
+        <td>Permite eliminar una oferta creada en la base de datos por medio de su ID</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>DELETE</td>
       </tr>
       <tr>
@@ -257,27 +317,107 @@
       </tr>
       <tr>
         <td>USUARIOS</td>
-        <td>Administrador, Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
-        <td>PETICIÓN body</td>
-        <td>Null</td>
+        <td>PETICIÓN BODY</td>
+        <td>NULL</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: "oferta eliminada con éxito." }
-          Incorrecto: JSON:{status: 404, message:"No se encontró la oferta con el ID especificado."}
-          Error: JSON:{status: 500, message: "Error en el sistema."}
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Oferta eliminada con éxito."
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se encontró la oferta con el ID especificado."
+}</code></pre>
+          <strong>Error:</strong> Status: 404
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLLADOR</td>
-        <td>Jorge Enrique Nuñez Molina</td>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>RAMA:</td>
-        <td>DEVjenm</td>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
       </tr>
     </table>
-    <hr>
+    
+    <hr />
+    <h3>Buscar oferta mayor</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>Nombre del servicio</td>
+        <td>Buscar oferta mayor</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/ofertamayor/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite buscar la oferta mayor según la subasta creada en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "pk_id_ofer": 74,
+  "fecha_ofer": "2024-06-10T22:56:46.000Z",
+  "oferta_ofer": 199000,
+  "fk_id_usuario": 2,
+  "fk_id_subasta": 30,
+  "pk_cedula_user": 2,
+  "nombre_user": "comprador",
+  "imagen_user": "imagen_perfil.jpg"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error ID de oferta no encontrada"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+  </body>
+</html>

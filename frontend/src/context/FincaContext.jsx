@@ -6,6 +6,7 @@ import {
   updateFincaActivar,
   updateFincaDesact,
   getFincaForUserActivas,
+  getFincaForUserOne,
 } from "../api/api.finca";
 import ModalMessage from "../nextui/ModalMessage";
 
@@ -24,6 +25,7 @@ export const FincaProvider = ({ children }) => {
   const [mensaje, setMensaje] = useState("");
   const [errors, setErrors] = useState([]);
   const [fincas, setFincas] = useState([]);
+  const [finca, setFinca] = useState([]);
   const [fincasActivas, setFincasActivas] = useState([]);
   const [idFinca, setIdFinca] = useState(0)
   const [cerrarModal, setCerrarModal] = useState(false)
@@ -32,6 +34,16 @@ export const FincaProvider = ({ children }) => {
     try {
       const res = await getFincaForUser(user);
       setFincas(res.data.data);
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  };
+
+  const getFincaUserOne = async (finca) => {
+    try {
+      await getFincaForUserOne(finca).then((res) => {
+        setFinca(res.data.data);
+      })
     } catch (error) {
       console.error(error.response.data);
     }
@@ -121,7 +133,9 @@ export const FincaProvider = ({ children }) => {
         getFincaUserActivas,
         fincasActivas,
         cerrarModal,
-        setCerrarModal
+        setCerrarModal,
+        getFincaUserOne,
+        finca
       }}
     >
       <ModalMessage

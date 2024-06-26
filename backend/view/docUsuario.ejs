@@ -41,27 +41,43 @@
       </tr>
       <tr>
         <td>PETICION BODY</td>
-        <td>{ "correo":"juan@gmail.com", "password":"123456" }</td>
+        <td>
+<pre>{
+  "correo": admin@gmail.com,
+  "password": "123456789",
+}</pre>
+</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: { "user": { 
-            "pk_cedula_user": 1084251889,
-            "nombre_user": "Juanca Realpe",
-            "email_user": "juan@gmail.com",
-            "password_user": "123456",
-            "descripcion_user": null, 
-            "imagen_user": null,
-            "telefono_user": "3157874593", 
-            "fecha_nacimiento_user": "2005-06-17",
-            "rol_user": "admin", 
-            "estado_user": "activo" 
-        }, "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-          } <br />
-          Incorrecto: Status:404 body: { "Correo incorrecto" } <br />
-          Incorrecto: Status:404 body: { "Contraseña incorrecta" } <br />
-          Error: Status:500 body: { "Error en el servidor" + error }
+          <strong>Correcto:</strong> Status: 200
+          <pre>{
+  "user": {
+      "pk_cedula_user": 123456,
+      "nombre_user": "admin",
+      "email_user": "admin@gmail.com",
+      "password_user": "$2b$12$sfx4cyI/O.lJ1cgGyAeEy.QbRDp2ox.TbMzJU487RtZv9njcOFBAy",
+      "descripcion_user": null,
+      "imagen_user": imagen_perfil5.jpg,
+      "telefono_user": "3214131",
+      "rol_user": "admin",
+      "estado_user": "activo"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}</pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre>{
+  "message": "Correo incorrecto"
+}</pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre>{
+  "message": "Contraseña incorrecta"
+}</pre>
+<strong>Error:</strong> Status: 500
+<pre>{
+  "message": "Error en el servidor" + error
+}</pre>
         </td>
       </tr>
       <tr>
@@ -89,8 +105,8 @@
         <td>/v1/users</td>
       </tr>
       <tr>
-        <td>Descripción:</td>
-        <td>Permite registrar a los usuarios</td>
+        <td>Descripción</td>
+        <td>Permite registrar usuarios en la base de datos</td>
       </tr>
       <tr>
         <td>Verbo HTTP</td>
@@ -104,34 +120,52 @@
         <td>Usuarios</td>
         <td>ADMINISTRADOR</td>
       </tr>
-      <tr>
-        <td>PETICION BODY</td>
-        <td>
-            {
-                "cedula_user": 100000,
-                "nombre_user": "Pepito Perez",
-                "email_user": "pepito@gmail.com",
-                "password_user": "123456789",
-                "telefono_user": "3100000000",
-                "fechanacimiento_user": "2000-01-01",
-                "rol_user": "vendedor"
-              }
-        </td>
-      </tr>
-      <tr>
-        <td>RESPUESTA JSON</td>
-        <td>
-          Correcto: Status:200 json: { "Usuario creado exitosamente" } <br />
-          Incorrecto: Status:404 body: { "No se pudo crear el usuario" } <br />
-          Error: Status:500 body: { "Error en el servidor" + error }
-        </td>
-      </tr>
+<tr>
+<td>PETICIÓN BODY</td>
+<td>
+<pre>{
+  "cedula_user": 100000,
+  "imagen_user": imagen_perfil3.jpg,
+  "nombre_user": "Pepito Perez",
+  "email_user": "pepito@gmail.com",
+  "password_user": "123456789",
+  "telefono_user": "3100000000",
+  "fechanacimiento_user": "2000-01-01",
+  "rol_user": "vendedor"
+}</pre>
+</td>
+</tr>
+<tr>
+<td>RESPUESTA JSON</td>
+<td>
+<strong>Correcto:</strong> Status: 200
+<pre>{
+  "message": "Usuario creado exitosamente"
+}</pre>
+<strong>Incorrecto:</strong> Status: 400 (Cédula existente)
+<pre>{
+  "message": "Ya existe un usuario con esa cédula"
+}</pre>
+<strong>Incorrecto:</strong> Status: 400 (Correo existente)
+<pre>{
+  "message": "Ya existe un usuario con ese correo"
+}</pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre>{
+  "message": "No se pudo crear el usuario"
+}</pre>
+<strong>Error:</strong> Status: 500
+<pre>{
+  "message": "Error en el servidor" + error
+}</pre>
+</td>
+</tr>
       <tr>
         <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
       </tr>
       <tr>
-        <td>Rama:</td>
+        <td>Rama</td>
         <td>DEVjcrc</td>
       </tr>
     </table>
@@ -152,9 +186,7 @@
       </tr>
       <tr>
         <td>Descripción:</td>
-        <td>
-          Permite listar a los usuarios que se encuentran registrados en la base de datos
-        </td>
+        <td>Permite listar a los usuarios que se encuentran registrados en la base de datos</td>
       </tr>
       <tr>
         <td>Verbo HTTP</td>
@@ -174,40 +206,45 @@
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
-        <td>
-          Correcto: Status:200 json: {
-            "message": "Los Usuarios son: ",
-            "data": [
-                {
-                    "pk_cedula_user": 100000,
-                    "nombre_user": "Pepito Perez",
-                    "email_user": "pepito@gmail.com",
-                    "password_user": "$2b$12$.BD.D1I5g44mkcdn18nYR.nipqa3WBrc3sPRMeO/JDZwuAHF2Y0zS",
-                    "descripcion_user": null,
-                    "imagen_user": null,
-                    "telefono_user": "3100000000",
-                    "fecha_nacimiento_user": "2000-01-01",
-                    "rol_user": "vendedor",
-                    "estado_user": "activo"
-                },
-                {
-                    "pk_cedula_user": 1084252915,
-                    "nombre_user": "Andres",
-                    "email_user": "andres@gmail.com",
-                    "password_user": "$2b$12$S6SGNywU6GOsgRj6.HwIPuGqsTlKItSH8LcN8/lhCqV/.A9VgcygC",
-                    "descripcion_user": null,
-                    "imagen_user": null,
-                    "telefono_user": "3186452162",
-                    "fecha_nacimiento_user": "2006-06-10T05:00:00.000Z",
-                    "rol_user": "vendedor",
-                    "estado_user": "activo"
-                },
-            }
-          <br />
-          Incorrecto: Status:404 body: { "No hay Usuarios registrados por el momento" } <br />
-          Error: Status:500 body: { "Error en el servidor" + error }
-        </td>
-      </tr>
+<td>
+<strong>Correcto:</strong> Status: 200
+<pre><code>{
+  "message": "Los usuarios son:",
+  "data": [
+    {
+      "pk_cedula_user": 1,
+      "nombre_user": "vendedor",
+      "email_user": "vendedor@gmail.com",
+      "password_user": "$2b$12$af5bnP76MuPb3IwdEsqcROiAuNt6HjOQjdhFwPtfAV0RcNAG5oJeO",
+      "descripcion_user": "",
+      "imagen_user": null,
+      "telefono_user": "3167654352",
+      "rol_user": "vendedor",
+      "estado_user": "activo"
+    },
+    {
+      "pk_cedula_user": 2,
+      "nombre_user": "comprador",
+      "email_user": "comprador@gmail.com",
+      "password_user": "$2b$12$IyNKalf9vSZLInC7u/RMPuFYSS99IcuBgYaj37eKZO7qyz3vH7KAa",
+      "descripcion_user": "",
+      "imagen_user": "imagen_perfil.jpg",
+      "telefono_user": "3657265342",
+      "rol_user": "comprador",
+      "estado_user": "activo"
+    }
+  ]
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "body": "No hay Usuarios registrados por el momento"
+}</code></pre>
+<strong>Error:</strong> Status: 500
+<pre><code>{
+  "body": "Error en el servidor" + error
+}</code></pre>
+</td>        
+</tr>
       <tr>
         <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
@@ -234,7 +271,7 @@
       </tr>
       <tr>
         <td>Descripción:</td>
-        <td>Permite actualizar los datos de los usuarios</td>
+        <td>Permite actualizar los datos de los usuarios registrados en la base de datos</td>
       </tr>
       <tr>
         <td>Verbo HTTP</td>
@@ -248,28 +285,46 @@
         <td>Usuarios</td>
         <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
       </tr>
-      <tr>
-        <td>PETICION BODY</td>
-        <td>
-          { "cedula_user": "100000",
-            "nombre_user": "Pepito",
-            "email_user": "pepito@hotmail.com",
-            "descripcion_user": "Hola, soy muy bueno.", 
-            "password_user": "123456789", 
-            "telefono_user": "3207383",
-            "fecha_nacimiento_user": "2020-10-10", 
-            "rol_user": "admin", 
-            "img": file }
-        </td>
-      </tr>
-      <tr>
-        <td>RESPUESTA JSON</td>
-        <td>
-          Correcto: Status:200 json: { "Usuario actualizado con exito" }<br />
-          Incorrecto: Status:404 body: { "No se pudo actualizar el usuario" } <br />
-          Error: Status:500 body: { "Error en el servidor" + error }
-        </td>
-      </tr>
+<tr>
+<td>PETICIÓN BODY</td>
+<td>
+<pre><code>{
+  "cedula_user": "100000",
+  "nombre_user": "Pepito",
+  "email_user": "pepito@hotmail.com",
+  "descripcion_user": "Hola, soy muy bueno.",
+  "password_user": "123456789",
+  "telefono_user": "3207383",
+  "rol_user": "admin",
+  "imagen_user": "imagen_perfil5"
+}</code></pre>
+</td>
+</tr>
+<tr>
+<td>RESPUESTA JSON</td>
+<td>
+<strong>Correcto:</strong> Status: 200
+<pre>{
+  "message": "Usuario actualizado con exito"
+}</pre>
+<strong>Incorrecto:</strong> Status: 400 (Cédula existente)
+<pre>{
+  "message": "Ya existe un usuario con esa cédula"
+}</pre>
+<strong>Incorrecto:</strong> Status: 400 (Correo existente)
+<pre>{
+  "message": "Ya existe un usuario con ese correo"
+}</pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "Error con el ID al actualizar el usuario"
+}</code></pre>
+<strong>Error:</strong> Status: 500
+<pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+</td>
+</tr>    
       <tr>
         <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
@@ -314,30 +369,35 @@
         <td>PETICION</td>
         <td>NULL</td>
       </tr>
-      <tr>
-        <td>RESPUESTA JSON</td>
-        <td>
-          Correcto: Status:200 json: {
-            "message": "Usuario encontrado con exito",
-            "data": [
-                {
-                    "pk_cedula_user": 100000,
-                    "nombre_user": "Pepito Pérezz",
-                    "email_user": "pepito1@gmail.com",
-                    "password_user": "$2b$12$d.V0vVLdgDhKfuA.Gr8ycOKEpd68fj94291QQKyc.B3s6H4zNEpHO",
-                    "descripcion_user": "Hola, soy muy bueno.",
-                    "imagen_user": "imagen_perfil1.jpg",
-                    "telefono_user": "3100000001",
-                    "fecha_nacimiento_user": "2000-11-11",
-                    "rol_user": "vendedor",
-                    "estado_user": "activo"
-                }
-            ]
-        }<br />
-          Incorrecto: Status:404 body: { 'Error al encontrar el usuario' } <br />
-          Error: Status:500 body: { "Error en el servidor" + error}
-        </td>
-      </tr>
+<tr>
+<td>RESPUESTA JSON</td>
+<td>
+<strong>Correcto:</strong> Status: 200
+<pre><code>{
+  "message": "Usuario encontrado con exito",
+  "data": [
+    {
+      "pk_cedula_user": 1,
+      "nombre_user": "vendedor",
+      "email_user": "vendedor@gmail.com",
+      "password_user": "$2b$12$af5bnP76MuPb3IwdEsqcROiAuNt6HjOQjdhFwPtfAV0RcNAG5oJeO",
+      "descripcion_user": "",
+      "imagen_user": null,
+      "telefono_user": "3167654352",
+      "rol_user": "vendedor",
+      "estado_user": "activo"
+    }
+  ]
+  }</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "Error al encontrar el usuario con ese ID"
+}</code></pre>
+<strong>Error:</strong> Status: 500
+<pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+</td></tr>
       <tr>
         <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
@@ -364,7 +424,7 @@
       </tr>
       <tr>
         <td>Descripción:</td>
-        <td>Permite eliminar a usuarios</td>
+        <td>Permite eliminar los usuarios registrados en la base de datos</td>
       </tr>
       <tr>
         <td>Verbo</td>
@@ -382,14 +442,23 @@
         <td>PETICION</td>
         <td>NULL</td>
       </tr>
-      <tr>
-        <td>RESPUESTA JSON</td>
-        <td>
-          Correcto: Status:200 json: { 'Usuario eliminado con exito' } <br />
-          Incorrecto: Status:404 body: { 'Error con el ID al eliminar el usuario' } <br />
-          Error: Status:500 body: { "Error en el servidor" + error }
-        </td>
-      </tr>
+<tr>
+<td>RESPUESTA JSON</td>
+<td>
+<strong>Correcto:</strong> Status: 200
+<pre><code>{
+  "message": "Usuario eliminado con éxito"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "Error con el ID al eliminar el usuario"
+}</code></pre>
+<strong>Error:</strong> Status: 500
+<pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+</td>
+</tr>    
       <tr>
         <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
@@ -412,7 +481,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/v1/users/:id</td>
+        <td>/v1/usersdes/:id</td>
       </tr>
       <tr>
         <td>Descripción:</td>
@@ -437,11 +506,20 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: { 'Usuario desactivado exitosamente' } <br />
-          Incorrecto: Status:404 body: { 'No se encontró ningun usuario con el ID ${id}' } <br />
-          Error: Status:500 body: { "Error en el servidor" + error }
-        </td>
-      </tr>
+<strong>Correcto:</strong> Status: 200
+<pre><code>{
+  "message": "Usuario desactivado exitosamente"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "No se encontró ningún usuario con el ID"
+}</code></pre>
+<strong>Error:</strong> Status: 500
+<pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+</td>
+</tr>
       <tr>
         <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
@@ -464,7 +542,7 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/v1/users/:id</td>
+        <td>/v1/usersac/:id</td>
       </tr>
       <tr>
         <td>Descripción:</td>
@@ -489,11 +567,20 @@
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: Status:200 json: { 'Usuario activado exitosamente' } <br />
-          Incorrecto: Status:404 body: { 'No se encontró ningun usuario con el ID ${id}' } <br />
-          Error: Status:500 body: { "Error en el servidor" + error } <br />
-        </td>
-      </tr>
+<strong>Correcto:</strong> Status: 200
+<pre><code>{
+  "message": "Usuario activado exitosamente"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "No se encontró ningún usuario con el ID"
+}</code></pre>
+<strong>Error:</strong> Status: 500
+<pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+</td>
+</tr>
       <tr>
         <td>Desarrollador</td>
         <td>Juan Camilo Realpe Ceron</td>
@@ -503,5 +590,160 @@
         <td>DEVjcrc</td>
       </tr>
     </table>
+
+    <h3>Cambiar contraseña</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>9</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Cambiar contraseña</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/users-password/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite cambiar la contraseña de los usuarios registrados en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios</td>
+        <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION</td>
+<td>
+<pre><code>{
+  "oldPassword": "123456789",
+  "newPassword": "newPassword123",
+  "confirmPassword": "newPassword123"
+}</code></pre>
+</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+<strong>Correcto:</strong> Status: 200
+<pre><code>{
+  "message": "Se registró la nueva contraseña con éxito"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "Usuario no encontrado"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "Contraseña incorrecta"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "La nueva contraseña no coincide con la de confirmar contraseña"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "Error con el ID del usuario al cambiar la contraseña"
+}</code></pre>
+<strong>Error:</strong> Status: 500
+<pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+</td>
+</tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <h3>Recuperar contraseña</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Recuperar contraseña</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/recuperarpassword</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite recuperar y cambiar la contraseña de los usuarios registrados en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios</td>
+        <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION</td>
+        <td>
+<pre><code>{
+  "email_user": "pepito@example.com",
+  "newPassword": "newPassword123",
+  "confirmPassword": "newPassword123"
+}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>RESPUESTA JSON</td>
+<td>
+<strong>Correcto:</strong> Status: 200
+<pre><code>{
+  "message": "Se registró la nueva contraseña con éxito"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "Usuario no encontrado"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "La nueva contraseña no coincide con la de confirmar contraseña"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "Error con el ID del usuario al cambiar la contraseña"
+}</code></pre>
+<strong>Error:</strong> Status: 500
+<pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+</td>
+</tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
   </body>
 </html>

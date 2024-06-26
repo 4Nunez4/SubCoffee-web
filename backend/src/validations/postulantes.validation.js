@@ -1,6 +1,6 @@
 import { check } from "express-validator";
 
-export const validarGuardarPostulante = [
+export const validarPostulante = [
   check("fk_id_usuario")
     .isNumeric()
     .withMessage("fk_id_usuario debe ser un número"),

@@ -1,6 +1,6 @@
 import { check } from "express-validator"
 
-export const validarRegistrarOfertas = [
+export const validarOfertas = [
     check('oferta_ofer').not()
     .isEmpty().isNumeric().withMessage('oferta_ofer debe ser un número'),
     check('fk_id_usuario') .not()

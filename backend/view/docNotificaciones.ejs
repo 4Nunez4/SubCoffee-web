@@ -3,33 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Notificaciones</title>
+    <title>Documentación de Notificaciones</title>
   </head>
   <body>
-    <hr>
-    <h2>Requerimiento. Documentación de notificaciones</h2>
-    <hr>
+    <hr />
+    <h2>Requerimiento: Documentación de Notificaciones</h2>
 
-    <h3>Crear notificación</h3>
+    <hr />
+    <h3>Crear Notificación</h3>
     <table>
-
-        <td>NUMERO</td>
+      <tr>
+        <td>Número</td>
         <td>1</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>Crear notificación</td>
+        <td>Nombre de servicio</td>
+        <td>Crear Notificación</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>/user/notificaciones</td>
+        <td>/v1/notificaciones</td>
       </tr>
       <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>Permite crear una notificacion en la base de datos</td>
+        <td>Descripción</td>
+        <td>Permite crear una notificación en la base de datos</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>POST</td>
       </tr>
       <tr>
@@ -37,58 +37,68 @@
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
-        <td>Administrador, Usuarios</td>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
-        <td>PETICIÓN body</td>
+        <td>PETICIÓN BODY</td>
         <td>
-          {
-            "tipo_not": "mensaje",
-            "texto_not"	: "la suasta a iniciado empieza a subastar",
-            "fk_id_subasta": 11,
-            "fk_id_usuario": 1084253677
-            }
+          <pre><code>{
+  "tipo_not": "mensaje",
+  "texto_not": "la subasta ha iniciado, comience a ofertar",
+  "fk_id_subasta": 11,
+  "fk_id_usuario": 1084253677
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: 'Notificación creada exitosamente.'} 
-          Incorrecto: JSON:{status: 404, message: "Error al crear la notificación."} 
-          Error: JSON:{status: 500, message:'Error en el sistema.'}
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Notificación creada exitosamente."
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error al crear la notificación."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el sistema."
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLLADOR</td>
+        <td>Desarrollador</td>
         <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
-        <td>RAMA:</td>
+        <td>Rama:</td>
         <td>DEVjenm</td>
       </tr>
     </table>
-    <hr>
-    <h3>Listar notificaciones</h3>
+
+    <hr />
+    <h3>Listar Notificaciones</h3>
     <table>
       <tr>
-        <td>NUMERO</td>
+        <td>Número</td>
         <td>2</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>Listar todas las notificaciones</td>
+        <td>Nombre de servicio</td>
+        <td>Listar Todas las Notificaciones</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/notificaciones</td>
+        <td>/v1/notificaciones</td>
       </tr>
       <tr>
-        <td>DESCRIPCIÓN</td>
+        <td>Descripción</td>
         <td>Permite listar todas las notificaciones de la base de datos</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>GET</td>
       </tr>
       <tr>
@@ -96,50 +106,62 @@
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
-        <td>ADMINISTRADOR, USUARIO</td>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
-        <td>PETICIÓN body</td>
+        <td>PETICIÓN BODY</td>
         <td>NULL</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message:"Notificaciones encontradas con éxito', data:rows} 
-          Incorrecto: JSON:{status: 404, message: 'No se encontraron notificaciones.'} 
-          Error: JSON:{status: 500, message:'Error en el sistema.'}
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Notificaciones encontradas con éxito",
+  "data": [ ... ]
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se encontraron notificaciones."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el sistema."
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLLADOR</td>
+        <td>Desarrollador</td>
         <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
-        <td>RAMA:</td>
+        <td>Rama:</td>
         <td>DEVjenm</td>
       </tr>
     </table>
-    <hr>
-    <h3>Actualizar notificación</h3>
+
+    <hr />
+    <h3>Actualizar Notificación</h3>
     <table>
-        <td>NUMERO</td>
+      <tr>
+        <td>Número</td>
         <td>3</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>actualizar notificación</td>
+        <td>Nombre de servicio</td>
+        <td>Actualizar Notificación</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/notificaciones/7</td>
+        <td>/v1/notificaciones/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>Permite actualizar las notificaciones de la base de datos</td>
+        <td>Descripción</td>
+        <td>Permite actualizar una notificación específica en la base de datos</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>PUT</td>
       </tr>
       <tr>
@@ -147,58 +169,66 @@
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
-        <td>Administrador, Usuarios</td>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
-        <td>PETICIÓN body</td>
+        <td>PETICIÓN BODY</td>
         <td>
-          {
-            "tipo_not": "cierre",
-            "texto_not"	: "la suasta a finalizado"
-            }
+          <pre><code>{
+  "tipo_not": "cierre",
+  "texto_not": "la subasta ha finalizado"
+}</code></pre>
         </td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: 'Notificación actualizada exitosamente.'} 
-          Incorrecto: JSON:{status: 404, message: "El ID proporcionado no existe."} 
-          Error: JSON:{status: 500, message: 'Error en el sistema.'}
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Notificación actualizada exitosamente."
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "El ID proporcionado no existe."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el sistema."
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLLADOR</td>
+        <td>Desarrollador</td>
         <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
-        <td>RAMA:</td>
+        <td>Rama:</td>
         <td>DEVjenm</td>
       </tr>
     </table>
-<hr>
-    <h3>Buscar notificación</h3>
-    <table>
 
-        <td>NUMERO</td>
+    <hr />
+    <h3>Buscar Notificación</h3>
+    <table>
+      <tr>
+        <td>Número</td>
         <td>4</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>Listar notificación</td>
+        <td>Nombre de servicio</td>
+        <td>Buscar Notificación</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/notificaciones/7</td>
+        <td>/v1/notificaciones/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>
-          Permite listar una notificación en especifico de la base de datos
-        </td>
+        <td>Descripción</td>
+        <td>Permite buscar una notificación específica en la base de datos</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>GET</td>
       </tr>
       <tr>
@@ -206,51 +236,61 @@
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
-        <td>Administrador, Usuarios</td>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
-        <td>PETICIÓN body</td>
+        <td>PETICIÓN BODY</td>
         <td>NULL</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message:"notificación encontrada exitosamente."} 
-          Incorrecto: JSON:{status: 404, message: 'Error con ID de Notificación, no encontrado.'} 
-          Error: JSON:{status: 500, message: 'Error en el sistema.'}
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Notificación encontrada exitosamente."
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error con ID de Notificación, no encontrado."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el sistema."
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLLADOR</td>
+        <td>Desarrollador</td>
         <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
-        <td>RAMA:</td>
+        <td>Rama:</td>
         <td>DEVjenm</td>
       </tr>
     </table>
- <hr>
-    <h3>Eliminar notificación</h3>
-    <table>
 
-        <td>NUMERO</td>
+    <hr />
+    <h3>Eliminar Notificación</h3>
+    <table>
+      <tr>
+        <td>Número</td>
         <td>5</td>
       </tr>
       <tr>
-        <td>NOMBRE DEL SERVICIO</td>
-        <td>Eliminar notificación</td>
+        <td>Nombre de servicio</td>
+        <td>Eliminar Notificación</td>
       </tr>
       <tr>
         <td>URI</td>
-        <td>http://localhost:4000/v1/notificaciones/7</td>
+        <td>/v1/notificaciones/:id</td>
       </tr>
       <tr>
-        <td>DESCRIPCIÓN</td>
-        <td>Permite eliminar las notificaciones de la base de datos</td>
+        <td>Descripción</td>
+        <td>Permite eliminar una notificación específica de la base de datos</td>
       </tr>
       <tr>
-        <td>VERBO HTTP</td>
+        <td>Verbo HTTP</td>
         <td>DELETE</td>
       </tr>
       <tr>
@@ -258,29 +298,39 @@
         <td>token: token</td>
       </tr>
       <tr>
-        <td>USUARIOS</td>
-        <td>Administrador, Usuarios</td>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
-        <td>PETICIÓN body</td>
+        <td>PETICIÓN BODY</td>
         <td>NULL</td>
       </tr>
       <tr>
         <td>RESPUESTA JSON</td>
         <td>
-          Correcto: JSON:{status: 200, message: 'Notificación eliminada exitosamente.'} 
-          Incorrecto: JSON:{status: 404, message: 'La notificación con el ID proporcionado no existe.'} 
-          Error: JSON:{status: 500, message: 'Error en el sistema.'}
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Notificación eliminada exitosamente."
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "La notificación con el ID proporcionado no existe."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el sistema."
+}</code></pre>
         </td>
       </tr>
       <tr>
-        <td>DESARROLLADOR</td>
+        <td>Desarrollador</td>
         <td>Jorge Enrique Nuñez Molina</td>
       </tr>
       <tr>
-        <td>RAMA:</td>
+        <td>Rama:</td>
         <td>DEVjenm</td>
       </tr>
     </table>
+
   </body>
 </html>

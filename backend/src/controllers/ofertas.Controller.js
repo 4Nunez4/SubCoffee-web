@@ -10,12 +10,12 @@ export const guardarOfertas = async (req, res) => {
     const { oferta_ofer, fk_id_usuario, fk_id_subasta } = req.body;    
     const [rows] = await pool.query("INSERT INTO ofertas(oferta_ofer,fk_id_usuario,fk_id_subasta) VALUES (?,?,?)",[oferta_ofer, fk_id_usuario, fk_id_subasta] );
     if (rows.affectedRows) {
-      res.status(200).json({ message: "Se registro con exito la oferta." });
+      res.status(200).json({ message: "Se creo con exito la oferta." });
     } else {
-      res.status(404).json({  message: "Error al registrar la oferta." });
+      res.status(404).json({ message: "Error al crear la oferta." });
     }
  } catch (error) {
-    res.status(500).json({ message: "Error servidor " + error });
+    res.status(500).json({ message: "Error en el servidor " + error });
  }
 };
    
@@ -27,7 +27,7 @@ export const listarOfertas = async (req, res) => {
     if (result.length > 0) {
       res.status(200).json(result);
     } else {
-      res.status(204).send({ mesage: "no hay ofertas" });
+      res.status(204).send({ mesage: "No hay ofertas creadas por el momento" });
     }
   } catch (error) {
     res.status(500).json({ mesage: "Error en el servidor " + error });
@@ -48,12 +48,12 @@ export const atualizarOfertas = async (req, res) => {
       [oferta_ofer, id]
     );
     if (result.affectedRows > 0) {
-      res.status(200).json({ status: 200, message: "oferta actualizada exitosamente" });
+      res.status(200).json({ message: "oferta actualizada exitosamente" });
     } else {
-      res.status(404).json({ status: 404, message: "El ID de la oferta es incorrecto" });
+      res.status(404).json({ message: "El ID de la oferta es incorrecto" });
     }
   } catch (error) {
-    res.status(500).json({ status: 500, message: "Error en el sistema" + error });
+    res.status(500).json({ message: "Error en el servidor " + error });
   }
 };
 
@@ -71,10 +71,10 @@ export const buscarOferta = async (req, res) => {
     if (rows.length > 0) {
       res.status(200).json({ data: rows });
     } else {
-      res.status(204).json({ message: "Error ID ofertas no encontrada" });
+      res.status(204).json({ message: "Error ID de oferta no encontrada" });
     }
-  } catch (e) {
-    res.status(500).json({ message: "Error al obtener las ofertas", e });
+  } catch (error) {
+    res.status(500).json({ message: "Error en el servidor " + error });
   }
 };
 
@@ -97,7 +97,7 @@ export const buscarOfertaMayor = async (req, res) => {
       res.status(204).json({ message: "No se encontraron ofertas para esta subasta" });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error al obtener la mayor oferta", error });
+    res.status(500).json({ message: "Error en el servidor " + error });
   }
 };
 
@@ -109,12 +109,12 @@ export const eliminarOferta = async (req, res) => {
       id, user
     ]);
     if (result.affectedRows > 0) {
-      res.status(200).json({ status: 200, message: "oferta eliminada con éxito." });
+      res.status(200).json({ message: "oferta eliminada con éxito." });
     } else {
-      res.status(404).json({message: "No se encontró la oferta con el ID especificado.",});
+      res.status(404).json({ message: "No se encontró la oferta con el ID especificado." });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error en el sistema." });
+    res.status(500).json({ message: "Error en el servidor " + error });
   }
 };
 

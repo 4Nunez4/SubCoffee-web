@@ -163,7 +163,7 @@ export default function UsersTable() {
                 Desactivar
               </Button>
             ) : (
-              <Button className="bg-green-600 text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => updateUserActive(user.pk_cedula_user)}>
+              <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => updateUserActive(user.pk_cedula_user)}>
                 Activar
               </Button>
             )}
@@ -245,7 +245,7 @@ export default function UsersTable() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="bg-[#00684a] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
+            <Button className="bg-[#39A800] text-white" endContent={<PlusIcon />} onClick={() => handleToggle("create")} >
               Registrar
             </Button>
           </div>
@@ -304,7 +304,7 @@ export default function UsersTable() {
   }, [items.length, page, pages, hasSearchFilter]);
 
   return (
-    <div className="mx-20">
+    <div className="px-20 bg-[#FDFBF6]">
       <FormUser
         open={abrirModal}
         onClose={() => setAbrirModal(false)}

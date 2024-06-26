@@ -1,6 +1,6 @@
 import { check } from "express-validator";
 
-export const validationRegisterUser = [
+export const validationUser = [
   check("pk_cedula_user", "La cedula es obligatorio, max 11 caracteres")
     .not()
     .isEmpty()

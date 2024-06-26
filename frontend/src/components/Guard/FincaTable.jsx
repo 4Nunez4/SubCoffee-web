@@ -32,7 +32,7 @@ function FincaTable() {
       <div className="grid lg:grid-cols-2 py-4 gap-3 px-4 items-center">
         <p className="text-center font-bold text-lg">Tu finca tiene una historia que contar</p>
         <Button
-          className="bg-[#00684a] text-white mx-auto"
+          className="bg-[#39A800] text-white mx-auto"
           endContent={<PlusIcon />}
           onClick={() => handleToggleFinca("create")}
         >
@@ -91,7 +91,7 @@ function FincaTable() {
                 <div className="flex justify-center items-center gap-2 flex-col px-4">
                   <Button
                     className="w-full"
-                    onPress={() => {setAbrirModalVariedad(true); setPkFinca(result.pk_id_fin)}}
+                    onPress={() => {setAbrirModalVariedad(true); setPkFinca(result)}}
                   >
                     Ver variedades de la finca
                   </Button>
@@ -118,7 +118,7 @@ function FincaTable() {
                     </Button>
                   ) : (
                     <Button
-                      className="bg-green-600 text-white w-full"
+                      className="bg-[#39A800] text-white w-full"
                       startContent={<ActivarIcon />}
                       onClick={() => {
                         activarFincas(result.pk_id_fin, user.pk_cedula_user);
