@@ -6,6 +6,7 @@ import { RxLockClosed } from "react-icons/rx";
 import { IoCalendarOutline } from "react-icons/io5";
 import { Button } from "@nextui-org/react";
 import { FaArrowUp } from "react-icons/fa";
+import FooterLinkAtom from "../components/atoms/FooterLinkAtom";
 
 function DashboardContentOrganims() {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ function DashboardContentOrganims() {
         <div className="  bg-[#FDFBF6]">
           <section
             id="quienessomos"
-            className="relative h-screen  flex flex-col items-center justify-center "
+            className="relative h-[90vh]  flex flex-col items-center justify-center "
           >
             <div className="grid grid-cols-2 place-items-center px-20">
               <div className="flex flex-col items-center justify-center">
@@ -70,9 +71,12 @@ function DashboardContentOrganims() {
                     </p>
                   </div>
                   <div className=" flex justify-center items-center">
-                    <Button endContent={<FaArrowUp className="rotate-45" />} className="text-white bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center">
+                  <FooterLinkAtom to="/somos"> 
+                    <Button endContent={<FaArrowUp className="rotate-45" />}  className="text-white bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center">
                       Conoce más
                     </Button>
+                  </FooterLinkAtom>
+                  
                   </div>
                 </div>
               </div>
@@ -91,7 +95,7 @@ function DashboardContentOrganims() {
         <div className="bg-[#FDFBF6]">
           <section
             id="quequeremos"
-            className="h-screen relative flex flex-col items-center justify-center "
+            className="h-[90vh] relative flex flex-col items-center justify-center "
           >
             <div className="grid grid-cols-2 place-items-center px-20">
               <div className="self-center">
@@ -116,9 +120,14 @@ function DashboardContentOrganims() {
                     </p>
                   </div>
                   <div className="flex justify-center items-center">
-                    <Button endContent={<FaArrowUp className="rotate-45" />} className="text-white bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center">
+            <FooterLinkAtom to="/queremoslograr">
+            
+             <Button endContent={<FaArrowUp className="rotate-45" />} className="text-white bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center">
                       Conoce más
                     </Button>
+             </FooterLinkAtom>
+
+                   
                   </div>
                 </div>
               </div>
@@ -129,7 +138,7 @@ function DashboardContentOrganims() {
         <div className="bg-[#FDFBF6]">
           <section
             id="beneficios"
-            className="h-screen relative flex flex-col items-center justify-center "
+            className="h-[110vh] relative flex flex-col items-center justify-center "
           >
             <div className="w-full px-20 py-5">
               <h2 className="font-bold text-3xl text-[#323232] leading-loose">

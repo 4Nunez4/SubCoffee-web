@@ -5,7 +5,7 @@ import { RiInstagramFill } from "react-icons/ri";
 import { FaLinkedin } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaTiktok } from "react-icons/fa";
-import { RiWhatsappFill } from "react-icons/ri";
+import { SiGmail } from "react-icons/si";
 
 import FooterLinkAtom from "../atoms/FooterLinkAtom";
 import { Link } from "react-router-dom";
@@ -31,8 +31,10 @@ const FooterOrganism = () => {
               <p className=" text-base text-[#FDFBF6] text-center">
                 Una plataforma innovadora diseñada para conectar a caficultores,
                 compradores y comerciantes en un entorno de subastas eficiente y
-                transparente.
+                transparente, contactanos si encuentas algun defecto.
+                <p className="font-medium">subcoffee1s@gmail.com</p>
               </p>
+              
             </div>
             <div>
               <Link to="/" className="cursor-pointer flex justify-center ">
@@ -52,23 +54,37 @@ const FooterOrganism = () => {
             </p>
             <div className="grid grid-cols-3 gap-4 text-[#FDFBF6] text-3xl  ">
               <div className="flex flex-col items-center justify-center ">
+              <a href="https://www.facebook.com/profile.php?id=61561697909286" target="_blank" rel="noopener noreferrer">
                 <FaFacebookSquare />
+                </a>
               </div>
               <div className="flex flex-col items-center justify-center ">
-                <RiInstagramFill />
+              <a href="https://www.instagram.com/subcoffee1s?igsh=MXI0aTc5cXFsOWU0Mw==" target="_blank" rel="noopener noreferrer" >
+                  <RiInstagramFill />
+              </a>
+            
               </div>
               <div className="flex flex-col items-center justify-center ">
                 {" "}
-                <FaLinkedin />
+                <a href="https://www.linkedin.com/in/subcoffee-sena-3660b1317?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" >
+                  <FaLinkedin />
+                </a>
+                
+              </div>
+              <div className="flex flex-col items-center justify-center ">      
+                    <SiGmail />
               </div>
               <div className="flex flex-col items-center justify-center ">
-                <RiWhatsappFill />
+                <a href="https://youtube.com/@subcoffee-k3f?si=K8iQRmlS-bTEWB4k " target="_blank" rel="noopener noreferrer">
+                   <FaYoutube />
+                </a>
+               
               </div>
               <div className="flex flex-col items-center justify-center ">
-                <FaYoutube />
-              </div>
-              <div className="flex flex-col items-center justify-center ">
-                <FaTiktok />
+                <a href="https://www.tiktok.com/@subcoffee1?_t=8nc0mwsl15Z&_r=1 " target="_blank" rel="noopener noreferrer">
+                  <FaTiktok />
+                </a>
+                
               </div>
             </div>
           </div>
