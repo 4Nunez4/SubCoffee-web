@@ -111,7 +111,7 @@ function ModalSubasta({ onClose }) {
             src={`http://localhost:4000/subastas/${subasta.imagen_sub}`}
           />
           <div className="shadow shadow-gray-400 text-sm rounded-lg w-80 max-h-[300px]">
-            <div className="bg-[#00684a] py-2 rounded-t-lg">
+            <div className="bg-[#39A800] py-2 rounded-t-lg">
               <p className="text-xl text-white font-semibold text-center"> Datos de la subasta </p>
             </div>
             <div className="flex flex-col items-center">

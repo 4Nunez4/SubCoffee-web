@@ -240,12 +240,12 @@ function SubastaUser() {
               />
             </div>
             <div className="shadow text-sm rounded-lg py-1">
-              <div className="bg-[#00684a] p-2 rounded-t-lg">
+              <div className="bg-[#39A800] p-2 rounded-t-lg">
                 <p className="text-xl text-white font-semibold text-center">Datos de la subasta</p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="font-semibold text-[#a1653d]">Fecha fin de la subasta:</p>
-                <p className="font-semibold text-[#00684a] text-center"> {tiempoRestante} </p>
+                <p className="font-semibold ">Fecha fin de la subasta:</p>
+                <p className="font-semibold  text-center"> {tiempoRestante} </p>
               </div>
               <div className="grid grid-cols-2 gap-x-2 py-2 px-2">
                 <div className="items-end flex flex-col">
@@ -272,8 +272,8 @@ function SubastaUser() {
                 </div>
               </div>
               <div className="flex flex-col items-center">
-                <p className="font-semibold text-[#a1653d]">PRECIO BASE:</p>
-                <p className="text-[#00684a] font-semibold text-lg -mt-2">${Number(subasta.precio_inicial_sub).toLocaleString("es-ES")}</p>
+                <p className="font-semibold ">PRECIO BASE:</p>
+                <p className="text-[#39A800]  font-semibold text-lg -mt-2">${Number(subasta.precio_inicial_sub).toLocaleString("es-ES")}</p>
               </div>
             </div>
           </div>
@@ -395,7 +395,7 @@ function SubastaUser() {
         </div>
         <div className="grid grid-rows-2 gap-y-2">
           <div className="bg-[#e0e0e0] w-64 rounded-xl p-2 items-center flex flex-col">
-            <h3 className="text-lg font-semibold text-[#a1653d]">Vendedor</h3>
+            <h3 className="text-lg font-semibold ">Vendedor</h3>
             <Avatar
               src={subasta.imagen_user && subasta.imagen_user.length > 0? `http://localhost:4000/usuarios/${subasta.imagen_user}`: "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
               className="w-28 h-28"
@@ -405,7 +405,7 @@ function SubastaUser() {
             </div>
             <p className="text-center">{subasta.email_user}</p>
             <p className="text-center">{subasta.telefono_user}</p>
-            <p className="text-[#a1653d]">Calificación del usuario</p>
+            <p className="">Calificación del usuario</p>
             <div className="flex flex-col items-start">
               {stats && stats.promedio != null && !isNaN(stats.promedio) ? (
                 <div className="flex gap-x-2">

@@ -75,7 +75,7 @@ function ModalContact({ id }) {
       <div className="w-full flex justify-center">
         {user.pk_cedula_user === subasta.pk_cedula_user && (
           <Button
-            className="py-2 mt-2 px-4 bg-[#00684a] w-auto text-white font-semibold rounded-lg"
+            className="text-white bg-[#39A800] rounded-lg font-bold flex justify-center items-center"
             size="lg"
             onClick={handleEstablecerGanador}
           >

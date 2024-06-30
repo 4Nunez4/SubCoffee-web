@@ -133,7 +133,7 @@ export default function SubastaTable() {
       <div className="grid lg:grid-cols-2 py-4 items-center">
         <p className="text-center font-bold text-lg">Registra una subasta con tu café de alta calidad</p>
         <Button
-          className="bg-[#00684a] text-white mx-auto"
+          className="bg-[#39A800] text-white mx-auto"
           endContent={<PlusIcon />}
           onClick={() => handleToggle("create")}
         >
@@ -251,7 +251,7 @@ export default function SubastaTable() {
                 </CardBody>
                 <CardFooter className="flex justify-center gap-x-2 -mt-4">
                   <Button
-                    className="py-2 px-4 bg-[#00684a] text-white font-semibold rounded-md"
+                    className="py-2 px-4 bg-[#39A800] text-white font-semibold rounded-md"
                     radius="md"
                     isDisabled={subasta.estado_sub === "inactiva" ? "disabled"  : ""}
                     onClick={() => handdleModaSub(subasta.pk_id_sub)}
