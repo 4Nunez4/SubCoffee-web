@@ -142,15 +142,15 @@ export default function MunicipioTable() {
         return (
           <div className="relative flex justify-center items-center gap-2">
             <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdMunicipio(municipios)}}>
-              Editar
+              
             </Button>
             {municipios.estado_muni === "activo" ? (
               <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivarMunis(municipios.pk_codigo_muni)}>
-                Desactivar
+          
               </Button>
             ) : (
               <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarMunis(municipios.pk_codigo_muni)}>
-                Activar
+              
               </Button>
             )}
           </div>
@@ -317,6 +317,7 @@ export default function MunicipioTable() {
               key={column.uid}
               align={column.uid === "actions" ? "center" : "start"}
               allowsSorting={column.sortable}
+              className="bg-[#38a800c7] text-white text-sm  drop-shadow-md md:drop-shadow-xl"
             >
               {column.name}
             </TableColumn>

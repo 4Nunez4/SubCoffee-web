@@ -133,15 +133,15 @@ export default function DepartamentoTable() {
         return (
           <div className="relative flex justify-center items-center gap-2">
               <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle('update'); setIdDepartamento(departamento)}}>
-                Editar
+               
               </Button>
               {departamento.estado_depar === "activo" ? (
                 <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivarDepartamento(departamento.pk_codigo_depar)}>
-                  Desactivar
+                  
                 </Button>
               ) : (              
                 <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarDepartamento(departamento.pk_codigo_depar)}>
-                  Activar
+                
                 </Button>
               )}
           </div>
@@ -309,6 +309,7 @@ export default function DepartamentoTable() {
               key={column.uid}
               align={column.uid === "actions" ? "center" : "start"}
               allowsSorting={column.sortable}
+              className="bg-[#38a800c7] text-white text-sm  drop-shadow-md md:drop-shadow-xl"
             >
               {column.name}
             </TableColumn>

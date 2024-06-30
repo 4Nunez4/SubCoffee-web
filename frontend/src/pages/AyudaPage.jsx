@@ -62,7 +62,7 @@ function AyudaPage() {
   };
 
   return (
-    <div className="flex justify-center mb-8">
+    <div className="flex justify-center mb-8 bg-[#FDFBF6]">
       <div className="flex flex-col items-center max-w-7xl px-12">
         <div className={`flex flex-col ${isScrolled ? "scrolled" : ""}`}>
           {/* <div className="flex justify-center items-center ">
@@ -115,7 +115,7 @@ function AyudaPage() {
             {user ? (
               <div>
                 <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
-                  <p className="text-sm font-semibold text-[#00684a] uppercase mb-2">
+                  <p className="text-sm font-semibold uppercase mb-2">
                     ¿Tienes alguna duda?
                   </p>
                   <form
@@ -134,7 +134,7 @@ function AyudaPage() {
                       value={texto}
                       onChange={(e) => setTexto(e.target.value)}
                     />
-                    <Button className="py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md">
+                    <Button  className="text-white bg-[#39A800]  rounded-lg font-bold flex justify-center items-center">
                       Enviar duda
                     </Button>
                   </form>

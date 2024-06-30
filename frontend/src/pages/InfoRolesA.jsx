@@ -3,14 +3,15 @@ import React from 'react';
 function InfoRolesA() {
     return (
         <div className="py-6">
-            <h2 className="text-3xl font-semibold text-center mb-8 mt-4 text-[#00684a]">Información de Roles</h2>
+            <h2 className="text-3xl font-semibold text-center mb-8 mt-4  text-black">Información de Roles</h2>
             <p className=" text-lg  text-center mb-8 mt-4">
                 Aquí tienes información sobre los roles disponibles en nuestra
                 plataforma:
             </p>
             <div className="grid grid-cols-1 gap-y-3">
-                <div className="border rounded-lg p-4 bg-[#00684a] text-white">
-                    <h3 className="text-2xl font-semibold mb-4  text-[#ceb733] text-center">Administrador</h3>
+            <div className="border rounded-lg shadow-lg p-4 bg-[#FDFBF6] text-[#919190] ">
+
+                    <h3 className="mb-4  font-semibold text-3xl text-center text-black">Administrador</h3>
                     <p className='mb-4 text-lg '>
                         El administrador tiene el control total sobre la plataforma. Sus
                         funciones incluyen:
@@ -34,8 +35,8 @@ function InfoRolesA() {
                         </li>
                     </ul>
                 </div>
-                <div className="border rounded-lg p-4 bg-[#00684a] text-white">
-                    <h3 className="text-2xl font-semibold mb-4 text-[#ceb733] text-center">Vendedor</h3>
+                <div className="border rounded-lg shadow-lg p-4 bg-[#FDFBF6] text-[#919190] ">
+                    <h3 className="mb-4  font-semibold text-3xl text-center text-black">Vendedor</h3>
                     <p className='mb-4 text-lg '>
                         El vendedor es responsable de agregar productos a la subasta. Sus
                         funciones incluyen:
@@ -59,8 +60,8 @@ function InfoRolesA() {
                         </li>
                     </ul>
                 </div>
-                <div className="border rounded-lg p-4 bg-[#00684a] text-white">
-                    <h3 className="text-2xl font-semibold mb-4 text-[#ceb733] text-center">Comprador</h3>
+                <div className="border rounded-lg shadow-lg p-4 bg-[#FDFBF6] text-[#919190] ">
+                    <h3 className="mb-4  font-semibold text-3xl text-center text-black">Comprador</h3>
                     <p className='mb-4 text-lg '>
                         El comprador participa en las subastas realizando ofertas por los
                         productos disponibles. Sus funciones incluyen:

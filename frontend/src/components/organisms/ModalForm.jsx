@@ -7,7 +7,7 @@ export const ModalForm = ({ open, onClose, children, title }) => {
       <Modal isOpen={open} onClose={onClose} isDismissable={false} placement="top-center">
         <ModalContent>
           <ModalHeader className="flex justify-center">
-            <h1 className="text-center text-3xl font-bold">{title}</h1>
+            <h1 className="font-semibold text-3xl">{title}</h1>
           </ModalHeader>
           <ModalBody>{children}</ModalBody>
         </ModalContent>

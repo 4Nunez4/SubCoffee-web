@@ -152,15 +152,15 @@ export default function VeredaTable() {
         return (
           <div className="relative flex justify-center items-center gap-2">
             <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdVereda(results)}}>
-              Editar
+             
             </Button>
             {results.estado_vere === "activo" ? (
               <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivarVeres(results.pk_id_vere)}>
-                Desactivar
+               
               </Button> 
             ) : (
               <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarVeres(results.pk_id_vere)}>
-                Activar
+              
               </Button>
             )}
           </div>
@@ -327,6 +327,7 @@ export default function VeredaTable() {
               key={column.uid}
               align={column.uid === "actions" ? "center" : "start"}
               allowsSorting={column.sortable}
+              className="bg-[#38a800c7] text-white text-sm  drop-shadow-md md:drop-shadow-xl"
             >
               {column.name}
             </TableColumn>

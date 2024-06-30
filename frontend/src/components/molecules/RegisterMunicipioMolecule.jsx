@@ -105,7 +105,7 @@ const RegisterMunicipioMolecule = ({ mode, titleBtn }) => {
       <ModalFooter className="flex justify-center">
         <Button
           type="submit"
-          className="px-4 bg-[#001e2b] text-white font-semibold rounded-md"
+          className="text-white bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center"
         >
           {titleBtn}
         </Button>
