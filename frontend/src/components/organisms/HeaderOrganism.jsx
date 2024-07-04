@@ -25,7 +25,6 @@ function HeaderOrganism() {
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const localUser = JSON.parse(localStorage.getItem("user"));
-
   const { getUsers, logout, users } = useAuthContext();
   const { getSubsMenoCerradas, subastasActivas } = useSubastaContext();
 
@@ -61,10 +60,11 @@ function HeaderOrganism() {
 
   return (
     <>
-      {localUser ? (
-        <nav className="grid grid-cols-6 gap-5 bg-[#4A9F1F] p-4 shadow-sm">
-          <div className="col-span-4 flex justify-center  item-center">
-            <Autocomplete
+      {localUser ?  (
+        <nav className="grid grid-cols-6 gap-5 bg-[#4A9F1F] p-4 shadow-sm"> 
+    <div className="col-span-4 flex justify-center  item-center">
+    {(localUser.rol_user === "comprador" || localUser.rol_user === "vendedor") && (
+       <Autocomplete
               classNames={{
                 base: "w-full max-w-md",
                 listboxWrapper: "max-h-[280px]",
@@ -112,7 +112,7 @@ function HeaderOrganism() {
               }
               radius="full"
               variant="faded"
-            >
+            >  
               <AutocompleteSection title="Usuarios">
                 {users.map((user) => (
                   <AutocompleteItem
@@ -180,8 +180,12 @@ function HeaderOrganism() {
                   </AutocompleteItem>
                 )}
               </AutocompleteSection>
-            </Autocomplete>
+            </Autocomplete>) }
+           
           </div>
+   
+          
+
           <div className="flex justify-end col-span-2">
             <div className="flex items-center gap-4">
               <Dropdown placement="bottom-end" className="bg-[#e0e0e0]">
