@@ -143,7 +143,7 @@ function SubastaPage() {
                       <CardBody className="flex">
                       <div className="relative w-auto h-[150px] bg-center bg-no-repeat bg-cover rounded-lg bg-[#181818] bg-opacity-30 inset-0">
                             <img
-                              src={`http://localhost:4000/img/subasta/${subasta.imagen_sub}`}
+                              src={`http://localhost:4000/subastas/${subasta.imagen_sub}`}
                               alt=""
                               className="w-full h-full object-cover rounded-lg"
                             />
