@@ -9,7 +9,7 @@ import { useAuthContext } from "../../context/AuthContext";
 const RegisterUser = ({ mode, titleBtn }) => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
-  const { createUsers, updateUsers, idUser, errors } = useAuthContext();
+  const { createUsers, updateUsers, idUser, errors, users } = useAuthContext();
   const userAdmin = JSON.parse(localStorage.getItem("user"));
   const [formData, setFormData] = useState({
     pk_cedula_user: "",
@@ -47,7 +47,7 @@ const RegisterUser = ({ mode, titleBtn }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const datosAEnviar = new FormData();
-    datosAEnviar.append("pk_cedula_user", formData.pk_cedula_user);
+   
     datosAEnviar.append("nombre_user", formData.nombre_user);
     datosAEnviar.append("email_user", formData.email_user);
     datosAEnviar.append("telefono_user", formData.telefono_user);
@@ -57,6 +57,7 @@ const RegisterUser = ({ mode, titleBtn }) => {
       if (mode === "update") {
         await updateUsers(idUser.pk_cedula_user, datosAEnviar);
         } else {
+        datosAEnviar.append("pk_cedula_user", formData.pk_cedula_user); 
         datosAEnviar.append("rol_user", formData.rol_user);
         datosAEnviar.append("password_user", formData.password_user);
         await createUsers(datosAEnviar);
@@ -112,7 +113,7 @@ const RegisterUser = ({ mode, titleBtn }) => {
                 <img
                   src={
                     typeof formData.imagen_user === "string"
-                      ? `http://localhost:4000/img/${formData.imagen_user}`
+                      ? `http://localhost:4000/usuarios/${formData.imagen_user}`
                       : URL.createObjectURL(formData.imagen_user)
                   }
                   alt="user"
@@ -157,18 +158,8 @@ const RegisterUser = ({ mode, titleBtn }) => {
         onChange={handleChange}
         startContent={<icono.iconoGmail />}
       />
-      <div className="grid grid-cols-2 items-center gap-x-2">
-        <Input
-          placeholder="Cédula"
-          required
-          type="number"
-          variant="bordered"
-          min={0}
-          name="pk_cedula_user"
-          value={formData.pk_cedula_user}
-          onChange={handleChange}
-          startContent={<icono.iconoCedula />}
-        />
+
+     
         <Input
           placeholder="Teléfono"
           required
@@ -180,13 +171,28 @@ const RegisterUser = ({ mode, titleBtn }) => {
           onChange={handleChange}
           startContent={<icono.iconoCelular />}
         />
-      </div>
+
       {mode !== "update" && (
+        
         <div
           className={`grid ${
             mode !== "update" ? "grid-cols-2" : "grid-cols-1"
           } items-center gap-x-2`}
         >
+          <div className=" col-span-2 pb-2">
+                  <Input
+          placeholder="Cédula"
+          required
+          type="number"
+          variant="bordered"
+          min={0}
+          name="pk_cedula_user"
+          value={formData.pk_cedula_user}
+          onChange={handleChange}
+          startContent={<icono.iconoCedula />}
+        />
+          </div>
+          
           <div className="relative">
             <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-800">
               {<icono.iconoRol />}

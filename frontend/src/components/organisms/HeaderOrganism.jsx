@@ -125,7 +125,7 @@ function HeaderOrganism() {
                           <User
                             as="button"
                             avatarProps={{
-                              src: user.imagen_user 
+                              src : user.imagen_user 
                                 ? `http://localhost:4000/usuarios/${user.imagen_user}`
                                 : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
                             }}
