@@ -77,7 +77,7 @@ const SidebarOrganims = () => {
             style={{ maxWidth: "calc(100% - 4rem)" }}
             title="Subcoffee"
           >
-             Sub<span className="text-[#39A800]">Coffee</span>
+             <span className="text-[#39A800]">SubCoffee</span>
           </h1>
           </div>
           <ul className="pt-6">

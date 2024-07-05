@@ -231,8 +231,8 @@ function HeaderOrganism() {
           <nav className="flex justify-between items-center  fixed w-full h-24 m-0 top-0 p-4 shadow-sm z-20 bg-[#FDFBF6] px-20">
             <div className="flex items-center">
               <AvatarAtom img="isotipo-SubCoffee.png" />
-              <Link to="/" className="text-[#323232] text-2xl font-bold">
-                Sub<span className=" text-[#39A800]">Coffee</span>
+              <Link to="/" className="text-[#39A800] text-2xl font-bold">
+                SubCoffee
               </Link>
             </div>
             <div className="flex items-center gap-x-3 font-medium text-base">

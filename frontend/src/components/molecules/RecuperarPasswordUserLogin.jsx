@@ -108,10 +108,10 @@ const RecuperarPasswordUserLogin = ({ titleBtn, onClose }) => {
         onChange={handleChange}
       />
       <ModalFooter className="flex justify-center">
-        <Button type="button" color="default" onClick={onClose} className='inline-flex items-center justify-center py-2 px-4 bg-[#001e2b] text-white font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#00ed64] hover:text-[#001e2b] transition-all ease-in-out duration-500'>
+        <Button type="button" color="default" onClick={onClose} className="text-[#39A800] bg-[#FDFBF6] h-10 w-36 rounded-lg font-bold flex justify-center items-center border-[#39A800] border-2">
           Cancelar
         </Button>
-        <Button type="submit" className='border-[#00ed64] inline-flex items-center justify-center py-2 px-4 bg-[#00ed64] text-white  font-semibold rounded-md hover:bg-[#00ed64] border-2 hover:border-[#001e2b]  hover:text-[#001e2b] transition-all ease-in-out duration-500'>{titleBtn}</Button>
+        <Button type="submit" className="text-[#FDFBF6] bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center border-[#FDFBF6]">{titleBtn}</Button>
       </ModalFooter>
     </form>
   );

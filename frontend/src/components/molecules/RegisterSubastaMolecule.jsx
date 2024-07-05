@@ -126,15 +126,15 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
                 </button>
                 {mode === "update" && typeof formData.imagen_sub === "string" ? (
                   <img
-                    src={`http://localhost:4000/img/subasta/${formData.imagen_sub}`}
-                    alt="user"
+                    src={`http://localhost:4000/subastas/${formData.imagen_sub}`}
+                    alt="subasta"
                     className="h-28 w-40 object-cover rounded-xl mx-auto"
                   />
                 ) : (
                   formData.imagen_sub instanceof File && (
                     <img
                       src={URL.createObjectURL(formData.imagen_sub)}
-                      alt="user"
+                      alt="subasta"
                       className="h-28 w-40 object-cover rounded-xl mx-auto"
                     />
                   )
