@@ -44,10 +44,7 @@ export default function SubastaTable() {
   
       if (tiempo.includes("Subasta terminada") && !alertShown.includes(pk_id_sub) && !ganador_sub) {
         setAlertShown((date) => [...date, pk_id_sub]);
-        Swal.fire({
-          text: `La subasta ${pk_id_sub} - ${nombre_tipo_vari} ya finalizó. Ingresa a la subasta y escoge al mayor pujador.`,
-          icon: "info",
-        });
+       
         EsperaSubs(pk_id_sub, usuario.pk_cedula_user);
       } else if (tiempo.includes("La subasta empezará dentro de") && estado_sub !== "cerrada") {
         activarSubs(pk_id_sub, usuario.pk_cedula_user);
