@@ -30,10 +30,28 @@ export const registrar = async (req, res) => {
     let imagen_sub = req.files && req.files["imagen_sub"] ? req.files["imagen_sub"][0].originalname : null;
     let certificado_sub = req.files && req.files["certificado_sub"] ? req.files["certificado_sub"][0].originalname : null;
 
-    const [resultado] = await pool.query("INSERT INTO subasta (fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, unidad_peso_sub, cantidad_sub, estado_sub, certificado_sub, descripcion_sub, fk_variedad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, unidad_peso_sub, cantidad_sub, "abierta", certificado_sub, descripcion_sub, fk_variedad, ]);
+    const userId = req.params.id;
+
+    console.log("UserId obtenido:", userId); 
+
+    const [resultado] = await pool.query("INSERT INTO subasta (fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, unidad_peso_sub, cantidad_sub, estado_sub, certificado_sub, descripcion_sub, fk_variedad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, unidad_peso_sub, cantidad_sub, "abierta", certificado_sub, descripcion_sub, fk_variedad ]);
 
     if (resultado.affectedRows > 0) {
-      res.status(200).json({ message: "Subasta creada con éxito" });
+      const subastaId = resultado.insertId;
+
+      if (userId && !isNaN(userId)) {
+        const tipoNotificacion = "mensaje";
+
+        const [resultadoNotif] = await pool.query("INSERT INTO notificaciones (tipo_not, texto_not, fk_id_subasta, fk_id_usuario) VALUES (?, ?, ?, ?)", [tipoNotificacion, "Nueva subasta creada", subastaId, userId ]);
+
+        if (resultadoNotif.affectedRows > 0) {
+          res.status(200).json({ message: "Subasta creada con éxito y notificación enviada" });
+        } else {
+          res.status(400).json({ message: "Error al crear la notificación para la subasta" });
+        }
+      } else {
+        res.status(200).json({ message: "Subasta creada con éxito, pero no se pudo enviar la notificación (usuario no identificado o id no válido)" });
+      }
     } else {
       res.status(400).json({ message: "Error al crear la subasta" });
     }

@@ -125,7 +125,7 @@ export const SubastaProvider = ({ children }) => {
 
   const createSubs = async (data, user) => {
     try {
-      const response = await createSubasta(data);
+      const response = await createSubasta(data , user);
       getSubForUser(user);
       setMensaje(response.data.message);
       serCerrarModal(true)
