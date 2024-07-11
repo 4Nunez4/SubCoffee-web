@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableHeader,
@@ -21,7 +21,7 @@ import { ChevronDownIcon } from "../../nextui/ChevronDownIcon";
 import { EditIcon } from "../../nextui/EditIcon";
 import ActivarIcon from "../../nextui/ActivarIcon.jsx";
 import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
-import DeparContext from "../../context/DeparContext.jsx";
+import { useDepartContext } from "../../context/DeparContext.jsx";
 import FormDepartamentoOrganism from "../templates/FormDepartamento.jsx";
 
 const statusColorMap = {
@@ -39,7 +39,7 @@ export default function DepartamentoTable() {
   });
   const [page, setPage] = useState(1);
 
-  const { getDepartamentos, setIdDepartamento, departamentos, desactivarDepartamento, activarDepartamento, totalDeparts } = useContext(DeparContext);
+  const { getDepartamentos, setIdDepartamento, departamentos, desactivarDepartamento, activarDepartamento } = useDepartContext();
 
   useEffect(() => {
     getDepartamentos();

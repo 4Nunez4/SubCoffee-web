@@ -8,13 +8,11 @@ import {
   Autocomplete,
   AutocompleteItem,
   Avatar,
-  Button,
   AutocompleteSection,
 } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useAuthContext } from "../../context/AuthContext";
-import { icono } from "../atoms/IconsAtom";
 import AvatarAtom from "../atoms/AvatarAtom";
 import { SearchIcon } from "../../nextui/SearchIcon";
 import FormLogin from "../templates/FormLogin";
@@ -181,11 +179,7 @@ function HeaderOrganism() {
                 )}
               </AutocompleteSection>
             </Autocomplete>) }
-           
-          </div>
-   
-          
-
+          </div>   
           <div className="flex justify-end col-span-2">
             <div className="flex items-center gap-4">
               <Dropdown placement="bottom-end" className="bg-[#e0e0e0]">

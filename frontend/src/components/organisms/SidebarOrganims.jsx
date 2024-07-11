@@ -20,7 +20,6 @@ const SidebarOrganims = () => {
       { title: "Inicio", link: "/subcoffee", icon: icono.iconoHome },
       { title: "Mis subastas", link: "/mi_subasta", icon: icono.iconoType },
       { title: "Notificaciones", link: "/notificaciones", icon: icono.iconoCampana },
-
       { title: "Políticas de privacidad", link: "/privacy-policy", icon: icono.iconoPrivacidad },
       { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda }
     ] : []),
@@ -77,7 +76,7 @@ const SidebarOrganims = () => {
             style={{ maxWidth: "calc(100% - 4rem)" }}
             title="Subcoffee"
           >
-             <span className="text-[#39A800]">SubCoffee</span>
+              <span className="text-[#39A800]">SubCoffee</span>
           </h1>
           </div>
           <ul className="pt-6">

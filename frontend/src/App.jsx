@@ -17,11 +17,10 @@ import TipoVariedadTable from "./components/Guard/TipoVariedadTable";
 import GlobalProvider from "./context/GlobalContext";
 import ListarNotificaciones from "./pages/Notificaciones";
 import QueremosLograr from "./pages/lograr";
-
-const users = JSON.parse(localStorage.getItem("user"));
+import ResetPassword from "./pages/ResetPassword";
+import RecuperarPasswordUserLogin from "./components/molecules/RecuperarPasswordUserLogin";
 
 function App() {
-
   return (
     <>
       <NextUIProvider>
@@ -45,6 +44,8 @@ function App() {
                   <Route path="mi_subasta" element={<MiSubastaT />} />
                 </Route>
               </Route>
+              <Route path="update-password" element={<RecuperarPasswordUserLogin />} /> 
+              <Route path="reset-password" element={<ResetPassword />} /> 
             </Routes>
           </BrowserRouter>
         </GlobalProvider>

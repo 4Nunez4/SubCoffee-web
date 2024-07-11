@@ -9,7 +9,7 @@ import { useAuthContext } from "../../context/AuthContext";
 const RegisterUser = ({ mode, titleBtn }) => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
-  const { createUsers, updateUsers, idUser, errors, users } = useAuthContext();
+  const { createUsers, updateUsers, idUser, errors } = useAuthContext();
   const userAdmin = JSON.parse(localStorage.getItem("user"));
   const [formData, setFormData] = useState({
     pk_cedula_user: "",
@@ -47,7 +47,6 @@ const RegisterUser = ({ mode, titleBtn }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const datosAEnviar = new FormData();
-   
     datosAEnviar.append("nombre_user", formData.nombre_user);
     datosAEnviar.append("email_user", formData.email_user);
     datosAEnviar.append("telefono_user", formData.telefono_user);

@@ -1,10 +1,17 @@
-import { validarUser, verificarUserToken } from "../controllers/autenticacionController.js";
 import { Router } from "express";
+import {
+    resetPassword,
+    tokenPassword,
+    validarUser,
+    verificarUserToken,
+} from "../controllers/autenticacionController.js";
 
-const autenticacionRouter = Router()
+const autenticacionRouter = Router();
 
-autenticacionRouter.post('/login', validarUser);
-autenticacionRouter.get("/validate", verificarUserToken)
+autenticacionRouter.post("/login", validarUser);
+autenticacionRouter.get("/validate", verificarUserToken);
 
+autenticacionRouter.post("/recuperar", tokenPassword);
+autenticacionRouter.put("/cambiar", resetPassword);
 
 export default autenticacionRouter;

@@ -6,7 +6,7 @@ function FormLogin ({ open, onClose, title }) {
   return (
     <>
       <ModalForm open={open} onClose={onClose} title={title} >
-        <LoginFormMolecule />
+        <LoginFormMolecule onClose={onClose} />
       </ModalForm>
     </>
   );

@@ -76,7 +76,6 @@ export default function UsersTable() {
     if (hasSearchFilter) {
       filteredResults = filteredResults.filter((users) =>
         String(users.pk_cedula_user).toLowerCase().includes(filterValue.toLowerCase()) ||
-        String(users.fecha_nacimiento_user).toLowerCase().includes(filterValue.toLowerCase()) ||
         String(users.nombre_user).toLowerCase().includes(filterValue.toLowerCase()) ||
         String(users.rol_user).toLowerCase().includes(filterValue.toLowerCase()) ||
         String(users.telefono_user).toLowerCase().includes(filterValue.toLowerCase()) ||
@@ -136,16 +135,6 @@ export default function UsersTable() {
             {user.email_user}
           </User>
         );
-      case "descripcion_user":
-        return (
-          <>
-            {user.descripcion_user && user.descripcion_user.length > 0 ? (
-              <span>{user.descripcion_user}</span>
-            ) : (
-              <span className="text-rojo">No tiene descripción</span>
-            )}
-          </>
-        );
       case "estado_user":
         return (
           <Chip className="capitalize" color={statusColorMap[user.estado_user]} size="sm" variant="flat">
@@ -156,7 +145,6 @@ export default function UsersTable() {
         return (
           <div className="relative flex justify-center items-center gap-2">
             <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle('update'); setIdUser(user)}}>
-              
             </Button>
             {user.estado_user === "activo" ? (
               <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => updateUserDesactive(user.pk_cedula_user)}>
@@ -164,7 +152,6 @@ export default function UsersTable() {
               </Button>
             ) : (
               <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => updateUserActive(user.pk_cedula_user)}>
-               
               </Button>
             )}
           </div>

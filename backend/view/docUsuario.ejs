@@ -682,11 +682,84 @@
       </tr>
       <tr>
         <td>URI</td>
-        <td>/v1/recuperarpassword</td>
+        <td>/v1/recuperar</td>
       </tr>
       <tr>
         <td>Descripción</td>
         <td>Permite recuperar y cambiar la contraseña de los usuarios registrados en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>Usuarios</td>
+        <td>ADMINISTRADOR, VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION</td>
+        <td>
+<pre><code>{
+  "email_user": "pepito@example.com",
+}</code></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>RESPUESTA JSON</td>
+<td>
+<strong>Correcto:</strong> Status: 200
+<pre><code>{
+  "message": "Hemos enviado una notificación a tu cuenta de Gmail. Por favor, revisa tu bandeja de entrada y sigue las instrucciones proporcionadas para restablecer tu contraseña."
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "Correo del usuario no definido"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "Usuario no encontrado"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "No se pudo enviar el Correo"
+}</code></pre>
+<strong>Error:</strong> Status: 500
+<pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+</td>
+</tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <h3>Restablecer contraseña</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>11</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Restablecer contraseña</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/cambiar</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite restablecer la contraseña de los usuarios registrados en la base de datos</td>
       </tr>
       <tr>
         <td>Verbo</td>
@@ -704,9 +777,8 @@
         <td>PETICION</td>
         <td>
 <pre><code>{
-  "email_user": "pepito@example.com",
-  "newPassword": "newPassword123",
-  "confirmPassword": "newPassword123"
+  "token": "$2b$12$sfx4cyI/O.lJ1cgGyAeEy.QbRDp2ox.TbMzJU487RtZv9njcOFBAy", 
+  "password": "123456789"
 }</code></pre>
     </td>
   </tr>
@@ -715,19 +787,15 @@
 <td>
 <strong>Correcto:</strong> Status: 200
 <pre><code>{
-  "message": "Se registró la nueva contraseña con éxito"
+  "message": "Contraseña actualizada"
+}</code></pre>
+<strong>Incorrecto:</strong> Status: 404
+<pre><code>{
+  "message": "No se pudo actualizar la contraseña"
 }</code></pre>
 <strong>Incorrecto:</strong> Status: 404
 <pre><code>{
   "message": "Usuario no encontrado"
-}</code></pre>
-<strong>Incorrecto:</strong> Status: 404
-<pre><code>{
-  "message": "La nueva contraseña no coincide con la de confirmar contraseña"
-}</code></pre>
-<strong>Incorrecto:</strong> Status: 404
-<pre><code>{
-  "message": "Error con el ID del usuario al cambiar la contraseña"
 }</code></pre>
 <strong>Error:</strong> Status: 500
 <pre><code>{

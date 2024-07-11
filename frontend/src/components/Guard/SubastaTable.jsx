@@ -44,7 +44,6 @@ export default function SubastaTable() {
   
       if (tiempo.includes("Subasta terminada") && !alertShown.includes(pk_id_sub) && !ganador_sub) {
         setAlertShown((date) => [...date, pk_id_sub]);
-       
         EsperaSubs(pk_id_sub, usuario.pk_cedula_user);
       } else if (tiempo.includes("La subasta empezará dentro de") && estado_sub !== "cerrada") {
         activarSubs(pk_id_sub, usuario.pk_cedula_user);
@@ -172,8 +171,6 @@ export default function SubastaTable() {
                             </Button>
                           </DropdownTrigger>
                           <DropdownMenu aria-label="Example" disabledKeys={subasta.estado_sub === "abierta" ? [] : subasta.estado_sub === "cerrada" && (subasta.ganador_sub || subasta.precio_final_sub)? ["activar", "edit"]: ["edit", "desactivar"]}>
-
-
                             <DropdownItem key="edit" onPress={() => {
                               handleToggle("update");
                               setIdSubasta(subasta);
@@ -201,7 +198,7 @@ export default function SubastaTable() {
                   <div className="grid gap-x-2 py-2 px-2 text-sm max-h-[300px] overflow-y-auto">
                     <div className="flex flex-col">
                       <div className="flex flex-col items-center mb-1">
-                        <p className="text-[#a1653d]">{calcularDiferencia(subasta.fecha_inicio_sub,subasta.fecha_fin_sub)}</p>
+                        <p className="text-[#a1653d]">{calcularDiferencia(subasta.fecha_inicio_sub, subasta.fecha_fin_sub)}</p>
                       </div>
                       <div className="flex w-full gap-x-2">
                         <p className="font-semibold">Apertura:</p>

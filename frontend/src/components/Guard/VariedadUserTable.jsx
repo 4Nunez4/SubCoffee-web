@@ -8,10 +8,11 @@ import { icono } from "../atoms/IconsAtom";
 import DesactivarIcon from "../../nextui/DesactivarIcon";
 import ActivarIcon from "../../nextui/ActivarIcon";
 import { useFincaContext } from "../../context/FincaContext";
+import Map from "../../pages/Map";
 
 export default function VariedadUserTable({ titleBtn, pkFinca }) {
   const user = JSON.parse(localStorage.getItem("user"));
-  const { getFincaUserOne, finca } = useFincaContext();
+  const { getFincaUserOne } = useFincaContext();
   const { getTipoVariedadesActivas, tipoVariedadsActivos } = useTipoVariContext();
   const { getVariForUser, createVaris, variedadForuser, activarVaris, desactivarVaris } = useVariedadUserContext();
   const [formData, setFormData] = useState({
@@ -46,12 +47,8 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
   return (
     <div className="flex h-[360px] pb-4">
       <div className="w-2/4 flex justify-center items-center">
-        {pkFinca && pkFinca.imagen_fin && (
-          <Image
-            src={`http://localhost:4000/fincas/${pkFinca.imagen_fin}`}
-            alt="Imagen de la finca"
-            className="w-[430px] h-full object-cover shadow border"
-          />
+        {pkFinca && (
+          <Map fincaId={pkFinca.pk_id_fin}/>
         )}
       </div>
       <div className="w-2/3 p-2">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-06-2024 a las 06:39:28
+-- Tiempo de generación: 11-07-2024 a las 06:44:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -41,22 +41,10 @@ CREATE TABLE `calificaciones` (
 --
 
 INSERT INTO `calificaciones` (`pk_id_cali`, `id_usuario_cali`, `estrellas_cali`, `opiniones_cali`, `fecha_cali`, `fk_usuario`) VALUES
-(1, 4, 4, 'Me parece que este usuario es muy serio para los negocios, lo recomiendo mucho.', '2024-06-10 02:32:46', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `chat`
---
-
-CREATE TABLE `chat` (
-  `pk_id_chat` int(11) NOT NULL,
-  `mensaje_chat` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `imagen_chat` varchar(255) NOT NULL,
-  `fecha_chat` timestamp NOT NULL DEFAULT current_timestamp(),
-  `fk_id_subasta` int(11) NOT NULL,
-  `fk_id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+(1, 4, 4, 'Me parece que este usuario es muy serio para los negocios, lo recomiendo mucho.', '2024-06-10 02:32:46', 1),
+(2, 1, 5, 'Es un buen sujeto y además es cumplido...', '2024-07-09 21:55:01', 2),
+(3, 1, 4, 'Es un usuario muy responsable y respetuoso', '2024-07-09 19:59:49', 4),
+(4, 1, 2, 'eso tilin ', '2024-07-10 00:38:10', 3);
 
 -- --------------------------------------------------------
 
@@ -75,8 +63,8 @@ CREATE TABLE `departamento` (
 --
 
 INSERT INTO `departamento` (`pk_codigo_depar`, `nombre_depar`, `estado_depar`) VALUES
-(1, 'Prueba', 'activo'),
 (5, 'Antioquia', 'activo'),
+(6, 'canu', 'activo'),
 (8, 'Atlántico', 'activo'),
 (13, 'Bolívar', 'activo'),
 (15, 'Boyacá', 'activo'),
@@ -108,7 +96,8 @@ INSERT INTO `departamento` (`pk_codigo_depar`, `nombre_depar`, `estado_depar`) V
 (95, 'Guaviare', 'activo'),
 (97, 'Vaupés', 'activo'),
 (99, 'Vichada', 'activo'),
-(100, 'Prueba Departamento', 'activo');
+(100, 'Prueba Departamento', 'activo'),
+(12020, 'juan', 'activo');
 
 -- --------------------------------------------------------
 
@@ -122,17 +111,22 @@ CREATE TABLE `finca` (
   `imagen_fin` varchar(100) NOT NULL,
   `estado_fin` enum('activo','inactivo') DEFAULT NULL,
   `fk_id_usuario` int(11) NOT NULL,
-  `fk_vereda` bigint(20) NOT NULL
+  `fk_vereda` bigint(20) NOT NULL,
+  `longitud_fin` int(11) NOT NULL,
+  `latitud_fin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `finca`
 --
 
-INSERT INTO `finca` (`pk_id_fin`, `nombre_fin`, `imagen_fin`, `estado_fin`, `fk_id_usuario`, `fk_vereda`) VALUES
-(37, 'Mi Primera finca', 'finca1.jpeg', 'activo', 1, 1),
-(38, 'Mi Segunda Finca', 'finca1.jpeg', 'activo', 1, 2),
-(39, 'Mi primer finca', 'WhatsApp Image 2024-06-08 at 2.44.38 PM.jpeg', 'activo', 4, 1);
+INSERT INTO `finca` (`pk_id_fin`, `nombre_fin`, `imagen_fin`, `estado_fin`, `fk_id_usuario`, `fk_vereda`, `longitud_fin`, `latitud_fin`) VALUES
+(37, 'Mi Primera finca', 'finca1.jpeg', 'activo', 1, 1, 73, 13),
+(38, 'Mi Segunda Finca', 'finca1.jpeg', 'activo', 1, 2, 74, 41),
+(39, 'Mi primer finca', 'WhatsApp Image 2024-06-08 at 2.44.38 PM.jpeg', 'activo', 4, 1, 49, 2),
+(40, 'Mi finca', 'mos-design-ZzxivGdFVSY-unsplash.jpg', 'activo', 1, 9, -74, 41),
+(41, 'Finca con longitud', 'REST-API-1.webp', 'activo', 1, 10, 21, 80),
+(42, 'otra finca', 'REST-API-1.webp', 'activo', 1, 19, 57, 12);
 
 -- --------------------------------------------------------
 
@@ -1303,8 +1297,13 @@ CREATE TABLE `ofertas` (
 --
 
 INSERT INTO `ofertas` (`pk_id_ofer`, `fecha_ofer`, `oferta_ofer`, `fk_id_usuario`, `fk_id_subasta`) VALUES
-(72, '2024-06-10 04:18:01', 189000, 1, 36),
-(73, '2024-06-10 04:24:56', 289000, 2, 36);
+(73, '2024-06-10 04:24:56', 289000, 2, 36),
+(74, '2024-06-10 22:56:46', 199000, 2, 30),
+(75, '2024-06-11 00:00:27', 489000, 1, 36),
+(76, '2024-06-11 01:40:11', 550000, 2, 31),
+(77, '2024-06-11 01:40:32', 216000, 2, 37),
+(78, '2024-06-12 03:47:57', 995000, 1, 38),
+(79, '2024-06-12 03:48:07', 105000, 1, 39);
 
 -- --------------------------------------------------------
 
@@ -1327,7 +1326,14 @@ INSERT INTO `postulantes` (`pk_id_post`, `fk_id_usuario`, `fk_id_subasta`, `esta
 (11, 4, 30, 'inactivo'),
 (12, 4, 31, 'activo'),
 (13, 1, 36, 'activo'),
-(14, 2, 36, 'activo');
+(14, 2, 36, 'activo'),
+(15, 2, 30, 'activo'),
+(16, 1, 37, 'activo'),
+(17, 2, 31, 'activo'),
+(18, 2, 37, 'activo'),
+(19, 3, 31, 'inactivo'),
+(20, 1, 38, 'activo'),
+(21, 1, 39, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1356,11 +1362,14 @@ CREATE TABLE `subasta` (
 --
 
 INSERT INTO `subasta` (`pk_id_sub`, `fecha_inicio_sub`, `fecha_fin_sub`, `imagen_sub`, `precio_inicial_sub`, `precio_final_sub`, `unidad_peso_sub`, `cantidad_sub`, `estado_sub`, `certificado_sub`, `descripcion_sub`, `fk_variedad`, `ganador_sub`) VALUES
-(30, '2024-06-09 03:40:00', '2024-06-09 04:40:00', 'WhatsApp Image 2024-06-08 at 2.44.54 PM.jpeg', 99000, NULL, 'Kilogramo', 18, 'espera', 'requerimientos_juan.docx', 'Es una muy buena subasta', 26, NULL),
-(31, '2024-06-09 14:20:00', '2024-06-09 14:40:00', 'WhatsApp Image 2024-06-08 at 2.42.26 PM.jpeg', 450000, NULL, 'Tonelada', 1, 'espera', 'Instructivo 4-Utilizar react native Select List en el proyecto formativoyecto formativo.pdf', 'Es un café de mucha calidad', 26, NULL),
+(30, '2024-06-09 03:40:00', '2024-06-09 04:40:00', 'WhatsApp Image 2024-06-08 at 2.44.54 PM.jpeg', 99000, 199000, 'Kilogramo', 18, 'cerrada', 'requerimientos_juan.docx', 'Es una muy buena subasta', 26, 2),
+(31, '2024-06-09 14:20:00', '2024-06-09 14:40:00', 'WhatsApp Image 2024-06-08 at 2.42.26 PM.jpeg', 450000, 550000, 'Tonelada', 1, 'cerrada', 'Instructivo 4-Utilizar react native Select List en el proyecto formativoyecto formativo.pdf', 'Es un café de mucha calidad', 26, 2),
 (33, '2024-06-09 06:32:00', '2024-06-09 06:43:00', 'WhatsApp Image 2024-06-08 at 2.39.49 PM.jpeg', 45000, 5000000, 'Kilogramo', 63, 'cerrada', 'Instructivo 4-Utilizar react native Select List en el proyecto formativoyecto formativo.pdf', 'El mejor café que los usuarios podrían probar', 27, 2),
-(36, '2024-06-09 19:18:00', '2024-06-09 19:20:00', 'WhatsApp Image 2024-06-08 at 2.42.26 PM.jpeg', 89000, NULL, 'Kilogramo', 80, 'espera', 'Instructivo 4-Utilizar react native Select List en el proyecto formativoyecto formativo.pdf', 'Un buen café', 27, NULL),
-(37, '2024-06-09 20:20:00', '2024-06-09 20:35:00', 'WhatsApp Image 2024-06-08 at 2.44.38 PM.jpeg', 56000, NULL, 'Libra', 60, 'espera', 'Instructivo 4-Utilizar react native Select List en el proyecto formativoyecto formativo.pdf', 'Un café unico y exclusivo', 28, NULL);
+(36, '2024-06-09 19:18:00', '2024-06-09 19:20:00', 'WhatsApp Image 2024-06-08 at 2.42.26 PM.jpeg', 89000, 489000, 'Kilogramo', 80, 'cerrada', 'Instructivo 4-Utilizar react native Select List en el proyecto formativoyecto formativo.pdf', 'Un buen café', 27, 1),
+(37, '2024-06-09 20:20:00', '2024-06-09 20:35:00', 'WhatsApp Image 2024-06-08 at 2.44.38 PM.jpeg', 56000, 216000, 'Libra', 60, 'cerrada', 'Instructivo 4-Utilizar react native Select List en el proyecto formativoyecto formativo.pdf', 'Un café unico y exclusivo', 28, 2),
+(38, '2024-06-11 03:40:00', '2024-06-11 03:42:00', 'WhatsApp Image 2024-06-08 at 2.32.15 PM.jpeg', 695000, 995000, 'Tonelada', 2, 'cerrada', 'Instructivo 4-Utilizar react native Select List en el proyecto formativoyecto formativo.pdf', 'Un café único en el Huila, que ha sido cuidado con amor con toda mi familia', 27, 1),
+(39, '2024-06-11 03:44:00', '2024-06-11 03:55:00', 'WhatsApp Image 2024-06-08 at 2.39.49 PM.jpeg', 45000, 105000, 'Kilogramo', 90, 'cerrada', 'Instructivo 4-Utilizar react native Select List en el proyecto formativoyecto formativo.pdf', 'El mejor café', 28, 1),
+(40, '2024-06-16 17:22:00', '2024-06-16 17:40:00', 'WhatsApp Image 2024-06-08 at 2.44.38 PM.jpeg', 56000, NULL, 'Kilogramo', 80, 'espera', 'Luego vamos a ubuntu server y ejecutamos el comando nano.docx', 'Muy buen café', 26, NULL);
 
 -- --------------------------------------------------------
 
@@ -1420,7 +1429,8 @@ INSERT INTO `tipo_variedad` (`pk_id_tipo_vari`, `nombre_tipo_vari`, `estado_tipo
 (39, 'Catigua', 'activo'),
 (40, 'T5269', 'activo'),
 (41, 'Marsellesa', 'activo'),
-(42, 'Prueba', 'activo');
+(42, 'Prueba', 'activo'),
+(43, 'Pr 2.1', 'activo');
 
 -- --------------------------------------------------------
 
@@ -1449,7 +1459,8 @@ INSERT INTO `usuarios` (`pk_cedula_user`, `nombre_user`, `email_user`, `password
 (2, 'comprador', 'comprador@gmail.com', '$2b$12$IyNKalf9vSZLInC7u/RMPuFYSS99IcuBgYaj37eKZO7qyz3vH7KAa', '', 'imagen_perfil.jpg', '3657265342', 'comprador', 'activo'),
 (3, 'comprador1', 'comprador1@gmail.com', '$2b$12$ArmUkRtymbEDYw2Gh5zybOmp7qJ.LPDWZwe96aVW4wPbN/YP1CbJm', '', NULL, '3213213213', 'comprador', 'activo'),
 (4, 'vendedor1', 'vendedor1@gmail.com', '$2b$12$Ow1Y4DeNXmEgHBNT0LudDOnzwlfgKEMFWDNcMMjrmfBqiDWjZiv1u', '', NULL, '3214321321', 'vendedor', 'activo'),
-(123456, 'admin', 'admin@gmail.com', '$2b$12$sfx4cyI/O.lJ1cgGyAeEy.QbRDp2ox.TbMzJU487RtZv9njcOFBAy', 'null', 'imagen_perfil5.jpg', '3214131', 'admin', 'activo');
+(123456, 'admin', 'admin@gmail.com', '$2b$12$sfx4cyI/O.lJ1cgGyAeEy.QbRDp2ox.TbMzJU487RtZv9njcOFBAy', 'null', 'imagen_perfil5.jpg', '3214131', 'admin', 'activo'),
+(10201202, 'Juan Camilo Realpe Ceron', 'juanrealpe972@gmail.com', '$2b$10$jjYGuXiAUJcBnVyYJoENS.k3RlZJPn/Xf.0wm4Jk4R41C5sbszYaK', 'Es un muy buen usuario, administrador', 'WhatsApp Image 2024-07-08 at 7.40.22 PM.jpeg', '3157874593', 'admin', 'activo');
 
 -- --------------------------------------------------------
 
@@ -1469,9 +1480,18 @@ CREATE TABLE `variedad` (
 --
 
 INSERT INTO `variedad` (`pk_id_vari`, `estado_vari`, `fk_tipo_variedad`, `fk_finca`) VALUES
-(26, 'activo', 1, 38),
+(26, 'inactivo', 1, 38),
 (27, 'activo', 19, 39),
-(28, 'activo', 20, 39);
+(28, 'activo', 20, 39),
+(29, 'activo', 1, 40),
+(30, 'activo', 20, 40),
+(31, 'activo', 18, 40),
+(32, 'activo', 21, 40),
+(33, 'activo', 22, 40),
+(34, 'activo', 8, 40),
+(35, 'activo', 20, 38),
+(36, 'activo', 3, 41),
+(37, 'activo', 1, 41);
 
 -- --------------------------------------------------------
 
@@ -1607,14 +1627,6 @@ ALTER TABLE `calificaciones`
   ADD KEY `calificar` (`fk_usuario`);
 
 --
--- Indices de la tabla `chat`
---
-ALTER TABLE `chat`
-  ADD PRIMARY KEY (`pk_id_chat`),
-  ADD KEY `subastac` (`fk_id_subasta`),
-  ADD KEY `chatUser` (`fk_id_usuario`);
-
---
 -- Indices de la tabla `departamento`
 --
 ALTER TABLE `departamento`
@@ -1703,19 +1715,13 @@ ALTER TABLE `veredas`
 -- AUTO_INCREMENT de la tabla `calificaciones`
 --
 ALTER TABLE `calificaciones`
-  MODIFY `pk_id_cali` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de la tabla `chat`
---
-ALTER TABLE `chat`
-  MODIFY `pk_id_chat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pk_id_cali` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `finca`
 --
 ALTER TABLE `finca`
-  MODIFY `pk_id_fin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `pk_id_fin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `notificaciones`
@@ -1727,31 +1733,31 @@ ALTER TABLE `notificaciones`
 -- AUTO_INCREMENT de la tabla `ofertas`
 --
 ALTER TABLE `ofertas`
-  MODIFY `pk_id_ofer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `pk_id_ofer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT de la tabla `postulantes`
 --
 ALTER TABLE `postulantes`
-  MODIFY `pk_id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `pk_id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `subasta`
 --
 ALTER TABLE `subasta`
-  MODIFY `pk_id_sub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `pk_id_sub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_variedad`
 --
 ALTER TABLE `tipo_variedad`
-  MODIFY `pk_id_tipo_vari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `pk_id_tipo_vari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `variedad`
 --
 ALTER TABLE `variedad`
-  MODIFY `pk_id_vari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `pk_id_vari` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `veredas`
@@ -1768,13 +1774,6 @@ ALTER TABLE `veredas`
 --
 ALTER TABLE `calificaciones`
   ADD CONSTRAINT `calificaciones_ibfk_1` FOREIGN KEY (`fk_usuario`) REFERENCES `usuarios` (`pk_cedula_user`);
-
---
--- Filtros para la tabla `chat`
---
-ALTER TABLE `chat`
-  ADD CONSTRAINT `chatUser` FOREIGN KEY (`fk_id_usuario`) REFERENCES `usuarios` (`pk_cedula_user`),
-  ADD CONSTRAINT `subastac` FOREIGN KEY (`fk_id_subasta`) REFERENCES `subasta` (`pk_id_sub`);
 
 --
 -- Filtros para la tabla `finca`

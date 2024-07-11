@@ -5,7 +5,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Image,
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import ImageSlider from "../components/molecules/ImageSlider";

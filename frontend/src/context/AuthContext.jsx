@@ -8,8 +8,10 @@ import {
   desactivarUser,
   loginUser,
   updatePasswordUser,
-  updatePasswordUserLogin,
+  restartTokenPassword,
+  restartPassword
 } from "../api/api.users";
+import ModalMessage from "../nextui/ModalMessage";
 
 const AuthContext = createContext();
 
@@ -31,6 +33,7 @@ export const AuthProvider = ({ children }) => {
   const [idUser, setIdUser] = useState([])
   const [onClose, setOnClose] = useState(false)
   const [cerrarModal, setCerrarModal] = useState(false)
+  const [back, setBack] = useState(false);
 
   const getUsers = async () => {
     try {
@@ -111,21 +114,6 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const updatePasswordLogin = async (data) => {
-    try {
-      const response = await updatePasswordUserLogin(data)
-      if(response.status === 200) {
-        getUsers()
-        setMensaje(response.data.message)
-        setModalMessage(true)
-        setOnClose(true)
-        setCerrarModal(true)
-      }
-    } catch (error) {
-      setErrors([error.response.data.message])
-    }
-  }
-
   const updateUserActive = async (id) => {
     try {
       const response = await activarUser(id)
@@ -141,6 +129,27 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await desactivarUser(id)
       getUsers()
+      setMensaje(response.data.message)
+      setModalMessage(true)
+    } catch (error) {
+      setErrors([error.response.data.message])
+    }
+  }
+
+  const tokenPassword = async (data) => {
+    try {
+      const response = await restartTokenPassword(data)
+      setMensaje(response.data.message)
+      setModalMessage(true)
+      setBack(true)
+    } catch (error) {
+      setErrors([error.response?.data?.message || "Error al procesar la solicitud"]);
+    }
+  }
+
+  const updatePasswordFinish = async (data) => {
+    try {
+      const response = await restartPassword(data)
       setMensaje(response.data.message)
       setModalMessage(true)
     } catch (error) {
@@ -175,6 +184,8 @@ export const AuthProvider = ({ children }) => {
         idUser,
         user,
         onClose,
+        back, 
+        setBack,
         logout,
         setUser,
         setIdUser,
@@ -190,10 +201,15 @@ export const AuthProvider = ({ children }) => {
         setUsers,
         cerrarModal,
         setCerrarModal,
-        updatePasswordLogin
+        tokenPassword,
+        updatePasswordFinish
       }}
     >
-   
+      <ModalMessage
+        isOpen={modalMessage}
+        onClose={() => setModalMessage(false)}
+        label={mensaje}
+      />
       {children}
     </AuthContext.Provider>
   );

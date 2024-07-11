@@ -1,120 +1,105 @@
-import React, { useState } from 'react';
-import { Button, Input, ModalFooter } from '@nextui-org/react';
-import { useAuthContext } from '../../context/AuthContext';
-import { EyeSlashFilledIcon } from '../../nextui/EyeSlashFilledIcon';
-import { EyeFilledIcon } from '../../nextui/EyeFilledIcon';
-import { icono } from '../atoms/IconsAtom';
+import React, { useEffect, useState } from 'react';
+import { Button, Input } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthContext";
+import { icono } from "../atoms/IconsAtom";
 
-const RecuperarPasswordUserLogin = ({ titleBtn, onClose }) => {
-  const [isVisibleNew, setIsVisibleNew] = useState(false);
-  const [isVisibleConfirm, setIsVisibleConfirm] = useState(false);
-
-  const toggleVisibilityNew = () => setIsVisibleNew(!isVisibleNew);
-  const toggleVisibilityConfirm = () => setIsVisibleConfirm(!isVisibleConfirm);
-
-  const { updatePasswordLogin, errors } = useAuthContext();
-  const [formData, setFormData] = useState({
-    email_user: '',
-    newPassword: '',
-    confirmPassword: '',
-  });
+function RecuperarPasswordUserLogin() {
+  const navigate = useNavigate();
+  const { errors, tokenPassword, mensaje, back, setBack } = useAuthContext();
+  const [email, setEmail] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setEmail(e.target.value);
   };
+
+  useEffect(() => {
+    setBack(false)
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updatePasswordLogin(formData);
-      onClose();
+      await tokenPassword({ email });
+      setEmail("");
     } catch (error) {
-      console.log(error);
+      console.error("Error in tokenPassword:", error);
     }
-    console.log(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-2 px-4">
-      {errors.map((error, i) => (
-          <div className='bg-red-500 p-2 text-white text-center my-2' key={i}>
-            {error}
+    <div className="flex items-center flex-col justify-center min-h-screen bg-[#F0F4F8] relative">
+      <div className="absolute top-8 left-8 flex items-center">
+        <img
+          src="./src/assets/isotipo-SubCoffee.png"
+          alt="Placeholder Image"
+          className="w-12 h-12 mr-2"
+        />
+        <span className="text-[#39A800] font-bold text-3xl">SubCoffee</span>
+      </div>
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md z-10">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {errors && errors.map((error, i) => (
+            <div className="bg-red-500 p-2 text-white text-center rounded-md" key={i}>
+              {error}
+            </div>
+          ))}
+          {mensaje && (
+            <div className="bg-green-500 p-2 text-white text-center rounded-md">
+              {mensaje}
+            </div>
+          )}
+          <h2 className="text-2xl font-bold mb-6 text-[#39A800] text-center">Restablecer Contraseña</h2>
+          <Input
+            label=""
+            aria-label="Email de usuario"
+            variant="bordered"
+            placeholder="Email de usuario"
+            startContent={icono?.iconoGmail ? <icono.iconoGmail /> : null}
+            isRequired
+            isClearable
+            type="email"
+            value={email}
+            name="email"
+            onChange={handleChange}
+            className="border-[#39A800]"
+          />
+          <div className="flex gap-x-4 w-full justify-center">
+            {back ? (
+              <Button
+                type="button"
+                color="default"
+                onClick={() => navigate("/")}
+                className="text-[#39A800] bg-[#FDFBF6] h-10 w-36 rounded-lg font-bold flex justify-center items-center border-[#39A800] border-2"
+              >
+                Volver
+              </Button>
+            ) : (
+              <>
+                <Button
+                  type="button"
+                  color="default"
+                  onClick={() => navigate("/")}
+                  className="text-[#39A800] bg-[#FDFBF6] h-10 w-36 rounded-lg font-bold flex justify-center items-center border-[#39A800] border-2"
+                >
+                  Cancelar
+                </Button>
+                <Button
+                  type="submit"
+                  className="text-[#FDFBF6] bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center border-[#FDFBF6]"
+                >
+                  Enviar Gmail
+                </Button>
+              </>
+            )}
           </div>
-        ))
-      }  
-      <Input
-        label=""
-        aria-label="Email de usuario"
-        variant="bordered"
-        placeholder="Email de usuario"
-        startContent={<icono.iconoGmail />}
-        isRequired
-        isClearable
-        type="email"
-        value={formData.email_user}
-        name="email_user"
-        onChange={handleChange}
-      />
-      <Input
-        label=""
-        aria-label="Nueva Contraseña"
-        variant="bordered"
-        placeholder="Nueva Contraseña"
-        startContent={<icono.iconoContraseña />}
-        endContent={
-          <button
-            type="button"
-            onClick={toggleVisibilityNew}
-            className="focus:outline-none"
-          >
-            {isVisibleNew ? (
-              <EyeSlashFilledIcon className="text-2xl text-default-400" />
-            ) : (
-              <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-            )}
-          </button>
-        }
-        type={isVisibleNew ? 'text' : 'password'}
-        value={formData.newPassword}
-        name="newPassword"
-        onChange={handleChange}
-      />
-      <Input
-        label=""
-        aria-label="Confirmar Contraseña"
-        variant="bordered"
-        placeholder="Confirmar Contraseña"
-        startContent={<icono.iconoContraseña />}
-        endContent={
-          <button
-            type="button"
-            onClick={toggleVisibilityConfirm}
-            className="focus:outline-none"
-          >
-            {isVisibleConfirm ? (
-              <EyeSlashFilledIcon className="text-2xl text-default-400" />
-            ) : (
-              <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
-            )}
-          </button>
-        }
-        type={isVisibleConfirm ? 'text' : 'password'}
-        value={formData.confirmPassword}
-        name="confirmPassword"
-        onChange={handleChange}
-      />
-      <ModalFooter className="flex justify-center">
-        <Button type="button" color="default" onClick={onClose} className="text-[#39A800] bg-[#FDFBF6] h-10 w-36 rounded-lg font-bold flex justify-center items-center border-[#39A800] border-2">
-          Cancelar
-        </Button>
-        <Button type="submit" className="text-[#FDFBF6] bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center border-[#FDFBF6]">{titleBtn}</Button>
-      </ModalFooter>
-    </form>
+        </form>
+      </div>
+      <div className="absolute top-0 left-0 w-96 h-96 bg-[#39A800] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-[#39A800] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+      <div className="absolute bottom-0 left-20 w-96 h-96 bg-[#39A800] rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+    </div>
   );
-};
+}
 
 export default RecuperarPasswordUserLogin;

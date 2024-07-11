@@ -1,17 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Input, ModalFooter } from "@nextui-org/react";
 import { EyeSlashFilledIcon } from "../../nextui/EyeSlashFilledIcon";
 import { EyeFilledIcon } from "../../nextui/EyeFilledIcon";
 import { icono } from "../atoms/IconsAtom";
 import { useAuthContext } from "../../context/AuthContext";
-import FormRecuperarPassword from "../templates/FormRecuperarPassword";
 
 const LoginFormMolecule = () => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
   const { loginUsers, isAuthenticated, errors } = useAuthContext();
-  const [abrirModalPassword, setAbrirModalPassword] = useState(false);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -49,12 +47,6 @@ const LoginFormMolecule = () => {
           </div>
         ))
       }
-      <FormRecuperarPassword
-        open={abrirModalPassword}
-        onClose={() => setAbrirModalPassword(false)}
-        title={"Recuperar contraseña"}
-        titleBtn={"Recuperar"}
-      />
       <Input
         type="email"
         name="email"
@@ -88,13 +80,9 @@ const LoginFormMolecule = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <a
-        href="#RecuperarPassword"
-        onClick={() => setAbrirModalPassword(true)}
-        className={`cursor-pointer text-sm underline hover:text-[#39A800]`}
-      >
+      <Link to="/update-password" className="text-sm underline hover:text-[#39A800]">
         ¿Olvidaste tu contraseña?
-      </a>
+      </Link>
       <ModalFooter className="flex justify-center">
         <Button type="submit" className="text-[#FDFBF6] bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center border-[#FDFBF6]"> 
           Iniciar Sesión

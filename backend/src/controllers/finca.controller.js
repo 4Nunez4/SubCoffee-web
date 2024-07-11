@@ -94,7 +94,7 @@ export const getFincasActivas = async (req, res) => {
       res.status(204).json({ message: "No se encontraron fincas para el usuario" });
     }
   } catch (error) {
-     res.status(500).json({ message: "Error en el servidor" + error });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -105,16 +105,16 @@ export const createFinca = async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { nombre_fin, fk_id_usuario, fk_vereda } = req.body;
+    const { nombre_fin, fk_id_usuario, fk_vereda, longitud_fin, latitud_fin } = req.body;
     let imagen_fin = req.file ? req.file.originalname : "";
 
-    const existingSQL = 'SELECT * FROM finca WHERE nombre_fin = ? AND fk_id_usuario = ? AND fk_vereda = ?';
-    const [existing] = await pool.query(existingSQL, [nombre_fin, fk_id_usuario, fk_vereda]);
+    const existingSQL = 'SELECT * FROM finca WHERE nombre_fin = ? AND fk_id_usuario = ? AND fk_vereda = ? AND  longitud_fin = ? AND latitud_fin = ?';
+    const [existing] = await pool.query(existingSQL, [nombre_fin, fk_id_usuario, fk_vereda, longitud_fin, latitud_fin]);
     
     if (existing.length > 0) {
       return res.status(400).json({ message: "Ya existe una finca con ese nombre y esa vereda" });
     } else {
-      let sql = `INSERT INTO finca(nombre_fin, imagen_fin, estado_fin, fk_id_usuario, fk_vereda) VALUES ('${nombre_fin}', '${imagen_fin}', 'activo', '${fk_id_usuario}', '${fk_vereda}')`;
+      let sql = `INSERT INTO finca(nombre_fin, imagen_fin, estado_fin, fk_id_usuario, fk_vereda, longitud_fin, latitud_fin) VALUES ('${nombre_fin}', '${imagen_fin}', 'activo', '${fk_id_usuario}', '${fk_vereda}', '${longitud_fin}', '${latitud_fin}')`;
       const [rows] = await pool.query(sql);
       if (rows.affectedRows > 0) {
         res.status(200).json({ message: "Finca creada con exito" });
@@ -135,11 +135,11 @@ export const updateFinca = async (req, res) => {
     }
 
     const { id } = req.params;
-    const { nombre_fin, fk_vereda } = req.body;
+    const { nombre_fin, fk_vereda, longitud_fin, latitud_fin } = req.body;
     const imagen_fin = req.file ? req.file.originalname : "";
 
-    let sql = `UPDATE finca SET nombre_fin = IFNULL(?, nombre_fin), fk_vereda = IFNULL(?, fk_vereda)`;
-    const params = [nombre_fin, fk_vereda]
+    let sql = `UPDATE finca SET nombre_fin = IFNULL(?, nombre_fin), fk_vereda = IFNULL(?, fk_vereda), longitud_fin = IFNULL(?, longitud_fin), latitud_fin = IFNULL(?, latitud_fin)`;
+    const params = [nombre_fin, fk_vereda, longitud_fin, latitud_fin]
 
     if(imagen_fin){
       sql += `, imagen_fin = ?`

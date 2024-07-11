@@ -16,4 +16,12 @@ export const validationFinca = [
     .not()
     .isEmpty()
     .isNumeric({ no_symbols: true }),
+  check("longitud_fin", "La longitud es obligatoria")
+    .not()
+    .isEmpty()
+    .isNumeric({ no_symbols: true }),
+  check("latitud_fin", "La latitud es obligatoria")
+    .not()
+    .isEmpty()
+    .isNumeric({ no_symbols: true }),
 ];
