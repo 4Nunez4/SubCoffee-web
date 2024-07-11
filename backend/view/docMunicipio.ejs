@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <hr />
+    <h2>Requerimiento. Documentación de municipio</h2>
+    <hr />
+    <h3>Crear municipios</h3>
+    <table>
+      <tr>
+        <td>Numero 1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Crear municipios</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite crear municipios en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>
+          <pre><code>{
+  "pk_codigo_muni": "100",
+  "nombre_muni": "nuevo municipio",
+  "fk_departamento": "41"
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "municipio creado exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 400 (Municipio existente)
+          <pre><code>{
+  "message": "El municipio que quieres crear ya existe"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 400 (Código existente)
+          <pre><code>{
+  "message": "El código del municipio ya existe"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se pudo crear el municipio"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor: " + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Listar municipios</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Listar municipios</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite listar todos los municipios creados en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>[
+  {
+    "pk_codigo_muni": 100,
+    "nombre_muni": "nuevo municipio",
+    "estado_muni": "activo",
+    "fk_departamento": 41,
+    "nombre_depar": "Huila"
+  },
+  {
+    "pk_codigo_muni": 41001,
+    "nombre_muni": "Neiva",
+    "estado_muni": "activo",
+    "fk_departamento": 41,
+    "nombre_depar": "Huila"
+  }
+]</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se encontraron municipios"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Actualizar municipios</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Actualizar municipios</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite actualizar los municipios creados en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>
+          <pre><code>{
+  "pk_codigo_muni": "101",
+  "nombre_muni": "nueva prueba municipio",
+  "fk_departamento": "41"
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "municipio actualizado exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 400 (Municipio existente)
+<pre><code>{
+"message": "El municipio que quieres crear ya existe"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 400 (Código existente
+<pre><code>{
+"message": "El código del municipio ya existe"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Municipio no encontrado"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Buscar municipios</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Buscar municipios</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite buscar los municipios creados en la base de datos por medio de su ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "pk_codigo_muni": 1001,
+  "nombre_muni": "nueva prueba municipio",
+  "estado_muni": "activo",
+  "fk_departamento": 41,
+  "nombre_depar": "Huila"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Municipio no encontrado"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Eliminar municipios</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Eliminar municipios</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>Permite eliminar los municipios creados en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>DELETE</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "municipio eliminado exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Municipio no encontrado"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <h3>Activar municipio</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Activar municipio</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipiosac/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite activar un municipio en la base de datos por medio de su ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Municipio activado exitosamente, ahora este podrá ser utilizado por los usuarios"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Municipio no encontrado"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Desactivar municipio</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Desactivar municipio</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipiosdes/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite desactivar un municipio en la base de datos por medio de su ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Municipio desactivado exitosamente, ahora este no podrá ser utilizado por los usuarios"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Municipio no encontrado"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Listar Municipios activos por departamento</h3>
+    <table>
+      <tr>
+        <td>Numero</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>listar municipios activos por departamento</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/municipios_activos/:id</td>
+      </tr>
+      <tr>
+        <td>Descripcion:</td>
+        <td>
+          Permite listar municipios activos por departamento de la base de datos por medio de su ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>[
+  {
+    "pk_codigo_muni": 1001,
+    "nombre_muni": "Municipio 1",
+    "estado_muni": "activo",
+    "fk_departamento": 41,
+    "nombre_depar": "Huila"
+  },
+  {
+    "pk_codigo_muni": 1002,
+    "nombre_muni": "Municipio 2",
+    "estado_muni": "activo",
+    "fk_departamento": 41,
+    "nombre_depar": "Huila"
+  }
+]</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Departamento no encontrado"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+  </body>
+</html>

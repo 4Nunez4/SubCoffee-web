@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <hr />
+    <h2>Requerimiento. Documentación de finca</h2>
+    <hr />
+    <h3>Crear finca</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Crear finca</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/finca</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite registrar fincas en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios</td>
+        <td>VENDEDOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>
+          <pre><code>{ 
+  "nombre_fin": "Napoles", 
+  "imagen_fin": "imagen_fin", 
+  "fk_id_usuario": 1084251889,
+  "fk_vereda": 6 
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Finca creada con éxito"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 400 (Finca existente)
+          <pre><code>{
+  "message": "Ya existe una finca con ese nombre y esa vereda"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se pudo crear la finca"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Listar fincas</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Listar fincas</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/finca</td>
+      </tr>
+      <tr>
+        <td>Descripción:</td>
+        <td>Permite listar todas las fincas creadas en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Las fincas encontradas con éxito",
+  "data": [
+    {
+      "pk_id_fin": 37,
+      "nombre_fin": "Mi Primera finca",
+      "imagen_fin": "finca1.jpeg",
+      "estado_fin": "activo",
+      "fk_id_usuario": 1,
+      "fk_vereda": 1,
+      "pk_id_vere": 1,
+      "nombre_vere": "San Adolfo",
+      "estado_vere": "activo",
+      "fk_municipio": 41357,
+      "pk_codigo_muni": 41357,
+      "nombre_muni": "Isnos",
+      "estado_muni": "activo",
+      "fk_departamento": 41,
+      "pk_codigo_depar": 41,
+      "nombre_depar": "Huila",
+      "estado_depar": "activo"
+    }, 
+    ...
+  ]
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se encontraron fincas"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Actualizar finca</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Actualizar finca</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/finca/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción:</td>
+        <td>
+          Permite actualizar fincas creadas en la base de datos por medio de su
+          ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>VENDEDOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>
+          <pre><code>{ 
+  "nombre_fin": "Casa De Diamonte", 
+  "imagen_fin": "imagen_fin", 
+  "fk_vereda": 5 
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{ 
+  "message": "Finca actualizada con éxito" 
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 400 (Finca existente)
+          <pre><code>{
+"message": "Ya existe una finca con ese nombre y esa vereda"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{ 
+  "message": "No se pudo actualizar la finca con el ID" 
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{ 
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Buscar finca</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Buscar fincas</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/fincaone/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción:</td>
+        <td>
+          Permite buscar fincas creadas en la base de datos por medio de su ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>VENDEDOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{ 
+  "message": "Finca encontrada",
+  "data": [
+      {
+          "pk_id_fin": 40,
+          "nombre_fin": "Mi finca",
+          "imagen_fin": "mos-design-ZzxivGdFVSY-unsplash.jpg",
+          "estado_fin": "activo",
+          "fk_id_usuario": 1,
+          "fk_vereda": 9
+      }
+  ]
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{ 
+  "message": "No se encontro la finca con ese ID"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{ 
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Eliminar finca</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Eliminar finca</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/finca/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción:</td>
+        <td>
+          Permite eliminar una finca en la base de datos por medio de su ID
+        </td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>DELETE</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>ADMINISTRADOR, VENDEDOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{ 
+  "message": "Finca eliminada con éxito"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{ 
+  "message": "Error con el ID al eliminar la finca"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{ 
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Desactivar finca</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>6</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Desactivar finca</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/fincades/:id</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCION</td>
+        <td>Permite desactivar una finca creada en la base de datos</td>
+      </tr>
+      <tr>
+        <td>VERBO</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR, VENDEDOR</td>
+      </tr>
+      <tr>
+        <td>PETICION</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{ 
+  "message": "Finca desactivada exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{ 
+  "message": "No se encontró ninguna Finca con el ID"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{ 
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Activar finca</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>7</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Activar finca</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/fincaac/:id</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCION</td>
+        <td>Permite activar una finca creada en la base de datos</td>
+      </tr>
+      <tr>
+        <td>VERBO</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR, VENDEDOR</td>
+      </tr>
+      <tr>
+        <td>PETICION</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{ 
+  "message": "Finca activada exitosamente"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{ 
+  "message": "No se encontró ninguna Finca con el ID"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{ 
+  "message": "Error en el servidor" + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Listar las fincas por usuario y activas</h3>
+    <table>
+      <tr>
+        <td>NUMERO</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Listar fincas activas por usuario</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/fincasactivas/:id</td>
+      </tr>
+      <tr>
+        <td>DESCRIPCION</td>
+        <td>
+          Permite listar las fincas activas de un usuario de la base de datos
+        </td>
+      </tr>
+      <tr>
+        <td>VERBO</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>USUARIOS</td>
+        <td>ADMINISTRADOR, VENDEDOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{ 
+  "message": "Finca encontrada",
+  "data": [
+    {
+      "pk_id_fin": 37,
+      "nombre_fin": "Mi Primera finca",
+      "imagen_fin": "finca1.jpeg",
+      "estado_fin": "activo",
+      "fk_id_usuario": 1,
+      "fk_vereda": 1,
+      "pk_id_vere": 1,
+      "nombre_vere": "San Adolfo",
+      "estado_vere": "activo",
+      "fk_municipio": 41357,
+      "pk_codigo_muni": 41357,
+      "nombre_muni": "Isnos",
+      "estado_muni": "activo",
+      "fk_departamento": 41,
+      "pk_codigo_depar": 41,
+      "nombre_depar": "Huila",
+      "estado_depar": "activo"
+    },
+    ...
+  ]
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 204
+          <pre><code>{ 
+  "message": "No se encontraron fincas para el usuario"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{ 
+  "message": "Error en el servidor: ${error}"
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>DESARROLLADOR</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+  </body>
+</html>

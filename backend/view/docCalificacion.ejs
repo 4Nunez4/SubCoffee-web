@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calificaciones</title>
+  </head>
+  <body>
+    <hr />
+    <h2>Requerimiento. Documentación de calificaciones</h2>
+
+    <hr />
+    <h3>Crear Calificación</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Crear Calificación</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/calificaciones</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite crear una calificación en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>
+          <pre><code>{
+  "idUsuario": 1,
+  "estrellas": 5,
+  "opiniones": "Excelente servicio",
+  "fk_usuario": 2
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Calificación creada exitosamente."
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se pudo crear la calificación."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Buscar Calificación</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Buscar Calificación</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/calificacionForId/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite buscar una calificación de la base de datos usando su ID</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "id_usuario_cali": 1,
+  "estrellas_cali": 5,
+  "opiniones_cali": "Excelente servicio",
+  "fk_usuario": 2
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se pudo obtener la calificación."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Listar Calificaciones</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Listar Calificaciones</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/calificaciones/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite listar todas las calificaciones de un usuario creado en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "calificaciones": [
+    {
+      "id_usuario_cali": 1,
+      "estrellas_cali": 5,
+      "opiniones_cali": "Excelente servicio",
+      "fk_usuario": 2
+    }
+  ],
+  "stats": {
+    "total": 10,
+    "promedio": 4.5,
+    "cinco_estrellas": 5,
+    "cuatro_estrellas": 3,
+    "tres_estrellas": 1,
+    "dos_estrellas": 1,
+    "una_estrella": 0
+  }
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 200
+          <pre><code>{
+  "message": "No hay calificaciones disponibles"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor: " + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Actualizar Calificación</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Actualizar Calificación</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/calificaciones/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite actualizar una calificación creada en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>
+          <pre><code>{
+  "idUsuario": 1,
+  "estrellas": 4,
+  "opiniones": "Buen servicio",
+  "fk_usuario": 2
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Calificación actualizada"
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Calificación no encontrada"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama</td>
+        <td>DEVjcrc</td>
+      </tr>
+    </table>
+    
+  </body>
+</html>

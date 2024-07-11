@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentación de Notificaciones</title>
+  </head>
+  <body>
+    <hr />
+    <h2>Requerimiento: Documentación de Notificaciones</h2>
+
+    <hr />
+    <h3>Crear Notificación</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>Nombre de servicio</td>
+        <td>Crear Notificación</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/notificaciones</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite crear una notificación en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>POST</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>
+          <pre><code>{
+  "tipo_not": "mensaje",
+  "texto_not": "la subasta ha iniciado, comience a ofertar",
+  "fk_id_subasta": 11,
+  "fk_id_usuario": 1084253677
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Notificación creada exitosamente."
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error al crear la notificación."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el sistema."
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Listar Notificaciones</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Nombre de servicio</td>
+        <td>Listar Todas las Notificaciones</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/notificaciones</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite listar todas las notificaciones de la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Notificaciones encontradas con éxito",
+  "data": [ ... ]
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "No se encontraron notificaciones."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el sistema."
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Actualizar Notificación</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Nombre de servicio</td>
+        <td>Actualizar Notificación</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/notificaciones/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite actualizar una notificación específica en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>PUT</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>
+          <pre><code>{
+  "tipo_not": "cierre",
+  "texto_not": "la subasta ha finalizado"
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Notificación actualizada exitosamente."
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "El ID proporcionado no existe."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el sistema."
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Buscar Notificación</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>4</td>
+      </tr>
+      <tr>
+        <td>Nombre de servicio</td>
+        <td>Buscar Notificación</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/notificaciones/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite buscar una notificación específica en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Notificación encontrada exitosamente."
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error con ID de Notificación, no encontrado."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el sistema."
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+
+    <hr />
+    <h3>Eliminar Notificación</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>5</td>
+      </tr>
+      <tr>
+        <td>Nombre de servicio</td>
+        <td>Eliminar Notificación</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/notificaciones/:id</td>
+      </tr>
+      <tr>
+        <td>Descripción</td>
+        <td>Permite eliminar una notificación específica de la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP</td>
+        <td>DELETE</td>
+      </tr>
+      <tr>
+        <td>HEADER</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICIÓN BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Notificación eliminada exitosamente."
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "La notificación con el ID proporcionado no existe."
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el sistema."
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador</td>
+        <td>Jorge Enrique Nuñez Molina</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjenm</td>
+      </tr>
+    </table>
+
+  </body>
+</html>
