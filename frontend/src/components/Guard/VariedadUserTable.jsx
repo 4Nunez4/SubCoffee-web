@@ -47,8 +47,12 @@ export default function VariedadUserTable({ titleBtn, pkFinca }) {
   return (
     <div className="flex h-[360px] pb-4">
       <div className="w-2/4 flex justify-center items-center">
-        {pkFinca && (
-          <Map fincaId={pkFinca.pk_id_fin}/>
+        {pkFinca && pkFinca.imagen_fin && (
+          <Image
+            src={`http://localhost:4000/fincas/${pkFinca.imagen_fin}`}
+            alt="Imagen de la finca"
+            className="w-[350px] h-[350px] object-cover shadow border"
+          />
         )}
       </div>
       <div className="w-2/3 p-2">

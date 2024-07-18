@@ -198,7 +198,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
           />
           <label
             htmlFor="certificado_sub"
-            className="cursor-pointer items-center w-[345px] flex bg-transparent border-2 rounded-xl border-gray-200"
+            className="cursor-pointer items-center w-full flex bg-transparent border-2 rounded-xl border-gray-200"
           >
             <div className="flex items-center h-5 transition duration-300">
               <span className="text-gray-500 w-full ml-2 overflow-hidden text-ellipsis whitespace-nowrap max-w-[210px]">
@@ -231,7 +231,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
             <option value="" hidden>
               Seleccionar Finca
             </option>
-            {fincasActivas.map(({pk_id_fin, nombre_fin}) => (
+            {fincasActivas.filter(finca => finca.estado_fin === 'activo').map(({pk_id_fin, nombre_fin}) => (
                 <option value={pk_id_fin} key={pk_id_fin}>
                   {nombre_fin}
                 </option>

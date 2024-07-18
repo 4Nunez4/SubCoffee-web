@@ -328,54 +328,54 @@ function SubastaUser() {
             <div className="bg-[#e0e0e0] rounded-xl p-4 mt-2 w-full">
               <p className="text-center">Precio actual: ${precioActual.toLocaleString()}</p>
               <form onSubmit={handleSubmitOferta} className="w-full flex flex-col items-center">
-                <Slider
-                  label="Añadir A La Puja"
-                  step={20000}
-                  value={oferta}
-                  onChange={(value) => setOferta(value)}
-                  maxValue={500000} 
-                  minValue={0}
-                  showSteps={true}
-                  showTooltip={true}
-                  showOutline={true}
-                  disableThumbScale={true}
-                  formatOptions={{
-                    style: "currency",
-                    currency: "COP",
-                    currencyDisplay: "symbol",
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                  }}
-                  tooltipValueFormatOptions={{
-                    style: "currency",
-                    currency: "COP",
-                    currencyDisplay: "symbol",
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                  }}
-                  classNames={{
-                    base: "w-full",
-                    filler: "bg-gradient-to-r from-primary-500 to-secondary-400",
-                    labelWrapper: "mb-2",
-                    label: "font-medium text-default-700 text-medium",
-                    value: "font-medium text-default-500 text-small",
-                    thumb: [
-                      "transition-size",
-                      "bg-gradient-to-r from-secondary-400 to-primary-500",
-                      "data-[dragging=true]:shadow-lg data-[dragging=true]:shadow-black/20",
-                      "data-[dragging=true]:w-7 data-[dragging=true]:h-7 data-[dragging=true]:after:h-6 data-[dragging=true]:after:w-6",
-                    ],
-                    step: "data-[in-range=true]:bg-black/30 dark:data-[in-range=true]:bg-white/50",
-                  }}
-                  tooltipProps={{
-                    offset: 10,
-                    placement: "bottom",
-                    classNames: {
-                      base: ["before:bg-gradient-to-r before:from-secondary-400 before:to-primary-500"],
-                      content: ["py-2 shadow-xl text-white bg-gradient-to-r from-secondary-400 to-primary-500"],
-                    },
-                  }}
-                />
+              <Slider
+                label="Añadir A La Puja"
+                step={20000}
+                value={oferta}
+                onChange={(value) => setOferta(value)}
+                maxValue={500000} 
+                minValue={0}
+                showSteps={true}
+                showTooltip={true}
+                showOutline={true}
+                disableThumbScale={true}
+                formatOptions={{
+                  style: "currency",
+                  currency: "COP",
+                  currencyDisplay: "symbol",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }}
+                tooltipValueFormatOptions={{
+                  style: "currency",
+                  currency: "COP",
+                  currencyDisplay: "symbol",
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                }}
+                classNames={{
+                  base: "w-full",
+                  filler: "bg-green-500", // Cambiado a verde
+                  labelWrapper: "mb-2",
+                  label: "font-medium text-default-700 text-medium",
+                  value: "font-medium text-default-500 text-small",
+                  thumb: [
+                    "transition-size",
+                    "bg-green-700", // Cambiado a verde oscuro
+                    "data-[dragging=true]:shadow-lg data-[dragging=true]:shadow-black/20",
+                    "data-[dragging=true]:w-7 data-[dragging=true]:h-7 data-[dragging=true]:after:h-6 data-[dragging=true]:after:w-6",
+                  ],
+                  step: "data-[in-range=true]:bg-black/30 dark:data-[in-range=true]:bg-white/50",
+                }}
+                tooltipProps={{
+                  offset: 10,
+                  placement: "bottom",
+                  classNames: {
+                    base: ["before:bg-green-500"], // Cambiado a verde
+                    content: ["py-2 shadow-xl text-white bg-green-500"], // Cambiado a verde
+                  },
+                }}
+              />
                 <Button type="submit">Realizar Oferta</Button>
               </form>
             </div>
@@ -438,7 +438,7 @@ function SubastaUser() {
               )}
             </div>
             <div className="flex justify-center mb-3 mt-3 gap-x-1">
-              {subastaIniciada && ofertasMayor && ofertas && user.pk_cedula_user === subasta.pk_cedula_user || ofertasMayor.pk_cedula_user === user.pk_cedula_user ? (
+              { user.pk_cedula_user === subasta.pk_cedula_user || ofertasMayor.pk_cedula_user === user.pk_cedula_user ? (
                 <Button auto color="primary" onClick={() => setIsModalOpen(true)}>
                   Contactar
                 </Button>

@@ -170,19 +170,48 @@ export default function SubastaTable() {
                               <VerticalDotsIcon className="text-default-400" />
                             </Button>
                           </DropdownTrigger>
-                          <DropdownMenu aria-label="Example" disabledKeys={subasta.estado_sub === "abierta" ? [] : subasta.estado_sub === "cerrada" && (subasta.ganador_sub || subasta.precio_final_sub)? ["activar", "edit"]: ["edit", "desactivar"]}>
-                            <DropdownItem key="edit" onPress={() => {
-                              handleToggle("update");
-                              setIdSubasta(subasta);
-                            }}>
-                              Editar
-                            </DropdownItem>
-                            {subasta.estado_sub !== "espera" ? (
-                                <DropdownItem key="desactivar" className="text-danger" color="danger" variant="solid" onPress={() => confirmDesactivarSubasta(subasta)}>Cerrar Subasta</DropdownItem>                             
-                              ): (
-                                <DropdownItem key="activar" className="text-green-500" color="success" variant="solid" onPress={() => destablecerGanador(subasta.pk_id_sub, usuario.pk_cedula_user)}>Abrir Subasta</DropdownItem>                             
-                            )}
-                          </DropdownMenu>
+                          <DropdownMenu 
+  aria-label="Example" 
+  disabledKeys={
+    subasta.estado_sub === "abierta" ? [] : 
+    (subasta.estado_sub === "cerrada" && (subasta.ganador_sub !== "NULL" || subasta.precio_final_sub)) || 
+    (subasta.estado_sub === "abierta" && subasta.ganador_sub === null) ? 
+    ["activar", "edit"] : 
+    ["edit", "desactivar"]
+  }
+>
+  <DropdownItem 
+    key="edit" 
+    onPress={() => {
+      handleToggle("update");
+      setIdSubasta(subasta);
+    }}
+  >
+    Editar
+  </DropdownItem>
+  {subasta.estado_sub !== "espera" && subasta.ganador_sub === null ? (
+    <DropdownItem 
+      key="desactivar" 
+      className="text-danger" 
+      color="danger" 
+      variant="solid" 
+      onPress={() => confirmDesactivarSubasta(subasta)}
+    >
+      Cerrar Subasta
+    </DropdownItem>
+  ) : (
+    <DropdownItem 
+      key="activar" 
+      className="text-green-500" 
+      color="success" 
+      variant="solid" 
+      onPress={() => destablecerGanador(subasta.pk_id_sub, usuario.pk_cedula_user)}
+    >
+      Abrir Subasta
+    </DropdownItem>
+  )}
+</DropdownMenu>
+
                         </Dropdown>
                       </div>
                   )}

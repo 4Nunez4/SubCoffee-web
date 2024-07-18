@@ -13,9 +13,7 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
     departamento: "",
     municipio: "",
     vereda: "",
-    imagen_fin: "",
-    latitud_fin: "",
-    longitud_fin: "",
+    imagen_fin: ""
   });
 
   const { idFinca, createFincas, updateFincas, errors } = useFincaContext();
@@ -36,9 +34,7 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
         imagen_fin: idFinca.imagen_fin,
         departamento: idFinca.fk_departamento,
         municipio: idFinca.fk_municipio,
-        vereda: idFinca.fk_vereda,
-        latitud_fin: idFinca.latitud_fin,
-        longitud_fin: idFinca.longitud_fin,
+        vereda: idFinca.fk_vereda
       });
       getMunisForDeparActivos(idFinca.fk_departamento);
       getVeresForMuni(idFinca.fk_municipio);
@@ -83,8 +79,6 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
       data.append("nombre_fin", formData.nombre_fin);
       data.append("imagen_fin", formData.imagen_fin);
       data.append("fk_vereda", formData.vereda);
-      data.append("longitud_fin", formData.longitud_fin);
-      data.append("latitud_fin", formData.latitud_fin);
       if (mode === "update") {
         updateFincas(idFinca.pk_id_fin, data, user.pk_cedula_user);
       } else {
@@ -242,34 +236,6 @@ const RegisterFincaMolecule = ({ mode, titleBtn }) => {
             </option>
           )}
         </select>
-      </div>
-      <div className="flex gap-x-3">
-        <Input
-          label=""
-          aria-label="Latitud de la Finca"
-          startContent={<icono.iconoNumber />}
-          placeholder="Latitud de la Finca"
-          variant="bordered"
-          required
-          min={0}
-          type="number"
-          name="latitud_fin"
-          value={formData.latitud_fin}
-          onChange={handleChange}
-        />
-        <Input
-          label=""
-          aria-label="Longitud de la Finca"
-          startContent={<icono.iconoNumber />}
-          placeholder="Longitud de la Finca"
-          variant="bordered"
-          required
-          min={0}
-          type="number"
-          name="longitud_fin"
-          value={formData.longitud_fin}
-          onChange={handleChange}
-        />
       </div>
       <ModalFooter className="flex justify-center">
         <Button

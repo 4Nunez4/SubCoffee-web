@@ -112,7 +112,7 @@ function HeaderOrganism() {
               variant="faded"
             >  
               <AutocompleteSection title="Usuarios">
-                {users.map((user) => (
+                {users && users.map((user) => (
                   <AutocompleteItem
                     key={user.pk_cedula_user}
                     textValue={user.nombre_user}

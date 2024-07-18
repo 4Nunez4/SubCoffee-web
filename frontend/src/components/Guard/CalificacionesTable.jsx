@@ -140,7 +140,7 @@ function CalificacionesTable({ titleBtn, fk_user }) {
                     src={
                       calificacion.imagen_user &&
                       calificacion.imagen_user.length > 0
-                        ? `http://localhost:4000/img/${calificacion.imagen_user}`
+                        ? `http://localhost:4000/usuarios/${calificacion.imagen_user}`
                         : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
                     }
                   />

@@ -39,7 +39,6 @@ export const createUser = async (req, res) => {
     const bcryptPassword = bcrypt.hashSync(password_user, 12);
     let imagen_user = req.file ? req.file.originalname : "";
 
-    // Verifica si ya existe un usuario con la misma cédula o correo
     const checkSqlCedula = `SELECT * FROM usuarios WHERE pk_cedula_user = '${pk_cedula_user}'`;
     const [existingCedula] = await pool.query(checkSqlCedula);
 
@@ -62,7 +61,7 @@ export const createUser = async (req, res) => {
       sql += `, imagen_user`;
       params.push(imagen_user);
     }
-    sql += ` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    sql += ` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const [result] = await pool.query(sql, params);
     if (result.affectedRows > 0) {
@@ -89,7 +88,6 @@ export const updateUser = async (req, res) => {
     let sql = `UPDATE usuarios SET pk_cedula_user = IFNULL(?, pk_cedula_user), nombre_user = IFNULL(?, nombre_user), email_user = IFNULL(?, email_user), descripcion_user = IFNULL(?, descripcion_user), telefono_user = IFNULL(?, telefono_user)`;
     const params = [pk_cedula_user, nombre_user, email_user, descripcion_user, telefono_user];
 
-    // Verificar si ya existe un usuario con la misma cédula o correo, excluyendo al usuario actual
     const checkSqlCedula = `SELECT * FROM usuarios WHERE pk_cedula_user = ? AND pk_cedula_user != ?`;
     const [existingCedula] = await pool.query(checkSqlCedula, [pk_cedula_user, id]);
 
@@ -104,7 +102,6 @@ export const updateUser = async (req, res) => {
       return res.status(400).json({ message: "Ya existe un usuario con ese correo" });
     }
 
-    // Agregar la actualización de la imagen solo si se proporciona una nueva imagen
     if (imagen_user) {
       sql += `, imagen_user = ?`;
       params.push(imagen_user);

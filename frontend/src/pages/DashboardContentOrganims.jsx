@@ -23,7 +23,6 @@ function DashboardContentOrganims() {
   return (
     <>
       <div>
-        {/* ///---------------------------------------------------------------------------/// */}
         <div>
           <section
             id="inicio"
@@ -48,9 +47,6 @@ function DashboardContentOrganims() {
             </div>
           </section>
         </div>
-
-        {/* ///---------------------------------------------------------------------------/// */}
-
         <div className="  bg-[#FDFBF6]">
           <section
             id="quienessomos"
@@ -76,7 +72,6 @@ function DashboardContentOrganims() {
                       Conoce más
                     </Button>
                   </FooterLinkAtom>
-                  
                   </div>
                 </div>
               </div>
@@ -90,8 +85,6 @@ function DashboardContentOrganims() {
             </div>
           </section>
         </div>
-
-        {/* ///---------------------------------------------------------------------------/// */}
         <div className="bg-[#FDFBF6]">
           <section
             id="quequeremos"
@@ -120,21 +113,17 @@ function DashboardContentOrganims() {
                     </p>
                   </div>
                   <div className="flex justify-center items-center">
-            <FooterLinkAtom to="/queremoslograr">
-            
-             <Button endContent={<FaArrowUp className="rotate-45" />} className="text-white bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center">
-                      Conoce más
-                    </Button>
-             </FooterLinkAtom>
-
-                   
+                    <FooterLinkAtom to="/queremoslograr">
+                      <Button endContent={<FaArrowUp className="rotate-45" />} className="text-white bg-[#39A800] h-10 w-36 rounded-lg font-bold flex justify-center items-center">
+                        Conoce más
+                      </Button>
+                    </FooterLinkAtom>
                   </div>
                 </div>
               </div>
             </div>
           </section>
         </div>
-        {/* ///---------------------------------------------------------------------------/// */}
         <div className="bg-[#FDFBF6]">
           <section
             id="beneficios"
@@ -147,72 +136,71 @@ function DashboardContentOrganims() {
             </div>
             <div className="grid gap-20 grid-cols-2 place-items-center px-20 font-normal text-lg text-[#919190] leading-relaxed">
               <div className="pr-30">
-                <div className="bg-[#c0e4ae] h-10 w-10 flex flex-col items-center justify-center rounded-lg mb-2">
-                  <TfiWorld className="text-[#39A800] text-2xl" />
+                <div className="flex items-center gap-x-3 mb-3">
+                  <div className="bg-[#c0e4ae] h-10 w-10 flex flex-col items-center justify-center rounded-lg mb-2">
+                    <TfiWorld className="text-[#39A800] text-2xl" />
+                  </div>
+                  <div className="font-medium text-xl text-[#323232]">
+                    <h3>Conexión con Vendedores y Compradores</h3>
+                  </div>
                 </div>
-                <div className="font-medium text-xl text-[#323232]">
-                  <h3>Conexión con Vendedores y Compradores</h3>
-                </div>
-                <div>
-                  <p>
-                    En SubCoffee te ofrecemos la facilidad de poder contactar
-                    con todos los vendedores de café de la mas alta calidad y
-                    los Compradores mas confiables registrados en esta
-                    plataforma.
-                  </p>
-                </div>
+                <p>
+                  En SubCoffee te ofrecemos la facilidad de poder contactar
+                  con todos los vendedores de café de la mas alta calidad y
+                  los Compradores mas confiables registrados en esta
+                  plataforma.
+                </p>
               </div>
               <div className="pl-20">
-                <div className="bg-[#c0e4ae] h-10 w-10 flex flex-col items-center justify-center rounded-lg mb-2">
-                  <FaRegCircleUser className="text-[#39A800] text-2xl" />
+                <div className="flex items-center gap-x-3 mb-3">
+                  <div className="bg-[#c0e4ae] h-10 w-10 flex flex-col items-center justify-center rounded-lg mb-2">
+                    <FaRegCircleUser className="text-[#39A800] text-2xl" />
+                  </div>
+                  <div className="font-medium text-xl text-[#323232]">
+                    <h3>Plataforma intuitiva y fácil de usar</h3>
+                  </div>
                 </div>
-                <div className="font-medium text-xl text-[#323232]">
-                  <h3>Plataforma intuitiva y fácil de usar</h3>
-                </div>
-                <div>
-                  <p>
-                    SubCoffee te ofrece una plataforma fácil de usar para
-                    cualquier tipo de usuario ofreciendo comodidad visual y
-                    armónica para todos.
-                  </p>
-                </div>
+                <p>
+                  SubCoffee te ofrece una plataforma fácil de usar para
+                  cualquier tipo de usuario ofreciendo comodidad visual y
+                  armónica para todos.
+                </p>
               </div>
               <div className="pr-30">
-                <div className="bg-[#c0e4ae] h-10 w-10 flex flex-col items-center justify-center rounded-lg mb-2">
-                  <RxLockClosed className="text-[#39A800] text-2xl" />
+                <div className="flex items-center gap-x-3 mb-3">
+                  <div className="bg-[#c0e4ae] h-10 w-10 flex flex-col items-center justify-center rounded-lg">
+                    <RxLockClosed className="text-[#39A800] text-2xl" />
+                  </div>
+                  <div className="font-medium text-xl text-[#323232]">
+                    <h3>Seguridad de tus datos </h3>
+                  </div>
                 </div>
-                <div className="font-medium text-xl text-[#323232]">
-                  <h3>Seguridad de tus datos </h3>
-                </div>
-                <div>
-                  <p>
-                    Todos los datos que nos proporcionas estas muy bien
-                    resguardados por nuestro sistema de seguridad para que nadie
-                    mas pueda hacer uso de ellos (esta plataforma solo registra
-                    Usuarios confiables de la Escuela Nacional del Café).
-                  </p>
-                </div>
+                <p>
+                  Todos los datos que nos proporcionas estas muy bien
+                  resguardados por nuestro sistema de seguridad para que nadie
+                  mas pueda hacer uso de ellos (esta plataforma solo registra
+                  Usuarios confiables de la Escuela Nacional del Café).
+                </p>
               </div>
               <div className="pl-20">
-                <div className="bg-[#c0e4ae] h-10 w-10 flex flex-col items-center justify-center rounded-lg mb-2">
-                  <IoCalendarOutline className="text-[#39A800] text-2xl" />
+                <div className="flex items-center gap-x-3 mb-3">
+                  <div className="bg-[#c0e4ae] h-10 w-10 flex flex-col items-center justify-center rounded-lg">
+                    <IoCalendarOutline className="text-[#39A800] text-2xl" />
+                  </div>
+                  <div className="font-medium text-xl text-[#323232]">
+                    <h3>Experiencia SubCoffee</h3>
+                  </div>
                 </div>
-                <div className="font-medium text-xl text-[#323232]">
-                  <h3>Experiencia SubCoffee</h3>
-                </div>
-                <div>
-                  <p>
-                    Brindamos una experiencia maravillosa de una subasta en line
-                    para que puedas vender tu café a un mejor precio y no solo
-                    eso si no que podrás Comprar café de la mas alta calidad
-                    (certificado por la Escuela Nacional del Café).
-                  </p>
-                </div>
+                <p>
+                  Brindamos una experiencia maravillosa de una subasta en line
+                  para que puedas vender tu café a un mejor precio y no solo
+                  eso si no que podrás Comprar café de la mas alta calidad
+                  (certificado por la Escuela Nacional del Café).
+                </p>
               </div>
             </div>
           </section>
         </div>
-        {/* ///---------------------------------------------------------------------------/// */}
       </div>
     </>
   );
