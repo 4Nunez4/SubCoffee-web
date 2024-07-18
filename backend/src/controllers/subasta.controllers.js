@@ -101,9 +101,17 @@ export const getSubGanador = async (req, res) => {
         INNER JOIN usuarios ug ON s.ganador_sub = ug.pk_cedula_user
         WHERE s.ganador_sub = ?
       `, [id]);
+
+      const [countResult] = await pool.query(`
+        SELECT COUNT(*) AS total_subastas_ganadas 
+        FROM subasta
+        WHERE ganador_sub = ?
+      `, [id]);
+
+      const totalSubastasGanadas = countResult[0].total_subastas_ganadas;
   
       if (resultado.length > 0) {
-        res.status(200).json(resultado);
+        res.status(200).json({ total_subastas_ganadas: totalSubastasGanadas, data: resultado});
       } else {
         res.status(200).json({ message: "No se encontraron subastas ganadas por este usuario",});
       }
@@ -242,13 +250,19 @@ export const buscar = async (req, res) => {
 
 export const buscarSubastaForUser = async (req, res) => {
   try {
-    const id = req.params.id; 
+    const { id } = req.params; 
     if (!id) {
       return res.status(400).json({ message: "Por favor, proporcione un ID de usuario válido." })
     }
 
     const [resultado] = await pool.query(`
-      SELECT  s.*,  t.nombre_tipo_vari,  v.*,  u.email_user,  u.pk_cedula_user,  u.nombre_user,  u.imagen_user,  u.telefono_user,  u.rol_user,  f.nombre_fin,  f.imagen_fin,  e.nombre_vere,  m.nombre_muni,  d.nombre_depar, ug.pk_cedula_user AS ganador_cedula, ug.email_user AS ganador_email, ug.nombre_user AS ganador_nombre, ug.imagen_user AS ganador_imagen, ug.telefono_user AS ganador_telefono, ug.rol_user AS ganador_rol
+      SELECT s.*, 
+        (SELECT COUNT(*) FROM subasta WHERE fk_variedad IN (SELECT pk_id_vari FROM variedad WHERE fk_finca IN (SELECT pk_id_fin FROM finca WHERE fk_id_usuario = '${id}'))) AS cantidad,
+        t.nombre_tipo_vari, v.*, 
+        u.email_user, u.pk_cedula_user, u.nombre_user, u.imagen_user, u.telefono_user, u.rol_user, 
+        f.nombre_fin, f.imagen_fin, e.nombre_vere, m.nombre_muni, d.nombre_depar, 
+        ug.pk_cedula_user AS ganador_cedula, ug.email_user AS ganador_email, ug.nombre_user AS ganador_nombre, 
+        ug.imagen_user AS ganador_imagen, ug.telefono_user AS ganador_telefono, ug.rol_user AS ganador_rol
       FROM subasta s
       INNER JOIN variedad v ON s.fk_variedad = v.pk_id_vari 
       INNER JOIN finca f ON v.fk_finca = f.pk_id_fin 
@@ -259,11 +273,10 @@ export const buscarSubastaForUser = async (req, res) => {
       INNER JOIN usuarios u ON f.fk_id_usuario = u.pk_cedula_user
       LEFT JOIN usuarios ug ON s.ganador_sub = ug.pk_cedula_user
       WHERE u.pk_cedula_user = '${id}'
-    `
-    );
+    `);
 
     if (resultado.length > 0) {
-      res.status(200).json({ message: "Datos de subasta obtenidos correctamente", data: resultado });
+      res.status(200).json({ message: "Datos de subasta obtenidos correctamente", total_subastas: resultado[0].cantidad, data: resultado });
     } else {
       res.status(204).json({ message: "No se encontraron subastas para el usuario proporcionado." })
     }

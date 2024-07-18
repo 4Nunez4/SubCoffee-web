@@ -33,6 +33,8 @@ function ProfileUser() {
     getSubGanador,
     subastaGanador,
     setIdSubasta,
+    totalDeSubastas,
+    totalDeSubastasGanadas
   } = useSubastaContext();
   const { getCalificacionesUser, stats } = useCalificacionesContext();
   const localUser = JSON.parse(localStorage.getItem("user"));
@@ -187,9 +189,7 @@ function ProfileUser() {
                     </div>
                   ) : (
                     <div className="flex w-full justify-center">
-                      <p className="text-xl my-2 text-gray-400 font-semibold">
-                        Usuario sin calificaciones.
-                      </p>
+                      <p className="text-xl my-2 text-gray-400 font-semibold">Usuario sin calificaciones.</p>
                     </div>
                   )}
                 </div>
@@ -250,7 +250,7 @@ function ProfileUser() {
                   }`}
                   onClick={() => setActiveTab("creadas")}
                 >
-                  Subastas Creadas
+                  Subastas Creadas. ({totalDeSubastas ? totalDeSubastas : ""})
                 </button>
               )}
               <button
@@ -261,7 +261,7 @@ function ProfileUser() {
                 }`}
                 onClick={() => setActiveTab("ganadas")}
               >
-                Subastas Ganadas
+                Subastas Ganadas. ({totalDeSubastasGanadas})
               </button>
             </div>
             <div className="flex w-full flex-col items-center">
@@ -282,32 +282,12 @@ function ProfileUser() {
                         >
                           <CardBody className="items-center w-full h-[510px]">
                             <span className="text-center flex justify-center items-center gap-x-3">
-                              <b className="text-lg">
-                                {subasta.pk_id_sub} - {subasta.nombre_tipo_vari}
-                              </b>
-                              <p
-                                className={`text-sm py-1 rounded-lg px-2 capitalize 
-                              ${
-                                subasta.estado_sub === "abierta"
-                                  ? "bg-[#d1f4e0] text-[#14a150]"
-                                  : ""
-                              }
-                              ${
-                                subasta.estado_sub === "proceso"
-                                  ? "bg-orange-100 text-orange-500"
-                                  : ""
-                              }
-                              ${
-                                subasta.estado_sub === "espera"
-                                  ? "bg-blue-100 text-blue-500"
-                                  : ""
-                              }
-                              ${
-                                subasta.estado_sub === "cerrada"
-                                  ? "bg-[#fdd0df] text-[#f31263]"
-                                  : ""
-                              } 
-                            `}
+                              <b className="text-lg"> {subasta.pk_id_sub} - {subasta.nombre_tipo_vari} </b>
+                              <p className={`text-sm py-1 rounded-lg px-2 capitalize 
+                                ${ subasta.estado_sub === "abierta" ? "bg-[#d1f4e0] text-[#14a150]" : "" }
+                                ${ subasta.estado_sub === "proceso" ? "bg-orange-100 text-orange-500" : "" }
+                                ${ subasta.estado_sub === "espera" ? "bg-blue-100 text-blue-500" : "" }
+                                ${ subasta.estado_sub === "cerrada" ? "bg-[#fdd0df] text-[#f31263]" : "" }  `}
                               >
                                 {subasta.estado_sub}
                               </p>
@@ -328,12 +308,9 @@ function ProfileUser() {
                                       {new Date(
                                         subasta.fecha_inicio_sub
                                       ).toLocaleString("es-ES", {
-                                        year: "numeric",
-                                        month: "numeric",
-                                        day: "numeric",
-                                        hour: "numeric",
-                                        minute: "numeric",
-                                        second: "numeric",
+                                        year: "numeric", month: "numeric",
+                                        day: "numeric", hour: "numeric",
+                                        minute: "numeric", second: "numeric",
                                       })}
                                     </p>
                                   </div>
@@ -343,59 +320,29 @@ function ProfileUser() {
                                       {new Date(
                                         subasta.fecha_fin_sub
                                       ).toLocaleString("es-ES", {
-                                        year: "numeric",
-                                        month: "numeric",
-                                        day: "numeric",
-                                        hour: "numeric",
-                                        minute: "numeric",
-                                        second: "numeric",
+                                        year: "numeric", month: "numeric",
+                                        day: "numeric", hour: "numeric",
+                                        minute: "numeric", second: "numeric",
                                       })}
                                     </p>
                                   </div>
                                   <div className="flex w-full gap-x-2">
                                     <p className="font-semibold">Ubicación:</p>
-                                    <p>
-                                      {subasta.nombre_vere} -
-                                      {subasta.nombre_muni} -
-                                      {subasta.nombre_depar}
-                                    </p>
+                                    <p> {subasta.nombre_vere} - {subasta.nombre_muni} - {subasta.nombre_depar} </p>
                                   </div>
                                   <div className="flex w-full gap-x-2">
                                     <p className="font-semibold">Cantidad:</p>
-                                    <p>
-                                      {subasta.cantidad_sub}
-                                      {subasta.cantidad_sub > 0
-                                        ? subasta.unidad_peso_sub + "s"
-                                        : subasta.unidad_peso_sub}
-                                    </p>
+                                    <p>{subasta.cantidad_sub} {subasta.cantidad_sub > 0 ? subasta.unidad_peso_sub + "s" : subasta.unidad_peso_sub}</p>
                                   </div>
                                   <div className="flex w-full gap-x-2">
-                                    <p className="font-semibold">
-                                      Certificado:
-                                    </p>
+                                    <p className="font-semibold">Certificado:</p>
                                     <div
                                       className="scroll-container"
-                                      onMouseEnter={() =>
-                                        handleMouseEnter(
-                                          subasta.pk_id_sub,
-                                          "certificado"
-                                        )
-                                      }
-                                      onMouseLeave={() =>
-                                        handleMouseLeave(
-                                          subasta.pk_id_sub,
-                                          "certificado"
-                                        )
-                                      }
+                                      onMouseEnter={() => handleMouseEnter(subasta.pk_id_sub,"certificado")}
+                                      onMouseLeave={() => handleMouseLeave(subasta.pk_id_sub,"certificado")}
                                     >
-                                      <p
-                                        className={`cursor-pointer hover:underline scroll-text ${
-                                          hoveredLinks[
-                                            `${subasta.pk_id_sub}_certificado`
-                                          ]
-                                            ? "scroll-active"
-                                            : ""
-                                        }`}
+                                      <p className={`cursor-pointer hover:underline scroll-text ${
+                                        hoveredLinks[ `${subasta.pk_id_sub}_certificado` ] ? "scroll-active" : "" }`}
                                       >
                                         <a
                                           href={`http://localhost:4000/subastas/${subasta.certificado_sub}`}
@@ -407,82 +354,40 @@ function ProfileUser() {
                                     </div>
                                   </div>
                                   <div className="flex w-full gap-x-2">
-                                    <p className="font-semibold">
-                                      Tipo Variedad:
-                                    </p>
+                                    <p className="font-semibold"> Tipo Variedad: </p>
                                     <p>{subasta.nombre_tipo_vari}</p>
                                   </div>
                                   <div className="flex gap-x-2">
-                                    <p className="font-semibold">
-                                      Descripción:
-                                    </p>
+                                    <p className="font-semibold"> Descripción: </p>
                                     <div
                                       className="scroll-container"
-                                      onMouseEnter={() =>
-                                        handleMouseEnter(
-                                          subasta.pk_id_sub,
-                                          "descripcion"
-                                        )
-                                      }
-                                      onMouseLeave={() =>
-                                        handleMouseLeave(
-                                          subasta.pk_id_sub,
-                                          "descripcion"
-                                        )
-                                      }
+                                      onMouseEnter={() => handleMouseEnter( subasta.pk_id_sub, "descripcion" ) }
+                                      onMouseLeave={() => handleMouseLeave( subasta.pk_id_sub, "descripcion" ) }
                                     >
-                                      <p
-                                        className={`scroll-text ${
-                                          hoveredLinks[
-                                            `${subasta.pk_id_sub}_descripcion`
-                                          ]
-                                            ? "scroll-active"
-                                            : ""
-                                        }`}
+                                      <p className={`scroll-text ${
+                                        hoveredLinks[ `${subasta.pk_id_sub}_descripcion` ] ? "scroll-active" : "" }`}
                                       >
                                         {subasta.descripcion_sub}
                                       </p>
                                     </div>
                                   </div>
                                   <div className="flex gap-x-2">
-                                    <p className="font-semibold">
-                                      Precio base:
-                                    </p>
-                                    <p>
-                                      $
-                                      {Number(
-                                        subasta.precio_inicial_sub
-                                      ).toLocaleString("es-ES")}
-                                    </p>
+                                    <p className="font-semibold"> Precio base:</p>
+                                    <p> ${Number(subasta.precio_inicial_sub).toLocaleString("es-ES")}</p>
                                   </div>
                                   {subasta.estado_sub === "cerrada" ? (
                                     <>
                                       <div className="flex gap-x-2">
-                                        <p className="font-semibold text-[#c29b81]">
-                                          Precio Final:
-                                        </p>
-                                        <p className="text-[#009100] font-semibold">
-                                          $
-                                          {Number(
-                                            subasta.precio_final_sub
-                                          ).toLocaleString("es-ES")}
-                                        </p>
+                                        <p className="font-semibold text-[#c29b81]">Precio Final:</p>
+                                        <p className="text-[#009100] font-semibold">${Number(subasta.precio_final_sub).toLocaleString("es-ES")}</p>
                                       </div>
                                       <div className="flex gap-x-2">
-                                        <p className="font-semibold text-[#c29b81]">
-                                          Vendedor:
-                                        </p>
+                                        <p className="font-semibold text-[#c29b81]">Vendedor:</p>
                                         <p
                                           className="text-[#009100] font-semibold cursor-pointer"
-                                          onClick={() =>
-                                            navigate(
-                                              `/profile/${subasta.ganador_sub}`
-                                            )
-                                          }
+                                          onClick={() => navigate(`/profile/${subasta.ganador_sub}`)}
                                         >
-                                          {subasta.ganador_sub
-                                            ? subasta.ganador_nombre
-                                            : "Desconocido"}
+                                          {subasta.ganador_sub ? subasta.ganador_nombre : "Desconocido"}
                                         </p>
                                       </div>
                                     </>
@@ -505,9 +410,7 @@ function ProfileUser() {
                       ))
                     ) : (
                       <div className="flex">
-                        <p className="pl-4 text-xl my-2 text-gray-400 font-semibold">
-                          No tiene ninguna subasta creada.
-                        </p>
+                        <p className="pl-4 text-xl my-2 text-gray-400 font-semibold">No tiene ninguna subasta creada.</p>
                       </div>
                     )}
                   </div>
@@ -521,7 +424,7 @@ function ProfileUser() {
                       : ""
                   } justify-center`}
                 >
-                  {subastaGanador.length > 0 ? (
+                  {subastaGanador && subastaGanador.length > 0 ? (
                     subastaGanador.map((ganador) => (
                       <Card
                         key={ganador.pk_id_sub}
@@ -532,29 +435,11 @@ function ProfileUser() {
                             <b className="text-lg">
                               {ganador.pk_id_sub} - {ganador.nombre_tipo_vari}
                             </b>
-                            <p
-                              className={`text-sm py-1 rounded-lg px-2 capitalize 
-                          ${
-                            ganador.estado_sub === "abierta"
-                              ? "bg-[#d1f4e0] text-[#14a150]"
-                              : ""
-                          }
-                          ${
-                            ganador.estado_sub === "proceso"
-                              ? "bg-orange-100 text-orange-500"
-                              : ""
-                          }
-                          ${
-                            ganador.estado_sub === "espera"
-                              ? "bg-blue-100 text-blue-500"
-                              : ""
-                          }
-                          ${
-                            ganador.estado_sub === "cerrada"
-                              ? "bg-[#fdd0df] text-[#f31263]"
-                              : ""
-                          } 
-                        `}
+                            <p className={`text-sm py-1 rounded-lg px-2 capitalize 
+                              ${ganador.estado_sub === "abierta"? "bg-[#d1f4e0] text-[#14a150]": ""}
+                              ${ganador.estado_sub === "proceso"? "bg-orange-100 text-orange-500": ""}
+                              ${ganador.estado_sub === "espera"? "bg-blue-100 text-blue-500": ""}
+                              ${ganador.estado_sub === "cerrada"? "bg-[#fdd0df] text-[#f31263]": ""} `}
                             >
                               {ganador.estado_sub}
                             </p>
@@ -575,12 +460,9 @@ function ProfileUser() {
                                     {new Date(
                                       ganador.fecha_inicio_sub
                                     ).toLocaleString("es-ES", {
-                                      year: "numeric",
-                                      month: "numeric",
-                                      day: "numeric",
-                                      hour: "numeric",
-                                      minute: "numeric",
-                                      second: "numeric",
+                                      year: "numeric", month: "numeric",
+                                      day: "numeric", hour: "numeric",
+                                      minute: "numeric", second: "numeric",
                                     })}
                                   </p>
                                 </div>
@@ -590,21 +472,15 @@ function ProfileUser() {
                                     {new Date(
                                       ganador.fecha_fin_sub
                                     ).toLocaleString("es-ES", {
-                                      year: "numeric",
-                                      month: "numeric",
-                                      day: "numeric",
-                                      hour: "numeric",
-                                      minute: "numeric",
-                                      second: "numeric",
+                                      year: "numeric", month: "numeric",
+                                      day: "numeric", hour: "numeric",
+                                      minute: "numeric", second: "numeric",
                                     })}
                                   </p>
                                 </div>
                                 <div className="flex w-full gap-x-2">
                                   <p className="font-semibold">Ubicación:</p>
-                                  <p>
-                                    {ganador.nombre_vere} -{ganador.nombre_muni}{" "}
-                                    -{ganador.nombre_depar}
-                                  </p>
+                                  <p>{ganador.nombre_vere} - {ganador.nombre_muni}{" "} - {ganador.nombre_depar}</p>
                                 </div>
                                 <div className="flex w-full gap-x-2">
                                   <p className="font-semibold">Cantidad:</p>
@@ -619,27 +495,11 @@ function ProfileUser() {
                                   <p className="font-semibold">Certificado:</p>
                                   <div
                                     className="scroll-container"
-                                    onMouseEnter={() =>
-                                      handleMouseEnter(
-                                        ganador.pk_id_sub,
-                                        "certificado"
-                                      )
-                                    }
-                                    onMouseLeave={() =>
-                                      handleMouseLeave(
-                                        ganador.pk_id_sub,
-                                        "certificado"
-                                      )
-                                    }
+                                    onMouseEnter={() =>handleMouseEnter(ganador.pk_id_sub,"certificado")}
+                                    onMouseLeave={() =>handleMouseLeave(ganador.pk_id_sub,"certificado")}
                                   >
-                                    <p
-                                      className={`cursor-pointer hover:underline scroll-text ${
-                                        hoveredLinks[
-                                          `${ganador.pk_id_sub}_certificado`
-                                        ]
-                                          ? "scroll-active"
-                                          : ""
-                                      }`}
+                                    <p className={`cursor-pointer hover:underline scroll-text ${
+                                      hoveredLinks[ `${ganador.pk_id_sub}_certificado` ] ? "scroll-active" : "" }`}
                                     >
                                       <a
                                         href={`http://localhost:4000/subastas/${ganador.certificado_sub}`}
@@ -651,36 +511,18 @@ function ProfileUser() {
                                   </div>
                                 </div>
                                 <div className="flex w-full gap-x-2">
-                                  <p className="font-semibold">
-                                    Tipo Variedad:
-                                  </p>
+                                  <p className="font-semibold">Tipo Variedad:</p>
                                   <p>{ganador.nombre_tipo_vari}</p>
                                 </div>
                                 <div className="flex gap-x-2">
                                   <p className="font-semibold">Descripción:</p>
                                   <div
                                     className="scroll-container"
-                                    onMouseEnter={() =>
-                                      handleMouseEnter(
-                                        ganador.pk_id_sub,
-                                        "descripcion"
-                                      )
-                                    }
-                                    onMouseLeave={() =>
-                                      handleMouseLeave(
-                                        ganador.pk_id_sub,
-                                        "descripcion"
-                                      )
-                                    }
+                                    onMouseEnter={() => handleMouseEnter( ganador.pk_id_sub, "descripcion" ) }
+                                    onMouseLeave={() => handleMouseLeave( ganador.pk_id_sub, "descripcion" ) }
                                   >
-                                    <p
-                                      className={`scroll-text ${
-                                        hoveredLinks[
-                                          `${ganador.pk_id_sub}_descripcion`
-                                        ]
-                                          ? "scroll-active"
-                                          : ""
-                                      }`}
+                                    <p className={`scroll-text ${
+                                      hoveredLinks[ `${ganador.pk_id_sub}_descripcion` ] ? "scroll-active" : "" }`}
                                     >
                                       {ganador.descripcion_sub}
                                     </p>
@@ -688,41 +530,21 @@ function ProfileUser() {
                                 </div>
                                 <div className="flex gap-x-2">
                                   <p className="font-semibold">Precio base:</p>
-                                  <p>
-                                    $
-                                    {Number(
-                                      ganador.precio_inicial_sub
-                                    ).toLocaleString("es-ES")}
-                                  </p>
+                                  <p>${Number(ganador.precio_inicial_sub).toLocaleString("es-ES")}</p>
                                 </div>
                                 {ganador.estado_sub === "cerrada" && (
                                   <>
                                     <div className="flex gap-x-2">
-                                      <p className="font-semibold text-[#c29b81]">
-                                        Precio Final:
-                                      </p>
-                                      <p className="text-[#009100] font-semibold">
-                                        $
-                                        {Number(
-                                          ganador.precio_final_sub
-                                        ).toLocaleString("es-ES")}
-                                      </p>
+                                      <p className="font-semibold text-[#c29b81]">Precio Final:</p>
+                                      <p className="text-[#009100] font-semibold">${Number(ganador.precio_final_sub).toLocaleString("es-ES")}</p>
                                     </div>
                                     <div className="flex gap-x-2">
-                                      <p className="font-semibold text-[#c29b81]">
-                                        Vendedor:
-                                      </p>
+                                      <p className="font-semibold text-[#c29b81]">Vendedor:</p>
                                       <p
                                         className="text-[#009100] font-semibold cursor-pointer"
-                                        onClick={() =>
-                                          navigate(
-                                            `/profile/${ganador.propietario_cedula}`
-                                          )
-                                        }
-                                      >
-                                        {ganador.propietario_nombre
-                                          ? ganador.propietario_nombre
-                                          : "Desconocido"}
+                                        onClick={() => navigate( `/profile/${ganador.propietario_cedula}` ) }
+                                      > 
+                                        {ganador.propietario_nombre ? ganador.propietario_nombre : "Desconocido"} 
                                       </p>
                                     </div>
                                   </>
@@ -735,9 +557,7 @@ function ProfileUser() {
                     ))
                   ) : (
                     <div className="flex">
-                      <p className="pl-4 text-xl my-2 text-gray-400 font-semibold">
-                        No tiene ninguna subasta ganada.
-                      </p>
+                      <p className="pl-4 text-xl my-2 text-gray-400 font-semibold">No tiene ninguna subasta ganada.</p>
                     </div>
                   )}
                 </div>

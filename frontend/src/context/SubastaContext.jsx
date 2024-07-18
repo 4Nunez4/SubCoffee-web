@@ -39,6 +39,8 @@ export const SubastaProvider = ({ children }) => {
   const [subasta, setSubasta] = useState([])
   const [subastaGanador, setSubastaGanador] = useState([])
   const [cerrarModal, serCerrarModal] = useState(false)
+  const [totalDeSubastas, setTotalDeSubastas] = useState(0)
+  const [totalDeSubastasGanadas, setTotalDeSubastasGanadas] = useState(0)
 
   const getSubs = async () => {
     try {
@@ -109,6 +111,7 @@ export const SubastaProvider = ({ children }) => {
     try {
       const response = await getSubastaForUser(user);
       setSubastaForUser(response.data.data);
+      setTotalDeSubastas(response.data.total_subastas)
     } catch (error) {
       console.error(error);
     }
@@ -117,7 +120,12 @@ export const SubastaProvider = ({ children }) => {
   const getSubGanador = async (user) => {
     try {
       const response = await getSubastaGanador(user)
-      setSubastaGanador(response.data)
+      setSubastaGanador(response.data.data)
+      if(response.data.total_subastas_ganadas) {
+        setTotalDeSubastasGanadas(response.data.total_subastas_ganadas)
+      } else (
+        setTotalDeSubastasGanadas(0)
+      )
     } catch (error) {
       console.error(error);
     }
@@ -219,7 +227,9 @@ export const SubastaProvider = ({ children }) => {
         establecerGanador,
         getSubGanador,
         subastaGanador,
-        destablecerGanador
+        destablecerGanador,
+        totalDeSubastas,
+        totalDeSubastasGanadas
       }}
     >
       <ModalMessage
