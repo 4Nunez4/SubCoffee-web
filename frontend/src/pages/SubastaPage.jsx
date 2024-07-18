@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-} from "@nextui-org/react";
+import React, { useEffect, useState, useCallback } from "react";
+import { Avatar, Button, Card, CardBody, CardHeader } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import ImageSlider from "../components/molecules/ImageSlider";
 import { useSubastaContext } from "../context/SubastaContext";
@@ -19,62 +13,34 @@ function SubastaPage() {
   const { getSubsMenoCerradas, subastasActivas = [], setIdSubasta, EsperaSubs, activarSubs, desactivarSubs, ProcesoSubs } = useSubastaContext();
   const { getUsers } = useAuthContext();
   const [abrirModal, setAbrirModal] = useState(false);
-  const [startIndex, setStartIndex] = useState(0); // Índice de la primera subasta visible
-  const users = JSON.parse(localStorage.getItem('user'));
+  const [startIndex, setStartIndex] = useState(0); 
+  const [users, setUsers] = useState({});
 
   useEffect(() => {
+    const users = JSON.parse(localStorage.getItem('user'));
+    setUsers(users);
     getSubsMenoCerradas();
     getUsers();
-  }, []);
+  }, [getSubsMenoCerradas, getUsers]);
 
-  const handdleModaSub = (id) => {
+  const handdleModaSub = useCallback((id) => {
     setAbrirModal(true);
     setIdSubasta(id);
-  };
+  }, [setIdSubasta]);
 
   useEffect(() => {
     if (users.rol_user === "admin") navigate('/users');
   }, [users, navigate]);
 
-  const showNextSubastas = () => {
-    setStartIndex(startIndex + 1);
-  };
+  const showNextSubastas = useCallback(() => {
+    setStartIndex(prevIndex => prevIndex + 1);
+  }, []);
 
-  const showPrevSubastas = () => {
-    setStartIndex(startIndex - 1);
-  };
+  const showPrevSubastas = useCallback(() => {
+    setStartIndex(prevIndex => prevIndex - 1);
+  }, []);
 
-  useEffect(() => {
-    if (!subastasActivas) return;
-  
-    const handleSubastaState = (subasta) => {
-      const { pk_id_sub, precio_final_sub, ganador_sub, fecha_inicio_sub, fecha_fin_sub, estado_sub } = subasta;
-      const tiempo = calcularDiferencia(fecha_inicio_sub, fecha_fin_sub);
-  
-      if (tiempo.includes("Subasta terminada") && !ganador_sub) {
-        EsperaSubs(pk_id_sub, users.pk_cedula_user);
-      } else if (tiempo.includes("La subasta terminará en: ")) {
-        ProcesoSubs(pk_id_sub, users.pk_cedula_user);
-      } else if (tiempo.includes("La subasta empezará dentro de") && estado_sub !== "cerrada") {
-        activarSubs(pk_id_sub, users.pk_cedula_user);
-      } else if (tiempo.includes("A la subasta le quedan ")) {
-        EsperaSubs(pk_id_sub, users.pk_cedula_user);
-      } else if (tiempo.includes("Subasta terminada") && precio_final_sub !== null && ganador_sub !== null) {
-        desactivarSubs(pk_id_sub, users.pk_cedula_user);
-      }
-    };
-    if(subastasActivas.length > 0) {
-      subastasActivas.forEach(handleSubastaState);
-    }
-  
-    const intervalId = setInterval(() => {
-      subastasActivas.forEach(handleSubastaState);
-    }, 1000);
-  
-    return () => clearInterval(intervalId);
-  }, [subastasActivas, users]);
-
-  const calcularDiferencia = (fechaInicio, fechaFin) => {
+  const calcularDiferencia = useCallback((fechaInicio, fechaFin) => {
     const inicio = new Date(fechaInicio);
     const fin = new Date(fechaFin);
     const ahora = new Date();
@@ -96,23 +62,49 @@ function SubastaPage() {
         return `La subasta terminará en: ${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
       }
     }
-  };
+  }, []);
 
-  const calcularTiempoRestante = (inicio, fin) => {
+  const calcularTiempoRestante = useCallback((inicio, fin) => {
     const diferenciaMs = fin - inicio;
     const segundos = Math.floor((diferenciaMs / 1000) % 60);
     const minutos = Math.floor((diferenciaMs / 1000 / 60) % 60);
     const horas = Math.floor((diferenciaMs / 1000 / 60 / 60) % 24);
     const dias = Math.floor(diferenciaMs / 1000 / 60 / 60 / 24);
     return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
-  };
+  }, []);
+
+  useEffect(() => {
+    if (!subastasActivas || !users.pk_cedula_user) return;
+  
+    const handleSubastaState = (subasta) => {
+      const { pk_id_sub, precio_final_sub, ganador_sub, fecha_inicio_sub, fecha_fin_sub, estado_sub } = subasta;
+      const tiempo = calcularDiferencia(fecha_inicio_sub, fecha_fin_sub);
+  
+      if (tiempo.includes("Subasta terminada") && !ganador_sub) {
+        EsperaSubs(pk_id_sub, users.pk_cedula_user);
+      } else if (tiempo.includes("La subasta terminará en: ")) {
+        ProcesoSubs(pk_id_sub, users.pk_cedula_user);
+      } else if (tiempo.includes("La subasta empezará dentro de") && estado_sub !== "cerrada") {
+        activarSubs(pk_id_sub, users.pk_cedula_user);
+      } else if (tiempo.includes("A la subasta le quedan ")) {
+        EsperaSubs(pk_id_sub, users.pk_cedula_user);
+      } else if (tiempo.includes("Subasta terminada") && precio_final_sub !== null && ganador_sub !== null) {
+        desactivarSubs(pk_id_sub, users.pk_cedula_user);
+      }
+    };
+    
+    const intervalId = setInterval(() => {
+      subastasActivas.forEach(handleSubastaState);
+    }, 1000);
+  
+    return () => clearInterval(intervalId);
+  }, [subastasActivas, users.pk_cedula_user, calcularDiferencia, EsperaSubs, activarSubs, desactivarSubs, ProcesoSubs]);
 
   return (
     <div className="px-auto pb-8 bg-[#FDFBF6]">
       <ImageSlider />
       {users.rol_user !== "admin" && (
         <div className="pl-6 bg-[#FDFBF6]">
-       
           <div className="flex flex-col overflow-x-auto py-6 overflow-hidden">
             {subastasActivas && subastasActivas.length > 0 ? (
               <div className="flex flex-wrap ml-6 gap-x-7">
@@ -124,61 +116,35 @@ function SubastaPage() {
                           isBordered
                           radius="full"
                           size="md"
-                          src={
-                            subasta.imagen_user && subasta.imagen_user.length > 0
-                              ? `http://localhost:4000/usuarios/${subasta.imagen_user}`
-                              : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
-                          }
+                          src={ subasta.imagen_user && subasta.imagen_user.length > 0 ? `http://localhost:4000/usuarios/${subasta.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp" }
                         />
                         <div className="flex flex-col gap-1 items-start justify-center">
                           <h4 className="text-small font-semibold leading-none text-[#323232]"> {subasta.nombre_user} </h4>
                           <h5 className="text-small -mt-1 tracking-tight text-default-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-full"> @{subasta.email_user} </h5>
                         </div>
                       </div>
-                  
                     </CardHeader>
                     <CardBody className="items-start w-full -mt-3">
-            
                       <CardBody className="flex">
-                      <div className="relative w-auto h-[150px] bg-center bg-no-repeat bg-cover rounded-lg bg-[#181818] bg-opacity-30 inset-0">
-                            <img
-                              src={`http://localhost:4000/subastas/${subasta.imagen_sub}`}
-                              alt=""
-                              className="w-full h-full object-cover rounded-lg"
-                            />
-                            <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
-
+                        <div className="relative w-auto h-[150px] bg-center bg-no-repeat bg-cover rounded-lg bg-[#181818] bg-opacity-30 inset-0">
+                          <img
+                            src={`http://localhost:4000/subastas/${subasta.imagen_sub}`}
+                            alt=""
+                            className="w-full h-full object-cover rounded-lg"
+                          />
+                          <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
                             <div className="absolute inset-0 w-11/12 grid grid-cols-2 h-7 mt-2">
                               <b className="ml-5 text-[#ffffff]">
                                 {subasta.pk_id_sub} - {subasta.nombre_tipo_vari}
                               </b>
-
                               <span className=" flex justify-end items-center ">
                                 <div
                                   className={`rounded-full w-4 h-4 flex justify-center items-center 
-        ${
-          subasta.estado_sub === "abierta"
-            ?"  border-double border-8 border-green-500"
-            : ""
-        }
-        ${
-          subasta.estado_sub === "proceso"
-            ? " border-double border-8 border-orange-500"
-            : ""
-        }
-        ${
-          subasta.estado_sub === "espera"
-            ? " border-double border-8 border-blue-500"
-            : ""
-        }
-        ${
-          subasta.estado_sub === "cerrada"
-            ? " border-double border-8 border-red-500"
-            : ""
-        }
-    `}
+                                    ${ subasta.estado_sub === "abierta" ?"  border-double border-8 border-green-500" : "" }
+                                    ${ subasta.estado_sub === "proceso" ? " border-double border-8 border-orange-500" : "" }
+                                    ${ subasta.estado_sub === "espera" ? " border-double border-8 border-blue-500" : "" }
+                                    ${ subasta.estado_sub === "cerrada" ? " border-double border-8 border-red-500" : "" } `}
                                 >
-                                  {/* Ocultamos el texto del estado */}
                                 </div>
                               </span>
                             </div>
@@ -196,7 +162,6 @@ function SubastaPage() {
                               <p className="font-semibold">Cierre:</p>
                               <p> {new Date(subasta.fecha_fin_sub).toLocaleString( "es-ES", { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", second: "numeric", } )} </p>
                             </div>
-                        
                             <div className="flex w-full gap-x-2">
                               <p className="font-semibold">Cantidad:</p>
                               <p> {subasta.cantidad_sub} {subasta.cantidad_sub > 1 ? subasta.unidad_peso_sub + "s" : subasta.unidad_peso_sub} </p>
@@ -209,7 +174,6 @@ function SubastaPage() {
                         </div>
                         <div className=" grid grid-cols-5 mt-1">
                             <div className=" col-span-3 flex justify-center ">
-                              {" "}
                               <Button
                                 className="text-white bg-[#39A800] h-10 w-40 rounded-lg font-bold "
                                 onClick={() =>
@@ -220,7 +184,6 @@ function SubastaPage() {
                               </Button>
                             </div>
                             <div className=" col-span-2 flex justify-center">
-                              {" "}
                               <Button
                                 className="text-white bg-[#39A800] h-10 w-4  rounded-lg font-bold "
                                 onPress={() =>

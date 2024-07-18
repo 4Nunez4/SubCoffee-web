@@ -177,9 +177,9 @@ export default function SubastaTable() {
                             }}>
                               Editar
                             </DropdownItem>
-                            {subasta.estado_sub !== "espera" ? (
+                            {subasta.estado_sub !== "espera" && subasta.ganador_sub === null ? (
                                 <DropdownItem key="desactivar" className="text-danger" color="danger" variant="solid" onPress={() => confirmDesactivarSubasta(subasta)}>Cerrar Subasta</DropdownItem>                             
-                              ): (
+                            ) : (
                                 <DropdownItem key="activar" className="text-green-500" color="success" variant="solid" onPress={() => destablecerGanador(subasta.pk_id_sub, usuario.pk_cedula_user)}>Abrir Subasta</DropdownItem>                             
                             )}
                           </DropdownMenu>

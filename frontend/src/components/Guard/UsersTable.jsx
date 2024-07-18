@@ -100,7 +100,7 @@ export default function UsersTable() {
     const end = start + rowsPerPage;
 
     if (!Array.isArray(filteredItems)) {
-      return []; // Devolver un arreglo vacío si filteredItems no es un arreglo
+      return []; 
     }
 
     return filteredItems.slice(start, end);
@@ -265,9 +265,7 @@ export default function UsersTable() {
     return (
       <div className="py-2 px-2 flex justify-between items-center m-4">
         <span>
-          {`Total ${
-            filteredItems.length
-          } Usuarios`}
+          {`Total ${ filteredItems.length } Usuarios`}
         </span>
         <Pagination
           isCompact
@@ -305,7 +303,7 @@ export default function UsersTable() {
         bottomContent={bottomContent}
         bottomContentPlacement="outside"
         classNames={{
-          wrapper: "max-h-[482px] ",
+          wrapper: "max-h-[482px]",
         }}
         sortDescriptor={sortDescriptor}
         topContent={topContent}
@@ -318,7 +316,7 @@ export default function UsersTable() {
               key={column.uid}
               align={column.uid === "actions" ? "center" : "start"}
               allowsSorting={column.sortable}
-              className="bg-[#38a800c7] text-white text-sm  drop-shadow-md md:drop-shadow-xl"
+              className="bg-[#38a800c7] text-white text-sm drop-shadow-md md:drop-shadow-xl"
             >
               {column.name}
             </TableColumn>

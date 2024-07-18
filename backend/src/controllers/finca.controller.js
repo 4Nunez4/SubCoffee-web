@@ -51,7 +51,7 @@ export const getFinca = async (req, res) => {
       res.status(204).json({ message: "No se encontraro la finca con ese ID" });
     }
   } catch (error) {
-     res.status(500).json({ message: "Error en el servidor" + error });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
@@ -71,7 +71,7 @@ export const getFincaOne = async (req, res) => {
       res.status(204).json({ message: "No se encontro la finca con ese ID" });
     }
   } catch (error) {
-     res.status(500).json({ message: "Error en el servidor" + error });
+    res.status(500).json({ message: "Error en el servidor" + error });
   }
 };
 
