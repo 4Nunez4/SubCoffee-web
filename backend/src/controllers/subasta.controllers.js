@@ -32,18 +32,12 @@ export const registrar = async (req, res) => {
 
     const userId = req.params.id;
 
-    console.log("UserId obtenido:", userId); 
-
     const [resultado] = await pool.query("INSERT INTO subasta (fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, unidad_peso_sub, cantidad_sub, estado_sub, certificado_sub, descripcion_sub, fk_variedad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [ fecha_inicio_sub, fecha_fin_sub, imagen_sub, precio_inicial_sub, unidad_peso_sub, cantidad_sub, "abierta", certificado_sub, descripcion_sub, fk_variedad ]);
-
     if (resultado.affectedRows > 0) {
       const subastaId = resultado.insertId;
-
       if (userId && !isNaN(userId)) {
         const tipoNotificacion = "mensaje";
-
         const [resultadoNotif] = await pool.query("INSERT INTO notificaciones (tipo_not, texto_not, fk_id_subasta, fk_id_usuario) VALUES (?, ?, ?, ?)", [tipoNotificacion, "Nueva subasta creada", subastaId, userId ]);
-
         if (resultadoNotif.affectedRows > 0) {
           res.status(200).json({ message: "Subasta creada con éxito y notificación enviada" });
         } else {
@@ -368,5 +362,147 @@ export const SubastaProceso = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: "Error en el servidor " + error });
+  }
+};
+
+export const listAllDatesSub = async (req, res) => {
+  try {
+    const sql1 = `
+      SELECT 
+        COUNT(pk_id_sub) AS todas_las_subastas,
+        COUNT(CASE WHEN estado_sub = 'abierta' THEN 1 END) AS subastas_abiertas,
+        COUNT(CASE WHEN estado_sub = 'espera' THEN 1 END) AS subastas_en_espera,
+        COUNT(CASE WHEN estado_sub = 'cerrada' THEN 1 END) AS subastas_cerradas,
+        COUNT(CASE WHEN estado_sub = 'proceso' THEN 1 END) AS subastas_en_proceso
+      FROM subasta
+    `;
+
+    const sql2 = `
+      SELECT COUNT(*) AS subastas_con_ganador_y_precio
+      FROM subasta
+      WHERE ganador_sub IS NOT NULL AND precio_final_sub IS NOT NULL
+    `;
+
+    const sql3 = `
+      SELECT COUNT(*) AS subastas_sin_ganador_o_precio_inactivas
+      FROM subasta
+      WHERE (ganador_sub IS NULL OR precio_final_sub IS NULL) AND estado_sub = 'cerrada'
+    `;
+
+    const sql4 = `
+      SELECT COUNT(*) AS subastas_no_terminadas
+      FROM subasta
+      WHERE estado_sub != 'cerrada'
+    `;
+
+    const sql5 = `
+      WITH meses AS (
+        SELECT 1 AS mes UNION ALL
+        SELECT 2 UNION ALL
+        SELECT 3 UNION ALL
+        SELECT 4 UNION ALL
+        SELECT 5 UNION ALL
+        SELECT 6 UNION ALL
+        SELECT 7 UNION ALL
+        SELECT 8 UNION ALL
+        SELECT 9 UNION ALL
+        SELECT 10 UNION ALL
+        SELECT 11 UNION ALL
+        SELECT 12
+      )
+      SELECT 
+        CASE meses.mes
+          WHEN 1 THEN 'Enero'
+          WHEN 2 THEN 'Febrero'
+          WHEN 3 THEN 'Marzo'
+          WHEN 4 THEN 'Abril'
+          WHEN 5 THEN 'Mayo'
+          WHEN 6 THEN 'Junio'
+          WHEN 7 THEN 'Julio'
+          WHEN 8 THEN 'Agosto'
+          WHEN 9 THEN 'Septiembre'
+          WHEN 10 THEN 'Octubre'
+          WHEN 11 THEN 'Noviembre'
+          WHEN 12 THEN 'Diciembre'
+        END AS mes,
+        COALESCE(COUNT(subasta.pk_id_sub), 0) AS subastas
+      FROM 
+        meses
+      LEFT JOIN 
+        subasta ON MONTH(subasta.fecha_fin_sub) = meses.mes
+      GROUP BY 
+        meses.mes
+      ORDER BY 
+        meses.mes;
+    `;
+
+    const sql6 = `
+      SELECT 
+        years.año AS año,
+        COALESCE(COUNT(subasta.pk_id_sub), 0) AS subastas_por_año
+      FROM (
+        SELECT YEAR(CURDATE()) - 4 AS año
+        UNION ALL
+        SELECT YEAR(CURDATE()) - 3
+        UNION ALL
+        SELECT YEAR(CURDATE()) - 2
+        UNION ALL
+        SELECT YEAR(CURDATE()) - 1
+        UNION ALL
+        SELECT YEAR(CURDATE())
+        UNION ALL
+        SELECT YEAR(CURDATE()) + 1
+      ) AS years
+      LEFT JOIN subasta ON YEAR(subasta.fecha_fin_sub) = years.año
+      GROUP BY years.año
+      ORDER BY years.año;
+    `;
+
+    
+    const sql7 = `
+      SELECT 
+        tv.nombre_tipo_vari AS variedad, 
+        COUNT(s.pk_id_sub) AS subastas_por_variedad
+      FROM subasta s
+      JOIN variedad v ON s.fk_variedad = v.pk_id_vari
+      JOIN tipo_variedad tv ON v.fk_tipo_variedad = tv.pk_id_tipo_vari
+      GROUP BY tv.nombre_tipo_vari
+    `;
+
+    const sql8 = `
+      SELECT 
+        AVG(precio_final_sub) AS precio_promedio,
+        MAX(precio_final_sub) AS precio_maximo,
+        MIN(precio_final_sub) AS precio_minimo
+      FROM subasta
+      WHERE estado_sub = 'cerrada'
+    `;
+
+    const [result1] = await pool.query(sql1);
+    const [result2] = await pool.query(sql2);
+    const [result3] = await pool.query(sql3);
+    const [result4] = await pool.query(sql4);
+    const [result5] = await pool.query(sql5);
+    const [result6] = await pool.query(sql6);
+    const [result7] = await pool.query(sql7);
+    const [result8] = await pool.query(sql8);
+    if (result1, result2, result3, result4, result5, result6, result7, result8) {
+      res.status(200).json({ message: "Estadisticas obtenidas exitosamente",
+        resumen_subastas: result1,
+        estadisticas_subastas: {
+          subastas_con_ganador_y_precio: result2[0].subastas_con_ganador_y_precio,
+          subastas_sin_ganador_o_precio_inactivas: result3[0].subastas_sin_ganador_o_precio_inactivas,
+          subastas_no_terminadas: result4[0].subastas_no_terminadas
+        },
+        subastas_por_mes: result5,
+        subastas_por_año: result6,
+        subastas_por_variedad: result7,
+        promedio_precio: result8,
+      });
+    } else {
+      res.status(404).json({ message: "Error al obtener las estadisticas datos" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error en el servidor: " + error });
   }
 };

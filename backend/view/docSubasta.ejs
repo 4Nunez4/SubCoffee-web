@@ -113,7 +113,7 @@
       </tr>
       <tr>
         <td>Usuarios:</td>
-        <td>Administrador, Usuarios</td>
+        <td>VENDEDOR, COMPRADOR</td>
       </tr>
       <tr>
         <td>PETICION BODY</td>
@@ -685,6 +685,7 @@
       <strong>Correcto:</strong> Status: 200
       <pre><code>[
   "message": "Datos de subasta obtenidos correctamente",
+  "total_subastas": 4,
   "data": [ {
     "pk_id_sub": 30,
     "fecha_inicio_sub": "2024-06-09T03:40:00.000Z",
@@ -842,6 +843,7 @@
         <td>
       <strong>Correcto:</strong> Status: 200
       <pre><code>[
+  "total_subastas_ganadas": 3,
   {
     "pk_id_sub": 30,
     "fecha_inicio_sub": "2024-06-09T03:40:00.000Z",
@@ -1056,6 +1058,70 @@
       <td>Rama:</td>
       <td>DEVjcrc</td>
     </tr>
+    </table>
+
+    <hr />
+    <h3>Listar estadisticas de las subastas</h3>
+    <table>
+      <tr>
+        <td>Número</td>
+        <td>15</td>
+      </tr>
+      <tr>
+        <td>Nombre del Servicio</td>
+        <td>Listar estadisticas de las subastas</td>
+      </tr>
+      <tr>
+        <td>URI</td>
+        <td>/v1/subastaAll</td>
+      </tr>
+      <tr>
+        <td>Descripción:</td>
+        <td>Permite listar las estadisticas de las subastas creadas en la base de datos</td>
+      </tr>
+      <tr>
+        <td>Verbo HTTP:</td>
+        <td>GET</td>
+      </tr>
+      <tr>
+        <td>HEADER:</td>
+        <td>token: token</td>
+      </tr>
+      <tr>
+        <td>Usuarios:</td>
+        <td>VENDEDOR, COMPRADOR</td>
+      </tr>
+      <tr>
+        <td>PETICION BODY</td>
+        <td>NULL</td>
+      </tr>
+      <tr>
+        <td>RESPUESTA JSON</td>
+        <td>
+          <strong>Correcto:</strong> Status: 200
+          <pre><code>{
+  "message": "Estadisticas obtenidas exitosamente",
+  {"resumen_subastas":[{"todas_las_subastas":9,"subastas_abiertas":0,"subastas_en_espera":2,"subastas_cerradas":7,"subastas_en_proceso":0}],"estadisticas_subastas":{"subastas_con_ganador_y_precio":7,"subastas_sin_ganador_o_precio_inactivas":0,"subastas_no_terminadas":2},"subastas_por_mes":[{"mes":"Enero","subastas":0},{"mes":"Febrero","subastas":0},{"mes":"Marzo","subastas":0},{"mes":"Abril","subastas":0},{"mes":"Mayo","subastas":0},{"mes":"Junio","subastas":8},{"mes":"Julio","subastas":1},{"mes":"Agosto","subastas":0},{"mes":"Septiembre","subastas":0},{"mes":"Octubre","subastas":0},{"mes":"Noviembre","subastas":0},{"mes":"Diciembre","subastas":0}],"subastas_por_año":[{"año":2022,"subastas_por_año":0},{"año":2023,"subastas_por_año":0},{"año":2024,"subastas_por_año":9},{"año":2025,"subastas_por_año":0},{"año":2026,"subastas_por_año":0}],"subastas_por_variedad":[{"variedad":"Morgan","subastas_por_variedad":1},{"variedad":"Obatá","subastas_por_variedad":3},{"variedad":"Sarchimor","subastas_por_variedad":2},{"variedad":"Typica","subastas_por_variedad":3}],"promedio_precio":[{"precio_promedio":"1079142.8571","precio_maximo":5000000,"precio_minimo":105000}]}
+  ...
+}</code></pre>
+          <strong>Incorrecto:</strong> Status: 404
+          <pre><code>{
+  "message": "Error al obtener las estadisticas datos"
+}</code></pre>
+          <strong>Error:</strong> Status: 500
+          <pre><code>{
+  "message": "Error en el servidor " + error
+}</code></pre>
+        </td>
+      </tr>
+      <tr>
+        <td>Desarrollador:</td>
+        <td>Juan Camilo Realpe Ceron</td>
+      </tr>
+      <tr>
+        <td>Rama:</td>
+        <td>DEVjcrc</td>
+      </tr>
     </table>
 
   </body>

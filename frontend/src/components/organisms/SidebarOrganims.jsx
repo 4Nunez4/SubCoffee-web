@@ -14,20 +14,25 @@ const SidebarOrganims = () => {
     ...(user && token && user.rol_user === "admin" ? [
       { title: "Usuarios", link: "/users", icon: icono.iconoRol },
       { title: "Geografía", link: "/geografia", icon: icono.iconoWorl },
-      { title: "Tipo Variedad", link: "/tipo_variedad", icon: icono.iconoFlor }
+      { title: "Tipo Variedad", link: "/tipo_variedad", icon: icono.iconoFlor },
+      { title: "Datos Estadisticos", link: "/datosEstadisticos", icon: icono.iconoFlor },
     ] : []),
     ...(user && token && user.rol_user === "vendedor" ? [
       { title: "Inicio", link: "/subcoffee", icon: icono.iconoHome },
       { title: "Mis subastas", link: "/mi_subasta", icon: icono.iconoType },
+      { title: "Datos Estadisticos", link: "/datosEstadisticos", icon: icono.iconoFlor },
       { title: "Notificaciones", link: "/notificaciones", icon: icono.iconoCampana },
       { title: "Políticas de privacidad", link: "/privacy-policy", icon: icono.iconoPrivacidad },
-      { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda }
+      { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda },
+
     ] : []),
     ...(user && token && user.rol_user === "comprador" ? [
       { title: "Inicio", link: "/subcoffee", icon: icono.iconoHome },
+      { title: "Datos Estadisticos", link: "/datosEstadisticos", icon: icono.iconoFlor },
       { title: "Notificaciones", link: "/notificaciones", icon: icono.iconoCampana },
       { title: "Políticas de privacidad", link: "/privacy-policy", icon: icono.iconoPrivacidad },
-      { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda }
+      { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda },
+
     ] : [])
   ];
 

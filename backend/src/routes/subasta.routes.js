@@ -15,6 +15,7 @@ import {
   getSubGanador,
   updateSubGanador,
   designarDatos,
+  listAllDatesSub,
 } from "../controllers/subasta.controllers.js";
 import { validarSubasta } from "../validations/subasta.validation.js";
 import { verificarUserToken } from "../controllers/autenticacionController.js";
@@ -38,5 +39,8 @@ routerSubasta.get("/subastaganador/:id", verificarUserToken, getSubGanador);
 routerSubasta.get("/subastasActivasMenosCerradas", verificarUserToken, listarSubsActivas);
 
 routerSubasta.put("/subastaganador/:id", verificarUserToken, updateSubGanador);
+
+routerSubasta.get("/subastaAll",  listAllDatesSub);
+
 
 export default routerSubasta;

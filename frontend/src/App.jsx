@@ -19,6 +19,7 @@ import ListarNotificaciones from "./pages/Notificaciones";
 import QueremosLograr from "./pages/lograr";
 import ResetPassword from "./pages/ResetPassword";
 import RecuperarPasswordUserLogin from "./components/molecules/RecuperarPasswordUserLogin";
+import DatosEstadisticos from "./pages/DatosEstadisticos";
 
 function App() {
   return (
@@ -34,8 +35,9 @@ function App() {
                 <Route path="queremoslograr" element={<QueremosLograr />} />
                 <Route path="ayuda" element={<AyudaPage />} />
                 <Route element={<ProtectedRoute />}>
-                  <Route path="notificaciones" element={<ListarNotificaciones />} />
                   <Route path="subcoffee" element={<SubastaPage />} />
+                  <Route path="datosEstadisticos" element={<DatosEstadisticos />} />
+                  <Route path="notificaciones" element={<ListarNotificaciones />} />
                   <Route path="profile/:id" element={<ProfileUser />} />
                   <Route path="subasta/:id" element={<SubastaUser />} />
                   <Route path="users" element={<UsersTable />} />

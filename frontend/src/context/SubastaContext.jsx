@@ -15,7 +15,8 @@ import {
   getSubastasActivasMenosCerradas,
   getSubastaGanador,
   subastaGanadorAsingar,
-  subastaGanadorDesingar
+  subastaGanadorDesingar,
+  listDatesSubs
 } from "../api/api.subasta";
 
 const SubastaContext = createContext();
@@ -34,13 +35,25 @@ export const SubastaProvider = ({ children }) => {
   const [errors, setErrors] = useState([]);
   const [idSubasta, setIdSubasta] = useState(0);
   const [subastaForuser, setSubastaForUser] = useState([]);
-  const [subastas, setSubastas] = useState([])
-  const [subastasActivas, setSubastasActivas] = useState([])
-  const [subasta, setSubasta] = useState([])
-  const [subastaGanador, setSubastaGanador] = useState([])
-  const [cerrarModal, serCerrarModal] = useState(false)
-  const [totalDeSubastas, setTotalDeSubastas] = useState(0)
-  const [totalDeSubastasGanadas, setTotalDeSubastasGanadas] = useState(0)
+  const [subastas, setSubastas] = useState([]);
+  const [subastasActivas, setSubastasActivas] = useState([]);
+  const [subasta, setSubasta] = useState([]);
+  const [subastaGanador, setSubastaGanador] = useState([]);
+  const [cerrarModal, serCerrarModal] = useState(false);
+  const [totalDeSubastas, setTotalDeSubastas] = useState(0);
+  const [totalDeSubastasGanadas, setTotalDeSubastasGanadas] = useState(0);
+
+  const [todasLasSubastas, setTodasLasSubastas] = useState(0);
+  const [subastasAbiertas, setSubastasAbiertas] = useState(0);
+  const [subastasEnEspera, setSubastasEnEspera] = useState(0);
+  const [subastasCerradas, setSubastasCerradas] = useState(0);
+  const [subastasEnProceso, setSubastasEnProceso] = useState(0);
+  const [subastasConGanadorYPrecio, setSubastasConGanadorYPrecio] = useState(0);
+  const [subastasSinGanadorOPrecioInactivas, setSubastasSinGanadorOPrecioInactivas] = useState(0);
+  const [subastasNoTerminadas, setSubastasNoTerminadas] = useState(0);
+  const [subastasPorMes, setSubastasPorMes] = useState([]);
+  const [subastasPorAno, setSubastasPorAno] = useState([]);
+  const [subastasPorVariedad, setSubastasPorVariedad] = useState([]);
 
   const getSubs = async () => {
     try {
@@ -191,6 +204,37 @@ export const SubastaProvider = ({ children }) => {
     }
   };
 
+  const ListAllDatesSub = useCallback(async () => {
+    try {
+        const response = await listDatesSubs();
+    
+        if (response.data) {
+          const resumenSubastas = response.data.resumen_subastas ? response.data.resumen_subastas[0] : {};
+          const estadisticasSubastas = response.data.estadisticas_subastas || {};
+          const subastasPorMes = response.data.subastas_por_mes || [];
+          const subastasPorAno = response.data.subastas_por_año || [];
+          const subastasPorVariedad = response.data.subastas_por_variedad || [];
+          
+          setTodasLasSubastas(resumenSubastas.todas_las_subastas || 0);
+          setSubastasAbiertas(resumenSubastas.subastas_abiertas || 0);
+          setSubastasEnEspera(resumenSubastas.subastas_en_espera || 0);
+          setSubastasCerradas(resumenSubastas.subastas_cerradas || 0);
+          setSubastasEnProceso(resumenSubastas.subastas_en_proceso || 0);
+          
+          setSubastasConGanadorYPrecio(estadisticasSubastas.subastas_con_ganador_y_precio || 0);
+          setSubastasSinGanadorOPrecioInactivas(estadisticasSubastas.subastas_sin_ganador_o_precio_inactivas || 0);
+          setSubastasNoTerminadas(estadisticasSubastas.subastas_no_terminadas || 0);
+          
+          setSubastasPorMes(subastasPorMes);
+          setSubastasPorAno(subastasPorAno);
+          
+          setSubastasPorVariedad(subastasPorVariedad);
+        }
+    } catch (error) {
+        console.error('Error al listar las estadisticas:', error);
+    }
+}, []); 
+
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -229,7 +273,20 @@ export const SubastaProvider = ({ children }) => {
         subastaGanador,
         destablecerGanador,
         totalDeSubastas,
-        totalDeSubastasGanadas
+        totalDeSubastasGanadas,
+
+        ListAllDatesSub,
+        todasLasSubastas,
+        subastasAbiertas,
+        subastasEnEspera,
+        subastasCerradas,
+        subastasEnProceso,
+        subastasConGanadorYPrecio,
+        subastasSinGanadorOPrecioInactivas,
+        subastasNoTerminadas,
+        subastasPorMes,
+        subastasPorAno,
+        subastasPorVariedad,
       }}
     >
       <ModalMessage
