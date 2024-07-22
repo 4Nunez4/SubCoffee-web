@@ -320,7 +320,7 @@ function SubastaUser() {
                   </div>
                 ))
               ) : (
-                <p>Aún no hay ofertas</p>
+                <p className=" text-center">Aún no hay ofertas</p>
               )}
             </div>
           </div>
@@ -434,7 +434,7 @@ function SubastaUser() {
                   </div>
                 ))
               ) : (
-                <p>No hay postulantes activos.</p>
+                <p className=" text-center">No hay postulantes activos.</p>
               )}
             </div>
             <div className="flex justify-center mb-3 mt-3 gap-x-1">
