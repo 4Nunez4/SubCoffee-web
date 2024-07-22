@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("token", token);
       setMensaje(response.data.message)
-      setModalMessage(true)
+      setModalMessage(false)
     } catch (error) {
       setErrors([error.response.data.message]);
     }
