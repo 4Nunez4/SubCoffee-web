@@ -21,7 +21,7 @@ export const guardarOfertas = async (req, res) => {
    
 export const listarOfertas = async (req, res) => {
   try {
-    let sql = "SELECT o.pk_id_ofer, o.oferta_ofer, o.fk_id_subasta, o.fecha_ofer,o.fk_id_usuario, u.nombre_user FROM ofertas o INNER JOIN usuarios u ON o.fk_id_usuario = u.pk_cedula_user";
+    let sql = "SELECT o.pk_id_ofer, o.oferta_ofer, o.fk_id_subasta, o.fecha_ofer,o.fk_id_usuario, u.nombre_user u.email_user u.telefono_user FROM ofertas o INNER JOIN usuarios u ON o.fk_id_usuario = u.pk_cedula_user";
     const [result] = await pool.query(sql);
 
     if (result.length > 0) {
@@ -62,7 +62,7 @@ export const buscarOferta = async (req, res) => {
     const id = req.params.id;
     const [rows] = await pool.query(
       `
-        SELECT o.*, u.pk_cedula_user, u.nombre_user, u.imagen_user
+        SELECT o.*, u.pk_cedula_user, u.nombre_user, u.imagen_user, u.telefono_user, u.email_user
         FROM ofertas o
         INNER JOIN usuarios u ON o.fk_id_usuario = u.pk_cedula_user
         WHERE o.fk_id_subasta = '${id}'

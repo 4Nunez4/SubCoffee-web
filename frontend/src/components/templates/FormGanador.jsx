@@ -3,7 +3,7 @@ import ModalContact from "../Guard/ModalContact";
 import { ModalFormXl } from "../organisms/ModalFormXl";
 import { useSubastaContext } from "../../context/SubastaContext";
 
-function FormGanador ({ open, onClose, title, id }) {
+function FormGanador ({ open, onClose, title, id , selectedUser}) {
   const { cerrarModal, serCerrarModal } = useSubastaContext()
   useEffect(() => {
     if (cerrarModal) {
@@ -15,7 +15,7 @@ function FormGanador ({ open, onClose, title, id }) {
   return (
     <>
       <ModalFormXl open={open} onClose={onClose} title={title}>
-        <ModalContact id={id} />
+        <ModalContact id={id} selectedUser={selectedUser}/>
       </ModalFormXl>
     </>
   );

@@ -32,6 +32,9 @@ function SubastaUser() {
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const [tiempoRestante, setTiempoRestante] = useState("");
   const [subastaIniciada, setSubastaIniciada] = useState(false);
+
+  const [selectedUser, setSelectedUser] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -215,6 +218,18 @@ function SubastaUser() {
     );
   };
 
+  const handleUserClick = (oferta) => {
+    setSelectedUser({
+      pk_cedula_user: oferta.fk_id_usuario,
+      nombre_user: oferta.nombre_user,
+      email_user: oferta.email_user,
+      telefono_user: oferta.telefono_user,
+      imagen_user: oferta.imagen_user,
+      oferta_ofer: oferta.oferta_ofer
+    });
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="px-16 pt-4 mb-10">
       <div className="font-bold p-1 text-xl items-center flex">{subasta.pk_id_sub} - {subasta.nombre_tipo_vari}                         
@@ -284,7 +299,9 @@ function SubastaUser() {
             <div className={`overflow-y-auto  ${subasta.pk_cedula_user !== user.pk_cedula_user ? "max-h-[350px]" : "max-full" }`}>
               {Array.isArray(ofertas) && ofertas.length > 0 ? (
                 ofertas.map((oferta) => (
-                  <div key={oferta.pk_id_ofer} className={`p-1`} >
+                  <div    key={oferta.pk_id_ofer} 
+                className={`p-1 cursor-pointer`} 
+                onClick={() => handleUserClick(oferta)}>
                     { oferta.fk_id_usuario === user.pk_cedula_user
                       ? (                    
                       <div className="flex items-center justify-start">
@@ -295,8 +312,11 @@ function SubastaUser() {
                             className="h-12 rounded-full mx-2"
                           />
                           <div className="-ml-1">
+                        
                             <p className="font-semibold -mb-2">{oferta.nombre_user}</p>
+                            <p className="text-xs -mt-1 text-[#ffffff02]">{oferta.email_user}</p>
                             <p>$ {oferta.oferta_ofer.toLocaleString()}</p>
+                              <p className="text-xs -mt-1 text-[#ffffff02]">{oferta.telefono_user}</p>
                             <p className="text-xs -mt-1">{new Date(oferta.fecha_ofer).toLocaleString()}</p>
                           </div>
                         </div>
@@ -305,8 +325,11 @@ function SubastaUser() {
                       <div className="flex items-center justify-end">
                         <div className="flex items-center bg-slate-100 py-1 pl-8 rounded-2xl">
                           <div className="flex text-end flex-col -mr-1">
+                         
                             <p className="font-semibold -mb-2">{oferta.nombre_user}</p>
+                            <p className="text-xs -mt-1 text-[#ffffff02] ">{oferta.email_user}</p>
                             <p>$ {oferta.oferta_ofer.toLocaleString()}</p>
+                             <p className="text-xs -mt-1 text-[#ffffff02]">{oferta.telefono_user}</p>
                             <p className="text-xs -mt-1">{new Date(oferta.fecha_ofer).toLocaleString()}</p>
                           </div>
                           <img
@@ -320,7 +343,7 @@ function SubastaUser() {
                   </div>
                 ))
               ) : (
-                <p className=" text-center">Aún no hay ofertas</p>
+                <p>Aún no hay ofertas</p>
               )}
             </div>
           </div>
@@ -434,7 +457,7 @@ function SubastaUser() {
                   </div>
                 ))
               ) : (
-                <p className=" text-center">No hay postulantes activos.</p>
+                <p>No hay postulantes activos.</p>
               )}
             </div>
             <div className="flex justify-center mb-3 mt-3 gap-x-1">
@@ -452,12 +475,13 @@ function SubastaUser() {
               )}
             </div>
             <FormGanador
-              open={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
-              title={"Contactar"}
-              id={id}
+                 open={isModalOpen}
+                 onClose={() => setIsModalOpen(false)}
+                 title={"Contactar"}
+                 id={id}
+                 selectedUser={selectedUser}
             />
-          </div>
+          </div>  
         </div>
       </div>
     </div>
