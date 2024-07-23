@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import {
   getUser,
   getUserForId,
@@ -35,14 +35,14 @@ export const AuthProvider = ({ children }) => {
   const [cerrarModal, setCerrarModal] = useState(false)
   const [back, setBack] = useState(false);
 
-  const getUsers = async () => {
+  const getUsers = useCallback(async () => {
     try {
       const response = await getUser();
       setUsers(response.data.data);
     } catch (error) {
       setErrors([error.response.data.message]);
     }
-  }
+  }, [])
 
   const getUserID = async (id) => {
     try {

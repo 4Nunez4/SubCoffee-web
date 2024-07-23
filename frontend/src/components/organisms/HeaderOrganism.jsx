@@ -9,6 +9,7 @@ import {
   AutocompleteItem,
   Avatar,
   AutocompleteSection,
+  Button,
 } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -25,17 +26,17 @@ const DEFAULT_USER_IMAGE = `${USER_IMAGE_URL}imagen_de_usuario.webp`;
 const UserDropdown = ({ localUser, handleLogout, navigate }) => (
   <Dropdown placement="bottom-end" className="bg-[#e0e0e0]">
     <DropdownTrigger>
-      <User
-        as="button"
-        avatarProps={{
-          src: localUser.imagen_user
-            ? `${USER_IMAGE_URL}${localUser.imagen_user}`
-            : DEFAULT_USER_IMAGE,
-        }}
-        className="transition-transform text-gray-200"
-        description={localUser.rol_user}
-        name={localUser.nombre_user}
-      />
+      <Button variant="" className="flex items-center p-2">
+        <img
+          src={localUser.imagen_user && localUser.imagen_user.length > 0 ? `${USER_IMAGE_URL}${localUser.imagen_user}` : DEFAULT_USER_IMAGE}
+          alt="User"
+          className="rounded-full w-10 h-10 object-cover"
+        />
+        <div className="ml-1 flex flex-col items-start">
+          <p className="text-sm font-semibold text-[#fdfbf6dc]">{localUser.nombre_user}</p>
+          <p className="text-xs text-gray-300 -mt-1">{localUser.rol_user}</p>
+        </div>
+      </Button>
     </DropdownTrigger>
     <DropdownMenu aria-label="User Actions" variant="flat">
       <DropdownItem

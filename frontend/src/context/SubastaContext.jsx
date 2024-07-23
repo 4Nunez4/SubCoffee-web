@@ -55,35 +55,25 @@ export const SubastaProvider = ({ children }) => {
   const [subastasPorAno, setSubastasPorAno] = useState([]);
   const [subastasPorVariedad, setSubastasPorVariedad] = useState([]);
 
-  const getSubs = async () => {
+  const getSubs = useCallback(async () => {
     try {
       const response = await getSubastas()
       setSubastas(response.data)
     } catch (error) {
       console.error(error);
     }
-  }
+  }, [])
 
-  const getSubsMenoCerradas = async () => {
+  const getSubsMenoCerradas = useCallback(async () => {
     try {
       const reponse = await getSubastasActivasMenosCerradas()
       setSubastasActivas(reponse.data)
     } catch (error) {
       console.error(error);
     }
-  }
+  }, [])
 
-  const updateDate = (id, data) => {
-    try {
-      const response = updateSubastafecha(id, data)
-      getSubs()
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const establecerGanador = async(id, data) => {
+  const establecerGanador = useCallback(async(id, data) => {
     try {
       await subastaGanadorAsingar(id, data).then((response) => {
         getSub(id)
@@ -96,9 +86,9 @@ export const SubastaProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-  }
+  }, [])
 
-  const destablecerGanador = async(id, user) => {
+  const destablecerGanador = useCallback(async(id, user) => {
     try {
       await subastaGanadorDesingar(id).then((response) => {
         activarSubs(id, user)
@@ -109,7 +99,7 @@ export const SubastaProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-  }
+  }, [])
 
   const getSub = useCallback(async (id) => {
     try {
@@ -120,7 +110,7 @@ export const SubastaProvider = ({ children }) => {
     }
   }, [])
 
-  const getSubForUser = async (user) => {
+  const getSubForUser = useCallback(async (user) => {
     try {
       const response = await getSubastaForUser(user);
       setSubastaForUser(response.data.data);
@@ -128,9 +118,9 @@ export const SubastaProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, []);
 
-  const getSubGanador = async (user) => {
+  const getSubGanador = useCallback(async (user) => {
     try {
       const response = await getSubastaGanador(user)
       setSubastaGanador(response.data.data)
@@ -142,9 +132,9 @@ export const SubastaProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-  }
+  }, [])
 
-  const createSubs = async (data, user) => {
+  const createSubs = useCallback(async (data, user) => {
     try {
       const response = await createSubasta(data , user);
       getSubForUser(user);
@@ -154,9 +144,9 @@ export const SubastaProvider = ({ children }) => {
     } catch (error) {
       setErrors([error.response.data.message]);
     }
-  };
+  }, [])
 
-  const updateSubs = async (id, data, user) => {
+  const updateSubs = useCallback(async (id, data, user) => {
     try {
       const response = await updateSubasta(id, data);
       getSubForUser(user)
@@ -166,43 +156,43 @@ export const SubastaProvider = ({ children }) => {
     } catch (error) {
       setErrors([error.response.data.message]);
     }
-  };
+  }, [])
 
-  const desactivarSubs = async (id, user) => {
+  const desactivarSubs = useCallback(async (id, user) => {
     try {
       await updateSubastaDesact(id);
       getSubForUser(user);
     } catch (error) {
       setErrors([error.response.data.message]);
     }
-  };
+  }, []);
 
-  const activarSubs = async (id, user) => {
+  const activarSubs = useCallback(async (id, user) => {
     try {
       await updateSubastaActivar(id);
       getSubForUser(user);
     } catch (error) {
       setErrors([error.response.data.message]);
     }
-  };
+  }, []);
 
-  const EsperaSubs = async (id, user) => {
+  const EsperaSubs = useCallback(async (id, user) => {
     try {
       await updateSubastaEspera(id);
       getSubForUser(user);
     } catch (error) {
       setErrors([error.response.data.message]);
     }
-  };
+  }, []);
 
-  const ProcesoSubs = async (id, user) => {
+  const ProcesoSubs = useCallback(async (id, user) => {
     try {
       await updateSubastaProceso(id);
       getSubForUser(user);
     } catch (error) {
       setErrors([error.response.data.message]);
     }
-  };
+  }, []);
 
   const ListAllDatesSub = useCallback(async () => {
     try {
@@ -263,7 +253,6 @@ export const SubastaProvider = ({ children }) => {
         activarSubs,
         EsperaSubs,
         ProcesoSubs,
-        updateDate,
         subastasActivas,
         getSubsMenoCerradas,
         cerrarModal, 

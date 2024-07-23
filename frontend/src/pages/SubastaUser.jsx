@@ -29,7 +29,7 @@ function SubastaUser() {
   const { getUsers } = useAuthContext();
   const [precioActual, setPrecioActual] = useState(0);
   const user = JSON.parse(localStorage.getItem("user"));
-  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [tiempoRestante, setTiempoRestante] = useState("");
   const [subastaIniciada, setSubastaIniciada] = useState(false);
 
@@ -96,16 +96,13 @@ function SubastaUser() {
     };
   
     const intervalId = setInterval(actualizarTiempo, 1000);
-    actualizarTiempo(); // Para calcular el tiempo restante inmediatamente
+    actualizarTiempo(); 
     return () => clearInterval(intervalId);
   }, [subasta.fecha_inicio_sub, subasta.fecha_fin_sub]);
 
   useEffect(() => {
-    // Verifica que subasta esté definida y que no haya ganador aún
     if (subasta && subastaIniciada && !subasta.ganador_sub) {
-      // Verifica que ofertas esté definido y no esté vacío
       if (ofertas && ofertas.length === 0) {
-        // Ejecuta la función para obtener la oferta mayor
         getOfertMayor(id);
       } else {
         console.log("No hay ofertas en esta subasta.");
@@ -190,12 +187,6 @@ function SubastaUser() {
   const handleMouseLeave = (id) => {
     setHoveredLinks({ ...hoveredLinks, [id]: false });
   };
-
-  useEffect(() => {
-    if (subasta && subasta.pk_cedula_user) {
-      getCalificacionesUser(subasta.pk_cedula_user);
-    }
-  }, [subasta.pk_cedula_user, getCalificacionesUser]);
   
   const renderAverageStars = (average) => {
     const fullStars = Math.floor(average);
@@ -219,14 +210,7 @@ function SubastaUser() {
   };
 
   const handleUserClick = (oferta) => {
-    setSelectedUser({
-      pk_cedula_user: oferta.fk_id_usuario,
-      nombre_user: oferta.nombre_user,
-      email_user: oferta.email_user,
-      telefono_user: oferta.telefono_user,
-      imagen_user: oferta.imagen_user,
-      oferta_ofer: oferta.oferta_ofer
-    });
+    setSelectedUser(oferta);
     setIsModalOpen(true);
   };
 
@@ -299,47 +283,42 @@ function SubastaUser() {
             <div className={`overflow-y-auto  ${subasta.pk_cedula_user !== user.pk_cedula_user ? "max-h-[350px]" : "max-full" }`}>
               {Array.isArray(ofertas) && ofertas.length > 0 ? (
                 ofertas.map((oferta) => (
-                  <div    key={oferta.pk_id_ofer} 
-                className={`p-1 cursor-pointer`} 
-                onClick={() => handleUserClick(oferta)}>
-                    { oferta.fk_id_usuario === user.pk_cedula_user
-                      ? (                    
-                      <div className="flex items-center justify-start">
-                        <div className="flex items-center bg-gray-100 py-1 pr-12 rounded-2xl">
-                          <img
-                            src={oferta.imagen_user && oferta.imagen_user.length > 0 ? `http://localhost:4000/usuarios/${oferta.imagen_user}`: "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
-                            alt="User Avatar"
-                            className="h-12 rounded-full mx-2"
-                          />
-                          <div className="-ml-1">
-                        
-                            <p className="font-semibold -mb-2">{oferta.nombre_user}</p>
-                            <p className="text-xs -mt-1 text-[#ffffff02]">{oferta.email_user}</p>
-                            <p>$ {oferta.oferta_ofer.toLocaleString()}</p>
-                              <p className="text-xs -mt-1 text-[#ffffff02]">{oferta.telefono_user}</p>
-                            <p className="text-xs -mt-1">{new Date(oferta.fecha_ofer).toLocaleString()}</p>
+                  <div    
+                    key={oferta.pk_id_ofer} 
+                    className={`p-1 cursor-pointer`} 
+                    onClick={() => handleUserClick(oferta)}>
+                      { oferta.fk_id_usuario === user.pk_cedula_user
+                        ? (                    
+                        <div className="flex items-center justify-start">
+                          <div className="flex items-center bg-gray-100 py-1 pr-12 rounded-2xl">
+                            <img
+                              src={oferta.imagen_user && oferta.imagen_user.length > 0 ? `http://localhost:4000/usuarios/${oferta.imagen_user}`: "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
+                              alt="User Avatar"
+                              className="h-12 rounded-full mx-2"
+                            />
+                            <div className="-ml-1">
+                              <p className="font-semibold -mb-2">{oferta.nombre_user}</p>
+                              <p>$ {oferta.oferta_ofer.toLocaleString()}</p>
+                              <p className="text-xs -mt-1">{new Date(oferta.fecha_ofer).toLocaleString()}</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ) : (                    
-                      <div className="flex items-center justify-end">
-                        <div className="flex items-center bg-slate-100 py-1 pl-8 rounded-2xl">
-                          <div className="flex text-end flex-col -mr-1">
-                         
-                            <p className="font-semibold -mb-2">{oferta.nombre_user}</p>
-                            <p className="text-xs -mt-1 text-[#ffffff02] ">{oferta.email_user}</p>
-                            <p>$ {oferta.oferta_ofer.toLocaleString()}</p>
-                             <p className="text-xs -mt-1 text-[#ffffff02]">{oferta.telefono_user}</p>
-                            <p className="text-xs -mt-1">{new Date(oferta.fecha_ofer).toLocaleString()}</p>
+                      ) : (                    
+                        <div className="flex items-center justify-end">
+                          <div className="flex items-center bg-slate-100 py-1 pl-8 rounded-2xl">
+                            <div className="flex text-end flex-col -mr-1">
+                              <p className="font-semibold -mb-2">{oferta.nombre_user}</p>
+                              <p>$ {oferta.oferta_ofer.toLocaleString()}</p>
+                              <p className="text-xs -mt-1">{new Date(oferta.fecha_ofer).toLocaleString()}</p>
+                            </div>
+                            <img
+                              src={oferta.imagen_user && oferta.imagen_user.length > 0? `http://localhost:4000/usuarios/${oferta.imagen_user}`: "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
+                              alt="User Avatar"
+                              className="h-12 mx-2 rounded-full"
+                            />
                           </div>
-                          <img
-                            src={oferta.imagen_user && oferta.imagen_user.length > 0? `http://localhost:4000/usuarios/${oferta.imagen_user}`: "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
-                            alt="User Avatar"
-                            className="h-12 mx-2 rounded-full"
-                          />
-                        </div>
-                      </div>)
-                    }
+                        </div>)
+                      }
                   </div>
                 ))
               ) : (
@@ -421,24 +400,13 @@ function SubastaUser() {
             <h3 className="text-lg font-semibold ">Vendedor</h3>
             <Avatar
               src={subasta.imagen_user && subasta.imagen_user.length > 0? `http://localhost:4000/usuarios/${subasta.imagen_user}`: "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
-              className="w-28 h-28"
+              className="w-40 h-40"
             />
             <div className="flex items-center">
               <Link className="text-center hover:underline" to={(`/profile/${subasta.pk_cedula_user}`)}>{subasta.nombre_user}</Link>
             </div>
             <p className="text-center">{subasta.email_user}</p>
             <p className="text-center">{subasta.telefono_user}</p>
-            <p className="">Calificación del usuario</p>
-            <div className="flex flex-col items-start">
-              {stats && stats.promedio != null && !isNaN(stats.promedio) ? (
-                <div className="flex gap-x-2">
-                  <div className="text-2xl font-bold">{parseFloat(stats.promedio).toFixed(1)}</div>
-                  {renderAverageStars(stats.promedio)}
-                </div>
-              ) : (
-                "Usuario sin calificaciones"
-              )}
-            </div>
           </div>
           <div className="overflow-x-auto bg-[#e0e0e0] rounded-xl flex flex-col h-full">
             <h3 className="text-lg font-semibold text-center mt-2">Postulantes</h3>
@@ -461,27 +429,21 @@ function SubastaUser() {
               )}
             </div>
             <div className="flex justify-center mb-3 mt-3 gap-x-1">
-              { user.pk_cedula_user === subasta.pk_cedula_user || ofertasMayor.pk_cedula_user === user.pk_cedula_user ? (
-                <Button auto color="primary" onClick={() => setIsModalOpen(true)}>
-                  Contactar
-                </Button>
-              ):(
                 <Button
                   onClick={handlePostulantesClick}
                   className="bg-red-600 text-white rounded-xl"
                 >
                   Salir de la subasta
                 </Button>
-              )}
             </div>
             <FormGanador
-                 open={isModalOpen}
-                 onClose={() => setIsModalOpen(false)}
-                 title={"Contactar"}
-                 id={id}
-                 selectedUser={selectedUser}
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title={"Contactar"}
+                id={id}
+                selectedUser={selectedUser}
             />
-          </div>  
+          </div>
         </div>
       </div>
     </div>

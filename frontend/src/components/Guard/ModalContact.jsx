@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, Button, Link } from "@nextui-org/react";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaStar, FaStarHalfAlt, FaWhatsapp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import { useSubastaContext } from "../../context/SubastaContext";
-import { useOfertasContext } from "../../context/OfertasContext";
 import { useCalificacionesContext } from "../../context/CalificacionesContext";
 import FormCalificacion from "../templates/FormCalificaion";
 
@@ -14,29 +13,21 @@ const colors = {
 };
 
 function ModalContact({ id, selectedUser }) {
-  const { getSub, subasta, establecerGanador, getSubs, desactivarSubs, getSubForUser } = useSubastaContext();
-  const { getOfertMayor, ofertasMayor } = useOfertasContext();
+  const { subasta, establecerGanador, getSubs, desactivarSubs, getSubForUser } = useSubastaContext();
   const { getCalificacionesUser, stats } = useCalificacionesContext();
   const [abrirModalCalificacion, setAbrirModalCalificacion] = useState(false);
   const user = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
+  const displayUser = selectedUser;
 
   useEffect(() => {
-    getSub(id);
-    if (!selectedUser) {
-      getOfertMayor(id);
-    }
-  }, [id, getOfertMayor, getSub, selectedUser]);
-
-  useEffect(() => {
-    const displayUser = selectedUser || ofertasMayor;
-    if (displayUser) {
+    if (displayUser && displayUser.pk_cedula_user) {
       getCalificacionesUser(displayUser.pk_cedula_user);
     }
-  }, [selectedUser, ofertasMayor, getCalificacionesUser]);
+  }, [displayUser]);
 
   const handleEstablecerGanador = () => {
-    const ganador = selectedUser || ofertasMayor;
+    const ganador = selectedUser;
     if (ganador && user) {
       const data = {
         ganador_sub: ganador.pk_cedula_user,
@@ -66,11 +57,16 @@ function ModalContact({ id, selectedUser }) {
     );
   };
 
-  const displayUser = selectedUser || ofertasMayor;
+  const handleWhatsAppContact = () => {
+    const phone = `+57${displayUser.telefono_user}`;
+    const message = encodeURIComponent(`Hola ${displayUser.nombre_user}, me gustaría contactarme contigo respecto a la subasta.`);
+    const whatsappURL = `https://wa.me/${phone}?text=${message}`;
+    window.open(whatsappURL, "_blank");
+  };
 
   return (
     <>
-      <div className="flex justify-between gap-8">
+      <div className="flex items-center">
         <div className="w-1/2 flex flex-col items-center">
           <h3 className="text-xl font-semibold mb-2">Calificaciones del Usuario</h3>
           {stats && stats.promedio != null && !isNaN(stats.promedio) ? (
@@ -90,7 +86,7 @@ function ModalContact({ id, selectedUser }) {
               </Link>
             </>
           ) : (
-            <div className="flex w-full justify-center">
+            <div className="flex w-full justify-center flex-col items-center">
               <p className="text-xl my-2 text-gray-400 font-semibold">Usuario sin calificaciones.</p>
               <Link
                 onClick={() => setAbrirModalCalificacion(true)}
@@ -102,8 +98,18 @@ function ModalContact({ id, selectedUser }) {
             </div>
           )}
         </div>
+        <div className="flex justify-center mt-4 gap-4">
+          {user.pk_cedula_user === subasta.pk_cedula_user && displayUser && (
+            <Button
+              className="text-white bg-[#239D19] rounded-full font-bold flex justify-center items-center w-20 h-20"
+              onClick={handleWhatsAppContact}
+            >
+              <FaWhatsapp size={44} />
+            </Button>
+          )}
+        </div>
         <div className="w-1/2 flex flex-col items-center">
-          <h3 className="text-xl font-semibold mb-2">Usuario Seleccionado / Mayor Pujador</h3>
+          <h3 className="text-xl font-semibold mb-2">Usuario Seleccionado</h3>
           {displayUser ? (
             <>
               <div className="flex flex-col items-start">

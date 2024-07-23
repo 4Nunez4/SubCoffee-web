@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import ModalMessage from "../nextui/ModalMessage";
 import {
   createCalificaciones,
@@ -28,7 +28,7 @@ export const CalifiProvider = ({ children }) => {
   const [cerrarModal, setCerrarModal] = useState(false);
   const [calificacion, setCalificacion] = useState([]);
 
-  const getCalificacionesUser = async (id) => {
+  const getCalificacionesUser = useCallback(async (id) => {
     try {
       const response = await getCalificaciones(id);
       setCalificaciones(response.data.calificaciones);
@@ -36,7 +36,7 @@ export const CalifiProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
   const getCalificacion = async (id) => {
     try {

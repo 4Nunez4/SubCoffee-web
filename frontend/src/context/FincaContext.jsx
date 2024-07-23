@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import {
   getFincaForUser,
   createFinca,
@@ -58,7 +58,7 @@ export const FincaProvider = ({ children }) => {
     }
   };
 
-  const createFincas = async (data, user) => {
+  const createFincas = useCallback(async (data, user) => {
     try {
       const response = await createFinca(data);
       if(response.status === 200) {
@@ -70,7 +70,7 @@ export const FincaProvider = ({ children }) => {
     } catch (error) {
       setErrors([error.response.data.message]);
     }
-  };
+  }, [])  
 
   const updateFincas = async (id, data, user) => {
     try {
