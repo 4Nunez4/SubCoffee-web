@@ -24,7 +24,6 @@ const SidebarOrganims = () => {
       { title: "Notificaciones", link: "/notificaciones", icon: icono.iconoCampana },
       { title: "Políticas de privacidad", link: "/privacy-policy", icon: icono.iconoPrivacidad },
       { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda },
-
     ] : []),
     ...(user && token && user.rol_user === "comprador" ? [
       { title: "Inicio", link: "/subcoffee", icon: icono.iconoHome },
@@ -32,7 +31,6 @@ const SidebarOrganims = () => {
       { title: "Notificaciones", link: "/notificaciones", icon: icono.iconoCampana },
       { title: "Políticas de privacidad", link: "/privacy-policy", icon: icono.iconoPrivacidad },
       { title: "Ayuda", link: "/ayuda", icon: icono.iconoAyuda },
-
     ] : [])
   ];
 

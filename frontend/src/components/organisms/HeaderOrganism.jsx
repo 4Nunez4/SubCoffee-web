@@ -59,20 +59,6 @@ const UserDropdown = ({ localUser, handleLogout, navigate }) => (
   </Dropdown>
 );
 
-const NavLinks = () => (
-  <div className="flex space-x-12 text-[#323232]">
-    {["inicio", "quienessomos", "quequeremos", "beneficios", "contacto"].map(
-      (section) => (
-        <Link to="/" key={section}>
-          <a href={`#${section}`} className="hover:text-[#39A800]">
-            {section.charAt(0).toUpperCase() + section.slice(1).replace(/([a-z])([A-Z])/g, '$1 $2')}
-          </a>
-        </Link>
-      )
-    )}
-  </div>
-);
-
 function HeaderOrganism() {
   const [isMoonSelected, setIsMoonSelected] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -107,9 +93,14 @@ function HeaderOrganism() {
   useEffect(() => {
     if (localUser) {
       getUsers();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (localUser) {
       getSubsMenoCerradas();
     }
-  }, [localUser, getUsers, getSubsMenoCerradas]);
+  }, []);
 
   return (
     <>

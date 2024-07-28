@@ -12,14 +12,19 @@ function SubastaPage() {
   const navigate = useNavigate();
   const { getSubsMenoCerradas, subastasActivas = [], setIdSubasta, EsperaSubs, activarSubs, desactivarSubs, ProcesoSubs } = useSubastaContext();
   const { getUsers, users: currentUser } = useAuthContext(); 
+  const localUser = JSON.parse(localStorage.getItem("user"));
 
   const [abrirModal, setAbrirModal] = useState(false);
   const [startIndex, setStartIndex] = useState(0);
 
-  useEffect(() => {
+  const fetchSubastas = useCallback(() => {
     getSubsMenoCerradas();
     getUsers();
-  }, [getSubsMenoCerradas, getUsers]);
+  }, []);
+
+  useEffect(() => {
+    fetchSubastas();
+  }, [fetchSubastas]);
 
   const handdleModaSub = useCallback((id) => {
     setAbrirModal(true);
@@ -27,10 +32,10 @@ function SubastaPage() {
   }, [setIdSubasta]);
 
   useEffect(() => {
-    if (currentUser.rol_user === "admin") {
+    if (localUser.rol_user === "admin") {
       navigate('/users');
     }
-  }, [currentUser, navigate]);
+  }, [localUser, navigate]);
 
   const showNextSubastas = useCallback(() => {
     setStartIndex(prevIndex => prevIndex + 1);
