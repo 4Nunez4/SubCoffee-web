@@ -34,7 +34,6 @@ function App() {
                 <Route path="somos" element={<QuienesSomosA />} />
                 <Route path="queremoslograr" element={<QueremosLograr />} />
                 <Route path="ayuda" element={<AyudaPage />} />
-                  <Route path="datosEstadisticos" element={<DatosEstadisticos />} />
                 <Route element={<ProtectedRoute />}>
                   <Route path="subcoffee" element={<SubastaPage />} />
                   <Route path="datosEstadisticos" element={<DatosEstadisticos />} />
