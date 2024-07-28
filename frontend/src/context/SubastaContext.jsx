@@ -75,7 +75,6 @@ export const SubastaProvider = ({ children }) => {
   const destablecerGanador = useCallback(async(id, user) => {
     try {
       await axiosClient.put(`/v1/eliminardatos/${id}`).then((response) => {
-        activarSubs(id, user)
         setMensaje(response.data.message);
         serCerrarModal(true)
         setModalMessage(true);

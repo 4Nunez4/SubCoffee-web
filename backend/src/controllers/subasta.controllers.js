@@ -297,7 +297,7 @@ export const eliminar = async (req, res) => {
 export const designarDatos = async (req, res) => {
   try {
     const id = req.params.id;
-    const [resultado] = await pool.query("UPDATE subasta SET precio_final_sub = NULL, ganador_sub = NULL WHERE pk_id_sub = ?", [id]);
+    const [resultado] = await pool.query("UPDATE subasta SET precio_final_sub = NULL, ganador_sub = NULL, estado_sub = 'abierta' WHERE pk_id_sub = ?", [id]);
 
     if (resultado.affectedRows > 0) {
       res.status(200).json({ message: "Datos de subasta cambiados exitosamente." });

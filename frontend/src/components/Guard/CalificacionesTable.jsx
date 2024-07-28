@@ -9,7 +9,7 @@ const colors = {
   grey: "#a9a9a9",
 };
 
-function CalificacionesTable({ titleBtn, fk_user }) {
+function CalificacionesTable({ titleBtn, fk_user, method }) {
   const [abrirModalCalificacion, setAbrirModalCalificacion] = useState(false);
   const { getCalificacionesUser, calificaciones, stats = {}, setIdCalificacion } = useCalificacionesContext();
   const [mode, setMode] = useState("create");
@@ -110,13 +110,22 @@ function CalificacionesTable({ titleBtn, fk_user }) {
           </>
         )}
       </div>
-      {calificaciones && calificaciones.some((calificacion) => calificacion.id_usuario_cali === userlocal.pk_cedula_user) || fk_user === userlocal.pk_cedula_user || userlocal.rol_user === "admin" ? (
+      {/* {calificaciones && calificaciones.some((calificacion) => calificacion.id_usuario_cali === userlocal.pk_cedula_user) || fk_user === userlocal.pk_cedula_user || userlocal.rol_user === "admin" ? (
         ""
       ) : (
         <Button className="mt-2" onClick={() => handleCalif("create")}>
           Registrar calificación
         </Button>
-      )}
+      )} */}
+      {
+        method === "visitante" ? (
+          ""
+        ) : (
+          <Button className="mt-2" onClick={() => handleCalif("create")}>
+            Registrar calificación
+          </Button>
+        )
+      }
       <FormRegisCalificacion
         open={abrirModalCalificacion}
         onClose={() => setAbrirModalCalificacion(false)}

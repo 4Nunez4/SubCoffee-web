@@ -96,9 +96,9 @@ function SubastaPage() {
     const intervalId = setInterval(() => {
       subastasActivas.forEach(handleSubastaState);
     }, 1000);
-  
+
     return () => clearInterval(intervalId);
-  }, [calcularDiferencia, EsperaSubs, activarSubs, desactivarSubs, ProcesoSubs]);
+  }, [subastasActivas, users.pk_cedula_user, calcularDiferencia, EsperaSubs, activarSubs, desactivarSubs, ProcesoSubs]);
 
   return (
     <div className="px-auto pb-8 bg-[#FDFBF6]">

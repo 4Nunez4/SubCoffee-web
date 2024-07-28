@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Button, Link } from "@nextui-org/react";
+import { Button, Link } from "@nextui-org/react";
 import { FaStar, FaStarHalfAlt, FaWhatsapp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -117,10 +117,10 @@ function ModalContact({ id, selectedUser }) {
                 <p><strong>Email:</strong> {displayUser.email_user || 'No disponible'}</p>
                 <p><strong>Teléfono:</strong> {displayUser.telefono_user || 'No disponible'}</p>
               </div>
-              <Avatar
+              <img
                 src={displayUser.imagen_user ? `http://localhost:4000/usuarios/${displayUser.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
-                alt="Imagen del usuario"
-                className="w-40 h-40 mt-4"
+                alt="User"
+                className="rounded-full w-48 h-48 object-cover"
               />
               <p className="mt-2"><strong>Oferta:</strong> ${displayUser.oferta_ofer?.toLocaleString() || 'No disponible'}</p>
             </>
@@ -147,6 +147,7 @@ function ModalContact({ id, selectedUser }) {
         fk_user={displayUser?.pk_cedula_user}
         title={"Calificaciones de usuario"}
         titleBtn={"Registrar calificación"}
+        method="register"
       />
     </>
   );

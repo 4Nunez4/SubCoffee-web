@@ -228,6 +228,7 @@ function ProfileUser() {
         fk_user={user.pk_cedula_user}
         title={"Calificaciones de usuario"}
         titleBtn={"Registrar calificación"}
+        method={"visitante"}
       />
       {user.rol_user !== "admin" && (
         <>

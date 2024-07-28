@@ -24,6 +24,7 @@ import ModalSubCoffee from "../organisms/ModalSubCoffee";
 export default function SubastaTable() {
   const [abrirModal, setAbrirModal] = useState(false);
   const [abrirModalSub, setAbrirModalSub] = useState(false);
+  const [alertShown, setAlertShown] = useState([]);
   const [mode, setMode] = useState("create");
   const navigate = useNavigate()
 
@@ -46,18 +47,20 @@ export default function SubastaTable() {
 
   useEffect(() => {
     if (!subastaForuser) return;
-  
+
     const handleSubastaState = (subasta) => {
       const { pk_id_sub, nombre_tipo_vari, precio_final_sub, ganador_sub, fecha_inicio_sub, fecha_fin_sub, estado_sub } = subasta;
       const tiempo = calcularDiferencia(fecha_inicio_sub, fecha_fin_sub);
-  
-      if (tiempo.includes("Subasta terminada") && !ganador_sub) {
+
+      if (tiempo.includes("Subasta terminada") && !alertShown.includes(pk_id_sub) && !ganador_sub) {
+        setAlertShown((date) => [...date, pk_id_sub]);
         EsperaSubs(pk_id_sub, usuario.pk_cedula_user);
       } else if (tiempo.includes("La subasta empezará dentro de") && estado_sub !== "cerrada") {
         activarSubs(pk_id_sub, usuario.pk_cedula_user);
       } else if (tiempo.includes("La subasta terminará en")) {
         ProcesoSubs(pk_id_sub, usuario.pk_cedula_user);
-      } else if (tiempo.includes("A la subasta le quedan menos de 10 minutos")) {
+      } else if (tiempo.includes("A la subasta le quedan menos de 10 minutos") && !alertShown.includes(pk_id_sub)) {
+        setAlertShown((date) => [...date, pk_id_sub]);
         Swal.fire({
           text: `A la subasta ${pk_id_sub} - ${nombre_tipo_vari} le quedan menos de 10 minutos para finalizar. Es hora de ponerse en contacto con el dueño de la mayor puja.`,
           icon: "info",
@@ -67,13 +70,13 @@ export default function SubastaTable() {
         desactivarSubs(pk_id_sub, usuario.pk_cedula_user);
       }
     };
-  
+
     subastaForuser.forEach(handleSubastaState);
-  
+
     const intervalId = setInterval(() => {
       subastaForuser.forEach(handleSubastaState);
     }, 1000);
-  
+
     return () => clearInterval(intervalId);
   }, [subastaForuser, usuario]);
 

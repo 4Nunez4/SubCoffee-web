@@ -20,7 +20,7 @@ function SubastaUser() {
   const [ tiempoRestante, setTiempoRestante ] = useState("");
   const [ subastaIniciada, setSubastaIniciada ] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-  const { getSub, subasta, EsperaSubs, activarSubs, ProcesoSubs, desactivarSubs } = useSubastaContext();
+  const { getSub, subasta, EsperaSubs, activarSubs, ProcesoSubs } = useSubastaContext();
   const { getPostsActivos, postsActivos, desactivarPosts } = usePostulantesContext();
   const { createOfert, ofertas, getOfertForSub, eliminarOfertas, getOfertMayor } = useOfertasContext();
   const { getUsers } = useAuthContext();
@@ -179,8 +179,10 @@ function SubastaUser() {
   };
 
   const handleUserClick = (oferta) => {
-    setSelectedUser(oferta);
-    setIsModalOpen(true);
+    if(subasta.pk_cedula_user === user.pk_cedula_user && subasta.estado_sub === "espera") {
+      setSelectedUser(oferta);
+      setIsModalOpen(true);
+    }
   };
 
   return (
@@ -408,11 +410,11 @@ function SubastaUser() {
                 </Button>
             </div>
             <FormGanador
-                open={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                title={"Contactar"}
-                id={id}
-                selectedUser={selectedUser}
+              open={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              title={"Contactar"}
+              id={id}
+              selectedUser={selectedUser}
             />
           </div>
         </div>
