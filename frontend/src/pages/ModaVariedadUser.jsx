@@ -49,9 +49,7 @@ export default function ModaVariedadUser({ titleBtn, pkFinca }) {
               key={i}
               className="bg-gray-100 rounded-md p-4 mx-3 flex mb-2 items-center justify-between shadow-md"
             >
-              <p className="text-gray-800 font-semibold">
-                {varis.nombre_tipo_vari}
-              </p>
+              <p className="text-gray-800 font-semibold">{varis.nombre_tipo_vari}</p>
               <p
                 className={`rounded-lg px-2 text-white ${
                   varis.estado_vari === "activo" ? "bg-green-500" : "bg-red-500"

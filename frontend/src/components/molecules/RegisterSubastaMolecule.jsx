@@ -26,7 +26,7 @@ const RegisterSubastaMolecule = ({ mode, titleBtn }) => {
 
   useEffect(() => {
     getFincaUserActivas(usuario.pk_cedula_user);
-  }, [usuario.pk_cedula_user, getFincaUserActivas]);
+  }, []);
 
   useEffect(() => {
     if (mode === "update" && idSubasta) {

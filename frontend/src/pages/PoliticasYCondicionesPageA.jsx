@@ -4,15 +4,11 @@ import logo from "../assets/isotipo-SubCoffee.png";
 function PoliticasYCondicionesPageA() {
   return (
     <div className="flex flex-col items-center justify-center bg-[#FDFBF6]">
-      <h2 className="font-semibold text-3xl text-center mb-8 mt-40 ">
-        Políticas de privacidad
-      </h2>
+      <h2 className="font-semibold text-3xl text-center mb-8 mt-10">Políticas de privacidad</h2>
       <div className=" py-6 w-full b overflow-y-auto max-w-7xl px-12">
         <section id="primera">
           <div className="flex-grow">
-            <h2 className="font-semibold text-3xl mb-4 ">
-              Fecha de efectividad
-            </h2>
+            <h2 className="font-semibold text-3xl mb-4 ">Fecha de efectividad</h2>
             <p className="font-normal text-lg text-[#919190]">
               Bienvenido a SubCoffe, la plataforma de subasta en línea enfocada
               en el café pergamino de calidad directamente de los campesinos del
@@ -23,7 +19,6 @@ function PoliticasYCondicionesPageA() {
               y de los servicios ofrecidos por SubCoffe (en adelante, los
               "Servicios").
             </p>
-
             <p className="font-normal text-lg text-[#919190]">
               Por favor, lea estos Términos cuidadosamente antes de acceder o
               utilizar nuestro Sitio Web. Si no está de acuerdo con todos los
@@ -32,7 +27,6 @@ function PoliticasYCondicionesPageA() {
               usar cualquier parte del sitio, usted acepta estar sujeto a estos
               Términos.
             </p>
-
             <div className="flex flex-col md:flex-row items-start mb-6">
               <img
                 src={logo}
@@ -40,9 +34,7 @@ function PoliticasYCondicionesPageA() {
                 className="w-32 h-auto mb-6 md:mr-8 max-w-full md:max-w-none"
               />
               <div>
-                <h2 className="font-semibold text-3xl mb-4  ">
-                  Descripción del Servicio
-                </h2>
+                <h2 className="font-semibold text-3xl mb-4">Descripción del Servicio</h2>
                 <p className="font-normal text-lg text-[#919190]">
                   SubCoffe proporciona una plataforma de subasta en línea que
                   permite a los campesinos del Huila, Colombia, subastar su café
@@ -57,9 +49,7 @@ function PoliticasYCondicionesPageA() {
           </div>
         </section>
         <section>
-          <h2 className="font-semibold text-3xl mb-4  ">
-            Registro de Usuarios
-          </h2>
+          <h2 className="font-semibold text-3xl mb-4">Registro de Usuarios</h2>
           <p className="font-normal text-lg text-[#919190]">
             Para acceder a ciertas funciones del Sitio Web, incluyendo la
             participación en subastas, deberá registrarse y crear una cuenta de
@@ -72,9 +62,7 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="font-semibold text-3xl mb-4  ">
-            Privacidad y Protección de Datos
-          </h2>
+          <h2 className="font-semibold text-3xl mb-4">Privacidad y Protección de Datos</h2>
           <p className="font-normal text-lg text-[#919190]">
             SubCoffe toma seriamente la privacidad de sus usuarios. Recopilamos
             y utilizamos sus datos personales de acuerdo con nuestra Política de
@@ -85,9 +73,7 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="font-semibold text-3xl mb-4  ">
-            Cookies y Tecnologías de Seguimiento
-          </h2>
+          <h2 className="font-semibold text-3xl mb-4">Cookies y Tecnologías de Seguimiento</h2>
           <p className="font-normal text-lg text-[#919190]">
             El Sitio Web utiliza cookies y otras tecnologías de seguimiento para
             mejorar su experiencia de usuario y recopilar datos sobre cómo
@@ -97,37 +83,18 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="font-semibold text-3xl mb-4  ">
-            Uso de los Servicios
-          </h2>
-          <p className="font-normal text-lg text-[#919190]">
-            Al utilizar los Servicios de SubCoffe, usted se compromete a:
-          </p>
+          <h2 className="font-semibold text-3xl mb-4">Uso de los Servicios</h2>
+          <p className="font-normal text-lg text-[#919190]">Al utilizar los Servicios de SubCoffe, usted se compromete a:</p>
           <ul className="mb-6 ml-8 list-disc font-normal text-lg text-[#919190]">
-            <li>
-              No utilizar los Servicios para fines ilegales o no autorizados.
-            </li>
-            <li>
-              No recopilar información de otros usuarios sin su consentimiento.
-            </li>
-            <li>
-              Mantener la confidencialidad de su contraseña y otros datos de
-              acceso a su cuenta.
-            </li>
-            <li>
-              No publicar contenido falso, inexacto, engañoso, difamatorio o de
-              naturaleza ofensiva.
-            </li>
-            <li>
-              Cumplir con todas las leyes locales, nacionales e internacionales
-              aplicables.
-            </li>
+            <li>No utilizar los Servicios para fines ilegales o no autorizados.</li>
+            <li>No recopilar información de otros usuarios sin su consentimiento.</li>
+            <li>Mantener la confidencialidad de su contraseña y otros datos de acceso a su cuenta.</li>
+            <li>No publicar contenido falso, inexacto, engañoso, difamatorio o de naturaleza ofensiva.</li>
+            <li>Cumplir con todas las leyes locales, nacionales e internacionales aplicables.</li>
           </ul>
         </section>
         <section>
-          <h2 className="font-semibold text-3xl mb-4  ">
-            Derechos de Propiedad Intelectual
-          </h2>
+          <h2 className="font-semibold text-3xl mb-4">Derechos de Propiedad Intelectual</h2>
           <p className="font-normal text-lg text-[#919190]">
             Todo el contenido incluido en el Sitio Web, como textos, gráficos,
             logos, imágenes, así como la compilación de dicho contenido, es
@@ -140,9 +107,7 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="font-semibold text-3xl mb-4  ">
-            Modificación de los Términos
-          </h2>
+          <h2 className="font-semibold text-3xl mb-4">Modificación de los Términos</h2>
           <p className="font-normal text-lg text-[#919190]">
             SubCoffe se reserva el derecho, a su sola discreción, de modificar o
             reemplazar estos Términos en cualquier momento. Si las revisiones
@@ -153,9 +118,7 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="font-semibold text-3xl mb-4  ">
-            Limitación de Responsabilidad
-          </h2>
+          <h2 className="font-semibold text-3xl mb-4">Limitación de Responsabilidad</h2>
           <p className="font-normal text-lg text-[#919190]">
             SubCoffe no será responsable por daños indirectos, incidentales,
             especiales, consecuenciales o ejemplares, incluidos, pero no
@@ -165,9 +128,7 @@ function PoliticasYCondicionesPageA() {
           </p>
         </section>
         <section>
-          <h2 className="font-semibold text-3xl mb-4  ">
-            Jurisdicción y Ley Aplicable
-          </h2>
+          <h2 className="font-semibold text-3xl mb-4">Jurisdicción y Ley Aplicable</h2>
           <p className="font-normal text-lg text-[#919190]">
             Estos Términos se regirán e interpretarán de acuerdo con las leyes
             de Colombia, sin dar efecto a ningún principio de conflictos de

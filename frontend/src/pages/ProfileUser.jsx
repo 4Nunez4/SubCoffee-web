@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Button, Card, CardBody, Image, Link } from "@nextui-org/react";
+import { Button, Card, CardBody, Image, Link } from "@nextui-org/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 
@@ -7,12 +7,12 @@ import "./scroll.css";
 
 import FormUser from "../components/templates/FormUser";
 import FormUserPassword from "../components/templates/FormUserPassword";
-import FormCalificaion from "../components/templates/FormCalificaion";
+import FormCalificacion from "../components/templates/FormCalificacion";
 
 import { useAuthContext } from "../context/AuthContext";
 import { useSubastaContext } from "../context/SubastaContext";
 import { useCalificacionesContext } from "../context/CalificacionesContext";
-import ModalSubCoffee from "../components/templates/ModalSubCoffee";
+import ModalSubCoffee from "../components/organisms/ModalSubCoffee";
 
 const colors = {
   orange: "#FFBA5A",
@@ -26,7 +26,7 @@ function ProfileUser() {
   const [abrirModalCalificacion, setAbrirModalCalificacion] = useState(false);
   const [abrirModalPassword, setAbrirModalPassword] = useState(false);
   const [mode, setMode] = useState("create");
-  const { getUserID, user, setIdUser, getUsers } = useAuthContext();
+  const { getUserID, user, setIdUser } = useAuthContext();
   const {
     getSubForUser,
     subastaForuser,
@@ -42,17 +42,13 @@ function ProfileUser() {
 
   useEffect(() => {
     getCalificacionesUser(id);
-  }, [id, getCalificacionesUser]);
-
-  useEffect(() => {
-    getUsers();
-  }, []);
+  }, [getCalificacionesUser]);
 
   useEffect(() => {
     getSubForUser(id);
     getUserID(id);
     getSubGanador(id);
-  }, [id]);
+  }, []);
 
   const handleToggle = (mode) => {
     setAbrirModal(true);
@@ -65,7 +61,7 @@ function ProfileUser() {
     } else if (user.rol_user !== "admin") {
       setActiveTab("creadas");
     }
-  }, [user]);
+  }, []);
 
   const renderAverageStars = (average) => {
     const fullStars = Math.floor(average);
@@ -139,14 +135,11 @@ function ProfileUser() {
       />
       <div className="grid grid-cols-2 gap-1 mt-5 bg-white shadow-md rounded-lg overflow-hidden p-10">
         <div className="flex">
-          <div className="flex justify-center items-center col-span-1">
-            <Avatar
-              src={
-                user.imagen_user && user.imagen_user.length > 0
-                  ? `http://localhost:4000/usuarios/${user.imagen_user}`
-                  : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
-              }
-              className="w-56 h-56"
+          <div className="flex justify-center items-center w-72">
+            <img
+              src={user.imagen_user ? `http://localhost:4000/usuarios/${user.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
+              alt="User"
+              className="rounded-full w-56 h-56 object-cover"
             />
           </div>
           <div className="flex justify-start items-center col-span-1 ml-4">
@@ -229,7 +222,7 @@ function ProfileUser() {
           </div>
         </div>
       </div>
-      <FormCalificaion
+      <FormCalificacion
         open={abrirModalCalificacion}
         onClose={() => setAbrirModalCalificacion(false)}
         fk_user={user.pk_cedula_user}
@@ -354,11 +347,11 @@ function ProfileUser() {
                                     </div>
                                   </div>
                                   <div className="flex w-full gap-x-2">
-                                    <p className="font-semibold"> Tipo Variedad: </p>
+                                    <p className="font-semibold">Tipo Variedad: </p>
                                     <p>{subasta.nombre_tipo_vari}</p>
                                   </div>
                                   <div className="flex gap-x-2">
-                                    <p className="font-semibold"> Descripción: </p>
+                                    <p className="font-semibold">Descripción: </p>
                                     <div
                                       className="scroll-container"
                                       onMouseEnter={() => handleMouseEnter( subasta.pk_id_sub, "descripcion" ) }
@@ -372,7 +365,7 @@ function ProfileUser() {
                                     </div>
                                   </div>
                                   <div className="flex gap-x-2">
-                                    <p className="font-semibold"> Precio base:</p>
+                                    <p className="font-semibold">Precio base:</p>
                                     <p> ${Number(subasta.precio_inicial_sub).toLocaleString("es-ES")}</p>
                                   </div>
                                   {subasta.estado_sub === "cerrada" ? (

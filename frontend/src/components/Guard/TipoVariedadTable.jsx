@@ -23,7 +23,6 @@ import DesactivarIcon from "../../nextui/DesactivarIcon.jsx";
 import ActivarIcon from "../../nextui/ActivarIcon.jsx";
 import FormTipovariedad from "../templates/FormTipovariedad.jsx";
 import TipoVariContext from "../../context/TipoVariContext.jsx";
-import { useAuthContext } from "../../context/AuthContext.jsx";
 
 const statusColorMap = {
   activo: "success",
@@ -38,18 +37,13 @@ export default function TipoVariedadTable() {
     column: "pk_id_tipo_vari",
     direction: "ascending",
   });
-  const { getUsers } = useAuthContext()
   const [page, setPage] = useState(1);
-  
+
   const { tipoVariedades, getTipoVariedades, desactivarTipoVariedades, activarTipoVariedades, setIdTipoVariedad } = useContext(TipoVariContext)
-  
+
   const [abrirModal, setAbrirModal] = useState(false);
   const [mode, setMode] = useState("create");
-  
-  useEffect(() => {
-      getUsers()
-    }, []);
-    
+
   useEffect(() => {
     getTipoVariedades();
   }, []);
@@ -138,17 +132,11 @@ export default function TipoVariedadTable() {
       case "actions":
         return (
           <div className="relative flex justify-center items-center gap-2">
-            <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdTipoVariedad(tipoVariedades)}}>
-             
-            </Button>
+            <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdTipoVariedad(tipoVariedades)}}></Button>
             {tipoVariedades.estado_tipo_vari === "activo" ? (
-              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivarTipoVariedades(tipoVariedades.pk_id_tipo_vari)}>
-                
-              </Button>
+              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivarTipoVariedades(tipoVariedades.pk_id_tipo_vari)}></Button>
             ) : (
-              <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarTipoVariedades(tipoVariedades.pk_id_tipo_vari)}>
-                
-              </Button>
+              <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarTipoVariedades(tipoVariedades.pk_id_tipo_vari)}></Button>
             )}
           </div>
         );

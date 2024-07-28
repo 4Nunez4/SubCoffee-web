@@ -386,7 +386,7 @@ export const listAllDatesSub = async (req, res) => {
     const sql3 = `
       SELECT COUNT(*) AS subastas_sin_ganador_o_precio_inactivas
       FROM subasta
-      WHERE (ganador_sub IS NULL OR precio_final_sub IS NULL) AND estado_sub = 'cerrada'
+      WHERE ganador_sub = 0 AND precio_final_sub = 0 AND estado_sub = 'cerrada'
     `;
 
     const sql4 = `

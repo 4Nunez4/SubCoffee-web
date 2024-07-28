@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ModalFooter, Button, Image } from "@nextui-org/react";
+import { 
+  ModalFooter, 
+  Button, 
+  Image 
+} from "@nextui-org/react";
 
 import { useTipoVariContext } from "../../context/TipoVariContext";
 import { useVariedadUserContext } from "../../context/VariedadUserContext";

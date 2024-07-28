@@ -152,7 +152,6 @@ function DatosEstadisticos() {
                 <h3>Mejores Variedades de Café</h3>
                 <Bar data={barDataVariedad} />
               </div>
-
               <div className=" h-5/6 items-center flex justify-center" >
                 <Doughnut data={donutData} />
               </div>

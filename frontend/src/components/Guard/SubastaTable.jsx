@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardBody, CardFooter, Button, Image, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/react";
+import { 
+  Card, 
+  CardBody, 
+  CardFooter, 
+  Button, 
+  Image, 
+  Dropdown, 
+  DropdownTrigger, 
+  DropdownMenu, 
+  DropdownItem 
+} from "@nextui-org/react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -9,13 +19,12 @@ import { VerticalDotsIcon } from "../../nextui/VerticalDotsIcon";
 import { useSubastaContext } from "../../context/SubastaContext";
 
 import FormSubasta from "../templates/FormSubasta";
-import ModalSubCoffee from "../templates/ModalSubCoffee";
+import ModalSubCoffee from "../organisms/ModalSubCoffee";
 
 export default function SubastaTable() {
   const [abrirModal, setAbrirModal] = useState(false);
   const [abrirModalSub, setAbrirModalSub] = useState(false);
   const [mode, setMode] = useState("create");
-  const [alertShown, setAlertShown] = useState([]);
   const navigate = useNavigate()
 
   const { getSubForUser, setIdSubasta, subastaForuser, desactivarSubs, activarSubs, destablecerGanador, ProcesoSubs, EsperaSubs, establecerGanador } = useSubastaContext();
@@ -42,15 +51,13 @@ export default function SubastaTable() {
       const { pk_id_sub, nombre_tipo_vari, precio_final_sub, ganador_sub, fecha_inicio_sub, fecha_fin_sub, estado_sub } = subasta;
       const tiempo = calcularDiferencia(fecha_inicio_sub, fecha_fin_sub);
   
-      if (tiempo.includes("Subasta terminada") && !alertShown.includes(pk_id_sub) && !ganador_sub) {
-        setAlertShown((date) => [...date, pk_id_sub]);
+      if (tiempo.includes("Subasta terminada") && !ganador_sub) {
         EsperaSubs(pk_id_sub, usuario.pk_cedula_user);
       } else if (tiempo.includes("La subasta empezará dentro de") && estado_sub !== "cerrada") {
         activarSubs(pk_id_sub, usuario.pk_cedula_user);
       } else if (tiempo.includes("La subasta terminará en")) {
         ProcesoSubs(pk_id_sub, usuario.pk_cedula_user);
-      } else if (tiempo.includes("A la subasta le quedan menos de 10 minutos") && !alertShown.includes(pk_id_sub)) {
-        setAlertShown((date) => [...date, pk_id_sub]);
+      } else if (tiempo.includes("A la subasta le quedan menos de 10 minutos")) {
         Swal.fire({
           text: `A la subasta ${pk_id_sub} - ${nombre_tipo_vari} le quedan menos de 10 minutos para finalizar. Es hora de ponerse en contacto con el dueño de la mayor puja.`,
           icon: "info",
@@ -68,7 +75,16 @@ export default function SubastaTable() {
     }, 1000);
   
     return () => clearInterval(intervalId);
-  }, [subastaForuser, alertShown, usuario]);
+  }, [subastaForuser, usuario]);
+
+  const calcularTiempoRestante = (inicio, fin) => {
+    const diferenciaMs = fin - inicio;
+    const segundos = Math.floor((diferenciaMs / 1000) % 60);
+    const minutos = Math.floor((diferenciaMs / 1000 / 60) % 60);
+    const horas = Math.floor((diferenciaMs / 1000 / 60 / 60) % 24);
+    const dias = Math.floor(diferenciaMs / 1000 / 60 / 60 / 24);
+    return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
+  };
 
   const calcularDiferencia = (fechaInicio, fechaFin) => {
     const inicio = new Date(fechaInicio);
@@ -92,15 +108,6 @@ export default function SubastaTable() {
         return `La subasta terminará en: ${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
       }
     }
-  };
-
-  const calcularTiempoRestante = (inicio, fin) => {
-    const diferenciaMs = fin - inicio;
-    const segundos = Math.floor((diferenciaMs / 1000) % 60);
-    const minutos = Math.floor((diferenciaMs / 1000 / 60) % 60);
-    const horas = Math.floor((diferenciaMs / 1000 / 60 / 60) % 24);
-    const dias = Math.floor(diferenciaMs / 1000 / 60 / 60 / 24);
-    return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
   };
 
   const confirmDesactivarSubasta = (subasta) => {

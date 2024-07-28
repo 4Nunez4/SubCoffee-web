@@ -1,4 +1,4 @@
-import { Avatar, Button } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useCalificacionesContext } from "../../context/CalificacionesContext";
@@ -133,16 +133,10 @@ function CalificacionesTable({ titleBtn, fk_user }) {
             <div key={calificacion.pk_id_cali} className="shadow-small p-2 rounded-xl mb-2">
               <div className="flex gap-x-2 justify-between">
                 <div className="flex items-center gap-x-2">
-                  <Avatar
-                    alt={calificacion.nombre_user}
-                    className="flex-shrink-0"
-                    size="sm"
-                    src={
-                      calificacion.imagen_user &&
-                      calificacion.imagen_user.length > 0
-                        ? `http://localhost:4000/usuarios/${calificacion.imagen_user}`
-                        : "http://localhost:4000/usuarios/imagen_de_usuario.webp"
-                    }
+                  <img
+                    src={calificacion.imagen_user && calificacion.imagen_user.length > 0 ? `http://localhost:4000/usuarios/${calificacion.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
+                    alt="User"
+                    className="rounded-full w-8 h-8 object-cover"
                   />
                   <div className="flex flex-col">
                     <span className="">{calificacion.nombre_user}</span>

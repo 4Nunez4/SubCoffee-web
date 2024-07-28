@@ -45,7 +45,7 @@ export default function MunicipioTable() {
   const { municipios, setIdMunicipio, getMunis, desactivarMunis, activarMunis } = useMunicipioContext()
 
   useEffect(() => {
-    getMunis(); //  Lista los datos al cargar la página
+    getMunis(); 
   }, []);
 
   const data = [
@@ -101,12 +101,10 @@ export default function MunicipioTable() {
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
   
-    // Verificar si filteredItems está definido y es un arreglo
     if (!Array.isArray(filteredItems)) {
       return []; // Devolver un arreglo vacío si filteredItems no es un arreglo
     }
   
-    // Aplicar slice solo si filteredItems es un arreglo válido
     return filteredItems.slice(start, end);
   }, [page, filteredItems, rowsPerPage]);
   
@@ -141,17 +139,11 @@ export default function MunicipioTable() {
       case "actions":
         return (
           <div className="relative flex justify-center items-center gap-2">
-            <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdMunicipio(municipios)}}>
-              
-            </Button>
+            <Button color="default" startContent={<EditIcon />} onClick={() => {handleToggle("update"); setIdMunicipio(municipios)}}></Button>
             {municipios.estado_muni === "activo" ? (
-              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivarMunis(municipios.pk_codigo_muni)}>
-          
-              </Button>
+              <Button className="bg-red-600 text-white" startContent={<DesactivarIcon />} onClick={() => desactivarMunis(municipios.pk_codigo_muni)}></Button>
             ) : (
-              <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarMunis(municipios.pk_codigo_muni)}>
-              
-              </Button>
+              <Button className="bg-[#39A800] text-white px-[27px]" startContent={<ActivarIcon />} onClick={() => activarMunis(municipios.pk_codigo_muni)}></Button>
             )}
           </div>
         );

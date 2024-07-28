@@ -1,30 +1,27 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Avatar, Button, Card, CardBody, CardHeader } from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import ImageSlider from "../components/molecules/ImageSlider";
-import ModalSubCoffee from "../components/templates/ModalSubCoffee";
 import { useSubastaContext } from "../context/SubastaContext";
 import { useAuthContext } from "../context/AuthContext";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaRegCircleUser } from "react-icons/fa6";
+import ModalSubCoffee from "../components/organisms/ModalSubCoffee";
 
 function SubastaPage() {
   const navigate = useNavigate();
   const { getSubsMenoCerradas, subastasActivas = [], setIdSubasta, EsperaSubs, activarSubs, desactivarSubs, ProcesoSubs } = useSubastaContext();
-  const { getUsers, users: currentUser } = useAuthContext(); 
-  const localUser = JSON.parse(localStorage.getItem("user"));
-
+  const { getUsers } = useAuthContext();
   const [abrirModal, setAbrirModal] = useState(false);
-  const [startIndex, setStartIndex] = useState(0);
+  const [startIndex, setStartIndex] = useState(0); 
+  const [users, setUsers] = useState({});
 
-  const fetchSubastas = useCallback(() => {
+  useEffect(() => {
+    const users = JSON.parse(localStorage.getItem('user'));
+    setUsers(users);
     getSubsMenoCerradas();
     getUsers();
   }, []);
-
-  useEffect(() => {
-    fetchSubastas();
-  }, [fetchSubastas]);
 
   const handdleModaSub = useCallback((id) => {
     setAbrirModal(true);
@@ -32,10 +29,8 @@ function SubastaPage() {
   }, [setIdSubasta]);
 
   useEffect(() => {
-    if (localUser.rol_user === "admin") {
-      navigate('/users');
-    }
-  }, [localUser, navigate]);
+    if (users.rol_user === "admin") navigate('/users');
+  }, [users, navigate]);
 
   const showNextSubastas = useCallback(() => {
     setStartIndex(prevIndex => prevIndex + 1);
@@ -69,9 +64,18 @@ function SubastaPage() {
     }
   }, []);
 
-  useEffect(() => {
-    if (!subastasActivas || !currentUser.pk_cedula_user) return;
+  const calcularTiempoRestante = useCallback((inicio, fin) => {
+    const diferenciaMs = fin - inicio;
+    const segundos = Math.floor((diferenciaMs / 1000) % 60);
+    const minutos = Math.floor((diferenciaMs / 1000 / 60) % 60);
+    const horas = Math.floor((diferenciaMs / 1000 / 60 / 60) % 24);
+    const dias = Math.floor(diferenciaMs / 1000 / 60 / 60 / 24);
+    return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
+  }, []);
 
+  useEffect(() => {
+    if (!subastasActivas || !users.pk_cedula_user) return;
+  
     const handleSubastaState = (subasta) => {
       const { pk_id_sub, precio_final_sub, ganador_sub, fecha_inicio_sub, fecha_fin_sub, estado_sub } = subasta;
       const tiempo = calcularDiferencia(fecha_inicio_sub, fecha_fin_sub);
@@ -88,18 +92,18 @@ function SubastaPage() {
         desactivarSubs(pk_id_sub, users.pk_cedula_user);
       }
     };
-
+    
     const intervalId = setInterval(() => {
       subastasActivas.forEach(handleSubastaState);
     }, 1000);
-
+  
     return () => clearInterval(intervalId);
-  }, [subastasActivas, currentUser.pk_cedula_user]);
+  }, [calcularDiferencia, EsperaSubs, activarSubs, desactivarSubs, ProcesoSubs]);
 
   return (
     <div className="px-auto pb-8 bg-[#FDFBF6]">
       <ImageSlider />
-      {currentUser.rol_user !== "admin" && (
+      {users.rol_user !== "admin" && (
         <div className="pl-6 bg-[#FDFBF6]">
           <div className="flex flex-col overflow-x-auto py-6 overflow-hidden">
             {subastasActivas && subastasActivas.length > 0 ? (
@@ -108,11 +112,10 @@ function SubastaPage() {
                   <Card key={subasta.pk_id_sub} className="max-w-[380px] h-[450px] p-2 bg-[#ffffff] text-[#919190]">
                     <CardHeader className="justify-between">
                       <div className="flex gap-x-3 pl-4">
-                        <Avatar
-                          isBordered
-                          radius="full"
-                          size="md"
-                          src={ subasta.imagen_user && subasta.imagen_user.length > 0 ? `http://localhost:4000/usuarios/${subasta.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp" }
+                        <img
+                          src={subasta.imagen_user ? `http://localhost:4000/usuarios/${subasta.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
+                          alt="User"
+                          className="rounded-full w-8 h-8 object-cover"
                         />
                         <div className="flex flex-col gap-1 items-start justify-center">
                           <h4 className="text-small font-semibold leading-none text-[#323232]"> {subasta.nombre_user} </h4>
@@ -122,7 +125,7 @@ function SubastaPage() {
                     </CardHeader>
                     <CardBody className="items-start w-full -mt-3">
                       <CardBody className="flex">
-                      <div className="relative w-auto h-[150px] bg-center bg-no-repeat bg-cover rounded-lg bg-[#181818] bg-opacity-30 inset-0">
+                        <div className="relative w-auto h-[150px] bg-center bg-no-repeat bg-cover rounded-lg bg-[#181818] bg-opacity-30 inset-0">
                           <img
                             src={`http://localhost:4000/subastas/${subasta.imagen_sub}`}
                             alt=""
@@ -220,7 +223,7 @@ function SubastaPage() {
         </div>
       )}
     </div>
-  );
+  ); 
 }
 
 export default SubastaPage;

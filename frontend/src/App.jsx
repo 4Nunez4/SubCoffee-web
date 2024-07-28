@@ -15,11 +15,11 @@ import SubastaUser from "./pages/SubastaUser";
 import UsersTable from "./components/Guard/UsersTable";
 import TipoVariedadTable from "./components/Guard/TipoVariedadTable";
 import GlobalProvider from "./context/GlobalContext";
-import ListarNotificaciones from "./pages/Notificaciones";
-import QueremosLograr from "./pages/lograr";
+import QueremosLograr from "./pages/QueremosLograr";
 import ResetPassword from "./pages/ResetPassword";
 import RecuperarPasswordUserLogin from "./components/molecules/RecuperarPasswordUserLogin";
 import DatosEstadisticos from "./pages/DatosEstadisticos";
+import NotificacionesTable from "./components/Guard/NotificacionesTable";
 
 function App() {
   return (
@@ -34,10 +34,11 @@ function App() {
                 <Route path="somos" element={<QuienesSomosA />} />
                 <Route path="queremoslograr" element={<QueremosLograr />} />
                 <Route path="ayuda" element={<AyudaPage />} />
+                  <Route path="datosEstadisticos" element={<DatosEstadisticos />} />
                 <Route element={<ProtectedRoute />}>
                   <Route path="subcoffee" element={<SubastaPage />} />
                   <Route path="datosEstadisticos" element={<DatosEstadisticos />} />
-                  <Route path="notificaciones" element={<ListarNotificaciones />} />
+                  <Route path="notificaciones" element={<NotificacionesTable />} />
                   <Route path="profile/:id" element={<ProfileUser />} />
                   <Route path="subasta/:id" element={<SubastaUser />} />
                   <Route path="users" element={<UsersTable />} />

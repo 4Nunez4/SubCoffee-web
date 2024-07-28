@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useSubastaContext } from "../../context/SubastaContext";
 import { useCalificacionesContext } from "../../context/CalificacionesContext";
-import FormCalificacion from "../templates/FormCalificaion";
+import FormCalificacion from "../templates/FormCalificacion";
 
 const colors = {
   orange: "#FFBA5A",

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import ModalContact from "../Guard/ModalContact";
 import { ModalFormXl } from "../organisms/ModalFormXl";
 import { useSubastaContext } from "../../context/SubastaContext";
+import ModalContact from "../organisms/ModalContact";
 
 function FormGanador ({ open, onClose, title, id , selectedUser}) {
   const { cerrarModal, serCerrarModal } = useSubastaContext()

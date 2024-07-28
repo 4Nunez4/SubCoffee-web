@@ -1,7 +1,8 @@
 import axios from "axios";
+import { IP } from "./IP";
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:4000"
+  baseURL: IP
 });
 
 axiosClient.interceptors.request.use((config) => {

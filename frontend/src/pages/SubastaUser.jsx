@@ -1,54 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Avatar, Button, Image, Slider } from "@nextui-org/react";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { Button, Image, Slider } from "@nextui-org/react";
 import Swal from "sweetalert2";
 
 import { useSubastaContext } from "../context/SubastaContext";
 import { usePostulantesContext } from "../context/PostulantesContext";
 import { useOfertasContext } from "../context/OfertasContext";
 import { useAuthContext } from "../context/AuthContext";
-import { useCalificacionesContext } from "../context/CalificacionesContext";
 
 import FormGanador from "../components/templates/FormGanador";
 import "./scroll.css"
 
-const colors = {
-  orange: "#FFBA5A",
-  grey: "#a9a9a9",
-};
-
 function SubastaUser() {
   const { id } = useParams();
   const [oferta, setOferta] = useState(0);
-  const { getSub, subasta, EsperaSubs, activarSubs, ProcesoSubs } = useSubastaContext();
-  const { getPostsActivos, postsActivos, desactivarPosts } = usePostulantesContext();
-  const { createOfert, ofertas, getOfertForSub, eliminarOfertas, getOfertMayor, ofertasMayor } = useOfertasContext();
-  const { getCalificacionesUser, stats } = useCalificacionesContext();
-  const [hoveredLinks, setHoveredLinks] = useState({});
-  const { getUsers } = useAuthContext();
-  const [precioActual, setPrecioActual] = useState(0);
-  const user = JSON.parse(localStorage.getItem("user"));
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tiempoRestante, setTiempoRestante] = useState("");
-  const [subastaIniciada, setSubastaIniciada] = useState(false);
-
+  const [ precioActual, setPrecioActual ] = useState(0);
+  const [ hoveredLinks, setHoveredLinks ] = useState({});
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
+  const [ tiempoRestante, setTiempoRestante ] = useState("");
+  const [ subastaIniciada, setSubastaIniciada ] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const { getSub, subasta, EsperaSubs, activarSubs, ProcesoSubs, desactivarSubs } = useSubastaContext();
+  const { getPostsActivos, postsActivos, desactivarPosts } = usePostulantesContext();
+  const { createOfert, ofertas, getOfertForSub, eliminarOfertas, getOfertMayor } = useOfertasContext();
+  const { getUsers } = useAuthContext();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
 
   useEffect(() => {
     getUsers();
-  }, [getUsers]);
+  }, []);
 
   useEffect(() => {
     getOfertForSub(id);
-  }, [id, getOfertForSub]);
+  }, []);
 
   useEffect(() => {
     getSub(id);
     getPostsActivos(id);
-  }, [id, getSub, getPostsActivos]);
+  }, []);
 
   useEffect(() => {
     const calcularDiferencia = (fechaInicio, fechaFin) => {
@@ -96,7 +87,7 @@ function SubastaUser() {
     };
   
     const intervalId = setInterval(actualizarTiempo, 1000);
-    actualizarTiempo(); 
+    actualizarTiempo(); // Para calcular el tiempo restante inmediatamente
     return () => clearInterval(intervalId);
   }, [subasta.fecha_inicio_sub, subasta.fecha_fin_sub]);
 
@@ -109,7 +100,6 @@ function SubastaUser() {
       }
     }
   }, []);
-  
 
   const handleSubmitOferta = async (e) => {
     e.preventDefault();
@@ -178,7 +168,7 @@ function SubastaUser() {
       ? Math.max(...ofertas.map((oferta) => oferta.oferta_ofer), 0)
       : Number(subasta.precio_inicial_sub);
     setPrecioActual(nuevoPrecioActual);
-  }, [subasta.precio_inicial_sub, ofertas]);
+  }, []);
   
   const handleMouseEnter = (id) => {
     setHoveredLinks({ ...hoveredLinks, [id]: true });
@@ -186,27 +176,6 @@ function SubastaUser() {
 
   const handleMouseLeave = (id) => {
     setHoveredLinks({ ...hoveredLinks, [id]: false });
-  };
-  
-  const renderAverageStars = (average) => {
-    const fullStars = Math.floor(average);
-    const hasHalfStar = average % 1 !== 0;
-    return (
-      <div className="flex items-center">
-        {Array.from({ length: fullStars }, (_, index) => (
-          <FaStar key={index} size={14} color={colors.orange} className="mr-1" />
-        ))}
-        {hasHalfStar && (
-          <FaStarHalfAlt size={24} color={colors.orange} className="mr-1" />
-        )}
-        {Array.from(
-          { length: 5 - fullStars - (hasHalfStar ? 1 : 0) },
-          (_, index) => (
-            <FaStar key={index + fullStars + 1} size={12} color={colors.grey} className="mr-1" />
-          )
-        )}
-      </div>
-    );
   };
 
   const handleUserClick = (oferta) => {
@@ -357,13 +326,13 @@ function SubastaUser() {
                 }}
                 classNames={{
                   base: "w-full",
-                  filler: "bg-green-500", // Cambiado a verde
+                  filler: "bg-green-500", 
                   labelWrapper: "mb-2",
                   label: "font-medium text-default-700 text-medium",
                   value: "font-medium text-default-500 text-small",
                   thumb: [
                     "transition-size",
-                    "bg-green-700", // Cambiado a verde oscuro
+                    "bg-green-700",
                     "data-[dragging=true]:shadow-lg data-[dragging=true]:shadow-black/20",
                     "data-[dragging=true]:w-7 data-[dragging=true]:h-7 data-[dragging=true]:after:h-6 data-[dragging=true]:after:w-6",
                   ],
@@ -373,8 +342,8 @@ function SubastaUser() {
                   offset: 10,
                   placement: "bottom",
                   classNames: {
-                    base: ["before:bg-green-500"], // Cambiado a verde
-                    content: ["py-2 shadow-xl text-white bg-green-500"], // Cambiado a verde
+                    base: ["before:bg-green-500"], 
+                    content: ["py-2 shadow-xl text-white bg-green-500"], 
                   },
                 }}
               />
@@ -398,9 +367,10 @@ function SubastaUser() {
         <div className="grid grid-rows-2 gap-y-2">
           <div className="bg-[#e0e0e0] w-64 rounded-xl p-2 items-center flex flex-col">
             <h3 className="text-lg font-semibold ">Vendedor</h3>
-            <Avatar
-              src={subasta.imagen_user && subasta.imagen_user.length > 0? `http://localhost:4000/usuarios/${subasta.imagen_user}`: "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
-              className="w-40 h-40"
+            <img
+              src={subasta.imagen_user ? `http://localhost:4000/usuarios/${subasta.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
+              alt="User"
+              className="rounded-full w-48 h-48 object-cover"
             />
             <div className="flex items-center">
               <Link className="text-center hover:underline" to={(`/profile/${subasta.pk_cedula_user}`)}>{subasta.nombre_user}</Link>
@@ -414,9 +384,10 @@ function SubastaUser() {
               {Array.isArray(postsActivos) && postsActivos.length > 0 ? (
                 postsActivos.map((postulante, i) => (
                   <div key={i} className="rounded-xl w-52 gap-x-1 h-10 flex px-2 items-center overflow-y-auto">
-                    <Avatar
+                    <img
                       src={postulante.imagen_user && postulante.imagen_user.length > 0 ? `http://localhost:4000/usuarios/${postulante.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
-                      className="w-8 h-8"
+                      alt="User"
+                      className="rounded-full w-8 h-8 object-cover"
                     />
                     <div className="flex flex-col">
                       <p className="text-sm font-semibold">{postulante.nombre_user}</p>

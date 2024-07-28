@@ -20,7 +20,7 @@ function FincaTable() {
 
   useEffect(() => {
     getFincaUser(user.pk_cedula_user);
-  }, [user.pk_cedula_user, getFincaUser]);
+  }, []);
 
   const handleToggleFinca = (mode) => {
     setAbrirModalFinca(true);

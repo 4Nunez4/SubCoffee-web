@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const ImagenSliderOne = "/imageSliderOne.png";
 const ImagenSliderTwo = "/imageSliderTwo.png";
@@ -13,11 +12,6 @@ function ImageSlider() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prevSlide = () => {
-    const newIndex = (currentIndex - 1 + slides.length) % slides.length;
-    setCurrentIndex(newIndex);
-  };
 
   const nextSlide = () => {
     const newIndex = (currentIndex + 1) % slides.length;

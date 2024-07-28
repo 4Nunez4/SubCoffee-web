@@ -5,7 +5,6 @@ import { useDepartContext } from "../../context/DeparContext";
 
 function FormDepartamento ({ open, onClose, title, titleBtn, mode }) {
   const { cerrarModal, setCerrarModal } = useDepartContext();
-
   useEffect(() => {
     if (cerrarModal) {
       onClose();

@@ -5,6 +5,7 @@ import { EyeSlashFilledIcon } from '../nextui/EyeSlashFilledIcon';
 import { EyeFilledIcon } from '../nextui/EyeFilledIcon';
 import { icono } from '../components/atoms/IconsAtom';
 import axios from "axios";
+import { IP } from "../api/IP";
 
 const ResetPassword = () => {
     const [isVisibleNew, setIsVisibleNew] = useState(false);
@@ -46,7 +47,7 @@ const ResetPassword = () => {
         }
 
         try {
-            const response = await axios.put("http://localhost:4000/auth/cambiar", {
+            const response = await axios.put(`${IP}/auth/cambiar`, {
                 token,
                 password: formData.newPassword,
             });
