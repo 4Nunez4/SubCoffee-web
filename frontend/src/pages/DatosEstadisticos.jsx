@@ -103,9 +103,9 @@ function DatosEstadisticos() {
   };
 
   return (
-    <div className=" ">
-      <div className=" grid grid-rows-5 gap-1 ">
-        <div className=" h-52 w-full p-4 border rounded shadow row-span-1">
+    <div className="px-5 mt-5">
+      <div className="grid grid-rows-5 gap-1">
+        <div className="h-44 w-full p-4 border rounded shadow row-span-1">
           <div className="flex justify-between items-center">
             <h2>Resumen de Subastas</h2>
             <span className="bg-green-200 text-green-800 py-1 px-2 rounded">
@@ -132,27 +132,25 @@ function DatosEstadisticos() {
           </div>
         </div>
 
-        <div className=" h-52 w-full ">
-          <div className=" ">
-            <div className=" grid grid-cols-2 w-full gap-1">
-              <div className="p-4 border rounded shadow w-full ">
-                <h3>Subastas por Mes</h3>
-                <Line data={lineDataMes} />
-              </div>
-              <div className="p-4 border rounded shadow w-full ">
-                <h3>Subastas por Año</h3>
-                <Line data={lineDataAno} />
-              </div>
+        <div className="h-52 w-full">
+          <div className="grid grid-cols-2 w-full gap-1">
+            <div className="p-4 border rounded shadow w-full ">
+              <h3>Subastas por Mes</h3>
+              <Line data={lineDataMes} />
+            </div>
+            <div className="p-4 border rounded shadow w-full ">
+              <h3>Subastas por Año</h3>
+              <Line data={lineDataAno} />
             </div>
           </div>
 
-          <div className=" w-full row-span-3">
-            <div className=" items-center grid grid-cols-2 gap-1">
-              <div className=" w-full p-4 border rounded shadow">
+          <div className="w-full mt-2">
+            <div className="items-center grid grid-cols-2 gap-1">
+              <div className="w-full p-4 border rounded shadow">
                 <h3>Mejores Variedades de Café</h3>
                 <Bar data={barDataVariedad} />
               </div>
-              <div className=" h-5/6 items-center flex justify-center" >
+              <div className="h-5/6 items-center flex justify-center" >
                 <Doughnut data={donutData} />
               </div>
             </div>

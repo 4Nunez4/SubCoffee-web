@@ -9,7 +9,6 @@ import {
   Input,
   Button,
   Chip,
-  User,
   Pagination,
   Dropdown,
   DropdownTrigger,
@@ -122,18 +121,17 @@ export default function UsersTable() {
     switch (columnKey) {
       case "nombre_user":
         return (
-          <User
-            avatarProps={{ radius: "full",                       
-            src: `${
-              user.imagen_user && user.imagen_user.length > 0
-                ? `http://localhost:4000/usuarios/${user.imagen_user}`
-                : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}`, 
-            }}
-            description={user.email_user}
-            name={cellValue}
-          >
-            {user.email_user}
-          </User>
+          <div className="flex gap-x-3 pl-4">
+            <img
+              src={user.imagen_user ? `http://localhost:4000/usuarios/${user.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
+              alt="User"
+              className="rounded-full w-8 h-8 object-cover"
+            />
+            <div className="flex flex-col gap-1 items-start justify-center">
+              <h4 className="text-small font-semibold leading-none text-[#323232]"> {user.nombre_user} </h4>
+              <h5 className="text-small -mt-1 tracking-tight text-default-400 overflow-hidden text-ellipsis whitespace-nowrap max-w-full"> @{user.email_user} </h5>
+            </div>
+          </div>
         );
       case "estado_user":
         return (

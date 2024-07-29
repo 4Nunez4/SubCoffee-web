@@ -15,6 +15,7 @@ function SubastaPage() {
   const [abrirModal, setAbrirModal] = useState(false);
   const [startIndex, setStartIndex] = useState(0); 
   const [users, setUsers] = useState({});
+  const [tiemposRestantes, setTiemposRestantes] = useState({});
 
   useEffect(() => {
     const users = JSON.parse(localStorage.getItem('user'));
@@ -40,11 +41,11 @@ function SubastaPage() {
     setStartIndex(prevIndex => prevIndex - 1);
   }, []);
 
-  const calcularDiferencia = useCallback((fechaInicio, fechaFin) => {
+  const calcularDiferencia = (fechaInicio, fechaFin) => {
     const inicio = new Date(fechaInicio);
     const fin = new Date(fechaFin);
     const ahora = new Date();
-
+  
     if (ahora < inicio) {
       return `La subasta empezará dentro de ${calcularTiempoRestante(ahora, inicio)}`;
     } else if (ahora > fin) {
@@ -55,39 +56,44 @@ function SubastaPage() {
       const minutos = Math.floor((diferenciaMs / 1000 / 60) % 60);
       const horas = Math.floor((diferenciaMs / 1000 / 60 / 60) % 24);
       const dias = Math.floor(diferenciaMs / 1000 / 60 / 60 / 24);
-
+  
       if (dias === 0 && horas === 0 && minutos < 10) {
         return `A la subasta le quedan ${minutos} minutos y ${segundos} segundos`;
       } else {
         return `La subasta terminará en: ${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
       }
     }
-  }, []);
+  };  
 
-  const calcularTiempoRestante = useCallback((inicio, fin) => {
+  const calcularTiempoRestante =(inicio, fin) => {
     const diferenciaMs = fin - inicio;
     const segundos = Math.floor((diferenciaMs / 1000) % 60);
     const minutos = Math.floor((diferenciaMs / 1000 / 60) % 60);
     const horas = Math.floor((diferenciaMs / 1000 / 60 / 60) % 24);
     const dias = Math.floor(diferenciaMs / 1000 / 60 / 60 / 24);
     return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
-  }, []);
+  }
 
   useEffect(() => {
     if (!subastasActivas || !users.pk_cedula_user) return;
-  
+    
     const handleSubastaState = (subasta) => {
       const { pk_id_sub, precio_final_sub, ganador_sub, fecha_inicio_sub, fecha_fin_sub, estado_sub } = subasta;
       const tiempo = calcularDiferencia(fecha_inicio_sub, fecha_fin_sub);
-  
-      if (tiempo.includes("Subasta terminada") && !ganador_sub) {
+
+      setTiemposRestantes(prevTiempos => ({
+        ...prevTiempos,
+        [pk_id_sub]: tiempo
+      }));
+    
+      if (tiempo.includes("Subasta terminada") && ganador_sub === "NULL") {
         EsperaSubs(pk_id_sub, users.pk_cedula_user);
       } else if (tiempo.includes("La subasta terminará en: ")) {
         ProcesoSubs(pk_id_sub, users.pk_cedula_user);
       } else if (tiempo.includes("La subasta empezará dentro de") && estado_sub !== "cerrada") {
         activarSubs(pk_id_sub, users.pk_cedula_user);
       } else if (tiempo.includes("A la subasta le quedan ")) {
-        EsperaSubs(pk_id_sub, users.pk_cedula_user);
+        ProcesoSubs(pk_id_sub, users.pk_cedula_user);
       } else if (tiempo.includes("Subasta terminada") && precio_final_sub !== null && ganador_sub !== null) {
         desactivarSubs(pk_id_sub, users.pk_cedula_user);
       }
@@ -96,9 +102,10 @@ function SubastaPage() {
     const intervalId = setInterval(() => {
       subastasActivas.forEach(handleSubastaState);
     }, 1000);
-
+  
     return () => clearInterval(intervalId);
   }, [subastasActivas, users.pk_cedula_user, calcularDiferencia, EsperaSubs, activarSubs, desactivarSubs, ProcesoSubs]);
+  
 
   return (
     <div className="px-auto pb-8 bg-[#FDFBF6]">
@@ -151,7 +158,7 @@ function SubastaPage() {
                         <div className="grid gap-x-2 py-2 px-2 text-sm">
                           <div className="flex flex-col">
                             <div className="flex flex-col items-center mb-1">
-                              <p className="text-[#323232] text-sm font-medium text-center">{calcularDiferencia(subasta.fecha_inicio_sub,subasta.fecha_fin_sub)}</p>
+                              <p className="text-[#323232] text-sm font-medium text-center">{tiemposRestantes[subasta.pk_id_sub] || calcularDiferencia(subasta.fecha_inicio_sub, subasta.fecha_fin_sub)}</p>
                             </div>
                             <div className="flex w-full gap-x-2">
                               <p className="font-semibold">Apertura:</p>

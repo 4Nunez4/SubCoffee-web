@@ -3,15 +3,17 @@ import { useState, useEffect } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useCalificacionesContext } from "../../context/CalificacionesContext";
 import FormRegisCalificacion from "../templates/FormRegisCalificacion";
+import { useAuthContext } from "../../context/AuthContext";
 
 const colors = {
   orange: "#FFBA5A",
   grey: "#a9a9a9",
 };
 
-function CalificacionesTable({ titleBtn, fk_user, method }) {
+function CalificacionesTable({ titleBtn, fk_user }) {
   const [abrirModalCalificacion, setAbrirModalCalificacion] = useState(false);
-  const { getCalificacionesUser, calificaciones, stats = {}, setIdCalificacion } = useCalificacionesContext();
+  const { validado } = useAuthContext()
+  const { getCalificacionesUser, calificaciones, stats = {} } = useCalificacionesContext();
   const [mode, setMode] = useState("create");
   const userlocal = JSON.parse(localStorage.getItem("user"));
 
@@ -110,22 +112,13 @@ function CalificacionesTable({ titleBtn, fk_user, method }) {
           </>
         )}
       </div>
-      {/* {calificaciones && calificaciones.some((calificacion) => calificacion.id_usuario_cali === userlocal.pk_cedula_user) || fk_user === userlocal.pk_cedula_user || userlocal.rol_user === "admin" ? (
+      {calificaciones && calificaciones.some((calificacion) => calificacion.id_usuario_cali === userlocal.pk_cedula_user) || fk_user === userlocal.pk_cedula_user || userlocal.rol_user === "admin" || !validado.includes(userlocal.pk_cedula_user) ? (
         ""
       ) : (
         <Button className="mt-2" onClick={() => handleCalif("create")}>
           Registrar calificación
         </Button>
-      )} */}
-      {
-        method === "visitante" ? (
-          ""
-        ) : (
-          <Button className="mt-2" onClick={() => handleCalif("create")}>
-            Registrar calificación
-          </Button>
-        )
-      }
+      )}
       <FormRegisCalificacion
         open={abrirModalCalificacion}
         onClose={() => setAbrirModalCalificacion(false)}

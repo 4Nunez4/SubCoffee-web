@@ -11,35 +11,41 @@ import { useAuthContext } from "../context/AuthContext";
 import FormGanador from "../components/templates/FormGanador";
 import "./scroll.css"
 
+const colors = {
+  orange: "#FFBA5A",
+  grey: "#a9a9a9",
+};
+
 function SubastaUser() {
   const { id } = useParams();
   const [oferta, setOferta] = useState(0);
-  const [ precioActual, setPrecioActual ] = useState(0);
-  const [ hoveredLinks, setHoveredLinks ] = useState({});
-  const [ isModalOpen, setIsModalOpen ] = useState(false);
-  const [ tiempoRestante, setTiempoRestante ] = useState("");
-  const [ subastaIniciada, setSubastaIniciada ] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
   const { getSub, subasta, EsperaSubs, activarSubs, ProcesoSubs } = useSubastaContext();
   const { getPostsActivos, postsActivos, desactivarPosts } = usePostulantesContext();
   const { createOfert, ofertas, getOfertForSub, eliminarOfertas, getOfertMayor } = useOfertasContext();
+  const [hoveredLinks, setHoveredLinks] = useState({});
   const { getUsers } = useAuthContext();
+  const [precioActual, setPrecioActual] = useState(0);
   const user = JSON.parse(localStorage.getItem("user"));
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tiempoRestante, setTiempoRestante] = useState("");
+  const [subastaIniciada, setSubastaIniciada] = useState(false);
+
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [getUsers]);
 
   useEffect(() => {
     getOfertForSub(id);
-  }, []);
+  }, [id, getOfertForSub]);
 
   useEffect(() => {
     getSub(id);
     getPostsActivos(id);
-  }, []);
+  }, [id, getSub, getPostsActivos]);
 
   useEffect(() => {
     const calcularDiferencia = (fechaInicio, fechaFin) => {
@@ -87,7 +93,7 @@ function SubastaUser() {
     };
   
     const intervalId = setInterval(actualizarTiempo, 1000);
-    actualizarTiempo(); // Para calcular el tiempo restante inmediatamente
+    actualizarTiempo(); 
     return () => clearInterval(intervalId);
   }, [subasta.fecha_inicio_sub, subasta.fecha_fin_sub]);
 
@@ -95,8 +101,6 @@ function SubastaUser() {
     if (subasta && subastaIniciada && !subasta.ganador_sub) {
       if (ofertas && ofertas.length === 0) {
         getOfertMayor(id);
-      } else {
-        console.log("No hay ofertas en esta subasta.");
       }
     }
   }, []);
@@ -168,7 +172,7 @@ function SubastaUser() {
       ? Math.max(...ofertas.map((oferta) => oferta.oferta_ofer), 0)
       : Number(subasta.precio_inicial_sub);
     setPrecioActual(nuevoPrecioActual);
-  }, []);
+  }, [subasta.precio_inicial_sub, ofertas]);
   
   const handleMouseEnter = (id) => {
     setHoveredLinks({ ...hoveredLinks, [id]: true });
@@ -179,7 +183,7 @@ function SubastaUser() {
   };
 
   const handleUserClick = (oferta) => {
-    if(subasta.pk_cedula_user === user.pk_cedula_user && subasta.estado_sub === "espera") {
+    if(subasta.pk_cedula_user === user.pk_cedula_user) {
       setSelectedUser(oferta);
       setIsModalOpen(true);
     }
@@ -198,9 +202,9 @@ function SubastaUser() {
         </p>
       </div>
       <div className="flex gap-3 w-full">
-        <div className="bg-[#e0e0e0] rounded-xl w-full p-4 h-full">
+        <div className="bg-[#e0e0e0] rounded-xl w-full p-4 h-auto">
           <div className="grid gap-1">
-            <div className="flex flex-col gap-2 justify-center items-center">
+            <div className="flex flex-col gap-2 justify-center items-center mt-10">
               <Image
                 radius="md"
                 shadow="sm"
@@ -246,26 +250,27 @@ function SubastaUser() {
                 <p className="text-[#39A800]  font-semibold text-lg -mt-2">${Number(subasta.precio_inicial_sub).toLocaleString("es-ES")}</p>
               </div>
             </div>
+            <p className="text-center text-2xl mt-3">Precio actual: ${precioActual.toLocaleString()}</p>
           </div>
         </div>
         <div className="w-full flex flex-col h-auto">
           <div className="flex-grow bg-[#e0e0e0] rounded-xl p-4 overflow-y-auto">
             <h3 className="text-lg font-semibold text-center">Ofertas</h3>
-            <div className={`overflow-y-auto  ${subasta.pk_cedula_user !== user.pk_cedula_user ? "max-h-[350px]" : "max-full" }`}>
+            <div className={`overflow-y-auto  ${subasta.pk_cedula_user !== user.pk_cedula_user ? "max-h-[450px]" : "max-full" }`}>
               {Array.isArray(ofertas) && ofertas.length > 0 ? (
                 ofertas.map((oferta) => (
                   <div    
                     key={oferta.pk_id_ofer} 
-                    className={`p-1 cursor-pointer`} 
-                    onClick={() => handleUserClick(oferta)}>
+                    className={`p-1`} 
+                  >
                       { oferta.fk_id_usuario === user.pk_cedula_user
                         ? (                    
                         <div className="flex items-center justify-start">
-                          <div className="flex items-center bg-gray-100 py-1 pr-12 rounded-2xl">
+                          <div className="flex items-center bg-gray-100 py-1 pr-12 rounded-2xl cursor-pointer" onClick={() => handleUserClick(oferta)}>
                             <img
                               src={oferta.imagen_user && oferta.imagen_user.length > 0 ? `http://localhost:4000/usuarios/${oferta.imagen_user}`: "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
                               alt="User Avatar"
-                              className="h-12 rounded-full mx-2"
+                              className="h-12 rounded-full mx-2" 
                             />
                             <div className="-ml-1">
                               <p className="font-semibold -mb-2">{oferta.nombre_user}</p>
@@ -276,7 +281,7 @@ function SubastaUser() {
                         </div>
                       ) : (                    
                         <div className="flex items-center justify-end">
-                          <div className="flex items-center bg-slate-100 py-1 pl-8 rounded-2xl">
+                          <div className="flex items-center bg-slate-100 py-1 pl-8 rounded-2xl cursor-pointer" onClick={() => handleUserClick(oferta)}>
                             <div className="flex text-end flex-col -mr-1">
                               <p className="font-semibold -mb-2">{oferta.nombre_user}</p>
                               <p>$ {oferta.oferta_ofer.toLocaleString()}</p>
@@ -328,13 +333,13 @@ function SubastaUser() {
                 }}
                 classNames={{
                   base: "w-full",
-                  filler: "bg-green-500", 
+                  filler: "bg-green-500", // Cambiado a verde
                   labelWrapper: "mb-2",
                   label: "font-medium text-default-700 text-medium",
                   value: "font-medium text-default-500 text-small",
                   thumb: [
                     "transition-size",
-                    "bg-green-700",
+                    "bg-green-700", // Cambiado a verde oscuro
                     "data-[dragging=true]:shadow-lg data-[dragging=true]:shadow-black/20",
                     "data-[dragging=true]:w-7 data-[dragging=true]:h-7 data-[dragging=true]:after:h-6 data-[dragging=true]:after:w-6",
                   ],
@@ -344,8 +349,8 @@ function SubastaUser() {
                   offset: 10,
                   placement: "bottom",
                   classNames: {
-                    base: ["before:bg-green-500"], 
-                    content: ["py-2 shadow-xl text-white bg-green-500"], 
+                    base: ["before:bg-green-500"], // Cambiado a verde
+                    content: ["py-2 shadow-xl text-white bg-green-500"], // Cambiado a verde
                   },
                 }}
               />
@@ -372,7 +377,7 @@ function SubastaUser() {
             <img
               src={subasta.imagen_user ? `http://localhost:4000/usuarios/${subasta.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
               alt="User"
-              className="rounded-full w-48 h-48 object-cover"
+              className="rounded-full w-56 h-56 object-cover"
             />
             <div className="flex items-center">
               <Link className="text-center hover:underline" to={(`/profile/${subasta.pk_cedula_user}`)}>{subasta.nombre_user}</Link>
@@ -387,7 +392,7 @@ function SubastaUser() {
                 postsActivos.map((postulante, i) => (
                   <div key={i} className="rounded-xl w-52 gap-x-1 h-10 flex px-2 items-center overflow-y-auto">
                     <img
-                      src={postulante.imagen_user && postulante.imagen_user.length > 0 ? `http://localhost:4000/usuarios/${postulante.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
+                      src={postulante.imagen_user ? `http://localhost:4000/usuarios/${postulante.imagen_user}` : "http://localhost:4000/usuarios/imagen_de_usuario.webp"}
                       alt="User"
                       className="rounded-full w-8 h-8 object-cover"
                     />

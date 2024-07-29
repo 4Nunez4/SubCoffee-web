@@ -102,7 +102,7 @@ function ModalContact({ id, selectedUser }) {
           {user.pk_cedula_user === subasta.pk_cedula_user && displayUser && (
             <Button
               className="text-white bg-[#239D19] rounded-full font-bold flex justify-center items-center w-20 h-20"
-              onClick={handleWhatsAppContact}
+              onClick={() => handleWhatsAppContact()}
             >
               <FaWhatsapp size={44} />
             </Button>
@@ -136,8 +136,7 @@ function ModalContact({ id, selectedUser }) {
             size="lg"
             onClick={handleEstablecerGanador}
           >
-            Establecer a {displayUser.nombre_user || 'Usuario seleccionado'} como
-            ganador
+            Establecer a {displayUser.nombre_user || 'Usuario seleccionado'} como ganador
           </Button>
         )}
       </div>
@@ -147,7 +146,6 @@ function ModalContact({ id, selectedUser }) {
         fk_user={displayUser?.pk_cedula_user}
         title={"Calificaciones de usuario"}
         titleBtn={"Registrar calificación"}
-        method="register"
       />
     </>
   );

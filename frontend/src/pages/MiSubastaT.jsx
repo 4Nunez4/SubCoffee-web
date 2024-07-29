@@ -9,7 +9,7 @@ import SubastaTable from "../components/Guard/SubastaTable";
 export default function MiSubastaT() {
     
   return (
-    <div className="w-full flex flex-col px-6 bg-gray-50">
+    <div className="w-full flex flex-col px-6 bg-[#FDFBF6]">
       <div className="pb-2">
         <p className="pl-2 text-xl my-2 text-gray-500 mt-8"> Para crear una subasta primero debes crear una finca. Luego, agregas las variedades que tienes en tu finca y ya por fin puedes agregar una subasta </p>
       </div>

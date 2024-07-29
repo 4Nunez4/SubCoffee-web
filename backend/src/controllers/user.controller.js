@@ -61,7 +61,7 @@ export const createUser = async (req, res) => {
       sql += `, imagen_user`;
       params.push(imagen_user);
     }
-    sql += ` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    sql += ` ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const [result] = await pool.query(sql, params);
     if (result.affectedRows > 0) {

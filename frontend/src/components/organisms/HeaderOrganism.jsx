@@ -54,7 +54,6 @@ const UserDropdown = ({ localUser, handleLogout, navigate }) => (
 );
 
 function HeaderOrganism() {
-  const [isMoonSelected, setIsMoonSelected] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const localUser = JSON.parse(localStorage.getItem("user"));
@@ -80,10 +79,6 @@ function HeaderOrganism() {
     });
   }, [logout, navigate]);
 
-  const toggleTheme = useCallback(() => {
-    setIsMoonSelected((prevValue) => !prevValue);
-  }, []);
-
   useEffect(() => {
     if (localUser) {
       getUsers();
@@ -101,7 +96,7 @@ function HeaderOrganism() {
       {localUser ? (
         <nav className="grid grid-cols-6 gap-5 bg-[#4A9F1F] p-4 shadow-sm">
           <div className="col-span-4 flex justify-center item-center">
-            {(localUser.rol_user === "comprador" || localUser.rol_user === "vendedor") && (
+            {localUser.rol_user !== "admin" && (
               <Autocomplete
                 classNames={{
                   base: "w-full max-w-md",

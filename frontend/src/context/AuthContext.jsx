@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
   const [onClose, setOnClose] = useState(false)
   const [cerrarModal, setCerrarModal] = useState(false)
   const [back, setBack] = useState(false);
+  const [validado, setValidado] = useState([])
 
   const getUsers = useCallback(async () => {
     try {
@@ -192,7 +193,9 @@ export const AuthProvider = ({ children }) => {
         cerrarModal,
         setCerrarModal,
         tokenPassword,
-        updatePasswordFinish
+        updatePasswordFinish,
+        validado, 
+        setValidado
       }}
     >
       <ModalMessage

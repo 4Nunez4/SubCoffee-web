@@ -49,7 +49,7 @@ export default function SubastaTable() {
     if (!subastaForuser) return;
 
     const handleSubastaState = (subasta) => {
-      const { pk_id_sub, nombre_tipo_vari, precio_final_sub, ganador_sub, fecha_inicio_sub, fecha_fin_sub, estado_sub } = subasta;
+      const { pk_id_sub, precio_final_sub, ganador_sub, fecha_inicio_sub, fecha_fin_sub, estado_sub } = subasta;
       const tiempo = calcularDiferencia(fecha_inicio_sub, fecha_fin_sub);
 
       if (tiempo.includes("Subasta terminada") && !alertShown.includes(pk_id_sub) && !ganador_sub) {
@@ -59,13 +59,9 @@ export default function SubastaTable() {
         activarSubs(pk_id_sub, usuario.pk_cedula_user);
       } else if (tiempo.includes("La subasta terminará en")) {
         ProcesoSubs(pk_id_sub, usuario.pk_cedula_user);
-      } else if (tiempo.includes("A la subasta le quedan menos de 10 minutos") && !alertShown.includes(pk_id_sub)) {
+      } else if (tiempo.includes("A la subasta le quedan") && !alertShown.includes(pk_id_sub)) {
         setAlertShown((date) => [...date, pk_id_sub]);
-        Swal.fire({
-          text: `A la subasta ${pk_id_sub} - ${nombre_tipo_vari} le quedan menos de 10 minutos para finalizar. Es hora de ponerse en contacto con el dueño de la mayor puja.`,
-          icon: "info",
-        });
-        EsperaSubs(pk_id_sub, usuario.pk_cedula_user);
+        ProcesoSubs(pk_id_sub, usuario.pk_cedula_user);
       } else if (tiempo.includes("Subasta terminada") && precio_final_sub !== null && ganador_sub !== null) {
         desactivarSubs(pk_id_sub, usuario.pk_cedula_user);
       }
