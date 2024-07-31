@@ -59,6 +59,8 @@ function ProfileUser() {
       if (subastaForuser && subastaForuser.length > 0) {
         const ganadores = subastaForuser.map(subasta => subasta.ganador_sub);
         setValidado(ganadores); 
+      }else {
+        setValidado(0); 
       }
     }
   }, [user]);
@@ -226,6 +228,7 @@ function ProfileUser() {
         fk_user={user.pk_cedula_user}
         title={"Calificaciones de usuario"}
         titleBtn={"Registrar calificación"}
+        modeCali={Array.isArray(subastaForuser) && subastaForuser.some(subasta => subasta.ganador_sub === localUser.pk_cedula_user) ? 'create' : ''}
       />
       {user.rol_user !== "admin" && (
         <>

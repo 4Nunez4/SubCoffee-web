@@ -10,7 +10,7 @@ const colors = {
   grey: "#a9a9a9",
 };
 
-function CalificacionesTable({ titleBtn, fk_user }) {
+function CalificacionesTable({ titleBtn, fk_user, modeCali }) {
   const [abrirModalCalificacion, setAbrirModalCalificacion] = useState(false);
   const { validado } = useAuthContext()
   const { getCalificacionesUser, calificaciones, stats = {} } = useCalificacionesContext();
@@ -112,7 +112,7 @@ function CalificacionesTable({ titleBtn, fk_user }) {
           </>
         )}
       </div>
-      {calificaciones && calificaciones.some((calificacion) => calificacion.id_usuario_cali === userlocal.pk_cedula_user) || fk_user === userlocal.pk_cedula_user || userlocal.rol_user === "admin" || !validado.includes(userlocal.pk_cedula_user) ? (
+      {calificaciones && calificaciones.some((calificacion) => calificacion.id_usuario_cali === userlocal.pk_cedula_user) || fk_user === userlocal.pk_cedula_user || userlocal.rol_user === "admin" || modeCali !== 'create' ? (
         ""
       ) : (
         <Button className="mt-2" onClick={() => handleCalif("create")}>

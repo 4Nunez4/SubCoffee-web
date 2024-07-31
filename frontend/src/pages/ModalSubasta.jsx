@@ -83,7 +83,7 @@ function ModalSubasta({ onClose }) {
     };
   
     const intervalId = setInterval(actualizarTiempo, 1000);
-    actualizarTiempo(); // Para calcular el tiempo restante inmediatamente
+    actualizarTiempo(); 
     return () => clearInterval(intervalId);
   }, [subasta.fecha_inicio_sub, subasta.fecha_fin_sub]);
 

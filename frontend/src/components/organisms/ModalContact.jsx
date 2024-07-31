@@ -146,6 +146,7 @@ function ModalContact({ id, selectedUser }) {
         fk_user={displayUser?.pk_cedula_user}
         title={"Calificaciones de usuario"}
         titleBtn={"Registrar calificación"}
+        modeCali={'create'}
       />
     </>
   );
